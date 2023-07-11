@@ -32,9 +32,34 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject moneyObjectM;
    
     [Header("Stats")]
-    [SerializeField] public int Hp = 0;
-    [SerializeField] public int Exp = 0;
-    [SerializeField] public TextMeshProUGUI ExpTextM;
+
+    [Header("Fork")]
+
+    [SerializeField] public int LVF = 0;
+
+    [SerializeField] public float HpF = 0;
+    [SerializeField] public float StaminaF = 0;
+    [SerializeField] public float MpF = 0;
+    [SerializeField] public float ExpF = 0;
+    [SerializeField] public TextMeshProUGUI ExpTextMF;
+
+    [Header("Spoon")]
+
+    [SerializeField] public int LVS = 0;
+
+    [SerializeField] public float HpS = 0;
+    [SerializeField] public float StaminaS = 0;
+    [SerializeField] public float MpS = 0;
+    [SerializeField] public float ExpS = 0;
+    [SerializeField] public TextMeshProUGUI ExpTextMS;
+
+    [Header("Knife")]
+    [SerializeField] public int LVK = 0;
+    [SerializeField] public float HpK = 0;
+    [SerializeField] public float StaminaK = 0;
+    [SerializeField] public float MpK = 0;
+    [SerializeField] public float ExpK = 0;
+    [SerializeField] public TextMeshProUGUI ExpTextMK;
     [SerializeField] GameObject ExpObjectM;
     public static GameManager instance;
 
@@ -67,8 +92,10 @@ public class GameManager : MonoBehaviour
         //Lo money aumenta
         moneyTextM.text = money.ToString(); 
         
-        //Lo Exp aumenta
-        ExpTextM.text = Exp.ToString();    
+        //L Exp aumenta
+        ExpTextMF.text = ExpF.ToString();    
+        ExpTextMS.text = ExpS.ToString();    
+        ExpTextMK.text = ExpK.ToString();    
 
     if(!battle){
        if (Input.GetButtonDown("Pause") && !stopInput)
@@ -100,9 +127,15 @@ public class GameManager : MonoBehaviour
     }
  public void AddToExp(int pointsToAdd)
     {
-        Exp += pointsToAdd;
+        ExpF += pointsToAdd;
+        ExpS += pointsToAdd;
+        ExpK += pointsToAdd;
+
         //Lo money aumenta
-        ExpTextM.text = Exp.ToString();    
+        ExpTextMF.text = ExpF.ToString(); 
+        ExpTextMS.text = ExpS.ToString();    
+        ExpTextMK.text = ExpK.ToString();    
+   
         //il testo dello money viene aggiornato
     }
 
