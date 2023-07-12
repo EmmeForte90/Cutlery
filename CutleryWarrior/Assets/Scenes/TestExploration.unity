@@ -336,7 +336,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8927713939667205697, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
 --- !u!1001 &42837049
@@ -440,7 +440,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1644463427859845245, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
 --- !u!1001 &44206143
@@ -1301,7 +1301,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &160847122
 MeshCollider:
@@ -1605,7 +1605,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1496752249247608118, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
 --- !u!64 &206828881
@@ -3847,7 +3847,7 @@ Transform:
   - {fileID: 1583172579}
   - {fileID: 1774243317}
   m_Father: {fileID: 941972800}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &386683136
 GameObject:
@@ -4043,7 +4043,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1007191313718141752, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
 --- !u!1001 &403241555
@@ -4294,14 +4294,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420847995}
-  m_LocalRotation: {x: -0, y: -0.000000059604645, z: 0.93371356, w: -0.358021}
-  m_LocalPosition: {x: -0.00034076863, y: -0.01409515, z: 0.0010823567}
+  m_LocalRotation: {x: -0.000000044703484, y: -0.00000008940697, z: 0.67844033, w: -0.73465556}
+  m_LocalPosition: {x: -0.01094, y: -0.00701, z: 0.00108}
   m_LocalScale: {x: 0.17890692, y: 0.17890687, z: 0.17890692}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -85.444}
 --- !u!64 &420847997
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4719,7 +4719,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2782759636747352030, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
 --- !u!64 &528623315
@@ -5268,7 +5268,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4397902430508635514, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
 --- !u!64 &622915170
@@ -5501,104 +5501,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638519898}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &644290856
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 644290857}
-  - component: {fileID: 644290860}
-  - component: {fileID: 644290859}
-  - component: {fileID: 644290858}
-  m_Layer: 0
-  m_Name: Gate_wide (1)
-  m_TagString: Collider
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &644290857
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644290856}
-  m_LocalRotation: {x: -0.000000014901161, y: 0.000000029802322, z: 0.95756483, w: -0.2882183}
-  m_LocalPosition: {x: -0.015729098, y: -0.01304021, z: 0.0008687324}
-  m_LocalScale: {x: 0.11778442, y: 0.11778444, z: 0.11778447}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 941972800}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -8.455}
---- !u!64 &644290858
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644290856}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
---- !u!23 &644290859
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644290856}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: -2382012188054065201, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &644290860
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644290856}
-  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
 --- !u!1 &654282906
 GameObject:
   m_ObjectHideFlags: 0
@@ -6471,7 +6373,7 @@ GameObject:
   - component: {fileID: 736699569}
   m_Layer: 0
   m_Name: bucket (1)
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6576,7 +6478,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7891019118150194138}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 647f8bfd432a4c94a81e23262623f4ab, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -7215,7 +7117,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2737402635735316384, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
 --- !u!64 &793465178
@@ -8409,6 +8311,105 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8861180440997155986, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
+--- !u!1 &921382376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 921382377}
+  - component: {fileID: 921382380}
+  - component: {fileID: 921382379}
+  - component: {fileID: 921382378}
+  m_Layer: 0
+  m_Name: Gate_wide (2)
+  m_TagString: Collider
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &921382377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921382376}
+  m_LocalRotation: {x: 0.00000005856434, y: 0.000000018573497, z: 0.000000011175863,
+    w: 1}
+  m_LocalPosition: {x: 0.0324, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2057994573}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -187.12}
+--- !u!64 &921382378
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921382376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
+--- !u!23 &921382379
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921382376}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b5ab0b0426a1d464b9539c55b96c4d03, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &921382380
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921382376}
+  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
 --- !u!64 &923549020
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8698,14 +8699,13 @@ Transform:
   m_LocalScale: {x: 1404.3447, y: 1404.3444, z: 1404.3444}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1863067674}
   - {fileID: 1171518739}
   - {fileID: 2137583271}
   - {fileID: 1374074168}
   - {fileID: 1331059629}
   - {fileID: 1102013917}
   - {fileID: 2057994573}
-  - {fileID: 644290857}
-  - {fileID: 1971282181}
   - {fileID: 160847121}
   - {fileID: 1035740582}
   - {fileID: 1697041855}
@@ -9574,7 +9574,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1035740583
 MeshCollider:
@@ -9881,7 +9881,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -687786317521909412, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
 --- !u!64 &1067789627
@@ -9948,7 +9948,7 @@ GameObject:
   - component: {fileID: 1078621419}
   m_Layer: 0
   m_Name: Legs.001 (3)
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10251,14 +10251,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102013916}
-  m_LocalRotation: {x: 0.0984631, y: 0.7002179, z: 0.70581967, w: -0.04264447}
-  m_LocalPosition: {x: -0.012941848, y: -0.014958195, z: 0.0050771027}
+  m_LocalRotation: {x: -0.51701933, y: 0.4617492, z: 0.32015887, w: -0.6457376}
+  m_LocalPosition: {x: 0.00334, y: -0.03028, z: 0.0057}
   m_LocalScale: {x: 0.0019918806, y: 0.001991881, z: 0.0019918813}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: -46.504, z: 11.462}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -201.842, y: -267.595, z: 106.291}
 --- !u!23 &1102013918
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10381,6 +10381,104 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1832137297477645813, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
+--- !u!1 &1117913475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1117913476}
+  - component: {fileID: 1117913479}
+  - component: {fileID: 1117913478}
+  - component: {fileID: 1117913477}
+  m_Layer: 0
+  m_Name: Gate_wide (3)
+  m_TagString: Collider
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1117913476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117913475}
+  m_LocalRotation: {x: 0.00000013083103, y: -0.000000071453734, z: -0.5457346, w: 0.8379581}
+  m_LocalPosition: {x: 0.04627647, y: -0.031076172, z: 0.00000057147173}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2057994573}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -426.15}
+--- !u!64 &1117913477
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117913475}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
+--- !u!23 &1117913478
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117913475}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b5ab0b0426a1d464b9539c55b96c4d03, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1117913479
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117913475}
+  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
 --- !u!1 &1123047719
 GameObject:
   m_ObjectHideFlags: 0
@@ -10831,7 +10929,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1171518740
 MeshCollider:
@@ -11885,14 +11983,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261596185}
-  m_LocalRotation: {x: -0, y: -0.000000059604645, z: 0.93371356, w: -0.358021}
-  m_LocalPosition: {x: -0.0032637664, y: -0.016723098, z: 0.0012390129}
+  m_LocalRotation: {x: -0.000000044703484, y: -0.00000008940697, z: 0.67844033, w: -0.73465556}
+  m_LocalPosition: {x: -0.01062, y: -0.01093, z: 0.00124}
   m_LocalScale: {x: 0.17890692, y: 0.17890687, z: 0.17890692}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -85.444}
 --- !u!64 &1261596187
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12177,14 +12275,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331059628}
-  m_LocalRotation: {x: -0.07792649, y: 0.10750374, z: 0.98916525, w: 0.06263122}
-  m_LocalPosition: {x: -0.006953024, y: -0.010904901, z: 0.003403724}
+  m_LocalRotation: {x: 0.19704002, y: 0.091951095, z: 0.74850076, w: 0.62647176}
+  m_LocalPosition: {x: -0.01105, y: -0.01212, z: 0.00395}
   m_LocalScale: {x: 0.0031148267, y: 0.0031148267, z: 0.0031148274}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -105.26, y: 170.357, z: -219.56}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: -186.271, y: 204.371, z: -438.501}
 --- !u!23 &1331059630
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12290,12 +12388,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343586326}
   m_LocalRotation: {x: -0, y: -0.000000059604645, z: 0.93371356, w: -0.358021}
-  m_LocalPosition: {x: -0.012076826, y: 0.006722865, z: 0.0011037174}
+  m_LocalPosition: {x: -0.01111, y: 0.0076, z: 0.0011}
   m_LocalScale: {x: 0.17890692, y: 0.17890687, z: 0.17890692}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1343586328
 MeshCollider:
@@ -12445,6 +12543,104 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4792411789315428734, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
+--- !u!1 &1360669227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1360669228}
+  - component: {fileID: 1360669231}
+  - component: {fileID: 1360669230}
+  - component: {fileID: 1360669229}
+  m_Layer: 0
+  m_Name: Gate_wide (4)
+  m_TagString: Collider
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1360669228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360669227}
+  m_LocalRotation: {x: 0.00000014262083, y: -0.00000004097821, z: -0.6196382, w: 0.78488755}
+  m_LocalPosition: {x: 0.0536, y: -0.06426, z: -0.00109}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2057994573}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -436.579}
+--- !u!64 &1360669229
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360669227}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
+--- !u!23 &1360669230
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360669227}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b5ab0b0426a1d464b9539c55b96c4d03, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1360669231
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360669227}
+  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
 --- !u!64 &1365680317
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12501,7 +12697,7 @@ GameObject:
   - component: {fileID: 1374074169}
   m_Layer: 0
   m_Name: House (1)
-  m_TagString: Untagged
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12513,14 +12709,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374074167}
-  m_LocalRotation: {x: 0.00000003352761, y: 0.000000059604638, z: -0.5457942, w: -0.83791924}
-  m_LocalPosition: {x: 0.0018190906, y: -0.018425263, z: 0.0031473776}
-  m_LocalScale: {x: 0.6805516, y: 0.354971, z: 0.34646052}
+  m_LocalRotation: {x: -0.00000006146728, y: 0.000000014901159, z: -0.49730876, w: -0.8675736}
+  m_LocalPosition: {x: 0.00321, y: -0.01919, z: 0.00343}
+  m_LocalScale: {x: 0.8857379, y: 0.354971, z: 0.34646052}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -155.8}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -300.356}
 --- !u!64 &1374074169
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13011,7 +13207,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 192553726283377094, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
 --- !u!1001 &1436119615
@@ -13954,7 +14150,7 @@ GameObject:
   - component: {fileID: 1571608922}
   m_Layer: 0
   m_Name: Legs.001 (4)
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14419,7 +14615,7 @@ GameObject:
   - component: {fileID: 1619997856}
   m_Layer: 0
   m_Name: Legs.001 (5)
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14517,7 +14713,7 @@ GameObject:
   - component: {fileID: 1623041557}
   m_Layer: 0
   m_Name: Legs.001 (1)
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15227,7 +15423,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1697041856
 MeshCollider:
@@ -16794,6 +16990,203 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5932399196476174867, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
+--- !u!1 &1863067673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1863067674}
+  - component: {fileID: 1863067677}
+  - component: {fileID: 1863067676}
+  - component: {fileID: 1863067675}
+  m_Layer: 0
+  m_Name: WoodAlt (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1863067674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863067673}
+  m_LocalRotation: {x: -0.00000006332993, y: 0.000000014901159, z: -0.18564306, w: -0.98261726}
+  m_LocalPosition: {x: -0.00731, y: -0.020365346, z: 0.00468}
+  m_LocalScale: {x: 0.007681161, y: 0.010852648, z: 0.31223115}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 941972800}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 21.397}
+--- !u!64 &1863067675
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863067673}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1109246550487489381, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
+--- !u!23 &1863067676
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863067673}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -1444460858095362738, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1863067677
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863067673}
+  m_Mesh: {fileID: -1109246550487489381, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
+--- !u!1 &1866927272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1866927273}
+  - component: {fileID: 1866927276}
+  - component: {fileID: 1866927275}
+  - component: {fileID: 1866927274}
+  m_Layer: 0
+  m_Name: Gate_wide (1)
+  m_TagString: Collider
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1866927273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866927272}
+  m_LocalRotation: {x: 0.00000005856434, y: 0.000000018573497, z: 0.000000011175863,
+    w: 1}
+  m_LocalPosition: {x: -0.0281, y: -0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2057994573}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -187.12}
+--- !u!64 &1866927274
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866927272}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
+--- !u!23 &1866927275
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866927272}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b5ab0b0426a1d464b9539c55b96c4d03, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1866927276
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866927272}
+  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
 --- !u!64 &1869736131
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16934,7 +17327,7 @@ GameObject:
   - component: {fileID: 1889469315}
   m_Layer: 0
   m_Name: ColonnaDec.007 (1)
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17764,104 +18157,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 202673054980710932, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
---- !u!1 &1971282180
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1971282181}
-  - component: {fileID: 1971282184}
-  - component: {fileID: 1971282183}
-  - component: {fileID: 1971282182}
-  m_Layer: 0
-  m_Name: Gate_wide (2)
-  m_TagString: Collider
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1971282181
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971282180}
-  m_LocalRotation: {x: -0.000000044703484, y: 0.00000008940697, z: 0.9968337, w: 0.07951546}
-  m_LocalPosition: {x: -0.019556005, y: -0.012372921, z: 0.0009684222}
-  m_LocalScale: {x: 0.11778443, y: 0.11778447, z: 0.11778447}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 941972800}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -51.079}
---- !u!64 &1971282182
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971282180}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
---- !u!23 &1971282183
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971282180}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: -2382012188054065201, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1971282184
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971282180}
-  m_Mesh: {fileID: -5976473559442360314, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
 --- !u!1 &1974541024
 GameObject:
   m_ObjectHideFlags: 0
@@ -18371,7 +18666,7 @@ GameObject:
   - component: {fileID: 2039432826}
   m_Layer: 0
   m_Name: Legs.001 (2)
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18610,14 +18905,18 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057994572}
-  m_LocalRotation: {x: -0.000000014901161, y: 0.000000029802322, z: 0.95756483, w: -0.2882183}
-  m_LocalPosition: {x: -0.012677266, y: -0.011024185, z: 0.0008687325}
-  m_LocalScale: {x: 0.11778442, y: 0.11778444, z: 0.11778447}
+  m_LocalRotation: {x: 0.00000005960465, y: 0.00000005960465, z: 0.99807036, w: 0.062093846}
+  m_LocalPosition: {x: -0.013, y: -0.0242, z: 0.0009}
+  m_LocalScale: {x: 0.16415614, y: 0.11778444, z: 0.11778447}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1866927273}
+  - {fileID: 921382377}
+  - {fileID: 1117913476}
+  - {fileID: 1360669228}
   m_Father: {fileID: 941972800}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -8.455}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -187.12}
 --- !u!64 &2057994574
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18652,7 +18951,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2382012188054065201, guid: 51a5c235cd3f6d441b19e7b64b218612, type: 3}
+  - {fileID: 2100000, guid: b5ab0b0426a1d464b9539c55b96c4d03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18839,14 +19138,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2110331371}
-  m_LocalRotation: {x: -0, y: -0.000000059604645, z: 0.93371356, w: -0.358021}
-  m_LocalPosition: {x: -0.0021941238, y: -0.015761426, z: 0.0036458308}
+  m_LocalRotation: {x: -0.000000044703484, y: -0.00000008940697, z: 0.67844033, w: -0.73465556}
+  m_LocalPosition: {x: -0.01073, y: -0.0095, z: 0.00365}
   m_LocalScale: {x: 0.17890692, y: 0.17890687, z: 0.17890692}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -85.444}
 --- !u!64 &2110331373
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19123,7 +19422,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 941972800}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &2137583272
 MeshCollider:
@@ -19317,7 +19616,7 @@ GameObject:
   - component: {fileID: 45124664}
   m_Layer: 0
   m_Name: pillar_45_low.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19336,7 +19635,7 @@ GameObject:
   - component: {fileID: 1942662869}
   m_Layer: 0
   m_Name: Arc_Mid_high.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19442,7 +19741,7 @@ GameObject:
   - component: {fileID: 867425610}
   m_Layer: 0
   m_Name: pillar_45_low.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19461,7 +19760,7 @@ GameObject:
   - component: {fileID: 964775556}
   m_Layer: 0
   m_Name: WallStone.019
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19479,8 +19778,8 @@ GameObject:
   - component: {fileID: 2463078728285869063}
   - component: {fileID: 1061726502}
   m_Layer: 0
-  m_Name: PavCirc
-  m_TagString: Collider
+  m_Name: Pav
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19499,7 +19798,7 @@ GameObject:
   - component: {fileID: 1664937721}
   m_Layer: 0
   m_Name: Tower.010
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19599,7 +19898,7 @@ GameObject:
   - component: {fileID: 1313214760}
   m_Layer: 0
   m_Name: St
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19668,7 +19967,7 @@ GameObject:
   - component: {fileID: 1734276627}
   m_Layer: 0
   m_Name: WallStone.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19687,7 +19986,7 @@ GameObject:
   - component: {fileID: 1254581205}
   m_Layer: 0
   m_Name: pillar_45_low.011
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19706,7 +20005,7 @@ GameObject:
   - component: {fileID: 2063602074}
   m_Layer: 0
   m_Name: Fork.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19733,7 +20032,7 @@ GameObject:
   - component: {fileID: 659978922}
   m_Layer: 0
   m_Name: Rock_01_low.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19767,7 +20066,7 @@ GameObject:
   - component: {fileID: 291502103}
   m_Layer: 0
   m_Name: Wood.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19839,7 +20138,7 @@ GameObject:
   - component: {fileID: 442256135}
   m_Layer: 0
   m_Name: ExpanHouse.011
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19858,7 +20157,7 @@ GameObject:
   - component: {fileID: 880297846}
   m_Layer: 0
   m_Name: WallStone.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19877,7 +20176,7 @@ GameObject:
   - component: {fileID: 500955420}
   m_Layer: 0
   m_Name: ColonnaDec.010
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20091,7 +20390,7 @@ GameObject:
   - component: {fileID: 1250293594}
   m_Layer: 0
   m_Name: pillar_45_low.015
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20240,7 +20539,7 @@ GameObject:
   - component: {fileID: 1034682216}
   m_Layer: 0
   m_Name: Gate_wide.027
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20331,7 +20630,7 @@ GameObject:
   - component: {fileID: 1067789627}
   m_Layer: 0
   m_Name: pst
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20350,7 +20649,7 @@ GameObject:
   - component: {fileID: 415522139}
   m_Layer: 0
   m_Name: pst.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20419,7 +20718,7 @@ GameObject:
   - component: {fileID: 622915170}
   m_Layer: 0
   m_Name: pillar_45_low.016
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20627,7 +20926,7 @@ GameObject:
   - component: {fileID: 2021982379}
   m_Layer: 0
   m_Name: Circle.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21026,7 +21325,7 @@ GameObject:
   - component: {fileID: 1330694972}
   m_Layer: 0
   m_Name: WallStone.010
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21142,7 +21441,7 @@ GameObject:
   - component: {fileID: 2125891321}
   m_Layer: 0
   m_Name: WoodAlt
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21287,7 +21586,7 @@ GameObject:
   - component: {fileID: 1372286830}
   m_Layer: 0
   m_Name: WallStone.038
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21402,7 +21701,7 @@ GameObject:
   - component: {fileID: 2019798525}
   m_Layer: 0
   m_Name: barrel.008
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21558,7 +21857,7 @@ GameObject:
   - component: {fileID: 517918231}
   m_Layer: 0
   m_Name: WallStone.039
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21643,7 +21942,7 @@ GameObject:
   - component: {fileID: 236890917}
   m_Layer: 0
   m_Name: Gate_wide.025
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21713,7 +22012,7 @@ GameObject:
   - component: {fileID: 988216753}
   m_Layer: 0
   m_Name: ColonnaDec.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22093,7 +22392,7 @@ GameObject:
   - component: {fileID: 518620050}
   m_Layer: 0
   m_Name: Gate_wide.016
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22112,7 +22411,7 @@ GameObject:
   - component: {fileID: 702678776}
   m_Layer: 0
   m_Name: WallStone.029
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22288,7 +22587,7 @@ GameObject:
   - component: {fileID: 1011794152}
   m_Layer: 0
   m_Name: Legs.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22307,7 +22606,7 @@ GameObject:
   - component: {fileID: 313453310}
   m_Layer: 0
   m_Name: Gate_wide.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22403,7 +22702,7 @@ GameObject:
   - component: {fileID: 176754512}
   m_Layer: 0
   m_Name: pillar_45_low.008
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22464,7 +22763,7 @@ GameObject:
   - component: {fileID: 2107149901}
   m_Layer: 0
   m_Name: Gate_wide.020
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22483,7 +22782,7 @@ GameObject:
   - component: {fileID: 483970522}
   m_Layer: 0
   m_Name: pst.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22685,7 +22984,7 @@ GameObject:
   - component: {fileID: 1344921367}
   m_Layer: 0
   m_Name: ExpanHouse.012
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22704,7 +23003,7 @@ GameObject:
   - component: {fileID: 1369973683}
   m_Layer: 0
   m_Name: WallStone.021
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22723,7 +23022,7 @@ GameObject:
   - component: {fileID: 1350536516}
   m_Layer: 0
   m_Name: pillar_45_low.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22799,7 +23098,7 @@ GameObject:
   - component: {fileID: 412380063}
   m_Layer: 0
   m_Name: Tet
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22834,7 +23133,7 @@ GameObject:
   - component: {fileID: 1982007693}
   m_Layer: 0
   m_Name: pst.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22868,7 +23167,7 @@ GameObject:
   - component: {fileID: 751807630}
   m_Layer: 0
   m_Name: pst.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22887,7 +23186,7 @@ GameObject:
   - component: {fileID: 997349021}
   m_Layer: 0
   m_Name: Stairs_high_low
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22906,7 +23205,7 @@ GameObject:
   - component: {fileID: 1411594334}
   m_Layer: 0
   m_Name: Panca
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22925,7 +23224,7 @@ GameObject:
   - component: {fileID: 1758817237}
   m_Layer: 0
   m_Name: Gate_wide.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23043,7 +23342,7 @@ GameObject:
   - component: {fileID: 1557931362}
   m_Layer: 0
   m_Name: Gate_wide.012
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23146,7 +23445,7 @@ GameObject:
   - component: {fileID: 1651356410}
   m_Layer: 0
   m_Name: PavCirc.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23329,7 +23628,7 @@ GameObject:
   - component: {fileID: 1947269174}
   m_Layer: 0
   m_Name: Wood
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23872,7 +24171,7 @@ GameObject:
   - component: {fileID: 1055908198}
   m_Layer: 0
   m_Name: WallStone.027
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23891,7 +24190,7 @@ GameObject:
   - component: {fileID: 833803547}
   m_Layer: 0
   m_Name: Cube.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23925,7 +24224,7 @@ GameObject:
   - component: {fileID: 1538106640}
   m_Layer: 0
   m_Name: WallStone.011
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23986,7 +24285,7 @@ GameObject:
   - component: {fileID: 528623315}
   m_Layer: 0
   m_Name: Tower.016
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24020,7 +24319,7 @@ GameObject:
   - component: {fileID: 1763377100}
   m_Layer: 0
   m_Name: WallStone.030
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24255,7 +24554,7 @@ GameObject:
   - component: {fileID: 1917573764}
   m_Layer: 0
   m_Name: Tower.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24396,7 +24695,7 @@ GameObject:
   - component: {fileID: 201538810}
   m_Layer: 0
   m_Name: Pav.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24415,7 +24714,7 @@ GameObject:
   - component: {fileID: 2118673812}
   m_Layer: 0
   m_Name: Rock_01_low.012
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24457,7 +24756,7 @@ GameObject:
   - component: {fileID: 740872896}
   m_Layer: 0
   m_Name: Gate_wide.032
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24499,7 +24798,7 @@ GameObject:
   - component: {fileID: 1691010804}
   m_Layer: 0
   m_Name: Gate_wide.024
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24518,7 +24817,7 @@ GameObject:
   - component: {fileID: 2040827746}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24666,7 +24965,7 @@ GameObject:
   - component: {fileID: 1231417432}
   m_Layer: 0
   m_Name: Fork.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24704,7 +25003,7 @@ GameObject:
   - component: {fileID: 136837200}
   m_Layer: 0
   m_Name: Medieval box 1.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24765,7 +25064,7 @@ GameObject:
   - component: {fileID: 1947128483}
   m_Layer: 0
   m_Name: Pozzo
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24784,7 +25083,7 @@ GameObject:
   - component: {fileID: 114844561}
   m_Layer: 0
   m_Name: Cassa.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24926,7 +25225,7 @@ GameObject:
   - component: {fileID: 809314233}
   m_Layer: 0
   m_Name: PavCirc.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24969,7 +25268,7 @@ GameObject:
   - component: {fileID: 964364664}
   m_Layer: 0
   m_Name: WallStone
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25103,7 +25402,7 @@ GameObject:
   - component: {fileID: 322623590}
   m_Layer: 0
   m_Name: Cupola.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25137,7 +25436,7 @@ GameObject:
   - component: {fileID: 1464316031}
   m_Layer: 0
   m_Name: ExpanHouse
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25419,7 +25718,7 @@ GameObject:
   - component: {fileID: 1942662873}
   m_Layer: 0
   m_Name: Anvil_Standart_Anvil
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25658,7 +25957,7 @@ GameObject:
   - component: {fileID: 1000099436}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.012
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25685,7 +25984,7 @@ GameObject:
   - component: {fileID: 1472594372}
   m_Layer: 0
   m_Name: WallStone.016
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25819,7 +26118,7 @@ GameObject:
   - component: {fileID: 988472558}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26044,7 +26343,7 @@ GameObject:
   - component: {fileID: 1772595978}
   m_Layer: 0
   m_Name: BigHouse
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26265,7 +26564,7 @@ GameObject:
   - component: {fileID: 1632073921}
   m_Layer: 0
   m_Name: WallStone.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26314,7 +26613,7 @@ GameObject:
   - component: {fileID: 1806868162}
   m_Layer: 0
   m_Name: pillar_45_low.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26333,7 +26632,7 @@ GameObject:
   - component: {fileID: 242991660}
   m_Layer: 0
   m_Name: Gate_wide.013
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26352,7 +26651,7 @@ GameObject:
   - component: {fileID: 666541006}
   m_Layer: 0
   m_Name: Gate_wide.017
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26446,7 +26745,7 @@ GameObject:
   - component: {fileID: 1961363768}
   m_Layer: 0
   m_Name: Circle.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26515,7 +26814,7 @@ GameObject:
   - component: {fileID: 1558505206}
   m_Layer: 0
   m_Name: WallStone.013
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26715,7 +27014,7 @@ GameObject:
   - component: {fileID: 854662903}
   m_Layer: 0
   m_Name: PavCirc.010
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26742,7 +27041,7 @@ GameObject:
   - component: {fileID: 1845250774}
   m_Layer: 0
   m_Name: WallStone.040
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26769,7 +27068,7 @@ GameObject:
   - component: {fileID: 31297035}
   m_Layer: 0
   m_Name: Pav.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26803,7 +27102,7 @@ GameObject:
   - component: {fileID: 486660498}
   m_Layer: 0
   m_Name: Fork
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26822,7 +27121,7 @@ GameObject:
   - component: {fileID: 874415307}
   m_Layer: 0
   m_Name: WallStone.033
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26992,7 +27291,7 @@ GameObject:
   - component: {fileID: 696949393}
   m_Layer: 0
   m_Name: barrel.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27011,7 +27310,7 @@ GameObject:
   - component: {fileID: 359462093}
   m_Layer: 0
   m_Name: PavCirc.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27248,7 +27547,7 @@ GameObject:
   - component: {fileID: 700945377}
   m_Layer: 0
   m_Name: Rock_Small_01
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27267,7 +27566,7 @@ GameObject:
   - component: {fileID: 2050363684}
   m_Layer: 0
   m_Name: Fork.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27328,7 +27627,7 @@ GameObject:
   - component: {fileID: 679954174}
   m_Layer: 0
   m_Name: WallStone.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27538,7 +27837,7 @@ GameObject:
   - component: {fileID: 864273106}
   m_Layer: 0
   m_Name: Tower.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27615,7 +27914,7 @@ GameObject:
   - component: {fileID: 1790191135}
   m_Layer: 0
   m_Name: WallStone.031
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27719,7 +28018,7 @@ GameObject:
   - component: {fileID: 333580780}
   m_Layer: 0
   m_Name: WallStone.034
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27860,7 +28159,7 @@ GameObject:
   - component: {fileID: 3509736}
   m_Layer: 0
   m_Name: WallStone.026
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27879,7 +28178,7 @@ GameObject:
   - component: {fileID: 562430615}
   m_Layer: 0
   m_Name: House.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28005,7 +28304,7 @@ GameObject:
   - component: {fileID: 2007519}
   m_Layer: 0
   m_Name: ColonnaDec.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28089,7 +28388,7 @@ GameObject:
   - component: {fileID: 268060}
   m_Layer: 0
   m_Name: PavCirc.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28108,7 +28407,7 @@ GameObject:
   - component: {fileID: 636616994}
   m_Layer: 0
   m_Name: barrel.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28249,7 +28548,7 @@ GameObject:
   - component: {fileID: 426972504}
   m_Layer: 0
   m_Name: Rock_01_low.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28268,7 +28567,7 @@ GameObject:
   - component: {fileID: 1806733131}
   m_Layer: 0
   m_Name: pillar_45_low.019
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28294,7 +28593,7 @@ GameObject:
   - component: {fileID: 1734225895400517818}
   m_Layer: 0
   m_Name: bucket
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28321,7 +28620,7 @@ GameObject:
   - component: {fileID: 225577920}
   m_Layer: 0
   m_Name: Tower.011
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28364,7 +28663,7 @@ GameObject:
   - component: {fileID: 994776207}
   m_Layer: 0
   m_Name: WallStone.012
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28440,7 +28739,7 @@ GameObject:
   - component: {fileID: 745912384}
   m_Layer: 0
   m_Name: Fork.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28554,7 +28853,7 @@ GameObject:
   - component: {fileID: 231247389}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28615,7 +28914,7 @@ GameObject:
   - component: {fileID: 611489507}
   m_Layer: 0
   m_Name: WallStone.022
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28707,7 +29006,7 @@ GameObject:
   - component: {fileID: 65523059}
   m_Layer: 0
   m_Name: PavCirc.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28726,7 +29025,7 @@ GameObject:
   - component: {fileID: 1173883331}
   m_Layer: 0
   m_Name: ColonnaDec.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28787,7 +29086,7 @@ GameObject:
   - component: {fileID: 1262147077}
   m_Layer: 0
   m_Name: bucket.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28806,7 +29105,7 @@ GameObject:
   - component: {fileID: 1722533467}
   m_Layer: 0
   m_Name: Rock_01_low.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28841,7 +29140,7 @@ GameObject:
   - component: {fileID: 1587314598}
   m_Layer: 0
   m_Name: barrel.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28860,7 +29159,7 @@ GameObject:
   - component: {fileID: 1812223938}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28952,7 +29251,7 @@ GameObject:
   - component: {fileID: 61718248}
   m_Layer: 0
   m_Name: Circle.010
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29122,7 +29421,7 @@ GameObject:
   - component: {fileID: 2104246948}
   m_Layer: 0
   m_Name: Gate_wide.014
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29434,7 +29733,7 @@ GameObject:
   - component: {fileID: 609398112}
   m_Layer: 0
   m_Name: Cupola
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29484,7 +29783,7 @@ GameObject:
   - component: {fileID: 1840745116}
   m_Layer: 0
   m_Name: Tower.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29889,7 +30188,7 @@ GameObject:
   - component: {fileID: 1654766472}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29908,7 +30207,7 @@ GameObject:
   - component: {fileID: 1059317537}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30052,7 +30351,7 @@ GameObject:
   - component: {fileID: 1060689146}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30136,7 +30435,7 @@ GameObject:
   - component: {fileID: 936159613}
   m_Layer: 0
   m_Name: Tower.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30239,7 +30538,7 @@ GameObject:
   - component: {fileID: 1310908265}
   m_Layer: 0
   m_Name: pillar_45_low.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30711,7 +31010,7 @@ GameObject:
   - component: {fileID: 259826936}
   m_Layer: 0
   m_Name: ColonnaDec.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30773,7 +31072,7 @@ GameObject:
   - component: {fileID: 1432015404}
   m_Layer: 0
   m_Name: Pav.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30858,7 +31157,7 @@ GameObject:
   - component: {fileID: 547230449}
   m_Layer: 0
   m_Name: Tower.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30908,7 +31207,7 @@ GameObject:
   - component: {fileID: 1551143572}
   m_Layer: 0
   m_Name: Tet.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31131,7 +31430,7 @@ GameObject:
   - component: {fileID: 213833653}
   m_Layer: 0
   m_Name: Rock_01_low.010
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31242,7 +31541,7 @@ GameObject:
   - component: {fileID: 736287597}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.013
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31307,7 +31606,7 @@ GameObject:
   - component: {fileID: 887868942}
   m_Layer: 0
   m_Name: Gate_wide.022
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31334,7 +31633,7 @@ GameObject:
   - component: {fileID: 1942662870}
   m_Layer: 0
   m_Name: Arc_Mid_high
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31353,7 +31652,7 @@ GameObject:
   - component: {fileID: 1135921198}
   m_Layer: 0
   m_Name: Fork.008
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31608,7 +31907,7 @@ GameObject:
   - component: {fileID: 734171991}
   m_Layer: 0
   m_Name: Medieval box 1
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31642,7 +31941,7 @@ GameObject:
   - component: {fileID: 1723829179}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.011
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31769,7 +32068,7 @@ GameObject:
   - component: {fileID: 782138392}
   m_Layer: 0
   m_Name: WallStone.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31796,7 +32095,7 @@ GameObject:
   - component: {fileID: 283159717}
   m_Layer: 0
   m_Name: ExpanHouse.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31838,7 +32137,7 @@ GameObject:
   - component: {fileID: 1928699369}
   m_Layer: 0
   m_Name: ExpanHouse.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31857,7 +32156,7 @@ GameObject:
   - component: {fileID: 2097894946}
   m_Layer: 0
   m_Name: pillar_45_low.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31968,7 +32267,7 @@ GameObject:
   - component: {fileID: 525657380}
   m_Layer: 0
   m_Name: Pav.008
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32044,7 +32343,7 @@ GameObject:
   - component: {fileID: 626673531}
   m_Layer: 0
   m_Name: barrel.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32178,7 +32477,7 @@ GameObject:
   - component: {fileID: 296484439}
   m_Layer: 0
   m_Name: WallStone.020
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32239,7 +32538,7 @@ GameObject:
   - component: {fileID: 1110379660}
   m_Layer: 0
   m_Name: Gate_wide.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32317,7 +32616,7 @@ GameObject:
   - component: {fileID: 55050692}
   m_Layer: 0
   m_Name: Tower.012
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32336,7 +32635,7 @@ GameObject:
   - component: {fileID: 1675371249}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.008
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32516,7 +32815,7 @@ GameObject:
   - component: {fileID: 1001734372}
   m_Layer: 0
   m_Name: Gate_wide.010
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32681,7 +32980,7 @@ GameObject:
   - component: {fileID: 874943751}
   m_Layer: 0
   m_Name: pillar_45_low
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32842,7 +33141,7 @@ GameObject:
   - component: {fileID: 2037818443}
   m_Layer: 0
   m_Name: Gate_wide.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32861,7 +33160,7 @@ GameObject:
   - component: {fileID: 425239990}
   m_Layer: 0
   m_Name: WallStone.035
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32895,7 +33194,7 @@ GameObject:
   - component: {fileID: 16055362}
   m_Layer: 0
   m_Name: Rock_01_low.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32929,7 +33228,7 @@ GameObject:
   - component: {fileID: 1226910805}
   m_Layer: 0
   m_Name: WallStone.024
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32948,7 +33247,7 @@ GameObject:
   - component: {fileID: 1344553611}
   m_Layer: 0
   m_Name: Wood.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32967,7 +33266,7 @@ GameObject:
   - component: {fileID: 2048523409}
   m_Layer: 0
   m_Name: ColonnaDec.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32994,7 +33293,7 @@ GameObject:
   - component: {fileID: 1897817076}
   m_Layer: 0
   m_Name: WallStone.036
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33066,7 +33365,7 @@ GameObject:
   - component: {fileID: 238809112}
   m_Layer: 0
   m_Name: bucket.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33358,7 +33657,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346831992057295048}
   m_LocalRotation: {x: -0.52209467, y: -0.47688282, z: -0.4768832, w: 0.52209425}
-  m_LocalPosition: {x: -6.7890286, y: 0.80263066, z: 34.493988}
+  m_LocalPosition: {x: -6.76, y: 1.36, z: 34.81}
   m_LocalScale: {x: 139.01917, y: 139.01917, z: 139.01917}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33379,7 +33678,7 @@ GameObject:
   - component: {fileID: 1712306275}
   m_Layer: 0
   m_Name: Circle.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33457,7 +33756,7 @@ GameObject:
   - component: {fileID: 970284681}
   m_Layer: 0
   m_Name: PavCirc.008
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33476,7 +33775,7 @@ GameObject:
   - component: {fileID: 1985097406}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33518,7 +33817,7 @@ GameObject:
   - component: {fileID: 654902008}
   m_Layer: 0
   m_Name: pillar_45_low.014
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33537,7 +33836,7 @@ GameObject:
   - component: {fileID: 1630209303}
   m_Layer: 0
   m_Name: ExpanHouse.010
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33644,7 +33943,7 @@ GameObject:
   - component: {fileID: 1331108917}
   m_Layer: 0
   m_Name: Gate_wide.021
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33713,7 +34012,7 @@ GameObject:
   - component: {fileID: 581324149}
   m_Layer: 0
   m_Name: ExpanHouse.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33996,7 +34295,7 @@ GameObject:
   - component: {fileID: 775331148}
   m_Layer: 0
   m_Name: Fork.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34045,7 +34344,7 @@ GameObject:
   - component: {fileID: 1941449093}
   m_Layer: 0
   m_Name: ExpanHouse.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34172,7 +34471,7 @@ GameObject:
   - component: {fileID: 1677758678}
   m_Layer: 0
   m_Name: WallStone.015
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34191,7 +34490,7 @@ GameObject:
   - component: {fileID: 1796185884}
   m_Layer: 0
   m_Name: Gate_wide.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34210,7 +34509,7 @@ GameObject:
   - component: {fileID: 1100623904}
   m_Layer: 0
   m_Name: Rock_01_low.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34312,7 +34611,7 @@ GameObject:
   - component: {fileID: 606775079}
   m_Layer: 0
   m_Name: Rock_01_low.008
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34339,7 +34638,7 @@ GameObject:
   - component: {fileID: 372356731}
   m_Layer: 0
   m_Name: Circle.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34358,7 +34657,7 @@ GameObject:
   - component: {fileID: 666101549}
   m_Layer: 0
   m_Name: Fork.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34477,7 +34776,7 @@ GameObject:
   - component: {fileID: 236464218}
   m_Layer: 0
   m_Name: WallStone.042
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34496,7 +34795,7 @@ GameObject:
   - component: {fileID: 1904291543}
   m_Layer: 0
   m_Name: Gate_wide.015
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34698,7 +34997,7 @@ GameObject:
   - component: {fileID: 1349361867}
   m_Layer: 0
   m_Name: Cassa
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34785,7 +35084,7 @@ GameObject:
   - component: {fileID: 494797350}
   m_Layer: 0
   m_Name: Gate_wide.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34959,7 +35258,7 @@ GameObject:
   - component: {fileID: 1181249077}
   m_Layer: 0
   m_Name: Rock_small_03
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34978,7 +35277,7 @@ GameObject:
   - component: {fileID: 424742399}
   m_Layer: 0
   m_Name: WallStone.017
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35040,7 +35339,7 @@ GameObject:
   - component: {fileID: 982163889}
   m_Layer: 0
   m_Name: Gate_wide.019
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35124,7 +35423,7 @@ GameObject:
   - component: {fileID: 907886719}
   m_Layer: 0
   m_Name: WallStone.032
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35185,7 +35484,7 @@ GameObject:
   - component: {fileID: 1365680317}
   m_Layer: 0
   m_Name: Gate_wide.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35219,7 +35518,7 @@ GameObject:
   - component: {fileID: 1305162821}
   m_Layer: 0
   m_Name: WallStone.014
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35254,7 +35553,7 @@ GameObject:
   - component: {fileID: 1617479390}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35281,7 +35580,7 @@ GameObject:
   - component: {fileID: 1896003555}
   m_Layer: 0
   m_Name: pillar_45_low.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35445,7 +35744,7 @@ GameObject:
   - component: {fileID: 1869736131}
   m_Layer: 0
   m_Name: Circle.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35464,7 +35763,7 @@ GameObject:
   - component: {fileID: 956283780}
   m_Layer: 0
   m_Name: ColonnaDec.008
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35710,7 +36009,7 @@ GameObject:
   - component: {fileID: 1609766650}
   m_Layer: 0
   m_Name: Tower.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35779,7 +36078,7 @@ GameObject:
   - component: {fileID: 158597849}
   m_Layer: 0
   m_Name: WallStone.018
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35836,7 +36135,7 @@ GameObject:
   - component: {fileID: 134484166}
   m_Layer: 0
   m_Name: WallStone.023
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35885,7 +36184,7 @@ GameObject:
   - component: {fileID: 971195583}
   m_Layer: 0
   m_Name: Panca.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35975,7 +36274,7 @@ GameObject:
   - component: {fileID: 2039761763}
   m_Layer: 0
   m_Name: Cupola.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35994,7 +36293,7 @@ GameObject:
   - component: {fileID: 611933712}
   m_Layer: 0
   m_Name: Rock_01_low
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36177,7 +36476,7 @@ GameObject:
   - component: {fileID: 970559184}
   m_Layer: 0
   m_Name: WallStone.025
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36196,7 +36495,7 @@ GameObject:
   - component: {fileID: 1718529977}
   m_Layer: 0
   m_Name: low
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36257,7 +36556,7 @@ GameObject:
   - component: {fileID: 1338629460}
   m_Layer: 0
   m_Name: ColonnaDec.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36543,7 +36842,7 @@ GameObject:
   - component: {fileID: 668333093}
   m_Layer: 0
   m_Name: WoodTet
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36570,7 +36869,7 @@ GameObject:
   - component: {fileID: 1353336988}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36741,7 +37040,7 @@ GameObject:
   - component: {fileID: 414071669}
   m_Layer: 0
   m_Name: barrel.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36760,7 +37059,7 @@ GameObject:
   - component: {fileID: 1309752888}
   m_Layer: 0
   m_Name: ExpanHouse.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36779,7 +37078,7 @@ GameObject:
   - component: {fileID: 1771871303}
   m_Layer: 0
   m_Name: BarileGr
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37070,7 +37369,7 @@ GameObject:
   - component: {fileID: 1588787055}
   m_Layer: 0
   m_Name: WallStone.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37097,7 +37396,7 @@ GameObject:
   - component: {fileID: 135476120}
   m_Layer: 0
   m_Name: SmallHouse
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37601,7 +37900,7 @@ GameObject:
   - component: {fileID: 790708280}
   m_Layer: 0
   m_Name: Pav.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37700,7 +37999,7 @@ GameObject:
   - component: {fileID: 1281607192}
   m_Layer: 0
   m_Name: barrel.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37956,7 +38255,7 @@ GameObject:
   - component: {fileID: 1155161941}
   m_Layer: 0
   m_Name: ColonnaDec.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38173,7 +38472,7 @@ GameObject:
   - component: {fileID: 95523089}
   m_Layer: 0
   m_Name: polySurface1365
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38234,7 +38533,7 @@ GameObject:
   - component: {fileID: 1528052930}
   m_Layer: 0
   m_Name: Wood.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38303,7 +38602,7 @@ GameObject:
   - component: {fileID: 1881336374}
   m_Layer: 0
   m_Name: Stairs_high_low.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38322,7 +38621,7 @@ GameObject:
   - component: {fileID: 617828280}
   m_Layer: 0
   m_Name: Gate_wide.011
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38505,7 +38804,7 @@ GameObject:
   - component: {fileID: 1662894253}
   m_Layer: 0
   m_Name: Wood.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38625,7 +38924,7 @@ GameObject:
   - component: {fileID: 2126195727}
   m_Layer: 0
   m_Name: WallStone.037
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38685,7 +38984,7 @@ GameObject:
   - component: {fileID: 1447383082}
   m_Layer: 0
   m_Name: Gate_wide.008
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38853,7 +39152,7 @@ GameObject:
   - component: {fileID: 816857633}
   m_Layer: 0
   m_Name: Gate_wide.026
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38872,7 +39171,7 @@ GameObject:
   - component: {fileID: 1732556324}
   m_Layer: 0
   m_Name: Circle.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38913,7 +39212,7 @@ GameObject:
   - component: {fileID: 1801336624}
   m_Layer: 0
   m_Name: Arc_Mid_high.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39006,7 +39305,7 @@ GameObject:
   - component: {fileID: 2069149102}
   m_Layer: 0
   m_Name: Rock_01_low.011
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39025,7 +39324,7 @@ GameObject:
   - component: {fileID: 1957745349}
   m_Layer: 0
   m_Name: barrel.010
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39044,7 +39343,7 @@ GameObject:
   - component: {fileID: 923549020}
   m_Layer: 0
   m_Name: barrel
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39063,7 +39362,7 @@ GameObject:
   - component: {fileID: 1727932018}
   m_Layer: 0
   m_Name: Tower.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39098,7 +39397,7 @@ GameObject:
   - component: {fileID: 1780896879}
   m_Layer: 0
   m_Name: Cube.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39117,7 +39416,7 @@ GameObject:
   - component: {fileID: 799480481}
   m_Layer: 0
   m_Name: WallStone.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39220,7 +39519,7 @@ GameObject:
   - component: {fileID: 1714100077}
   m_Layer: 0
   m_Name: Gate_wide.034
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39239,7 +39538,7 @@ GameObject:
   - component: {fileID: 1892149746}
   m_Layer: 0
   m_Name: Tower
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39323,7 +39622,7 @@ GameObject:
   - component: {fileID: 970684953}
   m_Layer: 0
   m_Name: PavCirc.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39342,7 +39641,7 @@ GameObject:
   - component: {fileID: 1910475614}
   m_Layer: 0
   m_Name: PavCirc.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39361,7 +39660,7 @@ GameObject:
   - component: {fileID: 43382727}
   m_Layer: 0
   m_Name: Pav.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39425,7 +39724,7 @@ GameObject:
   - component: {fileID: 206828881}
   m_Layer: 0
   m_Name: pst.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39484,7 +39783,7 @@ GameObject:
   - component: {fileID: 1979514596}
   m_Layer: 0
   m_Name: WallStone.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39560,7 +39859,7 @@ GameObject:
   - component: {fileID: 927231270}
   m_Layer: 0
   m_Name: Tower.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39837,7 +40136,7 @@ GameObject:
   - component: {fileID: 771547910}
   m_Layer: 0
   m_Name: ExpanHouse.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39856,7 +40155,7 @@ GameObject:
   - component: {fileID: 1026940474}
   m_Layer: 0
   m_Name: PavCirc.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39891,7 +40190,7 @@ GameObject:
   - component: {fileID: 1625941710}
   m_Layer: 0
   m_Name: WallStone.041
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40002,7 +40301,7 @@ GameObject:
   - component: {fileID: 1965073667}
   m_Layer: 0
   m_Name: WallStone.028
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40021,7 +40320,7 @@ GameObject:
   - component: {fileID: 793465178}
   m_Layer: 0
   m_Name: Table.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40112,7 +40411,7 @@ GameObject:
   - component: {fileID: 457342960}
   m_Layer: 0
   m_Name: Circle.008
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40213,7 +40512,7 @@ GameObject:
   - component: {fileID: 340242282}
   m_Layer: 0
   m_Name: Fork.006
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40434,7 +40733,7 @@ GameObject:
   - component: {fileID: 2133476352}
   m_Layer: 0
   m_Name: ColonnaDec
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40804,7 +41103,7 @@ GameObject:
   - component: {fileID: 607706966}
   m_Layer: 0
   m_Name: Circle.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40831,7 +41130,7 @@ GameObject:
   - component: {fileID: 912598904}
   m_Layer: 0
   m_Name: Circle.009
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40850,7 +41149,7 @@ GameObject:
   - component: {fileID: 212671089}
   m_Layer: 0
   m_Name: Tet.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40942,7 +41241,7 @@ GameObject:
   - component: {fileID: 1942662872}
   m_Layer: 0
   m_Name: Anvil_Standart_hammer
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40994,7 +41293,7 @@ GameObject:
   - component: {fileID: 945420417}
   m_Layer: 0
   m_Name: Rock_small_02
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41013,7 +41312,7 @@ GameObject:
   - component: {fileID: 116925882}
   m_Layer: 0
   m_Name: Gate_wide.023
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41055,7 +41354,7 @@ GameObject:
   - component: {fileID: 977986927}
   m_Layer: 0
   m_Name: pillar_45_low.018
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41233,7 +41532,7 @@ GameObject:
   - component: {fileID: 618151560}
   m_Layer: 0
   m_Name: Pav
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41351,7 +41650,7 @@ GameObject:
   - component: {fileID: 1702526148}
   m_Layer: 0
   m_Name: Arc_Mid_high.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41370,7 +41669,7 @@ GameObject:
   - component: {fileID: 1358664528}
   m_Layer: 0
   m_Name: Gate_wide.018
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41438,7 +41737,7 @@ GameObject:
   - component: {fileID: 1753774001}
   m_Layer: 0
   m_Name: ExpanHouse.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41457,7 +41756,7 @@ GameObject:
   - component: {fileID: 1407749702}
   m_Layer: 0
   m_Name: Wood.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41484,7 +41783,7 @@ GameObject:
   - component: {fileID: 1695376611}
   m_Layer: 0
   m_Name: barrel.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41603,7 +41902,7 @@ GameObject:
   - component: {fileID: 340152100}
   m_Layer: 0
   m_Name: ExpanHouse.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41772,7 +42071,7 @@ GameObject:
   - component: {fileID: 2065767455}
   m_Layer: 0
   m_Name: pillar_45_low.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41899,7 +42198,7 @@ GameObject:
   - component: {fileID: 1892580428}
   m_Layer: 0
   m_Name: Rock_01_low.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41918,7 +42217,7 @@ GameObject:
   - component: {fileID: 2086236377}
   m_Layer: 0
   m_Name: Cylinder.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42096,7 +42395,7 @@ GameObject:
   - component: {fileID: 1862732790}
   m_Layer: 0
   m_Name: Rock_small_03.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42507,7 +42806,7 @@ GameObject:
   - component: {fileID: 342209083}
   m_Layer: 0
   m_Name: Panca.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42568,7 +42867,7 @@ GameObject:
   - component: {fileID: 739298280}
   m_Layer: 0
   m_Name: pillar_45_low.017
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42668,7 +42967,7 @@ GameObject:
   - component: {fileID: 1855337222}
   m_Layer: 0
   m_Name: Gate_wide.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42871,7 +43170,7 @@ GameObject:
   - component: {fileID: 1467273754}
   m_Layer: 0
   m_Name: WallStone.008
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42890,7 +43189,7 @@ GameObject:
   - component: {fileID: 19718353}
   m_Layer: 0
   m_Name: Rock_01_low.005
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42933,7 +43232,7 @@ GameObject:
   - component: {fileID: 751351296}
   m_Layer: 0
   m_Name: barrel.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43077,7 +43376,7 @@ GameObject:
   - component: {fileID: 124681949}
   m_Layer: 0
   m_Name: Wall_4x0.6x3.5_low_C.010
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43236,7 +43535,7 @@ GameObject:
   - component: {fileID: 1473485062}
   m_Layer: 0
   m_Name: Table.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43327,7 +43626,7 @@ GameObject:
   - component: {fileID: 843910075}
   m_Layer: 0
   m_Name: Cassa.001
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43346,7 +43645,7 @@ GameObject:
   - component: {fileID: 1166432495}
   m_Layer: 0
   m_Name: ColonnaDec.011
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43625,7 +43924,7 @@ GameObject:
   - component: {fileID: 829055020}
   m_Layer: 0
   m_Name: Medieval box 1.002
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43694,7 +43993,7 @@ GameObject:
   - component: {fileID: 1263642704}
   m_Layer: 0
   m_Name: Table
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43713,7 +44012,7 @@ GameObject:
   - component: {fileID: 392494397}
   m_Layer: 0
   m_Name: Pav.004
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43747,7 +44046,7 @@ GameObject:
   - component: {fileID: 2047709129}
   m_Layer: 0
   m_Name: Rock_01_low.007
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43781,7 +44080,7 @@ GameObject:
   - component: {fileID: 1403242693}
   m_Layer: 0
   m_Name: Fork.003
-  m_TagString: Collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

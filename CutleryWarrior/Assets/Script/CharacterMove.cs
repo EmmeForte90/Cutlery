@@ -163,8 +163,7 @@ private void OnCollisionEnter(Collision collision)
 {
     // Controlliamo se il player ha toccato il collider
     if (collision.gameObject.CompareTag("Collider"))
-    {Idle(); Stop(); StopM = true; Vector3 knockbackDirection = transform.position - collision.transform.position;
-        knockbackController.ApplyKnockback(knockbackDirection);}
+    {Idle();  StopM = true; rb.AddForce(-transform.position + moveDir * 0.1f * SpeedB);}
 }
 
 private void OnCollisionExit(Collision collision)
