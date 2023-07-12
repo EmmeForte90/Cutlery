@@ -19,7 +19,9 @@ public class CharacterMove : MonoBehaviour
     public bool inputCTR = false;
     public bool Interact = false;
     public float hor;
-    bool Right = true;
+    bool Right = true;    
+    bool StopM = false;
+
     [SpineAnimation][SerializeField] private string WalkAnimationName;
     [SpineAnimation][SerializeField] private string RunAnimationName;
     [SpineAnimation][SerializeField] private string IdleAnimationName;
@@ -29,6 +31,7 @@ public class CharacterMove : MonoBehaviour
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
     Spine.EventData eventData;
+    private KnockbackController knockbackController;
 
     Vector3 camF,camR,moveDir;
 public static CharacterMove instance;
@@ -45,7 +48,8 @@ private void Awake()
         }        
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
-        _skeleton = _skeletonAnimation.skeleton;
+        _skeleton = _skeletonAnimation.skeleton;        
+        knockbackController = GetComponent<KnockbackController>();
         }
 
     // Start is called before the first frame update
@@ -127,13 +131,13 @@ private void Awake()
     {
         if(!inputCTR)
     {
-        if(!Interact && !isRun)
+        if(!Interact && !isRun && !StopM)
     {
         rb.MovePosition(transform.position + moveDir * 0.1f * Speed);
-    } else if(!Interact && isRun && !isBattle)
+    } else if(!Interact && isRun && !isBattle && !StopM)
     {
         rb.MovePosition(transform.position + moveDir * 0.1f * Run);
-    }else if(!Interact && isBattle)
+    }else if(!Interact && isBattle && !StopM)
     {
         rb.MovePosition(transform.position + moveDir * 0.1f * SpeedB);
     }
@@ -141,9 +145,7 @@ private void Awake()
     }
 
      public void Stop()
-    {
-        rb.velocity = new Vector3(0f, 0f, 0f);
-    }
+    {rb.velocity = new Vector3(0f, 0f, 0f);}
 
     private void Flip()
     {
@@ -155,15 +157,21 @@ private void Awake()
             SpriteHero.localScale = localScale;
         }
     }
-private void OnTriggerEnter(Collider other)
+
+
+private void OnCollisionEnter(Collision collision)
 {
     // Controlliamo se il player ha toccato il collider
-    if (other.CompareTag("Collider"))
-    {
-        Idle();
-        Stop();
-    }
+    if (collision.gameObject.CompareTag("Collider"))
+    {Idle(); Stop(); StopM = true; Vector3 knockbackDirection = transform.position - collision.transform.position;
+        knockbackController.ApplyKnockback(knockbackDirection);}
+}
 
+private void OnCollisionExit(Collision collision)
+{
+    // Controlliamo se il player ha smesso di collidere con l'oggetto
+    if (collision.gameObject.CompareTag("Collider"))
+    {StopM = false;}
 }
 
  public void Idle()

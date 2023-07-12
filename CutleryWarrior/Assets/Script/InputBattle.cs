@@ -21,7 +21,6 @@ public class InputBattle : MonoBehaviour
     //[SerializeField] private string attackAnimationName = "attack";
 
     // Nome delle animazioni di combo (aggiunto a un numero per formare il nome completo)
-    [SerializeField] private string comboAnimationName = "combo";
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;

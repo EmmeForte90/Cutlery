@@ -87,7 +87,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_A27A3D7E: 32
+    - Vector1_A27A3D7E: 60
     - Vector1_CC2ACFFC: 0.1
     - Vector1_E74BFB7C: 0.7
     - _AlphaClip: 0
@@ -123,7 +123,7 @@ Material:
     - Color_27150168: {r: 1, g: 1, b: 1, a: 0}
     - Color_A94F19A0: {r: 1, g: 1, b: 1, a: 0}
     - Color_C19B377F: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 0}
-    - Color_F306B785: {r: 0.44705883, g: 0.54509807, b: 0.75686276, a: 0}
+    - Color_F306B785: {r: 0.39365235, g: 0.7169812, b: 0.33481666, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
