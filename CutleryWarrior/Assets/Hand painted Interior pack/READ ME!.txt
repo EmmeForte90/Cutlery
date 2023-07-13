@@ -1,0 +1,22 @@
+Thank you for purchasing the interior pack!
+
+Drag the prefabs using ctrl to snap them together. 
+The prefabs are modeled so they follow the unity grid units.
+
+Here the components you can add to your camera to match the look of the screenshots and videos.
+
+_Bloom Optimized:
+Threshold: 0.2
+Intensity: 0.2
+blur size: 0.5
+
+_Screen space AO:
+Intensity: 1.5
+Radius:0.1
+Blur iterations:2
+blur filter distance:3
+
+Add a character controller to move through the demo scene.
+
+Thank you and enjoy the pack!
+Red Panda
