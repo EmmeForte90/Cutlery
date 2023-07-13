@@ -20,7 +20,7 @@ public class CharacterMove : MonoBehaviour
     public bool Interact = false;
     public float hor;
     bool Right = true;    
-    bool StopM = false;
+    public bool StopM = false;
 
     [SpineAnimation][SerializeField] private string WalkAnimationName;
     [SpineAnimation][SerializeField] private string RunAnimationName;
@@ -131,7 +131,7 @@ private void Awake()
     {
         if(!inputCTR)
     {
-        if(!Interact && !isRun && !StopM)
+        if(!Interact && !isRun)
     {
         rb.MovePosition(transform.position + moveDir * 0.1f * Speed);
     } else if(!Interact && isRun && !isBattle && !StopM)
@@ -163,7 +163,8 @@ private void OnCollisionEnter(Collision collision)
 {
     // Controlliamo se il player ha toccato il collider
     if (collision.gameObject.CompareTag("Collider"))
-    {Idle();  StopM = true; rb.AddForce(-transform.position + moveDir * 0.1f * SpeedB);}
+    {Idle();  StopM = true;}// rb.AddForce(-transform.position + moveDir * 0.1f * SpeedB);}
+    else {StopM = false;}
 }
 
 private void OnCollisionExit(Collision collision)
