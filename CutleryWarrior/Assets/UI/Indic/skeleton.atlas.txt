@@ -1,0 +1,5 @@
+skeleton.png
+size:512,256
+filter:Linear,Linear
+Arrow
+bounds:2,2,254,143
