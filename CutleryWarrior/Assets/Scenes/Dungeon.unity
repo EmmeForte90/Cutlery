@@ -338,17 +338,17 @@ PrefabInstance:
         type: 3}
       propertyPath: cam
       value: 
+      objectReference: {fileID: 1427998184}
+    - target: {fileID: 9191035209652890969, guid: 045f5abf54423cf45a3c7a94d0fcd986,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9191035209652890970, guid: 045f5abf54423cf45a3c7a94d0fcd986,
         type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9191035209794000334, guid: 045f5abf54423cf45a3c7a94d0fcd986,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1427998184}
     - target: {fileID: 9191035209841328640, guid: 045f5abf54423cf45a3c7a94d0fcd986,
         type: 3}
       propertyPath: m_RootOrder
@@ -417,6 +417,11 @@ PrefabInstance:
     - target: {fileID: 9191035210331538625, guid: 045f5abf54423cf45a3c7a94d0fcd986,
         type: 3}
       propertyPath: cam
+      value: 
+      objectReference: {fileID: 1427998184}
+    - target: {fileID: 9191035210331538628, guid: 045f5abf54423cf45a3c7a94d0fcd986,
+        type: 3}
+      propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -851,7 +856,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604782634}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 647f8bfd432a4c94a81e23262623f4ab, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
