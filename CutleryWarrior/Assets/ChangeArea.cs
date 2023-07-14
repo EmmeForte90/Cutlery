@@ -16,8 +16,8 @@ public class ChangeArea : MonoBehaviour
     private GameObject player;
     private CinemachineVirtualCamera vCam;
     public bool needDeactivateObject;
-    public GameObject objDeactivate;
-    public GameObject objActivate;
+    public GameObject[] objDeactivate;
+    public GameObject[] objActivate;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +53,7 @@ public class ChangeArea : MonoBehaviour
         GameManager.instance.FadeIn();
         yield return new WaitForSeconds(2f);
         if(needDeactivateObject)
-        {objDeactivate.gameObject.SetActive(false); objActivate.gameObject.SetActive(true);}
+        {Deactive(); Activate();}
         CharacterMove.instance.isRun = false;
         ModifyConfiner();
         player.transform.position = PointSpawn.transform.position;
@@ -61,5 +61,24 @@ public class ChangeArea : MonoBehaviour
         yield return new WaitForSeconds(2f);
         CharacterMove.instance.inputCTR = false; 
     }
+
+
+    public void Deactive()
+    {
+        foreach (GameObject arenaObject in objDeactivate)
+        {
+            arenaObject.SetActive(false);
+        }
+    }
+
+    public void Activate()
+    {
+        foreach (GameObject arenaObject in objActivate)
+        {
+            arenaObject.SetActive(true);
+        }
+    }
+
+    
 }
 
