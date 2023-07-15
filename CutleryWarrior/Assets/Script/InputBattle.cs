@@ -29,9 +29,9 @@ public class InputBattle : MonoBehaviour
     public static InputBattle instance;
   
     [Header("Attacks")]
-     [SerializeField] private float comboTimeThreshold = 0.5f;
-
     private bool isAttacking = false;
+    public float comboTimer = 0.5f; // Tempo di attesa tra le combo
+
     private float lastAttackTime = 0f;
     private int comboCount = 0;
 
@@ -132,50 +132,15 @@ private void Awake()
     }
     hor = Input.GetAxisRaw("Horizontal");
     
-    // Input per attaccare
-// Controlla se il giocatore preme il pulsante di attacco
-        // Controlla se il giocatore preme il pulsante di attacco
-        // Controlla se il giocatore preme il pulsante di attacco
-       
-        if (Input.GetButtonDown("Fire1") && !isAttacking)
-        {
-            if (Time.time - lastAttackTime > comboTimeThreshold)
-            {
-                // Resettare il conteggio del combo se è passato troppo tempo dall'ultimo attacco
-                comboCount = 0;
-            }
+        if (Input.GetButtonDown("Fire1") && Time.time - lastAttackTime > comboTimer)
+    {
+        // Riproduci l'animazione di attacco base
+        PlayAnimation(Atk1AnimationName);
+        //_skeletonAnimation.AnimationName = Atk1AnimationName;
+        Debug.Log("Combo0");
 
-            if (comboCount == 0)
-            {
-                // Riproduci l'animazione di attacco base
-                //PlayAnimation(Atk1AnimationName);
-                _skeletonAnimation.AnimationName = Atk1AnimationName;
-                Debug.Log("Combo0");
-
-            }
-            else
-            {
-                // Riproduci l'animazione di combo corrispondente al conteggio
-                //PlayAnimation(Atk2AnimationName + comboCount.ToString());
-                _skeletonAnimation.AnimationName = Atk2AnimationName;
-                Debug.Log("Combo1");
-
-            }
-
-            lastAttackTime = Time.time;
-            comboCount++;
-
-            isAttacking = true;
-        }
-
-        if (isAttacking && Time.time - lastAttackTime > _skeletonAnimation.state.GetCurrent(0).Animation.Duration)
-        {
-            // L'attacco è terminato quando è passato il tempo dell'animazione corrente
-            isAttacking = false;
-        }
-
-
-
+        lastAttackTime = Time.time; // Aggiorna l'ultimo momento di attacco
+    }
     }
     }
     
@@ -257,10 +222,10 @@ public void GuardAnm()
 {
     if (currentAnimationName != GuardAnimationName)
                 {
-                    _spineAnimationState.SetAnimation(1, GuardAnimationName, true);
+                    _spineAnimationState.SetAnimation(0, GuardAnimationName, true);
                     currentAnimationName = GuardAnimationName;
                     //_spineAnimationState.Event += HandleEvent;
-                }                _spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
+                }                _spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
 
 }
 
@@ -268,20 +233,20 @@ public void GuardHitAnm()
 {
     if (currentAnimationName != GuardHitAnimationName)
                 {
-                    _spineAnimationState.SetAnimation(1, GuardHitAnimationName, false);
+                    _spineAnimationState.SetAnimation(0, GuardHitAnimationName, false);
                     currentAnimationName = GuardHitAnimationName;
                     //_spineAnimationState.Event += HandleEvent;
-                }                _spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
+                }                _spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
 
 }
  public void Atk1Anm()
 {
     if (currentAnimationName != Atk1AnimationName)
                 {
-                    _spineAnimationState.SetAnimation(1, Atk1AnimationName, false);
+                    _spineAnimationState.SetAnimation(0, Atk1AnimationName, false);
                     currentAnimationName = Atk1AnimationName;
                     //_spineAnimationState.Event += HandleEvent;
-                }                _spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
+                }                //_spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
 
 }
 
@@ -289,27 +254,27 @@ public void GuardHitAnm()
 {
     if (currentAnimationName != Atk2AnimationName)
                 {
-                    _spineAnimationState.SetAnimation(1, Atk2AnimationName, false);
+                    _spineAnimationState.SetAnimation(0, Atk2AnimationName, false);
                     currentAnimationName = Atk2AnimationName;
                     //_spineAnimationState.Event += HandleEvent;
-                }                _spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
+                }                _spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
 
 }
  public void Atk3Anm()
 {
     if (currentAnimationName != Atk3AnimationName)
                 {
-                    _spineAnimationState.SetAnimation(1, Atk3AnimationName, false);
+                    _spineAnimationState.SetAnimation(0, Atk3AnimationName, false);
                     currentAnimationName = Atk3AnimationName;
                     //_spineAnimationState.Event += HandleEvent;
-                }                _spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
+                }                _spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
 
 }
  public void DodgeFAnm()
 {
     if (currentAnimationName != DodgeFAnimationName)
                 {
-                    _spineAnimationState.SetAnimation(1, DodgeFAnimationName, false);
+                    _spineAnimationState.SetAnimation(1, DodgeFAnimationName, true);
                     currentAnimationName = DodgeFAnimationName;
                     //_spineAnimationState.Event += HandleEvent;
                 }_spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
@@ -319,10 +284,9 @@ public void GuardHitAnm()
 {
     if (currentAnimationName != DodgeBAnimationName)
                 {
-                    _spineAnimationState.SetAnimation(0, DodgeBAnimationName, false);
+                    _spineAnimationState.SetAnimation(1, DodgeBAnimationName, true);
                     currentAnimationName = DodgeBAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
-                }_spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
+                }_spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
 
 }
 
@@ -330,20 +294,18 @@ public void GuardHitAnm()
 {
     if (currentAnimationName != WalkAnimationName)
                 {
-                    _spineAnimationState.SetAnimation(0, WalkAnimationName, false);
+                    _spineAnimationState.SetAnimation(0, WalkAnimationName, true);
                     currentAnimationName = WalkAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
-                }_spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
+                }
 
 }
  public void Running()
 {
     if (currentAnimationName != RunAnimationName)
                 {
-                    _spineAnimationState.SetAnimation(0, RunAnimationName, false);
+                    _spineAnimationState.SetAnimation(0, RunAnimationName, true);
                     currentAnimationName = RunAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
-                }_spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
+                }
 
 }
 
@@ -353,8 +315,7 @@ public void GuardHitAnm()
                 {
                     _spineAnimationState.SetAnimation(0, IdleAnimationName, true);
                     currentAnimationName = IdleAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
-                }_spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
+                }
 
 }
 private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
@@ -363,7 +324,7 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     trackEntry.Complete -= OnAttackAnimationComplete;
 
     // Clear the track 1 and reset to the idle animation
-    _skeletonAnimation.state.ClearTrack(0);
-    _skeletonAnimation.state.SetAnimation(0, IdleAnimationName, false);
+    _skeletonAnimation.state.ClearTrack(1);
+    _skeletonAnimation.state.SetAnimation(0, IdleAnimationName, true);
 }
 }
