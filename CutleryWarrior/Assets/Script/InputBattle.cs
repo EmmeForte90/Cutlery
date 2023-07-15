@@ -32,7 +32,10 @@ public class InputBattle : MonoBehaviour
     private bool isAttacking = false;
     public float comboTimer = 0.5f; // Tempo di attesa tra le combo
 
+    public float DodgeSTimer = 0.5f; // Tempo di attesa tra le combo
     private float lastAttackTime = 0f;
+    private float DodgeTime = 0f;
+
     private int comboCount = 0;
 
     private Rigidbody rb;
@@ -131,13 +134,50 @@ private void Awake()
         stand = true;
     }
     hor = Input.GetAxisRaw("Horizontal");
+
+    //DODGE
+        // Rileva l'input del tasto spazio
+        if (Input.GetButtonDown("Fire2") && Time.time - DodgeTime > DodgeSTimer)
+        {
+            Dodge();
+            DodgeFAnm();
+                    
+            DodgeTime = Time.time; // Aggiorna l'ultimo momento di attacco
+
+        }
     
+    //Attack
+
         if (Input.GetButtonDown("Fire1") && Time.time - lastAttackTime > comboTimer)
     {
-        // Riproduci l'animazione di attacco base
-        PlayAnimation(Atk1AnimationName);
-        //_skeletonAnimation.AnimationName = Atk1AnimationName;
-        Debug.Log("Combo0");
+        comboCount++; // Incrementa il conteggio delle combo
+
+        // Esegui la combo corrispondente in base al numero di attacchi consecutivi
+        switch (comboCount)
+        {
+            case 1:
+                // Riproduci l'animazione di attacco base
+                PlayAnimation(Atk1AnimationName);
+                Debug.Log("Combo 1");
+                break;
+            case 2:
+                // Riproduci l'animazione di attacco combo 2
+                PlayAnimation(Atk2AnimationName);
+                Debug.Log("Combo 2");
+                break;
+            case 3:
+                // Riproduci l'animazione di attacco combo 3
+                PlayAnimation(Atk3AnimationName);
+                Debug.Log("Combo 3");
+                break;
+            default:
+                // Ripristina il conteggio delle combo
+                comboCount = 1;
+                // Riproduci l'animazione di attacco base
+                PlayAnimation(Atk1AnimationName);
+                Debug.Log("Combo 1");
+                break;
+        }
 
         lastAttackTime = Time.time; // Aggiorna l'ultimo momento di attacco
     }
@@ -154,14 +194,7 @@ private void Awake()
     {
         if(!inputCTR)
     {
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//DODGE
-        // Rileva l'input del tasto spazio
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Dodge();
-            DodgeFAnm();
-        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Move
         if(!isRun)

@@ -12,12 +12,28 @@ using TMPro;
 public class DuelManager : MonoBehaviour
 {
 
+[Header("Stats")]
+
+     public float maxHealth = 100f;
+    public float currentHealth;
+    public Scrollbar healthBar;
+     public float maxMP = 100f;
+    public float currentMP;
+    public Scrollbar MPBar;
+    public float maxStamina = 100f;
+    public float currentStamina;
+    public Scrollbar staminaBar;
+    public float SpeeRestore = 5f; // il massimo valore di essenza disponibile
+
+
+
 [Header("Pause")]
     public bool stopInput = false;
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject Item;
     [SerializeField]  GameObject Skill;
     public bool inputCTR = false;
+
 
 [Header("AnimationUI")]
 public Animator animator;
@@ -31,11 +47,23 @@ private void Awake()
             instance = this;
         }
         Animator animator = GetComponent<Animator>();
-
+        currentHealth = maxHealth;
+        currentMP = maxMP;
+        currentStamina = maxStamina;
 
     }
 void Update()
     {
+        healthBar.size = currentHealth / maxHealth;
+        healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
+        //
+        MPBar.size = currentMP / maxMP;
+        MPBar.size = Mathf.Clamp(MPBar.size, 0.01f, 1);
+        //
+        staminaBar.size = currentStamina / maxStamina;
+        staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
+
+
     if(!inputCTR)
     {
        if (Input.GetButtonDown("Pause") && !stopInput)
