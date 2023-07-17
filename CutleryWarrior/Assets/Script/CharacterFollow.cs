@@ -14,7 +14,7 @@ public class CharacterFollow : MonoBehaviour
     public float stoppingDistance = 1f;
     public float groundCheckDistance = 0.2f;
     public LayerMask groundLayer;
-
+    public SwitchCharacter Switch;
     private Rigidbody characterRigidbody;
     private bool isFollowing;
     private bool isGrounded;
@@ -52,11 +52,11 @@ public static CharacterFollow instance;
     private void Update()
     {
 
-        if(GameManager.instance.isElement1Active)
+        if(Switch.isElement1Active)
         {Player = Spoon; Flip();} 
-        else if(GameManager.instance.isElement2Active)
+        else if(Switch.isElement2Active)
         {Player = Fork; Flip();} 
-        else if(GameManager.instance.isElement3Active)
+        else if(Switch.isElement3Active)
         {Player = Knife; Flip();} 
 
         // Verifica se il personaggio è a terra

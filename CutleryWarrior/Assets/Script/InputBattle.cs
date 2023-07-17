@@ -89,10 +89,9 @@ private void Awake()
     // Update is called once per frame
     void Update()
 {
-    Flip();
     if(!inputCTR)
     {
-        
+    Flip();
     input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     input = Vector2.ClampMagnitude(input, 1);
     
@@ -214,7 +213,7 @@ private void Awake()
 
     private void Flip()
     {
-        if (Right && hor > 0f || !Right && hor < 0f)
+        if (Right && hor < 0f || !Right && hor > 0f)
         {
             Right = !Right;
             Vector3 localScale = SpriteHero.localScale;
