@@ -8,6 +8,8 @@ TagManager:
   - Collider
   - Enemy
   - Actor
+  - SpawnPoint_Inn
+  - SpawnPoint_City1
   layers:
   - Default
   - TransparentFX

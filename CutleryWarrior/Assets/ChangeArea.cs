@@ -14,6 +14,9 @@ public class ChangeArea : MonoBehaviour
     private CinemachineConfiner confiner;
     public Collider NewConfiner;
     private GameObject player;
+    public GameObject FAct;
+    public GameObject KAct;
+    public GameObject SAct;
     private CinemachineVirtualCamera vCam;
     public bool needDeactivateObject;
     public GameObject[] objDeactivate;
@@ -57,9 +60,12 @@ public class ChangeArea : MonoBehaviour
         CharacterMove.instance.isRun = false;
         ModifyConfiner();
         player.transform.position = PointSpawn.transform.position;
-        GameManager.instance.FadeOut();
+        KAct.transform.position = PointSpawn.transform.position;
+        FAct.transform.position = PointSpawn.transform.position;
+        SAct.transform.position = PointSpawn.transform.position;
         yield return new WaitForSeconds(2f);
         CharacterMove.instance.inputCTR = false; 
+        GameManager.instance.FadeOut();
     }
 
 

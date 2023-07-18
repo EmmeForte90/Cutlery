@@ -12,7 +12,8 @@ using Spine;
 
 
 public class GameManager : MonoBehaviour
-{        
+{            
+    public bool StartGame = false;
     private CinemachineVirtualCamera vCam;
     private GameObject player;
     public static bool GameManagerExist;
@@ -31,7 +32,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int money = 0;
     [SerializeField] public TextMeshProUGUI moneyTextM;
     [SerializeField] GameObject moneyObjectM;
-  
+    public int IDPorta;
+
     [Header("Stats")]
 
     [Header("Fork")]

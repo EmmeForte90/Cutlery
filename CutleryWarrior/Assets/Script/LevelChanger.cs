@@ -9,52 +9,18 @@ using Cinemachine;
 public class LevelChanger : MonoBehaviour
 {
    // Variabili per memorizzare la scena attuale e la posizione del player
-public string spawnPointTag = "SpawnPoint";
-public GameObject button;
-private CinemachineVirtualCamera vCam;
-public bool camFollowPlayer = true;
-
-public bool interactWithKey = true;
-//public KeyCode changeSceneKey = "Talk";
+//public string spawnPointTag = "SpawnPoint";
 public string sceneName;
-public bool needButton;
-public bool isDoor = false;
-public Animator anim; // componente Animator del personaggio
 // Riferimento all'evento di cambio scena
+public int IDPorta;
 private SceneEvent sceneEvent;
 // Riferimento al game object del player
 private GameObject player;
- [Header("Audio")]
-    [HideInInspector] public float basePitch = 1f;
-    [HideInInspector] public float randomPitchOffset = 0.1f;
-    [SerializeField] public AudioClip[] listmusic; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
-    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
-    public AudioMixer SFX;
-    private bool bgmActive = false;
 
 private void Start()
 {
-    // Inizialmente nascondiamo il testo del dialogo
-    button.gameObject.SetActive(false); 
-    // Recuperiamo il riferimento allo script dell'evento di cambio scena
     sceneEvent = GetComponent<SceneEvent>();
-    // Aggiungiamo un listener all'evento di cambio scena
     sceneEvent.onSceneChange.AddListener(ChangeScene);
-   bgm = new AudioSource[listmusic.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
-        for (int i = 0; i < listmusic.Length; i++) // scorre la lista di AudioClip
-        {
-        bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
-        bgm[i].clip = listmusic[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
-        bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-        bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-
-        }
-
-        // Aggiunge i canali audio degli AudioSource all'output del mixer
-        foreach (AudioSource audioSource in bgm)
-        {
-        audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
-        }
 }
 
 // Metodo per cambiare scena
@@ -67,123 +33,59 @@ private void ChangeScene()
 // Metodo eseguito quando la scena è stata caricata
 private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 {
-    //GameplayManager.instance.FadeIn();
     SceneManager.sceneLoaded -= OnSceneLoaded;
-    if (player != null)
+    /*if (player != null)
     {
-        //Move.instance.stopInput = false;
-        if(camFollowPlayer)
-        {
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-        vCam.Follow = player.transform;
-        }
-        // Troviamo il game object del punto di spawn
-        GameObject spawnPoint = GameObject.FindWithTag(spawnPointTag);
+        //GameObject spawnPoint = GameObject.FindWithTag(spawnPointTag);
         if (spawnPoint != null)
-        {
-            // Muoviamo il player al punto di spawn
-            player.transform.position = spawnPoint.transform.position;
-            //yield return new WaitForSeconds(3f);
-        }
-    }
-    //GameplayManager.instance.StopFade();    
+        {player.transform.position = spawnPoint.transform.position;}
+    }*/
 }
 
 // Coroutine per attendere il caricamento della scena
 IEnumerator WaitForSceneLoad()
 {   
-    //GameplayManager.instance.FadeOut();
-    //Move.instance.stopInput = true;
-    //Move.instance.Stop();
+    GameManager.instance.StartGame = false;
+    CharacterMove.instance.inputCTR = true;
+    CharacterMove.instance.Idle();
+    GameManager.instance.FadeIn();
     yield return new WaitForSeconds(2f);
-    // Invochiamo l'evento di cambio scena
+    GameManager.instance.IDPorta = IDPorta;
     sceneEvent.InvokeOnSceneChange();
-    
+    CharacterMove.instance.isRun = false;
+    yield return new WaitForSeconds(2f);
+    CharacterMove.instance.inputCTR = false; 
+    GameManager.instance.FadeOut();
+    yield return new WaitForSeconds(2f);
 }
 
 // Metodo eseguito quando il player entra nel trigger
-private void OnTriggerStay2D(Collider2D other)
+private void OnTriggerStay(Collider other)
 {
     // Controlliamo se il player ha toccato il collider
     if (other.CompareTag("Player"))
     {
-         // Troviamo il game object del player
         player = GameObject.FindGameObjectWithTag("Player");
-        //GameplayManager.instance.startGame = false;
-        // Mostriamo il testo del dialogo se necessario
-        if(needButton)
-        {
-            button.gameObject.SetActive(true); 
-        }
-        // Verifichiamo se l'interazione avviene tramite il tasto "Talk"
-        if (interactWithKey && Input.GetButton("Talk"))
-        {    
-           // Move.instance.Stooping();
-            // Riproduciamo l'audio della porta se necessario
-            if(isDoor)
-            {
-                PlayMFX(0);
-                anim.SetBool("talk", true);
-            }
-            // Avviamo la coroutine per attendere il caricamento della scena
-            StartCoroutine(WaitForSceneLoad());
-        }  
+        StartCoroutine(WaitForSceneLoad()); 
     }
 }
- public void StopMFX(int soundToPlay)
-    {
-        if (bgmActive)
-        {
-            bgm[soundToPlay].Stop();
-            bgmActive = false;
-        }
-    }
-
-public void PlayMFX(int soundToPlay)
-    {
-        bgm[soundToPlay].Stop();
-        // Imposta la pitch dell'AudioSource in base ai valori specificati.
-        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
-        bgm[soundToPlay].Play();
-    }
 
 
-private void OnTriggerEnter2D(Collider2D other)
+
+private void OnTriggerEnter(Collider other)
 {
     // Controlliamo se il player ha toccato il collider
     if (other.CompareTag("Player"))
     {
-        //Move.instance.Stooping();
-         // Troviamo il game object del player
         player = GameObject.FindGameObjectWithTag("Player");
-        if(needButton)
-        {
-            button.gameObject.SetActive(true); // Initially hide the dialogue text
-        }
-
-         if (!interactWithKey)
-        {
         StartCoroutine(WaitForSceneLoad());
-        }
-       
-}
-}
+}}
 
-private void OnTriggerExit2D(Collider2D other)
+private void OnTriggerExit(Collider other)
 {
     // Controlliamo se il player ha toccato il collider
     if (other.CompareTag("Player"))
-    { 
-        //Move.instance.Stooping();
-        // Troviamo il game object del player
-         player = GameObject.FindGameObjectWithTag("Player");
-        if(needButton)
-        {
-            button.gameObject.SetActive(false); // Initially hide the dialogue text
-        }
+    {player = GameObject.FindGameObjectWithTag("Player");}
+}
 
-        
-       
-}
-}
 }
