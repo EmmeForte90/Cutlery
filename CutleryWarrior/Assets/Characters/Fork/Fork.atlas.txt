@@ -8,11 +8,13 @@ rotate:90
 Cape
 bounds:2,76,229,177
 Dita
-bounds:233,89,22,53
+bounds:952,231,22,53
 rotate:90
 Dress
 bounds:487,80,124,218
 rotate:90
+Eye
+bounds:233,67,45,44
 Fur
 bounds:707,88,116,97
 rotate:90

@@ -30,9 +30,27 @@ public class NPCDialogue : MonoBehaviour
     private bool _isInTrigger;
     private bool _isDialogueActive;
     private bool Talk = false;
+    
+     [Header("Move")]
+    [Tooltip("Il personaggio si muove?")]
+    public bool IsMove = false;
+    bool movingB = false;
+    public Transform[] waypoints; // Array di punti verso cui muoversi
+    public float moveSpeed = 5f; // Velocità di movimento del personaggio
+    public float pauseTime = 2f; // Tempo di pausa in secondi quando raggiunge un punto
+    bool Right = true;
 
-[SpineAnimation][SerializeField] private string TalnkAnimationName;
+    private int currentWaypointIndex = 0; // Indice del punto attuale
+    private bool isPaused = false; // Flag per indicare se è in pausa
+    private float pauseTimer = 0f; // Timer per il conteggio della pausa    
+    
+    [Header("Animations")]
+
+    [SpineAnimation][SerializeField] private string TalnkAnimationName;
     [SpineAnimation][SerializeField] private string IdleAnimationName;
+
+    [SpineAnimation][SerializeField]  string WalkAnimationName;
+
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
@@ -94,24 +112,38 @@ public void changeDialogue()
         button.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueText.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-        //anim = GetComponent<Animator>();
+        if(IsMove)
+        {movingB = true;}
+        if (waypoints.Length > 0 && IsMove)
+        {
+            transform.position = waypoints[0].position; // Posiziona il personaggio al primo waypoint
+        }    
     }
 
     void Update()
     {
-        if(Talk)
+        if(Talk && !movingB)
         {Talking();}
-        if(!Talk)
+        if(!Talk && !movingB)
         {Idle();}
-        //anim.SetBool("talk", Talk);
-        if(heFlip)
-        {
-        FacePlayer();
-        }
 
+        
+
+        if(movingB)
+        {if (!isPaused)
+        {
+            MoveToWaypoint();
+            Walk();
+        }
+        else
+        {
+            PauseAtWaypoint();
+            Idle();
+        }}
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive)
         {
             CharacterMove.instance.Interact = true;
+            if(heFlip){FacePlayer();}
             dialogueIndex = 0;
             StartCoroutine(ShowDialogue());
         }
@@ -122,10 +154,77 @@ public void changeDialogue()
         }
     }
 
+    private void MoveToWaypoint()
+{
+    if (waypoints.Length > 1 && currentWaypointIndex < waypoints.Length - 1)
+    {
+        Vector3 targetPosition = waypoints[currentWaypointIndex + 1].position;
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+        if (transform.position == targetPosition)
+        {
+            // Raggiunto il punto, attiva la pausa
+            isPaused = true;
+            pauseTimer = 0f;
+        }
+    }
+    else if (currentWaypointIndex == waypoints.Length - 1)
+    {
+        // Raggiunto l'ultimo punto, ritorna al punto iniziale
+        Vector3 initialPosition = waypoints[0].position;
+        transform.position = Vector3.MoveTowards(transform.position, initialPosition, moveSpeed * Time.deltaTime);
+
+        if (transform.position == initialPosition)
+        {
+            // Raggiunto il punto iniziale, ricomincia il percorso
+            isPaused = true;
+            pauseTimer = 0f;
+            currentWaypointIndex = 0;
+            
+        }
+    }
+}
+ private void Flip()
+    {
+        if (Right && transform.localScale.x < 0f || !Right && transform.localScale.x > 0f)
+        {
+            Right = !Right;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= 1f;
+            transform.localScale = localScale;
+        }
+    }
+
+ // Metodo per attivare lo script
+    public void EnableScript()
+    {
+        enabled = true;
+    }
+
+    // Metodo per disattivare lo script
+    public void DisableScript()
+    {
+        enabled = false;
+    }
+    private void PauseAtWaypoint()
+    {
+        if (pauseTimer < pauseTime)
+        {
+            pauseTimer += Time.deltaTime;
+        }
+        else
+        {
+            // Riprendi il movimento al prossimo waypoint
+            isPaused = false;
+            currentWaypointIndex++;
+        }
+    }
+
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Player"))
         {
+            movingB = false;            
             button.gameObject.SetActive(true); // Initially hide the dialogue text
             _isInTrigger = true;
             if (!isInteragible)
@@ -140,6 +239,7 @@ public void changeDialogue()
     {
         if (collision.CompareTag("Player"))
         {
+            movingB = true;
             CharacterMove.instance.Interact = false;
             button.gameObject.SetActive(false); // Initially hide the dialogue text
             _isInTrigger = false;
@@ -230,11 +330,11 @@ public void PlayMFX(int soundToPlay)
     {
         if (player != null)
         {
-            if (player.transform.position.x > transform.position.x)
+            if (player.transform.localScale.x > 0)
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }
-            else
+            else if (player.transform.localScale.x < 0)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
             }
@@ -259,5 +359,15 @@ public void PlayMFX(int soundToPlay)
                     currentAnimationName = TalnkAnimationName;
                     //_spineAnimationState.Event += HandleEvent;
                 }
+}
+
+public void Walk()
+{
+    if (currentAnimationName != WalkAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, WalkAnimationName, true);
+                    currentAnimationName = WalkAnimationName;
+                }
+
 }
 }

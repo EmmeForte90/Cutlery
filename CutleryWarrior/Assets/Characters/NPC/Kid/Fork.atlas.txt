@@ -35,8 +35,7 @@ bounds:2,179,140,318
 K/M
 bounds:144,179,140,318
 Rust/Braccio
-bounds:592,198,45,87
-rotate:90
+bounds:506,156,45,87
 Rust/Dita
 bounds:712,255,22,53
 rotate:90
@@ -49,13 +48,3 @@ S/F
 bounds:428,245,140,252
 S/M
 bounds:570,245,140,252
-mustache1
-bounds:256,141,36,20
-rotate:90
-mustache3
-bounds:1972,293,79,64
-rotate:90
-mustache4
-bounds:506,178,84,65
-mustache5
-bounds:506,132,36,44

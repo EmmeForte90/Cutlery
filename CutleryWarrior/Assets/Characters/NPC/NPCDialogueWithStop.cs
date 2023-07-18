@@ -120,7 +120,7 @@ if(!notGo)
 {
     if (collision.CompareTag("Player"))
     {            
-        //Move.instance.NotStrangeAnimationTalk = true;
+        FacePlayer();        
         button.gameObject.SetActive(true);
         _isInTrigger = true;
         if (!isInteragible)
@@ -243,7 +243,7 @@ if(!notGo)
     {
         if (player != null)
         {
-            if (player.transform.position.x > transform.position.x)
+            if (player.transform.localScale.x > transform.position.x)
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }

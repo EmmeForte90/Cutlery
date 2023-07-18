@@ -12,6 +12,9 @@ rotate:90
 Dress
 bounds:795,119,124,218
 rotate:90
+Eye1
+bounds:245,32,34,51
+rotate:90
 Fur
 bounds:2,4,116,97
 Gamba

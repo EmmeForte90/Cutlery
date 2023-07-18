@@ -1,6 +1,7 @@
 Fork.png
 size:2048,512
 filter:Linear,Linear
+pma:true
 Dress1
 bounds:712,279,124,218
 Dress10
