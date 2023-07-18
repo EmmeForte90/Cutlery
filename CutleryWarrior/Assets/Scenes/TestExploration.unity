@@ -15232,7 +15232,7 @@ GameObject:
   m_Layer: 0
   m_Name: Area4_cityExit
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -60092,7 +60092,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8145372470084089835, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
+  - {fileID: 2100000, guid: 45725f6333ed2cc4eaeb35412c037340, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74368,7 +74368,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8145372470084089835, guid: 4a4fb126a29b1e745a79a4bbcd040715, type: 3}
+  - {fileID: 2100000, guid: 45725f6333ed2cc4eaeb35412c037340, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

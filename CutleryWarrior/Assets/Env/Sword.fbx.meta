@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: 4a4fb126a29b1e745a79a4bbcd040715
+guid: 87dd9b8d50026f24ab5d63650d1da77a
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: FerStac
-    second: {fileID: 2100000, guid: b5ab0b0426a1d464b9539c55b96c4d03, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Hummer_Material
-    second: {fileID: 2100000, guid: 45725f6333ed2cc4eaeb35412c037340, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Panca
-    second: {fileID: 2100000, guid: 119e9c69e64e3944bbaf840d548e5e19, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Pav
-    second: {fileID: 2100000, guid: 0319d556841cbe146a27b3815a7d31c6, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
