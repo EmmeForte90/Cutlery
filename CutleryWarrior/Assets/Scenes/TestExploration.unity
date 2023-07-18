@@ -52750,7 +52750,7 @@ Transform:
   m_GameObject: {fileID: 2025998934}
   m_LocalRotation: {x: -0, y: -0.7798647, z: -0, w: 0.6259481}
   m_LocalPosition: {x: -5.2, y: 5.3, z: 422.14}
-  m_LocalScale: {x: 1, y: 1.2113, z: 1}
+  m_LocalScale: {x: -1, y: 1.2113, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 109192230}
@@ -52822,8 +52822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: b9563cb042d3e4a438c8463448fa25d7, type: 2}
-  initialSkinName: Knife/Male/KnifeM2
+  skeletonDataAsset: {fileID: 11400000, guid: 9c11524bb93e34d47a53129ce3ec231d, type: 2}
+  initialSkinName: Knife/Male/KnifeM3
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -52870,7 +52870,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2363fee8b248492448020675e5e1207d, type: 2}
+  - {fileID: 2100000, guid: 7bf051206e0b08f48997eef3e4b4b04e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -63893,21 +63893,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3123265100039423573, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123265100039423573, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123265100039423573, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3123265100756262345, guid: 3673356f01ac3794a90a53b1890f187a,
         type: 3}
       propertyPath: m_RootOrder
@@ -63963,75 +63948,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3123265100756262346, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: StartGame
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123265100756262346, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: ForckActor
-      value: 
-      objectReference: {fileID: 657041877}
-    - target: {fileID: 3123265100756262346, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: ForkActive
-      value: 
-      objectReference: {fileID: 773653922}
-    - target: {fileID: 3123265100756262346, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: KnifeActor
-      value: 
-      objectReference: {fileID: 1500072735}
-    - target: {fileID: 3123265100756262346, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: SpoonActor
-      value: 
-      objectReference: {fileID: 386683136}
-    - target: {fileID: 3123265100756262346, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: KnifeActive
-      value: 
-      objectReference: {fileID: 1193539791}
-    - target: {fileID: 3123265100756262346, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: SpoonActive
-      value: 
-      objectReference: {fileID: 801067332}
-    - target: {fileID: 3123265100756262346, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: spawnPointTag
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3123265100756262347, guid: 3673356f01ac3794a90a53b1890f187a,
         type: 3}
       propertyPath: m_Name
       value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123265101282475733, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123265101556236859, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123265101556236859, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123265101556236859, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123265101590468940, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}

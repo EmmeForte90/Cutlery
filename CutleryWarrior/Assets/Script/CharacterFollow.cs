@@ -113,7 +113,7 @@ public static CharacterFollow instance;
                 characterRigidbody.MovePosition(transform.position + direction * RunSpeed * Time.deltaTime);
                 } 
             }
-            else
+            else if (!CharacterMove.instance.isRun)
             {
                 if (isWalking)
                 {

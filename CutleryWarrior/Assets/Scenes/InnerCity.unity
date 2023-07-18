@@ -11268,6 +11268,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3123265100756262346, guid: 3673356f01ac3794a90a53b1890f187a,
         type: 3}
+      propertyPath: StartGame
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123265100756262346, guid: 3673356f01ac3794a90a53b1890f187a,
+        type: 3}
       propertyPath: ForckActor
       value: 
       objectReference: {fileID: 0}
