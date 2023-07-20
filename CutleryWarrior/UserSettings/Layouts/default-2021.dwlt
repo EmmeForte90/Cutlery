@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Hierarchy 2
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 99
+  controlID: 98
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 100
+  controlID: 99
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 101
+  controlID: 20
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 21
+  controlID: 100
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -484,9 +484,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 668dfdff8a8dfdff9266feffc266fefff266fefff467feff0268fefffa93feffeee6feffa8f1feffaa7bffff6e7cffff7c7cffffda7cffff129cffff64a2ffff24c5ffff18fbffff6a9b000006b9000078bb000022e80000
+      m_SelectedIDs: 1eb20000
+      m_LastClickedID: 45598
+      m_ExpandedIDs: 7291fcff24c8fffffefaffff76aa000076ab000040ae000056b1000080b2000046b300008ab300009cb50000e4b900008abb0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -803,9 +803,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 151.48914, y: 17.112911, z: 114.592606}
+    m_Target: {x: 48.275963, y: 2.5776482, z: 191.8913}
     speed: 2
-    m_Value: {x: 151.48914, y: 17.112911, z: 114.592606}
+    m_Value: {x: 48.275963, y: 2.5776482, z: 191.8913}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -852,13 +852,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.23369034, y: -0.53121763, z: 0.1552867, w: 0.7994266}
+    m_Target: {x: 0.3065169, y: -0.6197562, z: 0.28641024, w: 0.6632654}
     speed: 2
-    m_Value: {x: 0.23204695, y: -0.53958213, z: 0.15773183, w: 0.79380476}
+    m_Value: {x: 0.30694583, y: -0.61876, z: 0.28594986, w: 0.6641936}
   m_Size:
-    m_Target: 17.406263
+    m_Target: 52.109028
     speed: 2
-    m_Value: 17.406263
+    m_Value: 54.564426
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -2371,8 +2371,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 623
+    x: -32000
+    y: -31420
     width: 891
     height: 376
   m_ViewDataDictionary: {fileID: 0}
@@ -2393,22 +2393,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/3DForge/Fantasy_Interiors/Villages_&_Towns/Textures
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/3DForge/Fantasy_Interiors/Villages_&_Towns/Textures
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Utente\Desktop\Cutlery\CutleryWarrior
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 0eaa0000
-    m_LastClickedID: 43534
-    m_ExpandedIDs: 000000009485000096850000a0850000f0850000f2850000f48500002e96000086960000b0a90000b2a90000d4a9000064aa000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 5ca60000
+    m_LastClickedID: 42588
+    m_ExpandedIDs: 000000005ca600005ea600008ea6000096a60000b0a60000eaa60000eca6000094c800004c0c010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2436,7 +2436,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009485000096850000
+    m_ExpandedIDs: 000000005ca600005ea60000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2464,7 +2464,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c6230000b67d0000fc7900000c7a0000127a0000107b00004c7b0000447b0000c4800000d0840000849400000e9600000000000006a30000109d0000d289020086f30000
+    m_ExpandedInstanceIDs: c6230000b67d0000fc7900000c7a0000127a0000107b00004c7b0000447b0000c4800000d0840000849400000e9600000000000006a30000109d0000d289020086f30000023b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2565,22 +2565,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/3DForge/Fantasy_Interiors/Villages_&_Towns
+    - Assets/TerrainSampleAssets/Textures
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/3DForge/Fantasy_Interiors/Villages_&_Towns
+  - Assets/TerrainSampleAssets/Textures
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Utente\Desktop\Cutlery\CutleryWarrior
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: b2a90000
-    m_LastClickedID: 43442
-    m_ExpandedIDs: 000000009485000096850000a0850000f0850000f2850000f485000086960000b0a90000b2a90000d4a9000064aa000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 380}
+    m_SelectedIDs: 4c0c0100
+    m_LastClickedID: 68684
+    m_ExpandedIDs: 000000005ca600005ea600008ea6000096a60000b0a60000eca600004c0c010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2608,7 +2608,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009485000096850000
+    m_ExpandedIDs: 000000005ca600005ea60000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2636,7 +2636,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: 06a3000090900000d289020086f3000086e10800
+    m_ExpandedInstanceIDs: 06a3000090900000d289020086f3000086e108000ec900000cc90000023b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
