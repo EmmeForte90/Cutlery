@@ -79720,6 +79720,11 @@ PrefabInstance:
       propertyPath: UiM.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 9273d8def1cb14646bafd6849e98b10e, type: 3}
+    - target: {fileID: 2776578226616052473, guid: 3673356f01ac3794a90a53b1890f187a,
+        type: 3}
+      propertyPath: UiM.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: a87d8d636f0b96747a0b917724e1f4e3, type: 3}
     - target: {fileID: 3123265100756262345, guid: 3673356f01ac3794a90a53b1890f187a,
         type: 3}
       propertyPath: m_RootOrder
@@ -79779,6 +79784,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3351739533657047856, guid: 3673356f01ac3794a90a53b1890f187a,
+        type: 3}
+      propertyPath: IDSound
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
