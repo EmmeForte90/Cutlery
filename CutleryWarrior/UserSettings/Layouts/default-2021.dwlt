@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 127
+  controlID: 193
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 23
+  controlID: 194
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 24
+  controlID: 195
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 75
+  controlID: 77
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -349,8 +349,8 @@ MonoBehaviour:
     y: 0
     width: 389
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 24}
   m_Panes:
   - {fileID: 24}
@@ -483,24 +483,24 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 214}
-      m_SelectedIDs: 768d04002c850400f0800400ce8d04008a8b04007487040040770400127e0400a4850400327b0400407b0400d27d04007a800400068404003e850400448404007883040050840400c47d04009c8a04007083040086820400487c0400988604003c8304007a7b0400a68c04003e8d0400
-      m_LastClickedID: 0
-      m_ExpandedIDs: 4281eeff228eeeff86c3eeffb4dbeeffb0feeeff86faefff448df0ff1ceff0ffd250f1ffcceaf1ffb6a4f2ff80d9f2ff1efcf9ffb4fcf9ffd218faffbe1afbffdcaffeffdeaffeffe4affeffeaaffeffdcb0feffeec2feff6a9dffff58a3ffff18fbffffe0c5000034c600000ac7000078cf000086d20000bcd4000054d50000f2d600003ad8000008d900006eda000012e1000054070100500a0100f40e01006c0f01009c110100b6160100d81801003c1901009e1a0100fe1c01002e2201009e230100a6a401002aa701007aa8010010ab0100c4b2010092f601000afa010032fa010096fb01009e0602000008020002fe0200b2ff02004c02030062040300042d03004ae10300dce8030028e90300c2eb030030ed03006af00300c4770400207804003a7a0400f67b0400b87c0400e6810400fa8104008e85040094850400d4880400d48a04002a8d0400568d0400
+      scrollPos: {x: 0, y: 4628}
+      m_SelectedIDs: 26800000
+      m_LastClickedID: 32806
+      m_ExpandedIDs: 3818fbff3a18fbff5038fbff5238fbffb858fbffba58fbfffa84fbfffc84fbff14a6fbff16a6fbff5ccdfbff42eafbff44eafbfff612fcff4e2efcff502efcff7e5ffcff805ffcffca85fcffcc85fcff82a5fcff84a5fcff16c7fcff18c7fcff04eafcff06eafcff8c17fdffcc43fdffd643fdffca6ffdffd46ffdffa89bfdffb29bfdffbacbfdffc4cbfdff7ce7fdff86e7fdffb815feffc215feffe8faffff1a7a0000a67a0000f47b0000507c00007a7c0000ec7d0000447e00008c7f00002680000088810000d48100002c8300000884000098840000168600005c880000be890000048a0000348a0000468b0000de8b0000048c00005c8c0000368e0000048f0000088f0000cc8f0000b09000005a9100008691000006920000f4920000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Spine GameObject (cac1)
+        m_OriginalName: Spine GameObject (cac1)
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -438116
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -803,9 +803,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 943.5826, y: 708.6415, z: 733.68805}
+    m_Target: {x: 18.201317, y: 6.428915, z: 323.17838}
     speed: 2
-    m_Value: {x: 943.5826, y: 708.6415, z: 733.68805}
+    m_Value: {x: 18.201317, y: 6.428915, z: 323.17838}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -852,13 +852,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.14088306, y: -0.6923338, z: 0.14063013, w: 0.69357854}
+    m_Target: {x: 0.17333868, y: -0.66726804, z: 0.16392696, w: 0.7055772}
     speed: 2
-    m_Value: {x: 0.14088291, y: -0.6923331, z: 0.14062998, w: 0.6935778}
+    m_Value: {x: 0.17358401, y: -0.66620755, z: 0.16366644, w: 0.7065759}
   m_Size:
-    m_Target: 1401.6951
+    m_Target: 5.576573
     speed: 2
-    m_Value: 1401.6951
+    m_Value: 5.576573
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -876,7 +876,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0.28787568, y: -0.53780013, z: 0.20205985, w: 0.76620597}
+  m_LastSceneViewRotation: {x: 0.17784582, y: -0.6847614, z: 0.1780602, w: 0.6839375}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -2410,22 +2410,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Graphic/Characters/NPC/Cacciatore1
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Graphic/Characters/NPC/Cacciatore1
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Utente\Desktop\Cutlery\CutleryWarrior
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 140}
-    m_SelectedIDs: e4a10000
-    m_LastClickedID: 41444
-    m_ExpandedIDs: 00000000d29f0000d49f0000d8a1000096ac00002ebb000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 188}
+    m_SelectedIDs: 28f30000
+    m_LastClickedID: 62248
+    m_ExpandedIDs: 0000000008ae00000aae00000cae00000eae000010ae000028ae00009cb0000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2453,7 +2453,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d29f0000d49f0000
+    m_ExpandedIDs: 0000000008ae00000aae00000cae00000eae000010ae0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2582,22 +2582,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Graphic/Characters/NPC/Cacciatore1
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Graphic/Characters/NPC/Cacciatore1
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Utente\Desktop\Cutlery\CutleryWarrior
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 76}
-    m_SelectedIDs: e4a10000
-    m_LastClickedID: 41444
-    m_ExpandedIDs: 00000000d29f0000d49f000096ac00002ebb000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 108}
+    m_SelectedIDs: 28f30000
+    m_LastClickedID: 62248
+    m_ExpandedIDs: 0000000008ae00000aae00000cae00000eae000010ae000028ae000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2625,7 +2625,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d29f0000d49f0000
+    m_ExpandedIDs: 0000000008ae00000aae00000cae00000eae000010ae0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

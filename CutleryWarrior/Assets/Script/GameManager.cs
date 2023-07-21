@@ -89,7 +89,10 @@ public class GameManager : MonoBehaviour
         if(!battle)
         {vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
         vCam.Follow = player.transform;}
-        //TakeCharacters();
+        if(StartGame)
+        {AudioManager.instance.PlayMFX(0);}
+
+
     }
     // Start is called before the first frame update
     void Start()
