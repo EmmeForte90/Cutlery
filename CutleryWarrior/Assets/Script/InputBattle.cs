@@ -58,8 +58,14 @@ public class InputBattle : MonoBehaviour
     private DodgeController DodgeController;
 
     private KnockbackController knockbackController;
+    
+    public GameObject Bullet;
+    public GameObject SlashV;
+    public GameObject SlashH;
 
-   
+    public Transform BPoint;
+
+
     Vector3 camF,camR,moveDir;
        
 private void Awake()
@@ -77,13 +83,16 @@ private void Awake()
         _skeleton = _skeletonAnimation.skeleton;
         knockbackController = GetComponent<KnockbackController>();
         DodgeController = GetComponent<DodgeController>();
+        SlashV.gameObject.SetActive(false);
+        SlashH.gameObject.SetActive(false);
         }
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        rb.freezeRotation = true;            
+
     }
 
     // Update is called once per frame
@@ -146,8 +155,17 @@ private void Awake()
         }
     
     //Attack
+        if ((Input.GetMouseButtonDown(0) && ((float)Input.mousePosition.x / (float)Screen.width) > (140f / 800f) 
+        || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter)) && DuelManager.instance.CharacterID == 1)
+            {
+                PlayAnimation(Atk3AnimationName);
+                Instantiate(Bullet, BPoint.position, Bullet.transform.rotation);
+                //GameObject newParticle = Instantiate<GameObject>(currentCategory.GetChild(index).GetChild(0).gameObject);
+                //newParticle.transform.SetParent(particleParent, false);
+                //Destroy(newParticle, 10);
+            }
 
-        if (Input.GetButtonDown("Fire1") && Time.time - lastAttackTime > comboTimer)
+        if (Input.GetButtonDown("Fire1") && Time.time - lastAttackTime > comboTimer && DuelManager.instance.CharacterID == 2)
     {
         comboCount++; // Incrementa il conteggio delle combo
 
@@ -157,16 +175,22 @@ private void Awake()
             case 1:
                 // Riproduci l'animazione di attacco base
                 PlayAnimation(Atk1AnimationName);
+                SlashV.gameObject.SetActive(true);
+                StartCoroutine(StopVFX());
                 Debug.Log("Combo 1");
                 break;
             case 2:
                 // Riproduci l'animazione di attacco combo 2
                 PlayAnimation(Atk2AnimationName);
+                SlashH.gameObject.SetActive(true);
+                StartCoroutine(StopVFX());
                 Debug.Log("Combo 2");
                 break;
             case 3:
                 // Riproduci l'animazione di attacco combo 3
                 PlayAnimation(Atk3AnimationName);
+                SlashV.gameObject.SetActive(true);
+                StartCoroutine(StopVFX());
                 Debug.Log("Combo 3");
                 break;
             default:
@@ -174,6 +198,8 @@ private void Awake()
                 comboCount = 1;
                 // Riproduci l'animazione di attacco base
                 PlayAnimation(Atk1AnimationName);
+                SlashV.gameObject.SetActive(true);
+                StartCoroutine(StopVFX());
                 Debug.Log("Combo 1");
                 break;
         }
@@ -205,7 +231,12 @@ private void Awake()
     }
     }
     }
-
+IEnumerator StopVFX()
+    {
+        yield return new WaitForSeconds(1f);
+        SlashV.gameObject.SetActive(false);
+        SlashH.gameObject.SetActive(false);
+    }
      public void Stop()
     {
         rb.velocity = new Vector3(0f, 0f, 0f);
