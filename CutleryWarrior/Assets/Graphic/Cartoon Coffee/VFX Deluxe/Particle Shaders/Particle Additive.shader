@@ -46,10 +46,10 @@ Shader "CartoonCoffee/Particle Additive"
 		_UVDistortNoiseScale("UV Distort: Noise Scale", Vector) = (0.1,0.1,0,0)
 		[Toggle(_ENABLEUVSCROLL_ON)] _EnableUVScroll("Enable UV Scroll", Float) = 0
 		_UVScrollSpeed("UV Scroll: Speed", Vector) = (0.2,0,0,0)
-		[Toggle(_ENABLETEXTURESPRITE1_ON)] _EnableTextureSprite1("Enable Texture Sprite", Float) = 0
-		_TextureFadeTexture("Texture Fade: Texture", 2D) = "white" {}
-		_TextureFadeFrom("Texture Fade: From", Float) = 0
-		[ASEEnd]_TextureFadeTo("Texture Fade: To", Float) = 1
+		[Toggle(_ENABLECUTOUTSPRITE_ON)] _EnableCutoutSprite("Enable Cutout Sprite", Float) = 0
+		_CutoutFadeTexture("Cutout Fade: Texture", 2D) = "white" {}
+		_CutoutFadeFrom("Cutout Fade: From", Float) = 0
+		[ASEEnd]_CutoutFadeTo("Cutout Fade: To", Float) = 1
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
 	}
@@ -62,7 +62,7 @@ Shader "CartoonCoffee/Particle Additive"
 		LOD 0
 
 			Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" }
-			Blend SrcAlpha One, SrcAlpha OneMinusSrcAlpha
+			Blend SrcAlpha One, One OneMinusSrcAlpha
 			ColorMask RGBA
 			Cull Off
 			Lighting Off 
@@ -90,7 +90,7 @@ Shader "CartoonCoffee/Particle Additive"
 				#pragma shader_feature_local _ENABLEBLACKTINT_ON
 				#pragma shader_feature_local _ENABLESPLITTONING_ON
 				#pragma shader_feature_local _ENABLECUSTOMFADE_ON
-				#pragma shader_feature_local _ENABLETEXTURESPRITE1_ON
+				#pragma shader_feature_local _ENABLECUTOUTSPRITE_ON
 				#pragma shader_feature_local _ENABLEUVSCROLL_ON
 				#pragma shader_feature_local _ENABLEUVDISTORT_ON
 
@@ -146,9 +146,9 @@ Shader "CartoonCoffee/Particle Additive"
 				uniform sampler2D _UVDistortShaderMask;
 				uniform float4 _UVDistortShaderMask_ST;
 				uniform float2 _UVScrollSpeed;
-				uniform sampler2D _TextureFadeTexture;
-				uniform float _TextureFadeFrom;
-				uniform float _TextureFadeTo;
+				uniform sampler2D _CutoutFadeTexture;
+				uniform float _CutoutFadeFrom;
+				uniform float _CutoutFadeTo;
 				uniform sampler2D _CustomFadeFadeMask;
 				uniform float2 _CustomFadeNoiseScale;
 				uniform float _CustomFadeNoiseFactor;
@@ -253,15 +253,16 @@ Shader "CartoonCoffee/Particle Additive"
 					float2 staticSwitch96 = staticSwitch65;
 					#endif
 					float4 tex2DNode17 = tex2D( _MainTex, staticSwitch96 );
-					float4 temp_output_1_0_g166 = tex2DNode17;
+					float4 temp_output_78_0 = ( tex2DNode17 * i.color );
+					float4 temp_output_1_0_g166 = temp_output_78_0;
 					float3 appendResult15_g166 = (float3(temp_output_1_0_g166.rgb));
-					float lerpResult7_g166 = lerp( _TextureFadeFrom , _TextureFadeTo , i.color.a);
-					float4 tex2DNode2_g166 = tex2D( _TextureFadeTexture, ( ( ( i.texcoord.xy - float2( 0.5,0.5 ) ) / max( lerpResult7_g166 , 0.0001 ) ) + float2( 0.5,0.5 ) ) );
+					float lerpResult7_g166 = lerp( _CutoutFadeFrom , _CutoutFadeTo , i.color.a);
+					float4 tex2DNode2_g166 = tex2D( _CutoutFadeTexture, ( ( ( i.texcoord.xy - float2( 0.5,0.5 ) ) / max( lerpResult7_g166 , 0.0001 ) ) + float2( 0.5,0.5 ) ) );
 					float4 appendResult16_g166 = (float4(appendResult15_g166 , ( temp_output_1_0_g166.a * ( 1.0 - ( tex2DNode2_g166.r * tex2DNode2_g166.a ) ) )));
-					#ifdef _ENABLETEXTURESPRITE1_ON
+					#ifdef _ENABLECUTOUTSPRITE_ON
 					float4 staticSwitch100 = appendResult16_g166;
 					#else
-					float4 staticSwitch100 = ( tex2DNode17 * i.color );
+					float4 staticSwitch100 = temp_output_78_0;
 					#endif
 					float4 temp_output_1_0_g167 = tex2DNode17;
 					float2 temp_output_57_0_g167 = staticSwitch96;
@@ -338,7 +339,7 @@ Shader "CartoonCoffee/Particle Additive"
 }
 /*ASEBEGIN
 Version=18935
-253;200;1485;805;-2478.584;593.5227;1.3;True;True
+0;6;1920;1005;2310.005;1051.704;1.3;True;True
 Node;AmplifyShaderEditor.TemplateShaderPropertyNode;41;-3188.404,-194.2;Inherit;False;0;0;_MainTex;Shader;False;0;5;SAMPLER2D;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TextureCoordinatesNode;67;-2996.457,3.141286;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TexturePropertyNode;88;-3103.937,470.3728;Inherit;True;Property;_NoiseTexture;Noise Texture;0;0;Create;True;0;0;0;False;0;False;4addb5285d2d96b46bcc3d03bf698f23;4addb5285d2d96b46bcc3d03bf698f23;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
@@ -347,9 +348,9 @@ Node;AmplifyShaderEditor.StaticSwitch;65;-2403.408,1.236556;Inherit;False;Proper
 Node;AmplifyShaderEditor.FunctionNode;95;-2053.663,100.0231;Inherit;False;_UVScroll;46;;122;be39ff8debe04f84baeada43b5b8aeb7;0;1;1;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.StaticSwitch;96;-1795.765,-11.26569;Inherit;False;Property;_EnableUVScroll;Enable UV Scroll;45;0;Create;True;0;0;0;False;0;False;0;0;0;True;;Toggle;2;Key0;Key1;Create;True;True;All;9;1;FLOAT2;0,0;False;0;FLOAT2;0,0;False;2;FLOAT2;0,0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT2;0,0;False;6;FLOAT2;0,0;False;7;FLOAT2;0,0;False;8;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SamplerNode;17;-1442.57,-117.9648;Inherit;True;Property;_TextureSample0;Texture Sample 0;1;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.FunctionNode;78;-1025.791,-240.246;Inherit;False;TintVertex;-1;;125;b0b94dd27c0f3da49a89feecae766dcc;0;1;1;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.FunctionNode;99;-1276.825,-648.8935;Inherit;False;TextureFade;49;;166;b6b9d854da148684082ce91c9e92c063;0;1;1;COLOR;0,0,0,0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.StaticSwitch;100;-891.3918,-648.4344;Inherit;False;Property;_EnableTextureSprite1;Enable Texture Sprite;48;0;Create;True;0;0;0;False;0;False;0;0;0;True;;Toggle;2;Key0;Key1;Create;True;True;All;9;1;COLOR;0,0,0,0;False;0;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;3;COLOR;0,0,0,0;False;4;COLOR;0,0,0,0;False;5;COLOR;0,0,0,0;False;6;COLOR;0,0,0,0;False;7;COLOR;0,0,0,0;False;8;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.FunctionNode;78;-1116.791,-244.146;Inherit;False;TintVertex;-1;;125;b0b94dd27c0f3da49a89feecae766dcc;0;1;1;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.FunctionNode;99;-1148.125,-651.4935;Inherit;False;TextureFade;49;;166;b6b9d854da148684082ce91c9e92c063;0;1;1;COLOR;0,0,0,0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.StaticSwitch;100;-831.5919,-648.4344;Inherit;False;Property;_EnableCutoutSprite;Enable Cutout Sprite;48;0;Create;True;0;0;0;False;0;False;0;0;0;True;;Toggle;2;Key0;Key1;Create;True;True;All;9;1;COLOR;0,0,0,0;False;0;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;3;COLOR;0,0,0,0;False;4;COLOR;0,0,0,0;False;5;COLOR;0,0,0,0;False;6;COLOR;0,0,0,0;False;7;COLOR;0,0,0,0;False;8;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.FunctionNode;87;-1012.893,140.5994;Inherit;False;_CustomFade;9;;167;09a17a2b3ff778e4baeae7d542f88dd6;0;3;57;FLOAT2;0,0;False;56;SAMPLER2D;;False;1;COLOR;0,0,0,0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.StaticSwitch;64;-534.2484,-363.9702;Inherit;False;Property;_EnableCustomFade;Enable Custom Fade;8;0;Create;True;0;0;0;False;0;False;0;0;0;True;;Toggle;2;Key0;Key1;Create;True;True;All;9;1;COLOR;0,0,0,0;False;0;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;3;COLOR;0,0,0,0;False;4;COLOR;0,0,0,0;False;5;COLOR;0,0,0,0;False;6;COLOR;0,0,0,0;False;7;COLOR;0,0,0,0;False;8;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.FunctionNode;97;-63.04102,-172.3311;Inherit;False;_SplitToning;17;;169;6b87c8196f94bcd478491aaa714b31ef;0;1;1;COLOR;0,0,0,0;False;1;FLOAT4;0
@@ -364,7 +365,7 @@ Node;AmplifyShaderEditor.ComponentMaskNode;92;3205.363,-313.1724;Inherit;False;T
 Node;AmplifyShaderEditor.BreakToComponentsNode;91;3141.936,-160.4294;Inherit;False;COLOR;1;0;COLOR;0,0,0,0;False;16;FLOAT;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT;5;FLOAT;6;FLOAT;7;FLOAT;8;FLOAT;9;FLOAT;10;FLOAT;11;FLOAT;12;FLOAT;13;FLOAT;14;FLOAT;15
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;93;3447.422,-218.6789;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.DynamicAppendNode;90;3659.709,-210.912;Inherit;False;FLOAT4;4;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;1;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;75;3847.149,-305.2042;Float;False;True;-1;2;CartoonCoffee.ParticleShaderGUI;0;7;CartoonCoffee/Particle Additive;0b6a9f8b4f707c74ca64c0be8e590de0;True;SubShader 0 Pass 0;0;0;SubShader 0 Pass 0;2;True;True;8;5;False;-1;1;False;-1;2;5;False;-1;10;False;-1;False;False;False;False;False;False;False;False;False;False;False;True;True;2;False;-1;True;True;True;True;True;True;0;False;-1;False;False;False;False;False;False;False;False;False;True;2;False;-1;True;3;False;-1;False;True;4;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;0;2;0;0;Standard;0;0;1;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;75;3847.149,-305.2042;Float;False;True;-1;2;CartoonCoffee.ParticleShaderGUI;0;7;CartoonCoffee/Particle Additive;0b6a9f8b4f707c74ca64c0be8e590de0;True;SubShader 0 Pass 0;0;0;SubShader 0 Pass 0;2;True;True;8;5;False;-1;1;False;-1;3;1;False;-1;10;False;-1;False;False;False;False;False;False;False;False;False;False;False;True;True;2;False;-1;True;True;True;True;True;True;0;False;-1;False;False;False;False;False;False;False;False;False;True;2;False;-1;True;3;False;-1;False;True;4;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;0;2;0;0;Standard;0;0;1;True;False;;False;0
 WireConnection;89;1;67;0
 WireConnection;89;26;88;0
 WireConnection;89;3;41;0
@@ -376,7 +377,7 @@ WireConnection;96;0;95;0
 WireConnection;17;0;41;0
 WireConnection;17;1;96;0
 WireConnection;78;1;17;0
-WireConnection;99;1;17;0
+WireConnection;99;1;78;0
 WireConnection;100;1;78;0
 WireConnection;100;0;99;0
 WireConnection;87;57;96;0
@@ -404,4 +405,4 @@ WireConnection;90;0;93;0
 WireConnection;90;3;91;3
 WireConnection;75;0;90;0
 ASEEND*/
-//CHKSM=FB82AEC88F9F685DB3A4B0829BE3B11A0D9C6557
+//CHKSM=CB786DC94B0E36D2CC940AB8BDE04D4F7FB045E6

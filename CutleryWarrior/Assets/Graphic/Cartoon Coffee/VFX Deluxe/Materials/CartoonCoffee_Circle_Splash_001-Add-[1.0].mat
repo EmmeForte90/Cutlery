@@ -27,12 +27,20 @@ Material:
         m_Texture: {fileID: 2800000, guid: ab121f448d5baa245889334d7d590291, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _CutoutFadeTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 36bd46d65545bae48a5f3daa13d910ba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTexture:
         m_Texture: {fileID: 2800000, guid: ab121f448d5baa245889334d7d590291, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureFadeTexture:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UVDistortNoiseTexture:
@@ -64,22 +72,37 @@ Material:
     - _CustomFadeBrightness: 1
     - _CustomFadeNoiseFactor: 0
     - _CustomFadeSmoothness: 1
+    - _CutoutFadeFrom: 0
+    - _CutoutFadeTo: 1
     - _Distort: 0
     - _EnableAdjustColor: 0
     - _EnableAlphaTint: 0
     - _EnableBlackTint: 0
     - _EnableCustomFade: 1
+    - _EnableCutoutSprite: 0
+    - _EnableSplitToning: 0
+    - _EnableTextureSprite1: 0
     - _EnableUVDistort: 1
+    - _EnableUVScroll: 0
     - _InvFade: 1
+    - _SplitToningBalance: 1.5
+    - _SplitToningContrast: -0.17
+    - _SplitToningFade: 1
+    - _SplitToningShift: 0
+    - _TextureFadeFrom: 0
+    - _TextureFadeTo: 1
     - _UVDistortFade: 0.166
     - _UVDistortSpace: 0
     m_Colors:
     - _AlphaTintColor: {r: 0, g: 0, b: 0, a: 0}
-    - _BlackTintColor: {r: 1, g: 0, b: 0, a: 0}
+    - _BlackTintColor: {r: 1.2641509, g: 1.9207547, b: 4, a: 0}
     - _CustomFadeAddColor: {r: 0, g: 0, b: 0, a: 0}
     - _CustomFadeNoiseScale: {r: 0.2, g: 0.2, b: 0, a: 0}
+    - _SplitToningHighlightsColor: {r: 0.10196078, g: 1, b: 1, a: 0}
+    - _SplitToningShadowsColor: {r: 0, g: 0.007843138, b: 0.4745098, a: 0}
     - _TintColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _UVDistortFrom: {r: -1, g: -1, b: 0, a: 0}
     - _UVDistortNoiseScale: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _UVDistortSpeed: {r: 3, g: 1, b: 0, a: 0}
     - _UVDistortTo: {r: 1, g: 1, b: 0, a: 0}
+    - _UVScrollSpeed: {r: 0.2, g: 0, b: 0, a: 0}
