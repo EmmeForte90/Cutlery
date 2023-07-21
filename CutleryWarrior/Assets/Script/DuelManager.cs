@@ -36,6 +36,7 @@ public class DuelManager : MonoBehaviour
 [Header("AnimationUI")]
 public Animator animator;
 
+public int CharacterID;
 
 public static DuelManager instance;
 private void Awake()
@@ -47,7 +48,7 @@ private void Awake()
         Animator animator = GetComponent<Animator>();
         currentHealth = maxHealth;
         currentMP = maxMP;
-
+        CharacterID = 1;
     }
 void Update()
     {
@@ -57,7 +58,12 @@ void Update()
         MPBar.size = currentMP / maxMP;
         MPBar.size = Mathf.Clamp(MPBar.size, 0.01f, 1);
         //
-      
+        if(CharacterID == 1)
+        {SimpleEnemy.instance.TakePlayer();}
+        if(CharacterID == 2)
+        {SimpleEnemy.instance.TakePlayer();}
+        if(CharacterID == 3)
+        {SimpleEnemy.instance.TakePlayer();}
 
 
     if(!inputCTR)

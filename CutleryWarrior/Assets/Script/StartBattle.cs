@@ -36,6 +36,8 @@ public class StartBattle : MonoBehaviour
     public GameObject KnifeActor;
     public InputBattle K_Script;
 
+ [Header("Enemy")]
+    public SimpleEnemy E_Script;
 
     private void Start()
     {
@@ -51,7 +53,7 @@ public class StartBattle : MonoBehaviour
 
          // Stampa il risultato nella console
         //Debug.Log("Numero casuale: " + result);
-
+        E_Script.inputCTR = true;
         F_Script.inputCTR = true;
         K_Script.inputCTR = true;
         S_Script.inputCTR = true;
@@ -81,6 +83,8 @@ IEnumerator DuringInter()
         F_Script.inputCTR = false;
         K_Script.inputCTR = false;
         S_Script.inputCTR = false;
+        E_Script.inputCTR = false;
+
     }
     
 }

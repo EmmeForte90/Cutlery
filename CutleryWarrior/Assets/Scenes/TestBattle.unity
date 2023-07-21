@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 36699753}
   m_Layer: 0
   m_Name: Hero
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1367,7 +1367,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 0, b: 0, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1381,7 +1381,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1179845025}
   m_HandleRect: {fileID: 0}
@@ -3258,15 +3258,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleAnimationName: Battle/idle_battle
-  WalkAnimationName: idle_battle2
-  RunAnimationName: idle2
-  Atk1AnimationName: idle_battle2
-  Atk2AnimationName: idle2
-  Atk3AnimationName: idle2
-  GuardAnimationName: Battle/guard
-  GuardHitAnimationName: Battle/guard_hit
-  DodgeFAnimationName: idle2
-  DodgeBAnimationName: idle2
+  WalkAnimationName: Battle/walk_battle
+  RunAnimationName: Battle/run_battle
+  Atk1AnimationName: Battle/attack_1
+  Atk2AnimationName: Battle/attack_2
+  Atk3AnimationName: Battle/attack_3
+  GuardAnimationName: Battle/idle_battle
+  GuardHitAnimationName: Battle/idle_battle
+  DodgeFAnimationName: Battle/dodge_front
+  DodgeBAnimationName: Battle/dodge_front
   _skeletonAnimation: {fileID: 521126083}
   comboTimer: 0.5
   DodgeSTimer: 0.5
@@ -5584,15 +5584,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleAnimationName: Battle/idle_battle
-  WalkAnimationName: idle2
-  RunAnimationName: idle2
-  Atk1AnimationName: idle2
-  Atk2AnimationName: idle2
-  Atk3AnimationName: idle2
+  WalkAnimationName: Battle/walk_battle
+  RunAnimationName: Battle/run_battle
+  Atk1AnimationName: Battle/attack_1
+  Atk2AnimationName: Battle/attack_1
+  Atk3AnimationName: Battle/attack_1
   GuardAnimationName: Battle/guard
   GuardHitAnimationName: Battle/guard_hit
-  DodgeFAnimationName: idle2
-  DodgeBAnimationName: idle2
+  DodgeFAnimationName: Battle/guard
+  DodgeBAnimationName: Battle/guard
   _skeletonAnimation: {fileID: 844550187}
   comboTimer: 0.5
   DodgeSTimer: 0.5
@@ -8108,6 +8108,7 @@ MonoBehaviour:
   KnifeActive: {fileID: 521126076}
   KnifeActor: {fileID: 1630336526}
   K_Script: {fileID: 521126082}
+  E_Script: {fileID: 1450618422}
 --- !u!4 &1149023295
 Transform:
   m_ObjectHideFlags: 0
@@ -8148,6 +8149,7 @@ MonoBehaviour:
   Skill: {fileID: 954413814}
   inputCTR: 0
   animator: {fileID: 643435602}
+  CharacterID: 0
 --- !u!114 &1149023297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10561,6 +10563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1450618416}
+  - component: {fileID: 1450618422}
   - component: {fileID: 1450618421}
   - component: {fileID: 1450618420}
   - component: {fileID: 1450618419}
@@ -10709,6 +10712,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450618415}
   m_Mesh: {fileID: 0}
+--- !u!114 &1450618422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450618415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecedf0720cf9a084581bad01f3afe3a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  attackRange: 1.5
+  attackCooldown: 2
+  attackDamage: 20
+  attackPauseDuration: 1.5
+  inputCTR: 0
 --- !u!1 &1451595499
 GameObject:
   m_ObjectHideFlags: 0
@@ -11155,6 +11176,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2776578226616052473, guid: 3673356f01ac3794a90a53b1890f187a,
+        type: 3}
+      propertyPath: listmusic.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a485d37a31364bc468e94c2b1c1ac591, type: 3}
     - target: {fileID: 3123265100756262345, guid: 3673356f01ac3794a90a53b1890f187a,
         type: 3}
       propertyPath: m_RootOrder
@@ -11219,6 +11245,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7305673386254090528, guid: 3673356f01ac3794a90a53b1890f187a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
@@ -12002,7 +12033,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 0, b: 0, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -12016,7 +12047,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 217252540}
   m_HandleRect: {fileID: 0}
@@ -13216,8 +13247,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start Battle
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ea9be394fbe2f154f88be473bb4abb1b, type: 2}
+  m_sharedMaterial: {fileID: -8998078909823975768, guid: ea9be394fbe2f154f88be473bb4abb1b,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15863,7 +15895,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 0, b: 0, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -15877,7 +15909,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1371513782}
   m_HandleRect: {fileID: 0}
@@ -15976,7 +16008,7 @@ GameObject:
   - component: {fileID: 2030179321}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
