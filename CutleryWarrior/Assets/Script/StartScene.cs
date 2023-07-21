@@ -6,9 +6,12 @@ using Cinemachine;
 public class StartScene : MonoBehaviour
 {
     private GameObject player;
-    public GameObject FAct;
-    public GameObject KAct;
-    public GameObject SAct;    
+
+    public GameObject ContainerHero;
+
+    //public GameObject FAct;
+    //public GameObject KAct;
+    //public GameObject SAct;    
     public GameObject[] SpawnArr; 
     public Collider[] BoxConfiner;    
     private CinemachineConfiner confiner;
@@ -32,10 +35,11 @@ void Awake()
    
     public void Spawn(int ID)
     {
-        player.transform.position = SpawnArr[ID].transform.position;
-        KAct.transform.position = SpawnArr[ID].transform.position;
-        FAct.transform.position = SpawnArr[ID].transform.position;
-        SAct.transform.position = SpawnArr[ID].transform.position;    
+    //player.transform.position = SpawnArr[ID].transform.position;
+    ContainerHero.transform.position = SpawnArr[ID].transform.position;
+        //KAct.transform.position = SpawnArr[ID].transform.position;
+       // FAct.transform.position = SpawnArr[ID].transform.position;
+        //SAct.transform.position = SpawnArr[ID].transform.position;    
     }
 
     public void Confiner(int ID)
