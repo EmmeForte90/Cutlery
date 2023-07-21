@@ -56,13 +56,8 @@ public class NPCDialogue : MonoBehaviour
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
     Spine.EventData eventData;
-[Header("Audio")]
-    [HideInInspector] public float basePitch = 1f;
-    [HideInInspector] public float randomPitchOffset = 0.1f;
-    [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
-    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
-    public AudioMixer SFX;
-    private bool bgmActive = false;
+    public int IDAudio;
+
 
 public static NPCDialogue instance;
 
@@ -79,15 +74,6 @@ void Awake()
     player = GameObject.FindWithTag("Player");
     dialogue = DManager.dialogue;
     CharacterName.text = DManager.CharacterName;
-    bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
-        for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
-        {
-            bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
-            bgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
-            bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-            bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-
-        }
 }
 
 public void changeDialogue()
@@ -251,34 +237,20 @@ public void changeDialogue()
                 _isDialogueActive = false;
                 dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
                 dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-                StopMFX(1);
+                //StopMFX(1);
 
             }
         }
     }
 
-  public void StopMFX(int soundToPlay)
-    {
-        if (bgmActive)
-        {
-            bgm[soundToPlay].Stop();
-            bgmActive = false;
-        }
-    }
-
-public void PlayMFX(int soundToPlay)
-    {
-        bgm[soundToPlay].Stop();
-        // Imposta la pitch dell'AudioSource in base ai valori specificati.
-        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
-        bgm[soundToPlay].Play();
-    }
+ 
 
 
     IEnumerator ShowDialogue()
 {
     Talk = true;
-    PlayMFX(1);
+    AudioManager.instance.PlaySFX(IDAudio);
+    //PlayMFX(1);
     _isDialogueActive = true;
     elapsedTime = 0; // reset elapsed time
     dialogueBox.gameObject.SetActive(true); // Show dialogue box
@@ -309,7 +281,7 @@ public void PlayMFX(int soundToPlay)
         dialogueIndex++; // Increment the dialogue index
         if (dialogueIndex >= dialogue.Length)
         {
-            StopMFX(1);
+            //StopMFX(1);
             dialogueIndex = 0;
             _isDialogueActive = false;
             Talk = false;

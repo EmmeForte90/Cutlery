@@ -66,6 +66,7 @@ private void SetColor2(Color color)
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SwitchElement();
+            AudioManager.instance.PlayUFX(3);
         }
     }
 

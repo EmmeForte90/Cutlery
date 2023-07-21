@@ -18,7 +18,8 @@ public class DestroyOverTime : MonoBehaviour
     IEnumerator Destroy()
 {   
     yield return new WaitForSeconds(lifeTime);
-    title.gameObject.SetActive(false);
+    //title.gameObject.SetActive(false);
+    Destroy(title.gameObject);
     
 }
 }

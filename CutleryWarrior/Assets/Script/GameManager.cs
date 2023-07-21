@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
             CharacterMove.instance.inputCTR = true;
             Pause.gameObject.SetActive(true);
             CameraZoom.instance.ZoomIn();
+            AudioManager.instance.PlayUFX(1);
         }
         else if(Input.GetButtonDown("Pause") && stopInput)
         {
@@ -134,6 +135,7 @@ public class GameManager : MonoBehaviour
             Pause.gameObject.SetActive(false);
             CharacterMove.instance.inputCTR = false;
             CameraZoom.instance.ZoomOut();
+            AudioManager.instance.PlayUFX(1);
         } 
     }
     }

@@ -135,12 +135,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayUFX(int soundToPlay)
     {
-        if (!ugmActive)
-        {
-            ugm[soundToPlay].Play();
-            ugmActive = true;
-            StartCoroutine(restoreufx());
-        }
+            ugm[soundToPlay].Play();   
     }
 
 
@@ -149,10 +144,7 @@ private IEnumerator restoresfx(){
         sgmActive = false;
     }
 
-    private IEnumerator restoreufx(){
-        yield return new WaitForSeconds(1f);
-        ugmActive = false;
-    }
+   
 
   public void CrossFadeINAudio(int soundToPlay)
     {        

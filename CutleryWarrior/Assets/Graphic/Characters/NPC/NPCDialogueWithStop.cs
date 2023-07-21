@@ -41,6 +41,7 @@ public class NPCDialogueWithStop : MonoBehaviour
     Spine.EventData eventData;
 public static NPCDialogueWithStop instance;
 
+    public int IDAudio;
 
 void Awake()
 {
@@ -95,6 +96,7 @@ else if (Dialogue.End)//EndDia
         {
         FacePlayer();
         }
+
 if(!notGo)
 {
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive)
@@ -120,7 +122,6 @@ if(!notGo)
 {
     if (collision.CompareTag("Player"))
     {            
-        FacePlayer();        
         button.gameObject.SetActive(true);
         _isInTrigger = true;
         if (!isInteragible)
@@ -155,6 +156,8 @@ if(!notGo)
     IEnumerator ShowDialogue()
 {
     Talk = true;
+    AudioManager.instance.PlaySFX(IDAudio);
+
     //talk.Play();
     _isDialogueActive = true;
     elapsedTime = 0; // reset elapsed time

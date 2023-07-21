@@ -189,7 +189,7 @@ private void OnCollisionExit(Collision collision)
                 {
                     _spineAnimationState.SetAnimation(2, WalkAnimationName, true);
                     currentAnimationName = WalkAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
+                    _spineAnimationState.Event += HandleEvent;
                 }
 }
 
@@ -199,7 +199,7 @@ private void OnCollisionExit(Collision collision)
                 {
                     _spineAnimationState.SetAnimation(2, RunAnimationName, true);
                     currentAnimationName = RunAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
+                    _spineAnimationState.Event += HandleEvent;
                 }
 }
  public void Talking()
@@ -212,9 +212,14 @@ private void OnCollisionExit(Collision collision)
                 }
 }
 
+void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
 
 
+//Normal VFX
+    if (e.Data.Name == "walk") 
+    {AudioManager.instance.PlayUFX(0);}
 
+}
 
 }
 
