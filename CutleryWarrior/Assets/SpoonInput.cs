@@ -125,7 +125,7 @@ private void Awake()
     { 
         Walk();
         stand = false;
-    } else if (isRun)
+    } else if (isRun && !StopM)
     { 
         Running();
         stand = false;
@@ -201,22 +201,17 @@ private void Awake()
 
 private void OnCollisionEnter(Collision collision)
 {
-    // Controlliamo se il player ha colliso con l'oggetto
+    // Controlliamo se il player ha toccato il collider
     if (collision.gameObject.CompareTag("Collider"))
-    {
-        StopM = true;
-        Vector3 knockbackDirection = transform.position - collision.transform.position;
-        knockbackController.ApplyKnockback(knockbackDirection);
-    }
+    {Idle();  StopM = true; isRun = false;}// rb.AddForce(-transform.position + moveDir * 0.1f * SpeedB);}
+    else {StopM = false;}
 }
 
 private void OnCollisionExit(Collision collision)
 {
     // Controlliamo se il player ha smesso di collidere con l'oggetto
     if (collision.gameObject.CompareTag("Collider"))
-    {
-        StopM = false;
-    }
+    {StopM = false;}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Animation
