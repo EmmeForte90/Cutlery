@@ -151,9 +151,12 @@ private void Awake()
     
     //Attack
         if ((Input.GetMouseButtonDown(0) && ((float)Input.mousePosition.x / (float)Screen.width) > (140f / 800f) 
-        || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter)) && DuelManager.instance.CharacterID == 1)
+        || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter)) && DuelManager.instance.CharacterID == 1
+        && DuelManager.instance.FcurrentMP > 20)
             {
+                Stop();
                 PlayAnimation(Atk3AnimationName);
+                DuelManager.instance.FcurrentMP -= 20;
                 Instantiate(Bullet, BPoint.position, Bullet.transform.rotation);
                 //GameObject newParticle = Instantiate<GameObject>(currentCategory.GetChild(index).GetChild(0).gameObject);
                 //newParticle.transform.SetParent(particleParent, false);

@@ -59,6 +59,8 @@ public class KnifeInput : MonoBehaviour
     
     public GameObject SlashV;
     public GameObject SlashH;
+    public GameObject SlashB;
+
 
     //public Transform BPoint;
 
@@ -77,11 +79,13 @@ private void Awake()
         }        
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
-        _skeleton = _skeletonAnimation.skeleton;
+        _skeleton = _skeletonAnimation.skeleton;       
         knockbackController = GetComponent<KnockbackController>();
         DodgeController = GetComponent<DodgeController>();
         SlashV.gameObject.SetActive(false);
         SlashH.gameObject.SetActive(false);
+        SlashB.gameObject.SetActive(false);
+
         }
 
     // Start is called before the first frame update
@@ -152,7 +156,8 @@ private void Awake()
         }
     
     //Attack
-        if (Input.GetButtonDown("Fire1") && Time.time - lastAttackTime > comboTimer && DuelManager.instance.CharacterID == 2)
+        if (Input.GetButtonDown("Fire1") && Time.time - lastAttackTime > comboTimer && DuelManager.instance.CharacterID == 2 
+        && DuelManager.instance.KcurrentMP > 20)
     {
         comboCount++; // Incrementa il conteggio delle combo
 
@@ -161,33 +166,35 @@ private void Awake()
         {
             case 1:
                 // Riproduci l'animazione di attacco base
-                PlayAnimation(Atk1AnimationName);
-                SlashV.gameObject.SetActive(true);
-                StartCoroutine(StopVFX());
-                Debug.Log("Combo 1");
+                Stop();
+                PlayAnimation(Atk1AnimationName); 
+                DuelManager.instance.KcurrentMP -= DuelManager.instance.KcostMP;
+                _spineAnimationState.Event += HandleEvent;                //Debug.Log("Combo 1");
                 break;
             case 2:
                 // Riproduci l'animazione di attacco combo 2
+                Stop();
                 PlayAnimation(Atk2AnimationName);
-                SlashH.gameObject.SetActive(true);
-                StartCoroutine(StopVFX());
-                Debug.Log("Combo 2");
+                DuelManager.instance.KcurrentMP -= DuelManager.instance.KcostMP;
+                _spineAnimationState.Event += HandleEvent;                //Debug.Log("Combo 2");
                 break;
             case 3:
                 // Riproduci l'animazione di attacco combo 3
+                Stop();
                 PlayAnimation(Atk3AnimationName);
-                SlashV.gameObject.SetActive(true);
-                StartCoroutine(StopVFX());
-                Debug.Log("Combo 3");
+                DuelManager.instance.KcurrentMP -= DuelManager.instance.KcostMP;
+                _spineAnimationState.Event += HandleEvent;
+                //Debug.Log("Combo 3");
                 break;
             default:
                 // Ripristina il conteggio delle combo
                 comboCount = 1;
                 // Riproduci l'animazione di attacco base
+                Stop();
                 PlayAnimation(Atk1AnimationName);
-                SlashV.gameObject.SetActive(true);
-                StartCoroutine(StopVFX());
-                Debug.Log("Combo 1");
+                DuelManager.instance.KcurrentMP -= DuelManager.instance.KcostMP;
+                _spineAnimationState.Event += HandleEvent;
+                //Debug.Log("Combo 1");
                 break;
         }
 
@@ -223,6 +230,8 @@ IEnumerator StopVFX()
         yield return new WaitForSeconds(1f);
         SlashV.gameObject.SetActive(false);
         SlashH.gameObject.SetActive(false);
+        SlashB.gameObject.SetActive(false);
+
     }
      public void Stop()
     {
@@ -295,8 +304,8 @@ public void GuardHitAnm()
                 {
                     _spineAnimationState.SetAnimation(0, Atk1AnimationName, false);
                     currentAnimationName = Atk1AnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
-                }                //_spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
+                    _spineAnimationState.Event += HandleEvent;
+                }                _spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
 
 }
 
@@ -306,7 +315,7 @@ public void GuardHitAnm()
                 {
                     _spineAnimationState.SetAnimation(0, Atk2AnimationName, false);
                     currentAnimationName = Atk2AnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
+                    _spineAnimationState.Event += HandleEvent;
                 }                _spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
 
 }
@@ -316,7 +325,7 @@ public void GuardHitAnm()
                 {
                     _spineAnimationState.SetAnimation(0, Atk3AnimationName, false);
                     currentAnimationName = Atk3AnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
+                    _spineAnimationState.Event += HandleEvent;
                 }                _spineAnimationState.GetCurrent(0).Complete += OnAttackAnimationComplete;
 
 }
@@ -376,5 +385,18 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     // Clear the track 1 and reset to the idle animation
     _skeletonAnimation.state.ClearTrack(1);
     _skeletonAnimation.state.SetAnimation(0, IdleAnimationName, true);
+}
+void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
+
+
+//Normal VFX
+    if (e.Data.Name == "slashV") 
+    {AudioManager.instance.PlayUFX(3); SlashV.gameObject.SetActive(true); StartCoroutine(StopVFX());}
+    
+    if (e.Data.Name == "slashH") 
+    {AudioManager.instance.PlayUFX(3); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX());}
+
+    if (e.Data.Name == "slashB") 
+    {AudioManager.instance.PlayUFX(3); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX());}
 }
 }

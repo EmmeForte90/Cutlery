@@ -14,14 +14,41 @@ public class DuelManager : MonoBehaviour
 
 [Header("Stats")]
 
-     public float maxHealth = 100f;
-    public float currentHealth;
-    public Scrollbar healthBar;
-     public float maxMP = 100f;
-    public float currentMP;
-    public Scrollbar MPBar;
-   
-    public float SpeeRestore = 5f; // il massimo valore di essenza disponibile
+[Header("Fork")]
+
+     public float FmaxHealth = 100f;
+    public float FcurrentHealth;
+    public Scrollbar FhealthBar;
+     public float FmaxMP = 100f;
+    public float FcurrentMP;
+    public Scrollbar FMPBar;
+    public float FcostMP = 20;
+    public float F_SpeedRestore = 5f; // il massimo valore di essenza disponibile
+
+
+    [Header("Knife")]
+
+     public float KmaxHealth = 100f;
+    public float KcurrentHealth;
+    public Scrollbar KhealthBar;
+     public float KmaxMP = 100f;
+    public float KcurrentMP;
+    public Scrollbar KMPBar;
+    public float KcostMP = 15;
+    public float K_SpeedRestore = 5f; // il massimo valore di essenza disponibile
+
+
+    [Header("Spoon")]
+
+     public float SmaxHealth = 100f;
+    public float ScurrentHealth;
+    public Scrollbar ShealthBar;
+    public float SmaxMP = 100f;
+    public float ScurrentMP;
+    public Scrollbar SMPBar;
+    public float ScostMP = 10;
+
+    public float S_SpeedRestore = 5f; // il massimo valore di essenza disponibile
 
 
 
@@ -47,17 +74,35 @@ private void Awake()
             instance = this;
         }
         Animator animator = GetComponent<Animator>();
-        currentHealth = maxHealth;
-        currentMP = maxMP;
+        FcurrentHealth = FmaxHealth;
+        FcurrentMP = FmaxMP;
+        //
+        KcurrentHealth = KmaxHealth;
+        KcurrentMP = KmaxMP;
+        //
+        ScurrentHealth = SmaxHealth;
+        ScurrentMP = SmaxMP;
         CharacterID = 1;
     }
 void Update()
     {
-        healthBar.size = currentHealth / maxHealth;
-        healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
+        FhealthBar.size = FcurrentHealth / FmaxHealth;
+        FhealthBar.size = Mathf.Clamp(FhealthBar.size, 0.01f, 1);
         //
-        MPBar.size = currentMP / maxMP;
-        MPBar.size = Mathf.Clamp(MPBar.size, 0.01f, 1);
+        FMPBar.size = FcurrentMP / FmaxMP;
+        FMPBar.size = Mathf.Clamp(FMPBar.size, 0.01f, 1);
+        //
+        KhealthBar.size = KcurrentHealth / KmaxHealth;
+        KhealthBar.size = Mathf.Clamp(KhealthBar.size, 0.01f, 1);
+        //
+        KMPBar.size = KcurrentMP / KmaxMP;
+        KMPBar.size = Mathf.Clamp(KMPBar.size, 0.01f, 1);
+        //
+        ShealthBar.size = ScurrentHealth / SmaxHealth;
+        ShealthBar.size = Mathf.Clamp(ShealthBar.size, 0.01f, 1);
+        //
+        SMPBar.size = ScurrentMP / SmaxMP;
+        SMPBar.size = Mathf.Clamp(SMPBar.size, 0.01f, 1);
         //
         if(CharacterID == 1)
         {SimpleEnemy.instance.TakePlayer();}
@@ -65,6 +110,28 @@ void Update()
         {SimpleEnemy.instance.TakePlayer();}
         if(CharacterID == 3)
         {SimpleEnemy.instance.TakePlayer();}
+        //
+        
+        FcurrentMP += F_SpeedRestore * Time.deltaTime;
+        KcurrentMP += K_SpeedRestore * Time.deltaTime;
+        ScurrentMP += S_SpeedRestore * Time.deltaTime;
+
+        if(FcurrentMP >= FmaxMP)
+        {
+            FcurrentMP = FmaxMP;
+            //Restore = false;
+        }
+        if(KcurrentMP >= KmaxMP)
+        {
+            KcurrentMP = KmaxMP;
+            //Restore = false;
+        }
+        if(ScurrentMP >= SmaxMP)
+        {
+            ScurrentMP = SmaxMP;
+            //Restore = false;
+        }
+        
 
 
     if(!inputCTR)

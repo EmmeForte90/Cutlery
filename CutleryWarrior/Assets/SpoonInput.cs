@@ -141,18 +141,18 @@ private void Awake()
         // Rileva l'input del tasto spazio
         if (Input.GetButtonDown("Fire2")) //&& Time.time - DodgeTime > DodgeSTimer)
         {
-
+            _spineAnimationState.SetAnimation(0, GuardAnimationName, true);
+            //PlayAnimation(GuardAnimationName);
             //Dodge();
-            //DodgeFAnm();
-                    
+            //DodgeFAnm();      
             //DodgeTime = Time.time; // Aggiorna l'ultimo momento di attacco
-
         }
     
     //Attack
         if ((Input.GetMouseButtonDown(0) && ((float)Input.mousePosition.x / (float)Screen.width) > (140f / 800f) 
         || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter)) && DuelManager.instance.CharacterID == 1)
             {
+                Stop();
                 PlayAnimation(Atk3AnimationName);
                 SlashV.gameObject.SetActive(true);
             }
