@@ -71600,18 +71600,24 @@ MonoBehaviour:
   FmaxMP: 100
   FcurrentMP: 0
   FMPBar: {fileID: 990301830}
+  FcostMP: 20
+  F_SpeedRestore: 5
   KmaxHealth: 100
   KcurrentHealth: 0
   KhealthBar: {fileID: 580665138}
   KmaxMP: 100
   KcurrentMP: 0
   KMPBar: {fileID: 1855693047}
+  KcostMP: 5
+  K_SpeedRestore: 5
   SmaxHealth: 100
   ScurrentHealth: 0
   ShealthBar: {fileID: 2101959711}
   SmaxMP: 100
   ScurrentMP: 0
   SMPBar: {fileID: 1848453111}
+  ScostMP: 10
+  S_SpeedRestore: 5
   stopInput: 0
   Pause: {fileID: 643435598}
   Item: {fileID: 672275477}
@@ -98530,6 +98536,17 @@ MonoBehaviour:
   attackCooldown: 2
   attackDamage: 20
   attackPauseDuration: 1.5
+  IdleAnimationName: Battle/idle
+  WalkAnimationName: Explore/walk
+  RunAnimationName: Explore/run
+  Atk1AnimationName: Battle/attack_nomal_win
+  Atk2AnimationName: Battle/attack_nomal_win
+  Atk3AnimationName: 
+  GuardAnimationName: Battle/guard
+  GuardHitAnimationName: Battle/guard_hit
+  DodgeFAnimationName: Battle/move_front
+  DodgeBAnimationName: Battle/move_back
+  _skeletonAnimation: {fileID: 1450618419}
 --- !u!1 &1451595499
 GameObject:
   m_ObjectHideFlags: 0
