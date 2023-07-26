@@ -22,22 +22,23 @@ public class StartBattle : MonoBehaviour
 
     public GameObject ForkActive;
     public GameObject ForckActor;
-    public InputBattle F_Script;
+    public ForkInput F_Script;
 
     [Header("Spoon")]
 
     public GameObject SpoonActive;
     public GameObject SpoonActor;
-    public InputBattle S_Script;
+    public SpoonInput S_Script;
 
  [Header("Knife")]
 
     public GameObject KnifeActive;
     public GameObject KnifeActor;
-    public InputBattle K_Script;
+    public KnifeInput K_Script;
 
  [Header("Enemy")]
     public SimpleEnemy E_Script;
+    public DuelManager Duel_Script;
 
     private void Start()
     {
@@ -53,10 +54,13 @@ public class StartBattle : MonoBehaviour
 
          // Stampa il risultato nella console
         //Debug.Log("Numero casuale: " + result);
-        E_Script.inputCTR = true;
-        F_Script.inputCTR = true;
+        Duel_Script.inputCTR = true;
+        /*F_Script.inputCTR = true;
         K_Script.inputCTR = true;
         S_Script.inputCTR = true;
+        S_Script.inputCTR = true;*/
+
+
 
         ForkActive.transform.localScale = new Vector3(1, 1,1);
         KnifeActive.transform.localScale = new Vector3(1, 1,1);
@@ -80,10 +84,10 @@ IEnumerator DuringInter()
         yield return new WaitForSeconds(1f);
         ReadyForBattle.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
-        F_Script.inputCTR = false;
-        K_Script.inputCTR = false;
+        Duel_Script.inputCTR = false;
+        /*K_Script.inputCTR = false;
         S_Script.inputCTR = false;
-        E_Script.inputCTR = false;
+        E_Script.inputCTR = false;*/
 
     }
     

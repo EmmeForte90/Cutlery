@@ -13,7 +13,7 @@ public class SimpleEnemy : MonoBehaviour
     private Transform player;
     private bool isAttacking = false;
 
-    public bool inputCTR = false;    
+    //public bool inputCTR = false;    
     
     public static SimpleEnemy instance;
 
@@ -28,7 +28,7 @@ public class SimpleEnemy : MonoBehaviour
 
     private void Update()
     {
-        if(!inputCTR){
+        if(!DuelManager.instance.inputCTR){
         if (!isAttacking)
         {
             ChasePlayer();

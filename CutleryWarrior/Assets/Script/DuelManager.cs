@@ -38,6 +38,7 @@ public Animator animator;
 
 public int CharacterID;
 
+
 public static DuelManager instance;
 private void Awake()
     {
