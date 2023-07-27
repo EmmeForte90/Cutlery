@@ -116,6 +116,8 @@ IEnumerator CoordinateActor()
         KnifeActor.transform.position = KnifeActive.transform.position;
         if(GameManager.instance.battle)
         {DuelManager.instance.CharacterID = 1;}
+        else if(!GameManager.instance.battle)
+        {UIRotationSwitcher.instance.CharacterID = 1;}
         yield return new WaitForSeconds(0.01f);
         Flip();
         ForckActor.gameObject.SetActive(false);
@@ -140,6 +142,8 @@ IEnumerator CoordinateActor()
         ForckActor.transform.position = ForkActive.transform.position;
         if(GameManager.instance.battle)
         {DuelManager.instance.CharacterID = 2;}
+        else if(!GameManager.instance.battle)
+        {UIRotationSwitcher.instance.CharacterID = 2;}
         yield return new WaitForSeconds(0.01f);
         Flip();
         ForkActive.gameObject.SetActive(false);
@@ -164,6 +168,8 @@ IEnumerator CoordinateActor()
         ForckActor.transform.position = ForkActive.transform.position;
         if(GameManager.instance.battle)
         {DuelManager.instance.CharacterID = 3;}
+        else if(!GameManager.instance.battle)
+        {UIRotationSwitcher.instance.CharacterID = 3;}
         yield return new WaitForSeconds(0.01f);
         Flip();
         ForkActive.gameObject.SetActive(false);

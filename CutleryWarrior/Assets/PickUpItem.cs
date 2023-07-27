@@ -14,7 +14,10 @@ public class PickUpItem : MonoBehaviour
     public int specificQuant;
     
     [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-Weapom 4-Armor")]
-    public int KindItem;
+    private int KindItem;
+
+    private void Awake() 
+    {KindItem = specificItem.KindItem;}
 
        private void OnTriggerEnter(Collider collision)
 {
@@ -38,6 +41,15 @@ void AddSpecificItem()
             break;
             case 2:
             KeyManager.instance.AddItem(specificItem, specificQuant);            
+            break;
+            case 3:
+            EquipM_F.instance.AddItem(specificItem, specificQuant);            
+            break;
+            case 4:
+            EquipM_K.instance.AddItem(specificItem, specificQuant);            
+            break;
+            case 5:
+            EquipM_S.instance.AddItem(specificItem, specificQuant);            
             break;
         }
         Destroy(gameObject);

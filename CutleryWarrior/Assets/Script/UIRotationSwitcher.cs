@@ -24,17 +24,24 @@ public class UIRotationSwitcher : MonoBehaviour
     public GameObject M_F;
     public GameObject M_K;
     public GameObject M_S;
-        
+    public int CharacterID = 1;
+
     public Spine.Unity.SkeletonGraphic skeletonGraphic1;
     public Spine.Unity.SkeletonGraphic skeletonGraphic2;
     public Spine.Unity.SkeletonGraphic skeletonGraphic3;
-  
+    public static UIRotationSwitcher instance;
+
     private void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
         // Salva le posizioni iniziali degli elementi
         element1StartPosition = element1.transform.position;
         element2StartPosition = element2.transform.position;
         element3StartPosition = element3.transform.position;
+        CharacterID = 1;
 
        // Assicurati che il componente SkeletonGraphic sia assegnato nell'ispettore di Unity
         if (skeletonGraphic1 == null)
@@ -78,13 +85,13 @@ private void SetColor2(Color color)
     private void SwitchElement()
 {
     // Switcha tra gli elementi
-    if (isElement1Active)
+    if (CharacterID == 1)
     {
         StartCoroutine(MoveElement(element1, element2StartPosition));
         StartCoroutine(MoveElement(element2, element3StartPosition));
         StartCoroutine(MoveElement(element3, element1StartPosition));
-        M_F.SetActive(true);
-        M_K.SetActive(false);
+        M_F.SetActive(false);
+        M_K.SetActive(true);
         M_S.SetActive(false);
         SetColor1(color2);
         SetColor2(color2);
@@ -94,14 +101,14 @@ private void SetColor2(Color color)
         isElement1Active = false;
         isElement2Active = true;
     }
-    else if (isElement2Active)
+    else if (CharacterID == 2)
     {
         StartCoroutine(MoveElement(element3, element2StartPosition));
         StartCoroutine(MoveElement(element2, element1StartPosition));
         StartCoroutine(MoveElement(element1, element3StartPosition));
         M_F.SetActive(false);
-        M_K.SetActive(true);
-        M_S.SetActive(false);
+        M_K.SetActive(false);
+        M_S.SetActive(true);
         SetColor1(color2);
         SetColor2(color1);
         SetColor3(color2);
@@ -109,14 +116,14 @@ private void SetColor2(Color color)
         isElement2Active = false;
         isElement3Active = true;
     }
-    else if (isElement3Active)
+    else if (CharacterID == 3)
     {
         StartCoroutine(MoveElement(element1, element1StartPosition));
         StartCoroutine(MoveElement(element2, element2StartPosition));
         StartCoroutine(MoveElement(element3, element3StartPosition));
-        M_F.SetActive(false);
+        M_F.SetActive(true);
         M_K.SetActive(false);
-        M_S.SetActive(true);
+        M_S.SetActive(false);
         SetColor1(color1);
         SetColor2(color2);
         SetColor3(color2);

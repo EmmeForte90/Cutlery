@@ -11,6 +11,9 @@ public class Item : ScriptableObject
 
     // The ID of every Item needs to be different in order to be saved and loaded 
     public int ID;
+    
+    [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-EquipFork 4-EquipKnife 5-EquipSpoon")]
+    public int KindItem;
 
     // The price of an item can be used to set up a shop
     public int price;
@@ -20,6 +23,8 @@ public class Item : ScriptableObject
 
     // The UI icon of the item 
     public Sprite itemIcon;
+
+
     
     public virtual void Use()
     {

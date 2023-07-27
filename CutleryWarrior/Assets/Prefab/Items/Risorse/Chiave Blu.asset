@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: Chiave Blu
   itemDes: A simple key but with color blu.
   ID: 1
+  KindItem: 2
   price: 5
   Stackable: 1
   itemIcon: {fileID: 21300000, guid: c76f6ca624cc57347908d6432cdde08f, type: 3}
