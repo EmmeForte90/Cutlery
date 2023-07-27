@@ -10,7 +10,7 @@ public class PickUpItem : MonoBehaviour
 
     // In case of specific, this two parameters become active in the Editor
     public Item specificItem;
-    //public bool Weapon, Item, Armor, Key, Quest;
+    public GameObject VFXTake;
     public int specificQuant;
     
     [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-Weapom 4-Armor")]
@@ -24,6 +24,8 @@ public class PickUpItem : MonoBehaviour
     // Controlliamo se il player ha toccato il collider
     if (collision.gameObject.CompareTag("Player"))
     {
+        Instantiate(VFXTake, transform.position, transform.rotation);
+        AudioManager.instance.PlayUFX(5);
         AddSpecificItem();
     }
 }
