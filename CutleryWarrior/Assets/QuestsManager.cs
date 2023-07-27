@@ -1,16 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-// IN THIS SCRIPT: Inventory Main Script that handles items and respective quantities aqquired
-// WARNING: This script uses UNITY Editor to simplify the process of setting it up
-// USE THIS SCRIPT by attaching it to any GameObject(Ex. PlayerPrefab, EmptyObject)
-public class Inventory : MonoBehaviour
+public class QuestsManager : MonoBehaviour
 {
- 
     // The items on the inventory
     public List<Item> itemList = new List<Item>();
 
@@ -19,15 +15,7 @@ public class Inventory : MonoBehaviour
 
 
     // The inventoryPanel is the parent object of each slot
-    public GameObject inventoryItem;
     public GameObject inventoryQuestsItem;
-    public GameObject inventoryKey;
-    public GameObject inventoryEquip_F;
-    public GameObject inventorySkill_F;
-    public GameObject inventoryEquip_K;
-    public GameObject inventorySkill_K;
-    public GameObject inventoryEquip_S;
-    public GameObject inventorySkill_S;
 
     // The slotListItem is the list of slots on the inventory, you can turn this List public and place the slots manually inside of it
     // Currently it's making the list based on the inventoryPanel children objects on GatherSlots() in line 86
@@ -35,7 +23,7 @@ public class Inventory : MonoBehaviour
 
     #region Singleton
 
-    public static Inventory instance;
+    public static QuestsManager instance;
 
     void Awake()
     {
@@ -49,13 +37,13 @@ public class Inventory : MonoBehaviour
     {
         // Add the slots of the Inventory Panel to the list
 
-        foreach (InventorySlot child in inventoryItem.GetComponentsInChildren<InventorySlot>())
+        foreach (InventorySlot child in inventoryQuestsItem.GetComponentsInChildren<InventorySlot>())
         {slotListItem.Add(child);}
     }
     // AddItem() can be called in other scripts with the following line:
     //Inventory.instance.Add(ItemYouWantToGiveHere , quantityOfThatItem);
     // Currently it's being called by the AddItemToInventory Script on the Add Items Buttons 
-    #region ItemInventory
+    #region QuestItemInventory
     public void AddItem(Item itemAdded, int quantityAdded)
     {
         //If the Item is Stackable it checks if there is already that item in the inventory and only adds the quantity
@@ -167,5 +155,7 @@ public class Inventory : MonoBehaviour
         }
     }
 #endregion
- 
+
 }
+
+
