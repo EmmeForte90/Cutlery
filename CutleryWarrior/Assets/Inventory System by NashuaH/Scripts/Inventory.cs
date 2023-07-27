@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using TMPro;
 
 // IN THIS SCRIPT: Inventory Main Script that handles items and respective quantities aqquired
 // WARNING: This script uses UNITY Editor to simplify the process of setting it up
@@ -17,7 +19,15 @@ public class Inventory : MonoBehaviour
 
 
     // The inventoryPanel is the parent object of each slot
-    public GameObject inventoryPanel;
+    public GameObject inventoryItem;
+    public GameObject inventoryQuestsItem;
+    public GameObject inventoryKey;
+    public GameObject inventoryEquip_F;
+    public GameObject inventorySkill_F;
+    public GameObject inventoryEquip_K;
+    public GameObject inventorySkill_K;
+    public GameObject inventoryEquip_S;
+    public GameObject inventorySkill_S;
 
     // The slotList is the list of slots on the inventory, you can turn this List public and place the slots manually inside of it
     // Currently it's making the list based on the inventoryPanel children objects on GatherSlots() in line 86
@@ -40,12 +50,27 @@ public class Inventory : MonoBehaviour
     {
         // Add the slots of the Inventory Panel to the list
 
-        foreach (InventorySlot child in inventoryPanel.GetComponentsInChildren<InventorySlot>())
-        {
-            slotList.Add(child);
-        }
-
-
+        foreach (InventorySlot child in inventoryItem.GetComponentsInChildren<InventorySlot>())
+        {slotList.Add(child);}
+        foreach (InventorySlot child in inventoryQuestsItem.GetComponentsInChildren<InventorySlot>())
+        {slotList.Add(child);}
+        foreach (InventorySlot child in inventoryKey.GetComponentsInChildren<InventorySlot>())
+        {slotList.Add(child);}
+        //
+        foreach (InventorySlot child in inventoryEquip_F.GetComponentsInChildren<InventorySlot>())
+        {slotList.Add(child);}
+        foreach (InventorySlot child in inventorySkill_F.GetComponentsInChildren<InventorySlot>())
+        {slotList.Add(child);}
+        //
+        foreach (InventorySlot child in inventoryEquip_K.GetComponentsInChildren<InventorySlot>())
+        {slotList.Add(child);}
+        foreach (InventorySlot child in inventorySkill_K.GetComponentsInChildren<InventorySlot>())
+        {slotList.Add(child);}
+        //
+        foreach (InventorySlot child in inventoryEquip_S.GetComponentsInChildren<InventorySlot>())
+        {slotList.Add(child);}
+        foreach (InventorySlot child in inventorySkill_S.GetComponentsInChildren<InventorySlot>())
+        {slotList.Add(child);}
 
     }
     // AddItem() can be called in other scripts with the following line:

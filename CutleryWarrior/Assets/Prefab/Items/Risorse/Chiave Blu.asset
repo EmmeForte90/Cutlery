@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5b728530c479d843803971ca11c5f55, type: 3}
-  m_Name: Blue Herb
+  m_Name: Chiave Blu
   m_EditorClassIdentifier: 
-  itemName: Blue Herb
-  ID: 2
-  price: 2
+  itemName: Chiave Blu
+  itemDes: A simple key but with color blu.
+  ID: 1
+  price: 5
   Stackable: 1
-  itemIcon: {fileID: 21300000, guid: 339a01af7e4e2fe4ea21882c0918eea3, type: 3}
-  type: 1
+  itemIcon: {fileID: 21300000, guid: c76f6ca624cc57347908d6432cdde08f, type: 3}
+  type: 0

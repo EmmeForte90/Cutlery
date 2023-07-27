@@ -14,6 +14,6 @@ public class Resource : Item
         // Inventory.instance.RemoveItem(this, 1);
     }
 
-    public enum resourceType { Wood, Herb, Ore }
+    public enum resourceType { Key, Collectible, Material, Quest}
 }
 

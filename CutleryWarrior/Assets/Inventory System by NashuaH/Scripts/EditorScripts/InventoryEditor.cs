@@ -14,11 +14,11 @@ public class InventoryEditor : Editor
         inventoryUI = serializedObject.FindProperty("inventoryPanel");
     }
 
-    public override void OnInspectorGUI()
+    /*public override void OnInspectorGUI()
     {
         EditorGUILayout.LabelField("Place the parent object of the Inventory Slots here:");
         serializedObject.Update();
         EditorGUILayout.PropertyField(inventoryUI);
         serializedObject.ApplyModifiedProperties();
-    }
+    }*/
 }
