@@ -10,6 +10,7 @@ public class UIRotationSwitcher : MonoBehaviour
     public GameObject element1;
     public GameObject element2;
     public GameObject element3;
+
     public float switchSpeed = 5f;
     public Color color1;
     public Color color2;
@@ -19,6 +20,10 @@ public class UIRotationSwitcher : MonoBehaviour
     private bool isElement1Active = true;
     private bool isElement2Active = false;
     private bool isElement3Active = false;
+
+    public GameObject M_F;
+    public GameObject M_K;
+    public GameObject M_S;
         
     public Spine.Unity.SkeletonGraphic skeletonGraphic1;
     public Spine.Unity.SkeletonGraphic skeletonGraphic2;
@@ -78,6 +83,9 @@ private void SetColor2(Color color)
         StartCoroutine(MoveElement(element1, element2StartPosition));
         StartCoroutine(MoveElement(element2, element3StartPosition));
         StartCoroutine(MoveElement(element3, element1StartPosition));
+        M_F.SetActive(true);
+        M_K.SetActive(false);
+        M_S.SetActive(false);
         SetColor1(color2);
         SetColor2(color2);
         SetColor3(color1);
@@ -91,6 +99,9 @@ private void SetColor2(Color color)
         StartCoroutine(MoveElement(element3, element2StartPosition));
         StartCoroutine(MoveElement(element2, element1StartPosition));
         StartCoroutine(MoveElement(element1, element3StartPosition));
+        M_F.SetActive(false);
+        M_K.SetActive(true);
+        M_S.SetActive(false);
         SetColor1(color2);
         SetColor2(color1);
         SetColor3(color2);
@@ -103,6 +114,9 @@ private void SetColor2(Color color)
         StartCoroutine(MoveElement(element1, element1StartPosition));
         StartCoroutine(MoveElement(element2, element2StartPosition));
         StartCoroutine(MoveElement(element3, element3StartPosition));
+        M_F.SetActive(false);
+        M_K.SetActive(false);
+        M_S.SetActive(true);
         SetColor1(color1);
         SetColor2(color2);
         SetColor3(color2);

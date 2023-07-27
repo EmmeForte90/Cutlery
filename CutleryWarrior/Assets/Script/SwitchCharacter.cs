@@ -114,7 +114,8 @@ IEnumerator CoordinateActor()
         ForkActive.transform.position = ForckActor.transform.position;
         SpoonActor.transform.position = SpoonActive.transform.position;
         KnifeActor.transform.position = KnifeActive.transform.position;
-        DuelManager.instance.CharacterID = 1;
+        if(GameManager.instance.battle)
+        {DuelManager.instance.CharacterID = 1;}
         yield return new WaitForSeconds(0.01f);
         Flip();
         ForckActor.gameObject.SetActive(false);
@@ -137,7 +138,8 @@ IEnumerator CoordinateActor()
         KnifeActive.transform.position = KnifeActor.transform.position;
         SpoonActor.transform.position = SpoonActive.transform.position;
         ForckActor.transform.position = ForkActive.transform.position;
-        DuelManager.instance.CharacterID = 2;
+        if(GameManager.instance.battle)
+        {DuelManager.instance.CharacterID = 2;}
         yield return new WaitForSeconds(0.01f);
         Flip();
         ForkActive.gameObject.SetActive(false);
@@ -160,7 +162,8 @@ IEnumerator CoordinateActor()
         SpoonActive.transform.position = SpoonActor.transform.position;
         KnifeActor.transform.position = KnifeActive.transform.position;
         ForckActor.transform.position = ForkActive.transform.position;
-        DuelManager.instance.CharacterID = 3;
+        if(GameManager.instance.battle)
+        {DuelManager.instance.CharacterID = 3;}
         yield return new WaitForSeconds(0.01f);
         Flip();
         ForkActive.gameObject.SetActive(false);
