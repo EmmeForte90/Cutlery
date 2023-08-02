@@ -26677,6 +26677,7 @@ GameObject:
   - component: {fileID: 454443160}
   - component: {fileID: 454443159}
   - component: {fileID: 454443158}
+  - component: {fileID: 454443163}
   m_Layer: 8
   m_Name: F_Actor
   m_TagString: Actor
@@ -26743,7 +26744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 4bb92582524b844428b97d42e98e5c8c, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -26820,6 +26821,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454443156}
   m_Mesh: {fileID: 0}
+--- !u!114 &454443163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454443156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: default
 --- !u!1 &460525232
 GameObject:
   m_ObjectHideFlags: 0
@@ -37340,6 +37355,7 @@ GameObject:
   - component: {fileID: 521126086}
   - component: {fileID: 521126081}
   - component: {fileID: 521126080}
+  - component: {fileID: 521126087}
   - component: {fileID: 521126079}
   - component: {fileID: 521126078}
   m_Layer: 6
@@ -37440,7 +37456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 71fb1c54c2612584cbd76cd11e34c0f2, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -37552,6 +37568,20 @@ MonoBehaviour:
   SlashV: {fileID: 1787147570}
   SlashH: {fileID: 1586115919}
   SlashB: {fileID: 1420310622}
+--- !u!114 &521126087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521126076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: default
 --- !u!1 &521810307
 GameObject:
   m_ObjectHideFlags: 0
@@ -43633,6 +43663,7 @@ GameObject:
   - component: {fileID: 691336970}
   - component: {fileID: 691336968}
   - component: {fileID: 691336969}
+  - component: {fileID: 691336971}
   - component: {fileID: 691336962}
   - component: {fileID: 691336961}
   m_Layer: 6
@@ -43704,7 +43735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 4bb92582524b844428b97d42e98e5c8c, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -43843,6 +43874,20 @@ MonoBehaviour:
   hor: 0
   Bullet: {fileID: 1862645643401743441, guid: 709ca3e7b07bcb246bda3a4ed2a76e10, type: 3}
   BPoint: {fileID: 485041506}
+--- !u!114 &691336971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691336959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: default
 --- !u!1 &693698053
 GameObject:
   m_ObjectHideFlags: 0
@@ -49471,6 +49516,7 @@ GameObject:
   - component: {fileID: 844550190}
   - component: {fileID: 844550185}
   - component: {fileID: 844550184}
+  - component: {fileID: 844550191}
   - component: {fileID: 844550183}
   - component: {fileID: 844550182}
   m_Layer: 6
@@ -49569,7 +49615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: b5b9c82d629d0d7488c81be821dbbd5c, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -49678,6 +49724,20 @@ MonoBehaviour:
   hor: 0
   SlashV: {fileID: 1656528698}
   BPoint: {fileID: 460525233}
+--- !u!114 &844550191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844550180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: default
 --- !u!1 &846451552
 GameObject:
   m_ObjectHideFlags: 0
@@ -99604,6 +99664,7 @@ GameObject:
   - component: {fileID: 1630336530}
   - component: {fileID: 1630336529}
   - component: {fileID: 1630336528}
+  - component: {fileID: 1630336533}
   m_Layer: 8
   m_Name: K_Actor
   m_TagString: Actor
@@ -99670,7 +99731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 71fb1c54c2612584cbd76cd11e34c0f2, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -99747,6 +99808,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1630336526}
   m_Mesh: {fileID: 0}
+--- !u!114 &1630336533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630336526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: default
 --- !u!1 &1630379441
 GameObject:
   m_ObjectHideFlags: 0
@@ -101818,6 +101893,7 @@ GameObject:
   - component: {fileID: 1827832779}
   - component: {fileID: 1827832778}
   - component: {fileID: 1827832777}
+  - component: {fileID: 1827832782}
   m_Layer: 8
   m_Name: S_Actor
   m_TagString: Actor
@@ -101884,7 +101960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: b5b9c82d629d0d7488c81be821dbbd5c, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -101961,6 +102037,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827832775}
   m_Mesh: {fileID: 0}
+--- !u!114 &1827832782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827832775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: default
 --- !u!1 &1831040506
 GameObject:
   m_ObjectHideFlags: 0

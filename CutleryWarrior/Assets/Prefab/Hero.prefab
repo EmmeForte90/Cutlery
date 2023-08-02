@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: b5b9c82d629d0d7488c81be821dbbd5c, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -179,6 +179,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  Switch: {fileID: 0}
   WalkAnimationName: Exploration/walk
   RunAnimationName: Exploration/run
   IdleAnimationName: Exploration/idle
@@ -284,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 4bb92582524b844428b97d42e98e5c8c, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -485,7 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: b5b9c82d629d0d7488c81be821dbbd5c, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -685,7 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 4bb92582524b844428b97d42e98e5c8c, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -764,6 +765,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  Switch: {fileID: 0}
   WalkAnimationName: Explore/walk
   RunAnimationName: Explore/run
   IdleAnimationName: idle
@@ -935,7 +937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 71fb1c54c2612584cbd76cd11e34c0f2, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -1014,6 +1016,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  Switch: {fileID: 0}
   WalkAnimationName: Exploration/walk
   RunAnimationName: Exploration/run
   IdleAnimationName: Exploration/idle
@@ -1152,7 +1155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 71fb1c54c2612584cbd76cd11e34c0f2, type: 2}
-  initialSkinName: 
+  initialSkinName: Dress/Dress
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
