@@ -19,7 +19,7 @@ public class EquipM_F : MonoBehaviour
 
     // The slotListItem is the list of slots on the inventory, you can turn this List public and place the slots manually inside of it
     // Currently it's making the list based on the inventoryPanel children objects on GatherSlots() in line 86
-  List<InventorySlot> slotListItem = new List<InventorySlot>();
+  List<EquipSlot> slotListItem = new List<EquipSlot>();
 
     #region Singleton
 
@@ -37,7 +37,7 @@ public class EquipM_F : MonoBehaviour
     {
         // Add the slots of the Inventory Panel to the list
 
-        foreach (InventorySlot child in inventoryQuestsItem.GetComponentsInChildren<InventorySlot>())
+        foreach (EquipSlot child in inventoryQuestsItem.GetComponentsInChildren<EquipSlot>())
         {slotListItem.Add(child);}
     }
     // AddItem() can be called in other scripts with the following line:
@@ -127,7 +127,7 @@ public class EquipM_F : MonoBehaviour
         int ind = 0;
 
         // For each slot in the list it's attributed an Item from the itemList and the corresponding quantity
-      foreach(InventorySlot slot in slotListItem)
+      foreach(EquipSlot slot in slotListItem)
         {
 
             if (itemList.Count != 0)

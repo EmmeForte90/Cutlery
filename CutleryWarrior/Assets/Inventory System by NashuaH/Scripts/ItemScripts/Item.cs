@@ -6,6 +6,7 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public string itemName;
+    public string NameSkin;
 
     public string itemDes;
 
@@ -24,8 +25,10 @@ public class Item : ScriptableObject
     // The UI icon of the item 
     public Sprite itemIcon;
 
+    [Tooltip("Che tipo di Equipaggiamento? 0-Armor 1-Weapon ")]
+    public int TypesE;
 
-    
+
     public virtual void Use()
     {
         //Use item

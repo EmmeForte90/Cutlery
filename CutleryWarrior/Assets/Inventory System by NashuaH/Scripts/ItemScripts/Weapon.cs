@@ -5,10 +5,11 @@ public class Weapon : Item
 {
     public weaponType type;
     public int weaponDamage;
-
+    //public string NameSkin;
     public override void Use()
     {
         base.Use();
+
 
         //Equip Action
         //The Equip Action is avaible in the "Inventory & Equip System - Drag & Drop", an extension of this package that can be purchased from the Unity asset Store in the following link:

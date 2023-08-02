@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9191035208986848534}
   - component: {fileID: 9191035208986848529}
   - component: {fileID: 9191035208986848528}
+  - component: {fileID: 2423687835144064834}
   m_Layer: 8
   m_Name: S_Actor
   m_TagString: Actor
@@ -184,6 +185,20 @@ MonoBehaviour:
   RunAnimationName: Exploration/run
   IdleAnimationName: Exploration/idle
   _skeletonAnimation: {fileID: 9191035208986848535}
+--- !u!114 &2423687835144064834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191035208986848530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: Weapon/Latta
 --- !u!1 &9191035209642260912
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +215,7 @@ GameObject:
   - component: {fileID: 9191035209642260923}
   - component: {fileID: 9191035209642260922}
   - component: {fileID: 9191035209642260921}
+  - component: {fileID: 6301052031006127599}
   m_Layer: 6
   m_Name: F_Player
   m_TagString: Player
@@ -385,6 +401,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackForce: 5
   knockbackDuration: 0.5
+--- !u!114 &6301052031006127599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191035209642260912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: Weapon/Latta
 --- !u!1 &9191035209652890966
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +431,7 @@ GameObject:
   - component: {fileID: 9191035209652890965}
   - component: {fileID: 9191035209652890964}
   - component: {fileID: 9191035209652890974}
+  - component: {fileID: 9076380706886223985}
   m_Layer: 6
   m_Name: S_Player
   m_TagString: Player
@@ -586,6 +617,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackForce: 5
   knockbackDuration: 0.5
+--- !u!114 &9076380706886223985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191035209652890966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: Weapon/Latta
 --- !u!1 &9191035209794000327
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +646,7 @@ GameObject:
   - component: {fileID: 9191035209794000331}
   - component: {fileID: 9191035209794000330}
   - component: {fileID: 9191035209794000325}
+  - component: {fileID: 4388240039987312976}
   m_Layer: 8
   m_Name: F_Actor
   m_TagString: Actor
@@ -770,6 +816,20 @@ MonoBehaviour:
   RunAnimationName: Explore/run
   IdleAnimationName: idle
   _skeletonAnimation: {fileID: 9191035209794000328}
+--- !u!114 &4388240039987312976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191035209794000327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: Weapon/Latta
 --- !u!1 &9191035209830153431
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,6 +912,7 @@ GameObject:
   - component: {fileID: 9191035209890527025}
   - component: {fileID: 9191035209890527024}
   - component: {fileID: 9191035209890527027}
+  - component: {fileID: 2232862051650477762}
   m_Layer: 8
   m_Name: K_Actor
   m_TagString: Actor
@@ -1021,6 +1082,20 @@ MonoBehaviour:
   RunAnimationName: Exploration/run
   IdleAnimationName: Exploration/idle
   _skeletonAnimation: {fileID: 9191035209890527030}
+--- !u!114 &2232862051650477762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191035209890526989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: Weapon/Latta
 --- !u!1 &9191035210322088833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1145,7 @@ GameObject:
   - component: {fileID: 9191035210331538624}
   - component: {fileID: 9191035210331538627}
   - component: {fileID: 9191035210331538629}
+  - component: {fileID: 8363189205010888677}
   m_Layer: 6
   m_Name: K_Player
   m_TagString: Player
@@ -1255,6 +1331,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackForce: 5
   knockbackDuration: 0.5
+--- !u!114 &8363189205010888677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191035210331538653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c96fc532d80874c81a53caacd369a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DressSkin: Dress/Dress
+  Weapon: Weapon/Latta
 --- !u!1 &9191035210630832133
 GameObject:
   m_ObjectHideFlags: 0
