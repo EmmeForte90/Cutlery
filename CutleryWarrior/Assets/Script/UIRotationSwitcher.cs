@@ -87,6 +87,21 @@ private void SetColor2(Color color)
     // Switcha tra gli elementi
     if (CharacterID == 1)
     {
+        StartCoroutine(MoveElement(element1, element1StartPosition));
+        StartCoroutine(MoveElement(element2, element2StartPosition));
+        StartCoroutine(MoveElement(element3, element3StartPosition));
+        M_F.SetActive(true);
+        M_K.SetActive(false);
+        M_S.SetActive(false);
+        SetColor1(color1);
+        SetColor2(color2);
+        SetColor3(color2);
+
+        isElement1Active = false;
+        isElement2Active = true;
+    }
+    else if (CharacterID == 2)
+    {
         StartCoroutine(MoveElement(element1, element2StartPosition));
         StartCoroutine(MoveElement(element2, element3StartPosition));
         StartCoroutine(MoveElement(element3, element1StartPosition));
@@ -97,11 +112,10 @@ private void SetColor2(Color color)
         SetColor2(color2);
         SetColor3(color1);
 
-
-        isElement1Active = false;
-        isElement2Active = true;
+        isElement2Active = false;
+        isElement3Active = true;
     }
-    else if (CharacterID == 2)
+    else if (CharacterID == 3)
     {
         StartCoroutine(MoveElement(element3, element2StartPosition));
         StartCoroutine(MoveElement(element2, element1StartPosition));
@@ -111,21 +125,6 @@ private void SetColor2(Color color)
         M_S.SetActive(true);
         SetColor1(color2);
         SetColor2(color1);
-        SetColor3(color2);
-
-        isElement2Active = false;
-        isElement3Active = true;
-    }
-    else if (CharacterID == 3)
-    {
-        StartCoroutine(MoveElement(element1, element1StartPosition));
-        StartCoroutine(MoveElement(element2, element2StartPosition));
-        StartCoroutine(MoveElement(element3, element3StartPosition));
-        M_F.SetActive(true);
-        M_K.SetActive(false);
-        M_S.SetActive(false);
-        SetColor1(color1);
-        SetColor2(color2);
         SetColor3(color2);
 
         isElement3Active = false;

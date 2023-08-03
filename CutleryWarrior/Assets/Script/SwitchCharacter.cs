@@ -33,6 +33,7 @@ public class SwitchCharacter : MonoBehaviour
     public bool isElement3Active = false;
     private CinemachineVirtualCamera vCam;
     private GameObject player;
+    public UIRotationSwitcher rotationSwitcher;
 void Update()
     {
         
@@ -51,6 +52,7 @@ private void Awake()
         {vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
         vCam.Follow = player.transform;}
         //TakeCharacters();
+        //rotationSwitcher = GameObject.Find("Equip_S").GetComponent<UIRotationSwitcher>(); ;
         ForckActor.gameObject.SetActive(false);
         ForkActive.gameObject.SetActive(true);
         KnifeActive.gameObject.SetActive(false);
@@ -117,7 +119,7 @@ IEnumerator CoordinateActor()
         if(GameManager.instance.battle)
         {DuelManager.instance.CharacterID = 1;}
         else if(!GameManager.instance.battle)
-        {UIRotationSwitcher.instance.CharacterID = 1;}
+        {rotationSwitcher.CharacterID = 1;}
         yield return new WaitForSeconds(0.01f);
         Flip();
         ForckActor.gameObject.SetActive(false);
@@ -143,7 +145,7 @@ IEnumerator CoordinateActor()
         if(GameManager.instance.battle)
         {DuelManager.instance.CharacterID = 2;}
         else if(!GameManager.instance.battle)
-        {UIRotationSwitcher.instance.CharacterID = 2;}
+        {rotationSwitcher.CharacterID = 2;}
         yield return new WaitForSeconds(0.01f);
         Flip();
         ForkActive.gameObject.SetActive(false);
@@ -169,7 +171,7 @@ IEnumerator CoordinateActor()
         if(GameManager.instance.battle)
         {DuelManager.instance.CharacterID = 3;}
         else if(!GameManager.instance.battle)
-        {UIRotationSwitcher.instance.CharacterID = 3;}
+        {rotationSwitcher.CharacterID = 3;}
         yield return new WaitForSeconds(0.01f);
         Flip();
         ForkActive.gameObject.SetActive(false);
