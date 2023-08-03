@@ -18,6 +18,20 @@ public class Inventory : MonoBehaviour
     public List<int> quantityList = new List<int>();
     public Image previewImages_A;
     public Image previewImages_W;
+    public ChangeHeroSkin Skin_F;
+    public ChangeHeroSkin Skin_AcF;
+    public PuppetSkin Puppets_F;
+
+    public ChangeHeroSkin Skin_K;
+    public ChangeHeroSkin Skin_AcK;
+    public PuppetSkin Puppets_K;
+
+    public ChangeHeroSkin Skin_S;
+    public ChangeHeroSkin Skin_AcS;
+
+    public PuppetSkin Puppets_S;
+        
+    public UIRotationSwitcher rotationSwitcher;
 
     // The inventoryPanel is the parent object of each slot
     public GameObject inventoryItem;
@@ -47,25 +61,87 @@ public class Inventory : MonoBehaviour
 
 public void AssignDress(Weapon Item)
 {
-            ChangeHeroSkin.Instance.DressSkin = Item.NameSkin;
+    switch (rotationSwitcher.CharacterID)
+    {
+    case 1:
+            Skin_F.DressSkin = Item.NameSkin;
             previewImages_W.sprite = Item.itemIcon;
-            ChangeHeroSkin.Instance.UpdateCharacterSkin();
-	    	ChangeHeroSkin.Instance.UpdateCombinedSkin();
-            PuppetSkin.Instance.DressSkin = Item.NameSkin;
-            PuppetSkin.Instance.UpdateCharacterSkinUI(Item.NameSkin);
-            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
+            Skin_F.UpdateCharacterSkin();
+	    	Skin_F.UpdateCombinedSkin();
+            Skin_AcF.UpdateCharacterSkin();
+	    	Skin_AcF.UpdateCombinedSkin();
+            Puppets_F.DressSkin = Item.NameSkin;
+            Puppets_F.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_F.UpdateCombinedSkinUI(); 
+    break;
+    case 2:
+            Skin_K.DressSkin = Item.NameSkin;
+            previewImages_W.sprite = Item.itemIcon;
+            Skin_K.UpdateCharacterSkin();
+	    	Skin_K.UpdateCombinedSkin();
+            Skin_AcK.UpdateCharacterSkin();
+	    	Skin_AcK.UpdateCombinedSkin();
+            Puppets_K.DressSkin = Item.NameSkin;
+            Puppets_K.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_K.UpdateCombinedSkinUI(); 
+    break;
+    case 3:
+            Skin_S.DressSkin = Item.NameSkin;
+            previewImages_W.sprite = Item.itemIcon;
+            Skin_S.UpdateCharacterSkin();
+	    	Skin_S.UpdateCombinedSkin();
+            Skin_AcS.UpdateCharacterSkin();
+	    	Skin_AcS.UpdateCombinedSkin();
+            Puppets_S.DressSkin = Item.NameSkin;
+            Puppets_S.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_S.UpdateCombinedSkinUI(); 
+    break;
+    
+    
+    }
+            
 }
 
 public void AssignWeapon(Weapon Item)
 {
-            ChangeHeroSkin.Instance.Weapon = Item.NameSkin;
+    switch (rotationSwitcher.CharacterID)
+    {
+    case 1:
+            Skin_F.Weapon = Item.NameSkin;
             previewImages_A.sprite = Item.itemIcon;
-            ChangeHeroSkin.Instance.UpdateCharacterSkin();
-		    ChangeHeroSkin.Instance.UpdateCombinedSkin(); 
-            PuppetSkin.Instance.Weapon = Item.NameSkin;
-            PuppetSkin.Instance.UpdateCharacterSkinUI(Item.NameSkin);
-            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
-}
+            Skin_F.UpdateCharacterSkin();
+		    Skin_F.UpdateCombinedSkin(); 
+            Skin_AcF.UpdateCharacterSkin();
+	    	Skin_AcF.UpdateCombinedSkin();
+            Puppets_F.Weapon = Item.NameSkin;
+            Puppets_F.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_F.UpdateCombinedSkinUI();  
+    break;
+    case 2:
+            Skin_K.Weapon = Item.NameSkin;
+            previewImages_A.sprite = Item.itemIcon;
+            Skin_K.UpdateCharacterSkin();
+		    Skin_K.UpdateCombinedSkin(); 
+            Skin_AcK.UpdateCharacterSkin();
+	    	Skin_AcK.UpdateCombinedSkin();
+            Puppets_K.Weapon = Item.NameSkin;
+            Puppets_K.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_K.UpdateCombinedSkinUI();   
+    break;
+    case 3:
+            Skin_S.Weapon = Item.NameSkin;
+            previewImages_A.sprite = Item.itemIcon;
+            Skin_S.UpdateCharacterSkin();
+		    Skin_S.UpdateCombinedSkin(); 
+            Skin_AcS.UpdateCharacterSkin();
+	    	Skin_AcS.UpdateCombinedSkin();
+            Puppets_S.Weapon = Item.NameSkin;
+            Puppets_S.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_S.UpdateCombinedSkinUI();   
+    break;
+            
+}}
+
     public void Start()
     {
         // Add the slots of the Inventory Panel to the list

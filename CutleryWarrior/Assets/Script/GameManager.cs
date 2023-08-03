@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float MpF = 0;
     [SerializeField] public float ExpF = 0;
     [SerializeField] public TextMeshProUGUI ExpTextMF;
-
+    [SerializeField] CharacterMove ch_F;
   
 
     [Header("Spoon")]
@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float MpS = 0;
     [SerializeField] public float ExpS = 0;
     [SerializeField] public TextMeshProUGUI ExpTextMS;
+    [SerializeField] CharacterMove ch_S;
 
 
     [Header("Knife")]
@@ -66,7 +67,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float MpK = 0;
     [SerializeField] public float ExpK = 0;
     [SerializeField] public TextMeshProUGUI ExpTextMK;
+    [SerializeField] CharacterMove ch_K;
+
     [SerializeField] GameObject ExpObjectM;
+    public UIRotationSwitcher rotationSwitcher;
 
     public static GameManager instance;
    
@@ -121,19 +125,55 @@ public class GameManager : MonoBehaviour
     if(!battle){
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
-            CharacterMove.instance.Stop();
-            CharacterMove.instance.Idle();
-            stopInput = true;
-            CharacterMove.instance.inputCTR = true;
-            Pause.gameObject.SetActive(true);
-            CameraZoom.instance.ZoomIn();
-            AudioManager.instance.PlayUFX(1);
+            switch (rotationSwitcher.CharacterID)
+    {
+    case 1:
+        ch_F.Stop();
+        ch_F.Idle();
+        stopInput = true;
+        ch_F.inputCTR = true;
+        Pause.gameObject.SetActive(true);
+        CameraZoom.instance.ZoomIn();
+        AudioManager.instance.PlayUFX(1);     
+    break;
+    case 2:
+        ch_K.Stop();
+        ch_K.Idle();
+        stopInput = true;
+        ch_K.inputCTR = true;
+        Pause.gameObject.SetActive(true);
+        CameraZoom.instance.ZoomIn();
+        AudioManager.instance.PlayUFX(1);  
+    break;
+    case 3:
+        ch_S.Stop();
+        ch_S.Idle();
+        stopInput = true;
+        ch_S.inputCTR = true;
+        Pause.gameObject.SetActive(true);
+        CameraZoom.instance.ZoomIn();
+        AudioManager.instance.PlayUFX(1);   
+    break;
+    }       
+           
         }
         else if(Input.GetButtonDown("Pause") && stopInput)
         {
             stopInput = false;
             Pause.gameObject.SetActive(false);
             CharacterMove.instance.inputCTR = false;
+            switch (rotationSwitcher.CharacterID)
+            {
+            case 1:
+                ch_F.inputCTR = false;    
+            break;
+            case 2:
+                ch_K.inputCTR = false; 
+            break;
+            case 3:
+                ch_S.inputCTR = false; 
+            break;
+            }  
             CameraZoom.instance.ZoomOut();
             AudioManager.instance.PlayUFX(1);
         } 

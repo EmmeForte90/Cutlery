@@ -8,11 +8,13 @@ public class StartScene : MonoBehaviour
     private GameObject player;
 
     public GameObject ContainerHero;
+    public GameObject[] Actors; 
 
     //public GameObject FAct;
     //public GameObject KAct;
     //public GameObject SAct;    
     public GameObject[] SpawnArr; 
+
     public Collider[] BoxConfiner;    
     private CinemachineConfiner confiner;
     private CinemachineVirtualCamera vCam;
@@ -20,7 +22,7 @@ public class StartScene : MonoBehaviour
     private int IDPorta;
 public static StartScene instance;
 void Awake()
-{        
+{       
     if (instance == null){instance = this;}   
     if(!GameManager.instance.StartGame){   
     player = GameObject.FindWithTag("Player");
@@ -31,6 +33,10 @@ void Awake()
     Confiner(IDPorta);
     CharacterMove.instance.inputCTR = false; 
     GameManager.instance.FadeOut();}
+    foreach (GameObject Acto in Actors)
+        {
+            Acto.SetActive(false);
+        }
 }
    
     public void Spawn(int ID)

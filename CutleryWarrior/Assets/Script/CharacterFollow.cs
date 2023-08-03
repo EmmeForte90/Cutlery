@@ -14,7 +14,8 @@ public class CharacterFollow : MonoBehaviour
     public float stoppingDistance = 1f;
     public float groundCheckDistance = 0.2f;
     public LayerMask groundLayer;
-    public SwitchCharacter Switch;
+    private SwitchCharacter Switch;
+
     private Rigidbody characterRigidbody;
     private bool isFollowing;
     private bool isGrounded;
@@ -40,7 +41,12 @@ public static CharacterFollow instance;
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         if (_skeletonAnimation == null) {
             Debug.LogError("Componente SkeletonAnimation non trovato!");
-        }        
+        } 
+        if (Switch == null) 
+        {        
+            Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();;
+            //Debug.LogError("Componente SkeletonAnimation non trovato!");
+        } 
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;

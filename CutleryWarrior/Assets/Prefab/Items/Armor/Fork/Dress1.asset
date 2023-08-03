@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Dress1
   m_EditorClassIdentifier: 
   itemName: High Dress
-  NameSkin: Dress/Dress_1
+  NameSkin: Dress/Dress1
   itemDes: A good dress, usefull for battle
   ID: 2
   KindItem: 3
   price: 500
   Stackable: 0
   itemIcon: {fileID: 21300000, guid: 399aff037d581b046b786a0a06c2d595, type: 3}
+  TypesE: 0
   type: 1
   weaponDamage: 0
