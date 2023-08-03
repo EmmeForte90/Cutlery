@@ -8,7 +8,7 @@ public class StartScene : MonoBehaviour
     private GameObject player;
 
     public GameObject ContainerHero;
-    public GameObject[] Actors; 
+    //public GameObject[] Actors; 
 
     //public GameObject FAct;
     //public GameObject KAct;
@@ -33,10 +33,10 @@ void Awake()
     Confiner(IDPorta);
     CharacterMove.instance.inputCTR = false; 
     GameManager.instance.FadeOut();}
-    foreach (GameObject Acto in Actors)
+    /*foreach (GameObject Acto in Actors)
         {
             Acto.SetActive(false);
-        }
+        }*/
 }
    
     public void Spawn(int ID)

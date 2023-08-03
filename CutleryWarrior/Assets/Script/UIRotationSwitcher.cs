@@ -24,6 +24,9 @@ public class UIRotationSwitcher : MonoBehaviour
     public GameObject M_F;
     public GameObject M_K;
     public GameObject M_S;
+    public GameObject D_F;
+    public GameObject D_K;
+    public GameObject D_S;
     public int CharacterID = 1;
 
     public Spine.Unity.SkeletonGraphic skeletonGraphic1;
@@ -93,6 +96,9 @@ private void SetColor2(Color color)
         M_F.SetActive(true);
         M_K.SetActive(false);
         M_S.SetActive(false);
+        D_F.SetActive(true);
+        D_K.SetActive(false);
+        D_S.SetActive(false);
         SetColor1(color1);
         SetColor2(color2);
         SetColor3(color2);
@@ -108,6 +114,9 @@ private void SetColor2(Color color)
         M_F.SetActive(false);
         M_K.SetActive(true);
         M_S.SetActive(false);
+        D_F.SetActive(false);
+        D_K.SetActive(true);
+        D_S.SetActive(false);
         SetColor1(color2);
         SetColor2(color2);
         SetColor3(color1);
@@ -123,6 +132,9 @@ private void SetColor2(Color color)
         M_F.SetActive(false);
         M_K.SetActive(false);
         M_S.SetActive(true);
+        D_F.SetActive(false);
+        D_K.SetActive(false);
+        D_S.SetActive(true);
         SetColor1(color2);
         SetColor2(color1);
         SetColor3(color2);

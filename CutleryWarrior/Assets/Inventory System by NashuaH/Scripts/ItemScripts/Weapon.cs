@@ -21,7 +21,7 @@ public class Weapon : Item
         {Inventory.instance.AssignWeapon(this);}
         else if (TypesE == 0)
         {Inventory.instance.AssignDress(this);} 
-        Debug.Log("Hai cliccato il pulsante!");
+        //Debug.Log("Hai cliccato il pulsante!");
 
     }
 

@@ -16,19 +16,22 @@ public class Inventory : MonoBehaviour
 
     // The correponding quantities of each item
     public List<int> quantityList = new List<int>();
-    public Image previewImages_A;
-    public Image previewImages_W;
+    public Image previewImages_AF;
+    public Image previewImages_WF;
     public ChangeHeroSkin Skin_F;
     public ChangeHeroSkin Skin_AcF;
     public PuppetSkin Puppets_F;
 
+    public Image previewImages_AK;
+    public Image previewImages_WK;
     public ChangeHeroSkin Skin_K;
     public ChangeHeroSkin Skin_AcK;
     public PuppetSkin Puppets_K;
 
+    public Image previewImages_AS;
+    public Image previewImages_WS;
     public ChangeHeroSkin Skin_S;
     public ChangeHeroSkin Skin_AcS;
-
     public PuppetSkin Puppets_S;
         
     public UIRotationSwitcher rotationSwitcher;
@@ -65,7 +68,8 @@ public void AssignDress(Weapon Item)
     {
     case 1:
             Skin_F.DressSkin = Item.NameSkin;
-            previewImages_W.sprite = Item.itemIcon;
+            AudioManager.instance.PlayUFX(6);  
+            previewImages_WF.sprite = Item.itemIcon;
             Skin_F.UpdateCharacterSkin();
 	    	Skin_F.UpdateCombinedSkin();
             Skin_AcF.UpdateCharacterSkin();
@@ -76,7 +80,8 @@ public void AssignDress(Weapon Item)
     break;
     case 2:
             Skin_K.DressSkin = Item.NameSkin;
-            previewImages_W.sprite = Item.itemIcon;
+            AudioManager.instance.PlayUFX(6);  
+            previewImages_WK.sprite = Item.itemIcon;
             Skin_K.UpdateCharacterSkin();
 	    	Skin_K.UpdateCombinedSkin();
             Skin_AcK.UpdateCharacterSkin();
@@ -87,7 +92,8 @@ public void AssignDress(Weapon Item)
     break;
     case 3:
             Skin_S.DressSkin = Item.NameSkin;
-            previewImages_W.sprite = Item.itemIcon;
+            AudioManager.instance.PlayUFX(6);  
+            previewImages_WS.sprite = Item.itemIcon;
             Skin_S.UpdateCharacterSkin();
 	    	Skin_S.UpdateCombinedSkin();
             Skin_AcS.UpdateCharacterSkin();
@@ -107,8 +113,9 @@ public void AssignWeapon(Weapon Item)
     switch (rotationSwitcher.CharacterID)
     {
     case 1:
-            Skin_F.Weapon = Item.NameSkin;
-            previewImages_A.sprite = Item.itemIcon;
+            Skin_F.Weapon = Item.NameSkin;            
+            AudioManager.instance.PlayUFX(6);  
+            previewImages_AF.sprite = Item.itemIcon;
             Skin_F.UpdateCharacterSkin();
 		    Skin_F.UpdateCombinedSkin(); 
             Skin_AcF.UpdateCharacterSkin();
@@ -119,7 +126,8 @@ public void AssignWeapon(Weapon Item)
     break;
     case 2:
             Skin_K.Weapon = Item.NameSkin;
-            previewImages_A.sprite = Item.itemIcon;
+            AudioManager.instance.PlayUFX(6);  
+            previewImages_AK.sprite = Item.itemIcon;
             Skin_K.UpdateCharacterSkin();
 		    Skin_K.UpdateCombinedSkin(); 
             Skin_AcK.UpdateCharacterSkin();
@@ -130,7 +138,8 @@ public void AssignWeapon(Weapon Item)
     break;
     case 3:
             Skin_S.Weapon = Item.NameSkin;
-            previewImages_A.sprite = Item.itemIcon;
+            AudioManager.instance.PlayUFX(6);  
+            previewImages_AS.sprite = Item.itemIcon;
             Skin_S.UpdateCharacterSkin();
 		    Skin_S.UpdateCombinedSkin(); 
             Skin_AcS.UpdateCharacterSkin();

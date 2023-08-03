@@ -50,9 +50,15 @@ private void Awake()
         player = GameObject.FindGameObjectWithTag("Player");
         if(!battle)
         {vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-        vCam.Follow = player.transform;}
+        vCam.Follow = ForkActive.transform;}
         //TakeCharacters();
-        //rotationSwitcher = GameObject.Find("Equip_S").GetComponent<UIRotationSwitcher>(); ;
+        ForkActive = GameObject.Find("F_Player");
+        ForckActor = GameObject.Find("F_Actor");
+        SpoonActive = GameObject.Find("S_Player");
+        SpoonActor = GameObject.Find("S_Actor");
+        KnifeActive = GameObject.Find("K_Player");
+        KnifeActor = GameObject.Find("K_Actor");
+        //
         ForckActor.gameObject.SetActive(false);
         ForkActive.gameObject.SetActive(true);
         KnifeActive.gameObject.SetActive(false);
