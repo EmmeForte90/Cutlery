@@ -6,9 +6,9 @@ public class Weapon : Item
     public weaponType type;
     public int weaponDamage;
     //public string NameSkin;
-    public override void Use()
+    public override void Equip()
     {
-        base.Use();
+        base.Equip();
 
 
         //Equip Action
@@ -16,7 +16,13 @@ public class Weapon : Item
         // https://assetstore.unity.com/packages/slug/209478
 
         //Use the following line if you want to destroy this type of item after use
-        // Inventory.instance.RemoveItem(this, 1);
+        //Inventory.instance.RemoveItem(this, 1);
+         if (TypesE == 1)
+        {Inventory.instance.AssignWeapon(this);}
+        else if (TypesE == 0)
+        {Inventory.instance.AssignDress(this);} 
+        Debug.Log("Hai cliccato il pulsante!");
+
     }
 
     public enum weaponType { Sword, Fork, Spoon}

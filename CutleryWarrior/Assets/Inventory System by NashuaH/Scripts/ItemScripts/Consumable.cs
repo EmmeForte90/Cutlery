@@ -11,10 +11,9 @@ public class Consumable : Item
         base.Use();
 
         //Consumble Action
-      
-
-    
          Inventory.instance.RemoveItem(this, 1);
+        Debug.Log("Hai toltopo!");
+
     }
 
     public enum consumableType { Potion, Food }

@@ -16,7 +16,8 @@ public class Inventory : MonoBehaviour
 
     // The correponding quantities of each item
     public List<int> quantityList = new List<int>();
-
+    public Image previewImages_A;
+    public Image previewImages_W;
 
     // The inventoryPanel is the parent object of each slot
     public GameObject inventoryItem;
@@ -44,7 +45,27 @@ public class Inventory : MonoBehaviour
 
     #endregion
 
+public void AssignDress(Weapon Item)
+{
+            ChangeHeroSkin.Instance.DressSkin = Item.NameSkin;
+            previewImages_W.sprite = Item.itemIcon;
+            ChangeHeroSkin.Instance.UpdateCharacterSkin();
+	    	ChangeHeroSkin.Instance.UpdateCombinedSkin();
+            PuppetSkin.Instance.DressSkin = Item.NameSkin;
+            PuppetSkin.Instance.UpdateCharacterSkinUI(Item.NameSkin);
+            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
+}
 
+public void AssignWeapon(Weapon Item)
+{
+            ChangeHeroSkin.Instance.Weapon = Item.NameSkin;
+            previewImages_A.sprite = Item.itemIcon;
+            ChangeHeroSkin.Instance.UpdateCharacterSkin();
+		    ChangeHeroSkin.Instance.UpdateCombinedSkin(); 
+            PuppetSkin.Instance.Weapon = Item.NameSkin;
+            PuppetSkin.Instance.UpdateCharacterSkinUI(Item.NameSkin);
+            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
+}
     public void Start()
     {
         // Add the slots of the Inventory Panel to the list

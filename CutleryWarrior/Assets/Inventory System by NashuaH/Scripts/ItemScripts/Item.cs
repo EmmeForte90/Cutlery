@@ -35,4 +35,11 @@ public class Item : ScriptableObject
         //Use the following line if you want to destroy every item after use
         // Inventory.instance.RemoveItem(this, 1);
     }
+    public virtual void Equip()
+    {
+        //Use item
+        //Use the following line if you want to destroy every item after use
+        //Inventory.instance.AssignDress(this); 
+        Debug.Log("Hai cliccato il pulsante!");    
+    }
 }

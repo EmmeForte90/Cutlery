@@ -92,46 +92,12 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         //Checks if there is an item in the slot
         if (item != null)
         {
-            // Use the item by calling the function of that specific item
-             
+            // Use the item by calling the function of that specific item     
             item.Use();
-            //AssignDress(weapon);
-            //AssignWeapon(weapon);
         }
 
     }
 
-   /* public void AssignDress(Item Item)
-{
-            NameSkin = Item.NameSkin;
-            //ItemRapidMenu.Instance.SlotDres_I.sprite = Item.icon;
-            //ItemRapidMenu.Instance.SlotDres = selectedId;
-            ChangeHeroSkin.Instance.DressSkin = NameSkin;
-            previewImages_W.sprite = Item.itemIcon;
-            //descriptions_E.text = Item.itemDes;
-            //NameItems_E.text = Item.itemName;
-            ChangeHeroSkin.Instance.UpdateCharacterSkin();
-	    	ChangeHeroSkin.Instance.UpdateCombinedSkin();
-            PuppetSkin.Instance.DressSkin = NameSkin;
-            PuppetSkin.Instance.UpdateCharacterSkinUI(NameSkin);
-            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
-}
-
-public void AssignWeapon(Item Item)
-{
-            NameSkin = Item.NameSkin;
-            //ItemRapidMenu.Instance.SlotKat_I.sprite = Item.icon;
-            //ItemRapidMenu.Instance.SlotKat = selectedId;
-            ChangeHeroSkin.Instance.Weapon = NameSkin;
-            previewImages_A.sprite = Item.itemIcon;
-            //descriptions_E.text = Item.itemName;
-            //NameItems_E.text = Item.itemName;
-            ChangeHeroSkin.Instance.UpdateCharacterSkin();
-		    ChangeHeroSkin.Instance.UpdateCombinedSkin(); 
-            PuppetSkin.Instance.Weapon = NameSkin;
-            PuppetSkin.Instance.UpdateCharacterSkinUI(NameSkin);
-            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
-}*/
 
     // Called when the player presses the Remove Button corresponding to this slot
     public void RemoveItem()

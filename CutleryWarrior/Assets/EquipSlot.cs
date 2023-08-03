@@ -5,22 +5,22 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     //The item on the slot, if it's null the slot is considered empty
     Item item;
     [Header("Menu Equip")]
-    public GameObject buttonObject;
+    //public GameObject buttonObject;
    //public Transform ItemContent_E;
  // Riferimenti ai componenti delle immagini di preview e delle descrizioni
-    public Image previewImages_A;
-    public Image previewImages_W;
+    //public Image previewImages_A;
+    //public Image previewImages_W;
 
     //public TextMeshProUGUI descriptions_E;
     //public TextMeshProUGUI Num_E;
     //public TextMeshProUGUI NameItems_E;
     //Weapon weapon;
-    private string NameSkin;
+    //private string NameSkin;
 
     // Each slots shows the icon and quantity of that item, the following are the references to those on the UI
     public Image itemImage;
@@ -35,11 +35,11 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void UpdateSlot(Item itemInSlot, int quantityInSlot)
     {
         item = itemInSlot;
-        Button buttonComponent = buttonObject.AddComponent<Button>();
+       // Button buttonComponent = buttonObject.AddComponent<Button>();
         // Aggiungiamo un listener per gestire l'evento del clic sul pulsante
         
-        if (buttonComponent != null)
-        {buttonComponent.onClick.AddListener(OnButtonClick);}
+        //if (buttonComponent != null)
+        //{buttonComponent.onClick.AddListener(OnButtonClick);}
         // If the item is null or the quantity 0 the slot is considered empty
         if (itemInSlot != null && quantityInSlot !=0)
         {
@@ -87,52 +87,25 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         // Calls the function that sets the panel inactive
         GetComponentInParent<ItemInfoUpdate>().ClosePanel();
     }
-    void OnButtonClick()
+     public void OnPointerDown(PointerEventData eventData)
     {
-        if (item != null)
-        {// Use the item by calling the function of that specific item
-        if (item.TypesE == 1)
-        {AssignWeapon(item);}
-        else if (item.TypesE == 0)
-        {AssignDress(item);} 
-        Debug.Log("Hai cliccato il pulsante!");
+        Debug.Log("Mouse Down!");
     }
-    }
-    // Called when the player pressed the slot of the item(You can call it in other ways)
-    /*public void UseItem()
+    public void UseItem()
     {
         //Checks if there is an item in the slot
         if (item != null)
-        {// Use the item by calling the function of that specific item
-        if (item.TypesE == 1)
-        {AssignWeapon(item);}
-        else if (item.TypesE == 0)
-        {AssignDress(item);}    
+        {
+            // Use the item by calling the function of that specific item
+             
+            item.Equip();
+            //AssignDress(weapon);
+            //AssignWeapon(weapon);
         }
 
-    }*/
+    }
 
-    public void AssignDress(Item Item)
-{
-            ChangeHeroSkin.Instance.DressSkin = Item.NameSkin;
-            previewImages_W.sprite = Item.itemIcon;
-            ChangeHeroSkin.Instance.UpdateCharacterSkin();
-	    	ChangeHeroSkin.Instance.UpdateCombinedSkin();
-            PuppetSkin.Instance.DressSkin = Item.NameSkin;
-            PuppetSkin.Instance.UpdateCharacterSkinUI(Item.NameSkin);
-            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
-}
-
-public void AssignWeapon(Item Item)
-{
-            ChangeHeroSkin.Instance.Weapon = Item.NameSkin;
-            previewImages_A.sprite = Item.itemIcon;
-            ChangeHeroSkin.Instance.UpdateCharacterSkin();
-		    ChangeHeroSkin.Instance.UpdateCombinedSkin(); 
-            PuppetSkin.Instance.Weapon = Item.NameSkin;
-            PuppetSkin.Instance.UpdateCharacterSkinUI(Item.NameSkin);
-            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
-}
+    
 
     // Called when the player presses the Remove Button corresponding to this slot
     public void RemoveItem()
