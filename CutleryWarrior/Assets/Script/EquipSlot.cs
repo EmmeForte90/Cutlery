@@ -10,22 +10,11 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     //The item on the slot, if it's null the slot is considered empty
     Item item;
     [Header("Menu Equip")]
-    //public GameObject buttonObject;
-   //public Transform ItemContent_E;
- // Riferimenti ai componenti delle immagini di preview e delle descrizioni
-    //public Image previewImages_A;
-    //public Image previewImages_W;
-
-    //public TextMeshProUGUI descriptions_E;
-    //public TextMeshProUGUI Num_E;
-    //public TextMeshProUGUI NameItems_E;
-    //Weapon weapon;
-    //private string NameSkin;
+    
 
     // Each slots shows the icon and quantity of that item, the following are the references to those on the UI
     public Image itemImage;
     public TextMeshProUGUI quantity;
-    //public TextMeshProUGUI Description;
 
     // The remove Button is where the player clicks to remove the item in this slot
     //public Button removeButton;

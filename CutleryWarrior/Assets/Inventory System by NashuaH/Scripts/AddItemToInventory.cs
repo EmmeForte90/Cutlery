@@ -41,7 +41,7 @@ public class AddItemToInventory : MonoBehaviour
     // Adds the specific item and quantity you set up in the Editor to the Inventory
    void AddSpecificItem()
     {
-        Inventory.instance.AddItem(specificItem, specificQuant);
+        EquipM_F.instance.AddItem(specificItem, specificQuant);            
     }
 
     // Adds one random Item from the pre selected list to the Inventory

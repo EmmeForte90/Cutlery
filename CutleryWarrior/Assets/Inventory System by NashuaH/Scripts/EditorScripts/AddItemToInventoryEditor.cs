@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(AddItemToInventory)), CanEditMultipleObjects]
+//[CustomEditor(typeof(AddItemToInventory)), CanEditMultipleObjects]
 
 
 public class AddItemToInventoryEditor : Editor
@@ -18,7 +18,7 @@ public class AddItemToInventoryEditor : Editor
         quantitySpecific = serializedObject.FindProperty("specificQuant");
     }
 
-    public override void OnInspectorGUI()
+    /*public override void OnInspectorGUI()
     {
         serializedObject.Update();
         EditorGUILayout.LabelField("Choose if you wanna add a specific item or a random item");
@@ -44,5 +44,5 @@ public class AddItemToInventoryEditor : Editor
         }
       
         serializedObject.ApplyModifiedProperties();
-    }
+    }*/
 }
