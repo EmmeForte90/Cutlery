@@ -25,7 +25,7 @@ public class EquipM_F : MonoBehaviour
 
     public static EquipM_F instance;
 
-    void Awake()
+    public void Awake()
     {
         instance = this;
     }
@@ -45,46 +45,54 @@ public class EquipM_F : MonoBehaviour
     // Currently it's being called by the AddItemToInventory Script on the Add Items Buttons 
     #region QuestItemInventory
     public void AddItem(Item itemAdded, int quantityAdded)
+{
+    // Se l'oggetto è impilabile (stackable), controlla se è già presente nell'inventario e aggiorna solo la quantità
+    if (itemAdded.Stackable)
     {
-        //If the Item is Stackable it checks if there is already that item in the inventory and only adds the quantity
-  
-        if (itemAdded.Stackable)
+        if (itemList.Contains(itemAdded))
         {
-            if (itemList.Contains(itemAdded))
-            {
-                quantityList[itemList.IndexOf(itemAdded)] = quantityList[itemList.IndexOf(itemAdded)] + quantityAdded;
-            }
-            else
-            {
-
-                if (itemList.Count < slotListItem.Count)
-                {
-                    itemList.Add(itemAdded);
-                    quantityList.Add(quantityAdded);
-                }
-                else { }
-               
-            }
-
+            int index = itemList.IndexOf(itemAdded);
+            quantityList[index] += quantityAdded;
         }
         else
         {
-            for (int i = 0; i < quantityAdded; i++)
+            // Se l'oggetto non è già presente nell'inventario, aggiungilo solo se ci sono spazi disponibili
+            if (itemList.Count < slotListItem.Count)
             {
-                if (itemList.Count < slotListItem.Count)
-                {
-                    itemList.Add(itemAdded);
-                    quantityList.Add(1);
-                }
-                else {  }
-               
+                itemList.Add(itemAdded);
+                quantityList.Add(quantityAdded);
             }
-            
+            else
+            {
+                // L'inventario è pieno, non puoi aggiungere l'oggetto
+                Debug.LogWarning("L'inventario è pieno, non puoi aggiungere l'oggetto.");
+            }
         }
-        
-        // Update Inventory everytime an item is added
-        UpdateInventoryUI();
     }
+    else
+    {
+        // Se l'oggetto non è impilabile, aggiungi tanti oggetti quanti è specificato dalla quantità
+        for (int i = 0; i < quantityAdded; i++)
+        {
+            // Verifica se ci sono spazi disponibili nell'inventario
+            if (itemList.Count < slotListItem.Count)
+            {
+                itemList.Add(itemAdded);
+                quantityList.Add(1);
+            }
+            else
+            {
+                // L'inventario è pieno, non puoi aggiungere altri oggetti
+                Debug.LogWarning("L'inventario è pieno, non puoi aggiungere altri oggetti.");
+                break; // Esci dal ciclo for per evitare di aggiungere altri oggetti
+            }
+        }
+    }
+
+    // Aggiorna l'interfaccia grafica dell'inventario ogni volta che un oggetto viene aggiunto
+    UpdateInventoryUI();
+}
+
 
     // As the previous function, this can be called from another script
     // Currently called by the Remove Button in each InventorySlot Prefab
@@ -120,40 +128,38 @@ public class EquipM_F : MonoBehaviour
         UpdateInventoryUI();
     }
 
-    // Everytime an item is Added or Removed from the Inventory, the UpdateInventoryUI runs
-    public void UpdateInventoryUI()
+    // Ogni volta che un oggetto viene aggiunto o rimosso dall'inventario, viene eseguita la funzione UpdateInventoryUI
+public void UpdateInventoryUI()
+{
+    // Questo int serve per contare quanti slot sono pieni
+    int ind = 0;
+
+    // Per ogni slot nella lista, viene assegnato un oggetto dalla itemList e la corrispondente quantità
+    foreach (EquipSlot slot in slotListItem)
     {
-        // This int is to count how many slots are full
-        int ind = 0;
-
-        // For each slot in the list it's attributed an Item from the itemList and the corresponding quantity
-      foreach(EquipSlot slot in slotListItem)
+        if (itemList.Count != 0)
         {
-
-            if (itemList.Count != 0)
+            // Se ind è minore della quantità di oggetti nella itemList, l'elemento è considerato uno slot pieno
+            if (ind < itemList.Count)
             {
-                // If the ind is greater than the item quantity, the rest is considered empty slot
-
-                if (ind < itemList.Count)
-                {
-                    // Calls the UpdateSlot() function on the respective slot and attributes the item and quantity of their unique index in the itemList
-                    slot.UpdateSlot(itemList[ind], quantityList[ind]);
-                    ind = ind + 1;
-                }
-                else
-                {
-                    //Update Empty Slot
-                    slot.UpdateSlot(null, 0);
-                }
+                // Chiama la funzione UpdateSlot() sul rispettivo slot e assegna l'oggetto e la quantità in base al loro indice univoco nella itemList
+                slot.UpdateSlot(itemList[ind], quantityList[ind]);
+                ind++;
             }
             else
             {
-                //Update Empty Slot
+                // Aggiorna lo slot vuoto
                 slot.UpdateSlot(null, 0);
             }
-
+        }
+        else
+        {
+            // Aggiorna lo slot vuoto
+            slot.UpdateSlot(null, 0);
         }
     }
+}
+
 #endregion
 
 }

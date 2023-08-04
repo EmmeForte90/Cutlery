@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     //The item on the slot, if it's null the slot is considered empty
     Item item;
@@ -76,10 +76,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         // Calls the function that sets the panel inactive
         GetComponentInParent<ItemInfoUpdate>().ClosePanel();
     }
-     public void OnPointerDown(PointerEventData eventData)
-    {
-        Debug.Log("Mouse Down!");
-    }
+     
     public void UseItem()
     {
         //Checks if there is an item in the slot

@@ -10,7 +10,7 @@ public class CharacterMove : MonoBehaviour
     public float Speed = 1;
     public float SpeedB = 2;
     public float Run = 5;
-    public Transform cam;
+    private Transform cam;
     Vector2 input;
     public Transform SpriteHero;
     public bool stand = true;
