@@ -49,6 +49,7 @@ IEnumerator WaitForSceneLoad()
     CharacterMove.instance.inputCTR = true;
     CharacterMove.instance.Idle();
     GameManager.instance.FadeIn();
+    SwitchCharacter.instance.ActiveCH();
     yield return new WaitForSeconds(2f);
     GameManager.instance.IDPorta = IDPorta;
     sceneEvent.InvokeOnSceneChange();

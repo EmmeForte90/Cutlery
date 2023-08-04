@@ -18,27 +18,34 @@ public class StartScene : MonoBehaviour
     public Collider[] BoxConfiner;    
     private CinemachineConfiner confiner;
     private CinemachineVirtualCamera vCam;
+    private SwitchCharacter Switcher;
 
     private int IDPorta;
 public static StartScene instance;
 void Awake()
 {       
-    if (instance == null){instance = this;}   
-    if(!GameManager.instance.StartGame){   
+    if (instance == null){instance = this;}  
+    if(!GameManager.instance.StartGame)
+    {   
     player = GameObject.FindWithTag("Player");
     vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
     confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
     IDPorta = GameManager.instance.IDPorta;
     Spawn(IDPorta);
     Confiner(IDPorta);
-    CharacterMove.instance.inputCTR = false; 
-    GameManager.instance.FadeOut();}
+    CharacterMove.instance.inputCTR = false;
+    Switcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();;
+    Switcher.inizial();
+   // Switcher.TakeCharacters();
+    GameManager.instance.FadeOut();
+    }
     /*foreach (GameObject Acto in Actors)
         {
             Acto.SetActive(false);
         }*/
 }
    
+
     public void Spawn(int ID)
     {
     //player.transform.position = SpawnArr[ID].transform.position;

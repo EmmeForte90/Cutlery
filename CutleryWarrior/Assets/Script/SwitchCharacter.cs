@@ -14,18 +14,18 @@ public class SwitchCharacter : MonoBehaviour
 
     [Header("Fork")]
 
-    public GameObject ForkActive;
-    public GameObject ForckActor;
+    private GameObject ForkActive;
+    private GameObject ForckActor;
 
     [Header("Spoon")]
 
-    public GameObject SpoonActive;
-    public GameObject SpoonActor;
+    private GameObject SpoonActive;
+    private GameObject SpoonActor;
 
  [Header("Knife")]
 
-    public GameObject KnifeActive;
-    public GameObject KnifeActor;
+    private GameObject KnifeActive;
+    private GameObject KnifeActor;
 
     public static SwitchCharacter instance;
     public bool isElement1Active = false;
@@ -44,30 +44,27 @@ void Update()
             
         }    
     }
-    
+    private void Start()
+    {
+        inizial();
+    }
+
 private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        if(!battle)
-        {vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-        vCam.Follow = ForkActive.transform;}
-        //TakeCharacters();
-        ForkActive = GameObject.Find("F_Player");
-        ForckActor = GameObject.Find("F_Actor");
-        SpoonActive = GameObject.Find("S_Player");
-        SpoonActor = GameObject.Find("S_Actor");
-        KnifeActive = GameObject.Find("K_Player");
-        KnifeActor = GameObject.Find("K_Actor");
-        //
-        ForckActor.gameObject.SetActive(false);
-        ForkActive.gameObject.SetActive(true);
-        KnifeActive.gameObject.SetActive(false);
-        KnifeActor.gameObject.SetActive(true);
-        SpoonActive.gameObject.SetActive(false);
-        SpoonActor.gameObject.SetActive(true);
+        if (instance == null){instance = this;}   
     }
 
     #region ChangeCharacter
+public void inizial()
+{
+        player = GameObject.FindGameObjectWithTag("Player");  
+        TakeCharacters();
+        if(!battle)
+        {vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+        vCam.Follow = ForkActive.transform;}
+}
+
+
 
 public void Flip()
     {
@@ -104,13 +101,28 @@ public void Flip()
     {
         ForkActive = GameObject.Find("F_Player");
         ForckActor = GameObject.Find("F_Actor");
-        //
+        SpoonActive = GameObject.Find("S_Player");
+        SpoonActor = GameObject.Find("S_Actor");
         KnifeActive = GameObject.Find("K_Player");
         KnifeActor = GameObject.Find("K_Actor");
         //
-        SpoonActive = GameObject.Find("S_Player");
-        SpoonActor = GameObject.Find("S_Actor");
+        ForckActor.gameObject.SetActive(false);
+        ForkActive.gameObject.SetActive(true);
+        KnifeActive.gameObject.SetActive(false);
+        KnifeActor.gameObject.SetActive(true);
+        SpoonActive.gameObject.SetActive(false);
+        SpoonActor.gameObject.SetActive(true);
     }
+    public void ActiveCH()
+    {
+        ForckActor.gameObject.SetActive(true);
+        ForkActive.gameObject.SetActive(true);
+        KnifeActive.gameObject.SetActive(true);
+        KnifeActor.gameObject.SetActive(true);
+        SpoonActive.gameObject.SetActive(true);
+        SpoonActor.gameObject.SetActive(true);
+    }
+
 IEnumerator CoordinateActor()
     {
         // Switcha tra gli elementi
