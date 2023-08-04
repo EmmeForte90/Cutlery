@@ -128,7 +128,7 @@ public void changeDialogue()
         }}
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive)
         {
-            CharacterMove.instance.Interact = true;
+            GameManager.instance.ChInteract();//True
             if(heFlip){FacePlayer();}
             dialogueIndex = 0;
             StartCoroutine(ShowDialogue());
@@ -226,7 +226,7 @@ public void changeDialogue()
         if (collision.CompareTag("Player"))
         {
             movingB = true;
-            CharacterMove.instance.Interact = false;
+            GameManager.instance.ChInteractStop();//false
             button.gameObject.SetActive(false); // Initially hide the dialogue text
             _isInTrigger = false;
             StopCoroutine(ShowDialogue());
@@ -287,7 +287,7 @@ public void changeDialogue()
             Talk = false;
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-            CharacterMove.instance.Interact = false;
+            GameManager.instance.ChInteractStop();//false
             if(moreDialogue)
             {changeD = true;}
             changeDialogue();

@@ -33,10 +33,10 @@ void Awake()
     IDPorta = GameManager.instance.IDPorta;
     Spawn(IDPorta);
     Confiner(IDPorta);
-    CharacterMove.instance.inputCTR = false;
-    Switcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();;
+    GameManager.instance.ChMov();
+    GameManager.instance.ChStop();
+    Switcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
     Switcher.inizial();
-   // Switcher.TakeCharacters();
     GameManager.instance.FadeOut();
     }
     /*foreach (GameObject Acto in Actors)

@@ -180,7 +180,45 @@ public class GameManager : MonoBehaviour
     }
     }
 
+    public void ChMov()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+    }
 
+       public void ChStop()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.inputCTR = false;
+        ch_K.inputCTR = false;
+        ch_S.inputCTR = false;
+    }   
+
+      public void ChInteract()
+    {
+        ch_F.Interact = true;
+        ch_K.Interact = true;
+        ch_S.Interact = true;
+    }  
+
+    public void ChInteractStop()
+    {
+        ch_F.Interact = false;
+        ch_K.Interact = false;
+        ch_S.Interact = false;
+    }  
+    public void ChCanM()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.inputCTR = true;
+        ch_K.inputCTR = true;
+        ch_S.inputCTR = true;
+    }
   
 
     public void AddTomoney(int pointsToAdd)
