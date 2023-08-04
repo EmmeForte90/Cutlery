@@ -106,12 +106,35 @@ public void Flip()
         KnifeActive = GameObject.Find("K_Player");
         KnifeActor = GameObject.Find("K_Actor");
         //
-        ForckActor.gameObject.SetActive(false);
-        ForkActive.gameObject.SetActive(true);
-        KnifeActive.gameObject.SetActive(false);
-        KnifeActor.gameObject.SetActive(true);
-        SpoonActive.gameObject.SetActive(false);
-        SpoonActor.gameObject.SetActive(true);
+        switch(rotationSwitcher.CharacterID)
+        {
+            case 1:
+            ForckActor.gameObject.SetActive(false);
+            ForkActive.gameObject.SetActive(true);
+            KnifeActive.gameObject.SetActive(false);
+            KnifeActor.gameObject.SetActive(true);
+            SpoonActive.gameObject.SetActive(false);
+            SpoonActor.gameObject.SetActive(true);
+            break;
+            case 2:
+            ForckActor.gameObject.SetActive(true);
+            ForkActive.gameObject.SetActive(false);
+            KnifeActive.gameObject.SetActive(true);
+            KnifeActor.gameObject.SetActive(false);
+            SpoonActive.gameObject.SetActive(false);
+            SpoonActor.gameObject.SetActive(true);
+            break;
+            case 3:
+            ForckActor.gameObject.SetActive(true);
+            ForkActive.gameObject.SetActive(false);
+            KnifeActive.gameObject.SetActive(false);
+            KnifeActor.gameObject.SetActive(true);
+            SpoonActive.gameObject.SetActive(true);
+            SpoonActor.gameObject.SetActive(false);
+            break;
+
+
+        }
     }
     public void ActiveCH()
     {
