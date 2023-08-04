@@ -18,8 +18,8 @@ MonoBehaviour:
   ID: 2
   KindItem: 4
   price: 500
-  Stackable: 0
-  itemIcon: {fileID: 0}
+  Stackable: 1
+  itemIcon: {fileID: 21300000, guid: 22f2b0c6865efdc4094575a6451bb6a3, type: 3}
   TypesE: 0
   type: 0
   weaponDamage: 0

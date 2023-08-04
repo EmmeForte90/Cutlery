@@ -10,6 +10,9 @@ TagManager:
   - Actor
   - SpawnPoint_Inn
   - SpawnPoint_City1
+  - S_Player
+  - F_Player
+  - K_Player
   layers:
   - Default
   - TransparentFX

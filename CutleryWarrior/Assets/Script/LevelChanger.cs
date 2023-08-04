@@ -15,7 +15,7 @@ public string sceneName;
 public int IDPorta;
 private SceneEvent sceneEvent;
 // Riferimento al game object del player
-private GameObject player;
+//private GameObject player;
 
 private void Start()
 {
@@ -64,9 +64,11 @@ IEnumerator WaitForSceneLoad()
 private void OnTriggerStay(Collider other)
 {
     // Controlliamo se il player ha toccato il collider
-    if (other.CompareTag("Player"))
+    if (other.CompareTag("F_Player") ||
+    other.CompareTag("K_Player") ||
+    other.CompareTag("S_Player"))
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(WaitForSceneLoad()); 
     }
 }
@@ -76,17 +78,21 @@ private void OnTriggerStay(Collider other)
 private void OnTriggerEnter(Collider other)
 {
     // Controlliamo se il player ha toccato il collider
-    if (other.CompareTag("Player"))
+    if (other.CompareTag("F_Player") ||
+    other.CompareTag("K_Player") ||
+    other.CompareTag("S_Player"))
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(WaitForSceneLoad());
 }}
 
-private void OnTriggerExit(Collider other)
+/*private void OnTriggerExit(Collider other)
 {
     // Controlliamo se il player ha toccato il collider
-    if (other.CompareTag("Player"))
+    if (other.CompareTag("F_Player") ||
+    other.CompareTag("K_Player") ||
+    other.CompareTag("S_Player"))
     {player = GameObject.FindGameObjectWithTag("Player");}
-}
+}*/
 
 }

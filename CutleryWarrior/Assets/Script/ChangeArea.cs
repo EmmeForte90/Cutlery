@@ -13,10 +13,10 @@ public class ChangeArea : MonoBehaviour
     public GameObject PointSpawn;
     private CinemachineConfiner confiner;
     public Collider NewConfiner;
-    private GameObject player;
-    public GameObject FAct;
-    public GameObject KAct;
-    public GameObject SAct;
+    //private GameObject player;
+    private GameObject FAct;
+    private GameObject KAct;
+    private GameObject SAct;  
     private CinemachineVirtualCamera vCam;
     public bool needDeactivateObject;
     public GameObject[] objDeactivate;
@@ -25,16 +25,20 @@ public class ChangeArea : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
-        player = GameObject.FindGameObjectWithTag("Player");
+        FAct = GameObject.FindWithTag("F_Player");
+        SAct = GameObject.FindWithTag("S_Player");
+        KAct = GameObject.FindWithTag("K_Player");        
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
         confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
     }
 
    
-    private void OnTriggerEnter(Collider collision)
+    public void OnTriggerEnter(Collider collision)
 {
     // Controlliamo se il player ha toccato il collider
-    if (collision.gameObject.CompareTag("Player"))
+    if (collision.gameObject.CompareTag("F_Player")||
+    collision.gameObject.CompareTag("K_Player")||
+    collision.gameObject.CompareTag("S_Player"))
     {
         StartCoroutine(ChangeAreaF());
     }
@@ -46,7 +50,7 @@ public class ChangeArea : MonoBehaviour
         confiner.m_BoundingVolume  = null; 
         // Assegna un nuovo boundingVolume
         confiner.m_BoundingVolume  = NewConfiner;       
-        vCam.Follow = player.transform;
+        vCam.Follow = GameManager.instance.player.transform;
     }
 
     IEnumerator ChangeAreaF()
@@ -59,7 +63,7 @@ public class ChangeArea : MonoBehaviour
         {Deactive(); Activate();}
         CharacterMove.instance.isRun = false;
         ModifyConfiner();
-        player.transform.position = PointSpawn.transform.position;
+        GameManager.instance.player.transform.position = PointSpawn.transform.position;
         KAct.transform.position = PointSpawn.transform.position;
         FAct.transform.position = PointSpawn.transform.position;
         SAct.transform.position = PointSpawn.transform.position;

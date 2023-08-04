@@ -16,19 +16,20 @@ public class PickUpItem : MonoBehaviour
     [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-Weapom 4-Armor")]
     private int KindItem;
 
-    private void Awake() 
+    public void Awake() 
     {KindItem = specificItem.KindItem;}
 
-       private void OnTriggerEnter(Collider collision)
+       public void OnTriggerEnter(Collider collision)
 {
     // Controlliamo se il player ha toccato il collider
-    if (collision.gameObject.CompareTag("Player"))
+    if (collision.gameObject.CompareTag("F_Player") || collision.gameObject.CompareTag("S_Player") || collision.gameObject.CompareTag("K_Player"))
     {
         Instantiate(VFXTake, transform.position, transform.rotation);
         AudioManager.instance.PlayUFX(5);
         AddSpecificItem();
     }
 }
+
 
 
 void AddSpecificItem()

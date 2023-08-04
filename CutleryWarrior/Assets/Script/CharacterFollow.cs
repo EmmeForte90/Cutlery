@@ -32,7 +32,7 @@ public class CharacterFollow : MonoBehaviour
 
 public static CharacterFollow instance;
 
-    private void Awake()
+    public void Awake()
     {
          if (instance == null)
         {
@@ -51,19 +51,19 @@ public static CharacterFollow instance;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
         characterRigidbody = GetComponent<Rigidbody>();
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        //Player = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
     
-    private void Update()
+    public void Update()
     {
 
         if(Switch.isElement1Active)
-        {Player = Spoon; Flip();} 
+        {Player = Spoon;Flip();}
         else if(Switch.isElement2Active)
-        {Player = Fork; Flip();} 
+        {Player = Fork;Flip();} 
         else if(Switch.isElement3Active)
-        {Player = Knife; Flip();} 
+        {Player = Knife;Flip();} 
 
         // Verifica se il personaggio è a terra
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
@@ -131,30 +131,26 @@ public static CharacterFollow instance;
                 isFollowing = false;
             }
         }
-        else 
-        {
-            /*// Verifica se il giocatore si è mosso
-            if (transform.position != Player.position)
-            {
-                // Il giocatore si è mosso, il personaggio riprende a seguirlo
-                isFollowing = true;
-            }*/
-        }
+        
+    }
+
+    public void Direction()
+    {
+        transform.localScale = new Vector3(-1, 1,1);
     }
 private void Flip()
     {
         if (Player.localScale.x > 0f)
         {
-    
             transform.localScale = new Vector3(1, 1,1);
     
-        } else if (Player.localScale.x < 0f)
+        }else if (Player.localScale.x < 0f)
         {
             transform.localScale = new Vector3(-1, 1,1);
 
         }
     }
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         // Evita che il personaggio cada per terra durante il movimento
         if (isGrounded)

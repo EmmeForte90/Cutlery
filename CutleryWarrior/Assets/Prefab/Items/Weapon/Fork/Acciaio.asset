@@ -18,7 +18,7 @@ MonoBehaviour:
   ID: 4
   KindItem: 3
   price: 1000
-  Stackable: 0
+  Stackable: 1
   itemIcon: {fileID: 21300000, guid: eb42f61287a359b4f85ac5486217c381, type: 3}
   TypesE: 1
   type: 0

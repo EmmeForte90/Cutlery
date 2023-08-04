@@ -208,7 +208,7 @@ public void changeDialogue()
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
         {
             movingB = false;            
             button.gameObject.SetActive(true); // Initially hide the dialogue text
@@ -223,7 +223,7 @@ public void changeDialogue()
 
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
         {
             movingB = true;
             GameManager.instance.ChInteractStop();//false

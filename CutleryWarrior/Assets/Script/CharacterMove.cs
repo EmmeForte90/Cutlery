@@ -32,11 +32,13 @@ public class CharacterMove : MonoBehaviour
     public Spine.Skeleton _skeleton;
     Spine.EventData eventData;
     private KnockbackController knockbackController;
+    private SwitchCharacter Switch;
+    private Transform Player;
 
     Vector3 camF,camR,moveDir;
 public static CharacterMove instance;
        
-private void Awake()
+public void Awake()
     {
          if (instance == null)
         {
@@ -45,7 +47,8 @@ private void Awake()
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         if (_skeletonAnimation == null) {
             Debug.LogError("Componente SkeletonAnimation non trovato!");
-        }        
+        }  
+        cam = GameObject.FindWithTag("MainCamera").transform;      
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;        
@@ -53,16 +56,31 @@ private void Awake()
         }
 
     // Start is called before the first frame update
-    void Start()
+ public   void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        if (Switch == null) 
+        {        
+            Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();;
+            //Debug.LogError("Componente SkeletonAnimation non trovato!");
+        } 
     }
 
+
     // Update is called once per frame
-    void Update()
+   public void Update()
 {
-    Flip();
+        if(cam == null)
+        {cam = GameObject.FindWithTag("MainCamera").transform;}
+        Flip();
+        
+        /*if(Switch.isElement1Active)
+        {Flip();}
+        else if(Switch.isElement2Active)
+        {Flip();} 
+        else if(Switch.isElement3Active)
+        {Flip();} */
 
     if(Interact)
     {
@@ -127,7 +145,7 @@ private void Awake()
     }
 }
 
-    void FixedUpdate()
+   public void FixedUpdate()
     {
         if(!inputCTR)
     {
@@ -147,19 +165,22 @@ private void Awake()
      public void Stop()
     {rb.velocity = new Vector3(0f, 0f, 0f);}
 
-    private void Flip()
+    public void Flip()
     {
-        if (Right && hor > 0f || !Right && hor < 0f)
+        if (hor > 0f)
         {
-            Right = !Right;
-            Vector3 localScale = SpriteHero.localScale;
-            localScale.x *= -1f;
-            SpriteHero.localScale = localScale;
+            transform.localScale = new Vector3(1, 1,1);
+        }else if (hor < 0f)
+        {
+            transform.localScale = new Vector3(-1, 1,1);
         }
     }
+    public void Direction()
+    {
+        transform.localScale = new Vector3(-1, 1,1);
+    }
 
-
-private void OnCollisionEnter(Collision collision)
+public void OnCollisionEnter(Collision collision)
 {
     // Controlliamo se il player ha toccato il collider
     if (collision.gameObject.CompareTag("Collider"))
@@ -167,7 +188,7 @@ private void OnCollisionEnter(Collision collision)
     else {StopM = false;}
 }
 
-private void OnCollisionExit(Collision collision)
+public void OnCollisionExit(Collision collision)
 {
     // Controlliamo se il player ha smesso di collidere con l'oggetto
     if (collision.gameObject.CompareTag("Collider"))

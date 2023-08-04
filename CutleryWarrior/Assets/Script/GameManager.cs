@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 {            
     public bool StartGame = false;
     private CinemachineVirtualCamera vCam;
-    private GameObject player;
+    public GameObject player;
     public static bool GameManagerExist;
         
     [Header("Pause")]
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI moneyTextM;
     [SerializeField] GameObject moneyObjectM;
     public int IDPorta;
+    public int IDCharacter;
 
     [Header("Stats")]
 
@@ -46,7 +47,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float ExpF = 0;
     [SerializeField] public TextMeshProUGUI ExpTextMF;
     [SerializeField] CharacterMove ch_F;
-  
+      [SerializeField] ManagerCharacter Manager_F;
+
 
     [Header("Spoon")]
 
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float ExpS = 0;
     [SerializeField] public TextMeshProUGUI ExpTextMS;
     [SerializeField] CharacterMove ch_S;
+    [SerializeField] ManagerCharacter Manager_S;
 
 
     [Header("Knife")]
@@ -68,6 +71,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float ExpK = 0;
     [SerializeField] public TextMeshProUGUI ExpTextMK;
     [SerializeField] CharacterMove ch_K;
+    [SerializeField] ManagerCharacter Manager_K;
 
     [SerializeField] GameObject ExpObjectM;
     public UIRotationSwitcher rotationSwitcher;
@@ -89,7 +93,8 @@ public class GameManager : MonoBehaviour
             GameManagerExist = true;
             DontDestroyOnLoad(gameObject); 
         }
-        player = GameObject.FindGameObjectWithTag("Player");
+        
+        TakeCharacter();
         if(!battle)
         {vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
         vCam.Follow = player.transform;}
@@ -99,14 +104,37 @@ public class GameManager : MonoBehaviour
 
     }
     // Start is called before the first frame update
-    void Start()
+
+    public void TakeCharacter()
+    {
+        switch(rotationSwitcher.CharacterID)
+        {
+            case 1:
+            player = GameObject.FindGameObjectWithTag("F_Player");
+            break;
+            case 2:
+            player = GameObject.FindGameObjectWithTag("K_Player");
+            break;
+            case 3:
+            player = GameObject.FindGameObjectWithTag("S_Player");
+            break;
+        }}
+
+        public void TakeCamera()
+    {
+        //CharacterMove.instance.TakeCamera();
+    }   
+
+    public void Start()
     {
         Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
+        IDCharacter = rotationSwitcher.CharacterID;
+        TakeCharacter();
         //Lo money aumenta
         moneyTextM.text = money.ToString(); 
         
