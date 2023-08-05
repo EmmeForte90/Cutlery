@@ -11,6 +11,11 @@ using UnityEngine.EventSystems;
 public class Mercante : MonoBehaviour
 {
     public int IDCharacter;
+    [Header("Che tipo di mercante è?")]
+    [Tooltip("0-Armaiolo 1-Alchimista 2-Ambulante 3-Fruttivendolo")]
+    public int Tipo;
+
+    [Header("UI")]
     public TextMeshProUGUI CharacterName; // Reference to the TextMeshProUGUI component
     private GameObject player; // Reference to the player's position
     public TextMeshProUGUI dialogueText; // Reference to the TextMeshProUGUI component
@@ -156,14 +161,68 @@ public void AddItem(Item newItem)
     //IDItem = newItem.id;
     //PlayMFX(0);
     specificItem = newItem;
-    dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
+    //dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
     GameManager.instance.money -= prices;
     GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
-    Inventory.instance.AddItem(specificItem, specificQuant);
+    switch(Tipo)
+    {
+        case 0:
+        if(newItem.KindItem == 3)
+        {EquipM_F.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 4)
+        {EquipM_K.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 5)
+        {EquipM_S.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 0)
+        {Inventory.instance.AddItem(specificItem, specificQuant);}
+        dialogueMenu.text = "Ah! So you have money! Good for you, or better... For me!"; // Reference to the TextMeshProUGUI component
+        break;
+        case 1:
+        if(newItem.KindItem == 0)
+        {Inventory.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 1)
+        {QuestsManager.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 2)
+        {KeyManager.instance.AddItem(specificItem, specificQuant);}
+        dialogueMenu.text = "Thank you so kind, you don't will have regrets."; // Reference to the TextMeshProUGUI component
+        break;
+        case 2:
+        if(newItem.KindItem == 0)
+        {Inventory.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 1)
+        {QuestsManager.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 2)
+        {KeyManager.instance.AddItem(specificItem, specificQuant);}
+        dialogueMenu.text = "Thank you my friends!"; // Reference to the TextMeshProUGUI component
+        break;
+        case 3:
+        if(newItem.KindItem == 0)
+        {Inventory.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 1)
+        {QuestsManager.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 2)
+        {KeyManager.instance.AddItem(specificItem, specificQuant);}
+        dialogueMenu.text = "Thank you and come back again!"; // Reference to the TextMeshProUGUI component
+        break;
+    }
 
     }else if(GameManager.instance.money < prices)
     {
-    dialogueMenu.text = "Sorry, buddy, you don't have much money"; // Reference to the TextMeshProUGUI component
+        switch(Tipo)
+    {
+        case 0:
+        dialogueMenu.text = "You don't have much money. What you think? I don't do charity"; // Reference to the TextMeshProUGUI component
+        break;
+        case 1:
+        dialogueMenu.text = "Ah, we have a beggar!"; // Reference to the TextMeshProUGUI component
+        break;
+        case 2:
+        dialogueMenu.text = "Sorry, buddy, you don't have much money..."; // Reference to the TextMeshProUGUI component
+        break;
+        case 3:
+        dialogueMenu.text = "Hen, you don't have much money... So.., maybe the next time?"; // Reference to the TextMeshProUGUI component
+        break;
+    }
     //PlayMFX(1);
     }
     }
