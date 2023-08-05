@@ -25,7 +25,7 @@ public class Mercante : MonoBehaviour
     public TextMeshProUGUI ValueItem; // Reference to the TextMeshProUGUI component
     // In case of specific, this two parameters become active in the Editor
     private Item specificItem;
-    private int specificQuant;
+    private readonly int specificQuant = 1;
 
     public Dialogues Dial;
 
@@ -159,7 +159,8 @@ public void AddItem(Item newItem)
     dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
     GameManager.instance.money -= prices;
     GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
-    EquipM_F.instance.AddItem(specificItem, specificQuant); 
+    Inventory.instance.AddItem(specificItem, specificQuant);
+
     }else if(GameManager.instance.money < prices)
     {
     dialogueMenu.text = "Sorry, buddy, you don't have much money"; // Reference to the TextMeshProUGUI component

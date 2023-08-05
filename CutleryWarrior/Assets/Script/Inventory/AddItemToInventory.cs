@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 // IN THIS SCRIPT: Use this script to Add a specific or random item to the Inventory
@@ -42,7 +43,7 @@ public class AddItemToInventory : MonoBehaviour
     // Adds the specific item and quantity you set up in the Editor to the Inventory
    void AddSpecificItem()
     {
-        EquipM_F.instance.AddItem(specificItem, specificQuant);            
+        Inventory.instance.AddItem(specificItem, specificQuant);            
     }
 
     // Adds one random Item from the pre selected list to the Inventory

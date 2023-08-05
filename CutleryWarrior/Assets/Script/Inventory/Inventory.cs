@@ -46,7 +46,7 @@ public class Inventory : MonoBehaviour
 
     // The slotListItem is the list of slots on the inventory, you can turn this List public and place the slots manually inside of it
     // Currently it's making the list based on the inventoryPanel children objects on GatherSlots() in line 86
-  List<InventorySlot> slotListItem = new List<InventorySlot>();
+    private readonly List<InventorySlot> slotListItem = new();
 
     #region Singleton
 
