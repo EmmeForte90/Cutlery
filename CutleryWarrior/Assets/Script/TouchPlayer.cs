@@ -9,43 +9,59 @@ using Cinemachine;
 public class TouchPlayer : MonoBehaviour
 {
     // Riferimento all'evento di cambio scena
-private SceneEvent sceneEvent;
-public string spawnPointTag = "SpawnPoint";
-private CinemachineVirtualCamera vCam;
-public bool camFollowPlayer = true;
-private GameObject player;
-
-public string sceneName;
+    public string spawnPointTag = "SpawnPoint";
+    private CinemachineVirtualCamera vCam;
+    public bool camFollowPlayer = true;
+    //private GameObject player;
+    private SceneEvent sceneEvent;
+    public string sceneName;
     // Start is called before the first frame update
+       
+    public float stoppingDistance = 1f;
+    public Vector3 savedPosition;
+    private Transform Player;
+    private Transform Fork;
+    private Transform Spoon;
+    private Transform Knife;
+    private SwitchCharacter Switch;
+   
 
-    [Header("Audio")]
-    [HideInInspector] public float basePitch = 1f;
-    [HideInInspector] public float randomPitchOffset = 0.1f;
-    [SerializeField] public AudioClip[] listmusic; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
-    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
-    public AudioMixer SFX;
-    private bool bgmActive = false;
-
-    void Start()
+    public void Start()
     {
-         // Recuperiamo il riferimento allo script dell'evento di cambio scena
+    if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
+    // Recuperiamo il riferimento allo script dell'evento di cambio scena
     sceneEvent = GetComponent<SceneEvent>();
     // Aggiungiamo un listener all'evento di cambio scena
     sceneEvent.onSceneChange.AddListener(ChangeScene);
+    Fork = GameObject.Find("F_Player").transform;
+    Spoon = GameObject.Find("S_Player").transform;
+    Knife = GameObject.Find("K_Player").transform;
+    
     }
+    public void Update()
+    {
+        if(Switch.isElement1Active)
+        {Player = Spoon;}
+        else if(Switch.isElement2Active)
+        {Player = Fork;} 
+        else if(Switch.isElement3Active)
+        {Player = Knife;} 
 
+    if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance)
+    {savedPosition = Player.transform.position;}
+    }
     private void ChangeScene()
-{
+    {   
     SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     SceneManager.sceneLoaded += OnSceneLoaded;
-}
+    }
 
-// Metodo eseguito quando la scena è stata caricata
-private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-{
+    // Metodo eseguito quando la scena è stata caricata
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
     //GameplayManager.instance.FadeIn();
     SceneManager.sceneLoaded -= OnSceneLoaded;
-    if (player != null)
+    /*if (player != null)
     {
         CharacterMove.instance.inputCTR = false;
         CharacterMove.instance.Idle();
@@ -64,87 +80,86 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             player.transform.position = spawnPoint.transform.position;
             //yield return new WaitForSeconds(3f);
         }
-    }
+    }*/
     //GameplayManager.instance.StopFade();    
 }
 
 // Coroutine per attendere il caricamento della scena
 IEnumerator WaitForSceneLoad()
 {   
-    //GameplayManager.instance.FadeOut();
-    CharacterMove.instance.inputCTR = true;
-    CharacterMove.instance.Idle();
-    CharacterMove.instance.Stop();
+    GameManager.instance.ChStop();
     yield return new WaitForSeconds(2f);
     GameManager.instance.battle = true;
     GameManager.instance.FadeIn();
     yield return new WaitForSeconds(2f);
     // Invochiamo l'evento di cambio scena
     sceneEvent.InvokeOnSceneChange();
-    
 }
-
-// Metodo eseguito quando il player entra nel trigger
-private void OnTriggerStay(Collider other)
-{
-    // Controlliamo se il player ha toccato il collider
-    if (other.CompareTag("Player"))
+private void Flip()
     {
-         // Troviamo il game object del player
-        player = GameObject.FindGameObjectWithTag("Player");
-        // Mostriamo il testo del dialogo se necessario
-                    StartCoroutine(WaitForSceneLoad());
-
-       
-    }
-}
- public void StopMFX(int soundToPlay)
-    {
-        if (bgmActive)
+        if (Player.localScale.x > 0f)
         {
-            bgm[soundToPlay].Stop();
-            bgmActive = false;
+            transform.localScale = new Vector3(1, 1,1);
+    
+        }else if (Player.localScale.x < 0f)
+        {
+            transform.localScale = new Vector3(-1, 1,1);
+
         }
     }
-
-public void PlayMFX(int soundToPlay)
-    {
-        bgm[soundToPlay].Stop();
-        // Imposta la pitch dell'AudioSource in base ai valori specificati.
-        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
-        bgm[soundToPlay].Play();
-    }
-
-
-private void OnTriggerEnter(Collider other)
+// Metodo eseguito quando il player entra nel trigger
+public void OnTriggerStay(Collider other)
 {
     // Controlliamo se il player ha toccato il collider
-    if (other.CompareTag("Player"))
+    if (other.CompareTag("F_Player") || other.CompareTag("K_Player") || other.CompareTag("S_Player"))
     {
-        CharacterMove.instance.Idle();
-        CharacterMove.instance.Stop();
+        GameManager.instance.savedPosition = savedPosition;
+        GameManager.instance.ChStop();
+         // Troviamo il game object del player
+        //player = GameObject.FindGameObjectWithTag("Player");
+        // Mostriamo il testo del dialogo se necessario
+        StartCoroutine(WaitForSceneLoad()); 
+    }
+}
+ 
+
+public void OnTriggerEnter(Collider other)
+{
+    // Controlliamo se il player ha toccato il collider
+    if (other.CompareTag("F_Player") || other.CompareTag("K_Player") || other.CompareTag("S_Player"))
+    {
+        GameManager.instance.savedPosition = savedPosition;
+        GameManager.instance.ChStop();
         CameraZoom.instance.ZoomIn();
          // Troviamo il game object del player
-        player = GameObject.FindGameObjectWithTag("Player");
-                    StartCoroutine(WaitForSceneLoad());
-
+        //player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(WaitForSceneLoad());
 }
 }
 
-private void OnTriggerExit(Collider other)
+public void OnTriggerExit(Collider other)
 {
     // Controlliamo se il player ha toccato il collider
-    if (other.CompareTag("Player"))
+    if (other.CompareTag("F_Player") || other.CompareTag("K_Player") || other.CompareTag("S_Player"))
     { 
-        CharacterMove.instance.Idle();
-        CharacterMove.instance.Stop();
+        GameManager.instance.savedPosition = savedPosition;
+        GameManager.instance.ChStop();
         // Troviamo il game object del player
-         player = GameObject.FindGameObjectWithTag("Player");
-                    StartCoroutine(WaitForSceneLoad());
+        //player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(WaitForSceneLoad());     
+}}
 
+#if(UNITY_EDITOR)
+#region Gizmos
+private void OnDrawGizmos()
+    {
+    Gizmos.color = Color.red;
+    // disegna un Gizmo che rappresenta il Raycast
+    //Gizmos.DrawLine(transform.position, transform.position + new Vector3(transform.localScale.x, 0, 0) * wallDistance);
+    //Gizmos.color = Color.blue;
+    Gizmos.DrawWireSphere(transform.position, stoppingDistance);
+    }
+#endregion
+#endif
 
-        
-       
-}
-}
 }

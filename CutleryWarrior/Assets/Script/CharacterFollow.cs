@@ -9,12 +9,13 @@ public class CharacterFollow : MonoBehaviour
     public Transform Fork;
     public Transform Spoon;
     public Transform Knife;
+    private SwitchCharacter Switch;
+
     public float followSpeed = 5f;
     public float RunSpeed = 6f;
     public float stoppingDistance = 1f;
     public float groundCheckDistance = 0.2f;
     public LayerMask groundLayer;
-    private SwitchCharacter Switch;
 
     private Rigidbody characterRigidbody;
     private bool isFollowing;

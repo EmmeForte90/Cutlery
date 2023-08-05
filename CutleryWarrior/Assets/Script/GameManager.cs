@@ -17,7 +17,9 @@ public class GameManager : MonoBehaviour
     private CinemachineVirtualCamera vCam;
     public GameObject player;
     public static bool GameManagerExist;
-        
+    
+    public Vector3 savedPosition;
+
     [Header("Pause")]
     public bool stopInput = false;
     public bool battle = false;

@@ -22,16 +22,19 @@ public class StartBattle : MonoBehaviour
 
     private GameObject ForkActive;
     private ForkInput F_Script;
+    public GameObject F_point; // Variabile per il player
 
     [Header("Spoon")]
 
     private GameObject SpoonActive;
     private SpoonInput S_Script;
+    public GameObject S_point; // Variabile per il player
 
  [Header("Knife")]
 
     private GameObject KnifeActive;
     private KnifeInput K_Script;
+    public GameObject K_point; // Variabile per il player
 
  [Header("Enemy")]
     public SimpleEnemy E_Script;
@@ -57,6 +60,9 @@ public class StartBattle : MonoBehaviour
         ForkActive = GameObject.Find("F_Player");
         SpoonActive = GameObject.Find("S_Player");
         KnifeActive = GameObject.Find("K_Player");
+        ForkActive.transform.position = F_point.transform.position;
+        KnifeActive.transform.position = K_point.transform.position;
+        SpoonActive.transform.position = S_point.transform.position;
         ////////////////////////
         ForkActive.transform.localScale = new Vector3(1, 1,1);
         KnifeActive.transform.localScale = new Vector3(1, 1,1);
