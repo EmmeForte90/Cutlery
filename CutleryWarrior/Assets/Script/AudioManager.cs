@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
     private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
 
     private AudioSource[] ugm; // array di AudioSource che conterrà gli oggetti AudioSource creati
-    private bool ugmActive = false;
+    //private bool ugmActive = false;
 
     private bool sgmActive = false;
 
@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
-    private void Awake()
+    public void Awake()
     {
         if (instance == null)
         {
@@ -129,7 +129,7 @@ public class AudioManager : MonoBehaviour
         {
             sgm[soundToPlay].Play();
             sgmActive = true;
-            StartCoroutine(restoresfx());
+            StartCoroutine(Restoresfx());
         }
     }
 
@@ -139,7 +139,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-private IEnumerator restoresfx(){
+public IEnumerator Restoresfx(){
         yield return new WaitForSeconds(1f);
         sgmActive = false;
     }

@@ -14,38 +14,32 @@ public class StartBattle : MonoBehaviour
     //public GameObject StartIntermezzo; // Variabile per il player
     public GameObject ReadyForBattle; // Variabile per il player
     public GameObject DuelManagerO; // Variabile per il player
-    private int result;
+    //private int result;
     public static StartBattle instance;
 [Header("Stats")]
 
     [Header("Fork")]
 
-    public GameObject ForkActive;
-    public GameObject ForckActor;
-    public ForkInput F_Script;
+    private GameObject ForkActive;
+    private ForkInput F_Script;
 
     [Header("Spoon")]
 
-    public GameObject SpoonActive;
-    public GameObject SpoonActor;
-    public SpoonInput S_Script;
+    private GameObject SpoonActive;
+    private SpoonInput S_Script;
 
  [Header("Knife")]
 
-    public GameObject KnifeActive;
-    public GameObject KnifeActor;
-    public KnifeInput K_Script;
+    private GameObject KnifeActive;
+    private KnifeInput K_Script;
 
  [Header("Enemy")]
     public SimpleEnemy E_Script;
     public DuelManager Duel_Script;
-
-    private void Start()
+    public void Start()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        if (instance == null){instance = this;}
+
         // Genera un numero casuale tra 1 e 2
         //float randomNumber = Random.Range(1f, 2f);
 
@@ -54,41 +48,32 @@ public class StartBattle : MonoBehaviour
 
          // Stampa il risultato nella console
         //Debug.Log("Numero casuale: " + result);
+
         Duel_Script.inputCTR = true;
-        /*F_Script.inputCTR = true;
-        K_Script.inputCTR = true;
-        S_Script.inputCTR = true;
-        S_Script.inputCTR = true;*/
-
-
-
+        F_Script = GameObject.Find("F_Player").GetComponent<ForkInput>();
+        K_Script = GameObject.Find("S_Player").GetComponent<KnifeInput>();
+        S_Script = GameObject.Find("K_Player").GetComponent<SpoonInput>();
+        ////////////////////////
+        ForkActive = GameObject.Find("F_Player");
+        SpoonActive = GameObject.Find("S_Player");
+        KnifeActive = GameObject.Find("K_Player");
+        ////////////////////////
         ForkActive.transform.localScale = new Vector3(1, 1,1);
         KnifeActive.transform.localScale = new Vector3(1, 1,1);
         SpoonActive.transform.localScale = new Vector3(1, 1,1);
-       
-        ForckActor.transform.localScale = new Vector3(1, 1,1);
-        KnifeActor.transform.localScale = new Vector3(1, 1,1);
-        SpoonActor.transform.localScale = new Vector3(1, 1,1);
-
-    //StartIntermezzo.gameObject.SetActive(true);
+        ////////////////////////
         StartCoroutine(DuringInter());
     }
 
 IEnumerator DuringInter()
     {
-
         GameManager.instance.FadeOut();
-        //StartIntermezzo.gameObject.SetActive(false);
         yield return new WaitForSeconds(2f);
         ReadyForBattle.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         ReadyForBattle.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
         Duel_Script.inputCTR = false;
-        /*K_Script.inputCTR = false;
-        S_Script.inputCTR = false;
-        E_Script.inputCTR = false;*/
-
     }
     
 }

@@ -65,7 +65,7 @@ public class EquipM_F : MonoBehaviour
             else
             {
                 // L'inventario è pieno, non puoi aggiungere l'oggetto
-                Debug.LogWarning("L'inventario è pieno, non puoi aggiungere l'oggetto.");
+                Debug.Log("L'inventario è pieno, non puoi aggiungere l'oggetto.");
             }
         }
     }

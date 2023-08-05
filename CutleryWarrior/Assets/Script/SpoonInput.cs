@@ -57,8 +57,7 @@ public class SpoonInput : MonoBehaviour
     private DodgeController DodgeController;
 
     private KnockbackController knockbackController;
-    public GameObject SlashV;
-    public Transform BPoint;
+    
 
 
     Vector3 camF,camR,moveDir;
@@ -78,7 +77,7 @@ private void Awake()
         _skeleton = _skeletonAnimation.skeleton;
         knockbackController = GetComponent<KnockbackController>();
         DodgeController = GetComponent<DodgeController>();
-        SlashV.gameObject.SetActive(false);
+        //SlashV.gameObject.SetActive(false);
         }
 
     // Start is called before the first frame update
@@ -154,7 +153,7 @@ private void Awake()
             {
                 Stop();
                 PlayAnimation(Atk3AnimationName);
-                SlashV.gameObject.SetActive(true);
+              //  SlashV.gameObject.SetActive(true);
             }
 
     }

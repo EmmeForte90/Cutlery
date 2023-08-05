@@ -16,10 +16,10 @@ public class DuelManager : MonoBehaviour
 
 [Header("Fork")]
 
-     public float FmaxHealth = 100f;
+    public float FmaxHealth = 100f;
     public float FcurrentHealth;
     public Scrollbar FhealthBar;
-     public float FmaxMP = 100f;
+    public float FmaxMP = 100f;
     public float FcurrentMP;
     public Scrollbar FMPBar;
     public float FcostMP = 20;
@@ -28,10 +28,10 @@ public class DuelManager : MonoBehaviour
 
     [Header("Knife")]
 
-     public float KmaxHealth = 100f;
+    public float KmaxHealth = 100f;
     public float KcurrentHealth;
     public Scrollbar KhealthBar;
-     public float KmaxMP = 100f;
+    public float KmaxMP = 100f;
     public float KcurrentMP;
     public Scrollbar KMPBar;
     public float KcostMP = 15;
@@ -40,7 +40,7 @@ public class DuelManager : MonoBehaviour
 
     [Header("Spoon")]
 
-     public float SmaxHealth = 100f;
+    public float SmaxHealth = 100f;
     public float ScurrentHealth;
     public Scrollbar ShealthBar;
     public float SmaxMP = 100f;
@@ -67,7 +67,7 @@ public int CharacterID;
 
 
 public static DuelManager instance;
-private void Awake()
+public void Awake()
     {
          if (instance == null)
         {
@@ -104,6 +104,7 @@ void Update()
         SMPBar.size = ScurrentMP / SmaxMP;
         SMPBar.size = Mathf.Clamp(SMPBar.size, 0.01f, 1);
         //
+        //Il nemico attacca il player, creare un fattore randomico così che il nemico scelga il personaggio d'attaccare
         if(CharacterID == 1)
         {SimpleEnemy.instance.TakePlayer();}
         if(CharacterID == 2)
@@ -165,28 +166,15 @@ IEnumerator EndP()
         yield return new WaitForSeconds(1f);
         Pause.gameObject.SetActive(false);
         InputBattle.instance.inputCTR = false;
-
     }
 private void ToggleTimeScale()
     {
         if (Time.timeScale == 1)
-        {
-            Time.timeScale = 0.01f; // Rallenta il gioco a metà velocità
-        }
-        else
-        {
-            Time.timeScale = 1; // Ripristina la velocità normale del gioco
-        }
+        {Time.timeScale = 0.01f;}
+        // Rallenta il gioco a metà velocità
+        else{Time.timeScale = 1;}
+        // Ripristina la velocità normale del gioco  
     }
-
-
-
-
-
-
-
-
-
 }
 
     

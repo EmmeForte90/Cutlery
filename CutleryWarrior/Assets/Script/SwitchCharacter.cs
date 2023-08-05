@@ -20,7 +20,7 @@ public class SwitchCharacter : MonoBehaviour
 
     private ManagerCharacter SpoonActive;
 
- [Header("Knife")]
+    [Header("Knife")]
 
     private ManagerCharacter KnifeActive;
 
@@ -94,19 +94,25 @@ public void Flip()
         switch(rotationSwitcher.CharacterID)
         {
             case 1:
+            
             ForkActive.SwitchScriptsPlayer();
             KnifeActive.SwitchScriptsActor();
             SpoonActive.SwitchScriptsActor();
+            
             break;
             case 2:
+            
             ForkActive.SwitchScriptsActor();
             KnifeActive.SwitchScriptsPlayer();
             SpoonActive.SwitchScriptsActor();
+            
             break;
             case 3:
+            
             ForkActive.SwitchScriptsActor();
             KnifeActive.SwitchScriptsActor();
             SpoonActive.SwitchScriptsPlayer();
+            
             break;
 
 
