@@ -166,11 +166,7 @@ private void Awake()
     }
     }
     
-    private void Dodge()
-    {
-        Vector3 DodgeDirection = transform.position;
-        DodgeController.ApplyDodge(DodgeDirection);
-    }
+    
 
     void FixedUpdate()
     {
@@ -219,6 +215,12 @@ private void OnCollisionExit(Collision collision)
     if (collision.gameObject.CompareTag("Collider"))
     {StopM = false;}
 }
+
+private void Dodge()
+    {
+        Vector3 DodgeDirection = transform.position;
+        DodgeController.ApplyDodge(DodgeDirection);
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Animation
 

@@ -105,43 +105,28 @@ private void Awake()
     input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     input = Vector2.ClampMagnitude(input, 1);
     
-    if(Input.GetButton("Fire3"))
-    {
-        isRun = true;
-    } 
-    if (Input.GetButtonUp("Fire3"))
-    {
-        isRun = false;
-    }
+    if(Input.GetButton("Fire3")){isRun = true;} 
+    if (Input.GetButtonUp("Fire3")){isRun = false;}
     
     
     camF = cam.forward;
     camR = cam.right;
-
     camF.y = 0;
     camR.y = 0;
     camF = camF.normalized;
-    camR = camR.normalized;
-    
+    camR = camR.normalized;  
     moveDir = camR * input.x + camF * input.y;
     
 
     if (moveDir.magnitude > 0)
     {
         if (!isRun)
-    { 
-        Walk();
-        stand = false;
-    } else if (isRun && !StopM)
-    { 
-        Running();
-        stand = false;
-    }
-    } else
-    {
-        Idle();
-        stand = true;
-    }
+    {Walk(); stand = false;} 
+    else if (isRun && !StopM)
+    {Running();stand = false;}
+    } 
+    else
+    {Idle();stand = true;}
     hor = Input.GetAxisRaw("Horizontal");
 
     //DODGE
@@ -149,10 +134,8 @@ private void Awake()
         if (Input.GetButtonDown("Fire2") && Time.time - DodgeTime > DodgeSTimer)
         {
             Dodge();
-            DodgeFAnm();
-                    
+            DodgeFAnm();      
             DodgeTime = Time.time; // Aggiorna l'ultimo momento di attacco
-
         }
     
     //Attack
@@ -160,7 +143,6 @@ private void Awake()
         && DuelManager.instance.KcurrentMP > 20)
     {
         comboCount++; // Incrementa il conteggio delle combo
-
         // Esegui la combo corrispondente in base al numero di attacchi consecutivi
         switch (comboCount)
         {

@@ -44,7 +44,7 @@ public class SimpleEnemy : MonoBehaviour
         {
             instance = this;
         }
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         if (_skeletonAnimation == null) {
             Debug.LogError("Componente SkeletonAnimation non trovato!");

@@ -71890,6 +71890,8 @@ GameObject:
   - component: {fileID: 1149023295}
   - component: {fileID: 1149023294}
   - component: {fileID: 1149023296}
+  - component: {fileID: 1149023298}
+  - component: {fileID: 1149023297}
   m_Layer: 0
   m_Name: Script
   m_TagString: Untagged
@@ -71975,6 +71977,42 @@ MonoBehaviour:
   inputCTR: 0
   animator: {fileID: 643435602}
   CharacterID: 0
+--- !u!114 &1149023297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149023293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 900e4f745b06e584ea395815198c01cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSceneChange:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1149023298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149023293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed29d78972b999c4da094cdb7a16672d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReturn: 0
+  PointSpawn: {fileID: 0}
+  NewConfiner: {fileID: 0}
+  needDeactivateObject: 1
+  objDeactivate:
+  - {fileID: 0}
+  objActivate:
+  - {fileID: 0}
+  savedPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1161514158
 GameObject:
   m_ObjectHideFlags: 0
@@ -99355,46 +99393,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 437654966, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1221743238}
-    - target: {fileID: 1510146971, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 577377637}
-    - target: {fileID: 1576582879, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1873925885, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1221743238}
-    - target: {fileID: 2007474356, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 730982342757777797, guid: 3673356f01ac3794a90a53b1890f187a,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 2951295102835610775, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 577377637}
-    - target: {fileID: 2951295102835610775, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: BPoint
-      value: 
-      objectReference: {fileID: 460525233}
-    - target: {fileID: 2951295102835610775, guid: 3673356f01ac3794a90a53b1890f187a,
-        type: 3}
-      propertyPath: SlashV
-      value: 
-      objectReference: {fileID: 1656528698}
     - target: {fileID: 3123265100756262345, guid: 3673356f01ac3794a90a53b1890f187a,
         type: 3}
       propertyPath: m_RootOrder

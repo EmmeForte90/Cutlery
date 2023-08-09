@@ -8,43 +8,24 @@ using Cinemachine;
 
 public class LevelChanger : MonoBehaviour
 {
-   // Variabili per memorizzare la scena attuale e la posizione del player
-//public string spawnPointTag = "SpawnPoint";
 public string sceneName;
-// Riferimento all'evento di cambio scena
 public int IDPorta;
 private SceneEvent sceneEvent;
-// Riferimento al game object del player
-//private GameObject player;
 
-private void Start()
+public void Start()
 {
     sceneEvent = GetComponent<SceneEvent>();
     sceneEvent.onSceneChange.AddListener(ChangeScene);
 }
-
-// Metodo per cambiare scena
 private void ChangeScene()
 {
     SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     SceneManager.sceneLoaded += OnSceneLoaded;
 }
-
-// Metodo eseguito quando la scena è stata caricata
-private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-{
-    SceneManager.sceneLoaded -= OnSceneLoaded;
-    /*if (player != null)
-    {
-        //GameObject spawnPoint = GameObject.FindWithTag(spawnPointTag);
-        if (spawnPoint != null)
-        {player.transform.position = spawnPoint.transform.position;}
-    }*/
-}
-
-// Coroutine per attendere il caricamento della scena
-IEnumerator WaitForSceneLoad()
-{   
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {SceneManager.sceneLoaded -= OnSceneLoaded;}
+    IEnumerator WaitForSceneLoad()
+    {   
     GameManager.instance.StartGame = false;
     CharacterMove.instance.inputCTR = true;
     CharacterMove.instance.Idle();
@@ -58,41 +39,21 @@ IEnumerator WaitForSceneLoad()
     CharacterMove.instance.inputCTR = false; 
     GameManager.instance.FadeOut();
     yield return new WaitForSeconds(2f);
-}
-
-// Metodo eseguito quando il player entra nel trigger
-private void OnTriggerStay(Collider other)
-{
-    // Controlliamo se il player ha toccato il collider
-    if (other.CompareTag("F_Player") ||
-    other.CompareTag("K_Player") ||
-    other.CompareTag("S_Player"))
-    {
-        //player = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(WaitForSceneLoad()); 
     }
-}
-
-
-
-private void OnTriggerEnter(Collider other)
-{
-    // Controlliamo se il player ha toccato il collider
-    if (other.CompareTag("F_Player") ||
-    other.CompareTag("K_Player") ||
-    other.CompareTag("S_Player"))
+    public void Escape()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(WaitForSceneLoad());
-}}
+    GameManager.instance.ChStop();
+    CameraZoom.instance.ZoomIn();
+    StartCoroutine(WaitForSceneLoad());
+    }
 
-/*private void OnTriggerExit(Collider other)
+public void OnTriggerEnter(Collider other)
 {
-    // Controlliamo se il player ha toccato il collider
     if (other.CompareTag("F_Player") ||
     other.CompareTag("K_Player") ||
     other.CompareTag("S_Player"))
-    {player = GameObject.FindGameObjectWithTag("Player");}
-}*/
-
+    {GameManager.instance.ChStop();
+    CameraZoom.instance.ZoomIn();
+    StartCoroutine(WaitForSceneLoad());}
+    }
 }

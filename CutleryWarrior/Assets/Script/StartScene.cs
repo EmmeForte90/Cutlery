@@ -20,9 +20,9 @@ public class StartScene : MonoBehaviour
     private SwitchCharacter Switcher;
 
     private int IDPorta;
-public static StartScene instance;
-void Awake()
-{       
+    public static StartScene instance;
+    public void Awake()
+    {       
     if (instance == null){instance = this;}  
     if(!GameManager.instance.StartGame)
     {   
@@ -35,16 +35,11 @@ void Awake()
     ContainerHero = GameObject.Find("Hero");
     Spawn(IDPorta);
     Confiner(IDPorta);
-    GameManager.instance.ChMov();
-    GameManager.instance.ChStop();
+    GameManager.instance.ChCanM();
     Switcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
     Switcher.inizial();
     GameManager.instance.FadeOut();
-    }
-    
-}
-   
-
+    }}
     public void Spawn(int ID)
     {
     ContainerHero.transform.position = SpawnArr[ID].transform.position;
@@ -52,7 +47,6 @@ void Awake()
     FAct.transform.position = ContainerHero.transform.position;
     SAct.transform.position = ContainerHero.transform.position;    
     }
-
     public void Confiner(int ID)
     {
         confiner.m_BoundingVolume  = null; 
@@ -70,5 +64,4 @@ void Awake()
             break;
         }  
     }
-   
 }

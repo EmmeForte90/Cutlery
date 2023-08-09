@@ -120,7 +120,7 @@ if(!notGo)
 
     private void OnTriggerEnter(Collider collision)
 {
-    if (collision.CompareTag("Player"))
+    if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
     {            
         button.gameObject.SetActive(true);
         _isInTrigger = true;
@@ -134,7 +134,7 @@ if(!notGo)
 
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
         {
             //Move.instance.NotStrangeAnimationTalk = false;
             button.gameObject.SetActive(false); // Initially hide the dialogue text

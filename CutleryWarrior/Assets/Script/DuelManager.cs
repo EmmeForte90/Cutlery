@@ -87,9 +87,9 @@ public void Awake()
         ScurrentHealth = SmaxHealth;
         ScurrentMP = SmaxMP;
         CharacterID = 1;
-        sceneEvent = GetComponent<SceneEvent>();
+        //sceneEvent = GetComponent<SceneEvent>();
         // Aggiungiamo un listener all'evento di cambio scena
-        sceneEvent.onSceneChange.AddListener(ChangeScene);
+        //sceneEvent.onSceneChange.AddListener(ChangeScene);
     }
 void Update()
     {
@@ -159,25 +159,6 @@ void Update()
         } 
     }
     }
-public void EscapeBattle()
-    {StartCoroutine(DuringInter());}
-
-IEnumerator DuringInter()
-    {
-        GameManager.instance.FadeIn();
-        yield return new WaitForSeconds(2f);
-        sceneEvent.InvokeOnSceneChange();
-    }
-private void ChangeScene()
-    {   
-    SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-    SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    // Metodo eseguito quando la scena è stata caricata
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {SceneManager.sceneLoaded -= OnSceneLoaded;}
-
 IEnumerator StartM()
     {
         InputBattle.instance.inputCTR = true;
@@ -202,6 +183,3 @@ private void ToggleTimeScale()
         // Ripristina la velocità normale del gioco  
     }
 }
-
-    
-

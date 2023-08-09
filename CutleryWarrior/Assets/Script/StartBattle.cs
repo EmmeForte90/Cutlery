@@ -11,30 +11,32 @@ using TMPro;
 
 public class StartBattle : MonoBehaviour
 {
-    //public GameObject StartIntermezzo; // Variabile per il player
     public GameObject ReadyForBattle; // Variabile per il player
     public GameObject DuelManagerO; // Variabile per il player
-    //private int result;
     public static StartBattle instance;
+
 [Header("Stats")]
 
     [Header("Fork")]
 
     private GameObject ForkActive;
-    private ForkInput F_Script;
+    private CharacterMove F_Script;
     public GameObject F_point; // Variabile per il player
+    private ChangeHeroSkin Skin_F;
 
     [Header("Spoon")]
 
     private GameObject SpoonActive;
-    private SpoonInput S_Script;
+    private CharacterMove S_Script;
     public GameObject S_point; // Variabile per il player
+    private ChangeHeroSkin Skin_S;
 
  [Header("Knife")]
 
     private GameObject KnifeActive;
-    private KnifeInput K_Script;
+    private CharacterMove K_Script;
     public GameObject K_point; // Variabile per il player
+    private ChangeHeroSkin Skin_K;
 
  [Header("Enemy")]
     public SimpleEnemy E_Script;
@@ -53,9 +55,12 @@ public class StartBattle : MonoBehaviour
         //Debug.Log("Numero casuale: " + result);
 
         Duel_Script.inputCTR = true;
-        F_Script = GameObject.Find("F_Player").GetComponent<ForkInput>();
-        K_Script = GameObject.Find("S_Player").GetComponent<KnifeInput>();
-        S_Script = GameObject.Find("K_Player").GetComponent<SpoonInput>();
+        F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        Skin_F = GameObject.Find("F_Player").GetComponent<ChangeHeroSkin>();
+        Skin_K = GameObject.Find("K_Player").GetComponent<ChangeHeroSkin>();
+        Skin_S = GameObject.Find("S_Player").GetComponent<ChangeHeroSkin>();
         ////////////////////////
         ForkActive = GameObject.Find("F_Player");
         SpoonActive = GameObject.Find("S_Player");
@@ -67,7 +72,15 @@ public class StartBattle : MonoBehaviour
         ForkActive.transform.localScale = new Vector3(1, 1,1);
         KnifeActive.transform.localScale = new Vector3(1, 1,1);
         SpoonActive.transform.localScale = new Vector3(1, 1,1);
+        F_Script.IDAction = 1; S_Script.IDAction = 1; K_Script.IDAction = 1;
         ////////////////////////
+        Skin_S.UpdateCharacterSkin();
+		Skin_S.UpdateCombinedSkin();
+        Skin_F.UpdateCharacterSkin();
+		Skin_F.UpdateCombinedSkin();
+        Skin_K.UpdateCharacterSkin();
+		Skin_K.UpdateCombinedSkin(); 
+        GameManager.instance.Posebattle();
         StartCoroutine(DuringInter());
     }
 
@@ -79,6 +92,7 @@ IEnumerator DuringInter()
         yield return new WaitForSeconds(1f);
         ReadyForBattle.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
+        GameManager.instance.ChCanM();
         Duel_Script.inputCTR = false;
     }
     

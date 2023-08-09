@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public static bool GameManagerExist;
     
     public Vector3 savedPosition;
+    public string sceneName;
 
     [Header("Pause")]
     public bool stopInput = false;
@@ -97,9 +98,9 @@ public class GameManager : MonoBehaviour
         }
         
         TakeCharacter();
-        if(!battle)
+        /*if(!battle)
         {vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-        vCam.Follow = player.transform;}
+        vCam.Follow = player.transform;}*/
         if(StartGame)
         {AudioManager.instance.PlayMFX(0);}
 
@@ -222,35 +223,37 @@ public class GameManager : MonoBehaviour
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
-        ch_F.inputCTR = false;
-        ch_K.inputCTR = false;
-        ch_S.inputCTR = false;
+        ch_F.inputCTR = true; ch_K.inputCTR = true; ch_S.inputCTR = true;
+        ch_F.isRun = false; ch_K.isRun = false; ch_S.isRun = false;
     }   
 
       public void ChInteract()
-    {
-        ch_F.Interact = true;
-        ch_K.Interact = true;
-        ch_S.Interact = true;
-    }  
+    {ch_F.Interact = true; ch_K.Interact = true; ch_S.Interact = true;}  
 
     public void ChInteractStop()
-    {
-        ch_F.Interact = false;
-        ch_K.Interact = false;
-        ch_S.Interact = false;
-    }  
+    {ch_F.Interact = false; ch_K.Interact = false; ch_S.Interact = false;}  
     public void ChCanM()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
-        ch_F.inputCTR = true;
-        ch_K.inputCTR = true;
-        ch_S.inputCTR = true;
+        ch_F.inputCTR = false; ch_K.inputCTR = false; ch_S.inputCTR = false;
     }
-  
+    public void Posebattle()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.Posebattle(); ch_K.Posebattle(); ch_S.Posebattle();
+    }
 
+    public void Allarm()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.Allarm(); ch_K.Allarm(); ch_S.Allarm();
+    }
     public void AddTomoney(int pointsToAdd)
     {
         money += pointsToAdd;
