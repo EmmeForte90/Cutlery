@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(CharacterMove))]
+[CustomEditor(typeof(AnimationManager))]
 public class MyScriptEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        CharacterMove myScript = (CharacterMove)target;
+        AnimationManager myScript = (AnimationManager)target;
         // Draw default fields
         DrawDefaultInspector();
 

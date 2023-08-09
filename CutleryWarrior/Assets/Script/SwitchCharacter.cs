@@ -98,8 +98,6 @@ public void Flip()
             SpoonActive.SwitchScriptsPlayer();
             
             break;
-
-
         }
     }
     public void ActiveCH()

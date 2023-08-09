@@ -256,6 +256,10 @@ public class GameManager : MonoBehaviour
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_F.Allarm(); ch_K.Allarm(); ch_S.Allarm();
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_FAc.Allarm(); ch_KAc.Allarm(); ch_SAc.Allarm();
     }
 
     public void Exploration()
@@ -264,6 +268,10 @@ public class GameManager : MonoBehaviour
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_F.IDAction = 0; ch_K.IDAction = 0; ch_S.IDAction = 0;
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_FAc.IDAction = 0; ch_KAc.IDAction = 0; ch_SAc.IDAction = 0;
     }
     public void Battle()
     {
@@ -271,6 +279,10 @@ public class GameManager : MonoBehaviour
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_F.IDAction = 1; ch_K.IDAction = 1; ch_S.IDAction = 1;
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_FAc.IDAction = 1; ch_KAc.IDAction = 1; ch_SAc.IDAction = 1;
     }
     public void AddTomoney(int pointsToAdd)
     {

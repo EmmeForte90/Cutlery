@@ -69697,6 +69697,7 @@ GameObject:
   - component: {fileID: 1456018986730995154}
   - component: {fileID: 4387560790523146388}
   - component: {fileID: 6852908610195056526}
+  - component: {fileID: 3123265100892517034}
   m_Layer: 6
   m_Name: S_Player
   m_TagString: S_Player
@@ -69844,17 +69845,13 @@ MonoBehaviour:
   Atk1AnimationName: Battle/attack_1
   Atk2AnimationName: Battle/attack_1
   Atk3AnimationName: Battle/attack_1
+  Atk4AnimationName: Battle/attack_1
   GuardAnimationName: Battle/guard
   GuardHitAnimationName: Battle/guard_hit
   DodgeFAnimationName: Battle/guard
   DodgeBAnimationName: Battle/guard
   _skeletonAnimation: {fileID: 8865165351683847974}
-  Bullet: {fileID: 0}
-  BPoint: {fileID: 0}
-  SlashV: {fileID: 0}
-  SlashH: {fileID: 0}
-  SlashB: {fileID: 0}
-  isDefence: 0
+  Anm: {fileID: 3123265100892517034}
   comboTimer: 0.5
   DodgeSTimer: 0.5
 --- !u!54 &8734067108875236741
@@ -69941,12 +69938,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4202e435a517b6044a83833ffa76b95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fork: 0
   Fork: {fileID: 75757198767022020}
-  Spoon: {fileID: 2606424170602877004}
+  knife: 0
   Knife: {fileID: 4230004601868692968}
+  spoon: 1
+  Spoon: {fileID: 2606424170602877004}
+  IDAction: 0
   followSpeed: 5
   RunSpeed: 12
-  stoppingDistance: 5
+  stoppingDistance: 6
   groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
@@ -69954,7 +69955,33 @@ MonoBehaviour:
   WalkAnimationName: Exploration/walk
   RunAnimationName: Exploration/run
   IdleAnimationName: Exploration/idle
+  IdleBAnimationName: Battle/idle_battle
+  AllarmAnimationName: Exploration/allarm
+  Anm: {fileID: 3123265100892517034}
   _skeletonAnimation: {fileID: 8865165351683847974}
+--- !u!114 &3123265100892517034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881051687923036914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac76063cba8ea8418022876e4df91a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fork: 0
+  knife: 0
+  spoon: 1
+  IdleBAnimationName: Battle/idle_battle
+  _skeletonAnimation: {fileID: 8865165351683847974}
+  Bullet: {fileID: 1862645643401743441, guid: 709ca3e7b07bcb246bda3a4ed2a76e10, type: 3}
+  BPoint: {fileID: 440700284}
+  SlashV: {fileID: 0}
+  SlashH: {fileID: 0}
+  SlashB: {fileID: 0}
+  isDefence: 0
 --- !u!1 &1883350913762924891
 GameObject:
   m_ObjectHideFlags: 0
@@ -83462,6 +83489,7 @@ MonoBehaviour:
   ExpF: 0
   ExpTextMF: {fileID: 0}
   ch_F: {fileID: 5470156622018234070}
+  ch_FAc: {fileID: 0}
   Manager_F: {fileID: 624626145106767676}
   LVS: 0
   HpS: 0
@@ -83470,6 +83498,7 @@ MonoBehaviour:
   ExpS: 0
   ExpTextMS: {fileID: 0}
   ch_S: {fileID: 4100639160905609254}
+  ch_SAc: {fileID: 0}
   Manager_S: {fileID: 4387560790523146388}
   LVK: 0
   HpK: 0
@@ -83478,6 +83507,7 @@ MonoBehaviour:
   ExpK: 0
   ExpTextMK: {fileID: 0}
   ch_K: {fileID: 934647794340920839}
+  ch_KAc: {fileID: 0}
   Manager_K: {fileID: 3591900854741049043}
   ExpObjectM: {fileID: 3123265100167618619}
   rotationSwitcher: {fileID: 3123265101282475731}
@@ -94065,6 +94095,7 @@ GameObject:
   - component: {fileID: 7482327822899912600}
   - component: {fileID: 624626145106767676}
   - component: {fileID: 1510146965}
+  - component: {fileID: 3123265100892517036}
   m_Layer: 6
   m_Name: F_Player
   m_TagString: F_Player
@@ -94213,17 +94244,13 @@ MonoBehaviour:
   Atk1AnimationName: Battle/attack_2
   Atk2AnimationName: Battle/attack_1
   Atk3AnimationName: Battle/attack_3
+  Atk4AnimationName: Battle/attack_4
   GuardAnimationName: Battle/guard
   GuardHitAnimationName: Battle/guard_hit
   DodgeFAnimationName: Battle/dodge_front
   DodgeBAnimationName: Battle/dodge_back
   _skeletonAnimation: {fileID: 4194123266224909399}
-  Bullet: {fileID: 1862645643401743441, guid: 709ca3e7b07bcb246bda3a4ed2a76e10, type: 3}
-  BPoint: {fileID: 440700284}
-  SlashV: {fileID: 0}
-  SlashH: {fileID: 0}
-  SlashB: {fileID: 0}
-  isDefence: 0
+  Anm: {fileID: 3123265100892517036}
   comboTimer: 0.5
   DodgeSTimer: 0.5
 --- !u!54 &3398053389201536491
@@ -94296,12 +94323,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4202e435a517b6044a83833ffa76b95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fork: 1
   Fork: {fileID: 75757198767022020}
-  Spoon: {fileID: 2606424170602877004}
+  knife: 0
   Knife: {fileID: 4230004601868692968}
+  spoon: 0
+  Spoon: {fileID: 2606424170602877004}
+  IDAction: 0
   followSpeed: 4
   RunSpeed: 12
-  stoppingDistance: 6
+  stoppingDistance: 3
   groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
@@ -94309,6 +94340,9 @@ MonoBehaviour:
   WalkAnimationName: Explore/walk
   RunAnimationName: Explore/run
   IdleAnimationName: Explore/idle
+  IdleBAnimationName: Battle/idle_battle
+  AllarmAnimationName: Explore/allarm
+  Anm: {fileID: 3123265100892517036}
   _skeletonAnimation: {fileID: 4194123266224909399}
 --- !u!114 &624626145106767676
 MonoBehaviour:
@@ -94338,6 +94372,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DodgeForce: 10
   DodgeDuration: 0.5
+--- !u!114 &3123265100892517036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4118513455955893335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac76063cba8ea8418022876e4df91a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fork: 1
+  knife: 0
+  spoon: 0
+  IdleBAnimationName: Battle/idle_battle
+  _skeletonAnimation: {fileID: 4194123266224909399}
+  Bullet: {fileID: 1862645643401743441, guid: 709ca3e7b07bcb246bda3a4ed2a76e10, type: 3}
+  BPoint: {fileID: 440700284}
+  SlashV: {fileID: 0}
+  SlashH: {fileID: 0}
+  SlashB: {fileID: 0}
+  isDefence: 0
 --- !u!1 &4138654074585330613
 GameObject:
   m_ObjectHideFlags: 0
@@ -94706,6 +94763,7 @@ GameObject:
   - component: {fileID: 7088658369911021468}
   - component: {fileID: 3589441325496484946}
   - component: {fileID: 3591900854741049043}
+  - component: {fileID: 3123265100892517035}
   m_Layer: 6
   m_Name: K_Player
   m_TagString: K_Player
@@ -94853,17 +94911,13 @@ MonoBehaviour:
   Atk1AnimationName: Battle/attack_1
   Atk2AnimationName: Battle/attack_2
   Atk3AnimationName: Battle/attack_3
+  Atk4AnimationName: Battle/attack_1
   GuardAnimationName: Battle/charge_battle
   GuardHitAnimationName: Battle/charge_battle
   DodgeFAnimationName: Battle/dodge_front
   DodgeBAnimationName: Battle/dodge_front
   _skeletonAnimation: {fileID: 3251496515922407380}
-  Bullet: {fileID: 0}
-  BPoint: {fileID: 0}
-  SlashV: {fileID: 1010592991}
-  SlashH: {fileID: 2130095965}
-  SlashB: {fileID: 1852293283}
-  isDefence: 0
+  Anm: {fileID: 3123265100892517035}
   comboTimer: 0.5
   DodgeSTimer: 0.5
 --- !u!54 &6562752729758439279
@@ -94936,12 +94990,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4202e435a517b6044a83833ffa76b95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fork: 0
   Fork: {fileID: 75757198767022020}
-  Spoon: {fileID: 2606424170602877004}
+  knife: 1
   Knife: {fileID: 4230004601868692968}
+  spoon: 0
+  Spoon: {fileID: 2606424170602877004}
+  IDAction: 0
   followSpeed: 5
   RunSpeed: 12
-  stoppingDistance: 5
+  stoppingDistance: 8
   groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
@@ -94949,6 +95007,9 @@ MonoBehaviour:
   WalkAnimationName: Exploration/walk
   RunAnimationName: Exploration/run
   IdleAnimationName: Exploration/idle
+  IdleBAnimationName: Battle/idle_battle
+  AllarmAnimationName: Exploration/allarm
+  Anm: {fileID: 3123265100892517035}
   _skeletonAnimation: {fileID: 3251496515922407380}
 --- !u!114 &3591900854741049043
 MonoBehaviour:
@@ -94964,6 +95025,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 934647794340920839}
   Actor: {fileID: 3589441325496484946}
+--- !u!114 &3123265100892517035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228272781796328153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac76063cba8ea8418022876e4df91a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fork: 0
+  knife: 1
+  spoon: 0
+  IdleBAnimationName: Battle/idle_battle
+  _skeletonAnimation: {fileID: 3251496515922407380}
+  Bullet: {fileID: 1862645643401743441, guid: 709ca3e7b07bcb246bda3a4ed2a76e10, type: 3}
+  BPoint: {fileID: 440700284}
+  SlashV: {fileID: 1010592991}
+  SlashH: {fileID: 2130095965}
+  SlashB: {fileID: 1852293283}
+  isDefence: 0
 --- !u!1 &4248398609893764613
 GameObject:
   m_ObjectHideFlags: 0

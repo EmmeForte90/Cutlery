@@ -4,12 +4,23 @@ using UnityEngine;
 using Spine.Unity;
 using Spine;
 public class CharacterFollow : MonoBehaviour
-{ 
-    private Transform Player;
+{   
+    [Tooltip("0 - Exploration, 1 - Battle")]
+    public int IDAction = 0; //Che tipo di personaggio è
+
+    [Header("Character")]
+    public bool fork;
     public Transform Fork;
-    public Transform Spoon;
+    public bool knife;
     public Transform Knife;
+    public bool spoon;
+    public Transform Spoon;
+   
+    private Transform Player;
     private SwitchCharacter Switch;
+    private CharacterMove F_b;
+    private CharacterMove S_b;
+    private CharacterMove K_b;
 
     public float followSpeed = 5f;
     public float RunSpeed = 6f;
@@ -26,6 +37,7 @@ public class CharacterFollow : MonoBehaviour
     [SpineAnimation][SerializeField]  string IdleAnimationName;
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
     [SpineAnimation][SerializeField]  string AllarmAnimationName;
+    public AnimationManager Anm;
 
     private string currentAnimationName;
     private float distance;
@@ -46,32 +58,47 @@ public class CharacterFollow : MonoBehaviour
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
         characterRigidbody = GetComponent<Rigidbody>();
-        //Player = GameObject.FindGameObjectWithTag("Player").transform;
+        Player = GameObject.FindGameObjectWithTag("F_Player").transform;
+        F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        K_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        S_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         }
 
     
     public void Update()
     {
-        if(Switch.isElement1Active)
-        {Player = Spoon;Flip();}
-        else if(Switch.isElement2Active)
-        {Player = Fork;Flip();} 
-        else if(Switch.isElement3Active)
-        {Player = Knife;Flip();} 
-
-        // Verifica se il personaggio è a terra
+        switch(IDAction)
+        {
+        case 0:  
+        ////////////////////////////////////////
+        SimpleMove();
+        if(Switch.isElement1Active){Player = Spoon;Flip();}
+        else if(Switch.isElement2Active){Player = Fork;Flip();} 
+        else if(Switch.isElement3Active){Player = Knife;Flip();} 
+        break;
+        ////////////////////////////////////////
+        case 1: 
+        if(fork && !knife && !spoon) {ForkB();} //Se è forchetta
+        else if(!fork && knife && !spoon) {KnifeB();} //Se è Coltello
+        else if(!fork && !knife && spoon) {SpoonB();} //Se è Cucchiaio
+        break;
+        }
+        
+    }
+    
+    #region MoveExploration
+    public void SimpleMove()
+    {
+    // Verifica se il personaggio è a terra
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
 
-        if (!isFollowing){Idle(); isWalking = false;}
-
+        if (!isFollowing){Anm.PlayAnimationLoop(IdleAnimationName); isWalking = false;}
 
         if ((transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
         {isFollowing = true;}
 
         if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance)
         {isFollowing = false;}
-
-
 
         if (isFollowing && (transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
         {
@@ -85,36 +112,60 @@ public class CharacterFollow : MonoBehaviour
             
             if (distance > stoppingDistance)
             {
-                if (!CharacterMove.instance.isRun)
+                if (!F_b.isRun || !S_b.isRun || !K_b.isRun)
                 {
                 if (!isWalking)
-                {isWalking = true; Walk();}
+                {isWalking = true; Anm.PlayAnimationLoop(WalkAnimationName);}
 
                 // Muovi il personaggio verso il giocatore solo se la distanza supera la soglia di arresto
                 characterRigidbody.MovePosition(transform.position + direction * followSpeed * Time.deltaTime);
                 } 
                 
-                if (CharacterMove.instance.isRun)
+                if (F_b.isRun || S_b.isRun || K_b.isRun)
                 {
                 if (!isWalking)
-                {isWalking = true; Run();}
+                {isWalking = true; Anm.PlayAnimationLoop(RunAnimationName);}
 
                 // Muovi il personaggio verso il giocatore solo se la distanza supera la soglia di arresto
                 characterRigidbody.MovePosition(transform.position + direction * RunSpeed * Time.deltaTime);
                 } 
             }
-            else if (!CharacterMove.instance.isRun)
+            else if (!F_b.isRun || !S_b.isRun || !K_b.isRun)
             {
                 if (isWalking)
-                {isWalking = false; Idle();}
+                {isWalking = false; Anm.PlayAnimationLoop(IdleAnimationName);}
                 // Il personaggio è vicino al giocatore, smette di muoversi
                 isFollowing = false;
             }
         }
-        
     }
+    #endregion
+
+    #region Fork
+    public void ForkB()
+    {
+    Anm.PlayAnimationLoop(IdleBAnimationName);
+    }
+#endregion
+
+    #region Knife
+    public void KnifeB()
+    {
+    Anm.PlayAnimationLoop(IdleBAnimationName);
+    }
+#endregion
+
+    #region Spoon
+    public void SpoonB()
+    {
+    Anm.PlayAnimationLoop(IdleBAnimationName);
+    }
+#endregion
+
     public void Direction(){transform.localScale = new Vector3(-1, 1,1);}
-    public void Posebattle(){PlayAnimation(IdleBAnimationName);}
+    public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
+    public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
+    public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName);}    
     private void Flip()
     {
         if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
@@ -139,55 +190,4 @@ private void OnDrawGizmos()
     }
 #endregion
 #endif
-
-private void PlayAnimation(string animationName)
-    {
-        _skeletonAnimation.state.SetAnimation(0, animationName, false);
-        _skeletonAnimation.state.GetCurrent(0).Complete += OnAttackAnimationComplete;
-    }
-    public void Idle()
-{
-    if (currentAnimationName != IdleAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, IdleAnimationName, true);
-                    currentAnimationName = IdleAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
-                }
-}
- public void Walk()
-{
-    if (currentAnimationName != WalkAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, WalkAnimationName, true);
-                    currentAnimationName = WalkAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
-                }
-}
-
- public void Run()
-{
-    if (currentAnimationName != RunAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, RunAnimationName, true);
-                    currentAnimationName = RunAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
-                }
-}
-public void Allarm()
-{
-    if (currentAnimationName != AllarmAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, AllarmAnimationName, false);
-                    currentAnimationName = AllarmAnimationName;
-                }
-}
-private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
-{
-    // Remove the event listener
-    trackEntry.Complete -= OnAttackAnimationComplete;
-
-    // Clear the track 1 and reset to the idle animation
-    _skeletonAnimation.state.ClearTrack(1);
-    _skeletonAnimation.state.SetAnimation(0, IdleAnimationName, true);
-}
 }
