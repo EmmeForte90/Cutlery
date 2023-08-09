@@ -262,6 +262,14 @@ public class GameManager : MonoBehaviour
         ch_FAc.Allarm(); ch_KAc.Allarm(); ch_SAc.Allarm();
     }
 
+    public void StopAllarm()
+    {
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_FAc.StopAllarm(); ch_KAc.StopAllarm(); ch_SAc.StopAllarm();
+    }
+
     public void Exploration()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();

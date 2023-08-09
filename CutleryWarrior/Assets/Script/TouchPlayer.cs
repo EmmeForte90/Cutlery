@@ -42,18 +42,14 @@ public class TouchPlayer : MonoBehaviour
    
     if ((transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
     {savedPosition = Player.transform.position; GameManager.instance.savedPosition = savedPosition; takeCoo = false;}
-    
     }
-
     private void ChangeScene()
     {   
     SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-    SceneManager.sceneLoaded -= OnSceneLoaded;   
-}
+    {SceneManager.sceneLoaded -= OnSceneLoaded;}
 IEnumerator WaitForSceneLoad()
 {   
     GameManager.instance.ChStop();
@@ -62,6 +58,7 @@ IEnumerator WaitForSceneLoad()
     GameManager.instance.savedPosition = savedPosition;
     GameManager.instance.FadeIn();
     yield return new WaitForSeconds(2f);
+    GameManager.instance.StopAllarm();
     GameManager.instance.Posebattle();
     sceneEvent.InvokeOnSceneChange();
 }
@@ -90,5 +87,4 @@ private void OnDrawGizmos()
     }
 #endregion
 #endif
-
 }

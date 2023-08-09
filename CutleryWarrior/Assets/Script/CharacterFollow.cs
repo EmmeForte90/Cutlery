@@ -38,7 +38,8 @@ public class CharacterFollow : MonoBehaviour
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
     [SpineAnimation][SerializeField]  string AllarmAnimationName;
     public AnimationManager Anm;
-
+    [HideInInspector]
+    public bool Allarming;
     private string currentAnimationName;
     private float distance;
     public SkeletonAnimation _skeletonAnimation;
@@ -71,10 +72,11 @@ public class CharacterFollow : MonoBehaviour
         {
         case 0:  
         ////////////////////////////////////////
-        SimpleMove();
+        if(!Allarming)
+        {SimpleMove();
         if(Switch.isElement1Active){Player = Spoon;Flip();}
         else if(Switch.isElement2Active){Player = Fork;Flip();} 
-        else if(Switch.isElement3Active){Player = Knife;Flip();} 
+        else if(Switch.isElement3Active){Player = Knife;Flip();}} 
         break;
         ////////////////////////////////////////
         case 1: 
@@ -165,7 +167,8 @@ public class CharacterFollow : MonoBehaviour
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
-    public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName);}    
+    public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName); Allarming = true;}    
+    public void StopAllarm(){Allarming = false;}    
     private void Flip()
     {
         if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
