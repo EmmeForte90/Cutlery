@@ -104,10 +104,10 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     if (e.Data.Name == "shoot"){AudioManager.instance.PlayUFX(0); 
     if (Boom){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation);} StartCoroutine(StopVFX_F());}
     //Normal VFX
-    if (e.Data.Name == "slashV"){AudioManager.instance.PlayUFX(3); SlashV.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    if (e.Data.Name == "slashV"){AudioManager.instance.PlayUFX(8); SlashV.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     //
-    if (e.Data.Name == "slashH"){AudioManager.instance.PlayUFX(3); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    if (e.Data.Name == "slashH"){AudioManager.instance.PlayUFX(8); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     //
-    if (e.Data.Name == "slashB"){AudioManager.instance.PlayUFX(3); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    if (e.Data.Name == "slashB"){AudioManager.instance.PlayUFX(8); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
 }
 }

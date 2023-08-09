@@ -3,8 +3,7 @@ size:2048,512
 filter:Linear,Linear
 pma:true
 Braccio
-bounds:127,29,45,87
-rotate:90
+bounds:1415,234,45,87
 Dita
 bounds:964,175,22,53
 Dress/Cape
@@ -41,8 +40,11 @@ Dress/arSp_2
 bounds:1207,220,102,101
 Dress/arSp_3
 bounds:1311,220,102,101
+Esc
+bounds:127,35,39,96
+rotate:90
 Eye2
-bounds:1415,289,36,32
+bounds:225,42,36,32
 Gamba
 bounds:964,230,33,128
 Livello 2

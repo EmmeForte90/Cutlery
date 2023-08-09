@@ -93,7 +93,7 @@ public void Flip()
 
     IEnumerator CoordinateActor()
     {
-        // Switcha tra gli elementi
+    // Switcha tra gli elementi
     if (isElement1Active)
     {
         ForkActive.SwitchScriptsPlayer();
@@ -106,11 +106,9 @@ public void Flip()
         yield return new WaitForSeconds(0.01f);
         Flip();
         player = GameObject.FindGameObjectWithTag("F_Player");
-        
+        AudioManager.instance.PlayUFX(3);
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
-        //ottieni il riferimento alla virtual camera di Cinemachine
         vCam.Follow = player.transform;
-        
         //////////////////////////////
         isElement1Active = false;
         isElement2Active = true;
@@ -127,11 +125,9 @@ public void Flip()
         yield return new WaitForSeconds(0.01f);
         Flip();
         player = GameObject.FindGameObjectWithTag("K_Player");
-        
+        AudioManager.instance.PlayUFX(3);
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
-        //ottieni il riferimento alla virtual camera di Cinemachine
         vCam.Follow = player.transform;
-        
         //////////////////////////////
         isElement2Active = false;
         isElement3Active = true;
@@ -148,11 +144,9 @@ public void Flip()
         yield return new WaitForSeconds(0.01f);
         Flip();
         player = GameObject.FindGameObjectWithTag("S_Player");
-
+        AudioManager.instance.PlayUFX(3);
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
-        //ottieni il riferimento alla virtual camera di Cinemachine
         vCam.Follow = player.transform;
-
         //////////////////////////////
         isElement3Active = false;
         isElement1Active = true;

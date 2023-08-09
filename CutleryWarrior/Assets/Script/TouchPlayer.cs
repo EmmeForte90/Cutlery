@@ -70,10 +70,13 @@ public void Flip()
 public void OnTriggerEnter(Collider other)
 {
     if (other.CompareTag("F_Player") || other.CompareTag("K_Player") || other.CompareTag("S_Player"))
-    {
+    {                
+        AudioManager.instance.CrossFadeOUTAudio(0);
+        AudioManager.instance.PlayUFX(7);
         GameManager.instance.ChStop();
         GameManager.instance.Allarm();
         CameraZoom.instance.ZoomIn();
+        AudioManager.instance.CrossFadeINAudio(1);
         StartCoroutine(WaitForSceneLoad());
 }}
 #if(UNITY_EDITOR)
