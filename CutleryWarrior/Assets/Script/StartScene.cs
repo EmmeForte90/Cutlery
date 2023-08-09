@@ -42,10 +42,16 @@ public class StartScene : MonoBehaviour
     }}
     public void Spawn(int ID)
     {
-    ContainerHero.transform.position = SpawnArr[ID].transform.position;
+    if(!GameManager.instance.battle)
+    {ContainerHero.transform.position = SpawnArr[ID].transform.position;
     KAct.transform.position = ContainerHero.transform.position;
     FAct.transform.position = ContainerHero.transform.position;
-    SAct.transform.position = ContainerHero.transform.position;    
+    SAct.transform.position = ContainerHero.transform.position;
+    }else if (GameManager.instance.battle)
+    {KAct.transform.position = GameManager.instance.savedPosition;
+    FAct.transform.position = GameManager.instance.savedPosition;
+    SAct.transform.position = GameManager.instance.savedPosition;
+    }
     }
     public void Confiner(int ID)
     {

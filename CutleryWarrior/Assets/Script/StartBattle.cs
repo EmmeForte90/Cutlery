@@ -41,10 +41,31 @@ public class StartBattle : MonoBehaviour
  [Header("Enemy")]
     public SimpleEnemy E_Script;
     public DuelManager Duel_Script;
-    public void Start()
+
+    public void Awake()
     {
         if (instance == null){instance = this;}
-
+        F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        Skin_F = GameObject.Find("F_Player").GetComponent<ChangeHeroSkin>();
+        Skin_K = GameObject.Find("K_Player").GetComponent<ChangeHeroSkin>();
+        Skin_S = GameObject.Find("S_Player").GetComponent<ChangeHeroSkin>();
+        GameManager.instance.Battle();
+        Skin_S.UpdateCharacterSkin();
+		Skin_S.UpdateCombinedSkin();
+        Skin_F.UpdateCharacterSkin();
+		Skin_F.UpdateCombinedSkin();
+        Skin_K.UpdateCharacterSkin();
+		Skin_K.UpdateCombinedSkin(); 
+        GameManager.instance.Posebattle();
+        ForkActive = GameObject.Find("F_Player");
+        SpoonActive = GameObject.Find("S_Player");
+        KnifeActive = GameObject.Find("K_Player");
+        //Duel_Script.inputCTR = true;
+    }
+    public void Start()
+    {
         // Genera un numero casuale tra 1 e 2
         //float randomNumber = Random.Range(1f, 2f);
 
@@ -53,18 +74,6 @@ public class StartBattle : MonoBehaviour
 
          // Stampa il risultato nella console
         //Debug.Log("Numero casuale: " + result);
-
-        Duel_Script.inputCTR = true;
-        F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();
-        S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        Skin_F = GameObject.Find("F_Player").GetComponent<ChangeHeroSkin>();
-        Skin_K = GameObject.Find("K_Player").GetComponent<ChangeHeroSkin>();
-        Skin_S = GameObject.Find("S_Player").GetComponent<ChangeHeroSkin>();
-        ////////////////////////
-        ForkActive = GameObject.Find("F_Player");
-        SpoonActive = GameObject.Find("S_Player");
-        KnifeActive = GameObject.Find("K_Player");
         ForkActive.transform.position = F_point.transform.position;
         KnifeActive.transform.position = K_point.transform.position;
         SpoonActive.transform.position = S_point.transform.position;
@@ -72,15 +81,7 @@ public class StartBattle : MonoBehaviour
         ForkActive.transform.localScale = new Vector3(1, 1,1);
         KnifeActive.transform.localScale = new Vector3(1, 1,1);
         SpoonActive.transform.localScale = new Vector3(1, 1,1);
-        F_Script.IDAction = 1; S_Script.IDAction = 1; K_Script.IDAction = 1;
         ////////////////////////
-        Skin_S.UpdateCharacterSkin();
-		Skin_S.UpdateCombinedSkin();
-        Skin_F.UpdateCharacterSkin();
-		Skin_F.UpdateCombinedSkin();
-        Skin_K.UpdateCharacterSkin();
-		Skin_K.UpdateCombinedSkin(); 
-        GameManager.instance.Posebattle();
         StartCoroutine(DuringInter());
     }
 

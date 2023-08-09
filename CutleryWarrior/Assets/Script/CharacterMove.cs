@@ -426,9 +426,8 @@ public void Allarm()
 {
     if (currentAnimationName != AllarmAnimationName)
                 {
-                    _spineAnimationState.SetAnimation(2, AllarmAnimationName, true);
+                    _spineAnimationState.SetAnimation(2, AllarmAnimationName, false);
                     currentAnimationName = AllarmAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
                 }
 }
 public void DodgeFAnm()

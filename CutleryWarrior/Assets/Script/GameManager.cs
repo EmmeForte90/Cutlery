@@ -83,19 +83,9 @@ public class GameManager : MonoBehaviour
    
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-         if (GameManagerExist) //&& gameplayOff) 
-        {
-            Destroy(gameObject);
-        }
-        else 
-        {
-            GameManagerExist = true;
-            DontDestroyOnLoad(gameObject); 
-        }
+        if (instance == null){instance = this;}
+        if (GameManagerExist){Destroy(gameObject);}
+        else {GameManagerExist = true; DontDestroyOnLoad(gameObject);}
         
         TakeCharacter();
         /*if(!battle)
@@ -253,6 +243,21 @@ public class GameManager : MonoBehaviour
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_F.Allarm(); ch_K.Allarm(); ch_S.Allarm();
+    }
+
+    public void Exploration()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.IDAction = 0; ch_K.IDAction = 0; ch_S.IDAction = 0;
+    }
+    public void Battle()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.IDAction = 1; ch_K.IDAction = 1; ch_S.IDAction = 1;
     }
     public void AddTomoney(int pointsToAdd)
     {

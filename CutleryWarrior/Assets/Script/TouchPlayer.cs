@@ -20,6 +20,7 @@ public class TouchPlayer : MonoBehaviour
     private Transform Spoon;
     private Transform Knife;
     private SwitchCharacter Switch;
+    public bool takeCoo = false;
 
     public void Start()
     {
@@ -35,10 +36,15 @@ public class TouchPlayer : MonoBehaviour
         if(Switch.isElement1Active){Player = Spoon;}
         else if(Switch.isElement2Active){Player = Fork;} 
         else if(Switch.isElement3Active){Player = Knife;} 
-
+    if(!takeCoo){
     if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance)
-    {savedPosition = Player.transform.position;}
+    {savedPosition = Player.transform.position; GameManager.instance.savedPosition = savedPosition; takeCoo = true;}}
+   
+    if ((transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
+    {savedPosition = Player.transform.position; GameManager.instance.savedPosition = savedPosition; takeCoo = false;}
+    
     }
+
     private void ChangeScene()
     {   
     SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
@@ -54,10 +60,9 @@ IEnumerator WaitForSceneLoad()
     yield return new WaitForSeconds(2f);
     GameManager.instance.battle = true;
     GameManager.instance.savedPosition = savedPosition;
-    GameManager.instance.sceneName = sceneName;
     GameManager.instance.FadeIn();
-    GameManager.instance.Posebattle();
     yield return new WaitForSeconds(2f);
+    GameManager.instance.Posebattle();
     sceneEvent.InvokeOnSceneChange();
 }
 public void Flip()
@@ -69,7 +74,6 @@ public void OnTriggerEnter(Collider other)
 {
     if (other.CompareTag("F_Player") || other.CompareTag("K_Player") || other.CompareTag("S_Player"))
     {
-        GameManager.instance.savedPosition = savedPosition;
         GameManager.instance.ChStop();
         GameManager.instance.Allarm();
         CameraZoom.instance.ZoomIn();

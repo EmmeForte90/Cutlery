@@ -32,8 +32,6 @@ public class ChangeArea : MonoBehaviour
         collision.gameObject.CompareTag("S_Player"))
         {StartCoroutine(ChangeAreaF());}
     }
-     public void ReturnHome()
-    {StartCoroutine(ChangeAreaF());}
     public void ModifyConfiner()
     {
         confiner.m_BoundingVolume  = null; 
