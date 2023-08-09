@@ -62,7 +62,6 @@ private SceneEvent sceneEvent;
     GameManager.instance.FadeIn();
     yield return new WaitForSeconds(2f);
     SwitchCharacter.instance.ActiveCH();
-    GameManager.instance.battle = true;
     GameManager.instance.Exploration();
     sceneEvent.InvokeOnSceneChange();
     CharacterMove.instance.isRun = false;

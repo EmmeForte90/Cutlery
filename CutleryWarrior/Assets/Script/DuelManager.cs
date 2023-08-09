@@ -73,10 +73,7 @@ public int CharacterID;
 public static DuelManager instance;
 public void Awake()
     {
-         if (instance == null)
-        {
-            instance = this;
-        }
+         if (instance == null){instance = this;}
         Animator animator = GetComponent<Animator>();
         FcurrentHealth = FmaxHealth;
         FcurrentMP = FmaxMP;
@@ -91,7 +88,7 @@ public void Awake()
         // Aggiungiamo un listener all'evento di cambio scena
         //sceneEvent.onSceneChange.AddListener(ChangeScene);
     }
-void Update()
+public void Update()
     {
         FhealthBar.size = FcurrentHealth / FmaxHealth;
         FhealthBar.size = Mathf.Clamp(FhealthBar.size, 0.01f, 1);

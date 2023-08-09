@@ -48,7 +48,8 @@ public class StartScene : MonoBehaviour
     FAct.transform.position = ContainerHero.transform.position;
     SAct.transform.position = ContainerHero.transform.position;
     }else if (GameManager.instance.battle)
-    {KAct.transform.position = GameManager.instance.savedPosition;
+    {GameManager.instance.battle = false;
+    KAct.transform.position = GameManager.instance.savedPosition;
     FAct.transform.position = GameManager.instance.savedPosition;
     SAct.transform.position = GameManager.instance.savedPosition;
     }

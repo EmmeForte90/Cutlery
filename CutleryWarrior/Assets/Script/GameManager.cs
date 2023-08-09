@@ -50,7 +50,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float ExpF = 0;
     [SerializeField] public TextMeshProUGUI ExpTextMF;
     [SerializeField] CharacterMove ch_F;
-      [SerializeField] ManagerCharacter Manager_F;
+    [SerializeField] CharacterFollow ch_FAc;
+    [SerializeField] ManagerCharacter Manager_F;
 
 
     [Header("Spoon")]
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float ExpS = 0;
     [SerializeField] public TextMeshProUGUI ExpTextMS;
     [SerializeField] CharacterMove ch_S;
+    [SerializeField] CharacterFollow ch_SAc;
     [SerializeField] ManagerCharacter Manager_S;
 
 
@@ -74,6 +76,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float ExpK = 0;
     [SerializeField] public TextMeshProUGUI ExpTextMK;
     [SerializeField] CharacterMove ch_K;
+    [SerializeField] CharacterFollow ch_KAc;
+
     [SerializeField] ManagerCharacter Manager_K;
 
     [SerializeField] GameObject ExpObjectM;
@@ -113,10 +117,7 @@ public class GameManager : MonoBehaviour
             break;
         }}
 
-        public void TakeCamera()
-    {
-        //CharacterMove.instance.TakeCamera();
-    }   
+       
 
     public void Start()
     {
@@ -201,6 +202,14 @@ public class GameManager : MonoBehaviour
     }
     }
 
+
+    public void TakeCamera()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.TakeCamera(); ch_K.TakeCamera(); ch_S.TakeCamera();
+    }   
     public void ChMov()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
@@ -234,7 +243,11 @@ public class GameManager : MonoBehaviour
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_F.Posebattle(); ch_K.Posebattle(); ch_S.Posebattle();
+        ch_FAc.Posebattle(); ch_KAc.Posebattle(); ch_SAc.Posebattle();
     }
 
     public void Allarm()

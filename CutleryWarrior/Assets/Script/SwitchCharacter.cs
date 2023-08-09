@@ -31,35 +31,19 @@ public class SwitchCharacter : MonoBehaviour
     private CinemachineVirtualCamera vCam;
     private GameObject player;
     public UIRotationSwitcher rotationSwitcher;
-void Update()
-    {
-        
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //SwitchElement();
-            StartCoroutine(CoordinateActor());
-            
-        }    
-    }
-    private void Start()
-    {
-        inizial();
-    }
-
-private void Awake()
-    {
-        if (instance == null){instance = this;}   
-    }
+    public void Update(){if (Input.GetKeyDown(KeyCode.Space)){StartCoroutine(CoordinateActor());}}
+    public void Start(){inizial();}
+    public void Awake(){if (instance == null){instance = this;}}
 
     #region ChangeCharacter
-public void inizial()
-{
-        player = GameObject.FindGameObjectWithTag("Player");  
-        TakeCharacters();
-        if(!battle)
-        {vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-        vCam.Follow = ForkActive.transform;}
-}
+    public void inizial()
+    {
+            player = GameObject.FindGameObjectWithTag("Player");  
+            TakeCharacters();
+            
+            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+            vCam.Follow = ForkActive.transform;
+    }
 
 
 
@@ -125,7 +109,7 @@ public void Flip()
         SpoonActive.gameObject.SetActive(true);
     }
 
-IEnumerator CoordinateActor()
+    IEnumerator CoordinateActor()
     {
         // Switcha tra gli elementi
     if (isElement1Active)
@@ -133,17 +117,16 @@ IEnumerator CoordinateActor()
         ForkActive.SwitchScriptsPlayer();
         KnifeActive.SwitchScriptsActor();
         SpoonActive.SwitchScriptsActor();
-        if(GameManager.instance.battle)
-        {DuelManager.instance.CharacterID = 1;}
-        else if(!GameManager.instance.battle)
-        {rotationSwitcher.CharacterID = 1;}
+        
+        rotationSwitcher.CharacterID = 1;
         yield return new WaitForSeconds(0.01f);
         Flip();
         player = GameObject.FindGameObjectWithTag("F_Player");
-        if(!battle){
+        
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         //ottieni il riferimento alla virtual camera di Cinemachine
-        vCam.Follow = player.transform;}
+        vCam.Follow = player.transform;
+        
         //////////////////////////////
         isElement1Active = false;
         isElement2Active = true;
@@ -153,17 +136,16 @@ IEnumerator CoordinateActor()
         ForkActive.SwitchScriptsActor();
         KnifeActive.SwitchScriptsPlayer();
         SpoonActive.SwitchScriptsActor();
-        if(GameManager.instance.battle)
-        {DuelManager.instance.CharacterID = 2;}
-        else if(!GameManager.instance.battle)
-        {rotationSwitcher.CharacterID = 2;}
+
+        rotationSwitcher.CharacterID = 2;
         yield return new WaitForSeconds(0.01f);
         Flip();
         player = GameObject.FindGameObjectWithTag("K_Player");
-        if(!battle){
+        
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         //ottieni il riferimento alla virtual camera di Cinemachine
-        vCam.Follow = player.transform;}
+        vCam.Follow = player.transform;
+        
         //////////////////////////////
         isElement2Active = false;
         isElement3Active = true;
@@ -173,17 +155,16 @@ IEnumerator CoordinateActor()
         ForkActive.SwitchScriptsActor();
         KnifeActive.SwitchScriptsActor();
         SpoonActive.SwitchScriptsPlayer();
-        if(GameManager.instance.battle)
-        {DuelManager.instance.CharacterID = 3;}
-        else if(!GameManager.instance.battle)
-        {rotationSwitcher.CharacterID = 3;}
+        
+        rotationSwitcher.CharacterID = 3;
         yield return new WaitForSeconds(0.01f);
         Flip();
         player = GameObject.FindGameObjectWithTag("S_Player");
-        if(!battle){
+
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         //ottieni il riferimento alla virtual camera di Cinemachine
-        vCam.Follow = player.transform;}
+        vCam.Follow = player.transform;
+
         //////////////////////////////
         isElement3Active = false;
         isElement1Active = true;

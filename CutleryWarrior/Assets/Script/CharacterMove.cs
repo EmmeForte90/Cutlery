@@ -167,7 +167,7 @@ public void Awake()
 #region Fork
     public void ForkB()
     {
-    if(!DuelManager.instance.inputCTR)
+    if(!inputCTR)
     {
         if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
         Flip();  
@@ -219,7 +219,7 @@ public void Awake()
 #region Knife
     public void KnifeB()
     {
-    if(!DuelManager.instance.inputCTR)
+    if(!inputCTR)
     {
     Flip();
     input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -301,6 +301,8 @@ public void Awake()
 #endregion
 
     public void Posebattle(){PlayAnimation(IdleBAnimationName);}
+    public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
+
     public void FixedUpdate()
     {
     if(!inputCTR)

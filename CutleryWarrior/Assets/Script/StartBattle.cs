@@ -15,36 +15,36 @@ public class StartBattle : MonoBehaviour
     public GameObject DuelManagerO; // Variabile per il player
     public static StartBattle instance;
 
-[Header("Stats")]
+    [Header("Stats")]
 
     [Header("Fork")]
-
     private GameObject ForkActive;
     private CharacterMove F_Script;
     public GameObject F_point; // Variabile per il player
     private ChangeHeroSkin Skin_F;
 
     [Header("Spoon")]
-
     private GameObject SpoonActive;
     private CharacterMove S_Script;
     public GameObject S_point; // Variabile per il player
     private ChangeHeroSkin Skin_S;
 
- [Header("Knife")]
-
+    [Header("Knife")]
     private GameObject KnifeActive;
     private CharacterMove K_Script;
     public GameObject K_point; // Variabile per il player
     private ChangeHeroSkin Skin_K;
 
- [Header("Enemy")]
+    [Header("Enemy")]
     public SimpleEnemy E_Script;
     public DuelManager Duel_Script;
 
     public void Awake()
     {
         if (instance == null){instance = this;}
+        GameManager.instance.battle = true;
+        GameManager.instance.ChStop();
+        GameManager.instance.TakeCamera();
         F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();
         K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();
@@ -62,7 +62,7 @@ public class StartBattle : MonoBehaviour
         ForkActive = GameObject.Find("F_Player");
         SpoonActive = GameObject.Find("S_Player");
         KnifeActive = GameObject.Find("K_Player");
-        //Duel_Script.inputCTR = true;
+        GameManager.instance.ChCanM();
     }
     public void Start()
     {

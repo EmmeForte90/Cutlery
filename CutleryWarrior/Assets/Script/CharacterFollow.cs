@@ -21,9 +21,12 @@ public class CharacterFollow : MonoBehaviour
     private bool isFollowing;
     private bool isGrounded;
     private bool isWalking;
-    [SpineAnimation][SerializeField] private string WalkAnimationName;    
-    [SpineAnimation][SerializeField] private string RunAnimationName;
-    [SpineAnimation][SerializeField] private string IdleAnimationName;
+    [SpineAnimation][SerializeField]  string WalkAnimationName;    
+    [SpineAnimation][SerializeField]  string RunAnimationName;
+    [SpineAnimation][SerializeField]  string IdleAnimationName;
+    [SpineAnimation][SerializeField]  string IdleBAnimationName;
+    [SpineAnimation][SerializeField]  string AllarmAnimationName;
+
     private string currentAnimationName;
     private float distance;
     public SkeletonAnimation _skeletonAnimation;
@@ -31,23 +34,14 @@ public class CharacterFollow : MonoBehaviour
     public Spine.Skeleton _skeleton;
     Spine.EventData eventData;
 
-public static CharacterFollow instance;
+    public static CharacterFollow instance;
 
     public void Awake()
     {
-         if (instance == null)
-        {
-            instance = this;
-        }
+         if (instance == null){instance = this;}
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
-        if (_skeletonAnimation == null) {
-            Debug.LogError("Componente SkeletonAnimation non trovato!");
-        } 
-        if (Switch == null) 
-        {        
-            Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();;
-            //Debug.LogError("Componente SkeletonAnimation non trovato!");
-        } 
+        if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");} 
+        if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();;} 
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
@@ -58,7 +52,6 @@ public static CharacterFollow instance;
     
     public void Update()
     {
-
         if(Switch.isElement1Active)
         {Player = Spoon;Flip();}
         else if(Switch.isElement2Active)
@@ -69,10 +62,7 @@ public static CharacterFollow instance;
         // Verifica se il personaggio è a terra
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
 
-        
-
-        if (!isFollowing)
-        {Idle(); isWalking = false;}
+        if (!isFollowing){Idle(); isWalking = false;}
 
 
         if ((transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
@@ -93,16 +83,12 @@ public static CharacterFollow instance;
             // Calcola la distanza dal giocatore
             distance = Vector3.Distance(transform.position, Player.position);
             
-
             if (distance > stoppingDistance)
             {
                 if (!CharacterMove.instance.isRun)
                 {
                 if (!isWalking)
-                {
-                    isWalking = true;
-                    Walk();
-                }
+                {isWalking = true; Walk();}
 
                 // Muovi il personaggio verso il giocatore solo se la distanza supera la soglia di arresto
                 characterRigidbody.MovePosition(transform.position + direction * followSpeed * Time.deltaTime);
@@ -111,10 +97,7 @@ public static CharacterFollow instance;
                 if (CharacterMove.instance.isRun)
                 {
                 if (!isWalking)
-                {
-                    isWalking = true;
-                    Run();
-                }
+                {isWalking = true; Run();}
 
                 // Muovi il personaggio verso il giocatore solo se la distanza supera la soglia di arresto
                 characterRigidbody.MovePosition(transform.position + direction * RunSpeed * Time.deltaTime);
@@ -123,41 +106,25 @@ public static CharacterFollow instance;
             else if (!CharacterMove.instance.isRun)
             {
                 if (isWalking)
-                {
-                    isWalking = false;
-                    Idle();
-                }
-
+                {isWalking = false; Idle();}
                 // Il personaggio è vicino al giocatore, smette di muoversi
                 isFollowing = false;
             }
         }
         
     }
-
-    public void Direction()
+    public void Direction(){transform.localScale = new Vector3(-1, 1,1);}
+    public void Posebattle(){PlayAnimation(IdleBAnimationName);}
+    private void Flip()
     {
-        transform.localScale = new Vector3(-1, 1,1);
-    }
-private void Flip()
-    {
-        if (Player.localScale.x > 0f)
-        {
-            transform.localScale = new Vector3(1, 1,1);
-    
-        }else if (Player.localScale.x < 0f)
-        {
-            transform.localScale = new Vector3(-1, 1,1);
-
-        }
+        if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
+        else if (Player.localScale.x < 0f){transform.localScale = new Vector3(-1, 1,1);}
     }
     public void FixedUpdate()
     {
         // Evita che il personaggio cada per terra durante il movimento
         if (isGrounded)
-        {
-            characterRigidbody.velocity = Vector3.zero;
-        }
+        {characterRigidbody.velocity = Vector3.zero;}
     }
 
 #if(UNITY_EDITOR)
@@ -172,6 +139,12 @@ private void OnDrawGizmos()
     }
 #endregion
 #endif
+
+private void PlayAnimation(string animationName)
+    {
+        _skeletonAnimation.state.SetAnimation(0, animationName, false);
+        _skeletonAnimation.state.GetCurrent(0).Complete += OnAttackAnimationComplete;
+    }
     public void Idle()
 {
     if (currentAnimationName != IdleAnimationName)
@@ -199,5 +172,22 @@ private void OnDrawGizmos()
                     currentAnimationName = RunAnimationName;
                     //_spineAnimationState.Event += HandleEvent;
                 }
+}
+public void Allarm()
+{
+    if (currentAnimationName != AllarmAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, AllarmAnimationName, false);
+                    currentAnimationName = AllarmAnimationName;
+                }
+}
+private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
+{
+    // Remove the event listener
+    trackEntry.Complete -= OnAttackAnimationComplete;
+
+    // Clear the track 1 and reset to the idle animation
+    _skeletonAnimation.state.ClearTrack(1);
+    _skeletonAnimation.state.SetAnimation(0, IdleAnimationName, true);
 }
 }

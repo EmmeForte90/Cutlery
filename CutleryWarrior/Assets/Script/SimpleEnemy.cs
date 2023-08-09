@@ -66,7 +66,7 @@ public class SimpleEnemy : MonoBehaviour
     public void TakePlayer()
     {
     player = null;
-    player = GameObject.FindGameObjectWithTag("Player").transform;
+    //player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     private void ChasePlayer()
     {
@@ -107,20 +107,12 @@ public class SimpleEnemy : MonoBehaviour
     {
         // Inserisci qui la logica per subire danni
     }
-    void FacePlayer()
+    public void FacePlayer()
     {
-        
-            if (player.transform.position.x > transform.position.x)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
-            else if (player.transform.position.x < transform.position.x)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
-        
+    //if (player.transform.position.x > transform.position.x){transform.localScale = new Vector3(-1, 1, 1);}
+    //else if (player.transform.position.x < transform.position.x){transform.localScale = new Vector3(1, 1, 1);}  
     }
-    private void Die()
+    public void Die()
     {
         // Inserisci qui la logica per la morte del nemico
         Debug.Log("Il nemico è morto!");
