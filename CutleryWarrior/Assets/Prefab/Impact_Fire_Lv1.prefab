@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6636262004291732428}
   - component: {fileID: 539397893221785512}
   - component: {fileID: 8407609544244632386}
+  - component: {fileID: 9012421266184150880}
   m_Layer: 0
   m_Name: Impact_Fire_Lv1
   m_TagString: Untagged
@@ -4828,6 +4829,20 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &9012421266184150880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920225923742602794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab8a8ec5caf8e945945046ae5e25ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 1
+  title: {fileID: 1920225923742602794}
 --- !u!1 &2138280144977585234
 GameObject:
   m_ObjectHideFlags: 0

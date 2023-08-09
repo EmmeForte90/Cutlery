@@ -99,21 +99,22 @@ IEnumerator DuringInter()
         GameManager.instance.ChCanM();
         if(Switch.isElement1Active)
         {
+            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+            player = GameObject.FindWithTag("S_Player"); 
+            vCam.Follow = player.transform;
+        }else if(Switch.isElement2Active)
+        {
             vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
             player = GameObject.FindWithTag("F_Player"); 
             vCam.Follow = player.transform;
-        }else if(Switch.isElement2Active)
+            
+        }else if(Switch.isElement3Active)
         {
             vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
             player = GameObject.FindWithTag("K_Player");  
             vCam.Follow = player.transform;
-        }else if(Switch.isElement3Active)
-        {
-            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
-            player = GameObject.FindWithTag("S_Player"); 
-            vCam.Follow = player.transform;
+            
         }
-       
         Duel_Script.inputCTR = false;
     }
     

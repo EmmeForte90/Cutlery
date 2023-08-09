@@ -10,24 +10,24 @@ public class SwitchCharacter : MonoBehaviour
 {
     public bool battle = false;
 
- [Header("Stats")]
-
+    [Header("Stats")]
+ 
     [Header("Fork")]
-
+    public GameObject Ind_F;
     private ManagerCharacter ForkActive;
-
-    [Header("Spoon")]
-
-    private ManagerCharacter SpoonActive;
-
+    public bool isElement1Active = false;
+ 
     [Header("Knife")]
-
+    public GameObject Ind_K;
     private ManagerCharacter KnifeActive;
+    public bool isElement2Active = true;
+   
+    [Header("Spoon")]
+    public GameObject Ind_S;
+    private ManagerCharacter SpoonActive;
+    public bool isElement3Active = false;
 
     public static SwitchCharacter instance;
-    public bool isElement1Active = false;
-    public bool isElement2Active = true;
-    public bool isElement3Active = false;
     private CinemachineVirtualCamera vCam;
     private GameObject player;
     public UIRotationSwitcher rotationSwitcher;
@@ -40,13 +40,9 @@ public class SwitchCharacter : MonoBehaviour
     {
             player = GameObject.FindGameObjectWithTag("Player");  
             TakeCharacters();
-            
             vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
             vCam.Follow = ForkActive.transform;
     }
-
-
-
 public void Flip()
     {
         if (ForkActive.transform.localScale.x > 0f)
@@ -78,25 +74,13 @@ public void Flip()
         switch(rotationSwitcher.CharacterID)
         {
             case 1:
-            
-            ForkActive.SwitchScriptsPlayer();
-            KnifeActive.SwitchScriptsActor();
-            SpoonActive.SwitchScriptsActor();
-            
+            ForkActive.SwitchScriptsPlayer(); KnifeActive.SwitchScriptsActor(); SpoonActive.SwitchScriptsActor();
             break;
             case 2:
-            
-            ForkActive.SwitchScriptsActor();
-            KnifeActive.SwitchScriptsPlayer();
-            SpoonActive.SwitchScriptsActor();
-            
+            ForkActive.SwitchScriptsActor(); KnifeActive.SwitchScriptsPlayer(); SpoonActive.SwitchScriptsActor(); 
             break;
             case 3:
-            
-            ForkActive.SwitchScriptsActor();
-            KnifeActive.SwitchScriptsActor();
-            SpoonActive.SwitchScriptsPlayer();
-            
+            ForkActive.SwitchScriptsActor(); KnifeActive.SwitchScriptsActor(); SpoonActive.SwitchScriptsPlayer();
             break;
         }
     }
@@ -115,7 +99,9 @@ public void Flip()
         ForkActive.SwitchScriptsPlayer();
         KnifeActive.SwitchScriptsActor();
         SpoonActive.SwitchScriptsActor();
-        
+        Ind_F.gameObject.SetActive(true); 
+        Ind_K.gameObject.SetActive(false); 
+        Ind_S.gameObject.SetActive(false);
         rotationSwitcher.CharacterID = 1;
         yield return new WaitForSeconds(0.01f);
         Flip();
@@ -134,7 +120,9 @@ public void Flip()
         ForkActive.SwitchScriptsActor();
         KnifeActive.SwitchScriptsPlayer();
         SpoonActive.SwitchScriptsActor();
-
+        Ind_F.gameObject.SetActive(false); 
+        Ind_K.gameObject.SetActive(true); 
+        Ind_S.gameObject.SetActive(false); 
         rotationSwitcher.CharacterID = 2;
         yield return new WaitForSeconds(0.01f);
         Flip();
@@ -153,7 +141,9 @@ public void Flip()
         ForkActive.SwitchScriptsActor();
         KnifeActive.SwitchScriptsActor();
         SpoonActive.SwitchScriptsPlayer();
-        
+        Ind_F.gameObject.SetActive(false); 
+        Ind_K.gameObject.SetActive(false); 
+        Ind_S.gameObject.SetActive(true);
         rotationSwitcher.CharacterID = 3;
         yield return new WaitForSeconds(0.01f);
         Flip();

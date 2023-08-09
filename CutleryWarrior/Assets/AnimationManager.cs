@@ -32,6 +32,7 @@ public class AnimationManager : MonoBehaviour
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
     Spine.EventData eventData;
+    private bool Boom = false;
     [HideInInspector]
     public GameObject Bullet;
     [HideInInspector]
@@ -59,12 +60,18 @@ public class AnimationManager : MonoBehaviour
         K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();     
     }
-    IEnumerator StopVFX()
+    IEnumerator StopVFX_K()
     {
         yield return new WaitForSeconds(1f);
         SlashV.gameObject.SetActive(false);
         SlashH.gameObject.SetActive(false);
         SlashB.gameObject.SetActive(false);
+    }
+    IEnumerator StopVFX_F()
+    {
+        Boom = false;
+        yield return new WaitForSeconds(0.5f);
+        Boom = true;
     }
     public void PlayAnimation(string animationName)
     {if (currentAnimationName != animationName){
@@ -94,12 +101,13 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
     //Normal VFX
     if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(0);}
-    if (e.Data.Name == "shoot"){AudioManager.instance.PlayUFX(0); Instantiate(Bullet, BPoint.position, Bullet.transform.rotation);}
+    if (e.Data.Name == "shoot"){AudioManager.instance.PlayUFX(0); 
+    if (Boom){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation);} StartCoroutine(StopVFX_F());}
     //Normal VFX
-    if (e.Data.Name == "slashV"){AudioManager.instance.PlayUFX(3); SlashV.gameObject.SetActive(true); StartCoroutine(StopVFX());}
+    if (e.Data.Name == "slashV"){AudioManager.instance.PlayUFX(3); SlashV.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     //
-    if (e.Data.Name == "slashH"){AudioManager.instance.PlayUFX(3); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX());}
+    if (e.Data.Name == "slashH"){AudioManager.instance.PlayUFX(3); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     //
-    if (e.Data.Name == "slashB"){AudioManager.instance.PlayUFX(3); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX());}
+    if (e.Data.Name == "slashB"){AudioManager.instance.PlayUFX(3); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
 }
 }

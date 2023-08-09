@@ -49,6 +49,8 @@ public class CharacterMove : MonoBehaviour
     [SpineAnimation][SerializeField]  string Atk3AnimationName;
     [SpineAnimation][SerializeField]  string Atk4AnimationName;
     [SpineAnimation][SerializeField]  string GuardAnimationName;
+    [SpineAnimation][SerializeField]  string GuardWalkAnimationName;
+    [SpineAnimation][SerializeField]  string GuardRunAnimationName;
     [SpineAnimation][SerializeField]  string GuardHitAnimationName;
     [SpineAnimation][SerializeField]  string DodgeFAnimationName;
     [SpineAnimation][SerializeField]  string DodgeBAnimationName;
@@ -59,6 +61,7 @@ public class CharacterMove : MonoBehaviour
     Spine.EventData eventData;
     private SwitchCharacter Switch;
     private Transform Player;
+    private bool isDefence = false;
 
     public AnimationManager Anm;
 
@@ -160,7 +163,125 @@ public void Awake()
     {
     if(!inputCTR)
     {
-        if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
+        Move();
+    //DODGE
+        // Rileva l'input del tasto spazio
+        if (Input.GetButtonDown("Fire2") && Time.time - DodgeTime > DodgeSTimer)
+        {
+            Dodge();
+            //DodgeFAnm();      
+            DodgeTime = Time.time; // Aggiorna l'ultimo momento di attacco
+        }
+    
+    //Attack
+        if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
+        && DuelManager.instance.FcurrentMP > 20)
+            {
+                Stop();
+                Anm.PlayAnimation(Atk4AnimationName);
+                DuelManager.instance.FcurrentMP -= 20;  
+                lastAttackTime = Time.time;
+            }
+    }
+    }
+#endregion
+
+#region Knife
+    public void KnifeB()
+    {
+    if(!inputCTR)
+    {
+        Move();
+        //DODGE
+        if (Input.GetButtonDown("Fire2") && Time.time - DodgeTime > DodgeSTimer)
+        {
+            Dodge();
+            //DodgeFAnm();      
+            DodgeTime = Time.time; // Aggiorna l'ultimo momento di attacco
+        }
+    
+    //Attack
+        if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
+        && DuelManager.instance.KcurrentMP > 20)
+        {HandleComboAttack();}
+    }}
+
+    private void HandleComboAttack()
+    {
+        comboCount++;
+        switch (comboCount)
+        {
+            case 1:
+                Anm.PlayAnimation(Atk1AnimationName); //Debug.Log("Attacco1");
+                break;
+            case 2:
+                Anm.PlayAnimation(Atk2AnimationName);//Debug.Log("Attacco2");
+                break;
+            case 3:
+                Anm.PlayAnimation(Atk3AnimationName); //Debug.Log("Attacco3");
+                break;
+            default:
+                comboCount = 1;
+                Anm.PlayAnimation(Atk1AnimationName);// Debug.Log("Attacco1");
+                break;
+        }
+        lastAttackTime = Time.time;
+    }
+#endregion
+
+#region Spoon
+    public void SpoonB()
+    {
+        if(!inputCTR)
+    {
+           Move();  
+    //DODGE
+        // Rileva l'input del tasto spazio
+        if (Input.GetMouseButtonDown(1) && DuelManager.instance.ScurrentMP > 20)
+        {isDefence = true; Anm.PlayAnimationLoop(GuardAnimationName);}
+
+        // Verifica se il tasto del mouse è stato rilasciato
+        if (Input.GetMouseButtonUp(1)){isDefence = false;}
+
+        // Continua ad eseguire l'azione mentre il tasto del mouse è premuto
+        //if (isDefence){Anm.PlayAnimationLoop(GuardAnimationName);}
+    
+    //Attack
+       // Verifica se il tasto del mouse è stato premuto
+         if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
+        && DuelManager.instance.ScurrentMP > 20)
+            {
+                Stop();
+                Anm.PlayAnimation(Atk1AnimationName);
+                DuelManager.instance.ScurrentMP -= 5;  
+                lastAttackTime = Time.time;
+            }
+
+    }
+    }
+    
+#endregion
+
+    public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
+    public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
+    public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
+    public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName);}
+
+    public void FixedUpdate()
+    {
+    if(!inputCTR)
+    {
+    if(!Interact && !isRun || isDefence)
+    {rb.MovePosition(transform.position + moveDir * 0.1f * Speed);} 
+    else if(!Interact && isRun && !isBattle && !StopM && !isDefence)
+    {rb.MovePosition(transform.position + moveDir * 0.1f * Run);
+    }else if(!Interact && isBattle && !StopM && !isDefence)
+    {rb.MovePosition(transform.position + moveDir * 0.1f * SpeedB);}
+    }}
+
+    #region Move
+    public void Move()
+    {if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
         Flip();  
         ////////////////////////////////
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -179,135 +300,15 @@ public void Awake()
         
         if (moveDir.magnitude > 0)
         {
-        if (!isRun){Anm.PlayAnimationLoop(WalkBAnimationName); stand = false;} 
-        else if (isRun){Anm.PlayAnimationLoop(RunBAnimationName); stand = false;}
+        if (!isRun && !isDefence){Anm.PlayAnimationLoop(WalkBAnimationName); stand = false;}
+        else if(!isRun && isDefence){Anm.PlayAnimationLoop(GuardWalkAnimationName); stand = false;} 
+        if (isRun && !isDefence){Anm.PlayAnimationLoop(RunBAnimationName); stand = false;}
+        else if(isRun && isDefence){Anm.PlayAnimationLoop(GuardRunAnimationName); stand = false;} 
         }
-        else{Anm.PlayAnimationLoop(IdleBAnimationName); stand = true;}
-        hor = Input.GetAxisRaw("Horizontal");     
-    //DODGE
-        // Rileva l'input del tasto spazio
-        if (Input.GetButtonDown("Fire2") && Time.time - DodgeTime > DodgeSTimer)
-        {
-            Dodge();
-            //DodgeFAnm();      
-            DodgeTime = Time.time; // Aggiorna l'ultimo momento di attacco
-        }
-    
-    //Attack
-        if ((Input.GetMouseButtonDown(0) && ((float)Input.mousePosition.x / (float)Screen.width) > (140f / 800f) 
-        || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter)) && DuelManager.instance.CharacterID == 1
-        && DuelManager.instance.FcurrentMP > 20)
-            {
-                Stop();
-                Anm.PlayAnimation(Atk4AnimationName);
-                DuelManager.instance.FcurrentMP -= 20;
-                
-            }
-    }
-    }
+        else if(!isDefence){Anm.PlayAnimationLoop(IdleBAnimationName); stand = true;}
+        else if(isDefence){Anm.PlayAnimationLoop(GuardAnimationName); stand = true;}
+        hor = Input.GetAxisRaw("Horizontal");}
 #endregion
-
-#region Knife
-    public void KnifeB()
-    {
-    if(!inputCTR)
-    {
-    Flip();
-    input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-    input = Vector2.ClampMagnitude(input, 1);
-    
-    if(Input.GetButton("Fire3")){isRun = true;} 
-    if (Input.GetButtonUp("Fire3")){isRun = false;}
-    camF = cam.forward;
-    camR = cam.right;
-    camF.y = 0;
-    camR.y = 0;
-    camF = camF.normalized;
-    camR = camR.normalized;  
-    moveDir = camR * input.x + camF * input.y;
-    if (moveDir.magnitude > 0)
-    {
-    if (!isRun)
-    {Anm.PlayAnimationLoop(WalkBAnimationName); stand = false;} 
-    else if (isRun && !StopM)
-    {Anm.PlayAnimationLoop(RunBAnimationName);stand = false;}
-    } 
-    else
-    {Anm.PlayAnimationLoop(IdleBAnimationName);stand = true;}
-    hor = Input.GetAxisRaw("Horizontal");
-
-    //DODGE
-        if (Input.GetButtonDown("Fire2") && Time.time - DodgeTime > DodgeSTimer)
-        {
-            Dodge();
-            //DodgeFAnm();      
-            DodgeTime = Time.time; // Aggiorna l'ultimo momento di attacco
-        }
-    
-    //Attack
-        if (Input.GetButtonDown("Fire1") && Time.time - lastAttackTime > comboTimer && DuelManager.instance.CharacterID == 2 
-        && DuelManager.instance.KcurrentMP > 20)
-    {
-        comboCount++;
-        switch (comboCount)
-        {
-            case 1:
-                Stop();
-                Anm.PlayAnimation(Atk1AnimationName); 
-                DuelManager.instance.KcurrentMP -= DuelManager.instance.KcostMP;
-                //_spineAnimationState.Event += HandleEvent;                //Debug.Log("Combo 1");
-                break;
-            case 2:
-                Stop();
-                Anm.PlayAnimation(Atk2AnimationName); 
-                DuelManager.instance.KcurrentMP -= DuelManager.instance.KcostMP;
-                //_spineAnimationState.Event += HandleEvent;                //Debug.Log("Combo 2");
-                break;
-            case 3:
-                Stop();
-                Anm.PlayAnimation(Atk3AnimationName); 
-                DuelManager.instance.KcurrentMP -= DuelManager.instance.KcostMP;
-                //_spineAnimationState.Event += HandleEvent;
-                break;
-            default:
-                comboCount = 1;
-                Stop();
-                Anm.PlayAnimation(Atk1AnimationName); 
-                DuelManager.instance.KcurrentMP -= DuelManager.instance.KcostMP;
-                //_spineAnimationState.Event += HandleEvent;
-                break;
-        }
-
-        lastAttackTime = Time.time; // Aggiorna l'ultimo momento di attacco
-    }
-    }
-    }
-#endregion
-
-#region Spoon
-    public void SpoonB()
-    {
-        //Ancora non è pronto
-    }
-#endregion
-
-    public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
-    public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
-    public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
-    public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName);}
-
-    public void FixedUpdate()
-    {
-    if(!inputCTR)
-    {
-    if(!Interact && !isRun)
-    {rb.MovePosition(transform.position + moveDir * 0.1f * Speed);} 
-    else if(!Interact && isRun && !isBattle && !StopM)
-    {rb.MovePosition(transform.position + moveDir * 0.1f * Run);
-    }else if(!Interact && isBattle && !StopM)
-    {rb.MovePosition(transform.position + moveDir * 0.1f * SpeedB);}
-    }}
-
     public void Stop(){rb.velocity = new Vector3(0f, 0f, 0f);}
 
     public void Flip()
@@ -315,31 +316,21 @@ public void Awake()
         if (hor > 0f){transform.localScale = new Vector3(1, 1,1);}
         else if (hor < 0f){transform.localScale = new Vector3(-1, 1,1);}
     }
-    /*IEnumerator StopVFX()
-    {
-        yield return new WaitForSeconds(1f);
-        SlashV.gameObject.SetActive(false);
-        SlashH.gameObject.SetActive(false);
-        SlashB.gameObject.SetActive(false);
-    }*/
-    public void Direction(){transform.localScale = new Vector3(-1, 1,1);}
+    
+    public void Direction(){transform.localScale = new Vector3(1, 1,1);}
 
     public void OnCollisionEnter(Collision collision)
     {
-        // Controlliamo se il player ha toccato il collider
-        if (collision.gameObject.CompareTag("Collider")){Anm.PlayAnimationLoop(IdleAnimationName); StopM = true;}// rb.AddForce(-transform.position + moveDir * 0.1f * SpeedB);}
+        if (collision.gameObject.CompareTag("Collider")){Anm.PlayAnimationLoop(IdleAnimationName); StopM = true;}
         else {StopM = false;}
     }
 
     public void OnCollisionExit(Collision collision)
-    {
-        // Controlliamo se il player ha smesso di collidere con l'oggetto
-        if (collision.gameObject.CompareTag("Collider")){StopM = false;}
-    }
+    {if (collision.gameObject.CompareTag("Collider")){StopM = false;}}
     private void Dodge()
-        {
-            Vector3 DodgeDirection = transform.position;
-            DodgeController.ApplyDodge(DodgeDirection);
-        }
+    {
+        Vector3 DodgeDirection = transform.position;
+        DodgeController.ApplyDodge(DodgeDirection);
+    }
 
 }

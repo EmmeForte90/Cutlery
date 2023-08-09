@@ -162,7 +162,7 @@ public class CharacterFollow : MonoBehaviour
     }
 #endregion
 
-    public void Direction(){transform.localScale = new Vector3(-1, 1,1);}
+    public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
     public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName);}    
