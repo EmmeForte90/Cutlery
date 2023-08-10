@@ -9,6 +9,7 @@ public class Weapon : Item
 
     [Header("Se è un arma")]
     public int weaponDamage;
+    public int MpCost;
 
     [Header("Se è un'armatura")]
     public int DefenceDress;

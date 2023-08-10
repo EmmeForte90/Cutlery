@@ -176,7 +176,7 @@ public void Awake()
                 Anm.PlayAnimation(Atk4AnimationName);
                 AudioManager.instance.PlayUFX(0); 
                 Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
-                PlayerStats.instance.F_curMP -= 20;  
+                PlayerStats.instance.F_curMP -= PlayerStats.instance.F_CostMP;  
                 lastAttackTime = Time.time;
             }else {AudioManager.instance.PlayUFX(10);}
     }
@@ -205,20 +205,20 @@ public void Awake()
         switch (comboCount)
         {
             case 1:
-                PlayerStats.instance.K_curMP -= 10;
+                PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
                 Anm.PlayAnimation(Atk1AnimationName); //Debug.Log("Attacco1");
                 break;
             case 2:
-                PlayerStats.instance.K_curMP -= 10;
+                PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
                 Anm.PlayAnimation(Atk2AnimationName);//Debug.Log("Attacco2");
                 break;
             case 3:
-                PlayerStats.instance.K_curMP -= 10;
+                PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
                 Anm.PlayAnimation(Atk3AnimationName); //Debug.Log("Attacco3");
                 break;
             default:
                 comboCount = 1;
-                PlayerStats.instance.K_curMP -= 10;
+                PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
                 Anm.PlayAnimation(Atk1AnimationName);// Debug.Log("Attacco1");
                 break;
         }
@@ -248,7 +248,7 @@ public void Awake()
             {
                 Stop();
                 Anm.PlayAnimation(Atk1AnimationName);
-                PlayerStats.instance.S_curMP -= 5;  
+                PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;  
                 lastAttackTime = Time.time;
             } else {AudioManager.instance.PlayUFX(10);}
     }
