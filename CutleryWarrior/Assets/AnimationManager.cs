@@ -106,8 +106,8 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
     //Normal VFX
     if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(0);}
-    if (e.Data.Name == "shoot"){AudioManager.instance.PlayUFX(0); 
-    if (Boom){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation);} StartCoroutine(StopVFX_F());}
+    //if (e.Data.Name == "shoot"){AudioManager.instance.PlayUFX(0); 
+    //if (Boom){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation);} StartCoroutine(StopVFX_F());}
     //Normal VFX
     if (e.Data.Name == "slashV")
     {AudioManager.instance.PlayUFX(8); SlashV.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}

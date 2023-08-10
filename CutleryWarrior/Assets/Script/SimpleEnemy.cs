@@ -11,6 +11,7 @@ public class SimpleEnemy : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
     public Scrollbar healthBar;
+    public GameObject Stats;
     public float SpeedRestore = 5f; // il massimo valore di essenza disponibile
     [Header("Move")]
     public float moveSpeed = 3f;
@@ -22,6 +23,9 @@ public class SimpleEnemy : MonoBehaviour
     private Transform player;
     private bool isAttacking = false;   
     private bool DieB = false;
+    private DuelManager DM;
+
+    //private bool Diefu = false;
     public static SimpleEnemy instance;
     [Header("VFX")]
     [SerializeField] public Transform hitpoint;
@@ -45,7 +49,8 @@ public class SimpleEnemy : MonoBehaviour
     {
         if (instance == null){instance = this;}
         currentHealth = maxHealth;
-        DuelManager.instance.EnemyinArena += 1;
+        DM = GameObject.Find("Script").GetComponent<DuelManager>();
+        DM.EnemyinArena += 1;
     }
     public void Update()
     {
@@ -54,8 +59,9 @@ public class SimpleEnemy : MonoBehaviour
         healthBar.size = currentHealth / maxHealth;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
         FacePlayer(); if (!isAttacking){ChasePlayer();}
-        }}
-        if(currentHealth <= 0){DieB = true; Die();}
+        }
+        if(currentHealth < 0){DieB = true; Die();}
+        }
     }
     public void TakePlayer(){player = null;}
     private void ChasePlayer()
@@ -111,13 +117,14 @@ public class SimpleEnemy : MonoBehaviour
     {
         Debug.Log("Il nemico è morto!");
         Instantiate(VFXDie, hitpoint.position, transform.rotation);
-        DuelManager.instance.EnemyinArena -= 1;
+        Stats.gameObject.SetActive(false);
+        DM.EnemyinArena -= 1;
         Anm.PlayAnimation(DieAnimationName);
         StartCoroutine(TimeDestroy());
     }
     private IEnumerator TimeDestroy()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
         Destroy(gameObject);
     }
 }

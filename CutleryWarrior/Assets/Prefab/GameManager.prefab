@@ -72498,6 +72498,8 @@ MonoBehaviour:
   knife: 0
   spoon: 1
   IDAction: 0
+  Bullet: {fileID: 0}
+  BPoint: {fileID: 0}
   Speed: 1
   SpeedB: 2
   Run: 3
@@ -84930,7 +84932,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &3123265100539326075
 MonoBehaviour:
@@ -98375,6 +98377,8 @@ MonoBehaviour:
   knife: 0
   spoon: 0
   IDAction: 0
+  Bullet: {fileID: 1862645643401743441, guid: 709ca3e7b07bcb246bda3a4ed2a76e10, type: 3}
+  BPoint: {fileID: 440700284}
   Speed: 1
   SpeedB: 2
   Run: 3
@@ -99185,6 +99189,8 @@ MonoBehaviour:
   knife: 1
   spoon: 0
   IDAction: 0
+  Bullet: {fileID: 0}
+  BPoint: {fileID: 0}
   Speed: 1
   SpeedB: 2
   Run: 3

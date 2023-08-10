@@ -65,7 +65,6 @@ public class StartBattle : MonoBehaviour
         ForkActive = GameObject.Find("F_Player");
         SpoonActive = GameObject.Find("S_Player");
         KnifeActive = GameObject.Find("K_Player");
-        GameManager.instance.ChCanM();
     }
     public void Start()
     {
@@ -115,6 +114,7 @@ IEnumerator DuringInter()
             vCam.Follow = player.transform;
             
         }
+        GameManager.instance.ChCanM();
         Duel_Script.inputCTR = false;
     }
     

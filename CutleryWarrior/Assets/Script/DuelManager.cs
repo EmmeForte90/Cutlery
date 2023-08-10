@@ -46,15 +46,18 @@ public class DuelManager : MonoBehaviour
     
     [Header("ChangeScene")]
 
-    private SceneEvent sceneEvent;
+    public SceneEvent sceneEvent;
+    public LevelChanger L_C;
     public string sceneName;
 
 
-[Header("Pause")]
+    [Header("Pause")]
     public bool stopInput = false;
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject Item;
     [SerializeField]  GameObject Skill;
+    [SerializeField]  GameObject Win;
+
     public bool inputCTR = false;
 
 
@@ -78,9 +81,7 @@ public void Awake()
         PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
         PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;
         CharacterID = 1;
-        //sceneEvent = GetComponent<SceneEvent>();
-        // Aggiungiamo un listener all'evento di cambio scena
-        //sceneEvent.onSceneChange.AddListener(ChangeScene);
+        
     }
 public void Update()
     {
@@ -116,20 +117,14 @@ public void Update()
         PlayerStats.instance.S_curMP += S_SpeedRestore * Time.deltaTime;
 
         if(PlayerStats.instance.F_curMP >= PlayerStats.instance.F_MP)
-        {
-            PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;
-            //Restore = false;
-        }
+        {PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;}
         if(PlayerStats.instance.K_curMP >= PlayerStats.instance.K_MP)
-        {
-            PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;
-            //Restore = false;
-        }
+        {PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;}
         if(PlayerStats.instance.S_curMP >= PlayerStats.instance.S_MP)
-        {
-            PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;
-            //Restore = false;
-        }
+        {PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;}
+
+        if(EnemyinArena <= 0)
+        {StartCoroutine(EndBattle());}
         
 
 
@@ -164,6 +159,15 @@ IEnumerator EndP()
         yield return new WaitForSeconds(1f);
         Pause.gameObject.SetActive(false);
         InputBattle.instance.inputCTR = false;
+    }
+
+IEnumerator EndBattle()
+    {
+        GameManager.instance.ChStop();
+        yield return new WaitForSeconds(5f);
+        Win.gameObject.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        L_C.Escape();
     }
 private void ToggleTimeScale()
     {

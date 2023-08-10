@@ -13,7 +13,9 @@ public class CharacterMove : MonoBehaviour
     public bool spoon;
     [Tooltip("0 - Exploration, 1 - Battle")]
     public int IDAction = 0; //Che tipo di personaggio è
-
+    public GameObject Bullet;
+    public Transform BPoint;
+    private bool Boom = false;
     private Rigidbody rb;
         
     [Header("Move")]
@@ -101,8 +103,8 @@ public void Awake()
 
     public void Update()
     {
-        switch(IDAction)
-        {
+        if(!inputCTR)
+        {switch(IDAction){
         case 0:  
         ////////////////////////////////////////
         SimpleMove();
@@ -113,7 +115,7 @@ public void Awake()
         else if(!fork && knife && !spoon) {KnifeB();} //Se è Coltello
         else if(!fork && !knife && spoon) {SpoonB();} //Se è Cucchiaio
         break;
-        }
+        }}
     }
 #region MoveExploration
     public void SimpleMove()
@@ -122,8 +124,6 @@ public void Awake()
         Flip();  
         if(Interact){Anm.PlayAnimationLoop(TalkingAnimationName);}
         ////////////////////////////////
-        if(!inputCTR)
-        {
         if(!Interact)
         {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -149,14 +149,12 @@ public void Awake()
         }
         else{Anm.PlayAnimationLoop(IdleAnimationName); stand = true;}
         hor = Input.GetAxisRaw("Horizontal");      
-        }}
+        }
     }
 #endregion
 
 #region Fork
     public void ForkB()
-    {
-    if(!inputCTR)
     {
         Move();
     //DODGE
@@ -175,17 +173,16 @@ public void Awake()
                 Stop();
                 AudioManager.instance.PlayUFX(8);
                 Anm.PlayAnimation(Atk4AnimationName);
+                AudioManager.instance.PlayUFX(0); 
+                Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
                 PlayerStats.instance.F_curMP -= 20;  
                 lastAttackTime = Time.time;
             }
-    }
     }
 #endregion
 
 #region Knife
     public void KnifeB()
-    {
-    if(!inputCTR)
     {
         Move();
         //DODGE
@@ -199,7 +196,7 @@ public void Awake()
         if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
         && PlayerStats.instance.K_curMP > 20)
         {HandleComboAttack();}
-    }}
+    }
     
     private void HandleComboAttack()
     {
@@ -231,8 +228,6 @@ public void Awake()
 #region Spoon
     public void SpoonB()
     {
-        if(!inputCTR)
-    {
            Move();  
     //DODGE
         // Rileva l'input del tasto spazio
@@ -254,8 +249,7 @@ public void Awake()
                 Anm.PlayAnimation(Atk1AnimationName);
                 PlayerStats.instance.S_curMP -= 5;  
                 lastAttackTime = Time.time;
-            }
-    }
+            } 
     }
     
 #endregion
