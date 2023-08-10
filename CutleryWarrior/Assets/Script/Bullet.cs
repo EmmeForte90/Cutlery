@@ -25,6 +25,7 @@ public class Bullet : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
         // Crea l'effetto di impatto
+        AudioManager.instance.PlayUFX(9);
         if (hitEffect != null)
         {Instantiate(hitEffect, transform.position, transform.rotation);}
         // Distruggi il proiettile dopo l'impatto

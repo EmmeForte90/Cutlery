@@ -60,6 +60,7 @@ private SceneEvent sceneEvent;
     CharacterMove.instance.inputCTR = true;
     CharacterMove.instance.Idle();
     GameManager.instance.FadeIn();
+    AudioManager.instance.CrossFadeOUTAudio(1);
     yield return new WaitForSeconds(2f);
     SwitchCharacter.instance.ActiveCH();
     GameManager.instance.Exploration();

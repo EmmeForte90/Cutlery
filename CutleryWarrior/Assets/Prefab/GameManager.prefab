@@ -24660,7 +24660,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593110847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.09, z: 0}
+  m_LocalPosition: {x: 0.01, y: 1.09, z: -1.14}
   m_LocalScale: {x: -2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -39709,8 +39709,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577372859}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.09, z: 0}
+  m_LocalRotation: {x: -0.6532815, y: -0.27059805, z: -0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: 0, y: 1.09, z: -0.57}
   m_LocalScale: {x: -2, y: -2, z: -2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -39719,7 +39719,7 @@ Transform:
   - {fileID: 839010829}
   m_Father: {fileID: 2130095966}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -45}
 --- !u!198 &1577372862
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -70507,7 +70507,6 @@ MonoBehaviour:
   Run: 3
   SpriteHero: {fileID: 2606424170602877004}
   isRun: 0
-  isBattle: 0
   inputCTR: 0
   Interact: 0
   WalkAnimationName: Exploration/walk
@@ -70636,6 +70635,7 @@ MonoBehaviour:
   IdleBAnimationName: Battle/idle_battle
   AllarmAnimationName: Exploration/allarm
   Anm: {fileID: 3123265100892517034}
+  Allarming: 0
   _skeletonAnimation: {fileID: 8865165351683847974}
 --- !u!114 &3123265100892517034
 MonoBehaviour:
@@ -89982,7 +89982,7 @@ MonoBehaviour:
   MusicAfter: 0
   listmusic:
   - {fileID: 8300000, guid: d40cc789546a2d24c94a3766e13353cd, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: aaa38da8b835a164d8b2963731a1d4e2, type: 3}
   - {fileID: 0}
   Ambiental:
   - {fileID: 8300000, guid: 6cf2b1d7af1b8df46be6527d7d6624eb, type: 3}
@@ -90000,6 +90000,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a87d8d636f0b96747a0b917724e1f4e3, type: 3}
   - {fileID: 8300000, guid: f5eb4955d02941c459c4e4eab7a9dda0, type: 3}
   - {fileID: 8300000, guid: 346fc40217164bd49a62a5f81ee5e4da, type: 3}
+  - {fileID: 8300000, guid: 0f27498ab6aa08e4588f514ca76dbfc6, type: 3}
+  - {fileID: 8300000, guid: 5ee44ed1cfce8074aa7930c95c1675ad, type: 3}
+  - {fileID: 8300000, guid: 24f0a3b43c7f2eb4eb9223ac20560ccd, type: 3}
   MSX: {fileID: 24100000, guid: 8112fa7cb589b8340af91744ca05ce36, type: 2}
   SFX: {fileID: 24100000, guid: e986d7840d686434689032d6a468b39d, type: 2}
 --- !u!1 &3225873643527223388
@@ -94912,7 +94915,6 @@ MonoBehaviour:
   Run: 3
   SpriteHero: {fileID: 75757198767022020}
   isRun: 0
-  isBattle: 0
   inputCTR: 0
   Interact: 0
   WalkAnimationName: Explore/walk
@@ -95027,6 +95029,7 @@ MonoBehaviour:
   IdleBAnimationName: Battle/idle_battle
   AllarmAnimationName: Explore/allarm
   Anm: {fileID: 3123265100892517036}
+  Allarming: 0
   _skeletonAnimation: {fileID: 4194123266224909399}
 --- !u!114 &624626145106767676
 MonoBehaviour:
@@ -95587,7 +95590,6 @@ MonoBehaviour:
   Run: 3
   SpriteHero: {fileID: 4230004601868692968}
   isRun: 0
-  isBattle: 0
   inputCTR: 0
   Interact: 0
   WalkAnimationName: Exploration/walk
@@ -95702,6 +95704,7 @@ MonoBehaviour:
   IdleBAnimationName: Battle/idle_battle
   AllarmAnimationName: Exploration/allarm
   Anm: {fileID: 3123265100892517035}
+  Allarming: 0
   _skeletonAnimation: {fileID: 3251496515922407380}
 --- !u!114 &3591900854741049043
 MonoBehaviour:

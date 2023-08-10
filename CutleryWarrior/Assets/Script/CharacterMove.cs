@@ -27,14 +27,13 @@ public class CharacterMove : MonoBehaviour
     private bool stand = true;
     [HideInInspector]
     public bool isRun = false;
-    public bool isBattle = false;
+    //public bool isBattle = false;
     public bool inputCTR = false;
     [HideInInspector]
     public bool Interact = false;
     private float hor;
     private bool Right = true;    
     private bool StopM = false;
-
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string WalkAnimationName;
     [SpineAnimation][SerializeField]  string RunAnimationName;
@@ -100,9 +99,6 @@ public void Awake()
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
         }
 
-
-
-    // Update is called once per frame
     public void Update()
     {
         switch(IDAction)
@@ -133,11 +129,10 @@ public void Awake()
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input = Vector2.ClampMagnitude(input, 1);
         
-        if(!isBattle)
-        {
+        
         if(Input.GetButton("Fire3")){isRun = true;} 
         if (Input.GetButtonUp("Fire3")){isRun = false;}
-        }
+        
         
         camF = cam.forward;
         camR = cam.right;
@@ -178,6 +173,7 @@ public void Awake()
         && DuelManager.instance.FcurrentMP > 20)
             {
                 Stop();
+                AudioManager.instance.PlayUFX(8);
                 Anm.PlayAnimation(Atk4AnimationName);
                 DuelManager.instance.FcurrentMP -= 20;  
                 lastAttackTime = Time.time;
@@ -196,7 +192,6 @@ public void Awake()
         if (Input.GetButtonDown("Fire2") && Time.time - DodgeTime > DodgeSTimer)
         {
             Dodge();
-            //DodgeFAnm();      
             DodgeTime = Time.time; // Aggiorna l'ultimo momento di attacco
         }
     
@@ -205,23 +200,27 @@ public void Awake()
         && DuelManager.instance.KcurrentMP > 20)
         {HandleComboAttack();}
     }}
-
+    
     private void HandleComboAttack()
     {
         comboCount++;
         switch (comboCount)
         {
             case 1:
+                DuelManager.instance.KcurrentMP -= 10;
                 Anm.PlayAnimation(Atk1AnimationName); //Debug.Log("Attacco1");
                 break;
             case 2:
+                DuelManager.instance.KcurrentMP -= 10;
                 Anm.PlayAnimation(Atk2AnimationName);//Debug.Log("Attacco2");
                 break;
             case 3:
+                DuelManager.instance.KcurrentMP -= 10;
                 Anm.PlayAnimation(Atk3AnimationName); //Debug.Log("Attacco3");
                 break;
             default:
                 comboCount = 1;
+                DuelManager.instance.KcurrentMP -= 10;
                 Anm.PlayAnimation(Atk1AnimationName);// Debug.Log("Attacco1");
                 break;
         }
@@ -248,7 +247,7 @@ public void Awake()
     
     //Attack
        // Verifica se il tasto del mouse è stato premuto
-         if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
+        if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
         && DuelManager.instance.ScurrentMP > 20)
             {
                 Stop();
@@ -256,7 +255,6 @@ public void Awake()
                 DuelManager.instance.ScurrentMP -= 5;  
                 lastAttackTime = Time.time;
             }
-
     }
     }
     
@@ -273,9 +271,9 @@ public void Awake()
     {
     if(!Interact && !isRun || isDefence)
     {rb.MovePosition(transform.position + moveDir * 0.1f * Speed);} 
-    else if(!Interact && isRun && !isBattle && !StopM && !isDefence)
+    else if(!Interact && isRun  && !StopM && !isDefence)
     {rb.MovePosition(transform.position + moveDir * 0.1f * Run);
-    }else if(!Interact && isBattle && !StopM && !isDefence)
+    }else if(!Interact  && !StopM && !isDefence)
     {rb.MovePosition(transform.position + moveDir * 0.1f * SpeedB);}
     }}
 
@@ -324,13 +322,12 @@ public void Awake()
         if (collision.gameObject.CompareTag("Collider")){Anm.PlayAnimationLoop(IdleAnimationName); StopM = true;}
         else {StopM = false;}
     }
-
     public void OnCollisionExit(Collision collision)
     {if (collision.gameObject.CompareTag("Collider")){StopM = false;}}
     private void Dodge()
     {
         Vector3 DodgeDirection = transform.position;
+        Anm.PlayAnimation(DodgeFAnimationName);
         DodgeController.ApplyDodge(DodgeDirection);
     }
-
 }
