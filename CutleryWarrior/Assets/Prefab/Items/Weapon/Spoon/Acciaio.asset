@@ -15,11 +15,18 @@ MonoBehaviour:
   itemName: Steel shield
   NameSkin: Weapon/Acciaio
   itemDes: Strong and elegant fork
-  ID: 3
+  ID: 4
   KindItem: 5
   price: 1000
   Stackable: 1
   itemIcon: {fileID: 21300000, guid: 124b67496d201634ba5b9f27abd5d353, type: 3}
   TypesE: 1
   type: 0
-  weaponDamage: 0
+  weaponDamage: 80
+  DefenceDress: 0
+  HP: 0
+  MP: 0
+  Res_Poison: 0
+  Res_Stun: 0
+  Res_Sleep: 0
+  Res_Rust: 0

@@ -23,3 +23,10 @@ MonoBehaviour:
   TypesE: 0
   type: 0
   weaponDamage: 0
+  DefenceDress: 30
+  HP: 250
+  MP: 250
+  Res_Poison: 5
+  Res_Stun: 7
+  Res_Sleep: 4
+  Res_Rust: 5

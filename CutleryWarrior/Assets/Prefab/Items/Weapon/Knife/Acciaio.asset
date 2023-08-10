@@ -22,4 +22,11 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 56a9d0808a664d5479c4e4a655b99fcf, type: 3}
   TypesE: 1
   type: 0
-  weaponDamage: 0
+  weaponDamage: 150
+  DefenceDress: 0
+  HP: 0
+  MP: 0
+  Res_Poison: 0
+  Res_Stun: 0
+  Res_Sleep: 0
+  Res_Rust: 0

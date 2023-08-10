@@ -6,8 +6,19 @@ using UnityEngine;
 public class Weapon : Item
 {
     public weaponType type;
+
+    [Header("Se è un arma")]
     public int weaponDamage;
-    //public string NameSkin;
+
+    [Header("Se è un'armatura")]
+    public int DefenceDress;
+    public float HP;
+    public float MP;
+    public int Res_Poison;
+    public int Res_Stun;
+    public int Res_Sleep;
+    public int Res_Rust;
+
     public override void Equip()
     {
         base.Equip();
