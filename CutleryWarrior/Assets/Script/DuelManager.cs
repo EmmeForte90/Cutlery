@@ -111,23 +111,23 @@ public void Update()
         {SimpleEnemy.instance.TakePlayer();}
         //
         
-        FcurrentMP += F_SpeedRestore * Time.deltaTime;
-        KcurrentMP += K_SpeedRestore * Time.deltaTime;
-        ScurrentMP += S_SpeedRestore * Time.deltaTime;
+        PlayerStats.instance.F_curMP += F_SpeedRestore * Time.deltaTime;
+        PlayerStats.instance.K_curMP += K_SpeedRestore * Time.deltaTime;
+        PlayerStats.instance.S_curMP += S_SpeedRestore * Time.deltaTime;
 
-        if(FcurrentMP >= PlayerStats.instance.F_MP)
+        if(PlayerStats.instance.F_curMP >= PlayerStats.instance.F_MP)
         {
-            FcurrentMP = PlayerStats.instance.F_MP;
+            PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;
             //Restore = false;
         }
-        if(KcurrentMP >= PlayerStats.instance.K_MP)
+        if(PlayerStats.instance.K_curMP >= PlayerStats.instance.K_MP)
         {
-            KcurrentMP = PlayerStats.instance.K_MP;
+            PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;
             //Restore = false;
         }
-        if(ScurrentMP >= PlayerStats.instance.S_MP)
+        if(PlayerStats.instance.S_curMP >= PlayerStats.instance.S_MP)
         {
-            ScurrentMP = PlayerStats.instance.S_MP;
+            PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;
             //Restore = false;
         }
         

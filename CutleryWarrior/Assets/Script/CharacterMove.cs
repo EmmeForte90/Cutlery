@@ -170,12 +170,12 @@ public void Awake()
     
     //Attack
         if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
-        && DuelManager.instance.FcurrentMP > 20)
+        && PlayerStats.instance.F_curMP > 20)
             {
                 Stop();
                 AudioManager.instance.PlayUFX(8);
                 Anm.PlayAnimation(Atk4AnimationName);
-                DuelManager.instance.FcurrentMP -= 20;  
+                PlayerStats.instance.F_curMP -= 20;  
                 lastAttackTime = Time.time;
             }
     }
@@ -197,7 +197,7 @@ public void Awake()
     
     //Attack
         if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
-        && DuelManager.instance.KcurrentMP > 20)
+        && PlayerStats.instance.K_curMP > 20)
         {HandleComboAttack();}
     }}
     
@@ -207,20 +207,20 @@ public void Awake()
         switch (comboCount)
         {
             case 1:
-                DuelManager.instance.KcurrentMP -= 10;
+                PlayerStats.instance.K_curMP -= 10;
                 Anm.PlayAnimation(Atk1AnimationName); //Debug.Log("Attacco1");
                 break;
             case 2:
-                DuelManager.instance.KcurrentMP -= 10;
+                PlayerStats.instance.K_curMP -= 10;
                 Anm.PlayAnimation(Atk2AnimationName);//Debug.Log("Attacco2");
                 break;
             case 3:
-                DuelManager.instance.KcurrentMP -= 10;
+                PlayerStats.instance.K_curMP -= 10;
                 Anm.PlayAnimation(Atk3AnimationName); //Debug.Log("Attacco3");
                 break;
             default:
                 comboCount = 1;
-                DuelManager.instance.KcurrentMP -= 10;
+                PlayerStats.instance.K_curMP -= 10;
                 Anm.PlayAnimation(Atk1AnimationName);// Debug.Log("Attacco1");
                 break;
         }
@@ -236,7 +236,7 @@ public void Awake()
            Move();  
     //DODGE
         // Rileva l'input del tasto spazio
-        if (Input.GetMouseButtonDown(1) && DuelManager.instance.ScurrentMP > 20)
+        if (Input.GetMouseButtonDown(1) && PlayerStats.instance.S_curMP > 20)
         {isDefence = true; Anm.PlayAnimationLoop(GuardAnimationName);}
 
         // Verifica se il tasto del mouse è stato rilasciato
@@ -248,11 +248,11 @@ public void Awake()
     //Attack
        // Verifica se il tasto del mouse è stato premuto
         if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
-        && DuelManager.instance.ScurrentMP > 20)
+        && PlayerStats.instance.S_curMP > 20)
             {
                 Stop();
                 Anm.PlayAnimation(Atk1AnimationName);
-                DuelManager.instance.ScurrentMP -= 5;  
+                PlayerStats.instance.S_curMP -= 5;  
                 lastAttackTime = Time.time;
             }
     }

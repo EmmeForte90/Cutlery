@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public int IDCharacter;
 
     [Header("Stats")]
+    public PlayerStats PStats;
 
     [Header("Fork")]
 
@@ -161,14 +162,14 @@ public class GameManager : MonoBehaviour
         vCam.Follow = player.transform;}*/
         if(StartGame)
         {AudioManager.instance.PlayMFX(0);}
-        PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
-        PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;
+        PStats.F_curHP = PStats.F_HP;
+        PStats.F_curMP = PStats.F_MP;
         //
-        PlayerStats.instance.K_curHP = PlayerStats.instance.K_HP;
-        PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;
+        PStats.K_curHP = PStats.K_HP;
+        PStats.K_curMP = PStats.K_MP;
         //
-        PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
-        PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;
+        PStats.S_curHP = PStats.S_HP;
+        PStats.S_curMP = PStats.S_MP;
     }
     // Start is called before the first frame update
 
@@ -268,17 +269,17 @@ public class GameManager : MonoBehaviour
     public void StatPlayer()
     {
     //Fork
-    F_LV = PlayerStats.instance.F_LV;
-    F_HP = PlayerStats.instance.F_HP;
-    F_MP = PlayerStats.instance.F_MP;
-    F_Exp = PlayerStats.instance.F_Exp;
-    F_curExp = PlayerStats.instance.F_curExp;
-    F_attack = PlayerStats.instance.F_attack;
-    F_defense = PlayerStats.instance.F_defense;
-    F_poisonResistance = PlayerStats.instance.F_poisonResistance;
-    F_paralysisResistance = PlayerStats.instance.F_paralysisResistance;
-    F_sleepResistance = PlayerStats.instance.F_sleepResistance;
-    F_rustResistance  = PlayerStats.instance.F_rustResistance;
+    F_LV = PStats.F_LV;
+    F_HP = PStats.F_HP;
+    F_MP = PStats.F_MP;
+    F_Exp = PStats.F_Exp;
+    F_curExp = PStats.F_curExp;
+    F_attack = PStats.F_attack;
+    F_defense = PStats.F_defense;
+    F_poisonResistance = PStats.F_poisonResistance;
+    F_paralysisResistance = PStats.F_paralysisResistance;
+    F_sleepResistance = PStats.F_sleepResistance;
+    F_rustResistance  = PStats.F_rustResistance;
     F_LVTextM.text = F_LV.ToString();
     F_ExpTextM.text = F_Exp.ToString();
     F_ExpText.text = F_curExp.ToString();
@@ -292,17 +293,17 @@ public class GameManager : MonoBehaviour
     F_mpTextM.text = F_MP.ToString();
     F_hpTextM.text = F_HP.ToString();
     //Knife
-    K_LV = PlayerStats.instance.K_LV;
-    K_HP = PlayerStats.instance.K_HP;
-    K_MP = PlayerStats.instance.K_MP;
-    K_Exp = PlayerStats.instance.K_Exp;
-    K_curExp = PlayerStats.instance.K_curExp;
-    K_attack = PlayerStats.instance.K_attack;
-    K_defense = PlayerStats.instance.K_defense;
-    K_poisonResistance = PlayerStats.instance.K_poisonResistance;
-    K_paralysisResistance = PlayerStats.instance.K_paralysisResistance;
-    K_sleepResistance = PlayerStats.instance.K_sleepResistance;
-    K_rustResistance  = PlayerStats.instance.K_rustResistance;
+    K_LV = PStats.K_LV;
+    K_HP = PStats.K_HP;
+    K_MP = PStats.K_MP;
+    K_Exp = PStats.K_Exp;
+    K_curExp = PStats.K_curExp;
+    K_attack = PStats.K_attack;
+    K_defense = PStats.K_defense;
+    K_poisonResistance = PStats.K_poisonResistance;
+    K_paralysisResistance = PStats.K_paralysisResistance;
+    K_sleepResistance = PStats.K_sleepResistance;
+    K_rustResistance  = PStats.K_rustResistance;
     K_LVTextM.text = K_LV.ToString();
     K_ExpTextM.text = K_Exp.ToString();
     K_ExpText.text = K_curExp.ToString(); 
@@ -316,17 +317,17 @@ public class GameManager : MonoBehaviour
     K_mpTextM.text = K_MP.ToString();
     K_hpTextM.text = K_HP.ToString();
     //Spoon
-    S_LV = PlayerStats.instance.S_LV;
-    S_HP = PlayerStats.instance.S_HP;
-    S_MP = PlayerStats.instance.S_MP;
-    S_Exp = PlayerStats.instance.S_Exp;
-    S_curExp = PlayerStats.instance.S_curExp;
-    S_attack = PlayerStats.instance.S_attack;
-    S_defense = PlayerStats.instance.S_defense;
-    S_poisonResistance = PlayerStats.instance.S_poisonResistance;
-    S_paralysisResistance = PlayerStats.instance.S_paralysisResistance;
-    S_sleepResistance = PlayerStats.instance.S_sleepResistance;
-    S_rustResistance  = PlayerStats.instance.S_rustResistance;
+    S_LV = PStats.S_LV;
+    S_HP = PStats.S_HP;
+    S_MP = PStats.S_MP;
+    S_Exp = PStats.S_Exp;
+    S_curExp = PStats.S_curExp;
+    S_attack = PStats.S_attack;
+    S_defense = PStats.S_defense;
+    S_poisonResistance = PStats.S_poisonResistance;
+    S_paralysisResistance = PStats.S_paralysisResistance;
+    S_sleepResistance = PStats.S_sleepResistance;
+    S_rustResistance  = PStats.S_rustResistance;
     S_LVTextM.text = S_LV.ToString();
     S_ExpTextM.text = S_Exp.ToString(); 
     S_ExpText.text = S_curExp.ToString(); 
@@ -343,25 +344,25 @@ public class GameManager : MonoBehaviour
 
     public void BarStat()
     {   
-        F_Hp.size = PlayerStats.instance.F_curHP / PlayerStats.instance.F_HP;
+        F_Hp.size = PStats.F_curHP / PStats.F_HP;
         F_Hp.size = Mathf.Clamp(F_Hp.size, 0.01f, 1);
-        F_ExpScrol.size = PlayerStats.instance.F_curExp / PlayerStats.instance.F_Exp;
+        F_ExpScrol.size = PStats.F_curExp / PStats.F_Exp;
         F_ExpScrol.size = Mathf.Clamp(F_ExpScrol.size, 0.01f, 1);
-        F_Hp.size = PlayerStats.instance.F_curMP / PlayerStats.instance.F_MP;
+        F_Hp.size = PStats.F_curMP / PStats.F_MP;
         F_Hp.size = Mathf.Clamp(F_Hp.size, 0.01f, 1);
         //
-        K_Hp.size = PlayerStats.instance.K_curHP / PlayerStats.instance.K_HP;
+        K_Hp.size = PStats.K_curHP / PStats.K_HP;
         K_Hp.size = Mathf.Clamp(K_Hp.size, 0.01f, 1);
-        K_ExpScrol.size = PlayerStats.instance.K_curExp / PlayerStats.instance.K_Exp;
+        K_ExpScrol.size = PStats.K_curExp / PStats.K_Exp;
         K_ExpScrol.size = Mathf.Clamp(K_ExpScrol.size, 0.01f, 1);
-        K_Mp.size = PlayerStats.instance.K_curMP / PlayerStats.instance.K_MP;
+        K_Mp.size = PStats.K_curMP / PStats.K_MP;
         K_Mp.size = Mathf.Clamp(K_Mp.size, 0.01f, 1);
         //
-        S_Hp.size = PlayerStats.instance.S_curHP / PlayerStats.instance.S_MP;
+        S_Hp.size = PStats.S_curHP / PStats.S_MP;
         S_Hp.size = Mathf.Clamp(S_Hp.size, 0.01f, 1);
-        S_ExpScrol.size = PlayerStats.instance.S_curExp / PlayerStats.instance.S_Exp;
+        S_ExpScrol.size = PStats.S_curExp / PStats.S_Exp;
         S_ExpScrol.size = Mathf.Clamp(S_ExpScrol.size, 0.01f, 1);
-        S_Mp.size = PlayerStats.instance.S_curMP / PlayerStats.instance.S_MP;
+        S_Mp.size = PStats.S_curMP / PStats.S_MP;
         S_Mp.size = Mathf.Clamp(S_Mp.size, 0.01f, 1);
     }
     public void TakeCamera()
@@ -462,11 +463,11 @@ public class GameManager : MonoBehaviour
     }
  // Metodo chiamato quando il giocatore raggiunge il requisito per salire di livello
     public void K_PlayerReachedLevelUp()
-    {PlayerStats.instance.K_LevelUp();}
+    {PStats.K_LevelUp();}
     public void S_PlayerReachedLevelUp()
-    {PlayerStats.instance.S_LevelUp();}
+    {PStats.S_LevelUp();}
     public void F_PlayerReachedLevelUp()
-    {PlayerStats.instance.F_LevelUp();}
+    {PStats.F_LevelUp();}
     public void AddToExp(int pointsToAdd)
     {
         F_Exp += pointsToAdd;

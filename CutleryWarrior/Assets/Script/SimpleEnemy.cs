@@ -12,12 +12,12 @@ public class SimpleEnemy : MonoBehaviour
     public float currentHealth;
     public Scrollbar healthBar;
     public float SpeedRestore = 5f; // il massimo valore di essenza disponibile
-
     [Header("Move")]
     public float moveSpeed = 3f;
     public float attackRange = 1.5f;
     public float attackCooldown = 2f;
     public int attackDamage = 20;
+    public int defense = 2;
     public float attackPauseDuration = 1.5f;
     private Transform player;
     private bool isAttacking = false;   
@@ -70,12 +70,14 @@ public class SimpleEnemy : MonoBehaviour
     }
     public void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("F_Coll")||
-        collision.gameObject.CompareTag("K_Coll")||
-        collision.gameObject.CompareTag("S_Coll"))
-        {TakeDamage(10);}
-        
+        if (collision.gameObject.CompareTag("F_Coll"))
+        {TakeDamage(PlayerStats.instance.F_attack);} 
+        else if (collision.gameObject.CompareTag("K_Coll"))
+        {TakeDamage(PlayerStats.instance.K_attack);} 
+        else if (collision.gameObject.CompareTag("S_Coll"))
+        {TakeDamage(PlayerStats.instance.S_attack);} 
     }
+    
     private void StartAttack()
     {
         isAttacking = true;
@@ -93,7 +95,9 @@ public class SimpleEnemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-    currentHealth -= damage;
+    int danno_subito = Mathf.Max(damage - defense, 0);
+    currentHealth -= danno_subito;
+    Debug.Log("danno +"+ danno_subito);
     Instantiate(VFXHurt, hitpoint.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);;
     }
