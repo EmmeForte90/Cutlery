@@ -52,6 +52,7 @@ public class StartScene : MonoBehaviour
     KAct.transform.position = GameManager.instance.savedPosition;
     FAct.transform.position = GameManager.instance.savedPosition;
     SAct.transform.position = GameManager.instance.savedPosition;
+    GameManager.instance.StopWin();
     }
     }
     public void Confiner(int ID)

@@ -14,7 +14,7 @@ public class DuelManager : MonoBehaviour
 
     [Header("Arena")]
     public int EnemyinArena;
-
+    private bool win = true;
     [Header("Fork")]
 
     public Scrollbar FhealthBar;
@@ -164,7 +164,13 @@ IEnumerator EndP()
 IEnumerator EndBattle()
     {
         GameManager.instance.ChStop();
-        yield return new WaitForSeconds(5f);
+        AudioManager.instance.CrossFadeOUTAudio(1);
+        yield return new WaitForSeconds(3f);
+        GameManager.instance.battle = true;
+        if(win)
+        {AudioManager.instance.PlaySFX(7); 
+        GameManager.instance.PoseWin();
+        win = false;}
         Win.gameObject.SetActive(true);
         yield return new WaitForSeconds(5f);
         L_C.Escape();

@@ -412,6 +412,25 @@ public class GameManager : MonoBehaviour
         ch_FAc.Posebattle(); ch_KAc.Posebattle(); ch_SAc.Posebattle();
     }
 
+    public void PoseWin()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_F.PoseWin(); ch_K.PoseWin(); ch_S.PoseWin();
+        ch_FAc.PoseWin(); ch_KAc.PoseWin(); ch_SAc.PoseWin();
+    }
+    public void StopWin()
+    {
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_FAc.StopWin(); ch_KAc.StopWin(); ch_SAc.StopWin();
+    }
+
     public void Allarm()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
@@ -431,6 +450,8 @@ public class GameManager : MonoBehaviour
         ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_FAc.StopAllarm(); ch_KAc.StopAllarm(); ch_SAc.StopAllarm();
     }
+
+     
 
     public void Exploration()
     {

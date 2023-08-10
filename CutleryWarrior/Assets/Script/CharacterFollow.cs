@@ -37,9 +37,12 @@ public class CharacterFollow : MonoBehaviour
     [SpineAnimation][SerializeField]  string IdleAnimationName;
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
     [SpineAnimation][SerializeField]  string AllarmAnimationName;
+    [SpineAnimation][SerializeField]  string WinAnimationName;
     public AnimationManager Anm;
     [HideInInspector]
     public bool Allarming;
+    [HideInInspector]
+    public bool Win;
     private string currentAnimationName;
     private float distance;
     public SkeletonAnimation _skeletonAnimation;
@@ -80,9 +83,11 @@ public class CharacterFollow : MonoBehaviour
         break;
         ////////////////////////////////////////
         case 1: 
+        if(!Win){
         if(fork && !knife && !spoon) {ForkB();} //Se è forchetta
         else if(!fork && knife && !spoon) {KnifeB();} //Se è Coltello
         else if(!fork && !knife && spoon) {SpoonB();} //Se è Cucchiaio
+        } else if(Win) {Anm.PlayAnimationLoop(WinAnimationName);} //Se è forchetta
         break;
         }
         
@@ -167,7 +172,9 @@ public class CharacterFollow : MonoBehaviour
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
-    public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName); Allarming = true;}    
+    public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName); Allarming = true;}   
+    public void PoseWin(){Win = true;}    
+    public void StopWin(){Win = false;}    
     public void StopAllarm(){Allarming = false;}    
     private void Flip()
     {

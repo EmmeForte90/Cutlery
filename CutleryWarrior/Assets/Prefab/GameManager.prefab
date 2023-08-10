@@ -72525,6 +72525,7 @@ MonoBehaviour:
   GuardHitAnimationName: Battle/guard_hit
   DodgeFAnimationName: Battle/guard
   DodgeBAnimationName: Battle/guard
+  WinAnimationName: Battle/win
   _skeletonAnimation: {fileID: 8865165351683847974}
   Anm: {fileID: 3123265100892517034}
   comboTimer: 0.5
@@ -72632,6 +72633,7 @@ MonoBehaviour:
   IdleAnimationName: Exploration/idle
   IdleBAnimationName: Battle/idle_battle
   AllarmAnimationName: Exploration/allarm
+  WinAnimationName: Battle/win
   Anm: {fileID: 3123265100892517034}
   Allarming: 0
   _skeletonAnimation: {fileID: 8865165351683847974}
@@ -92155,6 +92157,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a93cc46e678b69343a00db9a5029e8fe, type: 3}
   - {fileID: 8300000, guid: c75284d46b3d89c4f9e6caed4f606ab7, type: 3}
   - {fileID: 8300000, guid: 94ee3ed0476321e4bbee107e5d12cd6a, type: 3}
+  - {fileID: 8300000, guid: d436cb30bedbc0245ad5456272d2ac32, type: 3}
   UiM:
   - {fileID: 8300000, guid: 44cee447620b2834988c88cc913646df, type: 3}
   - {fileID: 8300000, guid: 75a0181bcf82ce64fa5533635d410a1e, type: 3}
@@ -92166,6 +92169,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0f27498ab6aa08e4588f514ca76dbfc6, type: 3}
   - {fileID: 8300000, guid: 5ee44ed1cfce8074aa7930c95c1675ad, type: 3}
   - {fileID: 8300000, guid: 24f0a3b43c7f2eb4eb9223ac20560ccd, type: 3}
+  - {fileID: 8300000, guid: 4841659b4f768374b8b80256b8da3a02, type: 3}
   MSX: {fileID: 24100000, guid: 8112fa7cb589b8340af91744ca05ce36, type: 2}
   SFX: {fileID: 24100000, guid: e986d7840d686434689032d6a468b39d, type: 2}
 --- !u!1 &3225873643527223388
@@ -98404,6 +98408,7 @@ MonoBehaviour:
   GuardHitAnimationName: Battle/guard_hit
   DodgeFAnimationName: Battle/dodge_front
   DodgeBAnimationName: Battle/dodge_back
+  WinAnimationName: Battle/win
   _skeletonAnimation: {fileID: 4194123266224909399}
   Anm: {fileID: 3123265100892517036}
   comboTimer: 0.3
@@ -98497,6 +98502,7 @@ MonoBehaviour:
   IdleAnimationName: Explore/idle
   IdleBAnimationName: Battle/idle_battle
   AllarmAnimationName: Explore/allarm
+  WinAnimationName: Battle/win
   Anm: {fileID: 3123265100892517036}
   Allarming: 0
   _skeletonAnimation: {fileID: 4194123266224909399}
@@ -99216,6 +99222,7 @@ MonoBehaviour:
   GuardHitAnimationName: Battle/charge_battle
   DodgeFAnimationName: Battle/dodge_front
   DodgeBAnimationName: Battle/dodge_front
+  WinAnimationName: Battle/win
   _skeletonAnimation: {fileID: 3251496515922407380}
   Anm: {fileID: 3123265100892517035}
   comboTimer: 0.5
@@ -99309,6 +99316,7 @@ MonoBehaviour:
   IdleAnimationName: Exploration/idle
   IdleBAnimationName: Battle/idle_battle
   AllarmAnimationName: Exploration/allarm
+  WinAnimationName: Battle/win
   Anm: {fileID: 3123265100892517035}
   Allarming: 0
   _skeletonAnimation: {fileID: 3251496515922407380}

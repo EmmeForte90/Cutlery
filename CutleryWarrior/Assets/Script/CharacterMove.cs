@@ -55,6 +55,7 @@ public class CharacterMove : MonoBehaviour
     [SpineAnimation][SerializeField]  string GuardHitAnimationName;
     [SpineAnimation][SerializeField]  string DodgeFAnimationName;
     [SpineAnimation][SerializeField]  string DodgeBAnimationName;
+    [SpineAnimation][SerializeField]  string WinAnimationName;
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
@@ -177,7 +178,7 @@ public void Awake()
                 Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
                 PlayerStats.instance.F_curMP -= 20;  
                 lastAttackTime = Time.time;
-            }
+            }else {AudioManager.instance.PlayUFX(10);}
     }
 #endregion
 
@@ -195,7 +196,7 @@ public void Awake()
     //Attack
         if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
         && PlayerStats.instance.K_curMP > 20)
-        {HandleComboAttack();}
+        {HandleComboAttack();} else {AudioManager.instance.PlayUFX(10);}
     }
     
     private void HandleComboAttack()
@@ -249,7 +250,7 @@ public void Awake()
                 Anm.PlayAnimation(Atk1AnimationName);
                 PlayerStats.instance.S_curMP -= 5;  
                 lastAttackTime = Time.time;
-            } 
+            } else {AudioManager.instance.PlayUFX(10);}
     }
     
 #endregion
@@ -258,7 +259,7 @@ public void Awake()
     public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
     public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName);}
-
+    public void PoseWin(){Anm.PlayAnimationLoop(WinAnimationName);}
     public void FixedUpdate()
     {
     if(!inputCTR)
