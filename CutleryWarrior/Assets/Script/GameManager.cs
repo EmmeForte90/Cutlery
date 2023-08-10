@@ -42,42 +42,106 @@ public class GameManager : MonoBehaviour
 
     [Header("Fork")]
 
-    [SerializeField] public int LVF = 0;
+    private  int F_LV;
 
-    [SerializeField] public float HpF = 0;
-    [SerializeField] public float StaminaF = 0;
-    [SerializeField] public float MpF = 0;
-    [SerializeField] public float ExpF = 0;
-    [SerializeField] public TextMeshProUGUI ExpTextMF;
+    private float F_HP;
+    private float F_MP;
+    private float F_Exp;
+    private float F_curExp;
+    private int F_attack;
+    private int F_defense;
+    private int F_poisonResistance;
+    private int F_paralysisResistance;
+    private int F_sleepResistance;
+    private int F_rustResistance;
+    [Header("Fork")]
+    [SerializeField] public TextMeshProUGUI F_ExpTextM;
+    [SerializeField] public TextMeshProUGUI F_ExpText;
+    [SerializeField] public TextMeshProUGUI F_LVTextM;
+    [SerializeField] public TextMeshProUGUI F_hpTextM;
+    [SerializeField] public TextMeshProUGUI F_mpTextM;
+    [SerializeField] public TextMeshProUGUI F_Def;
+    [SerializeField] public TextMeshProUGUI F_Atk;
+    [SerializeField] public TextMeshProUGUI F_Pois;
+    [SerializeField] public TextMeshProUGUI F_Rust;
+    [SerializeField] public TextMeshProUGUI F_Sleep;
+    [SerializeField] public TextMeshProUGUI F_Stun;
+    [SerializeField] public Scrollbar F_Hp;
+    [SerializeField] public Scrollbar F_Mp;
+    [SerializeField] public Scrollbar F_ExpScrol;
+
     [SerializeField] CharacterMove ch_F;
     [SerializeField] CharacterFollow ch_FAc;
     [SerializeField] ManagerCharacter Manager_F;
 
+        
 
     [Header("Spoon")]
 
-    [SerializeField] public int LVS = 0;
+    private  int S_LV;
 
-    [SerializeField] public float HpS = 0;
-    [SerializeField] public float StaminaS = 0;
-    [SerializeField] public float MpS = 0;
-    [SerializeField] public float ExpS = 0;
-    [SerializeField] public TextMeshProUGUI ExpTextMS;
+    private float S_HP;
+    private float S_MP;
+    private float S_Exp;
+    private float S_curExp;
+    private int S_attack;
+    private int S_defense;
+    private int S_poisonResistance;
+    private int S_paralysisResistance;
+    private int S_sleepResistance;
+    private int S_rustResistance;
+    [Header("Spoon")]
+    [SerializeField] public TextMeshProUGUI S_ExpTextM;
+    [SerializeField] public TextMeshProUGUI S_ExpText;
+    [SerializeField] public TextMeshProUGUI S_LVTextM;
+    [SerializeField] public TextMeshProUGUI S_hpTextM;
+    [SerializeField] public TextMeshProUGUI S_mpTextM;
+    [SerializeField] public TextMeshProUGUI S_Def;
+    [SerializeField] public TextMeshProUGUI S_Atk;
+    [SerializeField] public TextMeshProUGUI S_Pois;
+    [SerializeField] public TextMeshProUGUI S_Rust;
+    [SerializeField] public TextMeshProUGUI S_Sleep;
+    [SerializeField] public TextMeshProUGUI S_Stun;
+    [SerializeField] public Scrollbar S_Hp;
+    [SerializeField] public Scrollbar S_Mp;
+    [SerializeField] public Scrollbar S_ExpScrol;
+
     [SerializeField] CharacterMove ch_S;
     [SerializeField] CharacterFollow ch_SAc;
     [SerializeField] ManagerCharacter Manager_S;
 
 
     [Header("Knife")]
-    [SerializeField] public int LVK = 0;
-    [SerializeField] public float HpK = 0;
-    [SerializeField] public float StaminaK = 0;
-    [SerializeField] public float MpK = 0;
-    [SerializeField] public float ExpK = 0;
-    [SerializeField] public TextMeshProUGUI ExpTextMK;
+    private  int K_LV;
+
+    private float K_HP;
+    private float K_MP;
+    private float K_Exp;
+    private float K_curExp;
+    private int K_attack;
+    private int K_defense;
+    private int K_poisonResistance;
+    private int K_paralysisResistance;
+    private int K_sleepResistance;
+    private int K_rustResistance;
+    [Header("Knife")]
+    [SerializeField] public TextMeshProUGUI K_ExpTextM;
+    [SerializeField] public TextMeshProUGUI K_ExpText;
+    [SerializeField] public TextMeshProUGUI K_LVTextM;
+    [SerializeField] public TextMeshProUGUI K_hpTextM;
+    [SerializeField] public TextMeshProUGUI K_mpTextM;
+    [SerializeField] public TextMeshProUGUI K_Def;
+    [SerializeField] public TextMeshProUGUI K_Atk;
+    [SerializeField] public TextMeshProUGUI K_Pois;
+    [SerializeField] public TextMeshProUGUI K_Rust;
+    [SerializeField] public TextMeshProUGUI K_Sleep;
+    [SerializeField] public TextMeshProUGUI K_Stun;
+    [SerializeField] public Scrollbar K_Hp;
+    [SerializeField] public Scrollbar K_Mp;
+    [SerializeField] public Scrollbar K_ExpScrol;
+
     [SerializeField] CharacterMove ch_K;
     [SerializeField] CharacterFollow ch_KAc;
-
     [SerializeField] ManagerCharacter Manager_K;
 
     [SerializeField] GameObject ExpObjectM;
@@ -97,8 +161,14 @@ public class GameManager : MonoBehaviour
         vCam.Follow = player.transform;}*/
         if(StartGame)
         {AudioManager.instance.PlayMFX(0);}
-
-
+        PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
+        PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;
+        //
+        PlayerStats.instance.K_curHP = PlayerStats.instance.K_HP;
+        PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;
+        //
+        PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
+        PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;
     }
     // Start is called before the first frame update
 
@@ -117,25 +187,19 @@ public class GameManager : MonoBehaviour
             break;
         }}
 
-       
+    public void Start(){Application.targetFrameRate = 60;}
 
-    public void Start()
-    {
-        Application.targetFrameRate = 60;
-    }
-
-    // Update is called once per frame
     public void Update()
     {
         IDCharacter = rotationSwitcher.CharacterID;
+        StatPlayer();
+        BarStat();
         TakeCharacter();
-        //Lo money aumenta
         moneyTextM.text = money.ToString(); 
-        
         //L Exp aumenta
         /*ExpTextMF.text = ExpF.ToString();    
         ExpTextMS.text = ExpS.ToString();    
-        ExpTextMK.text = ExpK.ToString();*/
+        K_ExpTextMK.text = ExpK.ToString();*/
 
         /*if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -201,8 +265,105 @@ public class GameManager : MonoBehaviour
         } 
     }
     }
+    public void StatPlayer()
+    {
+    //Fork
+    F_LV = PlayerStats.instance.F_LV;
+    F_HP = PlayerStats.instance.F_HP;
+    F_MP = PlayerStats.instance.F_MP;
+    F_Exp = PlayerStats.instance.F_Exp;
+    F_curExp = PlayerStats.instance.F_curExp;
+    F_attack = PlayerStats.instance.F_attack;
+    F_defense = PlayerStats.instance.F_defense;
+    F_poisonResistance = PlayerStats.instance.F_poisonResistance;
+    F_paralysisResistance = PlayerStats.instance.F_paralysisResistance;
+    F_sleepResistance = PlayerStats.instance.F_sleepResistance;
+    F_rustResistance  = PlayerStats.instance.F_rustResistance;
+    F_LVTextM.text = F_LV.ToString();
+    F_ExpTextM.text = F_Exp.ToString();
+    F_ExpText.text = F_curExp.ToString();
+    F_Def.text = F_defense.ToString();
+    F_Def.text = F_defense.ToString();
+    F_Atk.text = F_attack.ToString();
+    F_Pois.text = F_poisonResistance.ToString();
+    F_Rust.text = F_rustResistance.ToString();
+    F_Stun.text = F_paralysisResistance.ToString();
+    F_Sleep.text = F_sleepResistance.ToString();
+    F_mpTextM.text = F_MP.ToString();
+    F_hpTextM.text = F_HP.ToString();
+    //Knife
+    K_LV = PlayerStats.instance.K_LV;
+    K_HP = PlayerStats.instance.K_HP;
+    K_MP = PlayerStats.instance.K_MP;
+    K_Exp = PlayerStats.instance.K_Exp;
+    K_curExp = PlayerStats.instance.K_curExp;
+    K_attack = PlayerStats.instance.K_attack;
+    K_defense = PlayerStats.instance.K_defense;
+    K_poisonResistance = PlayerStats.instance.K_poisonResistance;
+    K_paralysisResistance = PlayerStats.instance.K_paralysisResistance;
+    K_sleepResistance = PlayerStats.instance.K_sleepResistance;
+    K_rustResistance  = PlayerStats.instance.K_rustResistance;
+    K_LVTextM.text = K_LV.ToString();
+    K_ExpTextM.text = K_Exp.ToString();
+    K_ExpText.text = K_curExp.ToString(); 
+    K_Def.text = K_defense.ToString();
+    K_Def.text = K_defense.ToString();
+    K_Atk.text = K_attack.ToString();
+    K_Pois.text = K_poisonResistance.ToString();
+    K_Rust.text = K_rustResistance.ToString();
+    K_Stun.text = K_paralysisResistance.ToString();
+    K_Sleep.text = K_sleepResistance.ToString();
+    K_mpTextM.text = K_MP.ToString();
+    K_hpTextM.text = K_HP.ToString();
+    //Spoon
+    S_LV = PlayerStats.instance.S_LV;
+    S_HP = PlayerStats.instance.S_HP;
+    S_MP = PlayerStats.instance.S_MP;
+    S_Exp = PlayerStats.instance.S_Exp;
+    S_curExp = PlayerStats.instance.S_curExp;
+    S_attack = PlayerStats.instance.S_attack;
+    S_defense = PlayerStats.instance.S_defense;
+    S_poisonResistance = PlayerStats.instance.S_poisonResistance;
+    S_paralysisResistance = PlayerStats.instance.S_paralysisResistance;
+    S_sleepResistance = PlayerStats.instance.S_sleepResistance;
+    S_rustResistance  = PlayerStats.instance.S_rustResistance;
+    S_LVTextM.text = S_LV.ToString();
+    S_ExpTextM.text = S_Exp.ToString(); 
+    S_ExpText.text = S_curExp.ToString(); 
+    S_Def.text = S_defense.ToString();
+    S_Def.text = S_defense.ToString();
+    S_Atk.text = S_attack.ToString();
+    S_Pois.text = S_poisonResistance.ToString();
+    S_Rust.text = S_rustResistance.ToString();
+    S_Stun.text = S_paralysisResistance.ToString();
+    S_Sleep.text = S_sleepResistance.ToString();
+    S_mpTextM.text = S_MP.ToString();
+    S_hpTextM.text = S_HP.ToString();
+    }   
 
-
+    public void BarStat()
+    {   
+        F_Hp.size = PlayerStats.instance.F_curHP / PlayerStats.instance.F_HP;
+        F_Hp.size = Mathf.Clamp(F_Hp.size, 0.01f, 1);
+        F_ExpScrol.size = PlayerStats.instance.F_curExp / PlayerStats.instance.F_Exp;
+        F_ExpScrol.size = Mathf.Clamp(F_ExpScrol.size, 0.01f, 1);
+        F_Hp.size = PlayerStats.instance.F_curMP / PlayerStats.instance.F_MP;
+        F_Hp.size = Mathf.Clamp(F_Hp.size, 0.01f, 1);
+        //
+        K_Hp.size = PlayerStats.instance.K_curHP / PlayerStats.instance.K_HP;
+        K_Hp.size = Mathf.Clamp(K_Hp.size, 0.01f, 1);
+        K_ExpScrol.size = PlayerStats.instance.K_curExp / PlayerStats.instance.K_Exp;
+        K_ExpScrol.size = Mathf.Clamp(K_ExpScrol.size, 0.01f, 1);
+        K_Mp.size = PlayerStats.instance.K_curMP / PlayerStats.instance.K_MP;
+        K_Mp.size = Mathf.Clamp(K_Mp.size, 0.01f, 1);
+        //
+        S_Hp.size = PlayerStats.instance.S_curHP / PlayerStats.instance.S_MP;
+        S_Hp.size = Mathf.Clamp(S_Hp.size, 0.01f, 1);
+        S_ExpScrol.size = PlayerStats.instance.S_curExp / PlayerStats.instance.S_Exp;
+        S_ExpScrol.size = Mathf.Clamp(S_ExpScrol.size, 0.01f, 1);
+        S_Mp.size = PlayerStats.instance.S_curMP / PlayerStats.instance.S_MP;
+        S_Mp.size = Mathf.Clamp(S_Mp.size, 0.01f, 1);
+    }
     public void TakeCamera()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
@@ -299,16 +460,23 @@ public class GameManager : MonoBehaviour
         moneyTextM.text = money.ToString();    
         //il testo dello money viene aggiornato
     }
- public void AddToExp(int pointsToAdd)
+ // Metodo chiamato quando il giocatore raggiunge il requisito per salire di livello
+    public void K_PlayerReachedLevelUp()
+    {PlayerStats.instance.K_LevelUp();}
+    public void S_PlayerReachedLevelUp()
+    {PlayerStats.instance.S_LevelUp();}
+    public void F_PlayerReachedLevelUp()
+    {PlayerStats.instance.F_LevelUp();}
+    public void AddToExp(int pointsToAdd)
     {
-        ExpF += pointsToAdd;
-        ExpS += pointsToAdd;
-        ExpK += pointsToAdd;
+        F_Exp += pointsToAdd;
+        S_Exp += pointsToAdd;
+        K_Exp += pointsToAdd;
 
         //Lo money aumenta
-        ExpTextMF.text = ExpF.ToString(); 
-        ExpTextMS.text = ExpS.ToString();    
-        ExpTextMK.text = ExpK.ToString();    
+        F_ExpTextM.text = F_Exp.ToString(); 
+        S_ExpTextM.text = S_Exp.ToString();    
+        K_ExpTextM.text = K_Exp.ToString();    
    
         //il testo dello money viene aggiornato
     }

@@ -13,6 +13,9 @@ TagManager:
   - S_Player
   - F_Player
   - K_Player
+  - F_Coll
+  - K_Coll
+  - S_Coll
   layers:
   - Default
   - TransparentFX

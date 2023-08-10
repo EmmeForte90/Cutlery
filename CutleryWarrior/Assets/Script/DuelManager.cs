@@ -12,14 +12,12 @@ using TMPro;
 public class DuelManager : MonoBehaviour
 {
 
-[Header("Stats")]
+    [Header("Arena")]
+    public int EnemyinArena;
 
-[Header("Fork")]
+    [Header("Fork")]
 
-    public float FmaxHealth = 100f;
-    public float FcurrentHealth;
     public Scrollbar FhealthBar;
-    public float FmaxMP = 100f;
     public float FcurrentMP;
     public Scrollbar FMPBar;
     public float FcostMP = 20;
@@ -28,10 +26,8 @@ public class DuelManager : MonoBehaviour
 
     [Header("Knife")]
 
-    public float KmaxHealth = 100f;
     public float KcurrentHealth;
     public Scrollbar KhealthBar;
-    public float KmaxMP = 100f;
     public float KcurrentMP;
     public Scrollbar KMPBar;
     public float KcostMP = 15;
@@ -40,10 +36,8 @@ public class DuelManager : MonoBehaviour
 
     [Header("Spoon")]
 
-    public float SmaxHealth = 100f;
     public float ScurrentHealth;
     public Scrollbar ShealthBar;
-    public float SmaxMP = 100f;
     public float ScurrentMP;
     public Scrollbar SMPBar;
     public float ScostMP = 10;
@@ -75,14 +69,14 @@ public void Awake()
     {
          if (instance == null){instance = this;}
         Animator animator = GetComponent<Animator>();
-        FcurrentHealth = FmaxHealth;
-        FcurrentMP = FmaxMP;
+        PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
+        PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;
         //
-        KcurrentHealth = KmaxHealth;
-        KcurrentMP = KmaxMP;
+        PlayerStats.instance.K_curHP = PlayerStats.instance.K_HP;
+        PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;
         //
-        ScurrentHealth = SmaxHealth;
-        ScurrentMP = SmaxMP;
+        PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
+        PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;
         CharacterID = 1;
         //sceneEvent = GetComponent<SceneEvent>();
         // Aggiungiamo un listener all'evento di cambio scena
@@ -90,22 +84,22 @@ public void Awake()
     }
 public void Update()
     {
-        FhealthBar.size = FcurrentHealth / FmaxHealth;
+        FhealthBar.size = PlayerStats.instance.F_curHP / PlayerStats.instance.F_HP;
         FhealthBar.size = Mathf.Clamp(FhealthBar.size, 0.01f, 1);
         //
-        FMPBar.size = FcurrentMP / FmaxMP;
+        FMPBar.size = PlayerStats.instance.F_curMP / PlayerStats.instance.F_MP;
         FMPBar.size = Mathf.Clamp(FMPBar.size, 0.01f, 1);
         //
-        KhealthBar.size = KcurrentHealth / KmaxHealth;
+        KhealthBar.size = PlayerStats.instance.K_curHP / PlayerStats.instance.K_HP;
         KhealthBar.size = Mathf.Clamp(KhealthBar.size, 0.01f, 1);
         //
-        KMPBar.size = KcurrentMP / KmaxMP;
+        KMPBar.size = PlayerStats.instance.K_curMP / PlayerStats.instance.K_MP;
         KMPBar.size = Mathf.Clamp(KMPBar.size, 0.01f, 1);
         //
-        ShealthBar.size = ScurrentHealth / SmaxHealth;
+        ShealthBar.size = PlayerStats.instance.S_curHP / PlayerStats.instance.S_MP;
         ShealthBar.size = Mathf.Clamp(ShealthBar.size, 0.01f, 1);
         //
-        SMPBar.size = ScurrentMP / SmaxMP;
+        SMPBar.size = PlayerStats.instance.S_curMP / PlayerStats.instance.S_MP;
         SMPBar.size = Mathf.Clamp(SMPBar.size, 0.01f, 1);
         //
         //Il nemico attacca il player, creare un fattore randomico così che il nemico scelga il personaggio d'attaccare
@@ -121,19 +115,19 @@ public void Update()
         KcurrentMP += K_SpeedRestore * Time.deltaTime;
         ScurrentMP += S_SpeedRestore * Time.deltaTime;
 
-        if(FcurrentMP >= FmaxMP)
+        if(FcurrentMP >= PlayerStats.instance.F_MP)
         {
-            FcurrentMP = FmaxMP;
+            FcurrentMP = PlayerStats.instance.F_MP;
             //Restore = false;
         }
-        if(KcurrentMP >= KmaxMP)
+        if(KcurrentMP >= PlayerStats.instance.K_MP)
         {
-            KcurrentMP = KmaxMP;
+            KcurrentMP = PlayerStats.instance.K_MP;
             //Restore = false;
         }
-        if(ScurrentMP >= SmaxMP)
+        if(ScurrentMP >= PlayerStats.instance.S_MP)
         {
-            ScurrentMP = SmaxMP;
+            ScurrentMP = PlayerStats.instance.S_MP;
             //Restore = false;
         }
         

@@ -9664,7 +9664,7 @@ GameObject:
   - component: {fileID: 289112817688856019}
   m_Layer: 0
   m_Name: Projectile_Fire_Ball_Lv1
-  m_TagString: Untagged
+  m_TagString: F_Coll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -12,19 +12,15 @@ public class AnimationManager : MonoBehaviour
     public bool fork;
     public bool knife;
     public bool spoon;
-
     [Header("Fork")]
     private GameObject ForkActive;
     private CharacterMove F_Script;
-
     [Header("Spoon")]
     private GameObject SpoonActive;
     private CharacterMove S_Script;
-
     [Header("Knife")]
     private GameObject KnifeActive;
     private CharacterMove K_Script;
-    
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
     private string currentAnimationName;
@@ -45,9 +41,7 @@ public class AnimationManager : MonoBehaviour
     public GameObject SlashB;
     [HideInInspector]
     public bool isDefence = false;
-
     public static AnimationManager instance;
-
     public void Awake()
     {
          if (instance == null){instance = this;}
@@ -73,6 +67,18 @@ public class AnimationManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Boom = true;
     }
+   
+    
+    public void TemporaryChangeColor(Color color)
+    {
+    _skeletonAnimation.Skeleton.SetColor(color);
+    Invoke(nameof(ResetColor), 0.5f);
+    }
+
+    private void ResetColor()
+    {
+    _skeletonAnimation.Skeleton.SetColor(Color.white);
+    }
     public void PlayAnimation(string animationName)
     {if (currentAnimationName != animationName){
     _skeletonAnimation.state.SetAnimation(0, animationName, false);
@@ -87,7 +93,6 @@ public class AnimationManager : MonoBehaviour
                     _spineAnimationState.Event += HandleEvent;
                 }
     }
-
 
 private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
 {
