@@ -117,7 +117,12 @@ public class AttStats : MonoBehaviour
         //
         F_ExpScrol.size = PlayerStats.instance.F_curExp / PlayerStats.instance.F_Exp;
         F_ExpScrol.size = Mathf.Clamp(F_ExpScrol.size, 0.01f, 5);
-
+        K_LV = PlayerStats.instance.K_LV;
+        K_LVTextM.text = K_LV.ToString();
+        S_LV = PlayerStats.instance.S_LV;
+        S_LVTextM.text = S_LV.ToString();
+        F_LV = PlayerStats.instance.F_LV;
+        F_LVTextM.text = F_LV.ToString();
     }
 // Metodo chiamato quando il giocatore guadagna esperienza
     public void F_GainExperience(int amount)
