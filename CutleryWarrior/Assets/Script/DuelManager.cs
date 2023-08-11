@@ -105,16 +105,7 @@ public void Update()
         //
         SMPBar.size = PlayerStats.instance.S_curMP / PlayerStats.instance.S_MP;
         SMPBar.size = Mathf.Clamp(SMPBar.size, 0.01f, 1);
-        //
-        //Il nemico attacca il player, creare un fattore randomico così che il nemico scelga il personaggio d'attaccare
-        if(CharacterID == 1)
-        {SimpleEnemy.instance.TakePlayer();}
-        if(CharacterID == 2)
-        {SimpleEnemy.instance.TakePlayer();}
-        if(CharacterID == 3)
-        {SimpleEnemy.instance.TakePlayer();}
-        //
-        
+        //            
         PlayerStats.instance.F_curMP += F_SpeedRestore * Time.deltaTime;
         PlayerStats.instance.K_curMP += K_SpeedRestore * Time.deltaTime;
         PlayerStats.instance.S_curMP += S_SpeedRestore * Time.deltaTime;
@@ -174,7 +165,7 @@ IEnumerator EndBattle()
     {
         GameManager.instance.ChStop();
         AudioManager.instance.CrossFadeOUTAudio(1);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         GameManager.instance.battle = true;
         if(win)
         {Win.gameObject.SetActive(true);

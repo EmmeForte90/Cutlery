@@ -40,9 +40,11 @@ public class GameManager : MonoBehaviour
 
     [Header("Stats")]
     public PlayerStats PStats;
-
+    [SerializeField] public GameObject F_Hero;
+    [SerializeField] public GameObject K_Hero;
+    [SerializeField] public GameObject S_Hero;
+    
     [Header("Fork")]
-
     private  int F_LV;
 
     private float F_HP;

@@ -10,6 +10,7 @@ public class SimpleEnemy : MonoBehaviour
     public int ID;
 
     [Header("Stop For Test")]
+    public GameObject player;
     public int result;
     public bool Test = false;   
     private bool take = false; 
@@ -25,12 +26,11 @@ public class SimpleEnemy : MonoBehaviour
     public int attackDamage = 20;
     public int defense = 2;
     public int attackPauseDuration = 1;
-    private Transform player;
     private bool isAttacking = false;   
     private bool DieB = false;
     private DuelManager DM;
 
-    public static SimpleEnemy instance;
+    //public static SimpleEnemy instance;
     [Header("VFX")]
     [SerializeField] public Transform hitpoint;
     [SerializeField] GameObject VFXHurt;    
@@ -51,7 +51,7 @@ public class SimpleEnemy : MonoBehaviour
     
     public void Awake()
     {
-        if (instance == null){instance = this;}
+        //if (instance == null){instance = this;}
         currentHealth = maxHealth;
         DM = GameObject.Find("Script").GetComponent<DuelManager>();
         DM.EnemyinArena += 1;
@@ -59,20 +59,20 @@ public class SimpleEnemy : MonoBehaviour
     private void Choise()
     {
         // Genera un numero casuale tra 1 e 3
-        int randomNumber = Random.Range(1, 3);
+        int randomNumber = Random.Range(0, 2);
         result = Mathf.RoundToInt(randomNumber);
         Debug.Log("Numero casuale: " + result);
         Debug.Log(ID + "ha Preso" + result);
         switch(result)
         {
+            case 0:
+            player = GameManager.instance.F_Hero;
+            break;
             case 1:
-            player = GameObject.FindWithTag("K_Player").transform;
+            player =  GameManager.instance.K_Hero;
             break;
             case 2:
-            player = GameObject.FindWithTag("F_Player").transform;
-            break;
-            case 3:
-            player = GameObject.FindWithTag("S_Player").transform;
+            player =  GameManager.instance.S_Hero;
             break;
         } 
     }
@@ -89,15 +89,14 @@ public class SimpleEnemy : MonoBehaviour
         if(currentHealth < 0){DieB = true; Die();}
         }
     }
-    public void TakePlayer(){player = null;}
     private void ChasePlayer()
     {
         if (player != null)
         {
             if(!isAttacking)
-            {transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+            {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
             Anm.PlayAnimationLoop(WalkAnimationName);}
-            if (Vector3.Distance(transform.position, player.position) <= attackRange)
+            if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
             {StartAttack();}
         }
     }
@@ -124,6 +123,7 @@ public class SimpleEnemy : MonoBehaviour
         yield return new WaitForSeconds(1);
         Anm.PlayAnimationLoop(IdleAnimationName);
         yield return new WaitForSeconds(attackPauseDuration);
+        take = false;
         isAttacking = false;
     }
 
@@ -132,6 +132,7 @@ public class SimpleEnemy : MonoBehaviour
     if(!DieB){
     int danno_subito = Mathf.Max(damage - defense, 0);
     currentHealth -= danno_subito;
+    AudioManager.instance.PlaySFX(8);
     //Debug.Log("danno +"+ danno_subito);
     Instantiate(VFXHurt, transform.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);}
