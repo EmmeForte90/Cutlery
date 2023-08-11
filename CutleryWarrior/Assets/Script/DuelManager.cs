@@ -152,7 +152,9 @@ public void Update()
     }
 IEnumerator StartM()
     {
-        InputBattle.instance.inputCTR = true;
+        //InputBattle.instance.inputCTR = true;
+        inputCTR = true;
+        GameManager.instance.ChStop();
         Pause.gameObject.SetActive(true);
         animator.SetTrigger("Open");
         yield return new WaitForSeconds(1f);
@@ -163,7 +165,9 @@ IEnumerator EndP()
         animator.SetTrigger("Close");
         yield return new WaitForSeconds(1f);
         Pause.gameObject.SetActive(false);
-        InputBattle.instance.inputCTR = false;
+        GameManager.instance.ChCanM();
+        inputCTR = false;
+        //InputBattle.instance.inputCTR = false;
     }
 
 IEnumerator EndBattle()

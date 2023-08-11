@@ -45,6 +45,7 @@ public class StartBattle : MonoBehaviour
     {
         if (instance == null){instance = this;}
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();;} 
+        Duel_Script.inputCTR = true;
         GameManager.instance.battle = true;
         GameManager.instance.ChStop();
         GameManager.instance.TakeCamera();
@@ -90,11 +91,7 @@ public class StartBattle : MonoBehaviour
 IEnumerator DuringInter()
     {
         GameManager.instance.FadeOut();
-        yield return new WaitForSeconds(1f);
-        ReadyForBattle.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        ReadyForBattle.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         GameManager.instance.ChCanM();
         if(Switch.isElement1Active)
         {
