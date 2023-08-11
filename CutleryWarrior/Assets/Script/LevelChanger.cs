@@ -64,6 +64,7 @@ private SceneEvent sceneEvent;
     yield return new WaitForSeconds(2f);
     SwitchCharacter.instance.ActiveCH();
     GameManager.instance.Exploration();
+    GameManager.instance.Change();
     sceneEvent.InvokeOnSceneChange();
     CharacterMove.instance.isRun = false;
     yield return new WaitForSeconds(2f);

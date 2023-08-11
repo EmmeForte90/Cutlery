@@ -15,6 +15,9 @@ public class DuelManager : MonoBehaviour
     [Header("Arena")]
     public int EnemyinArena;
     private bool win = true;
+    private bool WinEnd = false;
+    public AttStats Stats;
+    private int result;
     [Header("Fork")]
 
     public Scrollbar FhealthBar;
@@ -128,7 +131,7 @@ public void Update()
         
 
 
-    if(!inputCTR)
+    if(!inputCTR || win)
     {
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
@@ -144,6 +147,8 @@ public void Update()
             StartCoroutine(EndP());
         } 
     }
+    if(WinEnd)
+    {if (Input.GetMouseButtonDown(0)){L_C.Escape();}}
     }
 IEnumerator StartM()
     {
@@ -165,17 +170,21 @@ IEnumerator EndBattle()
     {
         GameManager.instance.ChStop();
         AudioManager.instance.CrossFadeOUTAudio(1);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         GameManager.instance.battle = true;
         if(win)
-        {AudioManager.instance.PlaySFX(7); 
+        {Win.gameObject.SetActive(true);
+        ExpChoise();
+        AudioManager.instance.PlaySFX(7);
+        GameManager.instance.NotChange(); 
         GameManager.instance.PoseWin();
+        Stats.F_GainExperience(result);
+        Stats.S_GainExperience(result);
+        Stats.K_GainExperience(result);
         win = false;}
-        Win.gameObject.SetActive(true);
-        yield return new WaitForSeconds(5f);
-        L_C.Escape();
+        WinEnd = true;
     }
-private void ToggleTimeScale()
+    private void ToggleTimeScale()
     {
         if (Time.timeScale == 1)
         {Time.timeScale = 0.01f;}
@@ -183,4 +192,18 @@ private void ToggleTimeScale()
         else{Time.timeScale = 1;}
         // Ripristina la velocità normale del gioco  
     }
+
+    private void ExpChoise()
+    {
+       // Genera un numero casuale tra 1 e 2
+        int randomNumber = Random.Range(100, 200);
+
+        // Converte il numero in intero
+        result = Mathf.RoundToInt(randomNumber);
+
+         // Stampa il risultato nella console
+        Debug.Log("Numero casuale: " + result);
+    }
+
+    
 }

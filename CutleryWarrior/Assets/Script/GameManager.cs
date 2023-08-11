@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     
     public Vector3 savedPosition;
     public string sceneName;
-
+    public bool notChange = false;
     [Header("Pause")]
     public bool stopInput = false;
     public bool battle = false;
@@ -365,6 +365,11 @@ public class GameManager : MonoBehaviour
         S_Mp.size = PStats.S_curMP / PStats.S_MP;
         S_Mp.size = Mathf.Clamp(S_Mp.size, 0.01f, 1);
     }
+
+    public void Change()
+    {notChange = false;} 
+    public void NotChange()
+    {notChange = true;} 
     public void TakeCamera()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();

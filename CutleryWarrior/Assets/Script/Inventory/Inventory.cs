@@ -69,6 +69,7 @@ public void AssignDress(Weapon Item)
             previewImages_WF.sprite = Item.itemIcon;
             Skin_F.UpdateCharacterSkin();
 	    	Skin_F.UpdateCombinedSkin();
+            //
             PlayerStats.instance.F_HP = 0;
             PlayerStats.instance.F_MP = 0;
             PlayerStats.instance.F_defense = 0;
@@ -76,13 +77,13 @@ public void AssignDress(Weapon Item)
             PlayerStats.instance.F_paralysisResistance = 0;
             PlayerStats.instance.F_sleepResistance = 0;
             PlayerStats.instance.F_rustResistance = 0;
-            PlayerStats.instance.F_HP += Item.HP;
-            PlayerStats.instance.F_MP += Item.MP;
-            PlayerStats.instance.F_defense += Item.DefenceDress;
-            PlayerStats.instance.F_poisonResistance += Item.Res_Poison;
-            PlayerStats.instance.F_paralysisResistance += Item.Res_Stun;
-            PlayerStats.instance.F_sleepResistance += Item.Res_Sleep;
-            PlayerStats.instance.F_rustResistance += Item.Res_Rust;
+            PlayerStats.instance.F_HP += Item.HP + PlayerStats.instance.F_HPCont;
+            PlayerStats.instance.F_MP += Item.MP + PlayerStats.instance.F_MP;
+            PlayerStats.instance.F_defense += Item.DefenceDress + PlayerStats.instance.F_defense;
+            PlayerStats.instance.F_poisonResistance += Item.Res_Poison + PlayerStats.instance.F_poisonResistance;
+            PlayerStats.instance.F_paralysisResistance += Item.Res_Stun + PlayerStats.instance.F_paralysisResistance;
+            PlayerStats.instance.F_sleepResistance += Item.Res_Sleep + PlayerStats.instance.F_sleepResistance;
+            PlayerStats.instance.F_rustResistance += Item.Res_Rust + PlayerStats.instance.F_rustResistance;
             Puppets_F.DressSkin = Item.NameSkin;
             Puppets_F.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_F.UpdateCombinedSkinUI(); 
@@ -93,6 +94,7 @@ public void AssignDress(Weapon Item)
             previewImages_WK.sprite = Item.itemIcon;
             Skin_K.UpdateCharacterSkin();
 	    	Skin_K.UpdateCombinedSkin();
+            //
             PlayerStats.instance.K_HP = 0;
             PlayerStats.instance.K_MP = 0;
             PlayerStats.instance.K_defense = 0;
@@ -100,13 +102,13 @@ public void AssignDress(Weapon Item)
             PlayerStats.instance.K_paralysisResistance = 0;
             PlayerStats.instance.K_sleepResistance = 0;
             PlayerStats.instance.K_rustResistance = 0;
-            PlayerStats.instance.K_HP += Item.HP;
-            PlayerStats.instance.K_MP += Item.MP;
-            PlayerStats.instance.K_defense += Item.DefenceDress;
-            PlayerStats.instance.K_poisonResistance += Item.Res_Poison;
-            PlayerStats.instance.K_paralysisResistance += Item.Res_Stun;
-            PlayerStats.instance.K_sleepResistance += Item.Res_Sleep;
-            PlayerStats.instance.K_rustResistance += Item.Res_Rust;
+            PlayerStats.instance.K_HP += Item.HP += PlayerStats.instance.K_HPCont;
+            PlayerStats.instance.K_MP += Item.MP += PlayerStats.instance.K_MP;
+            PlayerStats.instance.K_defense += Item.DefenceDress + PlayerStats.instance.K_defense;
+            PlayerStats.instance.K_poisonResistance += Item.Res_Poison + PlayerStats.instance.K_poisonResistance;
+            PlayerStats.instance.K_paralysisResistance += Item.Res_Stun + PlayerStats.instance.K_paralysisResistance;
+            PlayerStats.instance.K_sleepResistance += Item.Res_Sleep + PlayerStats.instance.K_sleepResistance;
+            PlayerStats.instance.K_rustResistance += Item.Res_Rust + PlayerStats.instance.K_rustResistance;
             Puppets_K.DressSkin = Item.NameSkin;
             Puppets_K.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_K.UpdateCombinedSkinUI(); 
@@ -117,6 +119,7 @@ public void AssignDress(Weapon Item)
             previewImages_WS.sprite = Item.itemIcon;
             Skin_S.UpdateCharacterSkin();
 	    	Skin_S.UpdateCombinedSkin();
+            //
             PlayerStats.instance.S_HP = 0;
             PlayerStats.instance.S_MP = 0;
             PlayerStats.instance.S_defense = 0;
@@ -124,13 +127,13 @@ public void AssignDress(Weapon Item)
             PlayerStats.instance.S_paralysisResistance = 0;
             PlayerStats.instance.S_sleepResistance = 0;
             PlayerStats.instance.S_rustResistance = 0;
-            PlayerStats.instance.S_HP += Item.HP;
-            PlayerStats.instance.S_MP += Item.MP;
-            PlayerStats.instance.S_defense += Item.DefenceDress;
-            PlayerStats.instance.S_poisonResistance += Item.Res_Poison;
-            PlayerStats.instance.S_paralysisResistance += Item.Res_Stun;
-            PlayerStats.instance.S_sleepResistance += Item.Res_Sleep;
-            PlayerStats.instance.S_rustResistance += Item.Res_Rust;
+            PlayerStats.instance.S_HP += Item.HP + PlayerStats.instance.S_HPCont;
+            PlayerStats.instance.S_MP += Item.MP + PlayerStats.instance.S_MP;
+            PlayerStats.instance.S_defense += Item.DefenceDress + PlayerStats.instance.S_defense;
+            PlayerStats.instance.S_poisonResistance += Item.Res_Poison + PlayerStats.instance.S_poisonResistance;
+            PlayerStats.instance.S_paralysisResistance += Item.Res_Stun + PlayerStats.instance.S_paralysisResistance;
+            PlayerStats.instance.S_sleepResistance += Item.Res_Sleep + PlayerStats.instance.S_sleepResistance;
+            PlayerStats.instance.S_rustResistance += Item.Res_Rust + PlayerStats.instance.S_rustResistance;
             Puppets_S.DressSkin = Item.NameSkin;
             Puppets_S.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_S.UpdateCombinedSkinUI(); 
@@ -180,6 +183,9 @@ public void AssignWeapon(Weapon Item)
     break;
             
 }}
+
+
+
 
     public void Start()
     {

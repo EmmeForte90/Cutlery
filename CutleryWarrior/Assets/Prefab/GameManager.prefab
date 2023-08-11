@@ -72636,6 +72636,7 @@ MonoBehaviour:
   WinAnimationName: Battle/win
   Anm: {fileID: 3123265100892517034}
   Allarming: 0
+  Win: 0
   _skeletonAnimation: {fileID: 8865165351683847974}
 --- !u!114 &3123265100892517034
 MonoBehaviour:
@@ -92170,6 +92171,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5ee44ed1cfce8074aa7930c95c1675ad, type: 3}
   - {fileID: 8300000, guid: 24f0a3b43c7f2eb4eb9223ac20560ccd, type: 3}
   - {fileID: 8300000, guid: 4841659b4f768374b8b80256b8da3a02, type: 3}
+  - {fileID: 8300000, guid: 347c8e9d026d69344b0e8f98ea2807f1, type: 3}
   MSX: {fileID: 24100000, guid: 8112fa7cb589b8340af91744ca05ce36, type: 2}
   SFX: {fileID: 24100000, guid: e986d7840d686434689032d6a468b39d, type: 2}
 --- !u!1 &3225873643527223388
@@ -98505,6 +98507,7 @@ MonoBehaviour:
   WinAnimationName: Battle/win
   Anm: {fileID: 3123265100892517036}
   Allarming: 0
+  Win: 0
   _skeletonAnimation: {fileID: 4194123266224909399}
 --- !u!114 &624626145106767676
 MonoBehaviour:
@@ -99319,6 +99322,7 @@ MonoBehaviour:
   WinAnimationName: Battle/win
   Anm: {fileID: 3123265100892517035}
   Allarming: 0
+  Win: 0
   _skeletonAnimation: {fileID: 3251496515922407380}
 --- !u!114 &3591900854741049043
 MonoBehaviour:
@@ -118415,6 +118419,7 @@ MonoBehaviour:
   F_curHP: 0
   F_MP: 100
   F_curMP: 0
+  F_CostMP: 10
   F_Exp: 0
   F_curExp: 0
   F_attack: 10
@@ -118423,11 +118428,25 @@ MonoBehaviour:
   F_paralysisResistance: 5
   F_sleepResistance: 5
   F_rustResistance: 5
+  F_HPCont: 0
+  F_curHPCont: 0
+  F_MPCont: 0
+  F_curMPCont: 0
+  F_CostMPCont: 0
+  F_ExpCont: 0
+  F_curExpCont: 0
+  F_attackCont: 0
+  F_defenseCont: 0
+  F_poisonResistanceCont: 0
+  F_paralysisResistanceCont: 0
+  F_sleepResistanceCont: 0
+  F_rustResistanceCont: 0
   S_LV: 1
   S_HP: 100
   S_curHP: 0
   S_MP: 100
   S_curMP: 0
+  S_CostMP: 10
   S_Exp: 0
   S_curExp: 0
   S_attack: 5
@@ -118436,11 +118455,25 @@ MonoBehaviour:
   S_paralysisResistance: 5
   S_sleepResistance: 5
   S_rustResistance: 5
+  S_HPCont: 0
+  S_curHPCont: 0
+  S_MPCont: 0
+  S_curMPCont: 0
+  S_CostMPCont: 0
+  S_ExpCont: 0
+  S_curExpCont: 0
+  S_attackCont: 0
+  S_defenseCont: 0
+  S_poisonResistanceCont: 0
+  S_paralysisResistanceCont: 0
+  S_sleepResistanceCont: 0
+  S_rustResistanceCont: 0
   K_LV: 1
   K_HP: 100
   K_curHP: 0
   K_MP: 100
   K_curMP: 0
+  K_CostMP: 10
   K_Exp: 0
   K_curExp: 0
   K_attack: 20
@@ -118449,6 +118482,19 @@ MonoBehaviour:
   K_paralysisResistance: 10
   K_sleepResistance: 10
   K_rustResistance: 10
+  K_HPCont: 0
+  K_curHPCont: 0
+  K_MPCont: 0
+  K_curMPCont: 0
+  K_CostMPCont: 0
+  K_ExpCont: 0
+  K_curExpCont: 0
+  K_attackCont: 0
+  K_defenseCont: 0
+  K_poisonResistanceCont: 0
+  K_paralysisResistanceCont: 0
+  K_sleepResistanceCont: 0
+  K_rustResistanceCont: 0
 --- !u!1 &7099483824798884498
 GameObject:
   m_ObjectHideFlags: 0

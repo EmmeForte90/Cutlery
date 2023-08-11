@@ -53,11 +53,11 @@ public class TouchPlayer : MonoBehaviour
 IEnumerator WaitForSceneLoad()
 {   
     GameManager.instance.ChStop();
-    yield return new WaitForSeconds(2f);
+    yield return new WaitForSeconds(1f);
     GameManager.instance.battle = true;
     GameManager.instance.savedPosition = savedPosition;
     GameManager.instance.FadeIn();
-    yield return new WaitForSeconds(2f);
+    yield return new WaitForSeconds(1f);
     GameManager.instance.StopAllarm();
     GameManager.instance.Posebattle();
     sceneEvent.InvokeOnSceneChange();
@@ -72,6 +72,7 @@ public void OnTriggerEnter(Collider other)
     if (other.CompareTag("F_Player") || other.CompareTag("K_Player") || other.CompareTag("S_Player"))
     {                
         AudioManager.instance.CrossFadeOUTAudio(0);
+        GameManager.instance.NotChange();
         AudioManager.instance.PlayUFX(7);
         GameManager.instance.ChStop();
         GameManager.instance.Allarm();

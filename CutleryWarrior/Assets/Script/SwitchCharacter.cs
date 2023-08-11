@@ -31,7 +31,8 @@ public class SwitchCharacter : MonoBehaviour
     private CinemachineVirtualCamera vCam;
     private GameObject player;
     public UIRotationSwitcher rotationSwitcher;
-    public void Update(){if (Input.GetKeyDown(KeyCode.Space)){StartCoroutine(CoordinateActor());}}
+    public void Update()
+    {if(!GameManager.instance.notChange){if(Input.GetKeyDown(KeyCode.Space)){StartCoroutine(CoordinateActor());}}}
     public void Start(){inizial();}
     public void Awake(){if (instance == null){instance = this;}}
 

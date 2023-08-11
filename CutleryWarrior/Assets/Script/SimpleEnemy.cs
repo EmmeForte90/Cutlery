@@ -101,11 +101,12 @@ public class SimpleEnemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+    if(!DieB){
     int danno_subito = Mathf.Max(damage - defense, 0);
     currentHealth -= danno_subito;
     Debug.Log("danno +"+ danno_subito);
-    Instantiate(VFXHurt, hitpoint.position, transform.rotation);
-    Anm.TemporaryChangeColor(Color.red);;
+    Instantiate(VFXHurt, transform.position, transform.rotation);
+    Anm.TemporaryChangeColor(Color.red);}
     }
     
     public void FacePlayer()
@@ -116,7 +117,8 @@ public class SimpleEnemy : MonoBehaviour
     public void Die()
     {
         Debug.Log("Il nemico è morto!");
-        Instantiate(VFXDie, hitpoint.position, transform.rotation);
+        Instantiate(VFXDie, transform.position, transform.rotation);
+        AudioManager.instance.PlayUFX(11);
         Stats.gameObject.SetActive(false);
         DM.EnemyinArena -= 1;
         Anm.PlayAnimation(DieAnimationName);

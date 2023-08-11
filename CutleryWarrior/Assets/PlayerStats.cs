@@ -25,6 +25,20 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int F_sleepResistance = 0;
     [SerializeField] public int F_rustResistance = 0;
 
+    [HideInInspector] public float F_HPCont;
+    [HideInInspector] public float F_curHPCont;
+    [HideInInspector] public float F_MPCont;
+    [HideInInspector] public float F_curMPCont;
+    [HideInInspector] public float F_CostMPCont;
+    [HideInInspector] public float F_ExpCont;
+    [HideInInspector] public float F_curExpCont;
+    [HideInInspector] public int F_attackCont;
+    [HideInInspector] public int F_defenseCont;
+    [HideInInspector] public int F_poisonResistanceCont;
+    [HideInInspector] public int F_paralysisResistanceCont;
+    [HideInInspector] public int F_sleepResistanceCont;
+    [HideInInspector] public int F_rustResistanceCont;
+
     [Header("Spoon")]
 
     [SerializeField] public int S_LV = 1;
@@ -43,6 +57,21 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int S_paralysisResistance = 0;
     [SerializeField] public int S_sleepResistance = 0;
     [SerializeField] public int S_rustResistance = 0; 
+
+    [HideInInspector] public float S_HPCont;
+    [HideInInspector] public float S_curHPCont;
+    [HideInInspector] public float S_MPCont;
+    [HideInInspector] public float S_curMPCont;
+    [HideInInspector] public float S_CostMPCont;
+    [HideInInspector] public float S_ExpCont;
+    [HideInInspector] public float S_curExpCont;
+    [HideInInspector] public int S_attackCont;
+    [HideInInspector] public int S_defenseCont;
+    [HideInInspector] public int S_poisonResistanceCont;
+    [HideInInspector] public int S_paralysisResistanceCont;
+    [HideInInspector] public int S_sleepResistanceCont;
+    [HideInInspector] public int S_rustResistanceCont;
+
    
 
 
@@ -56,7 +85,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float K_CostMP = 0;
     [SerializeField] public float K_Exp = 0;
     [SerializeField] public float K_curExp = 0;
-
     [SerializeField] public int K_attack = 10;
     [SerializeField] public int K_defense = 5;
     [SerializeField] public int K_poisonResistance = 0;
@@ -64,18 +92,27 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int K_sleepResistance = 0;
     [SerializeField] public int K_rustResistance = 0; 
 
+    [HideInInspector] public float K_HPCont;
+    [HideInInspector] public float K_curHPCont;
+    [HideInInspector] public float K_MPCont;
+    [HideInInspector] public float K_curMPCont;
+    [HideInInspector] public float K_CostMPCont;
+    [HideInInspector] public float K_ExpCont;
+    [HideInInspector] public float K_curExpCont;
+    [HideInInspector] public int K_attackCont;
+    [HideInInspector] public int K_defenseCont;
+    [HideInInspector] public int K_poisonResistanceCont;
+    [HideInInspector] public int K_paralysisResistanceCont;
+    [HideInInspector] public int K_sleepResistanceCont;
+    [HideInInspector] public int K_rustResistanceCont;
+
+
     public static PlayerStats instance;
    
     public void Awake()
     {if (instance == null){instance = this;}}
     // Metodo chiamato quando il giocatore sale di livello
 
-    public void TestExp()
-    {
-        F_GainExperience(50);
-        K_GainExperience(50);
-        S_GainExperience(50);
-    }
     public void F_LevelUp()
     {
         // Aumento degli attributi
@@ -87,6 +124,15 @@ public class PlayerStats : MonoBehaviour
         F_paralysisResistance += 2;
         F_sleepResistance += 2;
         F_rustResistance += 2;
+
+        F_HPCont = F_HP;
+        F_MPCont = F_MP;
+        F_attackCont = F_attack;
+        F_defenseCont = F_defense;
+        F_poisonResistanceCont = F_poisonResistance;
+        F_paralysisResistanceCont = F_paralysisResistance;
+        F_sleepResistanceCont = F_sleepResistance;
+        F_rustResistanceCont = F_rustResistance;
 
         // Aumento del livello
         F_LV++;
@@ -113,6 +159,15 @@ public class PlayerStats : MonoBehaviour
         K_sleepResistance += 1;
         K_rustResistance += 1;
 
+        K_HPCont = K_HP;
+        K_MPCont = K_MP;
+        K_attackCont = K_attack;
+        K_defenseCont = K_defense;
+        K_poisonResistanceCont = K_poisonResistance;
+        K_paralysisResistanceCont = K_paralysisResistance;
+        K_sleepResistanceCont = K_sleepResistance;
+        K_rustResistanceCont = K_rustResistance;
+
         // Aumento del livello
         K_LV++;
 
@@ -138,6 +193,14 @@ public class PlayerStats : MonoBehaviour
         S_sleepResistance += 3;
         S_rustResistance += 3;
 
+        S_HPCont = S_HP;
+        S_MPCont = S_MP;
+        S_attackCont = S_attack;
+        S_defenseCont = S_defense;
+        S_poisonResistanceCont = S_poisonResistance;
+        S_paralysisResistanceCont = S_paralysisResistance;
+        S_sleepResistanceCont = S_sleepResistance;
+        S_rustResistanceCont = S_rustResistance;
         // Aumento del livello
         S_LV++;
 
@@ -151,26 +214,4 @@ public class PlayerStats : MonoBehaviour
         GameManager.instance.StatPlayer();
     }
 
-    // Metodo chiamato quando il giocatore guadagna esperienza
-    public void F_GainExperience(int amount)
-    {
-        F_curExp += amount;
-        // Se il giocatore ha guadagnato abbastanza esperienza per salire di livello, chiama il metodo LevelUp()
-        if (F_curExp >= F_Exp)
-        {F_LevelUp();}
-    }
-    public void K_GainExperience(int amount)
-    {
-        K_curExp += amount;
-        // Se il giocatore ha guadagnato abbastanza esperienza per salire di livello, chiama il metodo LevelUp()
-        if (K_curExp >= K_Exp)
-        {K_LevelUp();}
-    }
-    public void S_GainExperience(int amount)
-    {
-        S_curExp += amount;
-        // Se il giocatore ha guadagnato abbastanza esperienza per salire di livello, chiama il metodo LevelUp()
-        if (S_curExp >= S_Exp)
-        {S_LevelUp();}
-    }
 }

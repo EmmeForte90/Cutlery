@@ -90,11 +90,11 @@ public class StartBattle : MonoBehaviour
 IEnumerator DuringInter()
     {
         GameManager.instance.FadeOut();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         ReadyForBattle.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         ReadyForBattle.gameObject.SetActive(false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         GameManager.instance.ChCanM();
         if(Switch.isElement1Active)
         {
@@ -114,6 +114,7 @@ IEnumerator DuringInter()
             vCam.Follow = player.transform;
             
         }
+        GameManager.instance.Change();
         GameManager.instance.ChCanM();
         Duel_Script.inputCTR = false;
     }
