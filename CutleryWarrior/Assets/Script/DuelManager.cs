@@ -122,22 +122,24 @@ public void Update()
         
 
 
-    if(!inputCTR || win)
+    /*if(!inputCTR || win)
     {
-       if (Input.GetButtonDown("Pause") && !stopInput)
+       if (Input.GetButtonDown("Fire3") && !stopInput)
         {
             stopInput = true;
+            CameraZoom.instance.ZoomIn();
             StartCoroutine(StartM());
         }
-        else if(Input.GetButtonDown("Pause") && stopInput)
+        else if(Input.GetButtonDown("Fire3") && stopInput)
         {
             stopInput = false;
             ToggleTimeScale();
+            CameraZoom.instance.ZoomOut();
             Skill.gameObject.SetActive(false);
             Item.gameObject.SetActive(false);
             StartCoroutine(EndP());
         } 
-    }
+    }*/
     if(WinEnd)
     {if (Input.GetMouseButtonDown(0)){L_C.Escape();}}
     }

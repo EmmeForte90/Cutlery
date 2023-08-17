@@ -11,8 +11,9 @@ using TMPro;
 
 public class StartBattle : MonoBehaviour
 {
-    public GameObject ReadyForBattle; // Variabile per il player
+    //public GameObject ReadyForBattle; // Variabile per il player
     public GameObject DuelManagerO; // Variabile per il player
+    public GameObject PointView; // Variabile per il player
     public static StartBattle instance;
     private SwitchCharacter Switch;
     private CinemachineVirtualCamera vCam;
@@ -44,7 +45,9 @@ public class StartBattle : MonoBehaviour
     public void Awake()
     {
         if (instance == null){instance = this;}
-        if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();;} 
+        if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
+        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+        vCam.Follow = PointView.transform;
         Duel_Script.inputCTR = true;
         GameManager.instance.battle = true;
         GameManager.instance.ChStop();
@@ -66,6 +69,7 @@ public class StartBattle : MonoBehaviour
         ForkActive = GameObject.Find("F_Player");
         SpoonActive = GameObject.Find("S_Player");
         KnifeActive = GameObject.Find("K_Player");
+        CameraZoom.instance.ZoomOut();
     }
     public void Start()
     {

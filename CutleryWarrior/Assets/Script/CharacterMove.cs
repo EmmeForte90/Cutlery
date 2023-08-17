@@ -157,7 +157,7 @@ public void Awake()
 #region Fork
     public void ForkB()
     {
-        Move();
+        MoveB();
     //DODGE
         // Rileva l'input del tasto spazio
         if (Input.GetButtonDown("Fire2") && Time.time - DodgeTime > DodgeSTimer)
@@ -185,9 +185,9 @@ public void Awake()
 #region Knife
     public void KnifeB()
     {
-        Move();
+        MoveB();
         //DODGE
-        if (Input.GetButtonDown("Fire2") && Time.time - DodgeTime > DodgeSTimer)
+        if (Input.GetMouseButtonDown(1) && Time.time - DodgeTime > DodgeSTimer)
         {
             Dodge();
             DodgeTime = Time.time; // Aggiorna l'ultimo momento di attacco
@@ -229,7 +229,7 @@ public void Awake()
 #region Spoon
     public void SpoonB()
     {
-           Move();  
+           MoveB();  
     //DODGE
         // Rileva l'input del tasto spazio
         if (Input.GetMouseButtonDown(1) && PlayerStats.instance.S_curMP > 20)
@@ -273,7 +273,8 @@ public void Awake()
     }}
 
     #region Move
-    public void Move()
+    //For Knife
+    /*public void Move()
     {if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
         Flip();  
         ////////////////////////////////
@@ -300,6 +301,27 @@ public void Awake()
         }
         else if(!isDefence){Anm.PlayAnimationLoop(IdleBAnimationName); stand = true;}
         else if(isDefence){Anm.PlayAnimationLoop(GuardAnimationName); stand = true;}
+        hor = Input.GetAxisRaw("Horizontal");}
+*/
+        public void MoveB()
+    {if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
+        Flip();  
+        ////////////////////////////////
+        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        input = Vector2.ClampMagnitude(input, 1);
+        
+        camF = cam.forward;
+        camR = cam.right;
+        camF.y = 0;
+        camR.y = 0;
+        camF = camF.normalized;
+        camR = camR.normalized;  
+        moveDir = camR * input.x + camF * input.y;
+        
+        if (moveDir.magnitude > 0)
+        {Anm.PlayAnimationLoop(RunBAnimationName);  isRun = true;}
+        else if(!isDefence){Anm.PlayAnimationLoop(IdleBAnimationName); stand = true; isRun = false;}
+        else if(isDefence){Anm.PlayAnimationLoop(GuardAnimationName); stand = true; isRun = false;}
         hor = Input.GetAxisRaw("Horizontal");}
 #endregion
     public void Stop(){rb.velocity = new Vector3(0f, 0f, 0f);}

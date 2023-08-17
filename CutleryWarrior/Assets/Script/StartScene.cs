@@ -38,6 +38,7 @@ public class StartScene : MonoBehaviour
     GameManager.instance.ChCanM();
     Switcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
     Switcher.inizial();
+    CameraZoom.instance.ZoomOut();
     GameManager.instance.FadeOut();
     }}
     public void Spawn(int ID)

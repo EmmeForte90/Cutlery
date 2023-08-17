@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
     public bool battle = false;
 
     [SerializeField]  GameObject Pause;
-
+    [SerializeField]  GameObject LittleM;
+    
     [Header("Fade")]
     [SerializeField] GameObject callFadeIn;
     [SerializeField] GameObject callFadeOut;
@@ -43,7 +44,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject F_Hero;
     [SerializeField] public GameObject K_Hero;
     [SerializeField] public GameObject S_Hero;
-    
+    [SerializeField] public GameObject MP_F;
+    [SerializeField] public GameObject MP_S;
+    [SerializeField] public GameObject MP_K;
+
+
     [Header("Fork")]
     private  int F_LV;
 
@@ -264,6 +269,63 @@ public class GameManager : MonoBehaviour
             break;
             }  
             CameraZoom.instance.ZoomOut();
+            AudioManager.instance.PlayUFX(1);
+        } 
+    }
+    else if(battle){
+       if (Input.GetButtonDown("Pause") && !stopInput)
+        {
+            DuelManager.instance.inputCTR = true;
+            switch (rotationSwitcher.CharacterID)
+    {
+    case 1:
+        ch_F.Stop();
+        stopInput = true;
+        ch_F.inputCTR = true;
+        LittleM.gameObject.SetActive(true);
+        LittleM.transform.position = MP_F.transform.position;
+        CameraZoom.instance.ZoomIn();
+        AudioManager.instance.PlayUFX(1);     
+    break;
+    case 2:
+        ch_K.Stop();
+        stopInput = true;
+        ch_K.inputCTR = true;
+        LittleM.gameObject.SetActive(true);
+        LittleM.transform.position = MP_K.transform.position;
+        CameraZoom.instance.ZoomIn();
+        AudioManager.instance.PlayUFX(1);  
+    break;
+    case 3:
+        ch_S.Stop();
+        stopInput = true;
+        ch_S.inputCTR = true;
+        LittleM.gameObject.SetActive(true);
+        LittleM.transform.position = MP_S.transform.position;
+        CameraZoom.instance.ZoomIn();
+        AudioManager.instance.PlayUFX(1);   
+    break;
+    }          
+        }
+        else if(Input.GetButtonDown("Pause") && stopInput)
+        {
+            stopInput = false;
+            LittleM.gameObject.SetActive(false);
+            CharacterMove.instance.inputCTR = false;
+            switch (rotationSwitcher.CharacterID)
+            {
+            case 1:
+                ch_F.inputCTR = false;    
+            break;
+            case 2:
+                ch_K.inputCTR = false; 
+            break;
+            case 3:
+                ch_S.inputCTR = false; 
+            break;
+            }  
+            CameraZoom.instance.ZoomOut();
+            DuelManager.instance.inputCTR = false;
             AudioManager.instance.PlayUFX(1);
         } 
     }
