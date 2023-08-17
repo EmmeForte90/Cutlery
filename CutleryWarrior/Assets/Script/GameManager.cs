@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject LittleM;
+    [SerializeField]  GameObject Ord;
+    [SerializeField]  GameObject Itm;
+    [SerializeField]  GameObject Skl;
+    [SerializeField]  GameObject Esc;
+
     
     [Header("Fade")]
     [SerializeField] GameObject callFadeIn;
@@ -167,8 +172,8 @@ public class GameManager : MonoBehaviour
         /*if(!battle)
         {vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
         vCam.Follow = player.transform;}*/
-        if(StartGame)
-        {AudioManager.instance.PlayMFX(0);}
+        /*if(StartGame)
+        {AudioManager.instance.PlayMFX(0);}*/
         PStats.F_curHP = PStats.F_HP;
         PStats.F_curMP = PStats.F_MP;
         //
@@ -310,6 +315,11 @@ public class GameManager : MonoBehaviour
         else if(Input.GetButtonDown("Pause") && stopInput)
         {
             stopInput = false;
+            Esc.gameObject.SetActive(false);
+            Ord.gameObject.SetActive(false);
+            Itm.gameObject.SetActive(false);
+            Esc.gameObject.SetActive(false);
+            Skl.gameObject.SetActive(false);
             LittleM.gameObject.SetActive(false);
             CharacterMove.instance.inputCTR = false;
             switch (rotationSwitcher.CharacterID)
@@ -325,6 +335,7 @@ public class GameManager : MonoBehaviour
             break;
             }  
             CameraZoom.instance.ZoomOut();
+
             DuelManager.instance.inputCTR = false;
             AudioManager.instance.PlayUFX(1);
         } 

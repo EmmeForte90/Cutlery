@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class StartScene : MonoBehaviour
 {
+    public int WhatMusic;
     private GameObject player;
 
     private GameObject ContainerHero;
@@ -33,6 +34,7 @@ public class StartScene : MonoBehaviour
     confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
     IDPorta = GameManager.instance.IDPorta;
     ContainerHero = GameObject.Find("Hero");
+    AudioManager.instance.CrossFadeINAudio(WhatMusic);
     Spawn(IDPorta);
     Confiner(IDPorta);
     GameManager.instance.ChCanM();
