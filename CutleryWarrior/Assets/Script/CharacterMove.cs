@@ -15,9 +15,7 @@ public class CharacterMove : MonoBehaviour
     public int IDAction = 0; //Che tipo di personaggio è
     public GameObject Bullet;
     public Transform BPoint;
-    private bool Boom = false;
-    private Rigidbody rb;
-        
+    private Rigidbody rb;  
     [Header("Move")]
     public float Speed = 1;
     public float SpeedB = 2;
@@ -25,17 +23,12 @@ public class CharacterMove : MonoBehaviour
     private Transform cam;
     Vector2 input;
     public Transform SpriteHero;
-    [HideInInspector]
     private bool stand = true;
-    [HideInInspector]
-    public bool isRun = false;
-    //public bool isBattle = false;
+    [HideInInspector] public bool isRun = false;
     public bool inputCTR = false;
-    [HideInInspector]
-    public bool Interact = false;
+    [HideInInspector]public bool Interact = false;
     private float hor;
     private bool Right = true;    
-    private bool StopM = false;
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string WalkAnimationName;
     [SpineAnimation][SerializeField]  string RunAnimationName;
@@ -64,17 +57,11 @@ public class CharacterMove : MonoBehaviour
     private SwitchCharacter Switch;
     private Transform Player;
     private bool isDefence = false;
-
     public AnimationManager Anm;
-
-    Vector3 camF,camR,moveDir;
-        
+    Vector3 camF,camR,moveDir;  
     [Header("Dodge and Knockback")]    
-    
     private DodgeController DodgeController;
     private KnockbackController knockbackController;
-        
-
     [Header("Attacks")]
     private bool isAttacking = false;
     public float comboTimer = 0.5f; // Tempo di attesa tra le combo
@@ -82,9 +69,7 @@ public class CharacterMove : MonoBehaviour
     private float lastAttackTime = 0f;
     private float DodgeTime = 0f;
     private int comboCount = 0;
-
     public static CharacterMove instance;
-
 public void Awake()
     {
          if (instance == null)
@@ -100,8 +85,7 @@ public void Awake()
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
-        }
-
+    }
     public void Update()
     {
         if(!inputCTR)
@@ -128,21 +112,14 @@ public void Awake()
         if(!Interact)
         {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        input = Vector2.ClampMagnitude(input, 1);
-        
-        
+        input = Vector2.ClampMagnitude(input, 1); 
         if(Input.GetButton("Fire3")){isRun = true;} 
-        if (Input.GetButtonUp("Fire3")){isRun = false;}
-        
-        
-        camF = cam.forward;
-        camR = cam.right;
-        camF.y = 0;
-        camR.y = 0;
-        camF = camF.normalized;
-        camR = camR.normalized;  
+        if (Input.GetButtonUp("Fire3")){isRun = false;} 
+        //
+        camF = cam.forward;camR = cam.right;camF.y = 0;camR.y = 0;
+        camF = camF.normalized;camR = camR.normalized;  
         moveDir = camR * input.x + camF * input.y;
-        
+        //
         if (moveDir.magnitude > 0)
         {
         if (!isRun){Anm.PlayAnimationLoop(WalkAnimationName); stand = false;} 
@@ -153,7 +130,6 @@ public void Awake()
         }
     }
 #endregion
-
 #region Fork
     public void ForkB()
     {
@@ -181,7 +157,6 @@ public void Awake()
             }else {AudioManager.instance.PlayUFX(10);}
     }
 #endregion
-
 #region Knife
     public void KnifeB()
     {
@@ -225,7 +200,6 @@ public void Awake()
         lastAttackTime = Time.time;
     }
 #endregion
-
 #region Spoon
     public void SpoonB()
     {
@@ -254,24 +228,20 @@ public void Awake()
     }
     
 #endregion
-
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
     public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName);}
     public void PoseWin(){Anm.PlayAnimationLoop(WinAnimationName);}
     public void FixedUpdate()
-    {
-    if(!inputCTR)
-    {
-    if(!Interact && !isRun || isDefence)
+    {if(!inputCTR)
+    {if(!Interact && !isRun || isDefence)
     {rb.MovePosition(transform.position + moveDir * 0.1f * Speed);} 
-    else if(!Interact && isRun  && !StopM && !isDefence)
+    else if(!Interact && isRun  && !isDefence)//!StopM && !isDefence)
     {rb.MovePosition(transform.position + moveDir * 0.1f * Run);
-    }else if(!Interact  && !StopM && !isDefence)
+    }else if(!Interact && !isDefence)//!StopM && !isDefence)
     {rb.MovePosition(transform.position + moveDir * 0.1f * SpeedB);}
     }}
-
     #region Move
     //For Knife
     /*public void Move()
@@ -318,29 +288,24 @@ public void Awake()
         camR = camR.normalized;  
         moveDir = camR * input.x + camF * input.y;
         
-        if (moveDir.magnitude > 0)
+        if(moveDir.magnitude > 0 && !isDefence)
         {Anm.PlayAnimationLoop(RunBAnimationName);  isRun = true;}
+        else if(moveDir.magnitude > 0 && isDefence){Anm.PlayAnimationLoop(GuardRunAnimationName); isRun = false;}
         else if(!isDefence){Anm.PlayAnimationLoop(IdleBAnimationName); stand = true; isRun = false;}
         else if(isDefence){Anm.PlayAnimationLoop(GuardAnimationName); stand = true; isRun = false;}
         hor = Input.GetAxisRaw("Horizontal");}
 #endregion
     public void Stop(){rb.velocity = new Vector3(0f, 0f, 0f);}
-
     public void Flip()
     {
         if (hor > 0f){transform.localScale = new Vector3(1, 1,1);}
         else if (hor < 0f){transform.localScale = new Vector3(-1, 1,1);}
-    }
-    
+    }   
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
-
     public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Collider")){Anm.PlayAnimationLoop(IdleAnimationName); StopM = true;}
-        else {StopM = false;}
-    }
+    {if (collision.gameObject.CompareTag("Collider")){Run = 1;}}
     public void OnCollisionExit(Collision collision)
-    {if (collision.gameObject.CompareTag("Collider")){StopM = false;}}
+    {if (collision.gameObject.CompareTag("Collider")){Run = 5;}}
     private void Dodge()
     {
         Vector3 DodgeDirection = transform.position;

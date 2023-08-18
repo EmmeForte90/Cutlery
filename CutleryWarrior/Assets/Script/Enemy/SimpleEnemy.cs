@@ -84,7 +84,7 @@ public class SimpleEnemy : MonoBehaviour
         if (player == null && !take){Choise(); take = true; }
         healthBar.size = currentHealth / maxHealth;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
-        FacePlayer(); if (!isAttacking){ChasePlayer();}
+        FacePlayer(); if(!isAttacking){ChasePlayer();}
         }
         if(currentHealth < 0){DieB = true; Die();}
         }

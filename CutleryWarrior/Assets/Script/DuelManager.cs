@@ -8,10 +8,8 @@ using UnityEngine.Audio;
 using Cinemachine;
 using UnityEngine.UI;
 using TMPro;
-
 public class DuelManager : MonoBehaviour
 {
-
     [Header("Arena")]
     public int EnemyinArena;
     private bool win = true;
@@ -22,63 +20,47 @@ public class DuelManager : MonoBehaviour
     private int result;
     private int Money;
     private int ItemN;
-
     [Header("Fork")]
-
     public Scrollbar FhealthBar;
     public float FcurrentMP;
     public Scrollbar FMPBar;
     public float FcostMP = 20;
     public float F_SpeedRestore = 5f; // il massimo valore di essenza disponibile
-
-
+    [SerializeField] CharacterFollow ch_FAc;
     [Header("Knife")]
-
     public float KcurrentHealth;
     public Scrollbar KhealthBar;
     public float KcurrentMP;
     public Scrollbar KMPBar;
     public float KcostMP = 15;
     public float K_SpeedRestore = 5f; // il massimo valore di essenza disponibile
-
-
+    [SerializeField] CharacterFollow ch_KAc;
     [Header("Spoon")]
-
     public float ScurrentHealth;
     public Scrollbar ShealthBar;
     public float ScurrentMP;
     public Scrollbar SMPBar;
     public float ScostMP = 10;
-
     public float S_SpeedRestore = 5f; // il massimo valore di essenza disponibile
-    
+    [SerializeField] CharacterFollow ch_SAc;
     [Header("ChangeScene")]
-
     public SceneEvent sceneEvent;
     public LevelChanger L_C;
     public string sceneName;
-
-
     [Header("Pause")]
     public bool stopInput = false;
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject Item;
     [SerializeField]  GameObject Skill;
     [SerializeField]  GameObject Win;
-
     public bool inputCTR = false;
-
-
-[Header("AnimationUI")]
-public Animator animator;
-
-public int CharacterID;
-
-
-public static DuelManager instance;
+    [Header("AnimationUI")]
+    public Animator animator;
+    public int CharacterID;
+    public static DuelManager instance;
 public void Awake()
     {
-         if (instance == null){instance = this;}
+        if (instance == null){instance = this;}
         Animator animator = GetComponent<Animator>();
         PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
         PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;
@@ -89,6 +71,9 @@ public void Awake()
         PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
         PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;
         CharacterID = 1; 
+        ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         StartCoroutine(StartAI());    
     }
 public void Update()
@@ -114,45 +99,22 @@ public void Update()
         PlayerStats.instance.F_curMP += F_SpeedRestore * Time.deltaTime;
         PlayerStats.instance.K_curMP += K_SpeedRestore * Time.deltaTime;
         PlayerStats.instance.S_curMP += S_SpeedRestore * Time.deltaTime;
-
+        //
         if(PlayerStats.instance.F_curMP >= PlayerStats.instance.F_MP)
         {PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;}
         if(PlayerStats.instance.K_curMP >= PlayerStats.instance.K_MP)
         {PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;}
         if(PlayerStats.instance.S_curMP >= PlayerStats.instance.S_MP)
         {PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;}
-
+        //
         if(EnemyinArena <= 0)
         {StartCoroutine(EndBattle());}
-        
-
-
-    /*if(!inputCTR || win)
-    {
-       if (Input.GetButtonDown("Fire3") && !stopInput)
-        {
-            stopInput = true;
-            CameraZoom.instance.ZoomIn();
-            StartCoroutine(StartM());
-        }
-        else if(Input.GetButtonDown("Fire3") && stopInput)
-        {
-            stopInput = false;
-            ToggleTimeScale();
-            CameraZoom.instance.ZoomOut();
-            Skill.gameObject.SetActive(false);
-            Item.gameObject.SetActive(false);
-            StartCoroutine(EndP());
-        } 
-    }*/
-    if(WinEnd)
-    {if (Input.GetMouseButtonDown(0)){L_C.Escape();}}
+        if(WinEnd){if (Input.GetMouseButtonDown(0)){L_C.Escape();}}
     }
-            
 IEnumerator StartAI()
     {
         yield return new WaitForSeconds(3f);
-        CharacterFollow.instance.order = 1;
+        ch_KAc.order = 1;ch_SAc.order = 2;ch_FAc.order = 1;
     }
 IEnumerator StartM()
     {
@@ -173,7 +135,6 @@ IEnumerator EndP()
         inputCTR = false;
         //InputBattle.instance.inputCTR = false;
     }
-
 IEnumerator EndBattle()
     {
         GameManager.instance.ChStop();
@@ -211,7 +172,6 @@ IEnumerator EndBattle()
         Debug.Log("Numero casuale: " + Money);
         Debug.Log("Numero casuale: " + ItemN);
     }
-
     private void Reward()
     {
         if(ItemN <= 20)//20% Di possibilità

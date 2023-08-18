@@ -14,19 +14,16 @@ public class StartScene : MonoBehaviour
     private GameObject KAct;
     private GameObject SAct;    
     public GameObject[] SpawnArr; 
-
     public Collider[] BoxConfiner;    
     private CinemachineConfiner confiner;
     private CinemachineVirtualCamera vCam;
     private SwitchCharacter Switcher;
-
     private int IDPorta;
     public static StartScene instance;
     public void Awake()
-    {       
-    if (instance == null){instance = this;}  
-    if(!GameManager.instance.StartGame)
-    {   
+    {if (instance == null){instance = this;}  
+    if(!GameManager.instance.StartGame){
+    GameManager.instance.ChStop();   
     FAct = GameObject.FindWithTag("F_Player");
     SAct = GameObject.FindWithTag("S_Player");
     KAct = GameObject.FindWithTag("K_Player");
@@ -56,8 +53,7 @@ public class StartScene : MonoBehaviour
     FAct.transform.position = GameManager.instance.savedPosition;
     SAct.transform.position = GameManager.instance.savedPosition;
     GameManager.instance.StopWin();
-    }
-    }
+    }}
     public void Confiner(int ID)
     {
         confiner.m_BoundingVolume  = null; 

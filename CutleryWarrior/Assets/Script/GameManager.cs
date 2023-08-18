@@ -9,8 +9,6 @@ using TMPro;
 using Spine.Unity.AttachmentTools;
 using Spine.Unity;
 using Spine;
-
-
 public class GameManager : MonoBehaviour
 {            
     public bool StartGame = false;
@@ -145,9 +143,6 @@ public class GameManager : MonoBehaviour
         if (GameManagerExist){Destroy(gameObject);}
         else {GameManagerExist = true; DontDestroyOnLoad(gameObject);}
         TakeCharacter();
-        /*if(!battle)
-        {vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-        vCam.Follow = player.transform;}*/
         /*if(StartGame)
         {AudioManager.instance.PlayMFX(0);}*/
         PStats.F_curHP = PStats.F_HP;
@@ -159,7 +154,6 @@ public class GameManager : MonoBehaviour
         PStats.S_curHP = PStats.S_HP;
         PStats.S_curMP = PStats.S_MP;
     }
-    // Start is called before the first frame update
     public void TakeCharacter()
     {
         switch(rotationSwitcher.CharacterID)
@@ -182,17 +176,6 @@ public class GameManager : MonoBehaviour
         BarStat();
         TakeCharacter();
         moneyTextM.text = money.ToString(); 
-        //L Exp aumenta
-        /*ExpTextMF.text = ExpF.ToString();    
-        ExpTextMS.text = ExpS.ToString();    
-        K_ExpTextMK.text = ExpK.ToString();*/
-
-        /*if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //SwitchElement();
-            StartCoroutine(CoordinateActor());
-        } */
-
     if(!battle){
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
@@ -317,7 +300,6 @@ public class GameManager : MonoBehaviour
         } 
     }
     }
-
     public void CloseLittleM()
     {
             ChCanM();
@@ -346,7 +328,6 @@ public class GameManager : MonoBehaviour
             DuelManager.instance.inputCTR = false;
             AudioManager.instance.PlayUFX(1);
     }
-
     public void StatPlayer()
     {
     //Fork
@@ -445,7 +426,6 @@ public class GameManager : MonoBehaviour
         S_Mp.size = PStats.S_curMP / PStats.S_MP;
         S_Mp.size = Mathf.Clamp(S_Mp.size, 0.01f, 1);
     }
-
     public void Change(){notChange = false;} 
     public void NotChange(){notChange = true;} 
     public void TakeCamera()
@@ -461,8 +441,7 @@ public class GameManager : MonoBehaviour
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
     }
-
-       public void ChStop()
+    public void ChStop()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
@@ -473,8 +452,8 @@ public class GameManager : MonoBehaviour
         ch_F.inputCTR = true; ch_K.inputCTR = true; ch_S.inputCTR = true;
         ch_FAc.inputCTR = true; ch_KAc.inputCTR = true; ch_SAc.inputCTR = true;
         ch_F.isRun = false; ch_K.isRun = false; ch_S.isRun = false;
+        ch_F.Idle();ch_K.Idle();ch_S.Idle();ch_F.Stop();ch_K.Stop();ch_S.Stop();
     }   
-
     public void ChInteract(){ch_F.Interact = true; ch_K.Interact = true; ch_S.Interact = true;}  
     public void ChInteractStop(){ch_F.Interact = false; ch_K.Interact = false; ch_S.Interact = false;}  
     public void ChCanM()
@@ -499,7 +478,6 @@ public class GameManager : MonoBehaviour
         ch_F.Posebattle(); ch_K.Posebattle(); ch_S.Posebattle();
         ch_FAc.Posebattle(); ch_KAc.Posebattle(); ch_SAc.Posebattle();
     }
-
     public void PoseWin()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
@@ -518,7 +496,6 @@ public class GameManager : MonoBehaviour
         ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_FAc.StopWin(); ch_KAc.StopWin(); ch_SAc.StopWin();
     }
-
     public void Allarm()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
@@ -530,7 +507,6 @@ public class GameManager : MonoBehaviour
         ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_FAc.Allarm(); ch_KAc.Allarm(); ch_SAc.Allarm();
     }
-
     public void StopAllarm()
     {
         ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
@@ -538,9 +514,6 @@ public class GameManager : MonoBehaviour
         ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_FAc.StopAllarm(); ch_KAc.StopAllarm(); ch_SAc.StopAllarm();
     }
-
-     
-
     public void Exploration()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
@@ -581,13 +554,10 @@ public class GameManager : MonoBehaviour
         F_Exp += pointsToAdd;
         S_Exp += pointsToAdd;
         K_Exp += pointsToAdd;
-        //Lo money aumenta
         F_ExpTextM.text = F_Exp.ToString(); 
         S_ExpTextM.text = S_Exp.ToString();    
         K_ExpTextM.text = K_Exp.ToString();    
-        //il testo dello money viene aggiornato
     }
-
 #region Fade
     public void FadeIn(){StartCoroutine(StartFadeIn());}
     public void FadeOut(){StartCoroutine(StartFadeOut());}
@@ -597,7 +567,6 @@ public class GameManager : MonoBehaviour
         callFadeIn.gameObject.SetActive(true);
         yield return new WaitForSeconds(5f);
     }
-
     IEnumerator StartFadeOut()
     {        
         callFadeIn.gameObject.SetActive(false);

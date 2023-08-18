@@ -22,7 +22,7 @@ public class CharacterFollow : MonoBehaviour
     private CharacterMove S_b;
     private CharacterMove K_b;
     public bool inputCTR = false;
-
+    public float AiSpeed = 3f;
     public float followSpeed = 5f;
     public float RunSpeed = 6f;
     public float stoppingDistance = 1f;
@@ -34,7 +34,7 @@ public class CharacterFollow : MonoBehaviour
     private bool isGrounded;
     private bool isWalking;
     private bool isGuard;
-
+    //private bool ChooseT = false;
     [SpineAnimation][SerializeField]  string WalkAnimationName;    
     [SpineAnimation][SerializeField]  string RunAnimationName;
     [SpineAnimation][SerializeField]  string RunBAnimationName;    
@@ -47,7 +47,7 @@ public class CharacterFollow : MonoBehaviour
    
     [Header("Battle")]
     public int attackPauseDuration = 1;
-    public float attackRange = 1.5f;
+    public float attackRange = 3f;
     private GameObject target;
     private bool isAttacking = false;   
     private bool take = false; 
@@ -173,7 +173,7 @@ public class CharacterFollow : MonoBehaviour
             Posebattle();
             break;
             case 1:
-            if(!inputCTR){AttackEnm();}
+            if(!inputCTR){AttackEnmF();}
             else if(inputCTR){Anm.PlayAnimation(IdleBAnimationName);}
             break;
             case 2:
@@ -251,16 +251,11 @@ public class CharacterFollow : MonoBehaviour
         if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
         else if (Player.localScale.x < 0f){transform.localScale = new Vector3(-1, 1,1);}
     }
-    public void FixedUpdate()
-    {
-        // Evita che il personaggio cada per terra durante il movimento
-        if (isGrounded)
-        {characterRigidbody.velocity = Vector3.zero;}
-    }
+    public void FixedUpdate(){if (isGrounded){characterRigidbody.velocity = Vector3.zero;}}
     
     #region Attack
-    public void AttackEnm()
-    {isGuard = false; Choise(); ChaseEnm();}
+    public void AttackEnm(){isGuard = false; if(!isAttacking){ChaseEnm();}}
+    public void AttackEnmF(){isGuard = false; if(!isAttacking){StartAttack();}}
     private void Choise()
     {
     // Genera un numero casuale tra 1 e 3
@@ -281,28 +276,23 @@ public class CharacterFollow : MonoBehaviour
     } 
     }
     private void ChaseEnm()
-    {
-        if (target != null)
+    {if (target != null)
         {
             if(!isAttacking)
-            {transform.position = Vector3.MoveTowards(transform.position, target.transform.position, RunSpeed * Time.deltaTime);
+            {transform.position = Vector3.MoveTowards(transform.position, target.transform.position, AiSpeed * Time.deltaTime);
             Anm.PlayAnimationLoop(RunBAnimationName);}
             if (Vector3.Distance(transform.position, target.transform.position) <= attackRange)
             {StartAttack();}
         }
     }
-
     private void StartAttack()
     {
         isAttacking = true;
         Anm.PlayAnimation(Atk1AnimationName);
         StartCoroutine(AttackPause());
     }
-
     private IEnumerator AttackPause()
     {        
-        yield return new WaitForSeconds(1);
-        Anm.PlayAnimationLoop(IdleBAnimationName);
         yield return new WaitForSeconds(attackPauseDuration);
         take = false;
         isAttacking = false;

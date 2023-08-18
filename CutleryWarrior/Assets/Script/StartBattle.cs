@@ -8,10 +8,8 @@ using UnityEngine.Audio;
 using Cinemachine;
 using UnityEngine.UI;
 using TMPro;
-
 public class StartBattle : MonoBehaviour
 {
-    //public GameObject ReadyForBattle; // Variabile per il player
     public GameObject DuelManagerO; // Variabile per il player
     public GameObject PointView; // Variabile per il player
     public static StartBattle instance;
@@ -19,29 +17,24 @@ public class StartBattle : MonoBehaviour
     private CinemachineVirtualCamera vCam;
     private GameObject player;
     [Header("Stats")]
-
     [Header("Fork")]
     private GameObject ForkActive;
     private CharacterMove F_Script;
     public GameObject F_point; // Variabile per il player
     private ChangeHeroSkin Skin_F;
-
     [Header("Spoon")]
     private GameObject SpoonActive;
     private CharacterMove S_Script;
     public GameObject S_point; // Variabile per il player
     private ChangeHeroSkin Skin_S;
-
     [Header("Knife")]
     private GameObject KnifeActive;
     private CharacterMove K_Script;
     public GameObject K_point; // Variabile per il player
     private ChangeHeroSkin Skin_K;
-
     [Header("Enemy")]
     public SimpleEnemy E_Script;
     public DuelManager Duel_Script;
-
     public void Awake()
     {
         if (instance == null){instance = this;}
@@ -79,7 +72,6 @@ public class StartBattle : MonoBehaviour
         //result = Mathf.RoundToInt(randomNumber);
          // Stampa il risultato nella console
         //Debug.Log("Numero casuale: " + result);
-
         ForkActive.transform.position = F_point.transform.position;
         KnifeActive.transform.position = K_point.transform.position;
         SpoonActive.transform.position = S_point.transform.position;
@@ -88,8 +80,7 @@ public class StartBattle : MonoBehaviour
         KnifeActive.transform.localScale = new Vector3(1, 1,1);
         SpoonActive.transform.localScale = new Vector3(1, 1,1);
         ////////////////////////
-        StartCoroutine(DuringInter());
-    }
+        StartCoroutine(DuringInter());}
 IEnumerator DuringInter()
     {
         GameManager.instance.FadeOut();
@@ -111,10 +102,8 @@ IEnumerator DuringInter()
             vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
             player = GameObject.FindWithTag("K_Player");  
             vCam.Follow = player.transform;
-            
         }
         GameManager.instance.Change();
         GameManager.instance.ChCanM();
         Duel_Script.inputCTR = false;
-    } 
-}
+    }}
