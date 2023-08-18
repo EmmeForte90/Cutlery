@@ -174,12 +174,14 @@ public void AddItem(Item newItem)
         else if(newItem.KindItem == 5)
         {EquipM_S.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 0)
-        {Inventory.instance.AddItem(specificItem, specificQuant);}
+        {Inventory.instance.AddItem(specificItem, specificQuant);
+        InventoryB.instance.AddItem(specificItem, specificQuant);}
         dialogueMenu.text = "Ah! So you have money! Good for you, or better... For me!"; // Reference to the TextMeshProUGUI component
         break;
         case 1:
         if(newItem.KindItem == 0)
-        {Inventory.instance.AddItem(specificItem, specificQuant);}
+        {Inventory.instance.AddItem(specificItem, specificQuant);
+        InventoryB.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 1)
         {QuestsManager.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 2)
@@ -188,7 +190,8 @@ public void AddItem(Item newItem)
         break;
         case 2:
         if(newItem.KindItem == 0)
-        {Inventory.instance.AddItem(specificItem, specificQuant);}
+        {Inventory.instance.AddItem(specificItem, specificQuant);
+        InventoryB.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 1)
         {QuestsManager.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 2)
@@ -197,7 +200,8 @@ public void AddItem(Item newItem)
         break;
         case 3:
         if(newItem.KindItem == 0)
-        {Inventory.instance.AddItem(specificItem, specificQuant);}
+        {Inventory.instance.AddItem(specificItem, specificQuant);
+        InventoryB.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 1)
         {QuestsManager.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 2)
@@ -224,10 +228,7 @@ public void AddItem(Item newItem)
         break;
     }
     //PlayMFX(1);
-    }
-    }
-
-
+    }}
 public void Preview(Item newItem)
 {
 prices = newItem.price;
@@ -235,12 +236,7 @@ ValueItem.text = prices.ToString();
 Nameitem.text = newItem.itemName; // Reference to the TextMeshProUGUI component
 Description.text = newItem.itemDes; // Reference to the TextMeshProUGUI component
 previewImages.sprite = newItem.itemIcon;
-//dialogueMenu.text = newItem.Dialogue; // Reference to the TextMeshProUGUI component
-//PuppetM.Instance.Hit();
 }
-
-
-
     public void OnTriggerEnter(Collider collision)
 {
     if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
@@ -272,12 +268,10 @@ previewImages.sprite = newItem.itemIcon;
                 dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
                 //dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
                 //talk.Stop();
-
             }
         }
     }
-
-    IEnumerator ShowDialogue()
+IEnumerator ShowDialogue()
 {    
     Talk = true;
     //sgm[1].Play();
@@ -300,9 +294,6 @@ previewImages.sprite = newItem.itemIcon;
             dialogueText.text = currentDialogue; // Set the dialogue text to the full current dialogue
             StopButton = true;
 }
-
-
-
     void NextDialogue()
     {
 
@@ -318,9 +309,7 @@ previewImages.sprite = newItem.itemIcon;
 
         }
         else
-        {
-            StartCoroutine(ShowDialogue());
-        }
+        {StartCoroutine(ShowDialogue());}
     }
 
 
@@ -330,13 +319,9 @@ previewImages.sprite = newItem.itemIcon;
         if (player != null)
         {
             if (player.transform.position.x > transform.position.x)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
+            {transform.localScale = new Vector3(1, 1, 1);}
             else
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
+            {transform.localScale = new Vector3(-1, 1, 1);}
         }
     }
 
@@ -372,7 +357,4 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     //_spineAnimationState.ClearTrack(1);
     _spineAnimationState.SetAnimation(1, idleAnimationName, true);
     currentAnimationName = idleAnimationName;
-
-}
-}
-
+}}

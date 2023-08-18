@@ -37,7 +37,8 @@ void AddSpecificItem()
         switch(KindItem)
         {
             case 0:
-            Inventory.instance.AddItem(specificItem, specificQuant);            
+            Inventory.instance.AddItem(specificItem, specificQuant);  
+            InventoryB.instance.AddItem(specificItem, specificQuant);
             break;
             case 1:
             QuestsManager.instance.AddItem(specificItem, specificQuant);            

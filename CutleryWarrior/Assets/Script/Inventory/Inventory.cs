@@ -35,7 +35,6 @@ public class Inventory : MonoBehaviour
 
     // The inventoryPanel is the parent object of each slot
     public GameObject inventoryItem;
-    public GameObject inventoryItemBattle;
     public GameObject inventoryQuestsItem;
     public GameObject inventoryKey;
     public GameObject inventoryEquip_F;
@@ -190,11 +189,7 @@ public void AssignWeapon(Weapon Item)
 
     public void Start()
     {
-        // Add the slots of the Inventory Panel to the list
-
         foreach (InventorySlot child in inventoryItem.GetComponentsInChildren<InventorySlot>())
-        {slotListItem.Add(child);}
-        foreach (InventorySlot child in inventoryItemBattle.GetComponentsInChildren<InventorySlot>())
         {slotListItem.Add(child);}
     }
     // AddItem() can be called in other scripts with the following line:
