@@ -17,7 +17,12 @@ public class DuelManager : MonoBehaviour
     private bool win = true;
     private bool WinEnd = false;
     public AttStats Stats;
+    public Item[] Rewards;
+    private int specificQuant = 1;
     private int result;
+    private int Money;
+    private int ItemN;
+
     [Header("Fork")]
 
     public Scrollbar FhealthBar;
@@ -83,8 +88,8 @@ public void Awake()
         //
         PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
         PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;
-        CharacterID = 1;
-        
+        CharacterID = 1; 
+        StartCoroutine(StartAI());    
     }
 public void Update()
     {
@@ -143,6 +148,12 @@ public void Update()
     if(WinEnd)
     {if (Input.GetMouseButtonDown(0)){L_C.Escape();}}
     }
+            
+IEnumerator StartAI()
+    {
+        yield return new WaitForSeconds(3f);
+        CharacterFollow.instance.order = 1;
+    }
 IEnumerator StartM()
     {
         //InputBattle.instance.inputCTR = true;
@@ -171,36 +182,45 @@ IEnumerator EndBattle()
         GameManager.instance.battle = true;
         if(win)
         {Win.gameObject.SetActive(true);
-        ExpChoise();
+        RandomReward();
         AudioManager.instance.PlaySFX(7);
         GameManager.instance.NotChange(); 
         GameManager.instance.PoseWin();
         Stats.F_GainExperience(result);
         Stats.S_GainExperience(result);
         Stats.K_GainExperience(result);
+        GameManager.instance.AddTomoney(Money);
+        Reward();
         win = false;}
         WinEnd = true;
     }
     private void ToggleTimeScale()
     {
-        if (Time.timeScale == 1)
-        {Time.timeScale = 0.01f;}
-        // Rallenta il gioco a metà velocità
+        if (Time.timeScale == 1){Time.timeScale = 0.01f;}
         else{Time.timeScale = 1;}
-        // Ripristina la velocità normale del gioco  
     }
-
-    private void ExpChoise()
+    private void RandomReward()
     {
-       // Genera un numero casuale tra 1 e 2
-        int randomNumber = Random.Range(100, 200);
-
-        // Converte il numero in intero
+        int randomNumber = Random.Range(10, 20);
+        int randomNumberM = Random.Range(10, 50);
+        int randomNumberItem = Random.Range(1, 100);
         result = Mathf.RoundToInt(randomNumber);
-
-         // Stampa il risultato nella console
+        Money = Mathf.RoundToInt(randomNumberM);
+        ItemN = Mathf.RoundToInt(randomNumberItem);
         Debug.Log("Numero casuale: " + result);
+        Debug.Log("Numero casuale: " + Money);
+        Debug.Log("Numero casuale: " + ItemN);
     }
 
-    
+    private void Reward()
+    {
+        if(ItemN <= 20)//20% Di possibilità
+        {Inventory.instance.AddItem(Rewards[1], specificQuant);}
+        else if(ItemN <= 50)//50% Di possibilità
+        {Inventory.instance.AddItem(Rewards[2], specificQuant);  
+        InventoryB.instance.AddItem(Rewards[2], specificQuant);}
+         else if(ItemN <= 80)//80% Di possibilità
+        {Inventory.instance.AddItem(Rewards[3], specificQuant);  
+        InventoryB.instance.AddItem(Rewards[3], specificQuant);}
+    }
 }

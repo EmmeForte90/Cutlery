@@ -16,34 +16,28 @@ public class GameManager : MonoBehaviour
     public bool StartGame = false;
     private CinemachineVirtualCamera vCam;
     public GameObject player;
-    public static bool GameManagerExist;
-    
+    public static bool GameManagerExist; 
     public Vector3 savedPosition;
     public string sceneName;
     public bool notChange = false;
     [Header("Pause")]
     public bool stopInput = false;
     public bool battle = false;
-
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject LittleM;
     [SerializeField]  GameObject Ord;
     [SerializeField]  GameObject Itm;
     [SerializeField]  GameObject Skl;
     [SerializeField]  GameObject Esc;
-
-    
     [Header("Fade")]
     [SerializeField] GameObject callFadeIn;
     [SerializeField] GameObject callFadeOut;
-
     [Header("Money")]
     [SerializeField] public int money = 0;
     [SerializeField] public TextMeshProUGUI moneyTextM;
     [SerializeField] GameObject moneyObjectM;
     public int IDPorta;
     public int IDCharacter;
-
     [Header("Stats")]
     public PlayerStats PStats;
     [SerializeField] public GameObject F_Hero;
@@ -52,11 +46,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject MP_F;
     [SerializeField] public GameObject MP_S;
     [SerializeField] public GameObject MP_K;
-
-
     [Header("Fork")]
     private  int F_LV;
-
     private float F_HP;
     private float F_MP;
     private float F_Exp;
@@ -82,17 +73,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Scrollbar F_Hp;
     [SerializeField] public Scrollbar F_Mp;
     [SerializeField] public Scrollbar F_ExpScrol;
-
     [SerializeField] CharacterMove ch_F;
     [SerializeField] CharacterFollow ch_FAc;
     [SerializeField] ManagerCharacter Manager_F;
-
-        
-
     [Header("Spoon")]
-
     private  int S_LV;
-
     private float S_HP;
     private float S_MP;
     private float S_Exp;
@@ -118,15 +103,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Scrollbar S_Hp;
     [SerializeField] public Scrollbar S_Mp;
     [SerializeField] public Scrollbar S_ExpScrol;
-
     [SerializeField] CharacterMove ch_S;
     [SerializeField] CharacterFollow ch_SAc;
     [SerializeField] ManagerCharacter Manager_S;
-
-
     [Header("Knife")]
     private  int K_LV;
-
     private float K_HP;
     private float K_MP;
     private float K_Exp;
@@ -152,22 +133,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Scrollbar K_Hp;
     [SerializeField] public Scrollbar K_Mp;
     [SerializeField] public Scrollbar K_ExpScrol;
-
     [SerializeField] CharacterMove ch_K;
     [SerializeField] CharacterFollow ch_KAc;
     [SerializeField] ManagerCharacter Manager_K;
-
     [SerializeField] GameObject ExpObjectM;
     public UIRotationSwitcher rotationSwitcher;
-
     public static GameManager instance;
-   
     private void Awake()
     {
         if (instance == null){instance = this;}
         if (GameManagerExist){Destroy(gameObject);}
         else {GameManagerExist = true; DontDestroyOnLoad(gameObject);}
-        
         TakeCharacter();
         /*if(!battle)
         {vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
@@ -184,7 +160,6 @@ public class GameManager : MonoBehaviour
         PStats.S_curMP = PStats.S_MP;
     }
     // Start is called before the first frame update
-
     public void TakeCharacter()
     {
         switch(rotationSwitcher.CharacterID)
@@ -199,9 +174,7 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("S_Player");
             break;
         }}
-
     public void Start(){Application.targetFrameRate = 60;}
-
     public void Update()
     {
         IDCharacter = rotationSwitcher.CharacterID;
@@ -220,10 +193,10 @@ public class GameManager : MonoBehaviour
             StartCoroutine(CoordinateActor());
         } */
 
-
     if(!battle){
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
+            ChStop();
             switch (rotationSwitcher.CharacterID)
     {
     case 1:
@@ -253,11 +226,11 @@ public class GameManager : MonoBehaviour
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.PlayUFX(1);   
     break;
-    }       
-           
+    }             
         }
         else if(Input.GetButtonDown("Pause") && stopInput)
         {
+            ChCanM();
             stopInput = false;
             Pause.gameObject.SetActive(false);
             CharacterMove.instance.inputCTR = false;
@@ -280,9 +253,11 @@ public class GameManager : MonoBehaviour
     else if(battle){
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
+            ChStop();
+            notChange = true;
             DuelManager.instance.inputCTR = true;
             switch (rotationSwitcher.CharacterID)
-    {
+        {
     case 1:
         ch_F.Stop();
         stopInput = true;
@@ -314,6 +289,8 @@ public class GameManager : MonoBehaviour
         }
         else if(Input.GetButtonDown("Pause") && stopInput)
         {
+            ChCanM();
+            notChange = false;
             stopInput = false;
             Esc.gameObject.SetActive(false);
             Ord.gameObject.SetActive(false);
@@ -335,12 +312,41 @@ public class GameManager : MonoBehaviour
             break;
             }  
             CameraZoom.instance.ZoomOut();
-
             DuelManager.instance.inputCTR = false;
             AudioManager.instance.PlayUFX(1);
         } 
     }
     }
+
+    public void CloseLittleM()
+    {
+            ChCanM();
+            stopInput = false;
+            notChange = false;
+            Esc.gameObject.SetActive(false);
+            Ord.gameObject.SetActive(false);
+            Itm.gameObject.SetActive(false);
+            Esc.gameObject.SetActive(false);
+            Skl.gameObject.SetActive(false);
+            LittleM.gameObject.SetActive(false);
+            CharacterMove.instance.inputCTR = false;
+            switch (rotationSwitcher.CharacterID)
+            {
+            case 1:
+                ch_F.inputCTR = false;    
+            break;
+            case 2:
+                ch_K.inputCTR = false; 
+            break;
+            case 3:
+                ch_S.inputCTR = false; 
+            break;
+            }  
+            CameraZoom.instance.ZoomOut();
+            DuelManager.instance.inputCTR = false;
+            AudioManager.instance.PlayUFX(1);
+    }
+
     public void StatPlayer()
     {
     //Fork
@@ -416,7 +422,6 @@ public class GameManager : MonoBehaviour
     S_mpTextM.text = S_MP.ToString();
     S_hpTextM.text = S_HP.ToString();
     }   
-
     public void BarStat()
     {   
         F_Hp.size = PStats.F_curHP / PStats.F_HP;
@@ -441,10 +446,8 @@ public class GameManager : MonoBehaviour
         S_Mp.size = Mathf.Clamp(S_Mp.size, 0.01f, 1);
     }
 
-    public void Change()
-    {notChange = false;} 
-    public void NotChange()
-    {notChange = true;} 
+    public void Change(){notChange = false;} 
+    public void NotChange(){notChange = true;} 
     public void TakeCamera()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
@@ -464,21 +467,26 @@ public class GameManager : MonoBehaviour
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_F.inputCTR = true; ch_K.inputCTR = true; ch_S.inputCTR = true;
+        ch_FAc.inputCTR = true; ch_KAc.inputCTR = true; ch_SAc.inputCTR = true;
         ch_F.isRun = false; ch_K.isRun = false; ch_S.isRun = false;
     }   
 
-      public void ChInteract()
-    {ch_F.Interact = true; ch_K.Interact = true; ch_S.Interact = true;}  
-
-    public void ChInteractStop()
-    {ch_F.Interact = false; ch_K.Interact = false; ch_S.Interact = false;}  
+    public void ChInteract(){ch_F.Interact = true; ch_K.Interact = true; ch_S.Interact = true;}  
+    public void ChInteractStop(){ch_F.Interact = false; ch_K.Interact = false; ch_S.Interact = false;}  
     public void ChCanM()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_F.inputCTR = false; ch_K.inputCTR = false; ch_S.inputCTR = false;
+        ch_FAc.inputCTR = false; ch_KAc.inputCTR = false; ch_SAc.inputCTR = false;
     }
     public void Posebattle()
     {
@@ -562,7 +570,6 @@ public class GameManager : MonoBehaviour
         moneyTextM.text = money.ToString();    
         //il testo dello money viene aggiornato
     }
- // Metodo chiamato quando il giocatore raggiunge il requisito per salire di livello
     public void K_PlayerReachedLevelUp()
     {PStats.K_LevelUp();}
     public void S_PlayerReachedLevelUp()
@@ -574,28 +581,16 @@ public class GameManager : MonoBehaviour
         F_Exp += pointsToAdd;
         S_Exp += pointsToAdd;
         K_Exp += pointsToAdd;
-
         //Lo money aumenta
         F_ExpTextM.text = F_Exp.ToString(); 
         S_ExpTextM.text = S_Exp.ToString();    
         K_ExpTextM.text = K_Exp.ToString();    
-   
         //il testo dello money viene aggiornato
     }
 
-
 #region Fade
-public void FadeIn()
-    {
-    StartCoroutine(StartFadeIn());
-    }
-
-    public void FadeOut()
-    {
-    StartCoroutine(StartFadeOut());
-    }
-
-
+    public void FadeIn(){StartCoroutine(StartFadeIn());}
+    public void FadeOut(){StartCoroutine(StartFadeOut());}
     IEnumerator StartFadeIn()
     {
         callFadeOut.gameObject.SetActive(false);
@@ -609,10 +604,6 @@ public void FadeIn()
         callFadeOut.gameObject.SetActive(true);
         yield return new WaitForSeconds(5f);
         callFadeOut.gameObject.SetActive(false);
-
     }
-
 #endregion
-
 }
-

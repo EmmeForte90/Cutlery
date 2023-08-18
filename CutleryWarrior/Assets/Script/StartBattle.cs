@@ -75,12 +75,11 @@ public class StartBattle : MonoBehaviour
     {
         // Genera un numero casuale tra 1 e 2
         //float randomNumber = Random.Range(1f, 2f);
-
         // Converte il numero in intero
         //result = Mathf.RoundToInt(randomNumber);
-
          // Stampa il risultato nella console
         //Debug.Log("Numero casuale: " + result);
+
         ForkActive.transform.position = F_point.transform.position;
         KnifeActive.transform.position = K_point.transform.position;
         SpoonActive.transform.position = S_point.transform.position;
@@ -91,7 +90,6 @@ public class StartBattle : MonoBehaviour
         ////////////////////////
         StartCoroutine(DuringInter());
     }
-
 IEnumerator DuringInter()
     {
         GameManager.instance.FadeOut();
@@ -118,6 +116,5 @@ IEnumerator DuringInter()
         GameManager.instance.Change();
         GameManager.instance.ChCanM();
         Duel_Script.inputCTR = false;
-    }
-    
+    } 
 }

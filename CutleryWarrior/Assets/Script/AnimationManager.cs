@@ -117,6 +117,4 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     //
     if (e.Data.Name == "slashB")
     {AudioManager.instance.PlayUFX(8); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
-    
-}
-}
+}}
