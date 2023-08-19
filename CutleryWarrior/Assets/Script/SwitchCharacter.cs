@@ -5,32 +5,28 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using Cinemachine;
-
 public class SwitchCharacter : MonoBehaviour
 {
+    #region Header
     public bool battle = false;
-
     [Header("Stats")]
- 
     [Header("Fork")]
     public GameObject Ind_F;
     private ManagerCharacter ForkActive;
     public bool isElement1Active = false;
- 
     [Header("Knife")]
     public GameObject Ind_K;
     private ManagerCharacter KnifeActive;
     public bool isElement2Active = true;
-   
     [Header("Spoon")]
     public GameObject Ind_S;
     private ManagerCharacter SpoonActive;
     public bool isElement3Active = false;
-
     public static SwitchCharacter instance;
     private CinemachineVirtualCamera vCam;
     private GameObject player;
     public UIRotationSwitcher rotationSwitcher;
+    #endregion
     public void Update()
     {if(!GameManager.instance.notChange){if(Input.GetKeyDown(KeyCode.Space)){StartCoroutine(CoordinateActor());}}}
     public void Start(){inizial();}
@@ -44,28 +40,23 @@ public class SwitchCharacter : MonoBehaviour
             vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
             vCam.Follow = ForkActive.transform;
     }
-public void Flip()
+    public void Flip()
     {
         if (ForkActive.transform.localScale.x > 0f)
         {transform.localScale = new Vector3(1, 1,1);} 
         else if (ForkActive.transform.localScale.x < 0f)
-        {transform.localScale = new Vector3(-1, 1,1);}
-        
+        {transform.localScale = new Vector3(-1, 1,1);}  
         ///
         if (KnifeActive.transform.localScale.x > 0f)
         {transform.localScale = new Vector3(1, 1,1);} 
         else if (KnifeActive.transform.localScale.x < 0f)
         {transform.localScale = new Vector3(-1, 1,1);}
-        
         ///
         if (SpoonActive.transform.localScale.x > 0f)
         {transform.localScale = new Vector3(1, 1,1);} 
         else if (SpoonActive.transform.localScale.x < 0f)
         {transform.localScale = new Vector3(-1, 1,1);}
-        
     }
-
-
      public void TakeCharacters()
     {
         ForkActive = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
@@ -91,10 +82,8 @@ public void Flip()
         KnifeActive.gameObject.SetActive(true);
         SpoonActive.gameObject.SetActive(true);
     }
-
     IEnumerator CoordinateActor()
-    {
-    // Switcha tra gli elementi
+    {// Switcha tra gli elementi
     if (isElement1Active)
     {
         ForkActive.SwitchScriptsPlayer();

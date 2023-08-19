@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Item : ScriptableObject
 {
+    #region Header
     public string itemName;
     public string NameSkin;
     public string itemDes;
@@ -14,6 +15,7 @@ public class Item : ScriptableObject
     public Sprite itemIcon;
     [Tooltip("Che tipo di Equipaggiamento? 0-Armor 1-Weapon ")]
     public int TypesE;
+    #endregion
     public void Use(int whatDo)
     {if(whatDo == 0){Inventory.instance.RemoveItem(this, 1);}
         else if(whatDo == 1)

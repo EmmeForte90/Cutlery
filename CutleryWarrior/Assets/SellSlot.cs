@@ -5,11 +5,13 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 public class SellSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
-{
+{    
+    #region Header
     Item item;
     private string NameSkin;
     public Image itemImage;
     public TextMeshProUGUI quantity;
+    #endregion
     public void UpdateSlot(Item itemInSlot, int quantityInSlot)
     {
         item = itemInSlot;

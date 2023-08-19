@@ -7,15 +7,14 @@ using TMPro;
 
 // IN THIS SCRIPT: Inventory Slot Handler that shows the player one item and it's quantity based on the Inventory Script
 public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
-{
+{    
+    #region Header
     Item item;
-    //[Header("Menu Equip")]
-    //public Image previewImages_A;
-    //public Image previewImages_W;
     Weapon weapon;
     private string NameSkin;
     public Image itemImage;
     public TextMeshProUGUI quantity;
+    #endregion
     public void UpdateSlot(Item itemInSlot, int quantityInSlot)
     {
         item = itemInSlot;

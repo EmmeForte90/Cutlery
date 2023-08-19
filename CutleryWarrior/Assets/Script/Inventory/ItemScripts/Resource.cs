@@ -5,17 +5,5 @@ using UnityEngine;
 public class Resource : Item
 {
     public resourceType type;
-
-    /*public override void Use()
-    {
-        base.Use();
-
-        //Use Resource
-
-        //Use the following line if you want to destroy this type of item after use
-        // Inventory.instance.RemoveItem(this, 1);
-    }*/
-
     public enum resourceType { Key, Collectible, Material, Quest}
 }
-

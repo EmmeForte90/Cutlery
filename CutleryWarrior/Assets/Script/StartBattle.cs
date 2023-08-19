@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using TMPro;
 public class StartBattle : MonoBehaviour
 {
+    #region Header
     public GameObject DuelManagerO; // Variabile per il player
     public GameObject PointView; // Variabile per il player
     public static StartBattle instance;
@@ -35,6 +36,7 @@ public class StartBattle : MonoBehaviour
     [Header("Enemy")]
     public SimpleEnemy E_Script;
     public DuelManager Duel_Script;
+    #endregion
     public void Awake()
     {
         if (instance == null){instance = this;}
@@ -81,7 +83,7 @@ public class StartBattle : MonoBehaviour
         SpoonActive.transform.localScale = new Vector3(1, 1,1);
         ////////////////////////
         StartCoroutine(DuringInter());}
-IEnumerator DuringInter()
+    IEnumerator DuringInter()
     {
         GameManager.instance.FadeOut();
         yield return new WaitForSeconds(2f);
@@ -106,4 +108,5 @@ IEnumerator DuringInter()
         GameManager.instance.Change();
         GameManager.instance.ChCanM();
         Duel_Script.inputCTR = false;
-    }}
+    }
+}

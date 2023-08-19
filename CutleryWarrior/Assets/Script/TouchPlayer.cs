@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using Cinemachine;
-
 public class TouchPlayer : MonoBehaviour
 {
+    #region Header
     public string spawnPointTag = "SpawnPoint";
     private CinemachineVirtualCamera vCam;
     public bool camFollowPlayer = true;
@@ -21,7 +21,7 @@ public class TouchPlayer : MonoBehaviour
     private Transform Knife;
     private SwitchCharacter Switch;
     public bool takeCoo = false;
-
+    #endregion
     public void Start()
     {
     if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
@@ -33,13 +33,12 @@ public class TouchPlayer : MonoBehaviour
     }
     public void Update()
     {
-        if(Switch.isElement1Active){Player = Spoon;}
-        else if(Switch.isElement2Active){Player = Fork;} 
-        else if(Switch.isElement3Active){Player = Knife;} 
+    if(Switch.isElement1Active){Player = Spoon;}
+    else if(Switch.isElement2Active){Player = Fork;} 
+    else if(Switch.isElement3Active){Player = Knife;} 
     if(!takeCoo){
     if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance)
     {savedPosition = Player.transform.position; GameManager.instance.savedPosition = savedPosition; takeCoo = true;}}
-   
     if ((transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
     {savedPosition = Player.transform.position; GameManager.instance.savedPosition = savedPosition; takeCoo = false;}
     }
@@ -48,10 +47,9 @@ public class TouchPlayer : MonoBehaviour
     SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {SceneManager.sceneLoaded -= OnSceneLoaded;}
-IEnumerator WaitForSceneLoad()
-{   
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode){SceneManager.sceneLoaded -= OnSceneLoaded;}
+    IEnumerator WaitForSceneLoad()
+    {   
     GameManager.instance.ChStop();
     yield return new WaitForSeconds(1f);
     GameManager.instance.battle = true;
@@ -61,14 +59,14 @@ IEnumerator WaitForSceneLoad()
     GameManager.instance.StopAllarm();
     GameManager.instance.Posebattle();
     sceneEvent.InvokeOnSceneChange();
-}
-public void Flip()
+    }
+    public void Flip()
     {
         if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
         else if (Player.localScale.x < 0f){transform.localScale = new Vector3(-1, 1,1);}
     }
-public void OnTriggerEnter(Collider other)
-{
+    public void OnTriggerEnter(Collider other)
+    {
     if (other.CompareTag("F_Player") || other.CompareTag("K_Player") || other.CompareTag("S_Player"))
     {                
         AudioManager.instance.CrossFadeOUTAudio(0);
@@ -79,16 +77,16 @@ public void OnTriggerEnter(Collider other)
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.CrossFadeINAudio(1);
         StartCoroutine(WaitForSceneLoad());
-}}
-#if(UNITY_EDITOR)
-#region Gizmos
-private void OnDrawGizmos()
-    {
-    Gizmos.color = Color.red;
-    //Gizmos.DrawLine(transform.position, transform.position + new Vector3(transform.localScale.x, 0, 0) * wallDistance);
-    //Gizmos.color = Color.blue;
-    Gizmos.DrawWireSphere(transform.position, stoppingDistance);
-    }
-#endregion
-#endif
+    }}
+    #if(UNITY_EDITOR)
+    #region Gizmos
+    private void OnDrawGizmos()
+        {
+        Gizmos.color = Color.red;
+        //Gizmos.DrawLine(transform.position, transform.position + new Vector3(transform.localScale.x, 0, 0) * wallDistance);
+        //Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, stoppingDistance);
+        }
+    #endregion
+    #endif
 }

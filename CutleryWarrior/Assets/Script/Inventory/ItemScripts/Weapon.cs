@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Weapon", menuName = "Item/Weapon")]
 public class Weapon : Item
 {
+    #region Header
     public weaponType type;
     [Header("Se è un arma")]
     public int weaponDamage;
@@ -17,6 +18,7 @@ public class Weapon : Item
     public int Res_Stun;
     public int Res_Sleep;
     public int Res_Rust;
+    #endregion
     public override void Equip()
     {
         base.Equip();

@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-
 public class StartScene : MonoBehaviour
 {
+    #region Header
     public int WhatMusic;
     private GameObject player;
-
     private GameObject ContainerHero;
-
     private GameObject FAct;
     private GameObject KAct;
     private GameObject SAct;    
@@ -20,6 +18,7 @@ public class StartScene : MonoBehaviour
     private SwitchCharacter Switcher;
     private int IDPorta;
     public static StartScene instance;
+    #endregion
     public void Awake()
     {if (instance == null){instance = this;}  
     if(!GameManager.instance.StartGame){
@@ -34,11 +33,9 @@ public class StartScene : MonoBehaviour
     AudioManager.instance.CrossFadeINAudio(WhatMusic);
     Spawn(IDPorta);
     Confiner(IDPorta);
-    GameManager.instance.ChCanM();
     Switcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
     Switcher.inizial();
-    CameraZoom.instance.ZoomOut();
-    GameManager.instance.FadeOut();
+    StartCoroutine(BoxDel());
     }}
     public void Spawn(int ID)
     {
@@ -54,6 +51,9 @@ public class StartScene : MonoBehaviour
     SAct.transform.position = GameManager.instance.savedPosition;
     GameManager.instance.StopWin();
     }}
+    IEnumerator BoxDel()
+    {yield return new WaitForSeconds(0.5f);
+    CameraZoom.instance.ZoomOut();GameManager.instance.FadeOut(); GameManager.instance.ChCanM();}
     public void Confiner(int ID)
     {
         confiner.m_BoundingVolume  = null; 

@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 public class Inventory : MonoBehaviour
 {
+    #region Header
     public List<Item> itemList = new List<Item>();
     public List<int> quantityList = new List<int>();
     public Image previewImages_AF;
@@ -31,6 +32,7 @@ public class Inventory : MonoBehaviour
     public GameObject inventoryEquip_S;
     public GameObject inventorySkill_S;
     private readonly List<InventorySlot> slotListItem = new();
+    #endregion
     #region Singleton
     public static Inventory instance;
     public void Awake(){instance = this;}

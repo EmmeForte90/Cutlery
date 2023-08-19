@@ -4,12 +4,6 @@ public class Consumable : Item
 {
     public consumableType typeOfConsumable;
     public int HPRecover;
-    /*public void Use(int whatDo)
-    {        
-        //base.Use();
-        
-
-    }*/
     public override void Sell()
     {
         base.Sell(); 
