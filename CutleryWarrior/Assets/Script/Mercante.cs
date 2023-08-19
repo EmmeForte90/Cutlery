@@ -10,48 +10,48 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 public class Mercante : MonoBehaviour
 {
+    #region Header
     public int IDCharacter;
     [Header("Che tipo di mercante è?")]
     [Tooltip("0-Armaiolo 1-Alchimista 2-Ambulante 3-Fruttivendolo")]
     public int Tipo;
-
+    public List<Item> itemList = new List<Item>();
+    public List<int> quantityList = new List<int>();
+    private readonly List<SellSlot> slotListItem = new();
+    public GameObject inventoryItem;
     [Header("UI")]
-    public TextMeshProUGUI CharacterName; // Reference to the TextMeshProUGUI component
-    private GameObject player; // Reference to the player's position
-    public TextMeshProUGUI dialogueText; // Reference to the TextMeshProUGUI component
-    public TextMeshProUGUI dialogueMenu; // Reference to the TextMeshProUGUI component
-    public TextMeshProUGUI Nameitem; // Reference to the TextMeshProUGUI component
-    public TextMeshProUGUI Description; // Reference to the TextMeshProUGUI component
+    public TextMeshProUGUI CharacterName; 
+    private GameObject player; 
+    public TextMeshProUGUI dialogueText; 
+    public TextMeshProUGUI dialogueMenu; 
+    public TextMeshProUGUI Nameitem; 
+    public TextMeshProUGUI Description; 
     public Image previewImages;
     private int prices;
     private int IDItem;
-
-    public TextMeshProUGUI Value; // Reference to the TextMeshProUGUI component
-    public TextMeshProUGUI ValueItem; // Reference to the TextMeshProUGUI component
-    // In case of specific, this two parameters become active in the Editor
+    public TextMeshProUGUI Value;
+    public TextMeshProUGUI ValueS; 
+    public TextMeshProUGUI ValueItem; 
     private Item specificItem;
     private readonly int specificQuant = 1;
-
     public Dialogues Dial;
-
     public GameObject button;
     public GameObject dialogueBox;
     public GameObject Menu;
-
-    private string[] dialogue; // array of string to store the dialogues
-    public float dialogueDuration; // variable to set the duration of the dialogue
-    private int dialogueIndex; // variable to keep track of the dialogue status
-    private float elapsedTime; // variable to keep track of the elapsed time
-    //private Animator anim; // componente Animator del personaggio
+    public GameObject Sell;
+    public GameObject SelectionOp;
+    public GameObject Box;
+    private string[] dialogue; 
+    public float dialogueDuration; 
+    private int dialogueIndex;
+    private float elapsedTime; 
     public bool isInteragible;
     public bool heFlip;
-    private bool StopButton = false; // o la variabile che deve attivare la sostituzione
+    private bool StopButton = false;
     private bool Talk = false;
     private bool EndDia = false;
-
     private bool _isInTrigger;
     private bool _isDialogueActive;
-
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
     [SpineAnimation][SerializeField] private string HitAnimationName;
@@ -60,110 +60,78 @@ public class Mercante : MonoBehaviour
     private Spine.AnimationState _spineAnimationState;
     private Spine.Skeleton _skeleton;
     Spine.EventData eventData;
-
-    //public GameObject Sashimi, BackB,Kunai, Shuriken, Onigiri;
-
-
-public static Mercante instance;
-
-
-public void Awake()
-{
+    public static Mercante instance;
+    #endregion
+    public void Awake()
+    {
         instance = this;   
-        //player = GameObject.FindWithTag("Player");
         _skeletonAnimation = GetComponent<SkeletonAnimation>();    
          _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
-}
-
-public void Start()
-    {        
         button.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueText.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+        foreach (SellSlot child in inventoryItem.GetComponentsInChildren<SellSlot>())
+        {slotListItem.Add(child);}
     }
-
-  public void Update()
+    public void Update()
     {
-
-        //dialogueDuration = GameplayManager.instance.dialogueDuration;
+        itemList = Inventory.instance.itemList;
+        quantityList = Inventory.instance.quantityList;
+        UpdateInventoryUI();
         Value.text = GameManager.instance.money.ToString();
-        //ValueItem.text = 
+        ValueS.text = GameManager.instance.money.ToString();
         dialogue = Dial.dialogue; // Reference to the TextMeshProUGUI component
 
-        if(Talk)
-        {Hit();}
-        else
-        {Idle();}
+        if(Talk){Hit();}else{Idle();}
 
-        /*if(EndDia)
-        {Menu.gameObject.SetActive(true);}
-        else if(!EndDia)
-        {Menu.gameObject.SetActive(false);}*/     
-                
-        //anim.SetBool("talk", Talk);
         if(heFlip)
-        {
-        FacePlayer();
-        }
+        {FacePlayer();}
 
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive)
         {
-            //Move.instance.stopInput = true;
-            //Move.instance.Stop();
-            //Move.instance.Stooping();
             GameManager.instance.ChInteract();
             dialogueIndex = 0;
             StartCoroutine(ShowDialogue());
         }
         else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton)
         {
-            //Cursor.visible = true;
             NextDialogue();
             StopButton = false;
         }
         
         if (Input.GetButtonDown("Fire1") && EndDia)
         {
-           // Move.instance.NotStrangeAnimationTalk = false;
             button.gameObject.SetActive(false); // Initially hide the dialogue text
             _isInTrigger = false;
             _isDialogueActive = false;
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-            //dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-            //Menu.gameObject.SetActive(false);
             Talk = false;
             EndDia = false;
-            //Move.instance.stopInput = false;
-            //Move.instance.NotStrangeAnimationTalk = false; 
         }
-}
-
-public void Back()
-{
-            button.gameObject.SetActive(false); // Initially hide the dialogue text
-            _isInTrigger = false;
-            _isDialogueActive = false;
-            dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-            dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-            Menu.gameObject.SetActive(false);
-            Talk = false;
-            EndDia = false;
-            GameManager.instance.ChInteractStop();            
-}
-
-
-public void AddItem(Item newItem)
+    }
+    public void Back()
+        {
+                    button.gameObject.SetActive(false); // Initially hide the dialogue text
+                    _isInTrigger = false;
+                    _isDialogueActive = false;
+                    dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+                    dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+                    SelectionOp.gameObject.SetActive(false);
+                    Talk = false;
+                    EndDia = false;
+                    GameManager.instance.ChInteractStop();            
+        }
+    public void AddItem(Item newItem)
     {
-        if(GameManager.instance.money >= prices)
+    if(GameManager.instance.money >= prices)
     { 
-    //IDItem = newItem.id;
-    //PlayMFX(0);
     specificItem = newItem;
-    //dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
     GameManager.instance.money -= prices;
     GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
+    Box.gameObject.SetActive(true);
+    StartCoroutine(BoxDel());
     switch(Tipo)
     {
         case 0:
@@ -209,10 +177,8 @@ public void AddItem(Item newItem)
         dialogueMenu.text = "Thank you and come back again!"; // Reference to the TextMeshProUGUI component
         break;
     }
-
     }else if(GameManager.instance.money < prices)
-    {
-        switch(Tipo)
+    {switch(Tipo)
     {
         case 0:
         dialogueMenu.text = "You don't have much money. What you think? I don't do charity"; // Reference to the TextMeshProUGUI component
@@ -229,16 +195,75 @@ public void AddItem(Item newItem)
     }
     //PlayMFX(1);
     }}
-public void Preview(Item newItem)
-{
-prices = newItem.price;
-ValueItem.text = prices.ToString();
-Nameitem.text = newItem.itemName; // Reference to the TextMeshProUGUI component
-Description.text = newItem.itemDes; // Reference to the TextMeshProUGUI component
-previewImages.sprite = newItem.itemIcon;
-}
+    
+    #region ItemInventory
+    public void AddItem(Item itemAdded, int quantityAdded)
+    {
+        if (itemAdded.Stackable)
+        {
+            if (itemList.Contains(itemAdded))
+            {
+                quantityList[itemList.IndexOf(itemAdded)] = quantityList[itemList.IndexOf(itemAdded)] + quantityAdded;
+            }
+            else
+            {
+                if (itemList.Count < slotListItem.Count)
+                {
+                    itemList.Add(itemAdded);
+                    quantityList.Add(quantityAdded);
+                }else{}  
+            }
+        }
+        else
+        {
+            for (int i = 0; i < quantityAdded; i++)
+            {
+                if (itemList.Count < slotListItem.Count)
+                {
+                    itemList.Add(itemAdded);
+                    quantityList.Add(1);
+                }else{}
+            }  
+        }
+        UpdateInventoryUI();
+    }
+    public void RemoveItem(Item itemRemoved, int quantityRemoved)
+    {
+        if (itemRemoved.Stackable)
+        {
+            if (itemList.Contains(itemRemoved))
+            {
+                quantityList[itemList.IndexOf(itemRemoved)] = quantityList[itemList.IndexOf(itemRemoved)] - quantityRemoved;
+                if (quantityList[itemList.IndexOf(itemRemoved)]<= 0)
+                {
+                    quantityList.RemoveAt(itemList.IndexOf(itemRemoved));
+                    itemList.RemoveAt(itemList.IndexOf(itemRemoved));
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < quantityRemoved; i++)
+            {
+                quantityList.RemoveAt(itemList.IndexOf(itemRemoved));
+                itemList.RemoveAt(itemList.IndexOf(itemRemoved));
+            }
+        }
+        UpdateInventoryUI();
+    }
+    #endregion
+    public void Preview(Item newItem)
+    {
+    prices = newItem.price;
+    ValueItem.text = prices.ToString();
+    Nameitem.text = newItem.itemName; // Reference to the TextMeshProUGUI component
+    Description.text = newItem.itemDes; // Reference to the TextMeshProUGUI component
+    previewImages.sprite = newItem.itemIcon;
+    }
+    
+    #region Collision
     public void OnTriggerEnter(Collider collision)
-{
+    {
     if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
     {
         //Move.instance.NotStrangeAnimationTalk = true;
@@ -249,30 +274,27 @@ previewImages.sprite = newItem.itemIcon;
             dialogueIndex = 0; // Reset the dialogue index to start from the beginning
             StartCoroutine(ShowDialogue());
         }
-    }
-}
-
+    }}
     public void OnTriggerExit(Collider collision)
     {
         if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
         {
-            //GameManager.instance.ChInteractStop();            
             button.gameObject.SetActive(false); // Initially hide the dialogue text
             _isInTrigger = false;
             StopCoroutine(ShowDialogue());
-            dialogueIndex++; // Increment the dialogue index
+            dialogueIndex++;
             if (dialogueIndex >= dialogue.Length)
             {
                 dialogueIndex = 0;
                 _isDialogueActive = false;
-                dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-                //dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-                //talk.Stop();
+                dialogueBox.gameObject.SetActive(false);
             }
         }
     }
-IEnumerator ShowDialogue()
-{    
+    #endregion
+    IEnumerator BoxDel(){yield return new WaitForSeconds(3);Box.gameObject.SetActive(false);}
+    IEnumerator ShowDialogue()
+    {    
     Talk = true;
     //sgm[1].Play();
     _isDialogueActive = true;
@@ -293,7 +315,7 @@ IEnumerator ShowDialogue()
     }
             dialogueText.text = currentDialogue; // Set the dialogue text to the full current dialogue
             StopButton = true;
-}
+    }
     void NextDialogue()
     {
 
@@ -302,31 +324,38 @@ IEnumerator ShowDialogue()
         if (dialogueIndex >= dialogue.Length)
         {
             EndDia = true;
-            //GameManager.instance.ChInteractStop();            
             Menu.gameObject.SetActive(true);
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-            //Debug.Log("Arrivato al punto");            
-
         }
-        else
-        {StartCoroutine(ShowDialogue());}
+        else{StartCoroutine(ShowDialogue());}
     }
-
-
-
+    public void UpdateInventoryUI()
+    {
+    int ind = 0;
+    foreach(SellSlot slot in slotListItem)
+        {
+            if (itemList.Count != 0)
+            {
+                if (ind < itemList.Count)
+                {
+                    slot.UpdateSlot(itemList[ind], quantityList[ind]);
+                    ind = ind + 1;
+                }
+                else{slot.UpdateSlot(null, 0);}
+            }
+            else{slot.UpdateSlot(null, 0);}
+        }
+    }
     void FacePlayer()
     {
         if (player != null)
         {
-            if (player.transform.position.x > transform.position.x)
-            {transform.localScale = new Vector3(1, 1, 1);}
-            else
-            {transform.localScale = new Vector3(-1, 1, 1);}
+            if (player.transform.position.x > transform.position.x){transform.localScale = new Vector3(1, 1, 1);}
+            else{transform.localScale = new Vector3(-1, 1, 1);}
         }
     }
 
-
-
+    #region Animazione
     public void Idle()
 {
              if (currentAnimationName != idleAnimationName)
@@ -335,26 +364,20 @@ IEnumerator ShowDialogue()
                     currentAnimationName = idleAnimationName;
                 }            
 }
-
 public void Hit()
 {
              if (currentAnimationName != HitAnimationName)
                 { 
-                    //_spineAnimationState.ClearTrack(1);
                     _spineAnimationState.SetAnimation(1, HitAnimationName, false);
                     currentAnimationName = HitAnimationName;
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
 }
-
 private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
 {
-    // Remove the event listener
     trackEntry.Complete -= OnAttackAnimationComplete;
-
-    // Clear the track 1 and reset to the idle animation
-    //_spineAnimationState.ClearTrack(1);
     _spineAnimationState.SetAnimation(1, idleAnimationName, true);
     currentAnimationName = idleAnimationName;
-}}
+}
+#endregion
+}

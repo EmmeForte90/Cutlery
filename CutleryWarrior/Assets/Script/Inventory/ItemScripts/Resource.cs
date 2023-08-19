@@ -6,7 +6,7 @@ public class Resource : Item
 {
     public resourceType type;
 
-    public override void Use()
+    /*public override void Use()
     {
         base.Use();
 
@@ -14,7 +14,7 @@ public class Resource : Item
 
         //Use the following line if you want to destroy this type of item after use
         // Inventory.instance.RemoveItem(this, 1);
-    }
+    }*/
 
     public enum resourceType { Key, Collectible, Material, Quest}
 }

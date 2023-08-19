@@ -34,15 +34,9 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {GetComponentInParent<ItemInfoUpdate>().UpdateInfoPanel(item);}
-
-    public void OnPointerExit(PointerEventData eventData)
-    {GetComponentInParent<ItemInfoUpdate>().ClosePanel();}
-     
-    public void UseItem()
-    {if (item != null){item.Equip();}}
-
+    public void OnPointerEnter(PointerEventData eventData){GetComponentInParent<ItemInfoUpdate>().UpdateInfoPanel(item);}
+    public void OnPointerExit(PointerEventData eventData){GetComponentInParent<ItemInfoUpdate>().ClosePanel();}
+    public void UseItem(){if (item != null){item.Equip();}}
     public void RemoveItem()
     {Inventory.instance.RemoveItem(Inventory.instance.itemList[Inventory.instance.itemList.IndexOf(item)], 1);}
 }
