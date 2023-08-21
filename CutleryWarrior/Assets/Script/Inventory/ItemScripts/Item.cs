@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 public class Item : ScriptableObject
 {
     #region Header
@@ -15,13 +17,18 @@ public class Item : ScriptableObject
     public Sprite itemIcon;
     [Tooltip("Che tipo di Equipaggiamento? 0-Armor 1-Weapon ")]
     public int TypesE;
+    private Inventory Inv;
     #endregion
     public void Use(int whatDo)
-    {if(whatDo == 0){Inventory.instance.RemoveItem(this, 1);}
-        else if(whatDo == 1)
-        {GameManager.instance.money += price;
-        Inventory.instance.RemoveItem(this, 1);
-        Debug.Log("Hai Venduto!");}}//Vai allo script Consumable per verificarne la function
+    {if(whatDo == 0)
+    {Inv = GameObject.FindWithTag("Manager").GetComponent<Inventory>();
+    Inv.RemoveItem(this, 1);}
+    else if(whatDo == 1)
+    {GameManager.instance.money += price;
+    Inv = GameObject.FindWithTag("Manager").GetComponent<Inventory>();
+    Inv.RemoveItem(this, 1);
+     //Debug.Log("Hai Venduto!");
+    }}
     public virtual void Equip()
     {}//Vai allo script Weapon per verificarne la function
     public virtual void Sell()

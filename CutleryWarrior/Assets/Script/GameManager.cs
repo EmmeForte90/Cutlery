@@ -10,7 +10,8 @@ using Spine.Unity.AttachmentTools;
 using Spine.Unity;
 using Spine;
 public class GameManager : MonoBehaviour
-{            
+{
+    #region Header  
     public bool StartGame = false;
     private CinemachineVirtualCamera vCam;
     public GameObject player;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     [Header("Pause")]
     public bool stopInput = false;
     public bool battle = false;
+    public bool Interact = false; 
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject LittleM;
     [SerializeField]  GameObject Ord;
@@ -137,7 +139,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject ExpObjectM;
     public UIRotationSwitcher rotationSwitcher;
     public static GameManager instance;
-    private void Awake()
+    #endregion
+    public void Awake()
     {
         if (instance == null){instance = this;}
         if (GameManagerExist){Destroy(gameObject);}
@@ -154,6 +157,8 @@ public class GameManager : MonoBehaviour
         PStats.S_curHP = PStats.S_HP;
         PStats.S_curMP = PStats.S_MP;
     }
+
+
     public void TakeCharacter()
     {
         switch(rotationSwitcher.CharacterID)
@@ -176,7 +181,7 @@ public class GameManager : MonoBehaviour
         BarStat();
         TakeCharacter();
         moneyTextM.text = money.ToString(); 
-    if(!battle){
+    if(!battle || !Interact){
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();

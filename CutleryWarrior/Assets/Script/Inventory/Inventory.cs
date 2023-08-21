@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour
     #endregion
     #region Singleton
     public static Inventory instance;
-    public void Awake(){instance = this;}
+    public void Awake(){instance = this; DontDestroyOnLoad(gameObject);}
     #endregion
     #region Equip
     public void AssignDress(Weapon Item)

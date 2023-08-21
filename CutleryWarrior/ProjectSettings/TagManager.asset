@@ -16,6 +16,7 @@ TagManager:
   - F_Coll
   - K_Coll
   - S_Coll
+  - Manager
   layers:
   - Default
   - TransparentFX

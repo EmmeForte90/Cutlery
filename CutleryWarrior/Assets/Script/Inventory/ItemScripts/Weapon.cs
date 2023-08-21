@@ -22,7 +22,8 @@ public class Weapon : Item
     public override void Equip()
     {
         base.Equip();
-        if (TypesE == 1){Inventory.instance.AssignWeapon(this);}
+        if (TypesE == 1)
+        {Inventory.instance.AssignWeapon(this);}
         else if (TypesE == 0){Inventory.instance.AssignDress(this);} //Debug.Log("Hai cliccato il pulsante!");
     }
     public enum weaponType { Sword, Fork, Spoon}

@@ -6,6 +6,9 @@ public class StartScene : MonoBehaviour
 {
     #region Header
     public int WhatMusic;
+    public bool StartGame = false;
+    public GameObject StartGameOBJ;
+    public GameObject PStart;
     private GameObject player;
     private GameObject ContainerHero;
     private GameObject FAct;
@@ -20,7 +23,12 @@ public class StartScene : MonoBehaviour
     public static StartScene instance;
     #endregion
     public void Awake()
-    {if (instance == null){instance = this;}  
+    {if (instance == null){instance = this;} 
+    if (StartGame)
+    {
+    Instantiate(StartGameOBJ, PStart.transform.position, StartGameOBJ.transform.rotation);
+    AudioManager.instance.CrossFadeINAudio(WhatMusic);
+    }  
     if(!GameManager.instance.StartGame){
     GameManager.instance.ChStop();   
     FAct = GameObject.FindWithTag("F_Player");
@@ -29,8 +37,7 @@ public class StartScene : MonoBehaviour
     vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
     confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
     IDPorta = GameManager.instance.IDPorta;
-    ContainerHero = GameObject.Find("Hero");
-    AudioManager.instance.CrossFadeINAudio(WhatMusic);
+    ContainerHero = GameObject.Find("Hero"); 
     Spawn(IDPorta);
     Confiner(IDPorta);
     Switcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();

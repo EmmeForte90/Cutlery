@@ -75,10 +75,16 @@ public class Mercante : MonoBehaviour
         foreach (SellSlot child in inventoryItem.GetComponentsInChildren<SellSlot>())
         {slotListItem.Add(child);}
     }
+    public  void OnEnable() 
+    {StartCoroutine(List());}
+    IEnumerator List(){
+    yield return new WaitForSeconds(1); 
+    itemList = GameObject.FindWithTag("Manager").GetComponent<Inventory>().itemList; //ottieni il riferimento alla virtual camera di Cinemachine
+    quantityList = GameObject.FindWithTag("Manager").GetComponent<Inventory>().quantityList;
+    UpdateInventoryUI();
+    }
     public void Update()
     {
-        itemList = Inventory.instance.itemList;
-        quantityList = Inventory.instance.quantityList;
         UpdateInventoryUI();
         Value.text = GameManager.instance.money.ToString();
         ValueS.text = GameManager.instance.money.ToString();
@@ -91,6 +97,7 @@ public class Mercante : MonoBehaviour
 
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive)
         {
+            GameManager.instance.Interact = true;
             GameManager.instance.ChInteract();
             dialogueIndex = 0;
             StartCoroutine(ShowDialogue());
@@ -121,7 +128,8 @@ public class Mercante : MonoBehaviour
                     SelectionOp.gameObject.SetActive(false);
                     Talk = false;
                     EndDia = false;
-                    GameManager.instance.ChInteractStop();            
+                    GameManager.instance.ChInteractStop();  
+                    GameManager.instance.Interact = false;
         }
     public void AddItem(Item newItem)
     {
@@ -176,25 +184,27 @@ public class Mercante : MonoBehaviour
         {KeyManager.instance.AddItem(specificItem, specificQuant);}
         dialogueMenu.text = "Thank you and come back again!"; // Reference to the TextMeshProUGUI component
         break;
-    }
-    }else if(GameManager.instance.money < prices)
-    {switch(Tipo)
-    {
-        case 0:
-        dialogueMenu.text = "You don't have much money. What you think? I don't do charity"; // Reference to the TextMeshProUGUI component
-        break;
-        case 1:
-        dialogueMenu.text = "Ah, we have a beggar!"; // Reference to the TextMeshProUGUI component
-        break;
-        case 2:
-        dialogueMenu.text = "Sorry, buddy, you don't have much money..."; // Reference to the TextMeshProUGUI component
-        break;
-        case 3:
-        dialogueMenu.text = "Hen, you don't have much money... So.., maybe the next time?"; // Reference to the TextMeshProUGUI component
-        break;
-    }
-    //PlayMFX(1);
-    }}
+        }
+        }else if(GameManager.instance.money < prices)
+        {AudioManager.instance.PlayUFX(10);
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        switch(Tipo)
+        {
+            case 0:
+            dialogueMenu.text = "You don't have much money. What you think? I don't do charity"; // Reference to the TextMeshProUGUI component
+            break;
+            case 1:
+            dialogueMenu.text = "Ah, we have a beggar!"; // Reference to the TextMeshProUGUI component
+            break;
+            case 2:
+            dialogueMenu.text = "Sorry, buddy, you don't have much money..."; // Reference to the TextMeshProUGUI component
+            break;
+            case 3:
+            dialogueMenu.text = "Hen, you don't have much money... So.., maybe the next time?"; // Reference to the TextMeshProUGUI component
+            break;
+        }
+        }}
     
     #region ItemInventory
     public void AddItem(Item itemAdded, int quantityAdded)
@@ -266,7 +276,6 @@ public class Mercante : MonoBehaviour
     {
     if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
     {
-        //Move.instance.NotStrangeAnimationTalk = true;
         button.gameObject.SetActive(true);
         _isInTrigger = true;
         if (!isInteragible)

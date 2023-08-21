@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Raw Iron
   NameSkin: 
-  itemDes: A raw Iron, useful for make tools
+  itemDes: A raw Iron, need to make Iron Ore
   ID: 2
   KindItem: 0
   price: 300
