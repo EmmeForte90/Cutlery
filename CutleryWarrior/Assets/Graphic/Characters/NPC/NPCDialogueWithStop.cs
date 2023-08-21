@@ -99,7 +99,7 @@ else if (Dialogue.End)//EndDia
 
 if(!notGo)
 {
-        if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive)
+        if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)
         {
             //Move.instance.stopInput = true;
             //Move.instance.Stop();
@@ -109,7 +109,7 @@ if(!notGo)
             //CharacterMove.instance.inputCTR = true;
             StartCoroutine(ShowDialogue());
         }
-        else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton)
+        else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton && !GameManager.instance.stopInput)
         {
             NextDialogue();
              StopButton = false;

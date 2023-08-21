@@ -15,8 +15,21 @@ public class MercanteComb : MonoBehaviour
     [Header("Che tipo di mercante è?")]
     [Tooltip("0-Armaiolo 1-Alchimista 2-Ambulante 3-Fruttivendolo 4-Fruttivendolo")]
     public int Tipo;
-    public List<Item> itemList = new List<Item>();
-    public List<int> quantityList = new List<int>();
+    private List<Item> itemList = new List<Item>();
+    private List<int> quantityList = new List<int>();
+    //
+    private List<Item> F_List = new List<Item>();
+    private List<int> F_quantityList = new List<int>();
+    //
+    private List<Item> K_List = new List<Item>();
+    private List<int> K_quantityList = new List<int>();
+    //
+    private List<Item> S_List = new List<Item>();
+    private List<int> S_quantityList = new List<int>();
+    //
+    private List<Item> Q_List = new List<Item>();
+    private List<int> Q_quantityList = new List<int>();
+    //
     private readonly List<SellSlot> slotListItem = new();
     public Item[] objectToCheck;
     public int obj1;
@@ -63,6 +76,11 @@ public class MercanteComb : MonoBehaviour
     private Spine.AnimationState _spineAnimationState;
     private Spine.Skeleton _skeleton;
     Spine.EventData eventData;
+    private Inventory Inv;
+    private EquipM_F M_F;
+    private EquipM_K M_K;
+    private EquipM_S M_S;
+    private QuestsManager M_Q;
     public static MercanteComb instance;
     #endregion
     public void Awake()
@@ -77,14 +95,30 @@ public class MercanteComb : MonoBehaviour
         dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
         foreach (SellSlot child in inventoryItem.GetComponentsInChildren<SellSlot>())
         {slotListItem.Add(child);}
-       
     }
     public  void OnEnable() 
     {StartCoroutine(List());}
     IEnumerator List(){
     yield return new WaitForSeconds(1); 
+    Inv = GameObject.FindWithTag("Manager").GetComponent<Inventory>();
     itemList = GameObject.FindWithTag("Manager").GetComponent<Inventory>().itemList; //ottieni il riferimento alla virtual camera di Cinemachine
     quantityList = GameObject.FindWithTag("Manager").GetComponent<Inventory>().quantityList;
+    //
+    M_Q = GameObject.FindWithTag("Manager").GetComponent<QuestsManager>();    
+    Q_List = GameObject.FindWithTag("Manager").GetComponent<QuestsManager>().itemList;    
+    Q_quantityList = GameObject.FindWithTag("Manager").GetComponent<QuestsManager>().quantityList;
+    //
+    M_F = GameObject.Find("EquipManager").GetComponent<EquipM_F>();
+    F_List = GameObject.Find("EquipManager").GetComponent<EquipM_F>().itemList;
+    F_quantityList = GameObject.Find("EquipManager").GetComponent<EquipM_F>().quantityList;
+    //
+    M_K = GameObject.Find("EquipManager").GetComponent<EquipM_K>();
+    K_List = GameObject.Find("EquipManager").GetComponent<EquipM_K>().itemList;
+    K_quantityList = GameObject.Find("EquipManager").GetComponent<EquipM_K>().quantityList;
+    //
+    M_S = GameObject.Find("EquipManager").GetComponent<EquipM_S>();
+    S_List = GameObject.Find("EquipManager").GetComponent<EquipM_S>().itemList;
+    S_quantityList = GameObject.Find("EquipManager").GetComponent<EquipM_S>().quantityList;
     UpdateInventoryUI();
     }
     
@@ -100,14 +134,14 @@ public class MercanteComb : MonoBehaviour
         if(heFlip)
         {FacePlayer();}
 
-        if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive)
+        if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)
         {
             GameManager.instance.ChInteract();
             GameManager.instance.Interact = true;
             dialogueIndex = 0;
             StartCoroutine(ShowDialogue());
         }
-        else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton)
+        else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton && !GameManager.instance.stopInput)
         {
             NextDialogue();
             StopButton = false;
@@ -140,44 +174,138 @@ public class MercanteComb : MonoBehaviour
     public void ItemNeed2(int K_obj2){obj2 = K_obj2;}
     public void AddCombinedItem(Item newItem)
     {
-    if (GameManager.instance.money >= prices)
-    {
-        bool hasObj1 = Inventory.instance.itemList.Contains(objectToCheck[obj1]);
-        bool hasObj2 = Inventory.instance.itemList.Contains(objectToCheck[obj2]);
-
-        if (hasObj1 && hasObj2)
-        { 
-            specificItem = newItem;
-            GameManager.instance.money -= prices;
-            Inventory.instance.RemoveItem(objectToCheck[obj1], 1);
-            Inventory.instance.RemoveItem(objectToCheck[obj2], 1);
-            GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
-            Box.gameObject.SetActive(true);
-            StartCoroutine(BoxDel());
-            if(newItem.KindItem == 0)
-            {Inventory.instance.AddItem(specificItem, specificQuant);
-            InventoryB.instance.AddItem(specificItem, specificQuant);}
-            else if(newItem.KindItem == 1)
-            {QuestsManager.instance.AddItem(specificItem, specificQuant);}
-            else if(newItem.KindItem == 2)
-            {KeyManager.instance.AddItem(specificItem, specificQuant);}
-            dialogueMenu.text = "Thank you!";
-        }
-        else
-        {
-            AudioManager.instance.PlayUFX(10);
-            Box.gameObject.SetActive(true);
-            StartCoroutine(BoxDel());
-            dialogueMenu.text = "Nothing to do!";
-        }
+    if(GameManager.instance.money >= prices 
+    && Inv.itemList.Contains(objectToCheck[obj1]) 
+    && Inv.itemList.Contains(objectToCheck[obj2]))
+    { 
+        specificItem = newItem;
+        GameManager.instance.money -= prices;
+        Inv.RemoveItem(objectToCheck[obj1], 1);
+        Inv.RemoveItem(objectToCheck[obj2], 1);
+        GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        if(newItem.KindItem == 0)
+        {Inv.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 1)
+        {QuestsManager.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 2)
+        {KeyManager.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 3)
+        {EquipM_F.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 4)
+        {EquipM_K.instance.AddItem(specificItem, specificQuant);}
+        else if(newItem.KindItem == 5)
+        {EquipM_S.instance.AddItem(specificItem, specificQuant);}
+        dialogueMenu.text = "Thank you!";
     }else
     {
         AudioManager.instance.PlayUFX(10);
         Box.gameObject.SetActive(true);
         StartCoroutine(BoxDel());
-        dialogueMenu.text = "You don't have money!";
+        dialogueMenu.text = "Nothing to do!";
     }
     }
+   
+   public void AddQuestItem(Item newItem)
+    {
+    if(GameManager.instance.money >= prices 
+    && M_Q.itemList.Contains(objectToCheck[obj1]) 
+    && M_Q.itemList.Contains(objectToCheck[obj2]))
+    { 
+        specificItem = newItem;
+        GameManager.instance.money -= prices;
+        M_Q.RemoveItem(objectToCheck[obj1], 1);
+        M_Q.RemoveItem(objectToCheck[obj2], 1);
+        GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        if(newItem.KindItem == 1)
+        {QuestsManager.instance.AddItem(specificItem, specificQuant);}
+        dialogueMenu.text = "Thank you!";
+    }else
+    {
+        AudioManager.instance.PlayUFX(10);
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        dialogueMenu.text = "Nothing to do!";
+    }
+    }
+   
+   public void AddCombinedWeapomF(Item newItem)
+    {
+    if(GameManager.instance.money >= prices 
+    && Inv.itemList.Contains(objectToCheck[obj1]) 
+    && M_F.itemList.Contains(objectToCheck[obj2]))
+    { 
+        specificItem = newItem;
+        GameManager.instance.money -= prices;
+        M_F.RemoveItem(objectToCheck[obj1], 1);
+        M_F.RemoveItem(objectToCheck[obj2], 1);
+        GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        if(newItem.KindItem == 3)
+        {EquipM_F.instance.AddItem(specificItem, specificQuant);}
+        dialogueMenu.text = "Thank you!";
+    }else
+    {
+        AudioManager.instance.PlayUFX(10);
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        dialogueMenu.text = "Nothing to do!";
+    }
+    }
+
+    public void AddCombinedWeapomK(Item newItem)
+    {
+    if(GameManager.instance.money >= prices 
+    && Inv.itemList.Contains(objectToCheck[obj1]) 
+    && M_K.itemList.Contains(objectToCheck[obj2]))
+    { 
+        specificItem = newItem;
+        GameManager.instance.money -= prices;
+        M_K.RemoveItem(objectToCheck[obj1], 1);
+        M_K.RemoveItem(objectToCheck[obj2], 1);
+        GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        if(newItem.KindItem == 3)
+        {EquipM_K.instance.AddItem(specificItem, specificQuant);}
+        dialogueMenu.text = "Thank you!";
+    }else
+    {
+        AudioManager.instance.PlayUFX(10);
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        dialogueMenu.text = "Nothing to do!";
+    }
+    }
+    public void AddCombinedWeapomS(Item newItem)
+    {
+    if(GameManager.instance.money >= prices 
+    && Inv.itemList.Contains(objectToCheck[obj1]) 
+    && M_S.itemList.Contains(objectToCheck[obj2]))
+    { 
+        specificItem = newItem;
+        GameManager.instance.money -= prices;
+        M_S.RemoveItem(objectToCheck[obj1], 1);
+        M_S.RemoveItem(objectToCheck[obj2], 1);
+        GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        if(newItem.KindItem == 3)
+        {EquipM_S.instance.AddItem(specificItem, specificQuant);}
+        dialogueMenu.text = "Thank you!";
+    }else
+    {
+        AudioManager.instance.PlayUFX(10);
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        dialogueMenu.text = "Nothing to do!";
+    }
+    }
+   
     public void AddItem(Item newItem)
     {
     if(GameManager.instance.money >= prices)
@@ -362,7 +490,7 @@ public class MercanteComb : MonoBehaviour
         }
     }
     #endregion
-    IEnumerator BoxDel(){yield return new WaitForSeconds(3);Box.gameObject.SetActive(false);}
+    IEnumerator BoxDel(){yield return new WaitForSeconds(5);Box.gameObject.SetActive(false);}
     IEnumerator ShowDialogue()
     {    
     Talk = true;

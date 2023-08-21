@@ -126,14 +126,14 @@ public void changeDialogue()
             PauseAtWaypoint();
             Idle();
         }}
-        if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive)
+        if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)
         {
             GameManager.instance.ChInteract();//True
             if(heFlip){FacePlayer();}
             dialogueIndex = 0;
             StartCoroutine(ShowDialogue());
         }
-        else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton)
+        else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton && !GameManager.instance.stopInput)
         {
             NextDialogue();
             //StopButton = false;

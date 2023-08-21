@@ -95,14 +95,14 @@ public class Mercante : MonoBehaviour
         if(heFlip)
         {FacePlayer();}
 
-        if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive)
+        if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)
         {
             GameManager.instance.Interact = true;
             GameManager.instance.ChInteract();
             dialogueIndex = 0;
             StartCoroutine(ShowDialogue());
         }
-        else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton)
+        else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton && !GameManager.instance.stopInput)
         {
             NextDialogue();
             StopButton = false;
@@ -301,7 +301,7 @@ public class Mercante : MonoBehaviour
         }
     }
     #endregion
-    IEnumerator BoxDel(){yield return new WaitForSeconds(3);Box.gameObject.SetActive(false);}
+    IEnumerator BoxDel(){yield return new WaitForSeconds(5);Box.gameObject.SetActive(false);}
     IEnumerator ShowDialogue()
     {    
     Talk = true;
