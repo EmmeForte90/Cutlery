@@ -29,8 +29,7 @@ public class LevelChanger : MonoBehaviour
     CameraZoom.instance.ZoomIn();
     StartCoroutine(RetunBattle());
     }
-    public void LoadingEnd()
-    {StartCoroutine(WaitForSceneLoad());}
+    public void LoadingEnd(){StartCoroutine(StartLoad());}
     public void OnTriggerEnter(Collider other)
     {
     if (other.CompareTag("F_Player") ||
@@ -40,6 +39,12 @@ public class LevelChanger : MonoBehaviour
     CameraZoom.instance.ZoomIn();
     StartCoroutine(WaitForSceneLoad());}
     }
+    IEnumerator StartLoad()
+    {    
+    yield return new WaitForSeconds(3f);
+    sceneEvent.InvokeOnSceneChange();
+    }
+    
     IEnumerator WaitForSceneLoad()
     {   
     GameManager.instance.StartGame = false;

@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
 {
     public float Timelife;
     public GameObject Fade;
+    public AudioSource Music;
     public string startScene;
     public AudioMixer MSX;
     public AudioMixer SFX;
@@ -18,6 +19,7 @@ public class MainMenu : MonoBehaviour
     {
         if (instance == null){instance = this;}
         Application.targetFrameRate = 60;
+        StartCoroutine(StartM());
     }
     public void SetVolume(float volume){MSX.SetFloat("Volume", volume);}
     public void SetSFX(float volume){SFX.SetFloat("Volume", volume);}
@@ -29,8 +31,9 @@ public class MainMenu : MonoBehaviour
     public void StartGame(){StartCoroutine(fade());}
     public void SetQuality(int qualityIndex){QualitySettings.SetQualityLevel(qualityIndex);}
     public void SetFullscreen(bool isFullScreen){Screen.fullScreen = isFullScreen;}
+    IEnumerator StartM(){yield return new WaitForSeconds(13);Music.Play();}
     IEnumerator fade()
-    {
+    {           
         Fade.gameObject.SetActive(true);
         yield return new WaitForSeconds(Timelife);
         SceneManager.LoadScene(startScene);       
