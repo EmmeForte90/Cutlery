@@ -206,7 +206,6 @@ public class MercanteComb : MonoBehaviour
         dialogueMenu.text = "Nothing to do!";
     }
     }
-   
    public void AddQuestItem(Item newItem)
     {
     if(GameManager.instance.money >= prices 
@@ -231,7 +230,6 @@ public class MercanteComb : MonoBehaviour
         dialogueMenu.text = "Nothing to do!";
     }
     }
-   
    public void AddCombinedWeapomF(Item newItem)
     {
     if(GameManager.instance.money >= prices 
@@ -256,7 +254,6 @@ public class MercanteComb : MonoBehaviour
         dialogueMenu.text = "Nothing to do!";
     }
     }
-
     public void AddCombinedWeapomK(Item newItem)
     {
     if(GameManager.instance.money >= prices 
@@ -291,6 +288,31 @@ public class MercanteComb : MonoBehaviour
         GameManager.instance.money -= prices;
         M_S.RemoveItem(objectToCheck[obj1], 1);
         M_S.RemoveItem(objectToCheck[obj2], 1);
+        GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        if(newItem.KindItem == 3)
+        {EquipM_S.instance.AddItem(specificItem, specificQuant);}
+        dialogueMenu.text = "Thank you!";
+    }else
+    {
+        AudioManager.instance.PlayUFX(10);
+        Box.gameObject.SetActive(true);
+        StartCoroutine(BoxDel());
+        dialogueMenu.text = "Nothing to do!";
+    }
+    }
+
+     public void AddCombinedAlchemy(Item newItem)
+    {
+    if(GameManager.instance.money >= prices 
+    && Inv.itemList.Contains(objectToCheck[obj1]) 
+    && Inv.itemList.Contains(objectToCheck[obj2]))
+    { 
+        specificItem = newItem;
+        GameManager.instance.money -= prices;
+        Inv.RemoveItem(objectToCheck[obj1], 1);
+        Inv.RemoveItem(objectToCheck[obj2], 1);
         GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
         Box.gameObject.SetActive(true);
         StartCoroutine(BoxDel());

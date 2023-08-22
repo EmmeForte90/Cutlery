@@ -8,9 +8,9 @@ using Cinemachine;
 
 public class LevelChanger : MonoBehaviour
 {
-public string sceneName;
-public int IDPorta;
-private SceneEvent sceneEvent;
+    public string sceneName;
+    public int IDPorta;
+    private SceneEvent sceneEvent;
     public void Start()
     {
     sceneEvent = GetComponent<SceneEvent>();
