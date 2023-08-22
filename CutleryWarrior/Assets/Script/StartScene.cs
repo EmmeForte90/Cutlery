@@ -20,15 +20,17 @@ public class StartScene : MonoBehaviour
     private CinemachineVirtualCamera vCam;
     private SwitchCharacter Switcher;
     private int IDPorta;
+    private Quaternion defaultRotation;
     public static StartScene instance;
     #endregion
     public void Awake()
     {if (instance == null){instance = this;} 
     if (StartGame)
     {
-    Instantiate(StartGameOBJ, PStart.transform.position, StartGameOBJ.transform.rotation);
+    Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
     AudioManager.instance.CrossFadeINAudio(WhatMusic);
     }  
+    defaultRotation = transform.rotation;
     if(!GameManager.instance.StartGame){
     GameManager.instance.ChStop();   
     FAct = GameObject.FindWithTag("F_Player");
@@ -51,11 +53,19 @@ public class StartScene : MonoBehaviour
     KAct.transform.position = ContainerHero.transform.position;
     FAct.transform.position = ContainerHero.transform.position;
     SAct.transform.position = ContainerHero.transform.position;
+    //
+    /*KAct.transform.rotation = defaultRotation;
+    FAct.transform.rotation = defaultRotation;
+    SAct.transform.rotation = defaultRotation;*/
     }else if (GameManager.instance.battle)
     {GameManager.instance.battle = false;
     KAct.transform.position = GameManager.instance.savedPosition;
     FAct.transform.position = GameManager.instance.savedPosition;
     SAct.transform.position = GameManager.instance.savedPosition;
+    //
+    /*KAct.transform.rotation = defaultRotation;
+    FAct.transform.rotation = defaultRotation;
+    SAct.transform.rotation = defaultRotation;*/
     GameManager.instance.StopWin();
     }}
     IEnumerator BoxDel()

@@ -29,6 +29,8 @@ public class LevelChanger : MonoBehaviour
     CameraZoom.instance.ZoomIn();
     StartCoroutine(RetunBattle());
     }
+    public void LoadingEnd()
+    {StartCoroutine(WaitForSceneLoad());}
     public void OnTriggerEnter(Collider other)
     {
     if (other.CompareTag("F_Player") ||
