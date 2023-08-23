@@ -9,6 +9,7 @@ using TMPro;
 using Spine.Unity.AttachmentTools;
 using Spine.Unity;
 using Spine;
+
 public class GameManager : MonoBehaviour
 {
     #region Header  

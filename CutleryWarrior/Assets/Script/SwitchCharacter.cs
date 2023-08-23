@@ -25,12 +25,13 @@ public class SwitchCharacter : MonoBehaviour
     public static SwitchCharacter instance;
     private CinemachineVirtualCamera vCam;
     private GameObject player;
+    public int ConInt;
     public UIRotationSwitcher rotationSwitcher;
     #endregion
     public void Update()
     {if(!GameManager.instance.notChange){if(Input.GetKeyDown(KeyCode.Space)){StartCoroutine(CoordinateActor());}}}
     public void Start(){inizial();}
-    public void Awake(){if (instance == null){instance = this;}}
+    public void Awake(){if (instance == null){instance = this;} ConInt = 1;}
 
     #region ChangeCharacter
     public void inizial()
@@ -66,13 +67,13 @@ public class SwitchCharacter : MonoBehaviour
         switch(rotationSwitcher.CharacterID)
         {
             case 1:
-            ForkActive.SwitchScriptsPlayer(); KnifeActive.SwitchScriptsActor(); SpoonActive.SwitchScriptsActor();
+            ForkActive.SwitchScriptsPlayer(); KnifeActive.SwitchScriptsActor(); SpoonActive.SwitchScriptsActor(); ConInt = 1;
             break;
             case 2:
-            ForkActive.SwitchScriptsActor(); KnifeActive.SwitchScriptsPlayer(); SpoonActive.SwitchScriptsActor(); 
+            ForkActive.SwitchScriptsActor(); KnifeActive.SwitchScriptsPlayer(); SpoonActive.SwitchScriptsActor(); ConInt = 2;
             break;
             case 3:
-            ForkActive.SwitchScriptsActor(); KnifeActive.SwitchScriptsActor(); SpoonActive.SwitchScriptsPlayer();
+            ForkActive.SwitchScriptsActor(); KnifeActive.SwitchScriptsActor(); SpoonActive.SwitchScriptsPlayer(); ConInt = 3;
             break;
         }
     }
