@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.UI;
 using Cinemachine;
 public class ChangeArea : MonoBehaviour
 {
+    #region Header
     public GameObject PointSpawn;
     private CinemachineConfiner confiner;
     public Collider NewConfiner;
@@ -16,6 +14,7 @@ public class ChangeArea : MonoBehaviour
     public bool needDeactivateObject;
     public GameObject[] objDeactivate;
     public GameObject[] objActivate;
+    #endregion
     public void Start()
     {        
         FAct = GameObject.FindWithTag("F_Player");
@@ -58,12 +57,10 @@ public class ChangeArea : MonoBehaviour
     }
     public void Deactive()
     {
-        foreach (GameObject arenaObject in objDeactivate)
-        {arenaObject.SetActive(false);}
+        foreach (GameObject arenaObject in objDeactivate){arenaObject.SetActive(false);}
     }
     public void Activate()
     {
-        foreach (GameObject arenaObject in objActivate)
-        {arenaObject.SetActive(true);}
+        foreach (GameObject arenaObject in objActivate){arenaObject.SetActive(true);}
     } 
 }

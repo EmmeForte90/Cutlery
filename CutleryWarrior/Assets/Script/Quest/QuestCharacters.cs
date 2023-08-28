@@ -1,0 +1,249 @@
+using System.Collections;
+using UnityEngine;
+using TMPro;
+using Spine.Unity;
+public class QuestCharacters : MonoBehaviour
+{
+    #region Header
+    public Quests Quest;
+    private int IDQuest;
+    public int IDCharacter;
+    public TextMeshProUGUI CharacterName; // Reference to the TextMeshProUGUI component
+    public TextMeshProUGUI QNameE; // Reference to the TextMeshProUGUI component
+    public TextMeshProUGUI QNameS; // Reference to the TextMeshProUGUI component
+    private GameObject player; // Reference to the player's position
+    public TextMeshProUGUI dialogueText; // Reference to the TextMeshProUGUI component
+    public GameObject button;
+    public GameObject dialogueBox;
+    public GameObject QuestStart;
+    public GameObject QuestEnd;
+     [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-Weapom 4-Armor")]
+    private int KindItem;
+    public Item Reward;
+    public int specificQuant;
+    //public Transform RewardPoint;
+    private string[] dialogue; // array of string to store the dialogues
+    public float dialogueDuration; // variable to set the duration of the dialogue
+    private int dialogueIndex; // variable to keep track of the dialogue status
+    private float elapsedTime; // variable to keep track of the elapsed time
+    private bool notGo = false;
+    public bool isInteragible;
+    public bool heFlip;
+    public bool FirstD = true;
+    private bool StopButton = false; // o la variabile che deve attivare la sostituzione
+    private bool _isInTrigger;
+    private bool _isDialogueActive;
+    [Header("Audio")]
+    public int IDAudio;
+    [Header("Animations")]
+    [SpineAnimation][SerializeField] private string idleAnimationName;
+    [SpineAnimation][SerializeField] private string HitAnimationName;
+    private string currentAnimationName;
+    private SkeletonAnimation _skeletonAnimation;
+    private Spine.AnimationState _spineAnimationState;
+    private Spine.Skeleton _skeleton;
+    Spine.EventData eventData;
+    public static QuestCharacters instance;
+    #endregion
+    public void Awake()
+    {
+            if (instance == null){instance = this;}
+            IDQuest = Quest.id;
+            CharacterName.text = Quest.CharacterName;
+            _skeletonAnimation = GetComponent<SkeletonAnimation>();
+            if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");}        
+            _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
+            _spineAnimationState = _skeletonAnimation.AnimationState;
+            _skeleton = _skeletonAnimation.skeleton;
+             button.gameObject.SetActive(false); // Initially hide the dialogue text
+            dialogueText.gameObject.SetActive(false); // Initially hide the dialogue text
+            dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+    }
+    public void Update()
+    {
+        if (FirstD){dialogue = Quest.Startdialogue;} //Start
+        else if (Quest.isActive){dialogue = Quest.Middledialogue;} //Middle
+        else if (Quest.isComplete){dialogue = Quest.Endingdialogue;} //EndD
+        else if (Quest.AfterQuest){dialogue = Quest.Afterdialogue;} //After
+        Idle();
+        if(heFlip){FacePlayer();}
+        if(!notGo)
+        {
+        if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)
+        {
+            CharacterMove.instance.Interact = true;
+            dialogueIndex = 0;
+            StartCoroutine(ShowDialogue());
+        }
+        else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton && !GameManager.instance.stopInput)
+        {
+            NextDialogue();
+            StopButton = false;
+        }}
+    }
+    public void OnTriggerEnter(Collider collision)
+{
+    if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
+    {
+        button.gameObject.SetActive(true);
+        _isInTrigger = true;
+        if (!isInteragible)
+        {
+            dialogueIndex = 0; // Reset the dialogue index to start from the beginning
+            StartCoroutine(ShowDialogue());
+        }
+    }
+}
+    public void OnTriggerExit(Collider collision)
+    {
+        if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
+        {
+            button.gameObject.SetActive(false); // Initially hide the dialogue text
+            _isInTrigger = false;
+            StopCoroutine(ShowDialogue());
+            dialogueIndex++; // Increment the dialogue index
+            if (dialogueIndex >= dialogue.Length)
+            {
+                dialogueIndex = 0;
+                _isDialogueActive = false;
+                dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+                dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+            }
+        }
+    }
+    IEnumerator ShowDialogue()
+    {    
+        Hit();
+        AudioManager.instance.PlaySFX(IDAudio);
+        _isDialogueActive = true;
+        elapsedTime = 0; // reset elapsed time
+        dialogueBox.gameObject.SetActive(true); // Show dialogue box
+        dialogueText.gameObject.SetActive(true); // Show dialogue text
+        string currentDialogue = dialogue[dialogueIndex]; // Get the current dialogue
+        dialogueText.text = ""; // Clear the dialogue text
+        for (int i = 0; i < currentDialogue.Length; i++)
+        {
+            dialogueText.text += currentDialogue[i]; // Add one letter at a time
+            elapsedTime += Time.deltaTime; // Update the elapsed time
+            if (elapsedTime >= dialogueDuration){break;}
+            yield return new WaitForSeconds(0); // Wait before showing the next letter
+        }
+        dialogueText.text = currentDialogue; // Set the dialogue text to the full current dialogue
+        StopButton = true;
+    }
+    void NextDialogue()
+    {
+        elapsedTime = 0; // reset elapsed time
+        dialogueIndex++; // Increment the dialogue index
+        if (dialogueIndex >= dialogue.Length)
+        {
+            dialogueIndex = 0;
+            _isDialogueActive = false;
+            dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+            dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+            if(FirstD){StartCoroutine(StartQuest());}
+            else if(Quest.isComplete){StartCoroutine(EndQuest());}
+            else {CharacterMove.instance.Interact = false;}
+        }
+        else{StartCoroutine(ShowDialogue());}
+    }
+    IEnumerator EndQuest()
+{
+        notGo = true;
+        QNameE.text = Quest.questName;
+        QuestEnd.gameObject.SetActive(true); 
+        AudioManager.instance.PlaySFX(IDAudio);//AudioQuestComplete
+        yield return new WaitForSeconds(5f); 
+        //Instantiate(Reward, RewardPoint.position, transform.rotation);
+        KindItem = Reward.KindItem;
+        AddSpecificItem();
+        QuestEnd.gameObject.SetActive(false); 
+        yield return new WaitForSeconds(1f); 
+        QuestsManager.instance.QuestCompleteF(IDQuest);
+        Quest.isActive = false;
+        Quest.isComplete = false;
+        Quest.AfterQuest = true;
+        notGo = false;
+        CharacterMove.instance.Interact = false;
+    }    
+
+    public void AddSpecificItem()
+    {
+        switch(KindItem)
+        {
+            case 0:
+            Inventory.instance.AddItem(Reward, specificQuant);  
+            InventoryB.instance.AddItem(Reward, specificQuant);
+            break;
+            case 1:
+            QuestsManager.instance.AddItem(Reward, specificQuant);            
+            break;
+            case 2:
+            KeyManager.instance.AddItem(Reward, specificQuant);            
+            break;
+            case 3:
+            EquipM_F.instance.AddItem(Reward, specificQuant);            
+            break;
+            case 4:
+            EquipM_K.instance.AddItem(Reward, specificQuant);            
+            break;
+            case 5:
+            EquipM_S.instance.AddItem(Reward, specificQuant);            
+            break;
+        }
+    } 
+    IEnumerator StartQuest()
+{            
+        notGo = true;
+        QNameS.text = Quest.questName;
+        Quest.isActive = true;
+        GameManager.instance.Allarm();
+        AudioManager.instance.PlaySFX(IDAudio);//AudioQuestStart
+        QuestStart.gameObject.SetActive(true); 
+        QuestsManager.instance.AddQuest(Quest);
+        QuestsManager.instance.ListQuest(IDQuest);
+        QuestsManager.instance.QuestStart(IDQuest);
+        yield return new WaitForSeconds(5f); 
+        QuestsManager.instance.QuestActiveF(IDQuest);
+        QuestStart.gameObject.SetActive(false); 
+        CharacterMove.instance.Interact = false;
+        notGo = false;
+        FirstD = false;
+    }
+    void FacePlayer()
+    {
+        if (player != null)
+        {
+            if (player.transform.position.x > transform.position.x){transform.localScale = new Vector3(1, 1, 1);}
+            else{transform.localScale = new Vector3(-1, 1, 1);}
+        }
+    }
+    #region Animations
+     public void Idle()
+{
+             if (currentAnimationName != idleAnimationName)
+                {  
+                    _spineAnimationState.SetAnimation(1, idleAnimationName, true);
+                    currentAnimationName = idleAnimationName;
+                }            
+}
+public void Hit()
+{
+             if (currentAnimationName != HitAnimationName)
+                { 
+                    //_spineAnimationState.ClearTrack(1);
+                    _spineAnimationState.SetAnimation(2, HitAnimationName, true);
+                    currentAnimationName = HitAnimationName;
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
+{
+    trackEntry.Complete -= OnAttackAnimationComplete;
+    _spineAnimationState.ClearTrack(2);
+    _spineAnimationState.SetAnimation(1, idleAnimationName, true);
+    currentAnimationName = idleAnimationName;
+}
+#endregion
+}

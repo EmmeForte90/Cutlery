@@ -1,15 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 using Cinemachine;
 using TMPro;
-using Spine.Unity.AttachmentTools;
-using Spine.Unity;
-using Spine;
-
 public class GameManager : MonoBehaviour
 {
     #region Header  
@@ -158,8 +151,6 @@ public class GameManager : MonoBehaviour
         PStats.S_curHP = PStats.S_HP;
         PStats.S_curMP = PStats.S_MP;
     }
-
-
     public void TakeCharacter()
     {
         switch(rotationSwitcher.CharacterID)
@@ -545,16 +536,11 @@ public class GameManager : MonoBehaviour
     public void AddTomoney(int pointsToAdd)
     {
         money += pointsToAdd;
-        //Lo money aumenta
         moneyTextM.text = money.ToString();    
-        //il testo dello money viene aggiornato
     }
-    public void K_PlayerReachedLevelUp()
-    {PStats.K_LevelUp();}
-    public void S_PlayerReachedLevelUp()
-    {PStats.S_LevelUp();}
-    public void F_PlayerReachedLevelUp()
-    {PStats.F_LevelUp();}
+    public void K_PlayerReachedLevelUp(){PStats.K_LevelUp();}
+    public void S_PlayerReachedLevelUp(){PStats.S_LevelUp();}
+    public void F_PlayerReachedLevelUp(){PStats.F_LevelUp();}
     public void AddToExp(int pointsToAdd)
     {
         F_Exp += pointsToAdd;
@@ -564,7 +550,8 @@ public class GameManager : MonoBehaviour
         S_ExpTextM.text = S_Exp.ToString();    
         K_ExpTextM.text = K_Exp.ToString();    
     }
-#region Fade
+    
+    #region Fade
     public void FadeIn(){StartCoroutine(StartFadeIn());}
     public void FadeOut(){StartCoroutine(StartFadeOut());}
     IEnumerator StartFadeIn()

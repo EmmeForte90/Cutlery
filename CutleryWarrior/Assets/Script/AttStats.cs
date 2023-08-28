@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
 public class AttStats : MonoBehaviour
 {
+    #region Header
     [Header("Stats")]
-
-    [Header("Fork")]
-
     [HideInInspector] public int F_LV;
     [Header("Fork")]
-
     [SerializeField] public Scrollbar F_ExpScrol;
     [SerializeField] public TextMeshProUGUI F_LVTextM;
     [SerializeField] public GameObject F_LevelUP;
@@ -23,7 +17,7 @@ public class AttStats : MonoBehaviour
     [SerializeField] public TextMeshProUGUI F_Rust;
     [SerializeField] public TextMeshProUGUI F_Sleep;
     [SerializeField] public TextMeshProUGUI F_Stun;
-
+    //
     [HideInInspector] public float F_HPCont;
     [HideInInspector] public float F_curHPCont;
     [HideInInspector] public float F_MPCont;
@@ -37,12 +31,9 @@ public class AttStats : MonoBehaviour
     [HideInInspector] public int F_paralysisResistanceCont;
     [HideInInspector] public int F_sleepResistanceCont;
     [HideInInspector] public int F_rustResistanceCont;
-
-    [Header("Spoon")]
-
+    //
     [HideInInspector] public int S_LV;
     [Header("Spoon")]
-
     [SerializeField] public Scrollbar S_ExpScrol;
     [SerializeField] public TextMeshProUGUI S_LVTextM;
     [SerializeField] public GameObject S_LevelUP;
@@ -53,8 +44,7 @@ public class AttStats : MonoBehaviour
     [SerializeField] public TextMeshProUGUI S_Rust;
     [SerializeField] public TextMeshProUGUI S_Sleep;
     [SerializeField] public TextMeshProUGUI S_Stun;
-
-
+    //
     [HideInInspector] public float S_HPCont;
     [HideInInspector] public float S_curHPCont;
     [HideInInspector] public float S_MPCont;
@@ -68,14 +58,9 @@ public class AttStats : MonoBehaviour
     [HideInInspector] public int S_paralysisResistanceCont;
     [HideInInspector] public int S_sleepResistanceCont;
     [HideInInspector] public int S_rustResistanceCont;
-
-   
-
-
-    [Header("Knife")]
+    //
     [HideInInspector] public int K_LV;
     [Header("Knife")]
-
     [SerializeField] public Scrollbar K_ExpScrol;
     [SerializeField] public TextMeshProUGUI K_LVTextM;
     [SerializeField] public GameObject K_LevelUP;
@@ -86,7 +71,7 @@ public class AttStats : MonoBehaviour
     [SerializeField] public TextMeshProUGUI K_Rust;
     [SerializeField] public TextMeshProUGUI K_Sleep;
     [SerializeField] public TextMeshProUGUI K_Stun;
-
+    //
     [HideInInspector] public float K_HPCont;
     [HideInInspector] public float K_curHPCont;
     [HideInInspector] public float K_MPCont;
@@ -100,13 +85,10 @@ public class AttStats : MonoBehaviour
     [HideInInspector] public int K_paralysisResistanceCont;
     [HideInInspector] public int K_sleepResistanceCont;
     [HideInInspector] public int K_rustResistanceCont;
-
-
+    //
     public static AttStats instance;
-   
-    public void Awake()
-    {if (instance == null){instance = this;}}
-
+    #endregion
+    public void Awake(){if (instance == null){instance = this;}}
     public void Update()
     {
         K_ExpScrol.size = PlayerStats.instance.K_curExp / PlayerStats.instance.K_Exp;
@@ -124,11 +106,9 @@ public class AttStats : MonoBehaviour
         F_LV = PlayerStats.instance.F_LV;
         F_LVTextM.text = F_LV.ToString();
     }
-// Metodo chiamato quando il giocatore guadagna esperienza
     public void F_GainExperience(int amount)
     {
         PlayerStats.instance.F_curExp += amount;
-        // Se il giocatore ha guadagnato abbastanza esperienza per salire di livello, chiama il metodo LevelUp()
         if (PlayerStats.instance.F_curExp >= PlayerStats.instance.F_Exp)
         {PlayerStats.instance.F_LevelUp();
         F_LevelUP.gameObject.SetActive(true); 
@@ -138,7 +118,6 @@ public class AttStats : MonoBehaviour
     public void K_GainExperience(int amount)
     {
         PlayerStats.instance.K_curExp += amount;
-        // Se il giocatore ha guadagnato abbastanza esperienza per salire di livello, chiama il metodo LevelUp()
         if (PlayerStats.instance.K_curExp >= PlayerStats.instance.K_Exp)
         {PlayerStats.instance.K_LevelUp();
         K_LevelUP.gameObject.SetActive(true); 
@@ -148,14 +127,12 @@ public class AttStats : MonoBehaviour
     public void S_GainExperience(int amount)
     {
         PlayerStats.instance.S_curExp += amount;
-        // Se il giocatore ha guadagnato abbastanza esperienza per salire di livello, chiama il metodo LevelUp()
         if (PlayerStats.instance.S_curExp >= PlayerStats.instance.S_Exp)
         {PlayerStats.instance.S_LevelUp();
         S_LevelUP.gameObject.SetActive(true); 
         S_Stat.gameObject.SetActive(true); 
         S_LevelUPatt();}
     }
-
     public void K_LevelUPatt()
     {        
         K_HPCont = PlayerStats.instance.K_HP;
@@ -176,7 +153,6 @@ public class AttStats : MonoBehaviour
         K_Sleep.text = K_sleepResistanceCont.ToString();
         K_Rust.text = K_rustResistanceCont.ToString(); 
     }
-
     public void F_LevelUPatt()
     {        
         F_HPCont = PlayerStats.instance.F_HP;
@@ -197,7 +173,6 @@ public class AttStats : MonoBehaviour
         F_Sleep.text = F_sleepResistanceCont.ToString();
         F_Rust.text = F_rustResistanceCont.ToString(); 
     }
-
     public void S_LevelUPatt()
     {        
         S_HPCont = PlayerStats.instance.S_HP;
@@ -218,6 +193,4 @@ public class AttStats : MonoBehaviour
         S_Sleep.text = S_sleepResistanceCont.ToString();
         S_Rust.text = S_rustResistanceCont.ToString(); 
     }
-
-
 }

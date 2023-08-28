@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class TitleArea : MonoBehaviour
 {
     public GameObject Title;

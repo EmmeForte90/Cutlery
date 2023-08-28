@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class Bullet : MonoBehaviour
 {
+    #region Header
     public float speed = 10f;
     public int damage = 10;
     public float lifeTime = 2f;
     public GameObject hitEffect;
     private Transform player;
     private Rigidbody rb;
+    #endregion
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -20,15 +19,10 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        // Se il proiettile colpisce un nemico, applica il danno e distruggi il proiettile
-        //EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
         if(other.CompareTag("Enemy"))
         {
-        // Crea l'effetto di impatto
         AudioManager.instance.PlayUFX(9);
-        if (hitEffect != null)
-        {Instantiate(hitEffect, transform.position, transform.rotation);}
-        // Distruggi il proiettile dopo l'impatto
+        if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
         Destroy(gameObject);
         }
     }

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00023975e9de553489b884dbb12dc3fc, type: 3}
+  m_Name: Coll_2
+  m_EditorClassIdentifier: 
+  id: 18
+  CharacterName: 
+  questName: He who scratches the iron, gets rust on his hand.
+  Description: Gibbon need some Iron Ore to make new weapons for the Mollica's Guards,
+    collect 5 Iron ore you can fine some one in the iron mine but be careful because
+    it's infected by rust.
+  Bigicon: {fileID: 0}
+  Startdialogue: []
+  Middledialogue: []
+  Endingdialogue: []
+  Afterdialogue: []
+  isActive: 0
+  isComplete: 0
+  AfterQuest: 0

@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using Spine.Unity;
 using Spine;
-
 public class AnimationManager : MonoBehaviour
 {
+    #region Header
     [Header("Stats")]
     [Header("Character")]
     public bool fork;
@@ -42,6 +40,7 @@ public class AnimationManager : MonoBehaviour
     [HideInInspector]
     public bool isDefence = false;
     public static AnimationManager instance;
+    #endregion
     public void Awake()
     {
          if (instance == null){instance = this;}
@@ -67,23 +66,11 @@ public class AnimationManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Boom = true;
     }
-   
-    
-    public void TemporaryChangeColor(Color color)
-    {
-    _skeletonAnimation.Skeleton.SetColor(color);
-    Invoke(nameof(ResetColor), 0.5f);
-    }
-
-    private void ResetColor()
-    {
-    _skeletonAnimation.Skeleton.SetColor(Color.white);
-    }
+    public void TemporaryChangeColor(Color color){_skeletonAnimation.Skeleton.SetColor(color); Invoke(nameof(ResetColor), 0.5f);}
+    private void ResetColor(){_skeletonAnimation.Skeleton.SetColor(Color.white);}
     public void PlayAnimation(string animationName)
-    {if (currentAnimationName != animationName){
-    _skeletonAnimation.state.SetAnimation(0, animationName, false);
-    }_skeletonAnimation.state.GetCurrent(0).Complete += OnAttackAnimationComplete;}
-
+    {if (currentAnimationName != animationName){_skeletonAnimation.state.SetAnimation(0, animationName, false);}
+    _skeletonAnimation.state.GetCurrent(0).Complete += OnAttackAnimationComplete;}
     public void PlayAnimationLoop(string animationName)
     {
     if (currentAnimationName != animationName)
@@ -93,21 +80,15 @@ public class AnimationManager : MonoBehaviour
                     _spineAnimationState.Event += HandleEvent;
                 }
     }
-
-private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
+    private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
 {
-    // Remove the event listener
     trackEntry.Complete -= OnAttackAnimationComplete;
-
-    // Clear the track 1 and reset to the idle animation
     _skeletonAnimation.state.ClearTrack(0);
    _skeletonAnimation.state.SetAnimation(0, IdleBAnimationName, true);
 }
     void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
     //Normal VFX
     if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(0);}
-    //if (e.Data.Name == "shoot"){AudioManager.instance.PlayUFX(0); 
-    //if (Boom){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation);} StartCoroutine(StopVFX_F());}
     //Normal VFX
     if (e.Data.Name == "slashV")
     {AudioManager.instance.PlayUFX(8); SlashV.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
@@ -117,4 +98,5 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     //
     if (e.Data.Name == "slashB")
     {AudioManager.instance.PlayUFX(8); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
-}}
+}
+}

@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
-using Spine;
 public class CharacterFollow : MonoBehaviour
 {   
+    #region Header
     [Tooltip("0 - Exploration, 1 - Battle")]
     public int IDAction = 0; //Che tipo di personaggio è
-
     [Header("Character")]
     public bool fork;
     public Transform Fork;
@@ -28,13 +26,11 @@ public class CharacterFollow : MonoBehaviour
     public float stoppingDistance = 1f;
     public float groundCheckDistance = 0.2f;
     public LayerMask groundLayer;
-
     private Rigidbody characterRigidbody;
     private bool isFollowing;
     private bool isGrounded;
     private bool isWalking;
     private bool isGuard;
-    //private bool ChooseT = false;
     [SpineAnimation][SerializeField]  string WalkAnimationName;    
     [SpineAnimation][SerializeField]  string RunAnimationName;
     [SpineAnimation][SerializeField]  string RunBAnimationName;    
@@ -44,7 +40,6 @@ public class CharacterFollow : MonoBehaviour
     [SpineAnimation][SerializeField]  string WinAnimationName;
     [SpineAnimation][SerializeField]  string GuardAnimationName;
     [SpineAnimation][SerializeField]  string Atk1AnimationName;
-   
     [Header("Battle")]
     public int attackPauseDuration = 1;
     public float attackRange = 3f;
@@ -52,9 +47,7 @@ public class CharacterFollow : MonoBehaviour
     private bool isAttacking = false;   
     private bool take = false; 
     private bool Die = false;
-    //[SerializeField] GameObject VFXHurt;    
     public int result;
-
     public AnimationManager Anm;
     [HideInInspector]
     public bool Allarming;
@@ -66,9 +59,8 @@ public class CharacterFollow : MonoBehaviour
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
     Spine.EventData eventData;
-
     public static CharacterFollow instance;
-
+    #endregion
     public void Awake()
     {
          if (instance == null){instance = this;}
@@ -83,9 +75,7 @@ public class CharacterFollow : MonoBehaviour
         F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();
         K_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         S_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();
-        }
-
-    
+    }
     public void Update()
     {
         if(!inputCTR){
@@ -112,24 +102,17 @@ public class CharacterFollow : MonoBehaviour
     #region MoveExploration
     public void SimpleMove()
     {
-    // Verifica se il personaggio è a terra
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+    isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+    if (!isFollowing){Anm.PlayAnimationLoop(IdleAnimationName); isWalking = false;}
+    if ((transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance){isFollowing = true;}
+    if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance){isFollowing = false;}
 
-        if (!isFollowing){Anm.PlayAnimationLoop(IdleAnimationName); isWalking = false;}
-
-        if ((transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
-        {isFollowing = true;}
-
-        if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance)
-        {isFollowing = false;}
-
-        if (isFollowing && (transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
-        {
+    if (isFollowing && (transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
+    {
             // Calcola la direzione verso cui il personaggio deve muoversi
             Vector3 direction = Player.position - transform.position;
             direction.y = 0f;
             direction.Normalize();
-
             // Calcola la distanza dal giocatore
             distance = Vector3.Distance(transform.position, Player.position);
             
@@ -139,16 +122,13 @@ public class CharacterFollow : MonoBehaviour
                 {
                 if (!isWalking)
                 {isWalking = true; Anm.PlayAnimationLoop(WalkAnimationName);}
-
                 // Muovi il personaggio verso il giocatore solo se la distanza supera la soglia di arresto
                 characterRigidbody.MovePosition(transform.position + direction * followSpeed * Time.deltaTime);
                 } 
-                
                 if (F_b.isRun || S_b.isRun || K_b.isRun)
                 {
                 if (!isWalking)
                 {isWalking = true; Anm.PlayAnimationLoop(RunAnimationName);}
-
                 // Muovi il personaggio verso il giocatore solo se la distanza supera la soglia di arresto
                 characterRigidbody.MovePosition(transform.position + direction * RunSpeed * Time.deltaTime);
                 } 
