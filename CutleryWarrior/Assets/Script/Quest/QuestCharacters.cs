@@ -33,6 +33,11 @@ public class QuestCharacters : MonoBehaviour
     private bool StopButton = false; // o la variabile che deve attivare la sostituzione
     private bool _isInTrigger;
     private bool _isDialogueActive;
+    [Header("Minimap Icons")]
+    public GameObject QuestAt;
+    public GameObject QuestCo;
+    public GameObject Esclama;
+
     [Header("Audio")]
     public int IDAudio;
     [Header("Animations")]
@@ -61,10 +66,10 @@ public class QuestCharacters : MonoBehaviour
     }
     public void Update()
     {
-        if (FirstD){dialogue = Quest.Startdialogue;} //Start
-        else if (Quest.isActive){dialogue = Quest.Middledialogue;} //Middle
-        else if (Quest.isComplete){dialogue = Quest.Endingdialogue;} //EndD
-        else if (Quest.AfterQuest){dialogue = Quest.Afterdialogue;} //After
+        if (FirstD){dialogue = Quest.Startdialogue; QuestAt.SetActive(true); QuestCo.SetActive(false); Esclama.SetActive(true);} //Start
+        else if (Quest.isActive){dialogue = Quest.Middledialogue; Esclama.SetActive(false);} //Middle
+        else if (Quest.isComplete){dialogue = Quest.Endingdialogue; Esclama.SetActive(true);} //EndD
+        else if (Quest.AfterQuest){dialogue = Quest.Afterdialogue; QuestAt.SetActive(false); QuestCo.SetActive(true); Esclama.SetActive(false);} //After
         Idle();
         if(heFlip){FacePlayer();}
         if(!notGo)
