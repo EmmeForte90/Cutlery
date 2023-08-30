@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
 public class Inventory : MonoBehaviour
 {
@@ -32,6 +31,10 @@ public class Inventory : MonoBehaviour
     public GameObject inventoryEquip_S;
     public GameObject inventorySkill_S;
     private readonly List<InventorySlot> slotListItem = new();
+    public GameObject RewardScreen;
+    public Image previewReward;
+    public TextMeshProUGUI QunatityR;
+    public TextMeshProUGUI NameReward;
     #endregion
     #region Singleton
     public static Inventory instance;
@@ -236,4 +239,17 @@ public void AssignWeapon(Weapon Item)
         }
     }
 #endregion
+    public void Reward(Item itemAdded, int quantityAdded)
+    {
+        StartCoroutine(RewardC());
+        previewReward.sprite = itemAdded.itemIcon;
+        QunatityR.text = quantityAdded.ToString();    
+        itemAdded.itemName = NameReward.ToString();
+    }
+    IEnumerator RewardC()
+    {            
+        RewardScreen.SetActive(true);
+        yield return new WaitForSeconds(5); 
+        RewardScreen.SetActive(false);
+    }
 }

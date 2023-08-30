@@ -124,7 +124,7 @@ public void OnQuestButtonClicked(int questId, Image previewImages, TextMeshProUG
         previewImages.sprite = questDatabase.Find(q => q.id == questId).Desicon;
         descriptions.text = questDatabase.Find(q => q.id == questId).Description;
         NameQ.text = questDatabase.Find(q => q.id == questId).questName;
-        if(QuestComplete[questId]){questI.color = Color.black; previewImages.sprite = Desicon;}
+        if(QuestComplete[questId]){questI.sprite = Desicon; previewImages.sprite = Desicon;}
     }
 }
     #endregion

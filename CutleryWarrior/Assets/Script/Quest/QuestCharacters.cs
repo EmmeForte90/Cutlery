@@ -162,7 +162,7 @@ public class QuestCharacters : MonoBehaviour
         notGo = true;
         QNameE.text = Quest.questName;
         QuestEnd.gameObject.SetActive(true); 
-        AudioManager.instance.PlaySFX(IDAudio);//AudioQuestComplete
+        AudioManager.instance.PlaySFX(9);//AudioQuestComplete
         yield return new WaitForSeconds(5f); 
         //Instantiate(Reward, RewardPoint.position, transform.rotation);
         KindItem = Reward.KindItem;
@@ -174,6 +174,7 @@ public class QuestCharacters : MonoBehaviour
         Quest.isComplete = false;
         Quest.AfterQuest = true;
         notGo = false;
+        Inventory.instance.Reward(Reward,specificQuant);
         GameManager.instance.ChInteractStop();
     }    
     IEnumerator StartQuest()
@@ -183,6 +184,8 @@ public class QuestCharacters : MonoBehaviour
             Quest.isActive = true;
             GameManager.instance.Allarm();
             AudioManager.instance.PlaySFX(IDAudio);//AudioQuestStart
+            yield return new WaitForSeconds(1f); 
+            GameManager.instance.StopAllarm();
             QuestStart.gameObject.SetActive(true); 
             QuestsManager.instance.AddQuest(Quest);
             QuestsManager.instance.ListQuest(IDQuest);

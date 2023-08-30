@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: fcbff3aa874abd144bbc95b0e1aeed07
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Babiole
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 540c6ac760034e6408e562ce4df72f19, type: 3}
+  - {fileID: 12800000, guid: 0a77e8a5b934f8940928b113e76aeb1d, type: 3}
+  - {fileID: 12800000, guid: e882d5dc3010eee4bbb62f9747242f7b, type: 3}
+  - {fileID: 12800000, guid: 66dcc29382f82fb4eb801a6c40182337, type: 3}
+  - {fileID: 12800000, guid: c8bb6ccadb59a4145878802a0944d8de, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
