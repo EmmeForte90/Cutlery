@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 public class Item : ScriptableObject
 {
     #region Header
-    public string itemName;
+    [TextArea(3, 10)] public string itemName;
     public string NameSkin;
-    public string itemDes;
+    [TextArea(3, 10)] public string itemDes;
     public int ID;
     [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-EquipFork 4-EquipKnife 5-EquipSpoon")]
     public int KindItem;

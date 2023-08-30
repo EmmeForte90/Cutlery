@@ -288,6 +288,7 @@ public void changeDialogue()
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             GameManager.instance.ChInteractStop();//false
+            
             if(moreDialogue)
             {changeD = true;}
             changeDialogue();

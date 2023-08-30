@@ -18,7 +18,7 @@ MonoBehaviour:
   Description: Gibbon need some Iron Ore to make new weapons for the Mollica's Guards,
     collect 5 Iron ore you can fine some one in the iron mine but be careful because
     it's infected by rust.
-  Bigicon: {fileID: 0}
+  Bigicon: {fileID: 21300000, guid: 1378113e74aab19429e0ad9ea21bd3cd, type: 3}
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []

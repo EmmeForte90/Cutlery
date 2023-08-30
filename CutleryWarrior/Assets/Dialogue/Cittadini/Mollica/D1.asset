@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 1
   CharacterName: Adelaide
   dialogue:
-  - Hello,, there! It's a nice day, didn't you?
+  - Hello, there! It's a nice day, didn't you?
   Startdialogue:
   - TestDialogueTestDialogueTestDialogueTestDialogueTestDialogueTestDialogue
   Middledialogue:

@@ -7,7 +7,7 @@ public class NPCDialogueWithStop : MonoBehaviour
     #region Header
     [Header("Data")]
     public Dialogues Dialogue;
-    public int IDDialogue;
+    private int IDDialogue;
     public int IDCharacter;
     private GameObject player; // Reference to the player's position
     [Header("Dialogue")]

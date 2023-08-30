@@ -30,7 +30,7 @@ public class QuestCharacters : MonoBehaviour
     public bool isInteragible;
     public bool heFlip;
     public bool FirstD = true;
-    private bool StopButton = false; // o la variabile che deve attivare la sostituzione
+    public bool StopButton = false; // o la variabile che deve attivare la sostituzione
     private bool _isInTrigger;
     private bool _isDialogueActive;
     [Header("Minimap Icons")]
@@ -76,14 +76,14 @@ public class QuestCharacters : MonoBehaviour
         {
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)
         {
-            CharacterMove.instance.Interact = true;
+            GameManager.instance.ChInteract();//True
             dialogueIndex = 0;
             StartCoroutine(ShowDialogue());
         }
         else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton && !GameManager.instance.stopInput)
         {
             NextDialogue();
-            StopButton = false;
+            //StopButton = false;
         }}
     }
     public void OnTriggerEnter(Collider collision)
@@ -116,26 +116,31 @@ public class QuestCharacters : MonoBehaviour
             }
         }
     }
-    IEnumerator ShowDialogue()
-    {    
-        Hit();
-        AudioManager.instance.PlaySFX(IDAudio);
-        _isDialogueActive = true;
-        elapsedTime = 0; // reset elapsed time
-        dialogueBox.gameObject.SetActive(true); // Show dialogue box
-        dialogueText.gameObject.SetActive(true); // Show dialogue text
-        string currentDialogue = dialogue[dialogueIndex]; // Get the current dialogue
-        dialogueText.text = ""; // Clear the dialogue text
-        for (int i = 0; i < currentDialogue.Length; i++)
+     IEnumerator ShowDialogue()
+{
+    //Talk = true;
+    AudioManager.instance.PlaySFX(IDAudio);
+    //PlayMFX(1);
+    _isDialogueActive = true;
+    elapsedTime = 0; // reset elapsed time
+    dialogueBox.gameObject.SetActive(true); // Show dialogue box
+    dialogueText.gameObject.SetActive(true); // Show dialogue text
+    string currentDialogue = dialogue[dialogueIndex]; // Get the current dialogue
+    dialogueText.text = ""; // Clear the dialogue text
+    for (int i = 0; i < currentDialogue.Length; i++)
+    {
+        dialogueText.text += currentDialogue[i]; // Add one letter at a time
+        elapsedTime += Time.deltaTime; // Update the elapsed time
+        if (elapsedTime >= dialogueDuration)
         {
-            dialogueText.text += currentDialogue[i]; // Add one letter at a time
-            elapsedTime += Time.deltaTime; // Update the elapsed time
-            if (elapsedTime >= dialogueDuration){break;}
-            yield return new WaitForSeconds(0); // Wait before showing the next letter
+            break;
         }
-        dialogueText.text = currentDialogue; // Set the dialogue text to the full current dialogue
-        StopButton = true;
+        yield return new WaitForSeconds(0.001f); // Wait before showing the next letter
     }
+            dialogueText.text = currentDialogue; // Set the dialogue text to the full current dialogue
+            StopButton = true;
+
+}
     void NextDialogue()
     {
         elapsedTime = 0; // reset elapsed time
@@ -148,7 +153,7 @@ public class QuestCharacters : MonoBehaviour
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             if(FirstD){StartCoroutine(StartQuest());}
             else if(Quest.isComplete){StartCoroutine(EndQuest());}
-            else {CharacterMove.instance.Interact = false;}
+            else {GameManager.instance.ChInteractStop();}
         }
         else{StartCoroutine(ShowDialogue());}
     }
@@ -169,9 +174,26 @@ public class QuestCharacters : MonoBehaviour
         Quest.isComplete = false;
         Quest.AfterQuest = true;
         notGo = false;
-        CharacterMove.instance.Interact = false;
+        GameManager.instance.ChInteractStop();
     }    
-
+    IEnumerator StartQuest()
+    {            
+            notGo = true;
+            QNameS.text = Quest.questName;
+            Quest.isActive = true;
+            GameManager.instance.Allarm();
+            AudioManager.instance.PlaySFX(IDAudio);//AudioQuestStart
+            QuestStart.gameObject.SetActive(true); 
+            QuestsManager.instance.AddQuest(Quest);
+            QuestsManager.instance.ListQuest(IDQuest);
+            QuestsManager.instance.QuestStart(IDQuest);
+            yield return new WaitForSeconds(5f); 
+            QuestsManager.instance.QuestActiveF(IDQuest);
+            QuestStart.gameObject.SetActive(false); 
+            GameManager.instance.ChInteractStop();
+            notGo = false;
+            FirstD = false;
+    }
     public void AddSpecificItem()
     {
         switch(KindItem)
@@ -197,24 +219,7 @@ public class QuestCharacters : MonoBehaviour
             break;
         }
     } 
-    IEnumerator StartQuest()
-{            
-        notGo = true;
-        QNameS.text = Quest.questName;
-        Quest.isActive = true;
-        GameManager.instance.Allarm();
-        AudioManager.instance.PlaySFX(IDAudio);//AudioQuestStart
-        QuestStart.gameObject.SetActive(true); 
-        QuestsManager.instance.AddQuest(Quest);
-        QuestsManager.instance.ListQuest(IDQuest);
-        QuestsManager.instance.QuestStart(IDQuest);
-        yield return new WaitForSeconds(5f); 
-        QuestsManager.instance.QuestActiveF(IDQuest);
-        QuestStart.gameObject.SetActive(false); 
-        CharacterMove.instance.Interact = false;
-        notGo = false;
-        FirstD = false;
-    }
+    
     void FacePlayer()
     {
         if (player != null)

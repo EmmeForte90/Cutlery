@@ -5,6 +5,8 @@ using UnityEditor;
 [CreateAssetMenu(fileName ="New Quest", menuName = "Quest/Create New Quest")]
 public class Quests : ScriptableObject
 {public int id;
+[Tooltip("Che tipo di Quest è? 0-Importante 1-Raccolta 2-Caccia 3-Varie")]
+public int KindQuest;
 public string CharacterName;
 [TextArea(3, 10)]
 public string questName;
@@ -13,6 +15,8 @@ public string Description;
 //public int value;
 //public Sprite icon;
 public Sprite Bigicon;
+public Sprite Desicon;
+
 [SerializeField][TextArea(3, 10)]
 public string[] Startdialogue; // array of string to store the dialogues
 [SerializeField][TextArea(3, 10)]

@@ -16,7 +16,7 @@ MonoBehaviour:
   CharacterName: 
   questName: 
   Description: 
-  Bigicon: {fileID: 0}
+  Bigicon: {fileID: 21300000, guid: 1378113e74aab19429e0ad9ea21bd3cd, type: 3}
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []

@@ -9,6 +9,8 @@ public class PickUpItem : MonoBehaviour
     public int specificQuant;
     [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-Weapom 4-Armor")]
     private int KindItem;
+    public bool IsQuest = false;
+    public Quests Quest;
     #endregion
     public void Awake(){KindItem = specificItem.KindItem;}
     public void OnTriggerEnter(Collider collision)
@@ -17,6 +19,7 @@ public class PickUpItem : MonoBehaviour
         Instantiate(VFXTake, transform.position, transform.rotation);
         AudioManager.instance.PlayUFX(5);
         AddSpecificItem();
+        if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
     }}
     void AddSpecificItem()
     {

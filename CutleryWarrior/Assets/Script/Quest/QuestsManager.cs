@@ -20,11 +20,16 @@ public class QuestsManager : MonoBehaviour
     public bool[] QuestComplete;
     private GameObject[] QuestS;
     [Header("List Quest UI")]
+    public Sprite Desicon;
     [SerializeField] public TextMeshProUGUI NameQ;
     [SerializeField] public TextMeshProUGUI DescriptionQ;
     public Image previewImages;
     public Transform QuestContent;
     public GameObject InventoryQuest;
+    public Transform QuestContent_M;
+    public Transform QuestContent_C;
+    public Transform QuestContent_R;
+    public Transform QuestContent_V;
 
     #endregion
 
@@ -79,6 +84,21 @@ public class QuestsManager : MonoBehaviour
     if (quest != null)
     {
         // Istanzia il prefab del bottone della quest nella lista UI
+        switch(quest.KindQuest)
+        {
+            case 0:
+            QuestContent =  QuestContent_M;
+            break;
+            case 1:
+            QuestContent =  QuestContent_R;
+            break; 
+            case 2:
+            QuestContent =  QuestContent_C;
+            break; 
+            case 3:
+            QuestContent =  QuestContent_V;
+            break; 
+        }
         GameObject obj = Instantiate(InventoryQuest, QuestContent);
         // Recupera il riferimento al componente del titolo della quest e del bottone
         var questT = obj.transform.Find("Title_quest").GetComponent<TextMeshProUGUI>();
@@ -87,9 +107,9 @@ public class QuestsManager : MonoBehaviour
         obj.name = "QuestButton_" + quest.id;
         // Assegna il nome della quest al componente del titolo
         questT.text = quest.questName;
-        questI.color = Color.red;
+        questI.sprite = quest.Bigicon;
         // Assegna i valori desiderati ai componenti dell'immagine di preview e della descrizione del pulsante della quest
-        previewImages.sprite = quest.Bigicon;
+        previewImages.sprite = quest.Desicon;
         DescriptionQ.text = quest.Description;
         NameQ.text = quest.questName;
         // Aggiungi un listener per il click del bottone
@@ -101,10 +121,10 @@ public void OnQuestButtonClicked(int questId, Image previewImages, TextMeshProUG
 {    
     if (questId >= 0)
     {    
-        previewImages.sprite = questDatabase.Find(q => q.id == questId).Bigicon;
+        previewImages.sprite = questDatabase.Find(q => q.id == questId).Desicon;
         descriptions.text = questDatabase.Find(q => q.id == questId).Description;
         NameQ.text = questDatabase.Find(q => q.id == questId).questName;
-        if(QuestComplete[questId]){questI.color = Color.black;}
+        if(QuestComplete[questId]){questI.color = Color.black; previewImages.sprite = Desicon;}
     }
 }
     #endregion
