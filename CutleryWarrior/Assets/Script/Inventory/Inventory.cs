@@ -35,6 +35,7 @@ public class Inventory : MonoBehaviour
     public Image previewReward;
     public TextMeshProUGUI QunatityR;
     public TextMeshProUGUI NameReward;
+    
     #endregion
     #region Singleton
     public static Inventory instance;
@@ -244,7 +245,7 @@ public void AssignWeapon(Weapon Item)
         StartCoroutine(RewardC());
         previewReward.sprite = itemAdded.itemIcon;
         QunatityR.text = quantityAdded.ToString();    
-        itemAdded.itemName = NameReward.ToString();
+        NameReward.text =  itemAdded.itemName.ToString();
     }
     IEnumerator RewardC()
     {            

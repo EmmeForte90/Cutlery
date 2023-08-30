@@ -19,6 +19,7 @@ public class PickUpItem : MonoBehaviour
         Instantiate(VFXTake, transform.position, transform.rotation);
         AudioManager.instance.PlayUFX(5);
         AddSpecificItem();
+        Inventory.instance.Reward(specificItem, specificQuant);
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
     }}
     void AddSpecificItem()

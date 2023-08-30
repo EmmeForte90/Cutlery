@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b728530c479d843803971ca11c5f55, type: 3}
   m_Name: DollQuest
   m_EditorClassIdentifier: 
-  itemName: Little Doll
+  itemName: Doll Quest
   NameSkin: 
   itemDes: 'A little lost doll, It''s possible that it belongs to someone?     '
   ID: 50

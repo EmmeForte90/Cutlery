@@ -77,6 +77,7 @@ public class QuestCharacters : MonoBehaviour
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)
         {
             GameManager.instance.ChInteract();//True
+            CameraZoom.instance.ZoomIn();
             dialogueIndex = 0;
             StartCoroutine(ShowDialogue());
         }
@@ -151,6 +152,7 @@ public class QuestCharacters : MonoBehaviour
             _isDialogueActive = false;
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+            CameraZoom.instance.ZoomOut();
             if(FirstD){StartCoroutine(StartQuest());}
             else if(Quest.isComplete){StartCoroutine(EndQuest());}
             else {GameManager.instance.ChInteractStop();}
@@ -168,13 +170,13 @@ public class QuestCharacters : MonoBehaviour
         KindItem = Reward.KindItem;
         AddSpecificItem();
         QuestEnd.gameObject.SetActive(false); 
+        Inventory.instance.Reward(Reward, specificQuant);
         yield return new WaitForSeconds(1f); 
         QuestsManager.instance.QuestCompleteF(IDQuest);
         Quest.isActive = false;
         Quest.isComplete = false;
         Quest.AfterQuest = true;
         notGo = false;
-        Inventory.instance.Reward(Reward,specificQuant);
         GameManager.instance.ChInteractStop();
     }    
     IEnumerator StartQuest()
@@ -183,8 +185,9 @@ public class QuestCharacters : MonoBehaviour
             QNameS.text = Quest.questName;
             Quest.isActive = true;
             GameManager.instance.Allarm();
-            AudioManager.instance.PlaySFX(IDAudio);//AudioQuestStart
+            AudioManager.instance.PlayUFX(7);
             yield return new WaitForSeconds(1f); 
+            AudioManager.instance.PlaySFX(10);//AudioQuestStart
             GameManager.instance.StopAllarm();
             QuestStart.gameObject.SetActive(true); 
             QuestsManager.instance.AddQuest(Quest);
@@ -225,9 +228,21 @@ public class QuestCharacters : MonoBehaviour
     
     void FacePlayer()
     {
+        switch(SwitchCharacter.instance.rotationSwitcher.CharacterID)
+        {
+            case 1:
+            player = GameObject.Find("F_Player");
+            break;
+            case 2:
+            player = GameObject.Find("K_Player");       
+            break;
+            case 3:
+            player = GameObject.Find("S_Player");
+            break;
+        }
         if (player != null)
         {
-            if (player.transform.position.x > transform.position.x){transform.localScale = new Vector3(1, 1, 1);}
+            if (player.transform.position.z > transform.position.z){transform.localScale = new Vector3(1, 1, 1);}
             else{transform.localScale = new Vector3(-1, 1, 1);}
         }
     }

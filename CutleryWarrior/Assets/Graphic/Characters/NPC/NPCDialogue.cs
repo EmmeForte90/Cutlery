@@ -128,6 +128,7 @@ public void changeDialogue()
         }}
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)
         {
+            CameraZoom.instance.ZoomIn();
             GameManager.instance.ChInteract();//True
             if(heFlip){FacePlayer();}
             dialogueIndex = 0;
@@ -288,6 +289,7 @@ public void changeDialogue()
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             GameManager.instance.ChInteractStop();//false
+            CameraZoom.instance.ZoomOut();
             
             if(moreDialogue)
             {changeD = true;}
