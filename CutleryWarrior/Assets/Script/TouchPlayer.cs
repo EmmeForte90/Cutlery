@@ -1,12 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Spine.Unity;
 using Cinemachine;
 public class TouchPlayer : MonoBehaviour
 {
     #region Header
-    public GameObject Brain;
     public string spawnPointTag = "SpawnPoint";
     private CinemachineVirtualCamera vCam;
     public bool camFollowPlayer = true;
@@ -24,6 +22,7 @@ public class TouchPlayer : MonoBehaviour
     private SwitchCharacter Switch;
     public bool takeCoo = false;
     public int IDAudio;
+    public NPCMove Mnpc;
     #endregion
     public void Start()
     {
@@ -39,7 +38,7 @@ public class TouchPlayer : MonoBehaviour
     if(Switch.isElement1Active){Player = Spoon;}
     else if(Switch.isElement2Active){Player = Fork;} 
     else if(Switch.isElement3Active){Player = Knife;} 
-    //Brain.transform.position = ENM.transform.position;
+    //
     if(!takeCoo){
     if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance)
     {savedPosition = Player.transform.position; GameManager.instance.savedPosition = savedPosition; takeCoo = true;}}
@@ -67,13 +66,15 @@ public class TouchPlayer : MonoBehaviour
 
     public void Flip()
     {
-        if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
-        else if (Player.localScale.x < 0f){transform.localScale = new Vector3(-1, 1,1);}
+        if (Player.localScale.z > 0f){transform.localScale = new Vector3(1, 1,1);}
+        else if (Player.localScale.z < 0f){transform.localScale = new Vector3(-1, 1,1);}
     }
     public void OnTriggerEnter(Collider other)
     {
     if (other.CompareTag("F_Player") || other.CompareTag("K_Player") || other.CompareTag("S_Player"))
-    {                
+    {           
+        print("Toccato");  
+        Mnpc.Behav = 2;
         AudioManager.instance.CrossFadeOUTAudio(0);
         GameManager.instance.NotChange();
         AudioManager.instance.PlayUFX(7);

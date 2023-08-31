@@ -4,21 +4,21 @@ public class NPCMove : MonoBehaviour
 {
     #region Header
     private GameObject player;
-    public GameObject ForkActive;
-	public GameObject SpoonActive;
-	public GameObject KnifeActive;
+    private GameObject ForkActive;
+	private GameObject SpoonActive;
+	private GameObject KnifeActive;
     public Transform[] waypoints; // Array di punti verso cui muoversi
-    public float moveSpeed = 5f; // Velocità di movimento del personaggio
-    public float pauseTime = 2f; // Tempo di pausa in secondi quando raggiunge un punto
+    private float moveSpeed = 5f; // Velocità di movimento del personaggio
+    private float RunSpeed = 6f; // Velocità di movimento del personaggio
+    private float pauseTime = 2f; // Tempo di pausa in secondi quando raggiunge un punto
     bool Right = true;
     private int currentWaypointIndex = 0; // Indice del punto attuale
     private bool isPaused = false; // Flag per indicare se è in pausa
     private float pauseTimer = 0f; // Timer per il conteggio della pausa
-    private int Behav = 0; // Tempo di pausa in secondi quando raggiunge un punto
+    public int Behav = 0; // Tempo di pausa in secondi quando raggiunge un punto
     public Transform Agro;
     public float agroDistance = 1f;
-    public SwitchCharacter rotationSwitcher;
-
+    private SwitchCharacter rotationSwitcher;
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string IdleAnimationName;
     [SpineAnimation][SerializeField] private string WalkAnimationName;
@@ -46,7 +46,6 @@ public class NPCMove : MonoBehaviour
     {
         PlayerTaking();
         Flip();
-
         if ((transform.position - player.transform.position).sqrMagnitude > agroDistance * agroDistance)
         {Behav = 0;} 
         else if ((transform.position - player.transform.position).sqrMagnitude < agroDistance * agroDistance)
@@ -62,15 +61,16 @@ public class NPCMove : MonoBehaviour
             case 1:
             ChasePlayer(); Run();
             break;
+            case 2:
+            PauseAtWaypoint(); Idle();
+            break;
         }
- 
     }
     private void ChasePlayer()
     {
         if (player != null)
-        {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);}
+        {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, RunSpeed * Time.deltaTime);}
     }
-
     private void PlayerTaking()
     {
         switch(rotationSwitcher.ConInt)
@@ -119,7 +119,6 @@ public class NPCMove : MonoBehaviour
     }
     public void EnableScript(){enabled = true;}
     public void DisableScript(){enabled = false;}
-    
     #if(UNITY_EDITOR)
     #region Gizmos
         private void OnDrawGizmos()
