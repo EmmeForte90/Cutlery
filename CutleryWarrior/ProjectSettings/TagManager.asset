@@ -17,6 +17,7 @@ TagManager:
   - K_Coll
   - S_Coll
   - Manager
+  - Minimap
   layers:
   - Default
   - TransparentFX

@@ -5749,6 +5749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 325728834}
   - component: {fileID: 325728835}
+  - component: {fileID: 325728836}
   m_Layer: 0
   m_Name: Icon_At
   m_TagString: Untagged
@@ -5823,6 +5824,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &325728836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325728833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596d9e9ade0c20744827b1b96c690b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinimapCam: {fileID: 0}
+  MinimapSize: 10
 --- !u!1 &352936899
 GameObject:
   m_ObjectHideFlags: 0
@@ -8490,6 +8505,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382371179416897224, guid: 3673356f01ac3794a90a53b1890f187a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Minimap
       objectReference: {fileID: 0}
     - target: {fileID: 3843781112192536227, guid: 3673356f01ac3794a90a53b1890f187a,
         type: 3}
