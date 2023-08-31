@@ -6,41 +6,23 @@ using Cinemachine;
 public class TouchPlayer : MonoBehaviour
 {
     #region Header
+    public GameObject Brain;
     public string spawnPointTag = "SpawnPoint";
     private CinemachineVirtualCamera vCam;
     public bool camFollowPlayer = true;
     private SceneEvent sceneEvent;
     public string sceneName;
     public float stoppingDistance = 1f;
+    //public float agroDistance = 1f;
     public Vector3 savedPosition;
     private Transform Player;
     private Transform Fork;
     private Transform Spoon;
     private Transform Knife;
+    public Transform ENM;
+    //public Transform Agro;
     private SwitchCharacter Switch;
     public bool takeCoo = false;
-
-    [Header("Move")]
-    [Tooltip("Il personaggio si muove?")]
-    public bool IsMove = false;
-    bool movingB = false;
-    public Transform[] waypoints; // Array di punti verso cui muoversi
-    public float moveSpeed = 5f; // Velocità di movimento del personaggio
-    public float pauseTime = 2f; // Tempo di pausa in secondi quando raggiunge un punto
-    bool Right = true;
-    private int currentWaypointIndex = 0; // Indice del punto attuale
-    private bool isPaused = false; // Flag per indicare se è in pausa
-    private float pauseTimer = 0f; // Timer per il conteggio della pausa    
-    
-    [Header("Animations")]
-    [SpineAnimation][SerializeField] private string TalnkAnimationName;
-    [SpineAnimation][SerializeField] private string IdleAnimationName;
-    [SpineAnimation][SerializeField]  string WalkAnimationName;
-    private string currentAnimationName;
-    public SkeletonAnimation _skeletonAnimation;
-    public Spine.AnimationState _spineAnimationState;
-    public Spine.Skeleton _skeleton;
-    Spine.EventData eventData;
     public int IDAudio;
     #endregion
     public void Start()
@@ -51,22 +33,13 @@ public class TouchPlayer : MonoBehaviour
     Fork = GameObject.Find("F_Player").transform;
     Spoon = GameObject.Find("S_Player").transform;
     Knife = GameObject.Find("K_Player").transform;
-    _skeletonAnimation = GetComponent<SkeletonAnimation>();
-    if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");}        
-    _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
-    _spineAnimationState = _skeletonAnimation.AnimationState;
-    _skeleton = _skeletonAnimation.skeleton;
-    if(IsMove)
-        {movingB = true;}
-        if (waypoints.Length > 0 && IsMove)
-        {transform.position = waypoints[0].position;}
-        // Posiziona il personaggio al primo waypoint   
     }
     public void Update()
     {
     if(Switch.isElement1Active){Player = Spoon;}
     else if(Switch.isElement2Active){Player = Fork;} 
     else if(Switch.isElement3Active){Player = Knife;} 
+    //Brain.transform.position = ENM.transform.position;
     if(!takeCoo){
     if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance)
     {savedPosition = Player.transform.position; GameManager.instance.savedPosition = savedPosition; takeCoo = true;}}
@@ -92,36 +65,6 @@ public class TouchPlayer : MonoBehaviour
     sceneEvent.InvokeOnSceneChange();
     }
 
-    public void MoveToWaypoint()
-{
-    if (waypoints.Length > 1 && currentWaypointIndex < waypoints.Length - 1)
-    {
-        Vector3 targetPosition = waypoints[currentWaypointIndex + 1].position;
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-        if (transform.position == targetPosition)
-        {
-            // Raggiunto il punto, attiva la pausa
-            isPaused = true;
-            pauseTimer = 0f;
-        }
-    }
-    else if (currentWaypointIndex == waypoints.Length - 1)
-    {
-        // Raggiunto l'ultimo punto, ritorna al punto iniziale
-        Vector3 initialPosition = waypoints[0].position;
-        transform.position = Vector3.MoveTowards(transform.position, initialPosition, moveSpeed * Time.deltaTime);
-
-        if (transform.position == initialPosition)
-        {
-            // Raggiunto il punto iniziale, ricomincia il percorso
-            isPaused = true;
-            pauseTimer = 0f;
-            currentWaypointIndex = 0;
-            
-        }
-    }
-}
     public void Flip()
     {
         if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
@@ -142,13 +85,13 @@ public class TouchPlayer : MonoBehaviour
     }}
     #if(UNITY_EDITOR)
     #region Gizmos
-    private void OnDrawGizmos()
-        {
+        private void OnDrawGizmos()
+    {
         Gizmos.color = Color.red;
-        //Gizmos.DrawLine(transform.position, transform.position + new Vector3(transform.localScale.x, 0, 0) * wallDistance);
+        Gizmos.DrawWireSphere(ENM.transform.position, stoppingDistance);
         //Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, stoppingDistance);
-        }
+        //Gizmos.DrawWireSphere(Agro.position, agroDistance);
+    }
     #endregion
     #endif
 }

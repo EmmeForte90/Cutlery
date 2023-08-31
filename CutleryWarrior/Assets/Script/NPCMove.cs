@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
-using Spine;
 public class NPCMove : MonoBehaviour
 {
     #region Header
+    private GameObject player;
+    public GameObject ForkActive;
+	public GameObject SpoonActive;
+	public GameObject KnifeActive;
     public Transform[] waypoints; // Array di punti verso cui muoversi
     public float moveSpeed = 5f; // Velocità di movimento del personaggio
     public float pauseTime = 2f; // Tempo di pausa in secondi quando raggiunge un punto
@@ -13,9 +14,15 @@ public class NPCMove : MonoBehaviour
     private int currentWaypointIndex = 0; // Indice del punto attuale
     private bool isPaused = false; // Flag per indicare se è in pausa
     private float pauseTimer = 0f; // Timer per il conteggio della pausa
+    private int Behav = 0; // Tempo di pausa in secondi quando raggiunge un punto
+    public Transform Agro;
+    public float agroDistance = 1f;
+    public SwitchCharacter rotationSwitcher;
+
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string IdleAnimationName;
     [SpineAnimation][SerializeField] private string WalkAnimationName;
+    [SpineAnimation][SerializeField] private string RunAnimationName;
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
@@ -25,6 +32,10 @@ public class NPCMove : MonoBehaviour
     public void Start()
     {
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
+        rotationSwitcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
+        ForkActive = GameObject.Find("F_Player");
+        SpoonActive = GameObject.Find("S_Player");
+        KnifeActive = GameObject.Find("K_Player");
         if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");}        
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
@@ -33,16 +44,46 @@ public class NPCMove : MonoBehaviour
     }
     public void Update()
     {
+        PlayerTaking();
         Flip();
-        if (!isPaused)
+
+        if ((transform.position - player.transform.position).sqrMagnitude > agroDistance * agroDistance)
+        {Behav = 0;} 
+        else if ((transform.position - player.transform.position).sqrMagnitude < agroDistance * agroDistance)
+        {Behav = 1;}
+        switch(Behav)
         {
-            MoveToWaypoint();
-            Walk();
+            case 0:
+            if (!isPaused)
+            {MoveToWaypoint(); Walk();}
+            else
+            {PauseAtWaypoint(); Idle();}
+            break;
+            case 1:
+            ChasePlayer(); Run();
+            break;
         }
-        else
+ 
+    }
+    private void ChasePlayer()
+    {
+        if (player != null)
+        {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);}
+    }
+
+    private void PlayerTaking()
+    {
+        switch(rotationSwitcher.ConInt)
         {
-            PauseAtWaypoint();
-            Idle();
+            case 1:
+			player = ForkActive;
+            break;
+            case 2:
+			player = KnifeActive;
+            break;
+            case 3:
+			player = SpoonActive;
+            break;
         }
     }
     private void MoveToWaypoint()
@@ -61,6 +102,11 @@ public class NPCMove : MonoBehaviour
         if (transform.position == initialPosition)
         {isPaused = true; pauseTimer = 0f; currentWaypointIndex = 0;}
     }}
+    private void PauseAtWaypoint()
+    {
+        if (pauseTimer < pauseTime){pauseTimer += Time.deltaTime;}
+        else{isPaused = false; currentWaypointIndex++;}
+    }
     private void Flip()
     {
         if (Right && transform.localScale.x < 0f || !Right && transform.localScale.x > 0f)
@@ -73,12 +119,16 @@ public class NPCMove : MonoBehaviour
     }
     public void EnableScript(){enabled = true;}
     public void DisableScript(){enabled = false;}
-    private void PauseAtWaypoint()
-    {
-        if (pauseTimer < pauseTime){pauseTimer += Time.deltaTime;}
-        else{isPaused = false; currentWaypointIndex++;}
-    }
     
+    #if(UNITY_EDITOR)
+    #region Gizmos
+        private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(Agro.position, agroDistance);
+    }
+    #endregion
+    #endif
     #region Animazione
     public void Walk()
     {
@@ -86,6 +136,14 @@ public class NPCMove : MonoBehaviour
         {
         _spineAnimationState.SetAnimation(0, WalkAnimationName, true);
         currentAnimationName = WalkAnimationName;
+        }
+    }
+    public void Run()
+    {
+    if (currentAnimationName != RunAnimationName)
+        {
+        _spineAnimationState.SetAnimation(0, RunAnimationName, true);
+        currentAnimationName = RunAnimationName;
         }
     }
     public void Idle()

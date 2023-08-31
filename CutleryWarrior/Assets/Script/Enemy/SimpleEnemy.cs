@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
-using Spine;
 using UnityEngine.UI;
-using TMPro;
 public class SimpleEnemy : MonoBehaviour
 {
     public int ID;
