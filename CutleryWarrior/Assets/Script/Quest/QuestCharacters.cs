@@ -66,11 +66,14 @@ public class QuestCharacters : MonoBehaviour
     }
     public void Update()
     {
-        if (FirstD){dialogue = Quest.Startdialogue; QuestAt.SetActive(true); QuestCo.SetActive(false); Esclama.SetActive(true);} //Start
+        if (FirstD){dialogue = Quest.Startdialogue; Esclama.SetActive(true);} //Start
         else if (Quest.isActive){dialogue = Quest.Middledialogue; Esclama.SetActive(false);} //Middle
         else if (Quest.isComplete){dialogue = Quest.Endingdialogue; Esclama.SetActive(true);} //EndD
-        else if (Quest.AfterQuest){dialogue = Quest.Afterdialogue; QuestAt.SetActive(false); QuestCo.SetActive(true); Esclama.SetActive(false);} //After
+        else if (Quest.AfterQuest){dialogue = Quest.Afterdialogue; Esclama.SetActive(false);} //After
         Idle();
+        if (Quest.isActive){
+        if(QuestsManager.instance.QuestSegnal[Quest.id]){QuestAt.SetActive(true); QuestCo.SetActive(false);}
+        else if(!QuestsManager.instance.QuestSegnal[Quest.id]){QuestAt.SetActive(false); QuestCo.SetActive(true);}}
         if(heFlip){FacePlayer();}
         if(!notGo)
         {

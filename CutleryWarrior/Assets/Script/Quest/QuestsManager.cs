@@ -18,7 +18,9 @@ public class QuestsManager : MonoBehaviour
     public bool[] quest;
     public bool[] QuestActive;
     public bool[] QuestComplete;
-    private GameObject[] QuestS;
+    public bool[] QuestSegnal;
+
+    //private GameObject[] QuestS;
     [Header("List Quest UI")]
     public Sprite Desicon;
     [SerializeField] public TextMeshProUGUI NameQ;
@@ -124,6 +126,9 @@ public void OnQuestButtonClicked(int questId, Image previewImages, TextMeshProUG
         previewImages.sprite = questDatabase.Find(q => q.id == questId).Desicon;
         descriptions.text = questDatabase.Find(q => q.id == questId).Description;
         NameQ.text = questDatabase.Find(q => q.id == questId).questName;
+        AudioManager.instance.PlayUFX(2);
+        if(QuestSegnal[questId]){QuestSegnal[questId] = false;}
+        else if(!QuestSegnal[questId]){QuestSegnal[questId] = true;}
         if(QuestComplete[questId]){questI.sprite = Desicon; previewImages.sprite = Desicon;}
     }
 }
