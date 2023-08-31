@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 using Spine.Unity;
-using UnityEngine.Audio;
-
 public class NPCDialogue : MonoBehaviour
 {
     public Dialogues DManager;

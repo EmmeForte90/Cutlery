@@ -2,7 +2,7 @@ using UnityEngine;
 public class StayInside : MonoBehaviour
 {
     private Transform MinimapCam;
-	private float MinimapSize = 8.5f;
+	private float MinimapSize = 17f;
 	Vector3 TempV3;
     public  void Awake() {MinimapCam = GameObject.FindGameObjectWithTag("Minimap").transform;}
 	public void Update () {

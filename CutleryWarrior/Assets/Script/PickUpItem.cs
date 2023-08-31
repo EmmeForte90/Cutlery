@@ -5,6 +5,7 @@ public class PickUpItem : MonoBehaviour
 {
     #region Header
     public Item specificItem;
+    public GameObject Icon;
     public GameObject VFXTake;
     public int specificQuant;
     [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-Weapom 4-Armor")]
@@ -13,6 +14,13 @@ public class PickUpItem : MonoBehaviour
     public Quests Quest;
     #endregion
     public void Awake(){KindItem = specificItem.KindItem;}
+    public void Update()
+    {
+        if(IsQuest){
+        if(QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(true);} 
+        else if(!QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(false);}
+        }
+    }
     public void OnTriggerEnter(Collider collision)
     {if (collision.gameObject.CompareTag("F_Player") || collision.gameObject.CompareTag("S_Player") || collision.gameObject.CompareTag("K_Player"))
     {

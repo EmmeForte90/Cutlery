@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.Audio;
+using Spine.Unity;
 using Cinemachine;
 public class TouchPlayer : MonoBehaviour
 {
@@ -21,6 +19,29 @@ public class TouchPlayer : MonoBehaviour
     private Transform Knife;
     private SwitchCharacter Switch;
     public bool takeCoo = false;
+
+    [Header("Move")]
+    [Tooltip("Il personaggio si muove?")]
+    public bool IsMove = false;
+    bool movingB = false;
+    public Transform[] waypoints; // Array di punti verso cui muoversi
+    public float moveSpeed = 5f; // Velocità di movimento del personaggio
+    public float pauseTime = 2f; // Tempo di pausa in secondi quando raggiunge un punto
+    bool Right = true;
+    private int currentWaypointIndex = 0; // Indice del punto attuale
+    private bool isPaused = false; // Flag per indicare se è in pausa
+    private float pauseTimer = 0f; // Timer per il conteggio della pausa    
+    
+    [Header("Animations")]
+    [SpineAnimation][SerializeField] private string TalnkAnimationName;
+    [SpineAnimation][SerializeField] private string IdleAnimationName;
+    [SpineAnimation][SerializeField]  string WalkAnimationName;
+    private string currentAnimationName;
+    public SkeletonAnimation _skeletonAnimation;
+    public Spine.AnimationState _spineAnimationState;
+    public Spine.Skeleton _skeleton;
+    Spine.EventData eventData;
+    public int IDAudio;
     #endregion
     public void Start()
     {
@@ -30,6 +51,16 @@ public class TouchPlayer : MonoBehaviour
     Fork = GameObject.Find("F_Player").transform;
     Spoon = GameObject.Find("S_Player").transform;
     Knife = GameObject.Find("K_Player").transform;
+    _skeletonAnimation = GetComponent<SkeletonAnimation>();
+    if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");}        
+    _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
+    _spineAnimationState = _skeletonAnimation.AnimationState;
+    _skeleton = _skeletonAnimation.skeleton;
+    if(IsMove)
+        {movingB = true;}
+        if (waypoints.Length > 0 && IsMove)
+        {transform.position = waypoints[0].position;}
+        // Posiziona il personaggio al primo waypoint   
     }
     public void Update()
     {
@@ -60,6 +91,37 @@ public class TouchPlayer : MonoBehaviour
     GameManager.instance.Posebattle();
     sceneEvent.InvokeOnSceneChange();
     }
+
+    public void MoveToWaypoint()
+{
+    if (waypoints.Length > 1 && currentWaypointIndex < waypoints.Length - 1)
+    {
+        Vector3 targetPosition = waypoints[currentWaypointIndex + 1].position;
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+        if (transform.position == targetPosition)
+        {
+            // Raggiunto il punto, attiva la pausa
+            isPaused = true;
+            pauseTimer = 0f;
+        }
+    }
+    else if (currentWaypointIndex == waypoints.Length - 1)
+    {
+        // Raggiunto l'ultimo punto, ritorna al punto iniziale
+        Vector3 initialPosition = waypoints[0].position;
+        transform.position = Vector3.MoveTowards(transform.position, initialPosition, moveSpeed * Time.deltaTime);
+
+        if (transform.position == initialPosition)
+        {
+            // Raggiunto il punto iniziale, ricomincia il percorso
+            isPaused = true;
+            pauseTimer = 0f;
+            currentWaypointIndex = 0;
+            
+        }
+    }
+}
     public void Flip()
     {
         if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
