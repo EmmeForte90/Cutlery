@@ -34,6 +34,8 @@ public class CharacterMove : MonoBehaviour
     private int comboCount = 0;
     private bool canAttack = true;
     public float comboCooldown = 0.3f; // Tempo di cooldown tra le combo in secondi
+    public float dodgeCooldown = 0.4f;
+    private bool canDodge = true;
     public bool warning = false;
     private float hor;
     private bool Right = true;    
@@ -152,12 +154,8 @@ public void Awake()
         MoveB();
     //DODGE
         // Rileva l'input del tasto spazio
-        if (Input.GetButtonDown("Fire2") && Time.time - DodgeTime > DodgeSTimer)
-        {
-            Dodge();
-            //DodgeFAnm();      
-            DodgeTime = Time.time; // Aggiorna l'ultimo momento di attacco
-        }
+        if (Input.GetMouseButtonDown(1) && canDodge)
+        {DodgeF();}
     
     //Attack
         if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.F_curMP > 20)
@@ -169,10 +167,17 @@ public void Awake()
                 Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
                 PlayerStats.instance.F_curMP -= PlayerStats.instance.F_CostMP;  
                 //lastAttackTime = Time.time;
-            }else {AudioManager.instance.PlayUFX(10);}
-
-            
+            }else {AudioManager.instance.PlayUFX(10);}     
     }
+    private void DodgeF()
+    {
+        Vector3 DodgeDirection = transform.position;
+        Anm.PlayAnimation(DodgeFAnimationName);
+        DodgeController.ApplyDodge(DodgeDirection);
+        canDodge = false;
+        StartCoroutine(DodgeCooldown());
+    }
+    
     private void HandleComboAttackF()
     {
         comboCount = (comboCount % 2) + 1;
@@ -186,17 +191,25 @@ public void Awake()
     {
         MoveB();
         //DODGE
-        if (Input.GetMouseButtonDown(1) && Time.time - DodgeTime > DodgeSTimer)
-        {
-            Dodge();
-            DodgeTime = Time.time; // Aggiorna l'ultimo momento di attacco
-        }
-    
+        if (Input.GetMouseButtonDown(1) && canDodge)
+        {DodgeK();}
+        
     //Attack
         if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.K_curMP > 20)
         {HandleComboAttackK(); PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;} 
         else {AudioManager.instance.PlayUFX(10);}
     }
+    
+
+    private void DodgeK()
+    {
+        Vector3 DodgeDirection = transform.position;
+        Anm.PlayAnimation(DodgeFAnimationName);
+        DodgeController.ApplyDodge(DodgeDirection);
+        canDodge = false;
+        StartCoroutine(DodgeCooldown());
+    }
+
     
     private void HandleComboAttackK()
     {
@@ -242,6 +255,11 @@ public void Awake()
     {
         yield return new WaitForSeconds(comboCooldown);
         canAttack = true;
+    }
+    private IEnumerator DodgeCooldown()
+    {
+        yield return new WaitForSeconds(dodgeCooldown);
+        canDodge = true;
     }
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
@@ -326,10 +344,5 @@ public void Awake()
     public void OnCollisionExit(Collision collision)
     {if (collision.gameObject.CompareTag("Collider")){Run = 5;}
     if (collision.gameObject.CompareTag("Question")){Attention = false;}}
-    private void Dodge()
-    {
-        Vector3 DodgeDirection = transform.position;
-        Anm.PlayAnimation(DodgeFAnimationName);
-        DodgeController.ApplyDodge(DodgeDirection);
-    }
+    
 }

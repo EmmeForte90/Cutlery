@@ -13,7 +13,7 @@ public class NPCMove : MonoBehaviour
     private float pauseTime = 2f; // Tempo di pausa in secondi quando raggiunge un punto
     bool Right = true;
     private int currentWaypointIndex = 0; // Indice del punto attuale
-    private bool isPaused = false; // Flag per indicare se è in pausa
+    public bool isPaused = false; // Flag per indicare se è in pausa
     private float pauseTimer = 0f; // Timer per il conteggio della pausa
     public int Behav = 0; // Tempo di pausa in secondi quando raggiunge un punto
     public Transform Agro;
@@ -60,9 +60,6 @@ public class NPCMove : MonoBehaviour
             case 1:
             ChasePlayer(); Run(); FacePlayer();
             break;
-            case 2:
-            PauseAtWaypoint(); Idle();
-            break;
         }
     }
     private void ChasePlayer()
@@ -108,11 +105,11 @@ public class NPCMove : MonoBehaviour
     }
     private void Flip()
     {
-        if (Right && transform.localScale.x < 0f || !Right && transform.localScale.x > 0f)
+        if (Right && transform.localScale.z < 0f || !Right && transform.localScale.z > 0f)
         {
             Right = !Right;
             Vector3 localScale = transform.localScale;
-            localScale.x *= 1f;
+            localScale.z *= -1f;
             transform.localScale = localScale;
         }
     }
@@ -132,8 +129,8 @@ public class NPCMove : MonoBehaviour
         }
         if (player != null)
         {
-            if (player.transform.position.z > transform.position.z){transform.localScale = new Vector3(1, 1, 1);}
-            else{transform.localScale = new Vector3(-1, 1, 1);}
+            if (player.transform.position.z > transform.position.z){transform.localScale = new Vector3(-1, 1, 1);}
+            else{transform.localScale = new Vector3(1, 1, 1);}
         }
     }
     public void EnableScript(){enabled = true;}

@@ -520,6 +520,15 @@ public class GameManager : MonoBehaviour
             Manager_F.SwitchScriptsActor(); Manager_K.SwitchScriptsActor(); Manager_S.SwitchScriptsPlayer(); 
             break;
         }
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_F.Idle();ch_K.Idle();ch_S.Idle();
+        ch_F.Stop();ch_K.Stop();ch_S.Stop();
+        ch_FAc.Idle();ch_KAc.Idle();ch_SAc.Idle();
     }
     public void Allarm()
     {

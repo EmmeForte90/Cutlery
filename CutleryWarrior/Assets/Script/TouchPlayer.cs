@@ -7,9 +7,9 @@ public class TouchPlayer : MonoBehaviour
     #region Header
     public int IdENM;
     public GameObject This;
-    public string spawnPointTag = "SpawnPoint";
-    private CinemachineVirtualCamera vCam;
-    public bool camFollowPlayer = true;
+    //public string spawnPointTag = "SpawnPoint";
+    //private CinemachineVirtualCamera vCam;
+    //public bool camFollowPlayer = true;
     private SceneEvent sceneEvent;
     public string sceneName;
     public float stoppingDistance = 1f;
@@ -21,8 +21,8 @@ public class TouchPlayer : MonoBehaviour
     public Transform ENM;
     private SwitchCharacter Switch;
     public bool takeCoo = false;
-    public int IDAudio;
-    //public NPCMove Mnpc;
+    //public int IDAudio;
+    public NPCMove Mnpc;
     #endregion
     public void Start()
     {
@@ -79,7 +79,7 @@ public class TouchPlayer : MonoBehaviour
     {Touch();}
     }
     public void Touch()
-    {   //Mnpc.Behav = 2;
+    {   Mnpc.Behav = 0; Mnpc.isPaused = true;
         AudioManager.instance.CrossFadeOUTAudio(0);
         GameManager.instance.IdENM = IdENM;
         GameManager.instance.NotChange();

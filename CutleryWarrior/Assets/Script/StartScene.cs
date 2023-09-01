@@ -47,7 +47,7 @@ public class StartScene : MonoBehaviour
     PlayerStats.instance.DeactivateENM();
     Inventory.instance.DeactivateItem();
     Switcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
-    Switcher.inizial();
+    Switcher.TakeCharacters();
     StartCoroutine(BoxDel());
     }}
     public void Spawn(int ID)

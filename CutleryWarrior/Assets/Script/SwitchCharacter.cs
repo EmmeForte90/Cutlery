@@ -30,18 +30,12 @@ public class SwitchCharacter : MonoBehaviour
     #endregion
     public void Update()
     {if(!GameManager.instance.notChange){if(Input.GetKeyDown(KeyCode.Space)){StartCoroutine(CoordinateActor());}}}
-    public void Start(){inizial();}
+    public void Start(){TakeCharacters();}
     public void Awake(){if (instance == null){instance = this;} ConInt = 1;}
     public void Take(){StartCoroutine(CoordinateActor());}
 
     #region ChangeCharacter
-    public void inizial()
-    {
-            player = GameObject.FindGameObjectWithTag("Player");  
-            TakeCharacters();
-            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-            vCam.Follow = ForkActive.transform;
-    }
+    
     public void Flip()
     {
         if (ForkActive.transform.localScale.x > 0f)
@@ -64,17 +58,22 @@ public class SwitchCharacter : MonoBehaviour
         ForkActive = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
         SpoonActive = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
         KnifeActive = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();
+        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+        //ottieni il riferimento alla virtual camera di Cinemachine
         //
         switch(rotationSwitcher.CharacterID)
         {
             case 1:
             ForkActive.SwitchScriptsPlayer(); KnifeActive.SwitchScriptsActor(); SpoonActive.SwitchScriptsActor(); ConInt = 1;
+            vCam.Follow = ForkActive.transform;
             break;
             case 2:
             ForkActive.SwitchScriptsActor(); KnifeActive.SwitchScriptsPlayer(); SpoonActive.SwitchScriptsActor(); ConInt = 2;
+            vCam.Follow = KnifeActive.transform;
             break;
             case 3:
             ForkActive.SwitchScriptsActor(); KnifeActive.SwitchScriptsActor(); SpoonActive.SwitchScriptsPlayer(); ConInt = 3;
+            vCam.Follow = SpoonActive.transform;
             break;
         }
     }
