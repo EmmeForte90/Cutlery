@@ -113,6 +113,7 @@ public void Awake()
         break;
         ////////////////////////////////////////
         case 1: 
+        if(Run >= 5){ Run = 3;}
         if(fork && !knife && !spoon) {ForkB();} //Se è forchetta
         else if(!fork && knife && !spoon) {KnifeB();} //Se è Coltello
         else if(!fork && !knife && spoon) {SpoonB();} //Se è Cucchiaio
@@ -172,7 +173,8 @@ public void Awake()
     private void DodgeF()
     {
         Vector3 DodgeDirection = transform.position;
-        Anm.PlayAnimation(DodgeFAnimationName);
+        //Anm.PlayAnimation(DodgeFAnimationName);
+        PlayComboAnimation("Battle/dodge_front");
         DodgeController.ApplyDodge(DodgeDirection);
         canDodge = false;
         StartCoroutine(DodgeCooldown());
@@ -204,7 +206,8 @@ public void Awake()
     private void DodgeK()
     {
         Vector3 DodgeDirection = transform.position;
-        Anm.PlayAnimation(DodgeFAnimationName);
+        //Anm.PlayAnimation(DodgeFAnimationName);
+        PlayComboAnimation("Battle/dodge_front");
         DodgeController.ApplyDodge(DodgeDirection);
         canDodge = false;
         StartCoroutine(DodgeCooldown());
@@ -259,6 +262,7 @@ public void Awake()
     private IEnumerator DodgeCooldown()
     {
         yield return new WaitForSeconds(dodgeCooldown);
+        PlayComboAnimation("Battle/walk_battle");
         canDodge = true;
     }
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
