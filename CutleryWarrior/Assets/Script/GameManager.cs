@@ -173,36 +173,39 @@ public class GameManager : MonoBehaviour
         BarStat();
         TakeCharacter();
         moneyTextM.text = money.ToString(); 
-    if(!battle || !Interact){
+    if(!battle){
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();
             switch (rotationSwitcher.CharacterID)
     {
     case 1:
+    if(!notChange){
         ch_F.Stop();
         ch_F.Idle();
         stopInput = true;
         ch_F.inputCTR = true;
-        Pause.gameObject.SetActive(true);
+        Pause.gameObject.SetActive(true);}
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.PlayUFX(1);     
     break;
     case 2:
+    if(!notChange){
         ch_K.Stop();
         ch_K.Idle();
         stopInput = true;
         ch_K.inputCTR = true;
-        Pause.gameObject.SetActive(true);
+        Pause.gameObject.SetActive(true);}
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.PlayUFX(1);  
     break;
     case 3:
+        if(!notChange){
         ch_S.Stop();
         ch_S.Idle();
         stopInput = true;
         ch_S.inputCTR = true;
-        Pause.gameObject.SetActive(true);
+        Pause.gameObject.SetActive(true);}
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.PlayUFX(1);   
     break;
@@ -234,6 +237,7 @@ public class GameManager : MonoBehaviour
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();
+            Posebattle();
             notChange = true;
             DuelManager.instance.inputCTR = true;
             switch (rotationSwitcher.CharacterID)
@@ -242,7 +246,6 @@ public class GameManager : MonoBehaviour
         ch_F.Stop();
         stopInput = true;
         ch_F.inputCTR = true;
-        LittleM.gameObject.SetActive(true);
         LittleM.transform.position = MP_F.transform.position;
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.PlayUFX(1);     
@@ -451,8 +454,8 @@ public class GameManager : MonoBehaviour
         ch_F.isRun = false; ch_K.isRun = false; ch_S.isRun = false;
         ch_F.Idle();ch_K.Idle();ch_S.Idle();ch_F.Stop();ch_K.Stop();ch_S.Stop();
     }   
-    public void ChInteract(){ch_F.Interact = true; ch_K.Interact = true; ch_S.Interact = true;}  
-    public void ChInteractStop(){ch_F.Interact = false; ch_K.Interact = false; ch_S.Interact = false;}  
+    public void ChInteract(){ch_F.Interact = true; ch_K.Interact = true; ch_S.Interact = true; Interact = true;}  
+    public void ChInteractStop(){ch_F.Interact = false; ch_K.Interact = false; ch_S.Interact = false; Interact = false;}  
     public void ChCanM()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();

@@ -126,6 +126,7 @@ public void changeDialogue()
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)
         {
             CameraZoom.instance.ZoomIn();
+            GameManager.instance.notChange = true;
             GameManager.instance.ChInteract();//True
             if(heFlip){FacePlayer();}
             dialogueIndex = 0;
@@ -205,9 +206,15 @@ public void changeDialogue()
     }
 
     private void OnTriggerEnter(Collider collision)
+    {if(collision.CompareTag("F_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    {Touch();}
+    else if (collision.CompareTag("K_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
+    {Touch();}
+    else if (collision.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    {Touch();}}
+        
+    private void Touch()
     {
-        if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
-        {
             movingB = false;            
             button.gameObject.SetActive(true); // Initially hide the dialogue text
             _isInTrigger = true;
@@ -216,8 +223,8 @@ public void changeDialogue()
                  dialogueIndex = 0; // Reset the dialogue index to start from the beginning
                 StartCoroutine(ShowDialogue());
             }
-        }
     }
+    
 
     private void OnTriggerExit(Collider collision)
     {
@@ -235,14 +242,9 @@ public void changeDialogue()
                 _isDialogueActive = false;
                 dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
                 dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-                //StopMFX(1);
-
-            }
+            }GameManager.instance.notChange = false;
         }
     }
-
- 
-
 
     IEnumerator ShowDialogue()
 {
@@ -287,7 +289,8 @@ public void changeDialogue()
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             GameManager.instance.ChInteractStop();//false
             CameraZoom.instance.ZoomOut();
-            
+            GameManager.instance.notChange = false;
+             GameManager.instance.ChCanM();
             if(moreDialogue)
             {changeD = true;}
             changeDialogue();

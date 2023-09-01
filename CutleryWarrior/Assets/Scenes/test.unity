@@ -105701,11 +105701,48 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 150346728, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 210713506, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 504514615, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 605275090, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 704450986, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -3792435271152898577, guid: 3673356f01ac3794a90a53b1890f187a,
         type: 3}
+    - target: {fileID: 889467090, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5266283376666001105, guid: d8bb8b8c5a03fef46ac5c9466cd4ccb3,
+        type: 2}
+    - target: {fileID: 889467090, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1094518217, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189514225, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1468533104, guid: 3673356f01ac3794a90a53b1890f187a, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 730982342757777797, guid: 3673356f01ac3794a90a53b1890f187a,
         type: 3}
       propertyPath: m_Mesh
@@ -135802,6 +135839,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Nemico_Simple
+      objectReference: {fileID: 0}
+    - target: {fileID: 364748374623600918, guid: 50980c97f063e9c4c9a584004d091dce,
+        type: 3}
+      propertyPath: sceneName
+      value: TestBattle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50980c97f063e9c4c9a584004d091dce, type: 3}

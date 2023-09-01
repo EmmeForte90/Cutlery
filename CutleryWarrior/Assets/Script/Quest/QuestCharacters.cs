@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine;
 using TMPro;
@@ -80,6 +82,7 @@ public class QuestCharacters : MonoBehaviour
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)
         {
             GameManager.instance.ChInteract();//True
+            GameManager.instance.notChange = true;
             CameraZoom.instance.ZoomIn();
             dialogueIndex = 0;
             StartCoroutine(ShowDialogue());
@@ -90,19 +93,28 @@ public class QuestCharacters : MonoBehaviour
             //StopButton = false;
         }}
     }
-    public void OnTriggerEnter(Collider collision)
-{
-    if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
+    
+    private void OnTriggerEnter(Collider collision)
+    {if(collision.CompareTag("F_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    {Touch();}
+    else if (collision.CompareTag("K_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
+    {Touch();}
+    else if (collision.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    {Touch();}}
+        
+    private void Touch()
     {
-        button.gameObject.SetActive(true);
-        _isInTrigger = true;
-        if (!isInteragible)
-        {
-            dialogueIndex = 0; // Reset the dialogue index to start from the beginning
-            StartCoroutine(ShowDialogue());
-        }
+            button.gameObject.SetActive(true); // Initially hide the dialogue text
+            _isInTrigger = true;
+            if (!isInteragible)
+            {
+                 dialogueIndex = 0; // Reset the dialogue index to start from the beginning
+                StartCoroutine(ShowDialogue());
+            }
     }
-}
+
+
+
     public void OnTriggerExit(Collider collision)
     {
         if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
@@ -118,6 +130,7 @@ public class QuestCharacters : MonoBehaviour
                 dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
                 dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             }
+            GameManager.instance.notChange = false;
         }
     }
      IEnumerator ShowDialogue()
@@ -156,6 +169,8 @@ public class QuestCharacters : MonoBehaviour
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             CameraZoom.instance.ZoomOut();
+            GameManager.instance.notChange = false;
+             GameManager.instance.ChCanM();
             if(FirstD){StartCoroutine(StartQuest());}
             else if(Quest.isComplete){StartCoroutine(EndQuest());}
             else {GameManager.instance.ChInteractStop();}

@@ -26,9 +26,9 @@ public class CharacterMove : MonoBehaviour
     Vector2 input;
     public Transform SpriteHero;
     private bool stand = true;
-    [HideInInspector] public bool isRun = false;
+    public bool isRun = false;
     public bool inputCTR = false;
-    [HideInInspector]public bool Interact = false;
+    public bool Interact = false;
     private float hor;
     private bool Right = true;    
     [Header("Animations")]
@@ -90,6 +90,11 @@ public void Awake()
     }
     public void Update()
     {
+        if(Interact){Anm.PlayAnimationLoop(TalkingAnimationName);}
+        //
+        if(Attention){Esclamation.SetActive(true);}
+        else if(!Attention){Esclamation.SetActive(false);}
+        //
         if(!inputCTR)
         {switch(IDAction){
         case 0:  
@@ -109,11 +114,8 @@ public void Awake()
     {
         if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
         Flip();  
-        if(Interact){Anm.PlayAnimationLoop(TalkingAnimationName);}
-        if(Attention){Esclamation.SetActive(true);}
-        else if(!Attention){Esclamation.SetActive(false);}
         ////////////////////////////////
-        if(!Interact || !Attention)
+        if(!Interact)
         {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input = Vector2.ClampMagnitude(input, 1); 
@@ -236,7 +238,7 @@ public void Awake()
     public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
     public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName);}
-    public void PoseWin(){Anm.PlayAnimationLoop(WinAnimationName);}
+    public void PoseWin(){Attention = false; Anm.PlayAnimationLoop(WinAnimationName);}
     public void FixedUpdate()
     {if(!inputCTR)
     {if(!Interact && !isRun || isDefence)

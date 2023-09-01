@@ -151,7 +151,7 @@ IEnumerator EndBattle()
         Stats.S_GainExperience(result);
         Stats.K_GainExperience(result);
         GameManager.instance.AddTomoney(Money);
-        Reward();
+        //Reward();
         win = false;}
         WinEnd = true;
     }
@@ -172,7 +172,7 @@ IEnumerator EndBattle()
         Debug.Log("Numero casuale: " + Money);
         Debug.Log("Numero casuale: " + ItemN);
     }
-    private void Reward()
+    /*private void Reward()
     {
         if(ItemN <= 20)//20% Di possibilità
         {Inventory.instance.AddItem(Rewards[1], specificQuant);}
@@ -182,5 +182,5 @@ IEnumerator EndBattle()
          else if(ItemN <= 80)//80% Di possibilità
         {Inventory.instance.AddItem(Rewards[3], specificQuant);  
         InventoryB.instance.AddItem(Rewards[3], specificQuant);}
-    }
+    }*/
 }
