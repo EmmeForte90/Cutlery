@@ -5,6 +5,8 @@ using Cinemachine;
 public class TouchPlayer : MonoBehaviour
 {
     #region Header
+    public int IdENM;
+    public GameObject This;
     public string spawnPointTag = "SpawnPoint";
     private CinemachineVirtualCamera vCam;
     public bool camFollowPlayer = true;
@@ -20,7 +22,7 @@ public class TouchPlayer : MonoBehaviour
     private SwitchCharacter Switch;
     public bool takeCoo = false;
     public int IDAudio;
-    public NPCMove Mnpc;
+    //public NPCMove Mnpc;
     #endregion
     public void Start()
     {
@@ -31,6 +33,7 @@ public class TouchPlayer : MonoBehaviour
     Spoon = GameObject.Find("S_Player").transform;
     Knife = GameObject.Find("K_Player").transform;
     }
+    public void Take(){Destroy(This);}
     public void Update()
     {
     if(Switch.isElement1Active){Player = Spoon;}
@@ -76,8 +79,9 @@ public class TouchPlayer : MonoBehaviour
     {Touch();}
     }
     public void Touch()
-    {   Mnpc.Behav = 2;
+    {   //Mnpc.Behav = 2;
         AudioManager.instance.CrossFadeOUTAudio(0);
+        GameManager.instance.IdENM = IdENM;
         GameManager.instance.NotChange();
         AudioManager.instance.PlayUFX(7);
         GameManager.instance.ChStop();

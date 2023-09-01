@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject ExpObjectM;
     public UIRotationSwitcher rotationSwitcher;
     public SwitchCharacter SwitcherUI;
-
+    public int IdENM;
     public static GameManager instance;
     #endregion
     public void Awake()

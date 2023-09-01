@@ -92,10 +92,46 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public int K_paralysisResistanceCont;
     [HideInInspector] public int K_sleepResistanceCont;
     [HideInInspector] public int K_rustResistanceCont;
+    //
+    [Header("Enemies List")]
+    public bool[] Enemies;
+
+    [Header("Treasure List")]
+    public bool[] Treasure;
     public static PlayerStats instance;
     #endregion
     public void Awake(){if (instance == null){instance = this;}}
-   
+
+    public void DeactivateENM()
+    {
+        // Cerca tutti i GameObjects con il tag "Enemy"
+        GameObject[] ENMIT = GameObject.FindGameObjectsWithTag("Enemy");
+    
+    foreach (GameObject Character in ENMIT)
+        {
+            // Ottiene il componente QuestCharacters
+            TouchPlayer Enm = Character.GetComponent<TouchPlayer>();
+
+            // Verifica se il componente esiste
+            if (Enm != null)
+            {
+                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
+                int Id = Enm.IdENM;
+                for (int i = 0; i <  Enemies.Length; i++)
+                {
+                    if ( Enemies[i] && i == Id)
+                    {
+                        // Imposta ordaliT.FirstD a false
+                        Enm.Take();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    public void EnemyDefeatArea(int Defeat){Enemies[Defeat] = true;}
+    public void TreasureOpen(int Open){Treasure[Open] = true;}
+
     #region Levelup
     public void F_LevelUp()
     {

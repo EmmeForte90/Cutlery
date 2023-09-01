@@ -1,11 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.Audio;
-using Cinemachine;
-
 public class LevelChanger : MonoBehaviour
 {
     public string sceneName;

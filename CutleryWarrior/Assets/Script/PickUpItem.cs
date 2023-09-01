@@ -5,6 +5,8 @@ public class PickUpItem : MonoBehaviour
 {
     #region Header
     public Item specificItem;
+    public int Id;
+    [Header("Solo se è in item da Quest")]
     public GameObject Icon;
     public GameObject VFXTake;
     public int specificQuant;
@@ -13,7 +15,8 @@ public class PickUpItem : MonoBehaviour
     public bool IsQuest = false;
     public Quests Quest;
     #endregion
-    public void Awake(){KindItem = specificItem.KindItem;}
+    public void Awake(){KindItem = specificItem.KindItem; Id = specificItem.ID;}
+    public void Take(){Destroy(gameObject);}
     public void Update()
     {
         if(IsQuest){
@@ -29,6 +32,7 @@ public class PickUpItem : MonoBehaviour
         AddSpecificItem();
         Inventory.instance.Reward(specificItem, specificQuant);
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
+        Inventory.instance.itemsArea(Id);
     }}
     void AddSpecificItem()
     {

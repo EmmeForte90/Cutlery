@@ -19,6 +19,7 @@ TagManager:
   - Manager
   - Minimap
   - Question
+  - Items
   layers:
   - Default
   - TransparentFX

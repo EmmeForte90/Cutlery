@@ -24,13 +24,15 @@ public class StartScene : MonoBehaviour
     public static StartScene instance;
     #endregion
     public void Awake()
-    {if (instance == null){instance = this;} 
+    {
+    if (instance == null){instance = this;} 
     if (StartGame)
     {
     Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
     AudioManager.instance.CrossFadeINAudio(WhatMusic);
     }  
     defaultRotation = transform.rotation;
+    //
     if(!GameManager.instance.StartGame){
     GameManager.instance.ChStop();   
     FAct = GameObject.FindWithTag("F_Player");
@@ -42,6 +44,8 @@ public class StartScene : MonoBehaviour
     ContainerHero = GameObject.Find("Hero"); 
     Spawn(IDPorta);
     Confiner(IDPorta);
+    PlayerStats.instance.DeactivateENM();
+    Inventory.instance.DeactivateItem();
     Switcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
     Switcher.inizial();
     StartCoroutine(BoxDel());

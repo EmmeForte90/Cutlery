@@ -11,7 +11,6 @@ using TMPro;
 public class DuelManager : MonoBehaviour
 {
     public LevelChanger LVCH;
-    private string Scene;
     [Header("Arena")]
     public int EnemyinArena;
     private bool win = true;
@@ -153,7 +152,8 @@ IEnumerator EndBattle()
         Stats.S_GainExperience(result);
         Stats.K_GainExperience(result);
         GameManager.instance.AddTomoney(Money);
-        LVCH.sceneName = Scene;
+        PlayerStats.instance.EnemyDefeatArea(GameManager.instance.IdENM);
+        LVCH.sceneName = sceneName;
         //Reward();
         win = false;}
         WinEnd = true;

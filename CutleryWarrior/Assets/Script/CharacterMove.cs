@@ -31,6 +31,9 @@ public class CharacterMove : MonoBehaviour
     public bool inputCTR = false;
     public bool Interact = false;
     public bool Win = false;
+    private int comboCount = 0;
+    private bool canAttack = true;
+    public float comboCooldown = 0.3f; // Tempo di cooldown tra le combo in secondi
     public bool warning = false;
     private float hor;
     private bool Right = true;    
@@ -73,7 +76,6 @@ public class CharacterMove : MonoBehaviour
     public float DodgeSTimer = 0.5f; // Tempo di attesa tra le combo
     private float lastAttackTime = 0f;
     private float DodgeTime = 0f;
-    private int comboCount = 0;
     public static CharacterMove instance;
 public void Awake()
     {
@@ -158,17 +160,25 @@ public void Awake()
         }
     
     //Attack
-        if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
-        && PlayerStats.instance.F_curMP > 20)
+        if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.F_curMP > 20)
             {
+                HandleComboAttackF();
                 Stop();
                 AudioManager.instance.PlayUFX(8);
-                Anm.PlayAnimation(Atk4AnimationName);
                 AudioManager.instance.PlayUFX(0); 
                 Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
                 PlayerStats.instance.F_curMP -= PlayerStats.instance.F_CostMP;  
-                lastAttackTime = Time.time;
+                //lastAttackTime = Time.time;
             }else {AudioManager.instance.PlayUFX(10);}
+
+            
+    }
+    private void HandleComboAttackF()
+    {
+        comboCount = (comboCount % 2) + 1;
+        PlayComboAnimation("Battle/attack_" + comboCount.ToString());
+        canAttack = false;
+        StartCoroutine(ComboCooldown());
     }
 #endregion
 #region Knife
@@ -183,36 +193,19 @@ public void Awake()
         }
     
     //Attack
-        if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
-        && PlayerStats.instance.K_curMP > 20)
-        {HandleComboAttack();} else {AudioManager.instance.PlayUFX(10);}
+        if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.K_curMP > 20)
+        {HandleComboAttackK(); PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;} 
+        else {AudioManager.instance.PlayUFX(10);}
     }
     
-    private void HandleComboAttack()
+    private void HandleComboAttackK()
     {
-        comboCount++;
-        switch (comboCount)
-        {
-            case 1:
-                PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
-                Anm.PlayAnimation(Atk1AnimationName); //Debug.Log("Attacco1");
-                break;
-            case 2:
-                PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
-                Anm.PlayAnimation(Atk2AnimationName);//Debug.Log("Attacco2");
-                break;
-            case 3:
-                PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
-                Anm.PlayAnimation(Atk3AnimationName); //Debug.Log("Attacco3");
-                break;
-            default:
-                comboCount = 1;
-                PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
-                Anm.PlayAnimation(Atk1AnimationName);// Debug.Log("Attacco1");
-                break;
-        }
-        lastAttackTime = Time.time;
+        comboCount = (comboCount % 3) + 1;
+        PlayComboAnimation("Battle/attack_" + comboCount.ToString());
+        canAttack = false;
+        StartCoroutine(ComboCooldown());
     }
+    
 #endregion
 #region Spoon
     public void SpoonB()
@@ -242,6 +235,14 @@ public void Awake()
     }
     
 #endregion
+
+    private void PlayComboAnimation(string animationName)
+    {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, false);}}
+    private IEnumerator ComboCooldown()
+    {
+        yield return new WaitForSeconds(comboCooldown);
+        canAttack = true;
+    }
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
