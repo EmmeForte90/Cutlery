@@ -13,6 +13,8 @@ public class CharacterMove : MonoBehaviour
     public bool spoon;
     [Tooltip("0 - Exploration, 1 - Battle")]
     public int IDAction = 0; //Che tipo di personaggio è
+    public GameObject Esclamation;
+     public bool Attention;
     public GameObject Bullet;
     public Transform BPoint;
     private Rigidbody rb;  
@@ -108,8 +110,10 @@ public void Awake()
         if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
         Flip();  
         if(Interact){Anm.PlayAnimationLoop(TalkingAnimationName);}
+        if(Attention){Esclamation.SetActive(true);}
+        else if(!Attention){Esclamation.SetActive(false);}
         ////////////////////////////////
-        if(!Interact)
+        if(!Interact || !Attention)
         {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input = Vector2.ClampMagnitude(input, 1); 

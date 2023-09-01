@@ -45,7 +45,6 @@ public class NPCMove : MonoBehaviour
     public void Update()
     {
         PlayerTaking();
-        Flip();
         if ((transform.position - player.transform.position).sqrMagnitude > agroDistance * agroDistance)
         {Behav = 0;} 
         else if ((transform.position - player.transform.position).sqrMagnitude < agroDistance * agroDistance)
@@ -54,12 +53,12 @@ public class NPCMove : MonoBehaviour
         {
             case 0:
             if (!isPaused)
-            {MoveToWaypoint(); Walk();}
+            {MoveToWaypoint(); Walk(); Flip();}
             else
-            {PauseAtWaypoint(); Idle();}
+            {PauseAtWaypoint(); Idle(); Flip();}
             break;
             case 1:
-            ChasePlayer(); Run();
+            ChasePlayer(); Run(); FacePlayer();
             break;
             case 2:
             PauseAtWaypoint(); Idle();
@@ -115,6 +114,26 @@ public class NPCMove : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= 1f;
             transform.localScale = localScale;
+        }
+    }
+    private void FacePlayer()
+    {
+        switch(SwitchCharacter.instance.rotationSwitcher.CharacterID)
+        {
+            case 1:
+            player = GameObject.Find("F_Player");
+            break;
+            case 2:
+            player = GameObject.Find("K_Player");       
+            break;
+            case 3:
+            player = GameObject.Find("S_Player");
+            break;
+        }
+        if (player != null)
+        {
+            if (player.transform.position.z > transform.position.z){transform.localScale = new Vector3(1, 1, 1);}
+            else{transform.localScale = new Vector3(-1, 1, 1);}
         }
     }
     public void EnableScript(){enabled = true;}

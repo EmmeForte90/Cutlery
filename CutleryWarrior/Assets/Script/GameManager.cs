@@ -499,10 +499,12 @@ public class GameManager : MonoBehaviour
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_F.Allarm(); ch_K.Allarm(); ch_S.Allarm();
+        ch_F.Attention = true; ch_K.Attention = true; ch_S.Attention = true;
         ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
         ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
         ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_FAc.Allarm(); ch_KAc.Allarm(); ch_SAc.Allarm();
+        ch_FAc.Attention = true; ch_KAc.Attention = true; ch_SAc.Attention = true;
     }
     public void StopAllarm()
     {
@@ -510,6 +512,8 @@ public class GameManager : MonoBehaviour
         ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
         ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_FAc.StopAllarm(); ch_KAc.StopAllarm(); ch_SAc.StopAllarm();
+        ch_F.Attention = false; ch_K.Attention = false; ch_S.Attention = false;
+        ch_FAc.Attention = false; ch_KAc.Attention = false; ch_SAc.Attention = false;
     }
     public void Exploration()
     {

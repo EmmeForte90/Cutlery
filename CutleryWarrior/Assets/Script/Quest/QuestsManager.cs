@@ -80,7 +80,7 @@ public class QuestsManager : MonoBehaviour
 
     #region UpdateUIQuest
     public void ListQuest(int questId)
-{
+    {
     // Cerca la quest con l'id specificato
     Quests quest = questDatabase.Find(q => q.id == questId);
     if (quest != null)
@@ -116,6 +116,7 @@ public class QuestsManager : MonoBehaviour
         NameQ.text = quest.questName;
         // Aggiungi un listener per il click del bottone
         var button = obj.GetComponent<Button>();
+        UpdateQuestButton(quest, questI,previewImages);
         button.onClick.AddListener(() => OnQuestButtonClicked(quest.id, previewImages, DescriptionQ, questI));
     }
 }
@@ -129,8 +130,13 @@ public void OnQuestButtonClicked(int questId, Image previewImages, TextMeshProUG
         AudioManager.instance.PlayUFX(2);
         if(QuestSegnal[questId]){QuestSegnal[questId] = false;}
         else if(!QuestSegnal[questId]){QuestSegnal[questId] = true;}
-        if(QuestComplete[questId]){questI.sprite = Desicon; previewImages.sprite = Desicon;}
+        if(QuestComplete[questId]){questI.sprite = Desicon; previewImages.sprite = Desicon; QuestSegnal[questId] = false;}
     }
+}
+private void UpdateQuestButton(Quests quest, Image questI, Image previewImages)
+{
+    // Se la quest è completa, imposta l'immagine del pulsante sulla tua icona "completed"
+    if (QuestComplete[quest.id]){questI.sprite = Desicon; previewImages.sprite = Desicon;}
 }
     #endregion
    

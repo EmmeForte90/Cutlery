@@ -3,7 +3,7 @@ size:2048,256
 filter:Linear,Linear
 pma:true
 Braccio
-bounds:1404,23,45,87
+bounds:1363,23,45,87
 Dita
 bounds:1735,5,22,53
 rotate:90
@@ -36,10 +36,8 @@ Dress/Fur_2
 bounds:1853,29,116,97
 Dress/Fur_3
 bounds:1245,13,116,97
-Esc
-bounds:1363,14,39,96
 Eye
-bounds:1451,66,45,44
+bounds:1410,66,45,44
 Gamba
 bounds:672,40,33,128
 rotate:90

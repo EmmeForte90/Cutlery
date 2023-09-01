@@ -68,8 +68,8 @@ public class QuestCharacters : MonoBehaviour
     {
         if (FirstD){dialogue = Quest.Startdialogue; Esclama.SetActive(true);} //Start
         else if (Quest.isActive){dialogue = Quest.Middledialogue; Esclama.SetActive(false);} //Middle
-        else if (Quest.isComplete){dialogue = Quest.Endingdialogue; Esclama.SetActive(true);} //EndD
-        else if (Quest.AfterQuest){dialogue = Quest.Afterdialogue; Esclama.SetActive(false);} //After
+        else if (Quest.isComplete){dialogue = Quest.Endingdialogue; Esclama.SetActive(true); QuestAt.SetActive(false);} //EndD
+        else if (Quest.AfterQuest){dialogue = Quest.Afterdialogue; Esclama.SetActive(false); QuestAt.SetActive(false);} //After
         Idle();
         if (Quest.isActive){
         if(QuestsManager.instance.QuestSegnal[Quest.id]){QuestAt.SetActive(true); QuestCo.SetActive(false);}

@@ -15,6 +15,8 @@ public class CharacterFollow : MonoBehaviour
     public Transform Spoon;
     public int order = 0;
     private Transform Player;
+     public GameObject Esclamation;
+     public bool Attention;
     private SwitchCharacter Switch;
     private CharacterMove F_b;
     private CharacterMove S_b;
@@ -79,9 +81,11 @@ public class CharacterFollow : MonoBehaviour
     public void Update()
     {
         if(!inputCTR){
+        if(Attention){Esclamation.SetActive(true);}
+        else if(!Attention){Esclamation.SetActive(false);}
         switch(IDAction)
         {case 0:  
-        if(!Allarming)
+        if(!Allarming || !Attention)
         {SimpleMove();
         if(Switch.isElement1Active){Player = Spoon;Flip();}
         else if(Switch.isElement2Active){Player = Fork;Flip();} 

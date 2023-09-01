@@ -11,14 +11,12 @@ public class TouchPlayer : MonoBehaviour
     private SceneEvent sceneEvent;
     public string sceneName;
     public float stoppingDistance = 1f;
-    //public float agroDistance = 1f;
     public Vector3 savedPosition;
     private Transform Player;
     private Transform Fork;
     private Transform Spoon;
     private Transform Knife;
     public Transform ENM;
-    //public Transform Agro;
     private SwitchCharacter Switch;
     public bool takeCoo = false;
     public int IDAudio;
@@ -63,7 +61,6 @@ public class TouchPlayer : MonoBehaviour
     GameManager.instance.Posebattle();
     sceneEvent.InvokeOnSceneChange();
     }
-
     public void Flip()
     {
         if (Player.localScale.z > 0f){transform.localScale = new Vector3(1, 1,1);}
@@ -71,10 +68,15 @@ public class TouchPlayer : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-    if (other.CompareTag("F_Player") || other.CompareTag("K_Player") || other.CompareTag("S_Player"))
-    {           
-        print("Toccato");  
-        Mnpc.Behav = 2;
+    if (other.CompareTag("F_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    {Touch();}
+    else if (other.CompareTag("K_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
+    {Touch();}
+    else if (other.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    {Touch();}
+    }
+    public void Touch()
+    {   Mnpc.Behav = 2;
         AudioManager.instance.CrossFadeOUTAudio(0);
         GameManager.instance.NotChange();
         AudioManager.instance.PlayUFX(7);
@@ -82,8 +84,7 @@ public class TouchPlayer : MonoBehaviour
         GameManager.instance.Allarm();
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.CrossFadeINAudio(1);
-        StartCoroutine(WaitForSceneLoad());
-    }}
+        StartCoroutine(WaitForSceneLoad());}
     #if(UNITY_EDITOR)
     #region Gizmos
         private void OnDrawGizmos()
