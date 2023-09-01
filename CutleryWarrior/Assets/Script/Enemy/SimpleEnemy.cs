@@ -133,6 +133,7 @@ public class SimpleEnemy : MonoBehaviour
     //Debug.Log("danno +"+ danno_subito);
     Instantiate(VFXHurt, transform.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);}
+    else if(DieB){Anm.PlayAnimation(DieAnimationName);}
     }
     
     public void FacePlayer()

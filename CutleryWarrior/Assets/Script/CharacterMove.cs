@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using Spine.Unity;
 using Spine;
+using Unity.VisualScripting;
 
 public class CharacterMove : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class CharacterMove : MonoBehaviour
     public bool isRun = false;
     public bool inputCTR = false;
     public bool Interact = false;
+    public bool Win = false;
+    public bool warning = false;
     private float hor;
     private bool Right = true;    
     [Header("Animations")]
@@ -91,6 +94,8 @@ public void Awake()
     public void Update()
     {
         if(Interact){Anm.PlayAnimationLoop(TalkingAnimationName);}
+        if(Win){Anm.PlayAnimation(WinAnimationName);}
+        if(warning){Anm.PlayAnimationLoop(AllarmAnimationName);}
         //
         if(Attention){Esclamation.SetActive(true);}
         else if(!Attention){Esclamation.SetActive(false);}
@@ -237,8 +242,11 @@ public void Awake()
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
-    public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName);}
-    public void PoseWin(){Attention = false; Anm.PlayAnimationLoop(WinAnimationName);}
+    public void Allarm(){warning = true;}
+    public void StopAllarm(){warning = false;}
+    public void PoseWin(){Win = true;}
+    public void StopWin(){Win = false;}
+
     public void FixedUpdate()
     {if(!inputCTR)
     {if(!Interact && !isRun || isDefence)

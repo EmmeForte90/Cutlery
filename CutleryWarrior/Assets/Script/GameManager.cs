@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public bool StartGame = false;
     private CinemachineVirtualCamera vCam;
     public GameObject player;
+    public GameObject Minimap;
+
     public static bool GameManagerExist; 
     public Vector3 savedPosition;
     public string sceneName;
@@ -174,6 +176,7 @@ public class GameManager : MonoBehaviour
         TakeCharacter();
         moneyTextM.text = money.ToString(); 
     if(!battle){
+        Minimap.SetActive(true);
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();
@@ -234,6 +237,7 @@ public class GameManager : MonoBehaviour
         } 
     }
     else if(battle){
+        Minimap.SetActive(false);
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();
@@ -246,6 +250,7 @@ public class GameManager : MonoBehaviour
         ch_F.Stop();
         stopInput = true;
         ch_F.inputCTR = true;
+        LittleM.gameObject.SetActive(true);
         LittleM.transform.position = MP_F.transform.position;
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.PlayUFX(1);     
@@ -454,8 +459,16 @@ public class GameManager : MonoBehaviour
         ch_F.isRun = false; ch_K.isRun = false; ch_S.isRun = false;
         ch_F.Idle();ch_K.Idle();ch_S.Idle();ch_F.Stop();ch_K.Stop();ch_S.Stop();
     }   
-    public void ChInteract(){ch_F.Interact = true; ch_K.Interact = true; ch_S.Interact = true; Interact = true;}  
-    public void ChInteractStop(){ch_F.Interact = false; ch_K.Interact = false; ch_S.Interact = false; Interact = false;}  
+    public void ChInteract(){
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.Interact = true; ch_K.Interact = true; ch_S.Interact = true; Interact = true;}  
+    public void ChInteractStop(){
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.Interact = false; ch_K.Interact = false; ch_S.Interact = false; Interact = false;}  
     public void ChCanM()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
@@ -491,6 +504,10 @@ public class GameManager : MonoBehaviour
     }
     public void StopWin()
     {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.StopWin(); ch_K.StopWin(); ch_S.StopWin();
         ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
         ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
         ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
@@ -511,6 +528,11 @@ public class GameManager : MonoBehaviour
     }
     public void StopAllarm()
     {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.StopAllarm(); ch_K.StopAllarm(); ch_S.StopAllarm();
+        ch_F.Attention = true; ch_K.Attention = true; ch_S.Attention = true;
         ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
         ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
         ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();

@@ -80,9 +80,13 @@ public class CharacterFollow : MonoBehaviour
     }
     public void Update()
     {
-        if(!inputCTR){
+        if(Win){Anm.PlayAnimation(WinAnimationName);}
+        if(Allarming){Anm.PlayAnimationLoop(AllarmAnimationName);}
+        //
         if(Attention){Esclamation.SetActive(true);}
         else if(!Attention){Esclamation.SetActive(false);}
+        //
+        if(!inputCTR){
         switch(IDAction)
         {case 0:  
         if(!Allarming || !Attention)
@@ -98,7 +102,7 @@ public class CharacterFollow : MonoBehaviour
         if(fork && !knife && !spoon) {ForkB();} //Se è forchetta
         else if(!fork && knife && !spoon) {KnifeB();} //Se è Coltello
         else if(!fork && !knife && spoon) {SpoonB();} //Se è Cucchiaio
-        } else if(Win) {Anm.PlayAnimationLoop(WinAnimationName);} //Se è forchetta
+        }
         break;
         }}  
     }
@@ -226,7 +230,7 @@ public class CharacterFollow : MonoBehaviour
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
-    public void Allarm(){Anm.PlayAnimationLoop(AllarmAnimationName); Allarming = true;}   
+    public void Allarm(){Allarming = true;}   
     public void PoseWin(){Win = true;}    
     public void StopWin(){Win = false;}    
     public void StopAllarm(){Allarming = false;}    
@@ -311,6 +315,7 @@ public class CharacterFollow : MonoBehaviour
 private void OnDrawGizmos()
     {
     Gizmos.color = Color.red;
+    Gizmos.DrawWireSphere(transform.position, attackRange);
     // disegna un Gizmo che rappresenta il Raycast
     //Gizmos.DrawLine(transform.position, transform.position + new Vector3(transform.localScale.x, 0, 0) * wallDistance);
     Gizmos.color = Color.blue;
