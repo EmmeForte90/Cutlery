@@ -51,9 +51,7 @@ public class CharacterFollow : MonoBehaviour
     private bool Die = false;
     public int result;
     public AnimationManager Anm;
-    [HideInInspector]
     public bool Allarming;
-    [HideInInspector]
     public bool Win;
     private string currentAnimationName;
     private float distance;
@@ -80,14 +78,14 @@ public class CharacterFollow : MonoBehaviour
     }
     public void Update()
     {
-        if(Win){Anm.PlayAnimation(WinAnimationName);}
         if(Allarming){Anm.PlayAnimationLoop(AllarmAnimationName);}
+        //if(Win){Anm.PlayAnimationLoop(WinAnimationName);}
         //
         if(Attention){Esclamation.SetActive(true);}
         else if(!Attention){Esclamation.SetActive(false);}
         //
         if(!inputCTR){
-        switch(IDAction)
+        switch(IDAction)//Combatte o esplora?
         {case 0:  
         if(!Allarming || !Attention)
         {SimpleMove();
@@ -231,8 +229,8 @@ public class CharacterFollow : MonoBehaviour
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
     public void Allarm(){Allarming = true;}   
-    public void PoseWin(){Win = true;}    
-    public void StopWin(){Win = false;}    
+    //public void PoseWin(){Win = true;}    
+    //public void StopWin(){Win = false;}    
     public void StopAllarm(){Allarming = false;}    
     private void Flip()
     {

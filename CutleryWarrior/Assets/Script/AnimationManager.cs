@@ -69,8 +69,11 @@ public class AnimationManager : MonoBehaviour
     public void TemporaryChangeColor(Color color){_skeletonAnimation.Skeleton.SetColor(color); Invoke(nameof(ResetColor), 0.5f);}
     private void ResetColor(){_skeletonAnimation.Skeleton.SetColor(Color.white);}
     public void PlayAnimation(string animationName)
-    {if (currentAnimationName != animationName){_skeletonAnimation.state.SetAnimation(0, animationName, false);}
-    _skeletonAnimation.state.GetCurrent(0).Complete += OnAttackAnimationComplete;}
+    {
+        if (currentAnimationName != animationName)
+        {_skeletonAnimation.state.SetAnimation(0, animationName, false);}
+        _skeletonAnimation.state.GetCurrent(0).Complete += OnAttackAnimationComplete;
+    }
     public void PlayAnimationLoop(string animationName)
     {
     if (currentAnimationName != animationName)

@@ -134,6 +134,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] ManagerCharacter Manager_K;
     [SerializeField] GameObject ExpObjectM;
     public UIRotationSwitcher rotationSwitcher;
+    public SwitchCharacter SwitcherUI;
+
     public static GameManager instance;
     #endregion
     public void Awake()
@@ -436,15 +438,16 @@ public class GameManager : MonoBehaviour
     public void TakeCamera()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_F.TakeCamera(); ch_K.TakeCamera(); ch_S.TakeCamera();
     }   
     public void ChMov()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+         ch_F.Idle();ch_K.Idle();ch_S.Idle();
     }
     public void ChStop()
     {
@@ -452,8 +455,8 @@ public class GameManager : MonoBehaviour
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
-        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
-        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_F.inputCTR = true; ch_K.inputCTR = true; ch_S.inputCTR = true;
         ch_FAc.inputCTR = true; ch_KAc.inputCTR = true; ch_SAc.inputCTR = true;
         ch_F.isRun = false; ch_K.isRun = false; ch_S.isRun = false;
@@ -461,13 +464,13 @@ public class GameManager : MonoBehaviour
     }   
     public void ChInteract(){
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_F.Interact = true; ch_K.Interact = true; ch_S.Interact = true; Interact = true;}  
     public void ChInteractStop(){
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_F.Interact = false; ch_K.Interact = false; ch_S.Interact = false; Interact = false;}  
     public void ChCanM()
     {
@@ -475,16 +478,16 @@ public class GameManager : MonoBehaviour
         ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
-        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
-        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_F.inputCTR = false; ch_K.inputCTR = false; ch_S.inputCTR = false;
         ch_FAc.inputCTR = false; ch_KAc.inputCTR = false; ch_SAc.inputCTR = false;
     }
     public void Posebattle()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
         ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
         ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
@@ -493,36 +496,41 @@ public class GameManager : MonoBehaviour
     }
     public void PoseWin()
     {
-        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
-        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
-        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
-        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
-        ch_F.PoseWin(); ch_K.PoseWin(); ch_S.PoseWin();
-        ch_FAc.PoseWin(); ch_KAc.PoseWin(); ch_SAc.PoseWin();
+        Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
+        Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
+        Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();
+        Manager_F.SwitchScriptsWin();
+        Manager_S.SwitchScriptsWin();
+        Manager_K.SwitchScriptsWin();
     }
     public void StopWin()
     {
-        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
-        ch_F.StopWin(); ch_K.StopWin(); ch_S.StopWin();
-        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
-        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
-        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
-        ch_FAc.StopWin(); ch_KAc.StopWin(); ch_SAc.StopWin();
+        Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
+        Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
+        Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();
+        switch(rotationSwitcher.CharacterID)
+        {
+            case 1:
+            Manager_F.SwitchScriptsPlayer(); Manager_K.SwitchScriptsActor(); Manager_S.SwitchScriptsActor();
+            break;
+            case 2:
+            Manager_F.SwitchScriptsActor(); Manager_K.SwitchScriptsPlayer(); Manager_S.SwitchScriptsActor();
+            break;
+            case 3:
+            Manager_F.SwitchScriptsActor(); Manager_K.SwitchScriptsActor(); Manager_S.SwitchScriptsPlayer(); 
+            break;
+        }
     }
     public void Allarm()
     {
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();
         ch_F.Allarm(); ch_K.Allarm(); ch_S.Allarm();
         ch_F.Attention = true; ch_K.Attention = true; ch_S.Attention = true;
         ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
-        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
-        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_FAc.Allarm(); ch_KAc.Allarm(); ch_SAc.Allarm();
         ch_FAc.Attention = true; ch_KAc.Attention = true; ch_SAc.Attention = true;
     }

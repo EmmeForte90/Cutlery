@@ -10,6 +10,8 @@ using UnityEngine.UI;
 using TMPro;
 public class DuelManager : MonoBehaviour
 {
+    public LevelChanger LVCH;
+    private string Scene;
     [Header("Arena")]
     public int EnemyinArena;
     private bool win = true;
@@ -151,6 +153,7 @@ IEnumerator EndBattle()
         Stats.S_GainExperience(result);
         Stats.K_GainExperience(result);
         GameManager.instance.AddTomoney(Money);
+        LVCH.sceneName = Scene;
         //Reward();
         win = false;}
         WinEnd = true;
@@ -164,13 +167,13 @@ IEnumerator EndBattle()
     {
         int randomNumber = Random.Range(10, 20);
         int randomNumberM = Random.Range(10, 50);
-        int randomNumberItem = Random.Range(1, 100);
+       // int randomNumberItem = Random.Range(1, 100);
         result = Mathf.RoundToInt(randomNumber);
         Money = Mathf.RoundToInt(randomNumberM);
-        ItemN = Mathf.RoundToInt(randomNumberItem);
-        Debug.Log("Numero casuale: " + result);
+        //ItemN = Mathf.RoundToInt(randomNumberItem);
+       // Debug.Log("Numero casuale: " + result);
         Debug.Log("Numero casuale: " + Money);
-        Debug.Log("Numero casuale: " + ItemN);
+        //Debug.Log("Numero casuale: " + ItemN);
     }
     /*private void Reward()
     {

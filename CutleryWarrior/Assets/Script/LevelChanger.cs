@@ -27,6 +27,10 @@ public class LevelChanger : MonoBehaviour
     {
     GameManager.instance.ChStop();
     CameraZoom.instance.ZoomIn();
+    GameManager.instance.StopWin();
+    GameManager.instance.PoseWin();
+    GameManager.instance.ChMov();
+    SwitchCharacter.instance.Take();
     StartCoroutine(RetunBattle());
     }
     public void LoadingEnd(){StartCoroutine(StartLoad());}
@@ -75,8 +79,11 @@ public class LevelChanger : MonoBehaviour
     sceneEvent.InvokeOnSceneChange();
     CharacterMove.instance.isRun = false;
     yield return new WaitForSeconds(2f);
-    CharacterMove.instance.inputCTR = false; 
+    CharacterMove.instance.inputCTR = false;
+    GameManager.instance.StopWin();
+    GameManager.instance.ChMov();
     GameManager.instance.FadeOut();
+    SwitchCharacter.instance.Take();
     yield return new WaitForSeconds(2f);
     }
 }

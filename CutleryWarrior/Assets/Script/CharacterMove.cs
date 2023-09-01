@@ -91,10 +91,11 @@ public void Awake()
         rb.freezeRotation = true;
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
     }
+   
     public void Update()
     {
         if(Interact){Anm.PlayAnimationLoop(TalkingAnimationName);}
-        if(Win){Anm.PlayAnimation(WinAnimationName);}
+        //if(Win){Anm.PlayAnimationLoop(WinAnimationName);}
         if(warning){Anm.PlayAnimationLoop(AllarmAnimationName);}
         //
         if(Attention){Esclamation.SetActive(true);}
@@ -121,6 +122,8 @@ public void Awake()
         Flip();  
         ////////////////////////////////
         if(!Interact)
+        {if(!warning)
+        {if(!Win)
         {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input = Vector2.ClampMagnitude(input, 1); 
@@ -139,7 +142,7 @@ public void Awake()
         else{Anm.PlayAnimationLoop(IdleAnimationName); stand = true;}
         hor = Input.GetAxisRaw("Horizontal");      
         }
-    }
+    }}}
 #endregion
 #region Fork
     public void ForkB()
@@ -244,8 +247,8 @@ public void Awake()
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
     public void Allarm(){warning = true;}
     public void StopAllarm(){warning = false;}
-    public void PoseWin(){Win = true;}
-    public void StopWin(){Win = false;}
+    //public void PoseWin(){Win = true;}
+    //public void StopWin(){Win = false;}
 
     public void FixedUpdate()
     {if(!inputCTR)

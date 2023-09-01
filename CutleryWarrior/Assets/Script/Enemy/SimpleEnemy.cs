@@ -8,6 +8,7 @@ public class SimpleEnemy : MonoBehaviour
 
     [Header("Stop For Test")]
     public GameObject player;
+    public GameObject Icon;
     public int result;
     public bool Test = false;   
     private bool take = false; 
@@ -92,19 +93,19 @@ public class SimpleEnemy : MonoBehaviour
         {
             if(!isAttacking)
             {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
-            Anm.PlayAnimationLoop(WalkAnimationName);}
+            if(!DieB){Anm.PlayAnimationLoop(WalkAnimationName);}}
             if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
             {StartAttack();}
         }
     }
     public void OnTriggerEnter(Collider collision)
-    {
+    {   
         if (collision.gameObject.CompareTag("F_Coll"))
-        {TakeDamage(PlayerStats.instance.F_attack);} 
+        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack);}} 
         else if (collision.gameObject.CompareTag("K_Coll"))
-        {TakeDamage(PlayerStats.instance.K_attack);} 
+        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack);}}
         else if (collision.gameObject.CompareTag("S_Coll"))
-        {TakeDamage(PlayerStats.instance.S_attack);} 
+        {if(!DieB){TakeDamage(PlayerStats.instance.S_attack);}}
     }
     
     private void StartAttack()
@@ -118,7 +119,7 @@ public class SimpleEnemy : MonoBehaviour
     private IEnumerator AttackPause()
     {        
         yield return new WaitForSeconds(1);
-        Anm.PlayAnimationLoop(IdleAnimationName);
+        if(!DieB){Anm.PlayAnimationLoop(IdleAnimationName);}
         yield return new WaitForSeconds(attackPauseDuration);
         take = false;
         isAttacking = false;
@@ -133,7 +134,6 @@ public class SimpleEnemy : MonoBehaviour
     //Debug.Log("danno +"+ danno_subito);
     Instantiate(VFXHurt, transform.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);}
-    else if(DieB){Anm.PlayAnimation(DieAnimationName);}
     }
     
     public void FacePlayer()
@@ -149,6 +149,7 @@ public class SimpleEnemy : MonoBehaviour
         Stats.gameObject.SetActive(false);
         DM.EnemyinArena -= 1;
         Anm.PlayAnimation(DieAnimationName);
+        Icon.SetActive(true);
         StartCoroutine(TimeDestroy());
     }
     private IEnumerator TimeDestroy()
@@ -156,4 +157,13 @@ public class SimpleEnemy : MonoBehaviour
         yield return new WaitForSeconds(4);
         Destroy(gameObject);
     }
+    #if(UNITY_EDITOR)
+    #region Gizmos
+    private void OnDrawGizmos()
+        {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
+    #endregion
+    #endif
 }

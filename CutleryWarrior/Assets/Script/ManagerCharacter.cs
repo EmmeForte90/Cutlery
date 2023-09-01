@@ -6,17 +6,28 @@ public class ManagerCharacter : MonoBehaviour
 {
     public CharacterMove Player;
     public CharacterFollow Actor;
-   
+    public Winanimation WinANM;
     public void SwitchScriptsPlayer()
     {
             Player.enabled = true;
             Actor.enabled = false;
+            WinANM.enabled = false;
             Player.Direction();
     }
     public void SwitchScriptsActor()
     {
             Player.enabled = false;
             Actor.enabled = true;
+            WinANM.enabled = false;
             Actor.Direction();
+    }
+
+    public void SwitchScriptsWin()
+    {
+            Player.enabled = false;
+            Actor.enabled = false;
+            WinANM.enabled = true;
+            WinANM.Direction();
+            WinANM.Win();
     }
 }
