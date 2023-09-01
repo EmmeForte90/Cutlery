@@ -309,9 +309,11 @@ public void Awake()
     }   
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void OnCollisionEnter(Collision collision)
-    {if (collision.gameObject.CompareTag("Collider")){Run = 1;}}
+    {if (collision.gameObject.CompareTag("Collider")){Run = 1;}
+    if (collision.gameObject.CompareTag("Question")){Attention = true;}}
     public void OnCollisionExit(Collision collision)
-    {if (collision.gameObject.CompareTag("Collider")){Run = 5;}}
+    {if (collision.gameObject.CompareTag("Collider")){Run = 5;}
+    if (collision.gameObject.CompareTag("Question")){Attention = false;}}
     private void Dodge()
     {
         Vector3 DodgeDirection = transform.position;

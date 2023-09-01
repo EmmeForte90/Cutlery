@@ -168,12 +168,14 @@ public class QuestCharacters : MonoBehaviour
             _isDialogueActive = false;
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+            if(FirstD){StartCoroutine(StartQuest());} 
+            else if(!FirstD && !Quest.isComplete){
+            GameManager.instance.ChInteractStop();
             CameraZoom.instance.ZoomOut();
             GameManager.instance.notChange = false;
-             GameManager.instance.ChCanM();
-            if(FirstD){StartCoroutine(StartQuest());}
-            else if(Quest.isComplete){StartCoroutine(EndQuest());}
-            else {GameManager.instance.ChInteractStop();}
+            GameManager.instance.ChCanM();}
+            else if(!FirstD && Quest.isComplete){StartCoroutine(EndQuest());}
+            //else {GameManager.instance.ChInteractStop();}
         }
         else{StartCoroutine(ShowDialogue());}
     }
@@ -196,6 +198,9 @@ public class QuestCharacters : MonoBehaviour
         Quest.AfterQuest = true;
         notGo = false;
         GameManager.instance.ChInteractStop();
+        CameraZoom.instance.ZoomOut();
+        GameManager.instance.notChange = false;
+        GameManager.instance.ChCanM();
     }    
     IEnumerator StartQuest()
     {            
@@ -215,6 +220,9 @@ public class QuestCharacters : MonoBehaviour
             QuestsManager.instance.QuestActiveF(IDQuest);
             QuestStart.gameObject.SetActive(false); 
             GameManager.instance.ChInteractStop();
+            CameraZoom.instance.ZoomOut();
+            GameManager.instance.notChange = false;
+            GameManager.instance.ChCanM();
             notGo = false;
             FirstD = false;
     }
