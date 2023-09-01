@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]  GameObject LittleM;
     [SerializeField]  GameObject Ord;
     [SerializeField]  GameObject Itm;
-    [SerializeField]  GameObject Skl;
     [SerializeField]  GameObject Esc;
     [Header("Fade")]
     [SerializeField] GameObject callFadeIn;
@@ -286,7 +285,6 @@ public class GameManager : MonoBehaviour
             Ord.gameObject.SetActive(false);
             Itm.gameObject.SetActive(false);
             Esc.gameObject.SetActive(false);
-            Skl.gameObject.SetActive(false);
             LittleM.gameObject.SetActive(false);
             CharacterMove.instance.inputCTR = false;
             switch (rotationSwitcher.CharacterID)
@@ -316,7 +314,6 @@ public class GameManager : MonoBehaviour
             Ord.gameObject.SetActive(false);
             Itm.gameObject.SetActive(false);
             Esc.gameObject.SetActive(false);
-            Skl.gameObject.SetActive(false);
             LittleM.gameObject.SetActive(false);
             CharacterMove.instance.inputCTR = false;
             switch (rotationSwitcher.CharacterID)

@@ -138,8 +138,8 @@ public class SimpleEnemy : MonoBehaviour
     
     public void FacePlayer()
     {
-    if (player.transform.position.x > transform.position.x){transform.localScale = new Vector3(-1, 1, 1);}
-    else if (player.transform.position.x < transform.position.x){transform.localScale = new Vector3(1, 1, 1);}  
+    if (player.transform.position.z > transform.position.z){transform.localScale = new Vector3(-1, 1, 1);}
+    else if (player.transform.position.z < transform.position.z){transform.localScale = new Vector3(1, 1, 1);}  
     }
     public void Die()
     {
