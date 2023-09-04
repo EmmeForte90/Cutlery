@@ -21,7 +21,7 @@ MonoBehaviour:
   Stackable: 0
   itemIcon: {fileID: 21300000, guid: bd78db6506d35064b85d0b344f47dd05, type: 3}
   TypesE: 0
-  MaxDuration: 5
+  MaxDuration: 3
   CostMP: 100
   WhoCH: 0
   WhoSkill: 0

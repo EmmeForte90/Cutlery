@@ -366,6 +366,18 @@ public class GameManager : MonoBehaviour
             AudioManager.instance.PlayUFX(1);   
         break;
         }}
+
+        public void CloseTimerMenu()
+        {
+            ChCanM();
+            Esc.gameObject.SetActive(false);
+            Ord.gameObject.SetActive(false);
+            Itm.gameObject.SetActive(false);
+            Esc.gameObject.SetActive(false);
+            LittleM.gameObject.SetActive(false);
+            TimerM.gameObject.SetActive(false);
+            AudioManager.instance.PlayUFX(1);   
+        }
     public void StatPlayer()
     {
     //Fork
