@@ -95,10 +95,19 @@ public class PlayerStats : MonoBehaviour
     //
     [Header("Enemies List")]
     public bool[] Enemies;
-
     [Header("Treasure List")]
     public bool[] Treasure;
     public static PlayerStats instance;
+    [Header("Skill List")]
+    public bool[] Skill_F;
+    public GameObject[] Skill_FI;
+    public GameObject[] Skill_FIB;
+    public bool[] Skill_K;
+    public GameObject[] Skill_KI;
+    public GameObject[] Skill_KIB;
+    public bool[] Skill_S;
+    public GameObject[] Skill_SI;
+    public GameObject[] Skill_SIB;
     #endregion
     public void Awake(){if (instance == null){instance = this;}}
 
@@ -129,6 +138,37 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
+    public void DeactivateCHEST()
+    {
+        // Cerca tutti i GameObjects con il tag "Enemy"
+        GameObject[] Chest = GameObject.FindGameObjectsWithTag("Chest");
+    
+    foreach (GameObject Character in Chest)
+        {
+            // Ottiene il componente QuestCharacters
+            Treasure tre = Character.GetComponent<Treasure>();
+
+            // Verifica se il componente esiste
+            if (tre != null)
+            {
+                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
+                int Id = tre.IdChest;
+                for (int i = 0; i <  Enemies.Length; i++)
+                {
+                    if ( Treasure[i] && i == Id)
+                    {
+                        // Imposta ordaliT.FirstD a false
+                        tre.Take();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    public void FSkillATT(int Act){Skill_F[Act] = true; Skill_FI[Act].SetActive(true); Skill_FIB[Act].SetActive(true);}
+    public void SSkillATT(int Act){Skill_S[Act] = true; Skill_SI[Act].SetActive(true); Skill_SIB[Act].SetActive(true);}
+    public void KSkillATT(int Act){Skill_K[Act] = true; Skill_KI[Act].SetActive(true); Skill_KIB[Act].SetActive(true);}
+
     public void EnemyDefeatArea(int Defeat){Enemies[Defeat] = true;}
     public void TreasureOpen(int Open){Treasure[Open] = true;}
 

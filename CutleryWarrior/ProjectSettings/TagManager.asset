@@ -20,6 +20,7 @@ TagManager:
   - Minimap
   - Question
   - Items
+  - Chest
   layers:
   - Default
   - TransparentFX

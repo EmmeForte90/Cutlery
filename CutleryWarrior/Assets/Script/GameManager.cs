@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     [Header("Money")]
     [SerializeField] public int money = 0;
     [SerializeField] public TextMeshProUGUI moneyTextM;
-    [SerializeField] GameObject moneyObjectM;
+    //[SerializeField] GameObject moneyObjectM;
     public int IDPorta;
     public int IDCharacter;
     [Header("Stats")]
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] CharacterMove ch_K;
     [SerializeField] CharacterFollow ch_KAc;
     [SerializeField] ManagerCharacter Manager_K;
-    [SerializeField] GameObject ExpObjectM;
+    //[SerializeField] GameObject ExpObjectM;
     public UIRotationSwitcher rotationSwitcher;
     public SwitchCharacter SwitcherUI;
     public int IdENM;
@@ -553,6 +553,20 @@ public class GameManager : MonoBehaviour
         ch_FAc.StopAllarm(); ch_KAc.StopAllarm(); ch_SAc.StopAllarm();
         ch_F.Attention = false; ch_K.Attention = false; ch_S.Attention = false;
         ch_FAc.Attention = false; ch_KAc.Attention = false; ch_SAc.Attention = false;
+    }
+    public void Esclamation()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.Attention = true; ch_K.Attention = true; ch_S.Attention = true;
+    }
+    public void EsclamationStop()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_F.Attention = false; ch_K.Attention = false; ch_S.Attention = false;
     }
     public void Exploration()
     {

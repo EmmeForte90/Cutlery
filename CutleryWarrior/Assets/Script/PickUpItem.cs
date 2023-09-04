@@ -14,6 +14,15 @@ public class PickUpItem : MonoBehaviour
     private int KindItem;
     public bool IsQuest = false;
     public Quests Quest;
+    [Header("Skill List")]
+    public bool IsSkill = false;
+    [Tooltip("Che tipo di skill? 0-Fork 1-Knife 2-Spoon")]
+    [Range(0, 2)]
+    public int KindSkill;
+    [Tooltip("Attiva la skill su numerazione")]
+    [Range(0, 9)]
+    public int IdSkill;
+
     #endregion
     public void Awake(){KindItem = specificItem.KindItem; Id = specificItem.ID;}
     public void Take(){Destroy(gameObject);}
@@ -22,10 +31,32 @@ public class PickUpItem : MonoBehaviour
         if(IsQuest){
         if(QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(true);} 
         else if(!QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(false);}
+        }else if(IsSkill)
+        {
+            switch(KindSkill)
+            {
+                case 0:
+                PlayerStats.instance.FSkillATT(IdSkill);
+                break;
+                case 1:
+                PlayerStats.instance.KSkillATT(IdSkill);
+                break;
+                case 2:
+                PlayerStats.instance.SSkillATT(IdSkill);
+                break;
+            }
         }
     }
-    public void OnTriggerEnter(Collider collision)
-    {if (collision.gameObject.CompareTag("F_Player") || collision.gameObject.CompareTag("S_Player") || collision.gameObject.CompareTag("K_Player"))
+    public void OnTriggerEnter(Collider other)
+    {
+    if (other.CompareTag("F_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    {Touch();}
+    else if (other.CompareTag("K_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
+    {Touch();}
+    else if (other.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    {Touch();}
+    }
+    public void Touch()
     {
         Instantiate(VFXTake, transform.position, transform.rotation);
         AudioManager.instance.PlayUFX(5);
@@ -33,7 +64,7 @@ public class PickUpItem : MonoBehaviour
         Inventory.instance.Reward(specificItem, specificQuant);
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
         Inventory.instance.itemsArea(Id);
-    }}
+    }
     void AddSpecificItem()
     {
         switch(KindItem)
