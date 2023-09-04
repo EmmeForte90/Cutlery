@@ -5,7 +5,6 @@ using System.Collections;
 public class ChargeSkill : MonoBehaviour
 {
     [Header("Timer")]
-    public GameObject TimerObj;
     public Scrollbar TimeBar;
     private Skill SkillAtt;
     public GameObject MP;
@@ -13,6 +12,8 @@ public class ChargeSkill : MonoBehaviour
     private float curTime = 0;       // Tempo trascorso
     public Spine.AnimationState _spineAnimationState;    
     public SkeletonAnimation _skeletonAnimation;
+    private bool isSkillLaunched = false;
+
     [SpineAnimation][SerializeField] string ChargeAnm;
 
     public void Awake()
@@ -21,8 +22,9 @@ public class ChargeSkill : MonoBehaviour
 
     public void TakeData(Skill skill)
     {
-    TimerObj.SetActive(true);
-    TimerObj.transform.position = MP.transform.position;
+    GameManager.instance.Charge();
+    GameManager.instance.TimerMenu();
+    _spineAnimationState.SetAnimation(0, ChargeAnm, true); 
     fillDuration = skill.MaxDuration; 
     SkillAtt = skill;
     PlayerStats.instance.F_CostMP -= skill.CostMP;
@@ -40,27 +42,41 @@ public class ChargeSkill : MonoBehaviour
     }
     }
 
-    public void Update()
+   public void Update()
+{
+    if (!isSkillLaunched)
     {
-        if(curTime != fillDuration)
+        if (curTime < fillDuration)
         {
-         // Incrementa il tempo trascorso in base a Time.deltaTime
-        curTime += Time.deltaTime;
+            // Incrementa il tempo trascorso in base a Time.deltaTime
+            curTime += Time.deltaTime;
 
-        // Calcola la percentuale di completamento
-        float fillPercentage = curTime / fillDuration;
+            // Calcola la percentuale di completamento
+            float fillPercentage = curTime / fillDuration;
 
-        // Imposta la dimensione della barra (assicurandoti che sia compresa tra 0.01f e 1)
-        TimeBar.size = Mathf.Clamp(fillPercentage, 0.01f, 1);
+            // Imposta la dimensione della barra (assicurandoti che sia compresa tra 0.01f e 1)
+            TimeBar.size = Mathf.Clamp(fillPercentage, 0.01f, 1);
+
+            if (curTime >= fillDuration)
+            {
+                curTime = fillDuration;
+                print("StartSkil");
+                StartCoroutine(SkillLunch());
+                isSkillLaunched = true; // Imposta il flag per evitare ulteriori avvii
+            }
         }
-        if(curTime >= fillDuration)
-        {StartCoroutine(SkillLunch());}
     }
-    IEnumerator SkillLunch()
-    {_spineAnimationState.SetAnimation(0, ChargeAnm, false);  
-     TimerObj.SetActive(false);
-    yield return new WaitForSeconds(3f);
+}
 
-    GameManager.instance.StopWin();}
+IEnumerator SkillLunch()
+{    
+    GameManager.instance.StopBattle();
+    CameraZoom.instance.ZoomIn(); 
+    yield return new WaitForSeconds(3f);
+    print("LunchSkill");
+    GameManager.instance.ResumeBattle();
+    //GameManager.instance.StopWin();
+}
+
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
 }

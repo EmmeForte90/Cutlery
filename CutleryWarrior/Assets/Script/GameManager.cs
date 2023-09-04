@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public bool Interact = false; 
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject LittleM;
+    [SerializeField]  GameObject TimerM;
     [SerializeField]  GameObject Ord;
     [SerializeField]  GameObject Itm;
     [SerializeField]  GameObject Esc;
@@ -332,6 +333,39 @@ public class GameManager : MonoBehaviour
             DuelManager.instance.inputCTR = false;
             AudioManager.instance.PlayUFX(1);
     }
+    public void StopBattle()
+    {ChStop(); notChange = true; DuelManager.instance.inputCTR = true;}
+
+     public void ResumeBattle()
+    {ChCanM(); notChange = false; DuelManager.instance.inputCTR = false;}
+     
+        public void TimerMenu()
+    {
+            ChCanM();
+            Esc.gameObject.SetActive(false);
+            Ord.gameObject.SetActive(false);
+            Itm.gameObject.SetActive(false);
+            Esc.gameObject.SetActive(false);
+            LittleM.gameObject.SetActive(false);
+           
+            switch (rotationSwitcher.CharacterID)
+            {
+        case 1:
+            TimerM.gameObject.SetActive(true);
+            TimerM.transform.position = MP_F.transform.position;
+            AudioManager.instance.PlayUFX(1);     
+        break;
+        case 2:
+            TimerM.gameObject.SetActive(true);
+            TimerM.transform.position = MP_K.transform.position;
+            AudioManager.instance.PlayUFX(1);  
+        break;
+        case 3:
+             TimerM.gameObject.SetActive(true);
+            TimerM.transform.position = MP_S.transform.position;
+            AudioManager.instance.PlayUFX(1);   
+        break;
+        }}
     public void StatPlayer()
     {
     //Fork
@@ -490,6 +524,15 @@ public class GameManager : MonoBehaviour
         ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_F.Posebattle(); ch_K.Posebattle(); ch_S.Posebattle();
         ch_FAc.Posebattle(); ch_KAc.Posebattle(); ch_SAc.Posebattle();
+    }
+    public void Charge()
+    {
+        Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
+        Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
+        Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();
+        Manager_F.SwitchScriptsCharge();
+        Manager_S.SwitchScriptsCharge();
+        Manager_K.SwitchScriptsCharge();
     }
     public void PoseWin()
     {
