@@ -11,19 +11,21 @@ public class Item : ScriptableObject
     [TextArea(3, 10)] public string itemDes;
     public int ID;
     [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-EquipFork 4-EquipKnife 5-EquipSpoon")]
+    [Range(0, 5)]
     public int KindItem;
     public int price;
     public bool Stackable;
     public Sprite itemIcon;
     [Tooltip("Che tipo di Equipaggiamento? 0-Armor 1-Weapon ")]
+    [Range(0, 1)]
     public int TypesE;
     private Inventory Inv;
     #endregion
     public void Use(int whatDo)
-    {if(whatDo == 0)
+    {if(whatDo == 0)//Lo usa
     {Inv = GameObject.FindWithTag("Manager").GetComponent<Inventory>();
     Inv.RemoveItem(this, 1);}
-    else if(whatDo == 1)
+    else if(whatDo == 1)//Lo vende
     {GameManager.instance.money += price;
     Inv = GameObject.FindWithTag("Manager").GetComponent<Inventory>();
     Inv.RemoveItem(this, 1);
