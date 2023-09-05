@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Cupole
     second: {fileID: 2100000, guid: 57c309987bf0f684ca2fa9d4fa8bcb05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pav
+    second: {fileID: 2100000, guid: 738e361c0cdc59c4cac0b29d686b672c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

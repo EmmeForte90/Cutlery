@@ -24,6 +24,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Pav
     second: {fileID: 2100000, guid: 0319d556841cbe146a27b3815a7d31c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone
+    second: {fileID: 2100000, guid: 19657dc114f97c54da03682e34b30342, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
