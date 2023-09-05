@@ -5,6 +5,9 @@ using UnityEngine.UI;
 public class SimpleEnemy : MonoBehaviour
 {
     public int ID;
+    [Header("Change Script")]
+    public SimpleEnemy This;
+    public DeathAnimation DeathANM;
 
     [Header("Stop For Test")]
     public GameObject player;
@@ -106,6 +109,8 @@ public class SimpleEnemy : MonoBehaviour
         {if(!DieB){TakeDamage(PlayerStats.instance.K_attack);}}
         else if (collision.gameObject.CompareTag("S_Coll"))
         {if(!DieB){TakeDamage(PlayerStats.instance.S_attack);}}
+        else if (collision.gameObject.CompareTag("Spell"))
+        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack += Bullet.instance.damage);}}
     }
     
     private void StartAttack()
@@ -148,14 +153,10 @@ public class SimpleEnemy : MonoBehaviour
         AudioManager.instance.PlayUFX(11);
         Stats.gameObject.SetActive(false);
         DM.EnemyinArena -= 1;
-        Anm.PlayAnimation(DieAnimationName);
-        Icon.SetActive(true);
-        StartCoroutine(TimeDestroy());
-    }
-    private IEnumerator TimeDestroy()
-    {
-        yield return new WaitForSeconds(4);
-        Destroy(gameObject);
+        //Anm.PlayAnimation(DieAnimationName);
+        Icon.SetActive(false);
+        DeathANM.enabled = true; 
+        This.enabled = false;
     }
     #if(UNITY_EDITOR)
     #region Gizmos

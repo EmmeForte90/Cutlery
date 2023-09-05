@@ -21,6 +21,8 @@ TagManager:
   - Question
   - Items
   - Chest
+  - FxTemporaire
+  - Spell
   layers:
   - Default
   - TransparentFX

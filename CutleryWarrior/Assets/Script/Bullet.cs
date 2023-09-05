@@ -8,9 +8,11 @@ public class Bullet : MonoBehaviour
     public GameObject hitEffect;
     private Transform player;
     private Rigidbody rb;
+    public static Bullet instance;
     #endregion
     public void Start()
     {
+        if (instance == null){instance = this;}
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("F_Player").transform;
         if(player.transform.localScale.x == 1){Vector3 direction = player.right; rb.velocity = direction.normalized * speed;}

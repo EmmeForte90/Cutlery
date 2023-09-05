@@ -18,7 +18,7 @@ public class ChargeSkill : MonoBehaviour
     public Spine.AnimationState _spineAnimationState;    
     public SkeletonAnimation _skeletonAnimation;
     private bool isSkillLaunched = false;
-
+    public  AnimationManager AM;
     [SpineAnimation][SerializeField] string ChargeAnm;
     [SpineAnimation][SerializeField] string LunchAnm;
 
@@ -87,7 +87,8 @@ IEnumerator SkillLunch()
     VFX.SetActive(false);
     Mossa.SetActive(false);
     GameManager.instance.CloseTimerMenu();
-    _spineAnimationState.SetAnimation(0, LunchAnm, false); 
+    //_spineAnimationState.SetAnimation(0, LunchAnm, false); 
+    AM.PlayAnimation(LunchAnm);
     print("LunchSkill");
     yield return new WaitForSeconds(3f);
     GameManager.instance.ResumeBattle();

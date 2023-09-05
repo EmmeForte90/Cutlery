@@ -555,6 +555,25 @@ public class GameManager : MonoBehaviour
         Manager_S.SwitchScriptsWin();
         Manager_K.SwitchScriptsWin();
     }
+
+    public void PoseDeathF()
+    {
+        Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
+        Manager_F.SwitchScriptsDeath();
+    }
+    public void PoseDeathK()
+    {
+        Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();
+        Manager_K.SwitchScriptsDeath();
+    }
+    public void PoseDeathS()
+    {
+        Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
+        Manager_S.SwitchScriptsDeath();
+    }
+
+
+
     public void StopWin()
     {
         Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
