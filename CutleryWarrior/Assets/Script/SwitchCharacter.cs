@@ -29,9 +29,10 @@ public class SwitchCharacter : MonoBehaviour
     public UIRotationSwitcher rotationSwitcher;
     #endregion
     public void Update()
-    {if(!GameManager.instance.notChange){if(Input.GetKeyDown(KeyCode.Space)){StartCoroutine(CoordinateActor());}}}
+    {if(!GameManager.instance.notChange)
+    {if(Input.GetKeyDown(KeyCode.Space)){StartCoroutine(CoordinateActor()); ind();}}}
     public void Start(){TakeCharacters();}
-    public void Awake(){if (instance == null){instance = this;} ConInt = 1; StartCoroutine(DInd());}
+    public void Awake(){if (instance == null){instance = this;} ConInt = 1;}
     public void Take(){StartCoroutine(CoordinateActor());}
 
     #region ChangeCharacter
@@ -83,12 +84,23 @@ public class SwitchCharacter : MonoBehaviour
         KnifeActive.gameObject.SetActive(true);
         SpoonActive.gameObject.SetActive(true);
     }
-    IEnumerator DInd()
-    { yield return new WaitForSeconds(3);
-        Ind_F.gameObject.SetActive(false);
-        Ind_K.gameObject.SetActive(false); 
-        Ind_S.gameObject.SetActive(false);
+    
+    public void ind()
+    {// Switcha tra gli elementi
+    if (isElement1Active)
+    {
+        Ind_F.gameObject.SetActive(true); 
     }
+    else if (isElement2Active)
+    {   
+        Ind_K.gameObject.SetActive(true); 
+    }
+    else if (isElement3Active)
+    {
+        Ind_S.gameObject.SetActive(true);
+    }
+    }
+    
     IEnumerator CoordinateActor()
     {// Switcha tra gli elementi
     if (isElement1Active)
@@ -106,8 +118,6 @@ public class SwitchCharacter : MonoBehaviour
         AudioManager.instance.PlayUFX(3);
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         vCam.Follow = player.transform;
-        yield return new WaitForSeconds(3);
-        Ind_F.gameObject.SetActive(false); 
         //////////////////////////////
         isElement1Active = false;
         isElement2Active = true;
@@ -127,8 +137,6 @@ public class SwitchCharacter : MonoBehaviour
         AudioManager.instance.PlayUFX(3);
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         vCam.Follow = player.transform;
-        yield return new WaitForSeconds(3);
-        Ind_K.gameObject.SetActive(false); 
         //////////////////////////////
         isElement2Active = false;
         isElement3Active = true;
@@ -148,8 +156,6 @@ public class SwitchCharacter : MonoBehaviour
         AudioManager.instance.PlayUFX(3);
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         vCam.Follow = player.transform;
-        yield return new WaitForSeconds(3);
-        Ind_S.gameObject.SetActive(false); 
         //////////////////////////////
         isElement3Active = false;
         isElement1Active = true;

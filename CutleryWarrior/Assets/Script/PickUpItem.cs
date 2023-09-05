@@ -5,6 +5,7 @@ public class PickUpItem : MonoBehaviour
 {
     #region Header
     public Item specificItem;
+    public bool StartGame = false;
     public int Id;
     [Header("Solo se è in item da Quest")]
     public GameObject Icon;
@@ -61,7 +62,7 @@ public class PickUpItem : MonoBehaviour
         Instantiate(VFXTake, transform.position, transform.rotation);
         AudioManager.instance.PlayUFX(5);
         AddSpecificItem();
-        Inventory.instance.Reward(specificItem, specificQuant);
+        if(!StartGame){Inventory.instance.Reward(specificItem, specificQuant);}
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
         Inventory.instance.itemsArea(Id);
     }

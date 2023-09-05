@@ -13,12 +13,24 @@ public class AnimationManager : MonoBehaviour
     [Header("Fork")]
     private GameObject ForkActive;
     private CharacterMove F_Script;
+    [HideInInspector] public GameObject Bullet;
+    [HideInInspector] public GameObject BigSpell;
+    
+    /////////////////////////////
     [Header("Spoon")]
     private GameObject SpoonActive;
     private CharacterMove S_Script;
+    [HideInInspector] public GameObject Cura;
+    [HideInInspector] public bool isDefence = false;
+    /////////////////////////////
     [Header("Knife")]
     private GameObject KnifeActive;
     private CharacterMove K_Script;
+    [HideInInspector] public GameObject SlashV;
+    [HideInInspector] public GameObject Increase;
+    [HideInInspector] public GameObject SlashH;
+    [HideInInspector] public GameObject SlashB;
+
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
     private string currentAnimationName;
@@ -27,18 +39,7 @@ public class AnimationManager : MonoBehaviour
     public Spine.Skeleton _skeleton;
     Spine.EventData eventData;
     private bool Boom = false;
-    [HideInInspector]
-    public GameObject Bullet;
-    [HideInInspector]
     public Transform BPoint;
-    [HideInInspector]
-    public GameObject SlashV;
-    [HideInInspector]
-    public GameObject SlashH;
-    [HideInInspector]
-    public GameObject SlashB;
-    [HideInInspector]
-    public bool isDefence = false;
     public static AnimationManager instance;
     #endregion
     public void Awake()
@@ -95,6 +96,12 @@ public class AnimationManager : MonoBehaviour
     //Normal VFX
     if (e.Data.Name == "slashV")
     {AudioManager.instance.PlayUFX(8); SlashV.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    if (e.Data.Name == "bigspell")
+    {AudioManager.instance.PlayUFX(8); Instantiate(BigSpell, BPoint.position, BigSpell.transform.rotation); }
+     if (e.Data.Name == "increaseatk")
+    {AudioManager.instance.PlayUFX(8); Instantiate(Increase, BPoint.position, Increase.transform.rotation); }
+    if (e.Data.Name == "cura")
+    {AudioManager.instance.PlayUFX(8); Instantiate(Cura, BPoint.position, Cura.transform.rotation); }
     //
     if (e.Data.Name == "slashH")
     {AudioManager.instance.PlayUFX(8); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
