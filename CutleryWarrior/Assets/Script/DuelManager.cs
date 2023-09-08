@@ -17,6 +17,7 @@ public class DuelManager : MonoBehaviour
     [Header("Fork")]
     public Scrollbar FhealthBar;
     public Image FRageBar;
+    public GameObject MaxRageF;
     public float FcurrentMP;
     public Scrollbar FMPBar;
     public float FcostMP = 20;
@@ -26,6 +27,7 @@ public class DuelManager : MonoBehaviour
     public float KcurrentHealth;
     public Scrollbar KhealthBar;
     public Image KRageBar;
+    public GameObject MaxRageK;
     public float KcurrentMP;
     public Scrollbar KMPBar;
     public float KcostMP = 15;
@@ -35,6 +37,8 @@ public class DuelManager : MonoBehaviour
     public float ScurrentHealth;
     public Scrollbar ShealthBar;
     public Image SRageBar;
+    public GameObject MaxRageS;
+
     public float ScurrentMP;
     public Scrollbar SMPBar;
     public float ScostMP = 10;
@@ -115,6 +119,20 @@ public void Update()
         {PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;}
         if(PlayerStats.instance.S_curMP >= PlayerStats.instance.S_MP)
         {PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;}
+        //
+        if(PlayerStats.instance.K_curRage >= PlayerStats.instance.K_Rage)
+        {MaxRageK.SetActive(true);} 
+        else if(PlayerStats.instance.K_curRage < PlayerStats.instance.K_Rage)
+        {MaxRageK.SetActive(false);}
+        if(PlayerStats.instance.S_curRage >= PlayerStats.instance.S_Rage)
+        {MaxRageS.SetActive(true);} 
+        else if(PlayerStats.instance.S_curRage < PlayerStats.instance.S_Rage)
+        {MaxRageS.SetActive(false);}
+        if(PlayerStats.instance.F_curRage >= PlayerStats.instance.F_Rage)
+        {MaxRageF.SetActive(true);} 
+        else if(PlayerStats.instance.F_curRage < PlayerStats.instance.F_Rage)
+        {MaxRageF.SetActive(false);}
+
         //
         if(EnemyinArena <= 0)
         {StartCoroutine(EndBattle());}

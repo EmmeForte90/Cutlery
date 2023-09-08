@@ -67,11 +67,17 @@ public class ScriptTestBattle : MonoBehaviour
         Stats.S_curHP =  Stats.K_HP;
         Stats.K_curHP =  Stats.S_HP;
     }
-    public void Rage()
+    public void RageMax()
     {
         Stats.F_curRage =  100;
         Stats.S_curRage =  100;
         Stats.K_curRage =  100;
+    }
+    public void RageLess()
+    {
+        Stats.F_curRage =  0;
+        Stats.S_curRage =  0;
+        Stats.K_curRage =  0;
     }
 
 }
