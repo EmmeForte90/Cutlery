@@ -69,7 +69,9 @@ public class ScriptTestBattle : MonoBehaviour
     }
     public void Rage()
     {
-        
+        Stats.F_curRage =  100;
+        Stats.S_curRage =  100;
+        Stats.K_curRage =  100;
     }
 
 }

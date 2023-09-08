@@ -9,6 +9,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float F_curHP = 0;
     [SerializeField] public float F_MP = 0;
     [SerializeField] public float F_curMP = 0;
+    [SerializeField] public float F_curRage = 0;
+    [SerializeField] public float F_Rage = 100;
     [SerializeField] public float F_CostMP = 0;
     [SerializeField] public float F_Exp = 0;
     [SerializeField] public float F_curExp = 0;
@@ -38,6 +40,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float S_curHP = 0;
     [SerializeField] public float S_MP = 0;
     [SerializeField] public float S_curMP = 0;
+    [SerializeField] public float S_curRage = 0;
+    [SerializeField] public float S_Rage = 100;
     [SerializeField] public float S_CostMP = 0;
     [SerializeField] public float S_Exp = 0;
     [SerializeField] public float S_curExp = 0;
@@ -68,6 +72,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float K_MP = 0;
     [SerializeField] public float K_curMP = 0;
     [SerializeField] public float K_CostMP = 0;
+    [SerializeField] public float K_curRage = 0;
+    [SerializeField] public float K_Rage = 100;
     [SerializeField] public float K_Exp = 0;
     [SerializeField] public float K_curExp = 0;
     [SerializeField] public int K_attack = 10;

@@ -16,6 +16,7 @@ public class DuelManager : MonoBehaviour
     private int ItemN;
     [Header("Fork")]
     public Scrollbar FhealthBar;
+    public Image FRageBar;
     public float FcurrentMP;
     public Scrollbar FMPBar;
     public float FcostMP = 20;
@@ -24,6 +25,7 @@ public class DuelManager : MonoBehaviour
     [Header("Knife")]
     public float KcurrentHealth;
     public Scrollbar KhealthBar;
+    public Image KRageBar;
     public float KcurrentMP;
     public Scrollbar KMPBar;
     public float KcostMP = 15;
@@ -32,6 +34,7 @@ public class DuelManager : MonoBehaviour
     [Header("Spoon")]
     public float ScurrentHealth;
     public Scrollbar ShealthBar;
+    public Image SRageBar;
     public float ScurrentMP;
     public Scrollbar SMPBar;
     public float ScostMP = 10;
@@ -68,6 +71,9 @@ public void Awake()
         ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
         ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
         ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        PlayerStats.instance.F_curRage = 0;        
+        PlayerStats.instance.S_curRage = 0;
+        PlayerStats.instance.K_curRage = 0;
         StartCoroutine(StartAI());    
     }
 public void Update()
@@ -78,14 +84,23 @@ public void Update()
         FMPBar.size = PlayerStats.instance.F_curMP / PlayerStats.instance.F_MP;
         FMPBar.size = Mathf.Clamp(FMPBar.size, 0.01f, 1);
         //
+        FRageBar.fillAmount = PlayerStats.instance.F_curRage / PlayerStats.instance.F_Rage;
+        FRageBar.fillAmount = Mathf.Clamp(FRageBar.fillAmount, 0.01f, 1);
+        ////////////////////////////////////////////////////////
         KhealthBar.size = PlayerStats.instance.K_curHP / PlayerStats.instance.K_HP;
         KhealthBar.size = Mathf.Clamp(KhealthBar.size, 0.01f, 1);
         //
+        KRageBar.fillAmount = PlayerStats.instance.K_curRage / PlayerStats.instance.K_Rage;
+        KRageBar.fillAmount = Mathf.Clamp(KRageBar.fillAmount, 0.01f, 1);
+        //
         KMPBar.size = PlayerStats.instance.K_curMP / PlayerStats.instance.K_MP;
         KMPBar.size = Mathf.Clamp(KMPBar.size, 0.01f, 1);
-        //
+        //////////////////////////////////////////////////////////
         ShealthBar.size = PlayerStats.instance.S_curHP / PlayerStats.instance.S_MP;
         ShealthBar.size = Mathf.Clamp(ShealthBar.size, 0.01f, 1);
+        //
+        SRageBar.fillAmount = PlayerStats.instance.S_curRage / PlayerStats.instance.S_Rage;
+        SRageBar.fillAmount = Mathf.Clamp(SRageBar.fillAmount, 0.01f, 1);
         //
         SMPBar.size = PlayerStats.instance.S_curMP / PlayerStats.instance.S_MP;
         SMPBar.size = Mathf.Clamp(SMPBar.size, 0.01f, 1);
