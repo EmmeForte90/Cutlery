@@ -140,6 +140,7 @@ public class Mercante : MonoBehaviour
     GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
     Box.gameObject.SetActive(true);
     StartCoroutine(BoxDel());
+    PuppetM.instance.Talk();
     switch(Tipo)
     {
         case 0:
@@ -301,7 +302,7 @@ public class Mercante : MonoBehaviour
         }
     }
     #endregion
-    IEnumerator BoxDel(){yield return new WaitForSeconds(5);Box.gameObject.SetActive(false);}
+    IEnumerator BoxDel(){yield return new WaitForSeconds(5);Box.gameObject.SetActive(false); PuppetM.instance.Idle();}
     IEnumerator ShowDialogue()
     {    
     Talk = true;

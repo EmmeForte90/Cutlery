@@ -197,12 +197,15 @@ public class MercanteComb : MonoBehaviour
         {EquipM_K.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 5)
         {EquipM_S.instance.AddItem(specificItem, specificQuant);}
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Thank you!";
     }else
     {
         AudioManager.instance.PlayUFX(10);
         Box.gameObject.SetActive(true);
+        PuppetM.instance.Talk();
         StartCoroutine(BoxDel());
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Nothing to do!";
     }
     }
@@ -221,12 +224,14 @@ public class MercanteComb : MonoBehaviour
         StartCoroutine(BoxDel());
         if(newItem.KindItem == 1)
         {QuestsManager.instance.AddItem(specificItem, specificQuant);}
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Thank you!";
     }else
     {
         AudioManager.instance.PlayUFX(10);
         Box.gameObject.SetActive(true);
         StartCoroutine(BoxDel());
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Nothing to do!";
     }
     }
@@ -245,12 +250,14 @@ public class MercanteComb : MonoBehaviour
         StartCoroutine(BoxDel());
         if(newItem.KindItem == 3)
         {EquipM_F.instance.AddItem(specificItem, specificQuant);}
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Thank you!";
     }else
     {
         AudioManager.instance.PlayUFX(10);
         Box.gameObject.SetActive(true);
         StartCoroutine(BoxDel());
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Nothing to do!";
     }
     }
@@ -269,12 +276,14 @@ public class MercanteComb : MonoBehaviour
         StartCoroutine(BoxDel());
         if(newItem.KindItem == 3)
         {EquipM_K.instance.AddItem(specificItem, specificQuant);}
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Thank you!";
     }else
     {
         AudioManager.instance.PlayUFX(10);
         Box.gameObject.SetActive(true);
         StartCoroutine(BoxDel());
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Nothing to do!";
     }
     }
@@ -293,12 +302,14 @@ public class MercanteComb : MonoBehaviour
         StartCoroutine(BoxDel());
         if(newItem.KindItem == 3)
         {EquipM_S.instance.AddItem(specificItem, specificQuant);}
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Thank you!";
     }else
     {
         AudioManager.instance.PlayUFX(10);
         Box.gameObject.SetActive(true);
         StartCoroutine(BoxDel());
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Nothing to do!";
     }
     }
@@ -318,12 +329,14 @@ public class MercanteComb : MonoBehaviour
         StartCoroutine(BoxDel());
         if(newItem.KindItem == 3)
         {EquipM_S.instance.AddItem(specificItem, specificQuant);}
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Thank you!";
     }else
     {
         AudioManager.instance.PlayUFX(10);
         Box.gameObject.SetActive(true);
         StartCoroutine(BoxDel());
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Nothing to do!";
     }
     }
@@ -349,6 +362,7 @@ public class MercanteComb : MonoBehaviour
         else if(newItem.KindItem == 0)
         {Inventory.instance.AddItem(specificItem, specificQuant);
         InventoryB.instance.AddItem(specificItem, specificQuant);}
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Ah! So you have money! Good for you, or better... For me!"; // Reference to the TextMeshProUGUI component
         break;
         case 1:
@@ -359,6 +373,7 @@ public class MercanteComb : MonoBehaviour
         {QuestsManager.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 2)
         {KeyManager.instance.AddItem(specificItem, specificQuant);}
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Thank you so kind, you don't will have regrets."; // Reference to the TextMeshProUGUI component
         break;
         case 2:
@@ -369,6 +384,7 @@ public class MercanteComb : MonoBehaviour
         {QuestsManager.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 2)
         {KeyManager.instance.AddItem(specificItem, specificQuant);}
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Thank you my friends!"; // Reference to the TextMeshProUGUI component
         break;
         case 3:
@@ -379,6 +395,7 @@ public class MercanteComb : MonoBehaviour
         {QuestsManager.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 2)
         {KeyManager.instance.AddItem(specificItem, specificQuant);}
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Thank you and come back again!"; // Reference to the TextMeshProUGUI component
         break;
         case 4:
@@ -389,6 +406,7 @@ public class MercanteComb : MonoBehaviour
         {QuestsManager.instance.AddItem(specificItem, specificQuant);}
         else if(newItem.KindItem == 2)
         {KeyManager.instance.AddItem(specificItem, specificQuant);}
+        PuppetM.instance.Talk();
         dialogueMenu.text = "Thank you, buddy!"; // Reference to the TextMeshProUGUI component
         break;
     }
@@ -396,6 +414,7 @@ public class MercanteComb : MonoBehaviour
     {AudioManager.instance.PlayUFX(10);
     Box.gameObject.SetActive(true);
     StartCoroutine(BoxDel());
+    PuppetM.instance.Talk();
     switch(Tipo)
     {
         case 0:
@@ -512,7 +531,7 @@ public class MercanteComb : MonoBehaviour
         }
     }
     #endregion
-    IEnumerator BoxDel(){yield return new WaitForSeconds(5);Box.gameObject.SetActive(false);}
+    IEnumerator BoxDel(){yield return new WaitForSeconds(5);Box.gameObject.SetActive(false); PuppetM.instance.Idle();}
     IEnumerator ShowDialogue()
     {    
     Talk = true;
