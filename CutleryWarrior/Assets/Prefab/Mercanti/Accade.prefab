@@ -14753,7 +14753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IDCharacter: 3
-  Tipo: 4
+  Tipo: 1
   objectToCheck:
   - {fileID: 11400000, guid: d9363611659949341b7ef6afe925a057, type: 2}
   - {fileID: 11400000, guid: d9363611659949341b7ef6afe925a057, type: 2}

@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 22f2b0c6865efdc4094575a6451bb6a3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b7f82870e20d38c41ab2996c923bb72a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2198,7 +2198,7 @@ MonoBehaviour:
         m_MethodName: AddItem
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 9b47050a37e3a8f418d9ca431eeb3b39,
+          m_ObjectArgument: {fileID: 11400000, guid: 4aa6c4f79d16b5f44957af0a3efe27dd,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
           m_IntArgument: 0
@@ -2221,7 +2221,7 @@ MonoBehaviour:
   specificItemGive: 1
   randomItemGive: 0
   itemsToGive: []
-  specificItem: {fileID: 11400000, guid: 9b47050a37e3a8f418d9ca431eeb3b39, type: 2}
+  specificItem: {fileID: 11400000, guid: 4aa6c4f79d16b5f44957af0a3efe27dd, type: 2}
   specificQuant: 1
 --- !u!114 &9038035830705857428
 MonoBehaviour:
@@ -2245,7 +2245,7 @@ MonoBehaviour:
           m_MethodName: Preview
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 9b47050a37e3a8f418d9ca431eeb3b39,
+            m_ObjectArgument: {fileID: 11400000, guid: 4aa6c4f79d16b5f44957af0a3efe27dd,
               type: 2}
             m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
             m_IntArgument: 0
@@ -3314,7 +3314,7 @@ MonoBehaviour:
         m_MethodName: AddItem
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 1e41db52343c9d0438471ece436df90f,
+          m_ObjectArgument: {fileID: 11400000, guid: b388426943b427c41981d91c53169b30,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
           m_IntArgument: 0
@@ -3337,7 +3337,7 @@ MonoBehaviour:
   specificItemGive: 1
   randomItemGive: 0
   itemsToGive: []
-  specificItem: {fileID: 11400000, guid: 1e41db52343c9d0438471ece436df90f, type: 2}
+  specificItem: {fileID: 11400000, guid: b388426943b427c41981d91c53169b30, type: 2}
   specificQuant: 1
 --- !u!114 &6288012463362537381
 MonoBehaviour:
@@ -3361,7 +3361,7 @@ MonoBehaviour:
           m_MethodName: Preview
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 1e41db52343c9d0438471ece436df90f,
+            m_ObjectArgument: {fileID: 11400000, guid: b388426943b427c41981d91c53169b30,
               type: 2}
             m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
             m_IntArgument: 0
@@ -3664,7 +3664,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e3ef543c5b0fa974593b67a4376265f0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d5361313d3a229144bf14fe829fab614, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5462,7 +5462,7 @@ MonoBehaviour:
         m_MethodName: AddItem
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 266272d5854bf7642b0a3e99b3c60995,
+          m_ObjectArgument: {fileID: 11400000, guid: 8ab9019407155c9498b7cac1025934c4,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
           m_IntArgument: 0
@@ -5485,7 +5485,7 @@ MonoBehaviour:
   specificItemGive: 1
   randomItemGive: 0
   itemsToGive: []
-  specificItem: {fileID: 11400000, guid: 266272d5854bf7642b0a3e99b3c60995, type: 2}
+  specificItem: {fileID: 11400000, guid: 8ab9019407155c9498b7cac1025934c4, type: 2}
   specificQuant: 1
 --- !u!114 &2327405278745969325
 MonoBehaviour:
@@ -5509,7 +5509,7 @@ MonoBehaviour:
           m_MethodName: Preview
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 266272d5854bf7642b0a3e99b3c60995,
+            m_ObjectArgument: {fileID: 11400000, guid: 8ab9019407155c9498b7cac1025934c4,
               type: 2}
             m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
             m_IntArgument: 0
@@ -5968,7 +5968,7 @@ MonoBehaviour:
         m_MethodName: AddItem
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: aa25eceeffb37fb4ca011d209c55c7f0,
+          m_ObjectArgument: {fileID: 11400000, guid: 541e7c162c4cc7845abb83f184856191,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
           m_IntArgument: 0
@@ -5991,7 +5991,7 @@ MonoBehaviour:
   specificItemGive: 1
   randomItemGive: 0
   itemsToGive: []
-  specificItem: {fileID: 11400000, guid: aa25eceeffb37fb4ca011d209c55c7f0, type: 2}
+  specificItem: {fileID: 11400000, guid: 541e7c162c4cc7845abb83f184856191, type: 2}
   specificQuant: 1
 --- !u!114 &7319836007719683037
 MonoBehaviour:
@@ -6015,7 +6015,7 @@ MonoBehaviour:
           m_MethodName: Preview
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: aa25eceeffb37fb4ca011d209c55c7f0,
+            m_ObjectArgument: {fileID: 11400000, guid: 541e7c162c4cc7845abb83f184856191,
               type: 2}
             m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
             m_IntArgument: 0
@@ -6638,7 +6638,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d251f1daff88383458e758240564f9ff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4a09de6df156cb2428e4aae3b42f0576, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8063,7 +8063,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: df4ca4b67a8ef62409514f920e7c5a50, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 408d4f94da3a391449d09b8add6698eb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9145,7 +9145,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 399aff037d581b046b786a0a06c2d595, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 905de77023b38574aa6e493f5ec770a8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13466,7 +13466,7 @@ MonoBehaviour:
         m_MethodName: AddItem
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 0832718136cc39946910a9e699edb131,
+          m_ObjectArgument: {fileID: 11400000, guid: d8928be5fe44e36488dd3e1898ba913f,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
           m_IntArgument: 0
@@ -13489,7 +13489,7 @@ MonoBehaviour:
   specificItemGive: 1
   randomItemGive: 0
   itemsToGive: []
-  specificItem: {fileID: 11400000, guid: 0832718136cc39946910a9e699edb131, type: 2}
+  specificItem: {fileID: 11400000, guid: d8928be5fe44e36488dd3e1898ba913f, type: 2}
   specificQuant: 1
 --- !u!114 &5403543537293447495
 MonoBehaviour:
@@ -13513,7 +13513,7 @@ MonoBehaviour:
           m_MethodName: Preview
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 0832718136cc39946910a9e699edb131,
+            m_ObjectArgument: {fileID: 11400000, guid: d8928be5fe44e36488dd3e1898ba913f,
               type: 2}
             m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
             m_IntArgument: 0
@@ -13935,7 +13935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IDCharacter: 2
-  Tipo: 0
+  Tipo: 3
   itemList: []
   quantityList: 
   inventoryItem: {fileID: 2484211418747533182}
