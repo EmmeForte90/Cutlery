@@ -20,6 +20,15 @@ public class DeathAnimation : MonoBehaviour
             //Meccanica di restore
         }
     }
+    private void OnEnable() 
+    {
+         if(!isPlayer){StartCoroutine(Death()); spineAnimationState.SetAnimation(0, DeathAnimationName, false);}
+        else if(isPlayer)
+        {
+            DeathLoop();
+            //Meccanica di restore
+        }
+    }
     void Update()
     {}    
     private IEnumerator Death()

@@ -30,8 +30,8 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float F_curExpCont;
     [HideInInspector] public int F_attackCont;
     [HideInInspector] public int F_defenseCont;
-    [HideInInspector] public int F_poisonResistanceCont;
-    [HideInInspector] public int F_paralysisResistanceCont;
+    [HideInInspector] public int F_poisonResistanceCont = 1;
+    [HideInInspector] public int F_paralysisResistanceCont = 1;
     [HideInInspector] public int F_sleepResistanceCont;
     [HideInInspector] public int F_rustResistanceCont;
     [Header("Spoon")]
@@ -61,8 +61,8 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float S_curExpCont;
     [HideInInspector] public int S_attackCont;
     [HideInInspector] public int S_defenseCont;
-    [HideInInspector] public int S_poisonResistanceCont;
-    [HideInInspector] public int S_paralysisResistanceCont;
+    [HideInInspector] public int S_poisonResistanceCont = 1;
+    [HideInInspector] public int S_paralysisResistanceCont = 1;
     [HideInInspector] public int S_sleepResistanceCont;
     [HideInInspector] public int S_rustResistanceCont;
     [Header("Knife")]
@@ -92,8 +92,8 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float K_curExpCont;
     [HideInInspector] public int K_attackCont;
     [HideInInspector] public int K_defenseCont;
-    [HideInInspector] public int K_poisonResistanceCont;
-    [HideInInspector] public int K_paralysisResistanceCont;
+    [HideInInspector] public int K_poisonResistanceCont = 1;
+    [HideInInspector] public int K_paralysisResistanceCont = 1;
     [HideInInspector] public int K_sleepResistanceCont;
     [HideInInspector] public int K_rustResistanceCont;
     //

@@ -9,6 +9,8 @@ public class ManagerCharacter : MonoBehaviour
     public Winanimation WinANM;
     public ChargeSkill Skill;
     public DeathAnimation Death;
+    public StunAnimation Stun;
+
 
     public void SwitchScriptsPlayer()
     {
@@ -17,6 +19,7 @@ public class ManagerCharacter : MonoBehaviour
             WinANM.enabled = false;
             Skill.enabled = false;
             Death.enabled = false;
+             Stun.enabled = false;
             Player.Direction();
     }
     public void SwitchScriptsActor()
@@ -26,6 +29,7 @@ public class ManagerCharacter : MonoBehaviour
             WinANM.enabled = false;
             Skill.enabled = false;
             Death.enabled = false;
+             Stun.enabled = false;
             Actor.Direction();
     }
 
@@ -36,6 +40,7 @@ public class ManagerCharacter : MonoBehaviour
             WinANM.enabled = true;
             Skill.enabled = false;
             Death.enabled = false;
+             Stun.enabled = false;
             WinANM.Direction();
             WinANM.Win();
     }
@@ -46,6 +51,7 @@ public class ManagerCharacter : MonoBehaviour
             WinANM.enabled = false;
             Skill.enabled = true;
             Death.enabled = false;
+             Stun.enabled = false;
     }
     public void SwitchScriptsDeath()
     {
@@ -54,5 +60,15 @@ public class ManagerCharacter : MonoBehaviour
             WinANM.enabled = false;
             Skill.enabled = false;
             Death.enabled = true;
+            Stun.enabled = false;
+    }
+    public void SwitchScriptsStun()
+    {
+            Player.enabled = false;
+            Actor.enabled = false;
+            WinANM.enabled = false;
+            Skill.enabled = false;
+            Death.enabled = false;
+            Stun.enabled = true;
     }
 }

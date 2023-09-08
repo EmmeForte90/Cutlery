@@ -132,8 +132,27 @@ public void Update()
         {MaxRageF.SetActive(true);} 
         else if(PlayerStats.instance.F_curRage < PlayerStats.instance.F_Rage)
         {MaxRageF.SetActive(false);}
-
         //
+        if(PlayerStats.instance.S_curHP <= 0)
+        {GameManager.instance.Die();}
+        if(PlayerStats.instance.K_curHP <= 0)
+        {GameManager.instance.Die();}
+        if(PlayerStats.instance.F_curHP <= 0)
+        {GameManager.instance.Die();}
+        //
+        if(PlayerStats.instance.F_paralysisResistance <= 0)
+        {GameManager.instance.Stun();}
+        if(PlayerStats.instance.K_paralysisResistance <= 0)
+        {GameManager.instance.Stun();}
+        if(PlayerStats.instance.S_paralysisResistance <= 0)
+        {GameManager.instance.Stun();}
+        //
+        if(PlayerStats.instance.F_poisonResistance <= 0)
+        {GameManager.instance.Poison();}
+        if(PlayerStats.instance.S_poisonResistance <= 0)
+        {GameManager.instance.Poison();}
+        if(PlayerStats.instance.K_poisonResistance <= 0)
+        {GameManager.instance.Poison();}
         if(EnemyinArena <= 0)
         {StartCoroutine(EndBattle());}
         if(WinEnd){if (Input.GetMouseButtonDown(0)){L_C.Escape();}}

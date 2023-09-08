@@ -546,6 +546,37 @@ public class GameManager : MonoBehaviour
         Manager_S.SwitchScriptsCharge();
         Manager_K.SwitchScriptsCharge();
     }
+
+    public void Die()
+    {
+        Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
+        Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
+        Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();
+        Manager_F.SwitchScriptsDeath();
+        Manager_S.SwitchScriptsDeath();
+        Manager_K.SwitchScriptsDeath();
+    }
+    public void Stun()
+    {
+        Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
+        Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
+        Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();
+        Manager_F.SwitchScriptsStun();
+        Manager_S.SwitchScriptsStun();
+        Manager_K.SwitchScriptsStun();
+    }
+    public void Poison()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_F.Poison(); ch_K.Poison(); ch_S.Poison();
+        ch_FAc.Poison(); ch_KAc.Poison(); ch_SAc.Poison();
+    }
+
     public void PoseWin()
     {
         Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
@@ -572,8 +603,6 @@ public class GameManager : MonoBehaviour
         Manager_S.SwitchScriptsDeath();
     }
 
-
-
     public void StopWin()
     {
         Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
@@ -599,6 +628,8 @@ public class GameManager : MonoBehaviour
         ch_SAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
         ch_F.Idle();ch_K.Idle();ch_S.Idle();
         ch_F.Stop();ch_K.Stop();ch_S.Stop();
+        ch_F.ReCol();ch_K.ReCol();ch_S.ReCol();
+        ch_FAc.ReCol();ch_KAc.ReCol();ch_SAc.ReCol();
         ch_FAc.Idle();ch_KAc.Idle();ch_SAc.Idle();
     }
     public void Allarm()

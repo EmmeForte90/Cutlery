@@ -38,6 +38,7 @@ public class CharacterMove : MonoBehaviour
     private bool canDodge = true;
     public bool warning = false;
     private float hor;
+    public GameObject VFXPoison;
     private bool Right = true;    
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string WalkAnimationName;
@@ -270,9 +271,16 @@ public void Awake()
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
     public void Allarm(){warning = true;}
     public void StopAllarm(){warning = false;}
-    //public void PoseWin(){Win = true;}
-    //public void StopWin(){Win = false;}
-
+    public void TakeDamage()
+    {
+    //int danno_subito = Mathf.Max(damage - defense, 0);
+    AudioManager.instance.PlaySFX(8);
+    //Debug.Log("danno +"+ danno_subito);
+    //Instantiate(VFXHurt, transform.position, transform.rotation);
+    Anm.TemporaryChangeColor(Color.red);
+    }
+    public void Poison(){Anm.ChangeColor(Color.green); VFXPoison.SetActive(true);}
+    public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false);}
     public void FixedUpdate()
     {if(!inputCTR)
     {if(!Interact && !isRun || isDefence)

@@ -33,6 +33,7 @@ public class CharacterFollow : MonoBehaviour
     private bool isGrounded;
     private bool isWalking;
     private bool isGuard;
+    public GameObject VFXPoison;
     [SpineAnimation][SerializeField]  string WalkAnimationName;    
     [SpineAnimation][SerializeField]  string RunAnimationName;
     [SpineAnimation][SerializeField]  string RunBAnimationName;    
@@ -290,6 +291,17 @@ public class CharacterFollow : MonoBehaviour
     #region Defence
     public void DefenceEnm(){Anm.PlayAnimationLoop(GuardAnimationName); isGuard = true;}
     #endregion
+
+    public void TakeDamage()
+    {
+    //int danno_subito = Mathf.Max(damage - defense, 0);
+    AudioManager.instance.PlaySFX(8);
+    //Debug.Log("danno +"+ danno_subito);
+    //Instantiate(VFXHurt, transform.position, transform.rotation);
+    Anm.TemporaryChangeColor(Color.red);
+    }
+    public void Poison(){Anm.ChangeColor(Color.green); VFXPoison.SetActive(true);}
+    public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false);}
 
     /*public void OnTriggerEnter(Collider collision)
     {

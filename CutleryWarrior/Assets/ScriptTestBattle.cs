@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ScriptTestBattle : MonoBehaviour
 {
-    public PlayerStats Stats;
+    private PlayerStats Stats;
     public DuelManager DM;
-    public CharacterMove F_Script;
-    public CharacterFollow ch_FAc;
-    public CharacterMove K_Script;
-    public CharacterFollow ch_KAc;
-    public CharacterMove S_Script;
-    public CharacterFollow ch_SAc;
-    public SwitchCharacter Switch;
+    private CharacterMove F_Script;
+    private CharacterFollow ch_FAc;
+    private CharacterMove K_Script;
+    private CharacterFollow ch_KAc;
+    private CharacterMove S_Script;
+    private CharacterFollow ch_SAc;
+    private SwitchCharacter Switch;
     public float DamageTest;
     public void Awake()
     {
@@ -34,6 +34,12 @@ public class ScriptTestBattle : MonoBehaviour
         Stats.F_curHP -=  DamageTest;
         Stats.S_curHP -=  DamageTest;
         Stats.K_curHP -=  DamageTest;
+        S_Script.TakeDamage();
+        F_Script.TakeDamage();
+        K_Script.TakeDamage();
+        ch_SAc.TakeDamage();
+        ch_KAc.TakeDamage();
+        ch_FAc.TakeDamage();
     }
 
     public void Restore()
@@ -41,6 +47,7 @@ public class ScriptTestBattle : MonoBehaviour
         Stats.F_curHP =  Stats.F_HP;
         Stats.S_curHP =  Stats.K_HP;
         Stats.K_curHP =  Stats.S_HP;
+        
     }
 
     public void DeathPL()
@@ -55,17 +62,29 @@ public class ScriptTestBattle : MonoBehaviour
     }
     public void Stun()
     {
-        
+        Stats.K_paralysisResistance = 0;
+        Stats.F_paralysisResistance = 0;
+        Stats.S_paralysisResistance = 0;
     }
     public void Poison()
     {
-       
+        Stats.K_poisonResistance = 0;
+        Stats.S_poisonResistance = 0;
+        Stats.F_poisonResistance = 0;
     }
     public void Recover()
     {
         Stats.F_curHP =  Stats.F_HP;
         Stats.S_curHP =  Stats.K_HP;
         Stats.K_curHP =  Stats.S_HP;
+        Stats.K_paralysisResistance = 1;
+        Stats.F_paralysisResistance = 1;
+        Stats.S_paralysisResistance = 1;
+        //
+        Stats.K_poisonResistance = 1;
+        Stats.F_poisonResistance = 1;
+        Stats.S_poisonResistance = 1;
+        GameManager.instance.StopWin();
     }
     public void RageMax()
     {
