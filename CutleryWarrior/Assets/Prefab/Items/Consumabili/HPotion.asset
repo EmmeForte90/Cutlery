@@ -19,7 +19,7 @@ MonoBehaviour:
   KindItem: 0
   price: 40
   Stackable: 1
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: b8005adc0cbd53c4090fc1d285b18fed, type: 3}
   TypesE: 0
   typeOfConsumable: 0
   HPRecover: 50

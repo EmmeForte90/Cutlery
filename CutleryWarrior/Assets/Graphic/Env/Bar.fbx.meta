@@ -3,7 +3,12 @@ guid: 1fa2e6e70ffae594e987d547289d9937
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sandstone
+    second: {fileID: 2100000, guid: 0952b009287b7e74f8c05a5500235007, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
