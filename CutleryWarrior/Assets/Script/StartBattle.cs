@@ -1,13 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Spine.Unity;
-using Spine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
 using Cinemachine;
-using UnityEngine.UI;
-using TMPro;
+
 public class StartBattle : MonoBehaviour
 {
     #region Header
