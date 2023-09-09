@@ -7,11 +7,11 @@ public class CharacterFollow : MonoBehaviour
     [Tooltip("0 - Exploration, 1 - Battle")]
     public int IDAction = 0; //Che tipo di personaggio è
     [Header("Character")]
-    public bool fork;
+    [Tooltip("Scegli personaggi 0.Fork 1.Knife 2.Spoon")]
+    [Range(0, 2)]
+    public int kindCh;
     public Transform Fork;
-    public bool knife;
     public Transform Knife;
-    public bool spoon;
     public Transform Spoon;
     public int order = 0;
     private Transform Player;
@@ -33,7 +33,11 @@ public class CharacterFollow : MonoBehaviour
     private bool isGrounded;
     private bool isWalking;
     private bool isGuard;
+    private float defense;
+    private float danno_subito;
     public GameObject VFXPoison;
+    public GameObject VFXHurt;
+    public float TimePoison = 3;   
     [SpineAnimation][SerializeField]  string WalkAnimationName;    
     [SpineAnimation][SerializeField]  string RunAnimationName;
     [SpineAnimation][SerializeField]  string RunBAnimationName;    
@@ -98,9 +102,19 @@ public class CharacterFollow : MonoBehaviour
         case 1: 
         if(!Win){
         if (target == null && !take){Choise(); take = true;}
-        if(fork && !knife && !spoon) {ForkB();} //Se è forchetta
-        else if(!fork && knife && !spoon) {KnifeB();} //Se è Coltello
-        else if(!fork && !knife && spoon) {SpoonB();} //Se è Cucchiaio
+        switch (kindCh)
+        {
+            case 0:
+            ForkB();
+            break;
+            case 1:
+            KnifeB();
+            break; 
+            case 2:
+            SpoonB();
+            break;
+        }
+        ///////////////////////////////////////
         }
         break;
         }}  
@@ -292,33 +306,58 @@ public class CharacterFollow : MonoBehaviour
     public void DefenceEnm(){Anm.PlayAnimationLoop(GuardAnimationName); isGuard = true;}
     #endregion
 
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
-    //int danno_subito = Mathf.Max(damage - defense, 0);
+        switch (kindCh)
+        {
+            case 0:
+            defense = PlayerStats.instance.F_defense;
+            break;
+            case 1:
+            defense = PlayerStats.instance.K_defense;
+            break; 
+            case 2:
+            defense = PlayerStats.instance.S_defense;
+            break;
+        }
+        danno_subito = Mathf.Max(damage - defense, 0);
+        switch (kindCh)
+        {
+            case 0:
+            PlayerStats.instance.F_curHP -= danno_subito;
+            break;
+            case 1:
+            PlayerStats.instance.K_curHP -= danno_subito;
+            break; 
+            case 2:
+            PlayerStats.instance.S_curHP -= danno_subito;
+            break;
+        }
     AudioManager.instance.PlaySFX(8);
-    //Debug.Log("danno +"+ danno_subito);
-    //Instantiate(VFXHurt, transform.position, transform.rotation);
+    //Debug.Log("danno "+ danno_subito);
+    Instantiate(VFXHurt, transform.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);
     }
-    public void Poison(){Anm.ChangeColor(Color.green); VFXPoison.SetActive(true);}
-    public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false);}
-
-    /*public void OnTriggerEnter(Collider collision)
+    #region Stato Veleno
+    public void Poison(){Anm.ChangeColor(Color.green); VFXPoison.SetActive(true); StartCoroutine(Poi());}
+    private IEnumerator Poi()
     {
-        if (collision.gameObject.CompareTag("Enm_Coll"))
-        {TakeDamage(PlayerStats.instance.F_attack);} 
+        yield return new WaitForSeconds(TimePoison);
+        switch (kindCh)
+        {
+            case 0:
+            GameManager.instance.RestoreF();
+            break;
+            case 1:
+            GameManager.instance.RestoreK();
+            break; 
+            case 2:
+            GameManager.instance.RestoreS();
+            break;
+        }
     }
-
-    public void TakeDamage(int damage)
-    {
-    if(!Die){
-    //int danno_subito = Mathf.Max(damage - defense, 0);
-    //currentHealth -= danno_subito;
-    AudioManager.instance.PlaySFX(8);
-    //Debug.Log("danno +"+ danno_subito);
-    Instantiate(VFXHurt, transform.position, transform.rotation);
-    Anm.TemporaryChangeColor(Color.red);}
-    }*/
+    #endregion
+    public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false);}
 
 #if(UNITY_EDITOR)
 #region Gizmos

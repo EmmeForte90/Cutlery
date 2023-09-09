@@ -94,21 +94,21 @@ public void Update()
         KhealthBar.size = PlayerStats.instance.K_curHP / PlayerStats.instance.K_HP;
         KhealthBar.size = Mathf.Clamp(KhealthBar.size, 0.01f, 1);
         //
-        KRageBar.fillAmount = PlayerStats.instance.K_curRage / PlayerStats.instance.K_Rage;
-        KRageBar.fillAmount = Mathf.Clamp(KRageBar.fillAmount, 0.01f, 1);
-        //
         KMPBar.size = PlayerStats.instance.K_curMP / PlayerStats.instance.K_MP;
         KMPBar.size = Mathf.Clamp(KMPBar.size, 0.01f, 1);
-        //////////////////////////////////////////////////////////
-        ShealthBar.size = PlayerStats.instance.S_curHP / PlayerStats.instance.S_MP;
-        ShealthBar.size = Mathf.Clamp(ShealthBar.size, 0.01f, 1);
         //
-        SRageBar.fillAmount = PlayerStats.instance.S_curRage / PlayerStats.instance.S_Rage;
-        SRageBar.fillAmount = Mathf.Clamp(SRageBar.fillAmount, 0.01f, 1);
+        KRageBar.fillAmount = PlayerStats.instance.K_curRage / PlayerStats.instance.K_Rage;
+        KRageBar.fillAmount = Mathf.Clamp(KRageBar.fillAmount, 0.01f, 1);
+        //////////////////////////////////////////////////////////
+        ShealthBar.size = PlayerStats.instance.S_curHP / PlayerStats.instance.S_HP;
+        ShealthBar.size = Mathf.Clamp(ShealthBar.size, 0.01f, 1);
         //
         SMPBar.size = PlayerStats.instance.S_curMP / PlayerStats.instance.S_MP;
         SMPBar.size = Mathf.Clamp(SMPBar.size, 0.01f, 1);
-        //            
+        //
+        SRageBar.fillAmount = PlayerStats.instance.S_curRage / PlayerStats.instance.S_Rage;
+        SRageBar.fillAmount = Mathf.Clamp(SRageBar.fillAmount, 0.01f, 1);
+        //           
         PlayerStats.instance.F_curMP += F_SpeedRestore * Time.deltaTime;
         PlayerStats.instance.K_curMP += K_SpeedRestore * Time.deltaTime;
         PlayerStats.instance.S_curMP += S_SpeedRestore * Time.deltaTime;
@@ -134,25 +134,25 @@ public void Update()
         {MaxRageF.SetActive(false);}
         //
         if(PlayerStats.instance.S_curHP <= 0)
-        {GameManager.instance.Die();}
+        {GameManager.instance.PoseDeathS();}
         if(PlayerStats.instance.K_curHP <= 0)
-        {GameManager.instance.Die();}
+        {GameManager.instance.PoseDeathK();}
         if(PlayerStats.instance.F_curHP <= 0)
-        {GameManager.instance.Die();}
+        {GameManager.instance.PoseDeathF();}
         //
         if(PlayerStats.instance.F_paralysisResistance <= 0)
-        {GameManager.instance.Stun();}
+        {GameManager.instance.StunF();}
         if(PlayerStats.instance.K_paralysisResistance <= 0)
-        {GameManager.instance.Stun();}
+        {GameManager.instance.StunK();}
         if(PlayerStats.instance.S_paralysisResistance <= 0)
-        {GameManager.instance.Stun();}
+        {GameManager.instance.StunS();}
         //
         if(PlayerStats.instance.F_poisonResistance <= 0)
-        {GameManager.instance.Poison();}
+        {GameManager.instance.PoisonF();}
         if(PlayerStats.instance.S_poisonResistance <= 0)
-        {GameManager.instance.Poison();}
+        {GameManager.instance.PoisonS();}
         if(PlayerStats.instance.K_poisonResistance <= 0)
-        {GameManager.instance.Poison();}
+        {GameManager.instance.PoisonK();}
         if(EnemyinArena <= 0)
         {StartCoroutine(EndBattle());}
         if(WinEnd){if (Input.GetMouseButtonDown(0)){L_C.Escape();}}

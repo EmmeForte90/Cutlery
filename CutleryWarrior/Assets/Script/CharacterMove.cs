@@ -9,9 +9,10 @@ using Unity.VisualScripting;
 public class CharacterMove : MonoBehaviour
 {
     [Header("Character")]
-    public bool fork;
-    public bool knife;
-    public bool spoon;
+    [Tooltip("Scegli personaggi 0.Fork 1.Knife 2.Spoon")]
+    [Range(0, 2)]
+    public int kindCh;
+
     [Tooltip("0 - Exploration, 1 - Battle")]
     public int IDAction = 0; //Che tipo di personaggio è
     public GameObject Esclamation;
@@ -38,8 +39,14 @@ public class CharacterMove : MonoBehaviour
     private bool canDodge = true;
     public bool warning = false;
     private float hor;
+    private float defense;
+    private float danno_subito;
     public GameObject VFXPoison;
-    private bool Right = true;    
+    public GameObject VFXHurt;
+    
+    public float TimePoison;   
+    private bool Right = true; 
+   
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string WalkAnimationName;
     [SpineAnimation][SerializeField]  string RunAnimationName;
@@ -115,9 +122,18 @@ public void Awake()
         ////////////////////////////////////////
         case 1: 
         if(Run >= 5){ Run = 3;}
-        if(fork && !knife && !spoon) {ForkB();} //Se è forchetta
-        else if(!fork && knife && !spoon) {KnifeB();} //Se è Coltello
-        else if(!fork && !knife && spoon) {SpoonB();} //Se è Cucchiaio
+        switch (kindCh)
+        {
+            case 0:
+            ForkB();
+            break;
+            case 1:
+            KnifeB();
+            break; 
+            case 2:
+            SpoonB();
+            break;
+        }
         break;
         }}
     }
@@ -271,15 +287,57 @@ public void Awake()
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
     public void Allarm(){warning = true;}
     public void StopAllarm(){warning = false;}
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
-    //int danno_subito = Mathf.Max(damage - defense, 0);
+        switch (kindCh)
+        {
+            case 0:
+            defense = PlayerStats.instance.F_defense;
+            break;
+            case 1:
+            defense = PlayerStats.instance.K_defense;
+            break; 
+            case 2:
+            defense = PlayerStats.instance.S_defense;
+            break;
+        }
+        danno_subito = Mathf.Max(damage - defense, 0);
+        switch (kindCh)
+        {
+            case 0:
+            PlayerStats.instance.F_curHP -= danno_subito;
+            break;
+            case 1:
+            PlayerStats.instance.K_curHP -= danno_subito;
+            break; 
+            case 2:
+            PlayerStats.instance.S_curHP -= danno_subito;
+            break;
+        }
     AudioManager.instance.PlaySFX(8);
-    //Debug.Log("danno +"+ danno_subito);
-    //Instantiate(VFXHurt, transform.position, transform.rotation);
+    //Debug.Log("danno "+ danno_subito);
+    Instantiate(VFXHurt, transform.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);
     }
-    public void Poison(){Anm.ChangeColor(Color.green); VFXPoison.SetActive(true);}
+    #region Stato Veleno
+    public void Poison(){Anm.ChangeColor(Color.green); VFXPoison.SetActive(true); StartCoroutine(Poi());}
+    private IEnumerator Poi()
+    {
+        yield return new WaitForSeconds(TimePoison);
+        switch (kindCh)
+        {
+            case 0:
+            GameManager.instance.RestoreF();
+            break;
+            case 1:
+            GameManager.instance.RestoreK();
+            break; 
+            case 2:
+            GameManager.instance.RestoreS();
+            break;
+        }
+    }
+    #endregion
     public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false);}
     public void FixedUpdate()
     {if(!inputCTR)

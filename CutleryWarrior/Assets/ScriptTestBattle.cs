@@ -31,23 +31,25 @@ public class ScriptTestBattle : MonoBehaviour
     }
     public void Damage()
     {
-        Stats.F_curHP -=  DamageTest;
-        Stats.S_curHP -=  DamageTest;
-        Stats.K_curHP -=  DamageTest;
-        S_Script.TakeDamage();
-        F_Script.TakeDamage();
-        K_Script.TakeDamage();
-        ch_SAc.TakeDamage();
-        ch_KAc.TakeDamage();
-        ch_FAc.TakeDamage();
+        switch(Switch.rotationSwitcher.CharacterID)
+        {
+            case 1:
+            F_Script.TakeDamage(DamageTest); ch_SAc.TakeDamage(DamageTest); ch_KAc.TakeDamage(DamageTest);
+            break;
+            case 2:
+            K_Script.TakeDamage(DamageTest); ch_SAc.TakeDamage(DamageTest); ch_FAc.TakeDamage(DamageTest);
+            break;
+            case 3:
+            S_Script.TakeDamage(DamageTest); ch_KAc.TakeDamage(DamageTest); ch_FAc.TakeDamage(DamageTest);
+            break;
+        }   
     }
 
     public void Restore()
     {
         Stats.F_curHP =  Stats.F_HP;
         Stats.S_curHP =  Stats.K_HP;
-        Stats.K_curHP =  Stats.S_HP;
-        
+        Stats.K_curHP =  Stats.S_HP;   
     }
 
     public void DeathPL()

@@ -6,7 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     #region Header  
-    public bool StartGame = false;
+    public bool StartGame = false;    
     private CinemachineVirtualCamera vCam;
     public GameObject player;
     public GameObject Minimap;
@@ -586,7 +586,8 @@ public class GameManager : MonoBehaviour
         Manager_S.SwitchScriptsWin();
         Manager_K.SwitchScriptsWin();
     }
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #region Death
     public void PoseDeathF()
     {
         Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
@@ -602,7 +603,101 @@ public class GameManager : MonoBehaviour
         Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
         Manager_S.SwitchScriptsDeath();
     }
-
+    #endregion
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #region Stun
+    public void StunF()
+    {
+        Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>(); 
+        Manager_F.SwitchScriptsStun();
+    }
+    public void StunK()
+    {
+        Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();
+        Manager_K.SwitchScriptsStun();
+    }
+    public void StunS()
+    {
+        Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
+        Manager_S.SwitchScriptsStun();
+    }
+    #endregion
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #region PoisonState
+    public void PoisonF()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_F.Poison();      
+    }
+    public void PoisonK()
+    {
+        ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_K.Poison();    
+    }
+    public void PoisonS()
+    {
+        ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S.Poison();    
+    }
+    #endregion
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #region PoisonState
+    public void RestoreF()
+    {
+        Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>(); 
+        //PStats.F_paralysisResistance = PStats.F_paralysisResistanceCont;
+        //PStats.F_poisonResistance = PStats.F_poisonResistanceCont;       
+        switch(rotationSwitcher.CharacterID)
+        {
+            case 1:
+            Manager_F.SwitchScriptsPlayer(); ch_F.Idle();ch_F.ReCol();
+            break;
+            case 2:
+            Manager_F.SwitchScriptsActor(); ch_FAc.ReCol();ch_FAc.Idle(); 
+            break;
+            case 3:
+            Manager_F.SwitchScriptsActor(); ch_FAc.ReCol();ch_FAc.Idle(); 
+            break;
+        }   
+    }
+    public void RestoreK()
+    {
+        Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>(); 
+        //PStats.K_paralysisResistance = PStats.K_paralysisResistanceCont;
+        //PStats.K_poisonResistance = PStats.K_poisonResistanceCont;       
+        switch(rotationSwitcher.CharacterID)
+        {
+            case 1:
+            Manager_K.SwitchScriptsActor(); ch_KAc.ReCol();ch_KAc.Idle();
+            break;
+            case 2:
+            Manager_K.SwitchScriptsPlayer(); ch_K.Idle();ch_K.ReCol();
+            break;
+            case 3:
+            Manager_K.SwitchScriptsActor(); ch_KAc.ReCol();ch_KAc.Idle();
+            break;
+        }
+    }
+    public void RestoreS()
+    {
+        Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>(); 
+        //PStats.S_paralysisResistance = PStats.S_paralysisResistanceCont;
+        //PStats.S_poisonResistance = PStats.S_poisonResistanceCont;       
+        switch(rotationSwitcher.CharacterID)
+        {
+            case 1:
+            Manager_S.SwitchScriptsActor(); ch_SAc.ReCol();ch_SAc.Idle();
+            break;
+            case 2:
+            Manager_S.SwitchScriptsActor(); ch_SAc.ReCol();ch_SAc.Idle();
+            break;
+            case 3:
+            Manager_S.SwitchScriptsPlayer(); ch_S.Idle();ch_S.ReCol();
+            break;
+        }    
+    }
+    #endregion   
+////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void StopWin()
     {
         Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
