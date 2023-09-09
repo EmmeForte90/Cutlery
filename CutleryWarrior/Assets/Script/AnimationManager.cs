@@ -68,9 +68,7 @@ public class AnimationManager : MonoBehaviour
         Boom = true;
     }
     public void TemporaryChangeColor(Color color){_skeletonAnimation.Skeleton.SetColor(color); Invoke(nameof(ResetColor), 0.5f);}
-    
-    public void ChangeColor(Color color){_skeletonAnimation.Skeleton.SetColor(color);}
-
+    public void ChangeColor(){_skeletonAnimation.Skeleton.SetColor(Color.green);}
     public void ResetColor(){_skeletonAnimation.Skeleton.SetColor(Color.white);}
     public void PlayAnimation(string animationName)
     {

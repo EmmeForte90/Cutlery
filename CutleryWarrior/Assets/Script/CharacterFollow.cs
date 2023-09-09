@@ -339,7 +339,7 @@ public class CharacterFollow : MonoBehaviour
     Anm.TemporaryChangeColor(Color.red);
     }
     #region Stato Veleno
-    public void Poison(){Anm.ChangeColor(Color.green); VFXPoison.SetActive(true); StartCoroutine(Poi());}
+    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true);} // StartCoroutine(Poi());}
     private IEnumerator Poi()
     {
         yield return new WaitForSeconds(TimePoison);

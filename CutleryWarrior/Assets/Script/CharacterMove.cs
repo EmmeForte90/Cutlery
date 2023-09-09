@@ -44,7 +44,7 @@ public class CharacterMove : MonoBehaviour
     public GameObject VFXPoison;
     public GameObject VFXHurt;
     
-    public float TimePoison;   
+    public float TimePoison = 3;   
     private bool Right = true; 
    
     [Header("Animations")]
@@ -320,7 +320,7 @@ public void Awake()
     Anm.TemporaryChangeColor(Color.red);
     }
     #region Stato Veleno
-    public void Poison(){Anm.ChangeColor(Color.green); VFXPoison.SetActive(true); StartCoroutine(Poi());}
+    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true);} //StartCoroutine(Poi());}
     private IEnumerator Poi()
     {
         yield return new WaitForSeconds(TimePoison);
