@@ -362,7 +362,7 @@ public class GameManager : MonoBehaviour
             AudioManager.instance.PlayUFX(1);  
         break;
         case 3:
-             TimerM.gameObject.SetActive(true);
+            TimerM.gameObject.SetActive(true);
             TimerM.transform.position = MP_S.transform.position;
             AudioManager.instance.PlayUFX(1);   
         break;

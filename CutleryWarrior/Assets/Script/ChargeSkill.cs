@@ -5,12 +5,18 @@ using System.Collections;
 using TMPro;
 public class ChargeSkill : MonoBehaviour
 {
-    [Header("Timer")]
+    [Header("Character")]
+    [Tooltip("Scegli personaggi 0.Fork 1.Knife 2.Spoon")]
+    [Range(0, 2)]
+    public int kindCh;
+    [Header("Timer")]    
+    private PlayerStats Stats;
     public Scrollbar TimeBar;
     private Skill SkillAtt;
     public GameObject MP;
     public GameObject VFX;
     public GameObject Mossa;
+    public GameObject AnimationRage;
     public TextMeshProUGUI nameText;
     private string nameT;
     public float fillDuration;  // Durata desiderata per riempire la barra in secondi
@@ -19,35 +25,88 @@ public class ChargeSkill : MonoBehaviour
     public SkeletonAnimation _skeletonAnimation;
     private bool isSkillLaunched = false;
     public  AnimationManager AM;
+    public string Anm;
     [SpineAnimation][SerializeField] string ChargeAnm;
-    [SpineAnimation][SerializeField] string LunchAnm;
+    [SpineAnimation][SerializeField] string Skill0;
+    [SpineAnimation][SerializeField] string Skill1;
+    [SpineAnimation][SerializeField] string Skill2;
+    [SpineAnimation][SerializeField] string Skill3;
+    [SpineAnimation][SerializeField] string Skill4;
+    [SpineAnimation][SerializeField] string Skill5;
+    [SpineAnimation][SerializeField] string Skill6;
+    [SpineAnimation][SerializeField] string Skill7;
+    [SpineAnimation][SerializeField] string Skill8;
+    [SpineAnimation][SerializeField] string Skill9;
+    [SpineAnimation][SerializeField] string SkillRage;
 
     public void Awake()
     {_spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState; 
     _spineAnimationState = _skeletonAnimation.AnimationState;}
+    
+    public void RageCurr()
+    {
+    if(SkillAtt.isRage)
+    {switch(kindCh)
+    {
+    case 0:
+        PlayerStats.instance.F_curRage =  0;
+        break;
+    case 1:
+        PlayerStats.instance.K_curRage =  0;
+        break;
+    case 2:
+        PlayerStats.instance.S_curRage =  0;
+    break;
+    }}}
 
     public void TakeData(Skill skill)
     {
+    if(PlayerStats.instance.F_curMP >= SkillAtt.CostMP){
     GameManager.instance.Charge();
-    GameManager.instance.TimerMenu();
     _spineAnimationState.SetAnimation(0, ChargeAnm, true); 
     fillDuration = skill.MaxDuration; 
     nameT = skill.itemName;
     SkillAtt = skill;
-    VFX.SetActive(true);
-    PlayerStats.instance.F_CostMP -= skill.CostMP;
-    switch(skill.WhoCH)
+    GameManager.instance.TimerMenu();
+    switch(skill.WhoSkill)
     {
     case 0:
-    PlayerStats.instance.F_CostMP -= skill.CostMP;
+    Anm = Skill0;
     break;
     case 1:
-    PlayerStats.instance.K_CostMP -= skill.CostMP;
+    Anm = Skill1;
     break;
     case 2:
-    PlayerStats.instance.S_CostMP -= skill.CostMP;
+    Anm = Skill2;
+    break;
+    case 3:
+    Anm = Skill3;
+    break;
+    case 4:
+    Anm = Skill4;
+    break;
+    case 5:
+    Anm = Skill5;
+    break;
+    case 6:
+    Anm = Skill6;
+    break;
+    case 7:
+    Anm = Skill7;
+    break;
+    case 8:
+    Anm = Skill8;
+    break;
+    case 9:
+    Anm = Skill9;
+    break;
+    case 10:
+    Anm = SkillRage;
     break;
     }
+    VFX.SetActive(true);}
+    else
+    {AudioManager.instance.PlayUFX(1);}
     }
 
    public void Update()
@@ -88,13 +147,31 @@ IEnumerator SkillLunch()
     Mossa.SetActive(false);
     GameManager.instance.CloseTimerMenu();
     //_spineAnimationState.SetAnimation(0, LunchAnm, false); 
-    AM.PlayAnimation(LunchAnm);
-    print("LunchSkill");
+    if(SkillAtt.isRage)
+    {AnimationRage.SetActive(true);
+    yield return new WaitForSeconds(2f);
+    AnimationRage.SetActive(false);}
+    AM.PlayAnimation(Anm);
+    //print("LunchSkill" + Anm + SkillAtt.WhoCH);
+    RageCurr();
+    switch(SkillAtt.WhoCH)
+    {
+    case 0:
+    PlayerStats.instance.F_curMP -= SkillAtt.CostMP; 
+    break;
+    case 1:
+    PlayerStats.instance.K_curMP -= SkillAtt.CostMP; 
+    break;
+    case 2:
+    PlayerStats.instance.S_curMP -= SkillAtt.CostMP; 
+    break;
+    }
     yield return new WaitForSeconds(3f);
     GameManager.instance.ResumeBattle();
     CameraZoom.instance.ZoomOut();
+    curTime = 0;
+    isSkillLaunched = false;
     GameManager.instance.StopWin();
 }
-
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
 }

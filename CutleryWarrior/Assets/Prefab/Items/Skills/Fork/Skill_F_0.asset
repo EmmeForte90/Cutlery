@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56cdccba5a6f6f9419ac405c1abccdff, type: 3}
   m_Name: Skill_F_0
   m_EditorClassIdentifier: 
-  itemName: Big Spells
+  itemName: Big Sphere
   NameSkin: 
   itemDes: A big fire ball, damage all enemies  touch it.
   ID: 0
@@ -22,6 +22,7 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: bd78db6506d35064b85d0b344f47dd05, type: 3}
   TypesE: 0
   MaxDuration: 3
+  isRage: 0
   CostMP: 100
   WhoCH: 0
   WhoSkill: 0
