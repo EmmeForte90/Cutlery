@@ -641,12 +641,14 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    #region PoisonState
+    #region Restore
     public void RestoreF()
     {
-        Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>(); 
-        //PStats.F_paralysisResistance = PStats.F_paralysisResistanceCont;
-        //PStats.F_poisonResistance = PStats.F_poisonResistanceCont;       
+        Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        PStats.F_paralysisResistance = PStats.F_paralysisResistanceCont;
+        PStats.F_poisonResistance = PStats.F_poisonResistanceCont;   
         switch(rotationSwitcher.CharacterID)
         {
             case 1:
@@ -662,39 +664,45 @@ public class GameManager : MonoBehaviour
     }
     public void RestoreK()
     {
-        Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>(); 
-        //PStats.K_paralysisResistance = PStats.K_paralysisResistanceCont;
-        //PStats.K_poisonResistance = PStats.K_poisonResistanceCont;       
+        Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();
+        ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        PStats.K_paralysisResistance = PStats.K_paralysisResistanceCont;
+        PStats.K_poisonResistance = PStats.K_poisonResistanceCont;   
         switch(rotationSwitcher.CharacterID)
         {
             case 1:
-            Manager_K.SwitchScriptsActor(); ch_KAc.ReCol();ch_KAc.Idle();
-            break;
-            case 2:
             Manager_K.SwitchScriptsPlayer(); ch_K.Idle();ch_K.ReCol();
             break;
-            case 3:
-            Manager_K.SwitchScriptsActor(); ch_KAc.ReCol();ch_KAc.Idle();
+            case 2:
+            Manager_K.SwitchScriptsActor(); ch_KAc.ReCol();ch_KAc.Idle(); 
             break;
-        }
+            case 3:
+            Manager_K.SwitchScriptsActor(); ch_KAc.ReCol();ch_KAc.Idle(); 
+            break;
+        }   
     }
     public void RestoreS()
     {
-        Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>(); 
-        //PStats.S_paralysisResistance = PStats.S_paralysisResistanceCont;
-        //PStats.S_poisonResistance = PStats.S_poisonResistanceCont;       
+        Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
+        ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        PStats.S_paralysisResistance = PStats.S_paralysisResistanceCont;
+        PStats.S_poisonResistance = PStats.S_poisonResistanceCont;   
         switch(rotationSwitcher.CharacterID)
         {
             case 1:
-            Manager_S.SwitchScriptsActor(); ch_SAc.ReCol();ch_SAc.Idle();
-            break;
-            case 2:
-            Manager_S.SwitchScriptsActor(); ch_SAc.ReCol();ch_SAc.Idle();
-            break;
-            case 3:
             Manager_S.SwitchScriptsPlayer(); ch_S.Idle();ch_S.ReCol();
             break;
-        }    
+            case 2:
+            Manager_S.SwitchScriptsActor(); ch_SAc.ReCol();ch_SAc.Idle(); 
+            break;
+            case 3:
+            Manager_S.SwitchScriptsActor(); ch_SAc.ReCol();ch_SAc.Idle(); 
+            break;
+        }   
+        
+        
     }
     #endregion   
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

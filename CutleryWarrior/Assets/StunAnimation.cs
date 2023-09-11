@@ -12,6 +12,7 @@ public class StunAnimation : MonoBehaviour
     [Range(0, 2)]
     public int kindCh;
     public float TimeStun;
+    public SwitchCharacter SwitcherUI;
 
     [SpineAnimation][SerializeField]  string StunAnimationName;
     public void Awake()
@@ -27,15 +28,15 @@ public class StunAnimation : MonoBehaviour
     private IEnumerator Stun()
     {
         yield return new WaitForSeconds(TimeStun);
-        switch (kindCh)
+        switch (SwitcherUI.rotationSwitcher.CharacterID)
         {
-            case 0:
+            case 1:
             GameManager.instance.RestoreF();
             break;
-            case 1:
+            case 2:
             GameManager.instance.RestoreK();
             break; 
-            case 2:
+            case 3:
             GameManager.instance.RestoreS();
             break;
         }

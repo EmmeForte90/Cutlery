@@ -43,8 +43,8 @@ public class CharacterMove : MonoBehaviour
     private float danno_subito;
     public GameObject VFXPoison;
     public GameObject VFXHurt;
-    
-    public float TimePoison = 3;   
+    private bool poisonState = false;
+    private int TimePoison = 5;   
     private bool Right = true; 
    
     [Header("Animations")]
@@ -320,22 +320,24 @@ public void Awake()
     Anm.TemporaryChangeColor(Color.red);
     }
     #region Stato Veleno
-    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true);} //StartCoroutine(Poi());}
+    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true); poisonState = true;} 
+    //Invoke("Poi", TimePoison);
     private IEnumerator Poi()
     {
         yield return new WaitForSeconds(TimePoison);
+        if(poisonState){
         switch (kindCh)
         {
             case 0:
-            GameManager.instance.RestoreF();
+            GameManager.instance.RestoreF(); poisonState = false;
             break;
             case 1:
-            GameManager.instance.RestoreK();
+            GameManager.instance.RestoreK(); poisonState = false;
             break; 
             case 2:
-            GameManager.instance.RestoreS();
+            GameManager.instance.RestoreS(); poisonState = false;
             break;
-        }
+        }}
     }
     #endregion
     public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false);}
@@ -347,6 +349,7 @@ public void Awake()
     {rb.MovePosition(transform.position + moveDir * 0.1f * Run);
     }else if(!Interact && !isDefence)//!StopM && !isDefence)
     {rb.MovePosition(transform.position + moveDir * 0.1f * SpeedB);}
+    if(poisonState){StartCoroutine(Poi());}
     }}
     #region Move
     //For Knife

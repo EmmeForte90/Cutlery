@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScriptTestBattle : MonoBehaviour
@@ -29,6 +27,7 @@ public class ScriptTestBattle : MonoBehaviour
         Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
 
     }
+    //Funziona
     public void Damage()
     {
         switch(Switch.rotationSwitcher.CharacterID)
@@ -44,7 +43,7 @@ public class ScriptTestBattle : MonoBehaviour
             break;
         }   
     }
-
+    //Funziona
     public void Restore()
     {
         Stats.F_curHP =  Stats.F_HP;
@@ -52,6 +51,7 @@ public class ScriptTestBattle : MonoBehaviour
         Stats.K_curHP =  Stats.S_HP;   
     }
 
+    //Funziona
     public void DeathPL()
     {
         Stats.F_curHP =  0;
@@ -79,14 +79,16 @@ public class ScriptTestBattle : MonoBehaviour
         Stats.F_curHP =  Stats.F_HP;
         Stats.S_curHP =  Stats.K_HP;
         Stats.K_curHP =  Stats.S_HP;
-        Stats.K_paralysisResistance = 1;
-        Stats.F_paralysisResistance = 1;
-        Stats.S_paralysisResistance = 1;
+        Stats.K_paralysisResistance = Stats.K_paralysisResistanceCont;
+        Stats.F_paralysisResistance = Stats.F_paralysisResistanceCont;
+        Stats.S_paralysisResistance = Stats.S_paralysisResistanceCont;
         //
-        Stats.K_poisonResistance = 1;
-        Stats.F_poisonResistance = 1;
-        Stats.S_poisonResistance = 1;
-        GameManager.instance.StopWin();
+        Stats.K_poisonResistance = Stats.K_poisonResistanceCont;
+        Stats.F_poisonResistance = Stats.F_poisonResistanceCont;
+        Stats.S_poisonResistance = Stats.S_poisonResistanceCont;
+        GameManager.instance.RestoreF();
+        GameManager.instance.RestoreK(); 
+        GameManager.instance.RestoreS();
     }
     public void RageMax()
     {

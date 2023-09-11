@@ -25685,6 +25685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specificItem: {fileID: 11400000, guid: 4571611f7d008b347b0ebeca523a591d, type: 2}
+  StartGame: 1
   Id: 0
   Icon: {fileID: 0}
   VFXTake: {fileID: 8228495725887555554, guid: 2cc1dd7da2a689743a499c14b3721be1, type: 3}
@@ -25957,6 +25958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specificItem: {fileID: 11400000, guid: 28a1b8efb54d0b64b895ad1ee1805ba9, type: 2}
+  StartGame: 0
   Id: 0
   Icon: {fileID: 2085134644}
   VFXTake: {fileID: 8228495725887555554, guid: 2cc1dd7da2a689743a499c14b3721be1, type: 3}
@@ -26262,6 +26264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specificItem: {fileID: 11400000, guid: 5ca3f87cf1aa80247a62dfadbff3a0bc, type: 2}
+  StartGame: 1
   Id: 0
   Icon: {fileID: 0}
   VFXTake: {fileID: 8228495725887555554, guid: 2cc1dd7da2a689743a499c14b3721be1, type: 3}
@@ -76121,6 +76124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specificItem: {fileID: 11400000, guid: b2b345b119c8c3c4b8cad3faecc2b2ee, type: 2}
+  StartGame: 1
   Id: 0
   Icon: {fileID: 0}
   VFXTake: {fileID: 8228495725887555554, guid: 2cc1dd7da2a689743a499c14b3721be1, type: 3}
@@ -81232,6 +81236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specificItem: {fileID: 11400000, guid: c5e76abcb1623f7439ec9cfa2ca1c8b2, type: 2}
+  StartGame: 1
   Id: 0
   Icon: {fileID: 0}
   VFXTake: {fileID: 8228495725887555554, guid: 2cc1dd7da2a689743a499c14b3721be1, type: 3}
@@ -91196,6 +91201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specificItem: {fileID: 11400000, guid: a6e87a1f7dbf99a4581819b8afdeb74e, type: 2}
+  StartGame: 1
   Id: 0
   Icon: {fileID: 0}
   VFXTake: {fileID: 8228495725887555554, guid: 2cc1dd7da2a689743a499c14b3721be1, type: 3}
@@ -105967,6 +105973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specificItem: {fileID: 11400000, guid: 7ac6611272f3c234c940289489541b4f, type: 2}
+  StartGame: 1
   Id: 0
   Icon: {fileID: 0}
   VFXTake: {fileID: 8228495725887555554, guid: 2cc1dd7da2a689743a499c14b3721be1, type: 3}
@@ -120656,6 +120663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specificItem: {fileID: 11400000, guid: 1dd720eb24528e449b3506f2c352f103, type: 2}
+  StartGame: 1
   Id: 0
   Icon: {fileID: 0}
   VFXTake: {fileID: 8228495725887555554, guid: 2cc1dd7da2a689743a499c14b3721be1, type: 3}
@@ -120956,6 +120964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specificItem: {fileID: 11400000, guid: 0dc10ed31c062a148a9cab7ddb7470c1, type: 2}
+  StartGame: 1
   Id: 0
   Icon: {fileID: 0}
   VFXTake: {fileID: 8228495725887555554, guid: 2cc1dd7da2a689743a499c14b3721be1, type: 3}
@@ -150015,6 +150024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specificItem: {fileID: 11400000, guid: 225282b46b7add14097762b5b2c39ad7, type: 2}
+  StartGame: 1
   Id: 0
   Icon: {fileID: 0}
   VFXTake: {fileID: 8228495725887555554, guid: 2cc1dd7da2a689743a499c14b3721be1, type: 3}
