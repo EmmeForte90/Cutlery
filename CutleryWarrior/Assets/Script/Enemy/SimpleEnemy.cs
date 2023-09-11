@@ -62,8 +62,8 @@ public class SimpleEnemy : MonoBehaviour
         // Genera un numero casuale tra 1 e 3
         int randomNumber = Random.Range(0, 2);
         result = Mathf.RoundToInt(randomNumber);
-        Debug.Log("Numero casuale: " + result);
-        Debug.Log(ID + "ha Preso" + result);
+        //Debug.Log("Numero casuale: " + result);
+        //Debug.Log(ID + "ha Preso" + result);
         switch(result)
         {
             case 0:

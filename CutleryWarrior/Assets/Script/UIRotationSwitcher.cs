@@ -27,6 +27,8 @@ public class UIRotationSwitcher : MonoBehaviour
     public GameObject D_K;
     public GameObject D_S;
     public int CharacterID = 1;
+    public int CharacterIDSec = 3;
+    public int CharacterIDTer = 2;
     public Spine.Unity.SkeletonGraphic skeletonGraphic1;
     public Spine.Unity.SkeletonGraphic skeletonGraphic2;
     public Spine.Unity.SkeletonGraphic skeletonGraphic3;
@@ -40,6 +42,8 @@ public class UIRotationSwitcher : MonoBehaviour
         element2StartPosition = element2.transform.position;
         element3StartPosition = element3.transform.position;
         CharacterID = 1;
+        CharacterIDSec = 3;
+        CharacterIDTer = 2;
        // Assicurati che il componente SkeletonGraphic sia assegnato nell'ispettore di Unity
         if (skeletonGraphic1 == null){Debug.LogError("SkeletonGraphic is not assigned!");return;}
         // Imposta il colore iniziale

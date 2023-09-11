@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class ManagerCharacter : MonoBehaviour
 {
     public CharacterMove Player;
@@ -10,7 +7,7 @@ public class ManagerCharacter : MonoBehaviour
     public ChargeSkill Skill;
     public DeathAnimation Death;
     public StunAnimation Stun;
-
+    public int kindCH;
 
     public void SwitchScriptsPlayer()
     {
@@ -19,8 +16,9 @@ public class ManagerCharacter : MonoBehaviour
             WinANM.enabled = false;
             Skill.enabled = false;
             Death.enabled = false;
-             Stun.enabled = false;
+            Stun.enabled = false;
             Player.Direction();
+            kindCH = 0;
     }
     public void SwitchScriptsActor()
     {
@@ -31,6 +29,7 @@ public class ManagerCharacter : MonoBehaviour
             Death.enabled = false;
              Stun.enabled = false;
             Actor.Direction();
+            kindCH = 1;
     }
 
     public void SwitchScriptsWin()

@@ -103,6 +103,7 @@ public class CharacterFollow : MonoBehaviour
         case 1: 
         if(!Win){
         if (target == null && !take){Choise(); take = true;}
+        if(poisonState){StartCoroutine(Poi());}
         switch (kindCh)
         {
             case 0:
@@ -253,7 +254,8 @@ public class CharacterFollow : MonoBehaviour
         if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
         else if (Player.localScale.x < 0f){transform.localScale = new Vector3(-1, 1,1);}
     }
-    public void FixedUpdate(){if (isGrounded){characterRigidbody.velocity = Vector3.zero;}}
+    public void FixedUpdate()
+    {if (isGrounded){characterRigidbody.velocity = Vector3.zero;}}
     
     #region Attack
     public void AttackEnm(){isGuard = false; if(!isAttacking){ChaseEnm();}}

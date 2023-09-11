@@ -13,7 +13,7 @@ public class StunAnimation : MonoBehaviour
     public int kindCh;
     public float TimeStun;
     public SwitchCharacter SwitcherUI;
-
+    public ManagerCharacter MC;
     [SpineAnimation][SerializeField]  string StunAnimationName;
     public void Awake()
     {spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState; spineAnimationState = skeletonAnimation.AnimationState;}
@@ -28,6 +28,7 @@ public class StunAnimation : MonoBehaviour
     private IEnumerator Stun()
     {
         yield return new WaitForSeconds(TimeStun);
+        if(MC.kindCH == 0){
         switch (SwitcherUI.rotationSwitcher.CharacterID)
         {
             case 1:
@@ -39,6 +40,32 @@ public class StunAnimation : MonoBehaviour
             case 3:
             GameManager.instance.RestoreS();
             break;
+        }}
+        else if(MC.kindCH == 1){
+        switch (SwitcherUI.rotationSwitcher.CharacterIDSec)
+        {
+            case 1:
+            GameManager.instance.RestoreF();
+            break;
+            case 2:
+            GameManager.instance.RestoreK();
+            break; 
+            case 3:
+            GameManager.instance.RestoreS();
+            break;
+        }
+        switch (SwitcherUI.rotationSwitcher.CharacterIDTer)
+        {
+            case 1:
+            GameManager.instance.RestoreF();
+            break;
+            case 2:
+            GameManager.instance.RestoreK();
+            break; 
+            case 3:
+            GameManager.instance.RestoreS();
+            break;
+        }
         }
     }
     public void StunLoop(){spineAnimationState.SetAnimation(0, StunAnimationName, true);}

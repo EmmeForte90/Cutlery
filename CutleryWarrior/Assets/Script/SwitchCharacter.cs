@@ -112,6 +112,8 @@ public class SwitchCharacter : MonoBehaviour
         Ind_K.gameObject.SetActive(false); 
         Ind_S.gameObject.SetActive(false);
         rotationSwitcher.CharacterID = 1;
+        rotationSwitcher.CharacterIDSec = 3;
+        rotationSwitcher.CharacterIDTer = 2;
         yield return new WaitForSeconds(0.01f);
         Flip();
         player = GameObject.FindGameObjectWithTag("F_Player");
@@ -131,6 +133,8 @@ public class SwitchCharacter : MonoBehaviour
         Ind_K.gameObject.SetActive(true); 
         Ind_S.gameObject.SetActive(false); 
         rotationSwitcher.CharacterID = 2;
+        rotationSwitcher.CharacterIDSec = 1;
+        rotationSwitcher.CharacterIDTer = 3;
         yield return new WaitForSeconds(0.01f);
         Flip();
         player = GameObject.FindGameObjectWithTag("K_Player");
@@ -150,6 +154,8 @@ public class SwitchCharacter : MonoBehaviour
         Ind_K.gameObject.SetActive(false); 
         Ind_S.gameObject.SetActive(true);
         rotationSwitcher.CharacterID = 3;
+        rotationSwitcher.CharacterIDSec = 2;
+        rotationSwitcher.CharacterIDTer = 1;
         yield return new WaitForSeconds(0.01f);
         Flip();
         player = GameObject.FindGameObjectWithTag("S_Player");
