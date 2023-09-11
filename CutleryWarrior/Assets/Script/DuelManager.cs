@@ -44,6 +44,11 @@ public class DuelManager : MonoBehaviour
     public float ScostMP = 10;
     public float S_SpeedRestore = 5f; // il massimo valore di essenza disponibile
     [SerializeField] CharacterFollow ch_SAc;
+    [Header("Status")]
+    public float damagePerSecond = 0.1f;
+    public float duration = 5.0f;
+    private float elapsedTime = 0.0f;
+    private bool isDamaging = false;
     [Header("ChangeScene")]
     public SceneEvent sceneEvent;
     public LevelChanger L_C;
@@ -148,14 +153,65 @@ public void Update()
         {GameManager.instance.StunS();}
         //
         if(PlayerStats.instance.F_poisonResistance <= 0)
-        {GameManager.instance.PoisonF();}
+        {GameManager.instance.PoisonF();
+        isDamaging = true;
+        elapsedTime = 0.0f;
+        if (isDamaging)
+        {
+            elapsedTime += Time.deltaTime;
+            PlayerStats.instance.F_curHP -= damagePerSecond;
+            if (elapsedTime >= duration)
+            {
+                // Il periodo di danno è terminato
+                isDamaging = false;
+            }
+        }}
         if(PlayerStats.instance.S_poisonResistance <= 0)
-        {GameManager.instance.PoisonS();}
+        {GameManager.instance.PoisonS();
+        isDamaging = true;
+        elapsedTime = 0.0f;
+        if (isDamaging)
+        {
+            elapsedTime += Time.deltaTime;
+            PlayerStats.instance.S_curHP -= damagePerSecond;
+            if (elapsedTime >= duration)
+            {
+                // Il periodo di danno è terminato
+                isDamaging = false;
+            }
+        }
+        }
         if(PlayerStats.instance.K_poisonResistance <= 0)
-        {GameManager.instance.PoisonK();}
+        {GameManager.instance.PoisonK();isDamaging = true;
+        elapsedTime = 0.0f;
+        if (isDamaging)
+        {
+            elapsedTime += Time.deltaTime;
+            PlayerStats.instance.K_curHP -= damagePerSecond;
+            if (elapsedTime >= duration)
+            {
+                // Il periodo di danno è terminato
+                isDamaging = false;
+            }
+        }}
         if(EnemyinArena <= 0)
         {StartCoroutine(EndBattle());}
         if(WinEnd){if (Input.GetMouseButtonDown(0)){L_C.Escape();}}
+    }
+
+    // Metodo per iniziare il danno nel tempo
+    public void StartDamaging()
+    {
+        isDamaging = true;
+        elapsedTime = 0.0f;
+        InvokeRepeating("ApplyDamage", 0.0f, 1.0f);
+    }
+
+    // Metodo per interrompere il danno nel tempo
+    public void StopDamaging()
+    {
+        isDamaging = false;
+        CancelInvoke("ApplyDamage");
     }
 IEnumerator StartAI()
     {

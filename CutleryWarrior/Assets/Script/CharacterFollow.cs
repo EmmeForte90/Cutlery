@@ -37,7 +37,8 @@ public class CharacterFollow : MonoBehaviour
     private float danno_subito;
     public GameObject VFXPoison;
     public GameObject VFXHurt;
-    public float TimePoison = 3;   
+    private bool poisonState = false;
+    private int TimePoison = 5;       
     [SpineAnimation][SerializeField]  string WalkAnimationName;    
     [SpineAnimation][SerializeField]  string RunAnimationName;
     [SpineAnimation][SerializeField]  string RunBAnimationName;    
@@ -338,23 +339,24 @@ public class CharacterFollow : MonoBehaviour
     Instantiate(VFXHurt, transform.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);
     }
-    #region Stato Veleno
-    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true);} // StartCoroutine(Poi());}
+     #region Stato Veleno
+    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true); poisonState = true;} 
     private IEnumerator Poi()
     {
         yield return new WaitForSeconds(TimePoison);
+        if(poisonState){
         switch (kindCh)
         {
             case 0:
-            GameManager.instance.RestoreF();
+            GameManager.instance.RestoreF(); poisonState = false;
             break;
             case 1:
-            GameManager.instance.RestoreK();
+            GameManager.instance.RestoreK(); poisonState = false;
             break; 
             case 2:
-            GameManager.instance.RestoreS();
+            GameManager.instance.RestoreS(); poisonState = false;
             break;
-        }
+        }}
     }
     #endregion
     public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false);}

@@ -321,7 +321,6 @@ public void Awake()
     }
     #region Stato Veleno
     public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true); poisonState = true;} 
-    //Invoke("Poi", TimePoison);
     private IEnumerator Poi()
     {
         yield return new WaitForSeconds(TimePoison);
