@@ -3,6 +3,8 @@ using Spine.Unity;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using Cinemachine;
+
 public class ChargeSkill : MonoBehaviour
 {
     [Header("Character")]
@@ -13,11 +15,13 @@ public class ChargeSkill : MonoBehaviour
     private PlayerStats Stats;
     public Scrollbar TimeBar;
     private Skill SkillAtt;
+    private int TimeS;
     public GameObject MP;
     public GameObject VFX;
     public GameObject Mossa;
     public GameObject AnimationRage;
-    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI nameText;    
+    private CinemachineVirtualCamera vCam;
     private string nameT;
     public float fillDuration;  // Durata desiderata per riempire la barra in secondi
     private float curTime = 0;       // Tempo trascorso
@@ -25,7 +29,9 @@ public class ChargeSkill : MonoBehaviour
     public SkeletonAnimation _skeletonAnimation;
     private bool isSkillLaunched = false;
     public  AnimationManager AM;
-    public string Anm;
+    public string Anm;    
+    public Transform RPoint;
+    public Transform Player;
     [SpineAnimation][SerializeField] string ChargeAnm;
     [SpineAnimation][SerializeField] string Skill0;
     [SpineAnimation][SerializeField] string Skill1;
@@ -38,10 +44,15 @@ public class ChargeSkill : MonoBehaviour
     [SpineAnimation][SerializeField] string Skill8;
     [SpineAnimation][SerializeField] string Skill9;
     [SpineAnimation][SerializeField] string SkillRage;
+    public static ChargeSkill instance;
 
     public void Awake()
-    {_spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState; 
-    _spineAnimationState = _skeletonAnimation.AnimationState;}
+    {
+    if (instance == null){instance = this;} 
+    _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState; 
+    _spineAnimationState = _skeletonAnimation.AnimationState;
+    vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+    }
     
     public void RageCurr()
     {
@@ -61,12 +72,13 @@ public class ChargeSkill : MonoBehaviour
 
     public void TakeData(Skill skill)
     {
-    if(PlayerStats.instance.F_curMP >= SkillAtt.CostMP){
+    if(PlayerStats.instance.F_curMP >= skill.CostMP){
     GameManager.instance.Charge();
     _spineAnimationState.SetAnimation(0, ChargeAnm, true); 
     fillDuration = skill.MaxDuration; 
     nameT = skill.itemName;
     SkillAtt = skill;
+    TimeS = skill.TimeSkill;
     GameManager.instance.TimerMenu();
     switch(skill.WhoSkill)
     {
@@ -152,8 +164,7 @@ IEnumerator SkillLunch()
     yield return new WaitForSeconds(2f);
     AnimationRage.SetActive(false);}
     AM.PlayAnimation(Anm);
-    //print("LunchSkill" + Anm + SkillAtt.WhoCH);
-    RageCurr();
+    if(SkillAtt.isRage){RageCurr();}
     switch(SkillAtt.WhoCH)
     {
     case 0:
@@ -166,12 +177,16 @@ IEnumerator SkillLunch()
     PlayerStats.instance.S_curMP -= SkillAtt.CostMP; 
     break;
     }
-    yield return new WaitForSeconds(3f);
+    yield return new WaitForSeconds(TimeS);
     GameManager.instance.ResumeBattle();
     CameraZoom.instance.ZoomOut();
+    if(SkillAtt.isRage){CamSkillBack();}
     curTime = 0;
     isSkillLaunched = false;
     GameManager.instance.StopWin();
 }
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
+    public void CamSkill(){vCam.Follow = RPoint.transform;}
+    public void CamSkillBack(){vCam.Follow = Player.transform;}
+
 }

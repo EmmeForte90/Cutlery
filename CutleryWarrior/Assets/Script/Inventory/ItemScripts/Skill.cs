@@ -11,4 +11,5 @@ public class Skill : Item
      [Tooltip("Che Skill è?")]
     [Range(0, 10)]
     public int WhoSkill;
+    public int TimeSkill;
 }

@@ -10,6 +10,8 @@ public class AnimationManager : MonoBehaviour
     public bool fork;
     public bool knife;
     public bool spoon;
+    public GameObject Rage;
+
     [Header("Fork")]
     private GameObject ForkActive;
     private CharacterMove F_Script;
@@ -38,8 +40,11 @@ public class AnimationManager : MonoBehaviour
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
     Spine.EventData eventData;
-    private bool Boom = false;
+    //private bool Boom = false;
+    private bool VFX = true;
     public Transform BPoint;
+    public Transform RPoint;
+    public ChargeSkill CS;
     public static AnimationManager instance;
     #endregion
     public void Awake()
@@ -61,11 +66,16 @@ public class AnimationManager : MonoBehaviour
         SlashH.gameObject.SetActive(false);
         SlashB.gameObject.SetActive(false);
     }
+    IEnumerator StopVFX_Rage()
+    {
+        yield return new WaitForSeconds(3f);
+        Rage.gameObject.SetActive(false);
+    }
     IEnumerator StopVFX_F()
     {
-        Boom = false;
-        yield return new WaitForSeconds(0.5f);
-        Boom = true;
+        //Boom = false;
+        yield return new WaitForSeconds(5f);
+        VFX = true;
     }
     public void TemporaryChangeColor(Color color){_skeletonAnimation.Skeleton.SetColor(color); Invoke(nameof(ResetColor), 0.5f);}
     public void ChangeColor(){_skeletonAnimation.Skeleton.SetColor(Color.green);}
@@ -94,20 +104,29 @@ public class AnimationManager : MonoBehaviour
     void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
     //Normal VFX
     if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(0);}
-    //Normal VFX
-    if (e.Data.Name == "slashV")
-    {AudioManager.instance.PlayUFX(8); SlashV.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Fork
     if (e.Data.Name == "bigspell")
     {AudioManager.instance.PlayUFX(8); Instantiate(BigSpell, BPoint.position, BigSpell.transform.rotation); }
-     if (e.Data.Name == "increaseatk")
-    {AudioManager.instance.PlayUFX(8); Instantiate(Increase, BPoint.position, Increase.transform.rotation); }
-    if (e.Data.Name == "cura")
-    {AudioManager.instance.PlayUFX(8); Instantiate(Cura, BPoint.position, Cura.transform.rotation); }
-    //
+    if (e.Data.Name == "rageFork" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Rage, RPoint.position, Rage.transform.rotation); 
+    VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}//Rage.gameObject.SetActive(true); StartCoroutine(StopVFX_Rage());}
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Knife
+    if (e.Data.Name == "slashV")
+    {AudioManager.instance.PlayUFX(8); SlashV.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "slashH")
     {AudioManager.instance.PlayUFX(8); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
-    //
     if (e.Data.Name == "slashB")
     {AudioManager.instance.PlayUFX(8); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    if (e.Data.Name == "increaseatk")
+    {AudioManager.instance.PlayUFX(8); Instantiate(Increase, BPoint.position, Increase.transform.rotation);}
+    if (e.Data.Name == "rageKnife" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Rage, transform.position, Rage.transform.rotation); 
+    VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}//Rage.gameObject.SetActive(true); StartCoroutine(StopVFX_Rage());}
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Spoon
+    if (e.Data.Name == "cura")
+    {AudioManager.instance.PlayUFX(8); Instantiate(Cura, BPoint.position, Cura.transform.rotation); }
 }
 }
