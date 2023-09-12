@@ -136,7 +136,7 @@ public class AttStats : MonoBehaviour
     public void K_LevelUPatt()
     {        
         K_HPCont = PlayerStats.instance.K_HP;
-        K_HPCont = PlayerStats.instance.K_HP;
+        PlayerStats.instance.K_curHP = K_HPCont;
         K_MPCont = PlayerStats.instance.K_MP;
         K_attackCont = PlayerStats.instance.K_attack;
         K_defenseCont = PlayerStats.instance.K_defense;
@@ -156,7 +156,7 @@ public class AttStats : MonoBehaviour
     public void F_LevelUPatt()
     {        
         F_HPCont = PlayerStats.instance.F_HP;
-        F_HPCont = PlayerStats.instance.F_HP;
+        PlayerStats.instance.F_curHP = F_HPCont;        
         F_MPCont = PlayerStats.instance.F_MP;
         F_attackCont = PlayerStats.instance.F_attack;
         F_defenseCont = PlayerStats.instance.F_defense;
@@ -176,7 +176,7 @@ public class AttStats : MonoBehaviour
     public void S_LevelUPatt()
     {        
         S_HPCont = PlayerStats.instance.S_HP;
-        S_HPCont = PlayerStats.instance.S_HP;
+        PlayerStats.instance.S_curHP = S_HPCont;        
         S_MPCont = PlayerStats.instance.S_MP;
         S_attackCont = PlayerStats.instance.S_attack;
         S_defenseCont = PlayerStats.instance.S_defense;

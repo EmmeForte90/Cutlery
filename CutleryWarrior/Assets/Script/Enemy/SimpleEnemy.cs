@@ -12,6 +12,7 @@ public class SimpleEnemy : MonoBehaviour
     [Header("Stop For Test")]
     public GameObject player;
     public GameObject Icon;
+    public GameObject IconVFX;
     public int result;
     public bool Test = false;   
     private bool take = false; 
@@ -87,7 +88,7 @@ public class SimpleEnemy : MonoBehaviour
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
         FacePlayer(); if(!isAttacking){ChasePlayer();}
         }
-        if(currentHealth < 0){DieB = true; Die();}
+        if(currentHealth < 0){DieB = true; IconVFX.SetActive(true); Die();}
         }
     }
     private void ChasePlayer()

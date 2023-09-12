@@ -12,4 +12,5 @@ public class Skill : Item
     [Range(0, 10)]
     public int WhoSkill;
     public int TimeSkill;
+    public int TimeActiveSkill;
 }

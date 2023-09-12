@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
     public UIRotationSwitcher rotationSwitcher;
     public SwitchCharacter SwitcherUI;
     public int IdENM;
+    public bool NotTouchOption = false;
     public static GameManager instance;
     #endregion
     public void Awake()
@@ -178,6 +179,7 @@ public class GameManager : MonoBehaviour
         BarStat();
         TakeCharacter();
         moneyTextM.text = money.ToString(); 
+        if(!NotTouchOption){
     if(!battle){
         Minimap.SetActive(true);
        if (Input.GetButtonDown("Pause") && !stopInput)
@@ -305,7 +307,7 @@ public class GameManager : MonoBehaviour
             DuelManager.instance.inputCTR = false;
             AudioManager.instance.PlayUFX(1);
         } 
-    }
+    }}
     }
     public void CloseLittleM()
     {
@@ -505,7 +507,18 @@ public class GameManager : MonoBehaviour
         ch_FAc.inputCTR = true; ch_KAc.inputCTR = true; ch_SAc.inputCTR = true;
         ch_F.isRun = false; ch_K.isRun = false; ch_S.isRun = false;
         ch_F.Idle();ch_K.Idle();ch_S.Idle();ch_F.Stop();ch_K.Stop();ch_S.Stop();
-    }   
+    } 
+    public void ChStopB()
+    {
+        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
+        ch_K = GameObject.Find("S_Player").GetComponent<CharacterMove>();
+        ch_S = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
+        ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
+        ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
+        ch_F.inputCTR = true; ch_K.inputCTR = true; ch_S.inputCTR = true;
+        ch_FAc.inputCTR = true; ch_KAc.inputCTR = true; ch_SAc.inputCTR = true;
+    }  
     public void ChInteract(){
         ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
         ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();

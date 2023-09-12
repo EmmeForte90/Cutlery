@@ -73,7 +73,11 @@ public class ChargeSkill : MonoBehaviour
     public void TakeData(Skill skill)
     {
     if(PlayerStats.instance.F_curMP >= skill.CostMP){
+    GameManager.instance.CloseLittleM();
+    GameManager.instance.notChange = true;
+    GameManager.instance.NotTouchOption = true;
     GameManager.instance.Charge();
+    GameManager.instance.ChStopB();
     _spineAnimationState.SetAnimation(0, ChargeAnm, true); 
     fillDuration = skill.MaxDuration; 
     nameT = skill.itemName;
@@ -183,6 +187,9 @@ IEnumerator SkillLunch()
     if(SkillAtt.isRage){CamSkillBack();}
     curTime = 0;
     isSkillLaunched = false;
+    GameManager.instance.ChCanM();
+    GameManager.instance.NotTouchOption = false;
+    GameManager.instance.notChange = false;
     GameManager.instance.StopWin();
 }
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
