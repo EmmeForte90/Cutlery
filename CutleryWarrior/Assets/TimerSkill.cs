@@ -9,18 +9,20 @@ public class TimerSkill : MonoBehaviour
     public float curTime = 10f;
     public float TimeMin = 0f;
     public float TimeMax = 10f;
-    public bool Start = false;    
+    public bool Start = true;    
+
+    private void OnEnable(){Start = true;}
     public void Update()
     {
         FillBar.fillAmount = curTime / TimeMax;
         FillBar.fillAmount = Mathf.Clamp(FillBar.fillAmount, 0.01f, 1);
-        if(Start){
+        if(Start)
+        {
         curTime -= SpeedRestore * Time.deltaTime;
         if(curTime <= TimeMin)
-        {curTime = TimeMax; Start = false;
+        {curTime = TimeMax; //Start = false;
         Slot.SetActive(true);
         HandleObj.SetActive(false);} 
         }
     }
-    public void Timer(){Start = true;}
 }
