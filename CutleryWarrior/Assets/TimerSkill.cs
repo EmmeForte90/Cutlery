@@ -5,12 +5,15 @@ public class TimerSkill : MonoBehaviour
     public Image FillBar;
     public GameObject Slot;
     public GameObject HandleObj;
+    public GameObject HandleObjA;
     public float SpeedRestore = 1f; // il massimo valore di essenza disponibile
-    public float curTime = 10f;
-    public float TimeMin = 0f;
+    private float curTime = 10f;
+    private float TimeMin = 0f;
     public float TimeMax = 10f;
     public bool Start = true;    
+    public static TimerSkill instance;
 
+    private void Awake() {curTime = TimeMax;if (instance == null){instance = this;}}    
     private void OnEnable(){Start = true;}
     public void Update()
     {
@@ -25,4 +28,6 @@ public class TimerSkill : MonoBehaviour
         HandleObj.SetActive(false);} 
         }
     }
+    public void Notuse(){HandleObjA.SetActive(true);}
+    public void Use(){HandleObjA.SetActive(false);}
 }

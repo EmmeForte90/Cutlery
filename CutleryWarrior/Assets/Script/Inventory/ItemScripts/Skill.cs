@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 [CreateAssetMenu(fileName = "Skill", menuName = "Item/Skill")]
 public class Skill : Item
 {   
@@ -11,6 +12,17 @@ public class Skill : Item
      [Tooltip("Che Skill è?")]
     [Range(0, 10)]
     public int WhoSkill;
+    //Il time skill NON è il tempo per attivare la skill, ma il tempo per farla finire una volta lanciata per
+    //sapere quanto tempo serve per lanciare la skill guarda nello script "TimerSkill"
     public int TimeSkill;
-    public int TimeActiveSkill;
+    //[HideInInspector]
+    public int Utilizzi;
+    public int UtilizziMAX;
+    #if UNITY_EDITOR
+    private void OnDisable()
+    {
+    // reset dei bool quando la modalità Play di Unity viene terminata
+    if (!EditorApplication.isPlaying){Utilizzi = UtilizziMAX;}
+    }
+    #endif
 }

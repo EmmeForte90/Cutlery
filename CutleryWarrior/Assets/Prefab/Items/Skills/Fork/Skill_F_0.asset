@@ -27,4 +27,5 @@ MonoBehaviour:
   WhoCH: 0
   WhoSkill: 0
   TimeSkill: 1
-  TimeActiveSkill: 5
+  Utilizzi: 5
+  UtilizziMAX: 5

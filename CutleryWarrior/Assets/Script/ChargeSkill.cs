@@ -20,7 +20,8 @@ public class ChargeSkill : MonoBehaviour
     public GameObject VFX;
     public GameObject Mossa;
     public GameObject AnimationRage;
-    public TextMeshProUGUI nameText;    
+    public TextMeshProUGUI nameText; 
+    public TextMeshProUGUI Utilizzi;    
     private CinemachineVirtualCamera vCam;
     private string nameT;
     public float fillDuration;  // Durata desiderata per riempire la barra in secondi
@@ -72,7 +73,8 @@ public class ChargeSkill : MonoBehaviour
 
     public void TakeData(Skill skill)
     {
-    if(PlayerStats.instance.F_curMP >= skill.CostMP){
+    if(skill.Utilizzi > 0){
+    TimerSkill.instance.Use();
     GameManager.instance.CloseLittleM();
     GameManager.instance.notChange = true;
     GameManager.instance.NotTouchOption = true;
@@ -80,6 +82,8 @@ public class ChargeSkill : MonoBehaviour
     GameManager.instance.ChStopB();
     _spineAnimationState.SetAnimation(0, ChargeAnm, true); 
     fillDuration = skill.MaxDuration; 
+    skill.Utilizzi--;
+    UpdatePreviewSkill.instance.UpdateInfoPanel(skill);
     nameT = skill.itemName;
     SkillAtt = skill;
     TimeS = skill.TimeSkill;
@@ -122,7 +126,7 @@ public class ChargeSkill : MonoBehaviour
     }
     VFX.SetActive(true);}
     else
-    {AudioManager.instance.PlayUFX(1);}
+    {AudioManager.instance.PlayUFX(10); TimerSkill.instance.Notuse();}
     }
 
    public void Update()
@@ -189,7 +193,7 @@ IEnumerator SkillLunch()
     isSkillLaunched = false;
     GameManager.instance.ChCanM();
     GameManager.instance.NotTouchOption = false;
-    GameManager.instance.notChange = false;
+    
     GameManager.instance.StopWin();
 }
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
