@@ -3,7 +3,7 @@ using UnityEngine;
 public class StayInside : MonoBehaviour
 {
     private Transform MinimapCam;
-	private float MinimapSize = 17f;
+	private float MinimapSize = 9f;
 	private bool Take = false;
 	Vector3 TempV3;
     public  void Awake(){StartCoroutine(FindMinimap());}

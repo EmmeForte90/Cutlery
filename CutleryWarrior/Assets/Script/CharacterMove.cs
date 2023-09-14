@@ -23,7 +23,7 @@ public class CharacterMove : MonoBehaviour
     [Header("Move")]
     public float Speed = 1;
     public float SpeedB = 2;
-    public float Run = 5;
+    public float Run = 3;
     private Transform cam;
     Vector2 input;
     public Transform SpriteHero;
@@ -121,7 +121,7 @@ public void Awake()
         break;
         ////////////////////////////////////////
         case 1: 
-        if(Run >= 5){ Run = 3;}
+        if(Run >= 3){ Run = 3;}
         switch (kindCh)
         {
             case 0:

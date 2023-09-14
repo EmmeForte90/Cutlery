@@ -6,7 +6,7 @@ public class MinimapScroll : MonoBehaviour
     public float maxSize = 10.0f; // Size massimo
     public Camera cam;
     private float originalSize;
-    private bool canZoom = true;
+    private bool canZoom = false;
     public void Start(){originalSize = cam.orthographicSize;}
     public void Update()
     {
@@ -20,6 +20,5 @@ public class MinimapScroll : MonoBehaviour
         }
     }
     public void CanZoom(){cam.orthographicSize = originalSize; canZoom = true;}
-    public void RestoreZoom()
-    {cam.orthographicSize = originalSize; canZoom = false;}
+    public void RestoreZoom(){cam.orthographicSize = originalSize; canZoom = false;}
 }

@@ -125,7 +125,7 @@ public class Mercante : MonoBehaviour
                     _isDialogueActive = false;
                     dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
                     dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-                    SelectionOp.gameObject.SetActive(false);
+                    //SelectionOp.gameObject.SetActive(false);
                     Talk = false;
                     EndDia = false;
                     GameManager.instance.ChInteractStop();  
