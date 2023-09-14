@@ -29,6 +29,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Stone
     second: {fileID: 2100000, guid: 19657dc114f97c54da03682e34b30342, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Terr
+    second: {fileID: 2100000, guid: 9598a45a2f0f0f342aa7b2f5f2e7cd75, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

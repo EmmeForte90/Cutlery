@@ -114,7 +114,9 @@ public void Awake()
         else if(!Attention){Esclamation.SetActive(false);}
         //
         if(!inputCTR)
-        {switch(IDAction){
+        {
+        if(Run >= 3 || Run <= 3){Run = 3;}
+        switch(IDAction){
         case 0:  
         ////////////////////////////////////////
         SimpleMove();
