@@ -25697,6 +25697,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 384373281}
   m_CullTransparentMesh: 1
+--- !u!1 &405454278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 364748373952434247, guid: 50980c97f063e9c4c9a584004d091dce,
+    type: 3}
+  m_PrefabInstance: {fileID: 364748375206016195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410119729
 GameObject:
   m_ObjectHideFlags: 0
@@ -75938,7 +75944,7 @@ GameObject:
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1186774167
 Transform:
   m_ObjectHideFlags: 0
@@ -76380,21 +76386,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WhatMusic: 0
   StartGame: 1
+  Testing: 1
   StartGameOBJ: {fileID: 3123265100756262347, guid: 3673356f01ac3794a90a53b1890f187a,
     type: 3}
   PStart: {fileID: 1267972204}
-  SpawnArr:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  BoxConfiner:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  SpawnArr: []
+  ActiveObj: []
+  ActiveObjAB: []
+  Enemies:
+  - {fileID: 405454278}
+  BoxConfiner: []
+  bCStart: {fileID: 0}
 --- !u!4 &1267972206
 Transform:
   m_ObjectHideFlags: 0
@@ -120935,7 +120937,7 @@ GameObject:
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1838236547
 Transform:
   m_ObjectHideFlags: 0
@@ -151226,6 +151228,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 364748374214596965, guid: 50980c97f063e9c4c9a584004d091dce,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 364748374623600918, guid: 50980c97f063e9c4c9a584004d091dce,
+        type: 3}
+      propertyPath: IdENM
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 364748374623600918, guid: 50980c97f063e9c4c9a584004d091dce,
+        type: 3}
+      propertyPath: sceneReturn
+      value: test
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50980c97f063e9c4c9a584004d091dce, type: 3}

@@ -29,10 +29,10 @@ public class SimpleEnemy : MonoBehaviour
     public int defense = 2;
     public int attackPauseDuration = 1;
     private bool isAttacking = false;   
-    private bool DieB = false;
+    public bool DieB = false;
     private DuelManager DM;
 
-    //public static SimpleEnemy instance;
+    public static SimpleEnemy instance;
     [Header("VFX")]
     [SerializeField] public Transform hitpoint;
     [SerializeField] GameObject VFXHurt;    
@@ -53,7 +53,7 @@ public class SimpleEnemy : MonoBehaviour
     
     public void Awake()
     {
-        //if (instance == null){instance = this;}
+        if (instance == null){instance = this;}
         currentHealth = maxHealth;
         DM = GameObject.Find("Script").GetComponent<DuelManager>();
         DM.EnemyinArena += 1;

@@ -7,7 +7,7 @@ public class DuelManager : MonoBehaviour
     [Header("Arena")]
     public int EnemyinArena;
     private bool win = true;
-    private bool WinEnd = false;
+    public bool WinEnd = false;
     public AttStats Stats;
     public Item[] Rewards;
     private int specificQuant = 1;
@@ -52,7 +52,7 @@ public class DuelManager : MonoBehaviour
     [Header("ChangeScene")]
     public SceneEvent sceneEvent;
     public LevelChanger L_C;
-    public string sceneName;
+
     [Header("Pause")]
     public bool stopInput = false;
     [SerializeField]  GameObject Pause;
@@ -254,7 +254,7 @@ IEnumerator EndBattle()
         Stats.K_GainExperience(result);
         GameManager.instance.AddTomoney(Money);
         PlayerStats.instance.EnemyDefeatArea(GameManager.instance.IdENM);
-        LVCH.sceneName = sceneName;
+        LVCH.sceneName = GameManager.instance.sceneName;
         //Reward();
         win = false;}
         WinEnd = true;

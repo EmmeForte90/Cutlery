@@ -29,6 +29,7 @@ public class CharacterMove : MonoBehaviour
     public Transform SpriteHero;
     private bool stand = true;
     public bool isRun = false;
+    private bool StopRun = false;
     public bool inputCTR = false;
     public bool Interact = false;
     public bool Win = false;
@@ -115,7 +116,8 @@ public void Awake()
         //
         if(!inputCTR)
         {
-        if(Run >= 3 || Run <= 3){Run = 3;}
+        if(!StopRun){if(Run >= 3 || Run <= 3){Run = 3;}}
+        else if(StopRun){if(Run >= 3 || Run <= 3){Run = 1;}}
         switch(IDAction){
         case 0:  
         ////////////////////////////////////////
@@ -123,7 +125,8 @@ public void Awake()
         break;
         ////////////////////////////////////////
         case 1: 
-        if(Run >= 3){ Run = 3;}
+        if(!StopRun){if(Run >= 3 || Run <= 3){Run = 3;}}
+        else if(StopRun){if(Run >= 3 || Run <= 3){Run = 1;}}
         switch (kindCh)
         {
             case 0:
@@ -413,10 +416,10 @@ public void Awake()
     }   
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void OnCollisionEnter(Collision collision)
-    {if (collision.gameObject.CompareTag("Collider")){Run = 1;}
+    {if (collision.gameObject.CompareTag("Collider")){StopRun = true;}
     if (collision.gameObject.CompareTag("Question")){Attention = true;}}
     public void OnCollisionExit(Collision collision)
-    {if (collision.gameObject.CompareTag("Collider")){Run = 5;}
+    {if (collision.gameObject.CompareTag("Collider")){StopRun = false;}
     if (collision.gameObject.CompareTag("Question")){Attention = false;}}
     
 }

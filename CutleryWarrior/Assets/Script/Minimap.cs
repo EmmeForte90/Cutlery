@@ -32,7 +32,7 @@ public class Minimap : MonoBehaviour {
 	}
 
 	IEnumerator CoordinateActor()
-    {  yield return new WaitForSeconds(1);
+    {  yield return new WaitForSeconds(0.2f);
 	player.transform.position = ForkActive.transform.position;
 	}
 }

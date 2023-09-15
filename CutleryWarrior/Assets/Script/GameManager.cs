@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     private CinemachineVirtualCamera vCam;
     public GameObject player;
     public GameObject Minimap;
-
     public static bool GameManagerExist; 
     public Vector3 savedPosition;
     public string sceneName;

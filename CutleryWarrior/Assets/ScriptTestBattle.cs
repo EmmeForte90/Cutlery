@@ -11,6 +11,8 @@ public class ScriptTestBattle : MonoBehaviour
     private CharacterMove S_Script;
     private CharacterFollow ch_SAc;
     private SwitchCharacter Switch;
+    public SimpleEnemy[] Enm;
+
     public float DamageTest;
     public void Awake()
     {
@@ -95,6 +97,16 @@ public class ScriptTestBattle : MonoBehaviour
         Stats.F_curRage =  100;
         Stats.S_curRage =  100;
         Stats.K_curRage =  100;
+    }
+
+    public void Win()
+    {
+        Enm[0].currentHealth =  0;
+        Enm[1].currentHealth =  0;
+        Enm[2].currentHealth =  0;
+        Enm[0].Die();
+        Enm[1].Die();
+        Enm[2].Die();
     }
     public void RageLess()
     {

@@ -56,7 +56,7 @@ public class LevelChanger : MonoBehaviour
     CharacterMove.instance.isRun = false;
     yield return new WaitForSeconds(2f);
     CharacterMove.instance.inputCTR = false; 
-    GameManager.instance.FadeOut();
+    //GameManager.instance.FadeOut();
     yield return new WaitForSeconds(2f);
     }
     IEnumerator RetunBattle()

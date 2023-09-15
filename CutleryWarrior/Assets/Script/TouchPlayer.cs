@@ -6,12 +6,14 @@ public class TouchPlayer : MonoBehaviour
 {
     #region Header
     public int IdENM;
+    public int IDBattle;
     public GameObject This;
     //public string spawnPointTag = "SpawnPoint";
     //private CinemachineVirtualCamera vCam;
     //public bool camFollowPlayer = true;
     private SceneEvent sceneEvent;
     public string sceneName;
+    public string sceneReturn;
     public float stoppingDistance = 1f;
     public Vector3 savedPosition;
     private Transform Player;
@@ -81,6 +83,8 @@ public class TouchPlayer : MonoBehaviour
     public void Touch()
     {   Mnpc.Behav = 0; Mnpc.isPaused = true;
         AudioManager.instance.CrossFadeOUTAudio(0);
+        GameManager.instance.sceneName = sceneReturn;
+        GameManager.instance.IDPorta = IDBattle;
         GameManager.instance.IdENM = IdENM;
         GameManager.instance.NotChange();
         AudioManager.instance.PlayUFX(7);
