@@ -23,6 +23,7 @@ public class AnimationManager : MonoBehaviour
     private GameObject SpoonActive;
     private CharacterMove S_Script;
     [HideInInspector] public GameObject Cura;
+    [HideInInspector] public GameObject ShiledI;
     [HideInInspector] public bool isDefence = false;
     /////////////////////////////
     [Header("Knife")]
@@ -106,8 +107,9 @@ public class AnimationManager : MonoBehaviour
     if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(0);}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
-    if (e.Data.Name == "bigspell")
-    {AudioManager.instance.PlayUFX(8); Instantiate(BigSpell, BPoint.position, BigSpell.transform.rotation); }
+    if (e.Data.Name == "bigspell" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(BigSpell, BPoint.position, BigSpell.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "rageFork" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Rage, RPoint.position, Rage.transform.rotation); 
     VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}//Rage.gameObject.SetActive(true); StartCoroutine(StopVFX_Rage());}
@@ -128,5 +130,7 @@ public class AnimationManager : MonoBehaviour
     //Spoon
     if (e.Data.Name == "cura")
     {AudioManager.instance.PlayUFX(8); Instantiate(Cura, BPoint.position, Cura.transform.rotation); }
+    if (e.Data.Name == "punch")
+    {AudioManager.instance.PlayUFX(8); ShiledI.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
 }
 }

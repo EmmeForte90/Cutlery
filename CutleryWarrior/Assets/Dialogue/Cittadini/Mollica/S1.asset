@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: S1
   m_EditorClassIdentifier: 
   id: 0
-  CharacterName: Timber Mayor
+  CharacterName: Timber
   dialogue:
   - 'I''ve heard that you intend to face the Trial of the Furnace. I appreciate your
     determination. However, the desert is a inhospitable territory, where many dangers

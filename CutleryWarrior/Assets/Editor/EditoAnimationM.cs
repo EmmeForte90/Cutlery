@@ -31,6 +31,8 @@ public class EditoAnimationM : Editor
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isDefence"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Cura"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("ShiledI"));
+
             // Add other fields as needed
         }
         // Apply changes to serialized object

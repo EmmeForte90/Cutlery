@@ -18,6 +18,7 @@ public class ChargeSkill : MonoBehaviour
     private int TimeS;
     public GameObject MP;
     public GameObject VFX;
+    public GameObject VFXRAGE;
     public GameObject Mossa;
     public GameObject AnimationRage;
     public TextMeshProUGUI nameText; 
@@ -91,40 +92,40 @@ public class ChargeSkill : MonoBehaviour
     switch(skill.WhoSkill)
     {
     case 0:
-    Anm = Skill0;
+    Anm = Skill0;VFX.SetActive(true);
     break;
     case 1:
-    Anm = Skill1;
+    Anm = Skill1;VFX.SetActive(true);
     break;
     case 2:
-    Anm = Skill2;
+    Anm = Skill2;VFX.SetActive(true);
     break;
     case 3:
-    Anm = Skill3;
+    Anm = Skill3;VFX.SetActive(true);
     break;
     case 4:
-    Anm = Skill4;
+    Anm = Skill4;VFX.SetActive(true);
     break;
     case 5:
-    Anm = Skill5;
+    Anm = Skill5;VFX.SetActive(true);
     break;
     case 6:
-    Anm = Skill6;
+    Anm = Skill6;VFX.SetActive(true);
     break;
     case 7:
-    Anm = Skill7;
+    Anm = Skill7;VFX.SetActive(true);
     break;
     case 8:
-    Anm = Skill8;
+    Anm = Skill8;VFX.SetActive(true);
     break;
     case 9:
-    Anm = Skill9;
+    Anm = Skill9;VFX.SetActive(true);
     break;
     case 10:
-    Anm = SkillRage;
+    Anm = SkillRage;VFXRAGE.SetActive(true);
     break;
     }
-    VFX.SetActive(true);}
+    }
     else
     {AudioManager.instance.PlayUFX(10); TimerSkill.instance.Notuse();}
     }
@@ -164,6 +165,7 @@ IEnumerator SkillLunch()
     nameText.text = nameT.ToString();
     yield return new WaitForSeconds(3f);
     VFX.SetActive(false);
+    VFXRAGE.SetActive(false);
     Mossa.SetActive(false);
     GameManager.instance.CloseTimerMenu();
     //_spineAnimationState.SetAnimation(0, LunchAnm, false); 
