@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI moneyTextM;
     //[SerializeField] GameObject moneyObjectM;
     public int IDPorta;
+    public int IdAreaAtt;
     public int IDCharacter;
     [Header("Stats")]
     public PlayerStats PStats;

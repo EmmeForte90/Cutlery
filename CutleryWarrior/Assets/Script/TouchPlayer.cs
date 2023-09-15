@@ -7,6 +7,7 @@ public class TouchPlayer : MonoBehaviour
     #region Header
     public int IdENM;
     public int IDBattle;
+    public int IdAreaAtt;
     public GameObject This;
     //public string spawnPointTag = "SpawnPoint";
     //private CinemachineVirtualCamera vCam;
@@ -84,6 +85,7 @@ public class TouchPlayer : MonoBehaviour
     {   Mnpc.Behav = 0; Mnpc.isPaused = true;
         AudioManager.instance.CrossFadeOUTAudio(0);
         GameManager.instance.sceneName = sceneReturn;
+        GameManager.instance.IdAreaAtt = IdAreaAtt;
         GameManager.instance.IDPorta = IDBattle;
         GameManager.instance.IdENM = IdENM;
         GameManager.instance.NotChange();
