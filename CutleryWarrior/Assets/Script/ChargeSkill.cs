@@ -22,7 +22,7 @@ public class ChargeSkill : MonoBehaviour
     public GameObject Mossa;
     public GameObject AnimationRage;
     public TextMeshProUGUI nameText; 
-    public TextMeshProUGUI Utilizzi;    
+    //public TextMeshProUGUI Utilizzi;    
     private CinemachineVirtualCamera vCam;
     private string nameT;
     public float fillDuration;  // Durata desiderata per riempire la barra in secondi
