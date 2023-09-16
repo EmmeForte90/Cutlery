@@ -32,9 +32,9 @@ public class TouchPlayer : MonoBehaviour
     if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
     sceneEvent = GetComponent<SceneEvent>();
     sceneEvent.onSceneChange.AddListener(ChangeScene);
-    Fork = GameObject.Find("F_Player").transform;
-    Spoon = GameObject.Find("S_Player").transform;
-    Knife = GameObject.Find("K_Player").transform;
+     if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
+     if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}
+     if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}
     }
     public void Take(){Destroy(This);}
     public void Update()

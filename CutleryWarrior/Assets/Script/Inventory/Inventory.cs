@@ -113,8 +113,8 @@ public class Inventory : MonoBehaviour
             PlayerStats.instance.K_paralysisResistance = 0;
             PlayerStats.instance.K_sleepResistance = 0;
             PlayerStats.instance.K_rustResistance = 0;
-            PlayerStats.instance.K_HP += Item.HP += PlayerStats.instance.K_HPCont;
-            PlayerStats.instance.K_MP += Item.MP += PlayerStats.instance.K_MPCont;
+            PlayerStats.instance.K_HP += Item.HP + PlayerStats.instance.K_HPCont;
+            PlayerStats.instance.K_MP += Item.MP + PlayerStats.instance.K_MPCont;
             PlayerStats.instance.K_defense += Item.DefenceDress + PlayerStats.instance.K_defenseCont;
             PlayerStats.instance.K_poisonResistance += Item.Res_Poison + PlayerStats.instance.K_poisonResistanceCont;
             PlayerStats.instance.K_paralysisResistance += Item.Res_Stun + PlayerStats.instance.K_paralysisResistanceCont;

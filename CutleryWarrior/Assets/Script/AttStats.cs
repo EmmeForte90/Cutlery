@@ -7,6 +7,7 @@ public class AttStats : MonoBehaviour
     [Header("Stats")]
     [HideInInspector] public int F_LV;
     [Header("Fork")]
+    [SerializeField] public GameObject F_Window;
     [SerializeField] public Scrollbar F_ExpScrol;
     [SerializeField] public TextMeshProUGUI F_LVTextM;
     [SerializeField] public GameObject F_LevelUP;
@@ -34,6 +35,7 @@ public class AttStats : MonoBehaviour
     //
     [HideInInspector] public int S_LV;
     [Header("Spoon")]
+    [SerializeField] public GameObject S_Window;
     [SerializeField] public Scrollbar S_ExpScrol;
     [SerializeField] public TextMeshProUGUI S_LVTextM;
     [SerializeField] public GameObject S_LevelUP;
@@ -61,6 +63,8 @@ public class AttStats : MonoBehaviour
     //
     [HideInInspector] public int K_LV;
     [Header("Knife")]
+    [SerializeField] public GameObject K_Window;
+
     [SerializeField] public Scrollbar K_ExpScrol;
     [SerializeField] public TextMeshProUGUI K_LVTextM;
     [SerializeField] public GameObject K_LevelUP;
@@ -88,23 +92,35 @@ public class AttStats : MonoBehaviour
     //
     public static AttStats instance;
     #endregion
-    public void Awake(){if (instance == null){instance = this;}}
+    public void Awake()
+    {if (instance == null){instance = this;} 
+    K_Window.SetActive(false);S_Window.SetActive(false);F_Window.SetActive(false);}
     public void Update()
     {
+        if(GameManager.instance.K_Unlock){
+        K_Window.SetActive(true);
         K_ExpScrol.size = PlayerStats.instance.K_curExp / PlayerStats.instance.K_Exp;
         K_ExpScrol.size = Mathf.Clamp(K_ExpScrol.size, 0.01f, 5);
-        //
-        S_ExpScrol.size = PlayerStats.instance.S_curExp / PlayerStats.instance.S_Exp;
-        S_ExpScrol.size = Mathf.Clamp(S_ExpScrol.size, 0.01f, 5);
-        //
-        F_ExpScrol.size = PlayerStats.instance.F_curExp / PlayerStats.instance.F_Exp;
-        F_ExpScrol.size = Mathf.Clamp(F_ExpScrol.size, 0.01f, 5);
         K_LV = PlayerStats.instance.K_LV;
         K_LVTextM.text = K_LV.ToString();
+        }
+        //
+        if(GameManager.instance.S_Unlock){
+        S_Window.SetActive(true);
+        S_ExpScrol.size = PlayerStats.instance.S_curExp / PlayerStats.instance.S_Exp;
+        S_ExpScrol.size = Mathf.Clamp(S_ExpScrol.size, 0.01f, 5);
         S_LV = PlayerStats.instance.S_LV;
         S_LVTextM.text = S_LV.ToString();
+        }
+        //
+        if(GameManager.instance.F_Unlock){
+        F_Window.SetActive(true);
+        F_ExpScrol.size = PlayerStats.instance.F_curExp / PlayerStats.instance.F_Exp;
+        F_ExpScrol.size = Mathf.Clamp(F_ExpScrol.size, 0.01f, 5);
         F_LV = PlayerStats.instance.F_LV;
         F_LVTextM.text = F_LV.ToString();
+        }
+        //
     }
     public void F_GainExperience(int amount)
     {

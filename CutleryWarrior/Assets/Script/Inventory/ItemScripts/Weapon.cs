@@ -6,7 +6,7 @@ using UnityEngine;
 public class Weapon : Item
 {
     #region Header
-    public weaponType type;
+    //public weaponType type;
     [Header("Se è un arma")]
     public int weaponDamage;
     public int MpCost;
@@ -26,5 +26,5 @@ public class Weapon : Item
         {Inventory.instance.AssignWeapon(this);}
         else if (TypesE == 0){Inventory.instance.AssignDress(this);} //Debug.Log("Hai cliccato il pulsante!");
     }
-    public enum weaponType { Sword, Fork, Spoon}
+    //public enum weaponType { Sword, Fork, Spoon}
 }

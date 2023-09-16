@@ -100,6 +100,8 @@ public class StartBattle : MonoBehaviour
     IEnumerator DuringInter()
     {
         GameManager.instance.FadeOut();
+        GameManager.instance.StopAllarm();
+        GameManager.instance.Posebattle();
         yield return new WaitForSeconds(2f);
         GameManager.instance.ChCanM();
         if(Switch.isElement1Active)
@@ -119,7 +121,7 @@ public class StartBattle : MonoBehaviour
             if(GameManager.instance.K_Unlock){player = GameObject.FindWithTag("K_Player");}  
             vCam.Follow = player.transform;
         }
-        GameManager.instance.Change();
+        //GameManager.instance.Change();
         GameManager.instance.ChCanM();
         Duel_Script.inputCTR = false;
     }

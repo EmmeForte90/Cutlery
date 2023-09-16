@@ -21,13 +21,12 @@ MonoBehaviour:
   Stackable: 1
   itemIcon: {fileID: 21300000, guid: 02ac8ea602e168444b8a4838a0d193f6, type: 3}
   TypesE: 0
-  type: 0
   weaponDamage: 0
   MpCost: 0
-  DefenceDress: 15
-  HP: 100
-  MP: 100
-  Res_Poison: 5
-  Res_Stun: 3
-  Res_Sleep: 2
-  Res_Rust: 5
+  DefenceDress: 0
+  HP: 0
+  MP: 0
+  Res_Poison: 0
+  Res_Stun: 0
+  Res_Sleep: 0
+  Res_Rust: 0

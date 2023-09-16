@@ -61,23 +61,34 @@ public class SimpleEnemy : MonoBehaviour
     private void Choise()
     {
         // Genera un numero casuale tra 1 e 3
+        if(GameManager.instance.F_Unlock &&
+        GameManager.instance.S_Unlock &&
+        GameManager.instance.K_Unlock){
         int randomNumber = Random.Range(0, 2);
-        result = Mathf.RoundToInt(randomNumber);
+        result = Mathf.RoundToInt(randomNumber);} 
+        else if(GameManager.instance.F_Unlock &&
+        !GameManager.instance.S_Unlock &&
+        !GameManager.instance.K_Unlock){
+        result = 0;}
         //Debug.Log("Numero casuale: " + result);
         //Debug.Log(ID + "ha Preso" + result);
         switch(result)
         {
             case 0:
-            player = GameManager.instance.F_Hero;
+            if(GameManager.instance.F_Unlock){player = GameManager.instance.F_Hero;}
+            else if(!GameManager.instance.F_Unlock){Choise();}
             break;
             case 1:
-            player =  GameManager.instance.K_Hero;
+            if(GameManager.instance.K_Unlock){player =  GameManager.instance.K_Hero;}
+            else if(!GameManager.instance.K_Unlock){Choise();}
             break;
             case 2:
-            player =  GameManager.instance.S_Hero;
+            if(GameManager.instance.S_Unlock){player =  GameManager.instance.S_Hero;}
+            else if(!GameManager.instance.S_Unlock){Choise();}
             break;
         } 
     }
+    
 
     public void Update()
     {
