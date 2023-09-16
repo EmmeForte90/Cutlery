@@ -23,6 +23,7 @@ MonoBehaviour:
   TypesE: 0
   type: 0
   weaponDamage: 0
+  MpCost: 0
   DefenceDress: 5
   HP: 100
   MP: 100

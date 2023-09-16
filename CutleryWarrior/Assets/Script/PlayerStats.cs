@@ -116,33 +116,89 @@ public class PlayerStats : MonoBehaviour
     public void Awake(){if (instance == null){instance = this;}}
     public void Start()
     {
+    if(GameManager.instance.F_Unlock){
     F_HPCont = F_HP;
+    F_curHP = F_HP;
     F_MPCont = F_MP;
+    F_curMP = F_MP;
     F_attackCont = F_attack;
     F_defenseCont = F_defense;
     F_poisonResistanceCont = F_poisonResistance;
     F_paralysisResistanceCont = F_paralysisResistance;
     F_sleepResistanceCont = F_sleepResistance;
-    F_rustResistanceCont = F_rustResistance; 
+    F_rustResistanceCont = F_rustResistance;}
     //
+    if(GameManager.instance.K_Unlock){
     K_HPCont = K_HP;
+    K_curHP = K_HP;
     K_MPCont = K_MP;
+    K_curMP = K_MP;
     K_attackCont = K_attack;
     K_defenseCont = K_defense;
     K_poisonResistanceCont = K_poisonResistance;
     K_paralysisResistanceCont = K_paralysisResistance;
     K_sleepResistanceCont = K_sleepResistance;
-    K_rustResistanceCont = K_rustResistance; 
+    K_rustResistanceCont = K_rustResistance;}
     //
+    if(GameManager.instance.S_Unlock){
     S_HPCont = S_HP;
+    S_curHP = S_HP;
     S_MPCont = S_MP;
+    S_curMP = S_MP;
     S_attackCont = S_attack;
     S_defenseCont = S_defense;
     S_poisonResistanceCont = S_poisonResistance;
     S_paralysisResistanceCont = S_paralysisResistance;
     S_sleepResistanceCont = S_sleepResistance;
-    S_rustResistanceCont = S_rustResistance;   
+    S_rustResistanceCont = S_rustResistance;}   
     }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void ResetStatF()
+    {
+    if(GameManager.instance.F_Unlock){
+    F_HPCont = F_HP;
+    F_curHP = F_HP;
+    F_MPCont = F_MP;
+    F_curMP = F_MP;
+    F_attackCont = F_attack;
+    F_defenseCont = F_defense;
+    F_poisonResistanceCont = F_poisonResistance;
+    F_paralysisResistanceCont = F_paralysisResistance;
+    F_sleepResistanceCont = F_sleepResistance;
+    F_rustResistanceCont = F_rustResistance;}
+    }
+    public void ResetStatS()
+    {
+    if(GameManager.instance.S_Unlock){
+    S_HPCont = S_HP;
+    S_curHP = S_HP;
+    S_MPCont = S_MP;
+    S_curMP = S_MP;
+    S_attackCont = S_attack;
+    S_defenseCont = S_defense;
+    S_poisonResistanceCont = S_poisonResistance;
+    S_paralysisResistanceCont = S_paralysisResistance;
+    S_sleepResistanceCont = S_sleepResistance;
+    S_rustResistanceCont = S_rustResistance;}   
+    }
+    public void ResetStatK()
+    {
+    if(GameManager.instance.K_Unlock){
+    K_HPCont = K_HP;
+    K_curHP = K_HP;
+    K_MPCont = K_MP;
+    K_curMP = K_MP;
+    K_attackCont = K_attack;
+    K_defenseCont = K_defense;
+    K_poisonResistanceCont = K_poisonResistance;
+    K_paralysisResistanceCont = K_paralysisResistance;
+    K_sleepResistanceCont = K_sleepResistance;
+    K_rustResistanceCont = K_rustResistance;}  
+    }
+    
+
+
+
     public void DeactivateENM()
     {
         // Cerca tutti i GameObjects con il tag "Enemy"

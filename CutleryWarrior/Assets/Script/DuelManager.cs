@@ -68,25 +68,29 @@ public void Awake()
     {
         if (instance == null){instance = this;}
         Animator animator = GetComponent<Animator>();
+        if(GameManager.instance.F_Unlock){
         PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
-        PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;
+        PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;}
         //
+        if(GameManager.instance.K_Unlock){
         PlayerStats.instance.K_curHP = PlayerStats.instance.K_HP;
-        PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;
+        PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;}
         //
+        if(GameManager.instance.S_Unlock){
         PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
-        PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;
+        PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;}
         CharacterID = 1; 
-        ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
-        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
-        ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
-        PlayerStats.instance.F_curRage = 0;        
-        PlayerStats.instance.S_curRage = 0;
-        PlayerStats.instance.K_curRage = 0;
+        if(GameManager.instance.S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        if(GameManager.instance.F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
+        if(GameManager.instance.K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage = 0;}       
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage = 0;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage = 0;}
         StartCoroutine(StartAI());    
     }
 public void Update()
     {
+        if(GameManager.instance.F_Unlock){
         FhealthBar.size = PlayerStats.instance.F_curHP / PlayerStats.instance.F_HP;
         FhealthBar.size = Mathf.Clamp(FhealthBar.size, 0.01f, 1);
         //
@@ -94,8 +98,9 @@ public void Update()
         FMPBar.size = Mathf.Clamp(FMPBar.size, 0.01f, 1);
         //
         FRageBar.fillAmount = PlayerStats.instance.F_curRage / PlayerStats.instance.F_Rage;
-        FRageBar.fillAmount = Mathf.Clamp(FRageBar.fillAmount, 0.01f, 1);
+        FRageBar.fillAmount = Mathf.Clamp(FRageBar.fillAmount, 0.01f, 1);}
         ////////////////////////////////////////////////////////
+        if(GameManager.instance.K_Unlock){
         KhealthBar.size = PlayerStats.instance.K_curHP / PlayerStats.instance.K_HP;
         KhealthBar.size = Mathf.Clamp(KhealthBar.size, 0.01f, 1);
         //
@@ -103,8 +108,9 @@ public void Update()
         KMPBar.size = Mathf.Clamp(KMPBar.size, 0.01f, 1);
         //
         KRageBar.fillAmount = PlayerStats.instance.K_curRage / PlayerStats.instance.K_Rage;
-        KRageBar.fillAmount = Mathf.Clamp(KRageBar.fillAmount, 0.01f, 1);
+        KRageBar.fillAmount = Mathf.Clamp(KRageBar.fillAmount, 0.01f, 1);}
         //////////////////////////////////////////////////////////
+        if(GameManager.instance.S_Unlock){
         ShealthBar.size = PlayerStats.instance.S_curHP / PlayerStats.instance.S_HP;
         ShealthBar.size = Mathf.Clamp(ShealthBar.size, 0.01f, 1);
         //
@@ -112,47 +118,47 @@ public void Update()
         SMPBar.size = Mathf.Clamp(SMPBar.size, 0.01f, 1);
         //
         SRageBar.fillAmount = PlayerStats.instance.S_curRage / PlayerStats.instance.S_Rage;
-        SRageBar.fillAmount = Mathf.Clamp(SRageBar.fillAmount, 0.01f, 1);
+        SRageBar.fillAmount = Mathf.Clamp(SRageBar.fillAmount, 0.01f, 1);}
         //           
-        PlayerStats.instance.F_curMP += F_SpeedRestore * Time.deltaTime;
-        PlayerStats.instance.K_curMP += K_SpeedRestore * Time.deltaTime;
-        PlayerStats.instance.S_curMP += S_SpeedRestore * Time.deltaTime;
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curMP += F_SpeedRestore * Time.deltaTime;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curMP += K_SpeedRestore * Time.deltaTime;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curMP += S_SpeedRestore * Time.deltaTime;}
         //
-        if(PlayerStats.instance.F_curMP >= PlayerStats.instance.F_MP)
+        if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curMP >= PlayerStats.instance.F_MP)
         {PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;}
-        if(PlayerStats.instance.K_curMP >= PlayerStats.instance.K_MP)
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curMP >= PlayerStats.instance.K_MP)
         {PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;}
-        if(PlayerStats.instance.S_curMP >= PlayerStats.instance.S_MP)
+        if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curMP >= PlayerStats.instance.S_MP)
         {PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;}
         //
-        if(PlayerStats.instance.K_curRage >= PlayerStats.instance.K_Rage)
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curRage >= PlayerStats.instance.K_Rage)
         {MaxRageK.SetActive(true);} 
-        else if(PlayerStats.instance.K_curRage < PlayerStats.instance.K_Rage)
+        else if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curRage < PlayerStats.instance.K_Rage)
         {MaxRageK.SetActive(false);}
-        if(PlayerStats.instance.S_curRage >= PlayerStats.instance.S_Rage)
+        if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curRage >= PlayerStats.instance.S_Rage)
         {MaxRageS.SetActive(true);} 
-        else if(PlayerStats.instance.S_curRage < PlayerStats.instance.S_Rage)
+        else if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curRage < PlayerStats.instance.S_Rage)
         {MaxRageS.SetActive(false);}
-        if(PlayerStats.instance.F_curRage >= PlayerStats.instance.F_Rage)
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.F_curRage >= PlayerStats.instance.F_Rage)
         {MaxRageF.SetActive(true);} 
-        else if(PlayerStats.instance.F_curRage < PlayerStats.instance.F_Rage)
+        else if(GameManager.instance.K_Unlock && PlayerStats.instance.F_curRage < PlayerStats.instance.F_Rage)
         {MaxRageF.SetActive(false);}
         //
-        if(PlayerStats.instance.S_curHP <= 0)
+        if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curHP <= 0)
         {GameManager.instance.PoseDeathS();}
-        if(PlayerStats.instance.K_curHP <= 0)
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curHP <= 0)
         {GameManager.instance.PoseDeathK();}
-        if(PlayerStats.instance.F_curHP <= 0)
+        if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curHP <= 0)
         {GameManager.instance.PoseDeathF();}
         //
-        if(PlayerStats.instance.F_paralysisResistance <= 0)
+        if(GameManager.instance.F_Unlock && PlayerStats.instance.F_paralysisResistance <= 0)
         {GameManager.instance.StunF();}
-        if(PlayerStats.instance.K_paralysisResistance <= 0)
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.K_paralysisResistance <= 0)
         {GameManager.instance.StunK();}
-        if(PlayerStats.instance.S_paralysisResistance <= 0)
+        if(GameManager.instance.S_Unlock && PlayerStats.instance.S_paralysisResistance <= 0)
         {GameManager.instance.StunS();}
         //
-        if(PlayerStats.instance.F_poisonResistance <= 0)
+        if(GameManager.instance.F_Unlock && PlayerStats.instance.F_poisonResistance <= 0)
         {GameManager.instance.PoisonF();
         isDamaging = true;
         elapsedTime = 0.0f;
@@ -166,7 +172,7 @@ public void Update()
                 isDamaging = false;
             }
         }}
-        if(PlayerStats.instance.S_poisonResistance <= 0)
+        if(GameManager.instance.S_Unlock && PlayerStats.instance.S_poisonResistance <= 0)
         {GameManager.instance.PoisonS();
         isDamaging = true;
         elapsedTime = 0.0f;
@@ -181,7 +187,7 @@ public void Update()
             }
         }
         }
-        if(PlayerStats.instance.K_poisonResistance <= 0)
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.K_poisonResistance <= 0)
         {GameManager.instance.PoisonK();isDamaging = true;
         elapsedTime = 0.0f;
         if (isDamaging)
@@ -216,7 +222,9 @@ public void Update()
 IEnumerator StartAI()
     {
         yield return new WaitForSeconds(3f);
-        ch_KAc.order = 1;ch_SAc.order = 2;ch_FAc.order = 1;
+        if(GameManager.instance.K_Unlock){ch_KAc.order = 1;}
+        if(GameManager.instance.S_Unlock){ch_SAc.order = 2;}
+        if(GameManager.instance.F_Unlock){ch_FAc.order = 1;}
     }
 IEnumerator StartM()
     {
@@ -249,9 +257,9 @@ IEnumerator EndBattle()
         AudioManager.instance.PlaySFX(7);
         GameManager.instance.NotChange(); 
         GameManager.instance.PoseWin();
-        Stats.F_GainExperience(result);
-        Stats.S_GainExperience(result);
-        Stats.K_GainExperience(result);
+        if(GameManager.instance.F_Unlock){Stats.F_GainExperience(result);}
+        if(GameManager.instance.S_Unlock){Stats.S_GainExperience(result);}
+        if(GameManager.instance.K_Unlock){Stats.K_GainExperience(result);}
         GameManager.instance.AddTomoney(Money);
         PlayerStats.instance.EnemyDefeatArea(GameManager.instance.IdENM);
         LVCH.sceneName = GameManager.instance.sceneName;

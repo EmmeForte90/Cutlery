@@ -17,22 +17,25 @@ public class StartBattle : MonoBehaviour
     private GameObject player;
     [Header("Stats")]
     [Header("Fork")]
+    public GameObject ForkHUD;
     private GameObject ForkActive;
     private CharacterMove F_Script;
     public GameObject F_point; // Variabile per il player
     private ChangeHeroSkin Skin_F;
     [Header("Spoon")]
+    public GameObject SpoonHUD;
     private GameObject SpoonActive;
     private CharacterMove S_Script;
     public GameObject S_point; // Variabile per il player
     private ChangeHeroSkin Skin_S;
     [Header("Knife")]
+    public GameObject KnifeHUD;
     private GameObject KnifeActive;
     private CharacterMove K_Script;
     public GameObject K_point; // Variabile per il player
     private ChangeHeroSkin Skin_K;
     [Header("Enemy")]
-    public SimpleEnemy E_Script;
+    //public SimpleEnemy E_Script;
     public DuelManager Duel_Script;
     #endregion
     public void Awake()
@@ -47,9 +50,15 @@ public class StartBattle : MonoBehaviour
         GameManager.instance.battle = true;
         GameManager.instance.ChStop();
         GameManager.instance.TakeCamera();
-        if(GameManager.instance.F_Unlock){F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.K_Unlock){K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.S_Unlock){S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.F_Unlock)
+        {F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>(); ForkHUD.SetActive(true);}
+        else{ForkHUD.SetActive(false);}
+        if(GameManager.instance.K_Unlock)
+        {K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>(); KnifeHUD.SetActive(true);}
+        else{KnifeHUD.SetActive(false);}
+        if(GameManager.instance.S_Unlock)
+        {S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>(); SpoonHUD.SetActive(true);}
+        else{SpoonHUD.SetActive(false);}
         //
         if(GameManager.instance.F_Unlock){Skin_F = GameObject.Find("F_Player").GetComponent<ChangeHeroSkin>();}
         if(GameManager.instance.K_Unlock){Skin_K = GameObject.Find("K_Player").GetComponent<ChangeHeroSkin>();}

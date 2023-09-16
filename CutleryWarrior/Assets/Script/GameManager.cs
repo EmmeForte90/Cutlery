@@ -423,7 +423,20 @@ public class GameManager : MonoBehaviour
     F_Stun.text = F_paralysisResistance.ToString();
     F_Sleep.text = F_sleepResistance.ToString();
     F_mpTextM.text = F_MP.ToString();
-    F_hpTextM.text = F_HP.ToString();}
+    F_hpTextM.text = F_HP.ToString();
+    
+        F_Hp.size = PlayerStats.instance.F_curHP / PlayerStats.instance.F_HP;
+        F_Hp.size = Mathf.Clamp(F_Hp.size, 1f, 1);
+        //
+        F_Mp.size = PlayerStats.instance.F_curMP / PlayerStats.instance.F_MP;
+        F_Mp.size = Mathf.Clamp(F_Mp.size, 1f, 1);
+        //
+        //FRageBar.fillAmount = PlayerStats.instance.F_curRage / PlayerStats.instance.F_Rage;
+        //FRageBar.fillAmount = Mathf.Clamp(FRageBar.fillAmount, 0.01f, 1);}
+        
+    }
+
+
     //Knife
     if(GameManager.instance.K_Unlock){
     K_LV = PStats.K_LV;
@@ -448,7 +461,20 @@ public class GameManager : MonoBehaviour
     K_Stun.text = K_paralysisResistance.ToString();
     K_Sleep.text = K_sleepResistance.ToString();
     K_mpTextM.text = K_MP.ToString();
-    K_hpTextM.text = K_HP.ToString();}
+    K_hpTextM.text = K_HP.ToString();
+    
+        K_Hp.size = PlayerStats.instance.K_curHP / PlayerStats.instance.K_HP;
+        K_Hp.size = Mathf.Clamp(K_Hp.size, 1f, 1);
+        //
+        K_Mp.size = PlayerStats.instance.K_curMP / PlayerStats.instance.K_MP;
+        K_Mp.size = Mathf.Clamp(K_Mp.size, 1f, 1);
+        //
+        //FRageBar.fillAmount = PlayerStats.instance.F_curRage / PlayerStats.instance.F_Rage;
+        //FRageBar.fillAmount = Mathf.Clamp(FRageBar.fillAmount, 0.01f, 1);}
+        
+    }
+
+
     //Spoon
     if(GameManager.instance.S_Unlock){
     S_LV = PStats.S_LV;
@@ -473,7 +499,18 @@ public class GameManager : MonoBehaviour
     S_Stun.text = S_paralysisResistance.ToString();
     S_Sleep.text = S_sleepResistance.ToString();
     S_mpTextM.text = S_MP.ToString();
-    S_hpTextM.text = S_HP.ToString();}
+    S_hpTextM.text = S_HP.ToString();
+    
+        S_Hp.size = PlayerStats.instance.S_curHP / PlayerStats.instance.S_HP;
+        S_Hp.size = Mathf.Clamp(S_Hp.size, 1f, 1);
+        //
+        S_Mp.size = PlayerStats.instance.K_curMP / PlayerStats.instance.S_MP;
+        S_Mp.size = Mathf.Clamp(S_Mp.size, 1f, 1);
+        //
+        //FRageBar.fillAmount = PlayerStats.instance.F_curRage / PlayerStats.instance.F_Rage;
+        //FRageBar.fillAmount = Mathf.Clamp(FRageBar.fillAmount, 0.01f, 1);}
+        
+    }
     }   
     public void BarStat()
     {   
