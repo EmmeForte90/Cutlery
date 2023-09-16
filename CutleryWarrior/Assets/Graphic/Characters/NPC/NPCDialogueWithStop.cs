@@ -38,6 +38,7 @@ public class NPCDialogueWithStop : MonoBehaviour
     Spine.EventData eventData;
     public static NPCDialogueWithStop instance;
     [Header("Audio")]
+    [Tooltip("0,1-Male 2,3-Female 4-Kid 5-Oldman 6-Oste")]
     public int IDAudio;
     #endregion
     void Awake()

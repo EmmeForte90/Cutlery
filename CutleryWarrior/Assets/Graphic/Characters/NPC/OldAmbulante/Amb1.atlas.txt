@@ -8,11 +8,13 @@ bounds:131,21,45,87
 Cassa
 bounds:2,110,155,138
 Dita
-bounds:466,133,22,53
+bounds:178,24,22,53
+rotate:90
 Eye
-bounds:178,87,40,27
+bounds:257,74,40,27
+rotate:90
 Gamba
-bounds:493,187,15,61
+bounds:240,53,15,61
 Hat
 bounds:2,2,127,106
 Head
@@ -24,3 +26,5 @@ Spalla
 bounds:296,125,72,123
 Staff
 bounds:435,135,29,113
+Z
+bounds:178,48,60,66

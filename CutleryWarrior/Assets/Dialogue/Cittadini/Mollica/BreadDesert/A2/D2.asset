@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74896e8e20d07d4c913bec59de3ca9c, type: 3}
+  m_Name: D2
+  m_EditorClassIdentifier: 
+  id: 0
+  CharacterName: Goffredo
+  dialogue:
+  - "The old man says, \"Do this, do that,\" and I'm feeling very unwell. We can't
+    work forever, sometimes it's better to take a break.\r"
+  Startdialogue: []
+  Middledialogue: []
+  Endingdialogue: []
+  First: 0
+  Middle: 0
+  End: 0

@@ -12,17 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74896e8e20d07d4c913bec59de3ca9c, type: 3}
   m_Name: D1
   m_EditorClassIdentifier: 
-  id: 1
-  CharacterName: Adelaide
+  id: 0
+  CharacterName: Adalberto
   dialogue:
-  - Hello, there! It's a nice day, didn't you?
-  Startdialogue:
-  - TestDialogueTestDialogueTestDialogueTestDialogueTestDialogueTestDialogue
-  Middledialogue:
-  - Ok, il test sembra andare beneOk, il test sembra andare beneOk, il test sembra
-    andare beneOk
-  Endingdialogue:
-  - Ok va benissimo possiamo andare avanti
+  - "Umpf, It seems like young people nowadays don't have the same work ethic. They
+    appear to be disorganized and lack motivation, I swear!\r"
+  Startdialogue: []
+  Middledialogue: []
+  Endingdialogue: []
   First: 0
   Middle: 0
   End: 0

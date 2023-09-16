@@ -60,6 +60,9 @@ public class Mercante : MonoBehaviour
     private Spine.AnimationState _spineAnimationState;
     private Spine.Skeleton _skeleton;
     Spine.EventData eventData;
+    [Header("Audio")]
+    [Tooltip("0,1-Male 2,3-Female 4-Kid 5-Oldman 6-Oste")]
+    public int IDAudio;
     public static Mercante instance;
     #endregion
     public void Awake()

@@ -16,7 +16,7 @@ MonoBehaviour:
   CharacterName: Oste
   dialogue:
   - Hello there, do you want something?
-  - C'mon, go away!
+  - Hello there, do you want something?
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []

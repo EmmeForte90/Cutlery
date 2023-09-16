@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74896e8e20d07d4c913bec59de3ca9c, type: 3}
+  m_Name: Cac_2
+  m_EditorClassIdentifier: 
+  id: 1
+  CharacterName: Vance
+  dialogue:
+  - 'What do you want? Just let me be, can''t you see I''m busy drowning my sorrows
+    in this drink? '
+  - Frustrating, really... I've been tracking the Multi-Spike for days, but I can't
+    seem to bring it down. Curse that beast.
+  - It roams the desert at night. I'd advise you to steer clear during those dark
+    hours; it's a highly dangerous creature.
+  - But why am I even telling you this? You don't strike me as the type to venture
+    out at night, do you?
+  Startdialogue: []
+  Middledialogue: []
+  Endingdialogue: []
+  First: 0
+  Middle: 0
+  End: 0

@@ -41,6 +41,7 @@ public class QuestCharacters : MonoBehaviour
     public GameObject Esclama;
 
     [Header("Audio")]
+    [Tooltip("0,1-Male 2,3-Female 4-Kid")]
     public int IDAudio;
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;

@@ -18,6 +18,10 @@ public class StartScene : MonoBehaviour
     public GameObject[] SpawnArr; 
     public GameObject[] ActiveObj; 
     public GameObject[] ActiveObjAB;
+    public GameObject[] Notte; 
+    public Material newSkyboxMaterial_N;
+    public GameObject[] Giorno;
+    public Material newSkyboxMaterial_G; // Il nuovo materiale Skybox che desideri applicare
     public GameObject[] Enemies; 
     //public Collider[] BoxConfiner;    
     private CinemachineConfiner confiner;
@@ -60,6 +64,18 @@ public class StartScene : MonoBehaviour
     Switcher.TakeCharacters();
     StartCoroutine(BoxDel());
     }}
+    public void Update()
+    {
+        if(!GameManager.instance.Day)
+        {foreach (GameObject arenaObject in Giorno){arenaObject.SetActive(false);}
+        foreach (GameObject arenaObjectN in Notte){arenaObjectN.SetActive(true);}
+        RenderSettings.skybox = newSkyboxMaterial_N;}
+        else if(GameManager.instance.Day)
+        {foreach (GameObject arenaObject in Giorno){arenaObject.SetActive(true);}
+        foreach (GameObject arenaObjectN in Notte){arenaObjectN.SetActive(false);}
+        RenderSettings.skybox = newSkyboxMaterial_G;}
+    }
+
     public void Spawn(int ID)
     {
     ContainerHero.transform.position = SpawnArr[ID].transform.position;

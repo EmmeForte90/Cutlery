@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [Header("Pause")]
     public bool stopInput = false;
     public bool battle = false;
+    public bool Day = true;
     public bool Interact = false; 
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject LittleM;
@@ -171,7 +172,7 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("S_Player");
             break;
         }}
-    public void Start(){Application.targetFrameRate = 60;}
+    public void Start(){Application.targetFrameRate = 60; Day = true;}
     public void Update()
     {
         IDCharacter = rotationSwitcher.CharacterID;
