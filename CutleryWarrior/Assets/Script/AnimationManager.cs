@@ -56,9 +56,9 @@ public class AnimationManager : MonoBehaviour
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;   
-        F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();
-        S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();     
+        if(GameManager.instance.F_Unlock){F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.K_Unlock){K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.S_Unlock){S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();}    
     }
     IEnumerator StopVFX_K()
     {

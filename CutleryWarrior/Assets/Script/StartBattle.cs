@@ -47,23 +47,28 @@ public class StartBattle : MonoBehaviour
         GameManager.instance.battle = true;
         GameManager.instance.ChStop();
         GameManager.instance.TakeCamera();
-        F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();
-        S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        Skin_F = GameObject.Find("F_Player").GetComponent<ChangeHeroSkin>();
-        Skin_K = GameObject.Find("K_Player").GetComponent<ChangeHeroSkin>();
-        Skin_S = GameObject.Find("S_Player").GetComponent<ChangeHeroSkin>();
+        if(GameManager.instance.F_Unlock){F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.K_Unlock){K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.S_Unlock){S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        //
+        if(GameManager.instance.F_Unlock){Skin_F = GameObject.Find("F_Player").GetComponent<ChangeHeroSkin>();}
+        if(GameManager.instance.K_Unlock){Skin_K = GameObject.Find("K_Player").GetComponent<ChangeHeroSkin>();}
+        if(GameManager.instance.S_Unlock){Skin_S = GameObject.Find("S_Player").GetComponent<ChangeHeroSkin>();}
         GameManager.instance.Battle();
-        Skin_S.UpdateCharacterSkin();
-		Skin_S.UpdateCombinedSkin();
-        Skin_F.UpdateCharacterSkin();
-		Skin_F.UpdateCombinedSkin();
-        Skin_K.UpdateCharacterSkin();
-		Skin_K.UpdateCombinedSkin(); 
+        //
+        if(GameManager.instance.F_Unlock){Skin_F.UpdateCharacterSkin();}
+		if(GameManager.instance.F_Unlock){Skin_F.UpdateCombinedSkin();}
+        //
+        if(GameManager.instance.S_Unlock){Skin_S.UpdateCharacterSkin();}
+		if(GameManager.instance.S_Unlock){Skin_S.UpdateCombinedSkin();}
+        //
+        if(GameManager.instance.K_Unlock){Skin_K.UpdateCharacterSkin();}
+		if(GameManager.instance.K_Unlock){Skin_K.UpdateCombinedSkin(); }
         GameManager.instance.Posebattle();
-        ForkActive = GameObject.Find("F_Player");
-        SpoonActive = GameObject.Find("S_Player");
-        KnifeActive = GameObject.Find("K_Player");
+        //
+        if(GameManager.instance.F_Unlock){ForkActive = GameObject.Find("F_Player");}
+        if(GameManager.instance.S_Unlock){SpoonActive = GameObject.Find("S_Player");}
+        if(GameManager.instance.K_Unlock){KnifeActive = GameObject.Find("K_Player");}
         CameraZoom.instance.ZoomOut();
     }
     public void Start()
@@ -74,13 +79,13 @@ public class StartBattle : MonoBehaviour
         //result = Mathf.RoundToInt(randomNumber);
          // Stampa il risultato nella console
         //Debug.Log("Numero casuale: " + result);
-        ForkActive.transform.position = F_point.transform.position;
-        KnifeActive.transform.position = K_point.transform.position;
-        SpoonActive.transform.position = S_point.transform.position;
+        if(GameManager.instance.F_Unlock){ForkActive.transform.position = F_point.transform.position;}
+        if(GameManager.instance.K_Unlock){KnifeActive.transform.position = K_point.transform.position;}
+        if(GameManager.instance.S_Unlock){SpoonActive.transform.position = S_point.transform.position;}
         ////////////////////////
-        ForkActive.transform.localScale = new Vector3(1, 1,1);
-        KnifeActive.transform.localScale = new Vector3(1, 1,1);
-        SpoonActive.transform.localScale = new Vector3(1, 1,1);
+        if(GameManager.instance.F_Unlock){ForkActive.transform.localScale = new Vector3(1, 1,1);}
+        if(GameManager.instance.S_Unlock){KnifeActive.transform.localScale = new Vector3(1, 1,1);}
+        if(GameManager.instance.S_Unlock){SpoonActive.transform.localScale = new Vector3(1, 1,1);}
         ////////////////////////
         StartCoroutine(DuringInter());}
     IEnumerator DuringInter()
@@ -91,18 +96,18 @@ public class StartBattle : MonoBehaviour
         if(Switch.isElement1Active)
         {
             vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
-            player = GameObject.FindWithTag("S_Player"); 
+            if(GameManager.instance.S_Unlock){player = GameObject.FindWithTag("S_Player");}
             vCam.Follow = player.transform;
         }else if(Switch.isElement2Active)
         {
             vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
-            player = GameObject.FindWithTag("F_Player"); 
+            if(GameManager.instance.F_Unlock){player = GameObject.FindWithTag("F_Player");}
             vCam.Follow = player.transform;
             
         }else if(Switch.isElement3Active)
         {
             vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
-            player = GameObject.FindWithTag("K_Player");  
+            if(GameManager.instance.K_Unlock){player = GameObject.FindWithTag("K_Player");}  
             vCam.Follow = player.transform;
         }
         GameManager.instance.Change();

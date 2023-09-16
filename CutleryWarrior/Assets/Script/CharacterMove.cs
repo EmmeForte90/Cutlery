@@ -154,8 +154,8 @@ public void Awake()
         {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input = Vector2.ClampMagnitude(input, 1); 
-        if(Input.GetButton("Fire3")){isRun = true;} 
-        if (Input.GetButtonUp("Fire3")){isRun = false;} 
+        if(Input.GetButton("Fire3")){isRun = true; GameManager.instance.isRun = true;} 
+        if (Input.GetButtonUp("Fire3")){isRun = false; GameManager.instance.isRun = false;} 
         //
         camF = cam.forward;camR = cam.right;camF.y = 0;camR.y = 0;
         camF = camF.normalized;camR = camR.normalized;  

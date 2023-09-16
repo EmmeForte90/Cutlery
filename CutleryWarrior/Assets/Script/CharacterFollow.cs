@@ -78,9 +78,9 @@ public class CharacterFollow : MonoBehaviour
         _skeleton = _skeletonAnimation.skeleton;
         characterRigidbody = GetComponent<Rigidbody>();
         Player = GameObject.FindGameObjectWithTag("F_Player").transform;
-        F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        K_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        S_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();
+        if(GameManager.instance.F_Unlock){F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.K_Unlock){K_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.S_Unlock){S_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
     }
     public void Update()
     {
@@ -141,28 +141,28 @@ public class CharacterFollow : MonoBehaviour
             
             if (distance > stoppingDistance)
             {
-                if (!F_b.isRun || !S_b.isRun || !K_b.isRun)
-                {
                 if (!isWalking)
-                {isWalking = true; Anm.PlayAnimationLoop(WalkAnimationName);}
-                // Muovi il personaggio verso il giocatore solo se la distanza supera la soglia di arresto
-                characterRigidbody.MovePosition(transform.position + direction * followSpeed * Time.deltaTime);
-                } 
-                if (F_b.isRun || S_b.isRun || K_b.isRun)
                 {
-                if (!isWalking)
-                {isWalking = true; Anm.PlayAnimationLoop(RunAnimationName);}
+                    isWalking = true;
+                    Anm.PlayAnimationLoop(GameManager.instance.isRun ? RunAnimationName : WalkAnimationName);
+                }
+                
                 // Muovi il personaggio verso il giocatore solo se la distanza supera la soglia di arresto
-                characterRigidbody.MovePosition(transform.position + direction * RunSpeed * Time.deltaTime);
-                } 
+                float speed = GameManager.instance.isRun ? RunSpeed : followSpeed;
+                characterRigidbody.MovePosition(transform.position + direction * speed * Time.deltaTime);
             }
-            else if (!F_b.isRun || !S_b.isRun || !K_b.isRun)
+            else
             {
                 if (isWalking)
-                {isWalking = false; Anm.PlayAnimationLoop(IdleAnimationName);}
+                {
+                    isWalking = false;
+                    Anm.PlayAnimationLoop(IdleAnimationName);
+                }
+                
                 // Il personaggio è vicino al giocatore, smette di muoversi
                 isFollowing = false;
             }
+
         }
     }
     #endregion

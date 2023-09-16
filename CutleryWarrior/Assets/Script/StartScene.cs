@@ -48,8 +48,8 @@ public class StartScene : MonoBehaviour
     if(!GameManager.instance.StartGame){
     GameManager.instance.ChStop();
     FAct = GameObject.FindWithTag("F_Player");
-    SAct = GameObject.FindWithTag("S_Player");
-    KAct = GameObject.FindWithTag("K_Player");
+    if(GameManager.instance.S_Unlock){SAct = GameObject.FindWithTag("S_Player");}
+    if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}
     vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
     confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
     IDPorta = GameManager.instance.IDPorta;
@@ -79,24 +79,22 @@ public class StartScene : MonoBehaviour
     public void Spawn(int ID)
     {
     ContainerHero.transform.position = SpawnArr[ID].transform.position;
-    KAct.transform.position = ContainerHero.transform.position;
-    FAct.transform.position = ContainerHero.transform.position;
-    SAct.transform.position = ContainerHero.transform.position;
+    if(GameManager.instance.F_Unlock){FAct.transform.position = ContainerHero.transform.position;}
+    if(GameManager.instance.K_Unlock){KAct.transform.position = ContainerHero.transform.position;}
+    if(GameManager.instance.S_Unlock){SAct.transform.position = ContainerHero.transform.position;}
     if(ID == 4 ||ID == 3|| ID == 2 || ID == 1 || ID == 0)
     {foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);} //Confiner(ID);}}
     }}
     public void SpawnB(int ID)
     {
     GameManager.instance.battle = false;
-    KAct.transform.position = GameManager.instance.savedPosition;
-    FAct.transform.position = GameManager.instance.savedPosition;
-    SAct.transform.position = GameManager.instance.savedPosition;
+    if(GameManager.instance.F_Unlock){FAct.transform.position = GameManager.instance.savedPosition;}
+    if(GameManager.instance.K_Unlock){KAct.transform.position = GameManager.instance.savedPosition;}
+    if(GameManager.instance.S_Unlock){SAct.transform.position = GameManager.instance.savedPosition;}
     EnemiesActive(ID_Enm);
     if (!Testing){AreaActive(GameManager.instance.IdAreaAtt);}
     GameManager.instance.StopWin();
     }
-
-    
     IEnumerator BoxDel()
     {yield return new WaitForSeconds(0.5f);
     CameraZoom.instance.ZoomOut();GameManager.instance.FadeOut(); GameManager.instance.ChCanM();}
