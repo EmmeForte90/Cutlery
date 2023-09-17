@@ -26,7 +26,8 @@ public class ChargeSkill : MonoBehaviour
     private CinemachineVirtualCamera vCam;
     private string nameT;
     public float fillDuration;  // Durata desiderata per riempire la barra in secondi
-    private float curTime = 0;       // Tempo trascorso
+    public float curTime = 0;       // Tempo trascorso
+    public float fillPercentage;
     public Spine.AnimationState _spineAnimationState;    
     public SkeletonAnimation _skeletonAnimation;
     private bool isSkillLaunched = false;
@@ -141,7 +142,7 @@ public class ChargeSkill : MonoBehaviour
             curTime += Time.deltaTime;
 
             // Calcola la percentuale di completamento
-            float fillPercentage = curTime / fillDuration;
+            fillPercentage = curTime / fillDuration;
 
             // Imposta la dimensione della barra (assicurandoti che sia compresa tra 0.01f e 1)
             TimeBar.size = Mathf.Clamp(fillPercentage, 0.01f, 1);

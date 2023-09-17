@@ -7,7 +7,7 @@ public class ChangeHeroSkin : MonoBehaviour
 	#region Header
 	[SpineSkin] public string DressSkin = "default";
 	[SpineSkin] public string Weapon = "default";
-	SkeletonAnimation skeletonAnimation;
+	public SkeletonAnimation skeletonAnimation;
 	Skeleton skeleton;
 	Skin characterSkin;
 	private Material runtimeMaterial;

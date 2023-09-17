@@ -6,7 +6,7 @@ using UnityEngine;
 public class Treasure : MonoBehaviour
 {
     public GameObject Brain; 
-    public GameObject iconM; 
+    //public GameObject iconM; 
     public int IdChest;
     public Animator Anm;
     [Header("Item")]
@@ -73,7 +73,7 @@ public class Treasure : MonoBehaviour
         AudioManager.instance.PlaySFX(11);
         GameManager.instance.EsclamationStop();
         AddSpecificItem();
-        iconM.SetActive(false);
+        //iconM.SetActive(false);
         Inventory.instance.Reward(specificItem, specificQuant);
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
         PlayerStats.instance.TreasureOpen(Id);

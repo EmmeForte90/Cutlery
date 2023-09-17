@@ -2,13 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TimerSkill : MonoBehaviour
 {
-    public Image FillBar;
+    [Header("Serve solo per riconoscere a quale slot appartiene questo timer")]   
+    public string NameSpell;
+    //public Image FillBar;
     public GameObject Slot;
     public GameObject HandleObj;
     public GameObject HandleObjA;
     public float SpeedRestore = 1f; // il massimo valore di essenza disponibile
-    private float curTime = 10f;
-    private float TimeMin = 0f;
+    public float curTime = 10f;
+    public float TimeMin = 0f;
     public float TimeMax = 10f;
     public bool Start = true;    
     public static TimerSkill instance;
@@ -17,15 +19,15 @@ public class TimerSkill : MonoBehaviour
     private void OnEnable(){Start = true;}
     public void Update()
     {
-        FillBar.fillAmount = curTime / TimeMax;
-        FillBar.fillAmount = Mathf.Clamp(FillBar.fillAmount, 0.01f, 1);
+        //FillBar.fillAmount = curTime / TimeMax;
+        //FillBar.fillAmount = Mathf.Clamp(FillBar.fillAmount, 0.01f, 1);
         if(Start)
         {
         curTime -= SpeedRestore * Time.deltaTime;
         if(curTime <= TimeMin)
         {curTime = TimeMax; //Start = false;
-        Slot.SetActive(true);
-        HandleObj.SetActive(false);} 
+        if(Slot != null){Slot.SetActive(true);}
+        if(HandleObj != null){HandleObj.SetActive(false);}} 
         }
     }
     public void Notuse(){HandleObjA.SetActive(true);}

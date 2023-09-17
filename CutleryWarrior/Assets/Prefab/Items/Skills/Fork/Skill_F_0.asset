@@ -23,9 +23,9 @@ MonoBehaviour:
   TypesE: 0
   MaxDuration: 3
   isRage: 0
-  CostMP: 100
+  CostMP: 0
   WhoCH: 0
   WhoSkill: 0
   TimeSkill: 1
-  Utilizzi: 5
+  Utilizzi: 4
   UtilizziMAX: 5

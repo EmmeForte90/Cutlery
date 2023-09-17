@@ -122,7 +122,7 @@ public class SimpleEnemy : MonoBehaviour
         else if (collision.gameObject.CompareTag("S_Coll"))
         {if(!DieB){TakeDamage(PlayerStats.instance.S_attack);}}
         else if (collision.gameObject.CompareTag("Spell"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack += Bullet.instance.damage);}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack + Bullet.instance.damage);}}
     }
     
     private void StartAttack()
@@ -148,7 +148,7 @@ public class SimpleEnemy : MonoBehaviour
     int danno_subito = Mathf.Max(damage - defense, 0);
     currentHealth -= danno_subito;
     AudioManager.instance.PlaySFX(8);
-    //Debug.Log("danno +"+ danno_subito);
+    Debug.Log("danno +"+ danno_subito);
     Instantiate(VFXHurt, transform.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);}
     }
