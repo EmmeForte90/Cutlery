@@ -3,7 +3,12 @@ guid: 87dd9b8d50026f24ab5d63650d1da77a
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Jutahs
+    second: {fileID: 2100000, guid: 949d1d66fbf1ca446882a484b17c6eee, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
