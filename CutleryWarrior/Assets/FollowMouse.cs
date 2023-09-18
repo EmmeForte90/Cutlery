@@ -1,26 +1,34 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
 public class FollowMouse : MonoBehaviour
 {
-    private float moveSpeed = 50f; // Velocità di movimento dello sprite
+    private float velocitaMovimento = 20f; // Velocità di movimento dell'oggetto.
+    private Rigidbody rigidBody;
 
-    private Camera mainCamera;
-
-    private void Start()
+    void Start()
     {
-        mainCamera = Camera.main;
+        rigidBody = GetComponent<Rigidbody>();
+        // Impedisci la rotazione dell'oggetto quando viene spostato con il mouse.
+        rigidBody.freezeRotation = true;
     }
 
-    private void Update()
+    void Update()
     {
-        // Ottieni la posizione del mouse in coordinate dello schermo
-        Vector3 mousePositionScreen = Input.mousePosition;
+        // Input da tastiera per il movimento.
+        float movimentoOrizzontale = Input.GetAxis("Vertical");
+        float movimentoVerticale = Input.GetAxis("Horizontal");
 
-        // Converti la posizione del mouse da coordinate dello schermo a coordinate del mondo
-        Vector3 mousePositionWorld = mainCamera.ScreenToWorldPoint(new Vector3(mousePositionScreen.x, mousePositionScreen.y, 10f)); 
-        // Usa 10f come posizione Z
+        // Calcola la direzione di movimento.
+        Vector3 direzioneMovimento = new Vector3(movimentoOrizzontale, 0.0f, movimentoVerticale);
 
-        // Muovi lo sprite verso la posizione del mouse con una velocità specifica
-        transform.position = Vector3.Lerp(transform.position, mousePositionWorld, moveSpeed * Time.deltaTime);
+        // Normalizza la direzione per evitare il movimento diagonale più veloce.
+        direzioneMovimento.Normalize();
+
+        // Calcola la velocità di traslazione basata sulla direzione e sulla velocità.
+        Vector3 velocitaTraslazione = direzioneMovimento * velocitaMovimento;
+
+        // Applica la velocità di traslazione all'oggetto solo sugli assi X e Z.
+        rigidBody.velocity = new Vector3(velocitaTraslazione.x, rigidBody.velocity.y, velocitaTraslazione.z);
     }
 }
