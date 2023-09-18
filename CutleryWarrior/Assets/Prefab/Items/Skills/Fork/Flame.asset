@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cdccba5a6f6f9419ac405c1abccdff, type: 3}
+  m_Name: Flame
+  m_EditorClassIdentifier: 
+  itemName: 'Flame '
+  NameSkin: 
+  itemDes: The oven's flames are ignited by the fork, damaging the enemy and setting
+    them on fire.
+  ID: 2
+  KindItem: 0
+  price: 0
+  Stackable: 0
+  itemIcon: {fileID: 21300000, guid: bd78db6506d35064b85d0b344f47dd05, type: 3}
+  TypesE: 0
+  MaxDuration: 0
+  SkillIcon: {fileID: 21300000, guid: 3644f40bf36a03f4296adfea6ad4bf8a, type: 3}
+  isRage: 0
+  damage: 10
+  WhoCH: 0
+  WhoSkill: 2
+  TimeSpell: 0
+  TimeSkill: 0
+  Utilizzi: 0
+  UtilizziMAX: 0

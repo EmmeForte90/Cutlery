@@ -14661,6 +14661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 67934245806058566}
   - component: {fileID: 3081106115934097024}
+  - component: {fileID: 8952759855210243366}
   m_Layer: 0
   m_Name: S_StunShield
   m_TagString: Untagged
@@ -14701,6 +14702,20 @@ MonoBehaviour:
   - {fileID: 1457012678780798, guid: 36ae98eef331304439f25aeb8078f05c, type: 3}
   m_movePos: {fileID: 0}
   m_randomRotationValue: {x: 0, y: 0, z: 0}
+--- !u!114 &8952759855210243366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180769534127460600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab8a8ec5caf8e945945046ae5e25ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 10
+  title: {fileID: 1180769534127460600}
 --- !u!1 &1257597130049437227
 GameObject:
   m_ObjectHideFlags: 0

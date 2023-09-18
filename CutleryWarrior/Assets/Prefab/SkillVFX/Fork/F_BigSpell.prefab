@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   damage: 30
+  isSkill: 1
+  itemInfo: {fileID: 11400000, guid: a6e87a1f7dbf99a4581819b8afdeb74e, type: 2}
   lifeTime: 2
   hitEffect: {fileID: 2373110032985906834, guid: 8a879d3050bf68e47824ee2a0306b1e7,
     type: 3}

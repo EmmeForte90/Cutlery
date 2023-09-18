@@ -17,22 +17,44 @@ public class AnimationManager : MonoBehaviour
     private CharacterMove F_Script;
     [HideInInspector] public GameObject Bullet;
     [HideInInspector] public GameObject BigSpell;
-    
+    [HideInInspector] public GameObject BigForks;
+    [HideInInspector] public GameObject Flame;
+    [HideInInspector] public GameObject Impulsium;
+    [HideInInspector] public GameObject Smug;
+    [HideInInspector] public GameObject RainFire;
+    [HideInInspector] public GameObject BenedictioFenix;
+    [HideInInspector] public GameObject HellFlame;
+    [HideInInspector] public GameObject Hole;
     /////////////////////////////
     [Header("Spoon")]
     private GameObject SpoonActive;
     private CharacterMove S_Script;
+     [HideInInspector] public GameObject ShiledI;
+    [HideInInspector] public GameObject BenedictionTower;
     [HideInInspector] public GameObject Cura;
-    [HideInInspector] public GameObject ShiledI;
+    [HideInInspector] public GameObject ShockWave;
+    [HideInInspector] public GameObject Shields;
+    [HideInInspector] public GameObject Explosion;
+    [HideInInspector] public GameObject HitStun;
+    [HideInInspector] public GameObject Revive;
+    [HideInInspector] public GameObject Reflect;
+
     [HideInInspector] public bool isDefence = false;
     /////////////////////////////
     [Header("Knife")]
     private GameObject KnifeActive;
     private CharacterMove K_Script;
     [HideInInspector] public GameObject SlashV;
-    [HideInInspector] public GameObject Increase;
     [HideInInspector] public GameObject SlashH;
     [HideInInspector] public GameObject SlashB;
+    [HideInInspector] public GameObject BigSlash;
+    [HideInInspector] public GameObject Fury;
+    [HideInInspector] public GameObject DanceSwords;
+    [HideInInspector] public GameObject SlashBombing;
+    [HideInInspector] public GameObject RainSwords;
+    [HideInInspector] public GameObject SawTrain;
+    [HideInInspector] public GameObject Stalactites;
+    [HideInInspector] public GameObject Whirlwinds;
 
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
@@ -121,8 +143,8 @@ public class AnimationManager : MonoBehaviour
     {AudioManager.instance.PlayUFX(8); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "slashB")
     {AudioManager.instance.PlayUFX(8); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
-    if (e.Data.Name == "increaseatk")
-    {AudioManager.instance.PlayUFX(8); Instantiate(Increase, BPoint.position, Increase.transform.rotation);}
+    if (e.Data.Name == "Furyatk")
+    {AudioManager.instance.PlayUFX(8); Instantiate(Fury, BPoint.position, Fury.transform.rotation);}
     if (e.Data.Name == "rageKnife" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Rage, transform.position, Rage.transform.rotation); 
     VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}//Rage.gameObject.SetActive(true); StartCoroutine(StopVFX_Rage());}

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cdccba5a6f6f9419ac405c1abccdff, type: 3}
+  m_Name: DragonFlame
+  m_EditorClassIdentifier: 
+  itemName: Hell Flame
+  NameSkin: 
+  itemDes: Summon the sacred flames of the oven, which annihilate all of its enemies.
+  ID: 7
+  KindItem: 0
+  price: 0
+  Stackable: 0
+  itemIcon: {fileID: 21300000, guid: bd78db6506d35064b85d0b344f47dd05, type: 3}
+  TypesE: 0
+  MaxDuration: 0
+  SkillIcon: {fileID: 21300000, guid: 1318ac71deeea4d4f8ab2415a51da916, type: 3}
+  isRage: 0
+  damage: 10
+  WhoCH: 0
+  WhoSkill: 7
+  TimeSpell: 0
+  TimeSkill: 0
+  Utilizzi: 0
+  UtilizziMAX: 0

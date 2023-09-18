@@ -15,14 +15,19 @@ MonoBehaviour:
   itemName: Deus Vult
   NameSkin: 
   itemDes: 
-  ID: 0
+  ID: 10
   KindItem: 2
   price: 0
   Stackable: 0
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 2092a93f05cfc8e409d531edd669e7cf, type: 3}
   TypesE: 0
   MaxDuration: 1
+  SkillIcon: {fileID: 0}
   isRage: 1
-  CostMP: 0
+  damage: 10
   WhoCH: 2
   WhoSkill: 10
+  TimeSpell: 0
+  TimeSkill: 0
+  Utilizzi: 0
+  UtilizziMAX: 0

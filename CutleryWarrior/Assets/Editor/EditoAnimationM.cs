@@ -17,6 +17,15 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Bullet"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("BPoint"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("BigSpell"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("BigForks"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Flame"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Impulsium"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Smug"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("RainFire"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("BenedictioFenix"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("HellFlame"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Hole"));
+
             // Add other fields as needed
         }
         if (myScript.knife)
@@ -24,14 +33,29 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("SlashV"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("SlashH"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("SlashB"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("Increase"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("BigSlash"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Fury"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("DanceSwords"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("SlashBombing"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("RainSwords"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("SawTrain"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Stalactites"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Whirlwinds"));
+            
+
             // Add other fields as needed
         }
         if (myScript.spoon)
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("isDefence"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("BenedictionTower"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Cura"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("ShiledI"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("ShockWave"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Shields"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Explosion"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("HitStun"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Revive"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Reflect"));
 
             // Add other fields as needed
         }

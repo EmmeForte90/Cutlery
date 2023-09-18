@@ -1,22 +1,22 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 public class TimerSkill : MonoBehaviour
 {
-    [Header("Serve solo per riconoscere a quale slot appartiene questo timer")]   
-    public string NameSpell;
-    //public Image FillBar;
+    [Header("Il timer è gestito dalle skill negli scriptable")]
+    public Skill itemInfo;
     public GameObject Slot;
     public GameObject HandleObj;
     public GameObject HandleObjA;
-    public float SpeedRestore = 1f; // il massimo valore di essenza disponibile
-    public float curTime = 10f;
-    public float TimeMin = 0f;
-    public float TimeMax = 10f;
-    public bool Start = true;    
+    private float SpeedRestore = 1f; // il massimo valore di essenza disponibile
+    [HideInInspector]public float curTime = 10f;
+    private float TimeMin = 0f;
+    //private float TimeMax = 10f;
+    private bool Start = true;        
+    public TextMeshProUGUI Utilizzi;
     public static TimerSkill instance;
 
-    private void Awake() {curTime = TimeMax;if (instance == null){instance = this;}}    
-    private void OnEnable(){Start = true;}
+    private void Awake() {curTime = itemInfo.TimeSpell; if (instance == null){instance = this;}}    
+    private void OnEnable(){Start = true; Utilizzi.text = itemInfo.Utilizzi.ToString();}
     public void Update()
     {
         //FillBar.fillAmount = curTime / TimeMax;
@@ -25,7 +25,7 @@ public class TimerSkill : MonoBehaviour
         {
         curTime -= SpeedRestore * Time.deltaTime;
         if(curTime <= TimeMin)
-        {curTime = TimeMax; //Start = false;
+        {curTime = itemInfo.TimeSpell; //Start = false;
         if(Slot != null){Slot.SetActive(true);}
         if(HandleObj != null){HandleObj.SetActive(false);}} 
         }

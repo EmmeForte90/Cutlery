@@ -12,7 +12,7 @@ public class UpdatePreviewSkill : MonoBehaviour
     public Image icon; 
     public static UpdatePreviewSkill instance;
     private void Awake() {if (instance == null){instance = this;}}    
-   
+
     public void UpdateInfoPanel(Skill itemInfo)
     {
         if (itemInfo != null)
@@ -20,8 +20,8 @@ public class UpdatePreviewSkill : MonoBehaviour
             infoPanel.SetActive(true);
             nameText.text = itemInfo.itemName;
             DesText.text = itemInfo.itemDes;
-            icon.sprite = itemInfo.itemIcon;
-            Utilizzi.text = itemInfo.Utilizzi.ToString();
+            icon.sprite = itemInfo.SkillIcon;
+            Utilizzi.text = itemInfo.Utilizzi.ToString();  
         }
         else{infoPanel.SetActive(false);}
     }

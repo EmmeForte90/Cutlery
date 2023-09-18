@@ -176,7 +176,7 @@ IEnumerator SkillLunch()
     AnimationRage.SetActive(false);}
     AM.PlayAnimation(Anm);
     if(SkillAtt.isRage){RageCurr();}
-    switch(SkillAtt.WhoCH)
+    /*switch(SkillAtt.WhoCH)
     {
     case 0:
     PlayerStats.instance.F_curMP -= SkillAtt.CostMP; 
@@ -187,7 +187,7 @@ IEnumerator SkillLunch()
     case 2:
     PlayerStats.instance.S_curMP -= SkillAtt.CostMP; 
     break;
-    }
+    }*/
     yield return new WaitForSeconds(TimeS);
     GameManager.instance.ResumeBattle();
     CameraZoom.instance.ZoomOut();
