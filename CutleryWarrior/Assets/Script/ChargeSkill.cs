@@ -81,6 +81,7 @@ public class ChargeSkill : MonoBehaviour
     GameManager.instance.notChange = true;
     GameManager.instance.NotTouchOption = true;
     GameManager.instance.Charge();
+    AudioManager.instance.PlayUFX(13);
     GameManager.instance.ChStopB();
     _spineAnimationState.SetAnimation(0, ChargeAnm, true); 
     fillDuration = skill.MaxDuration; 

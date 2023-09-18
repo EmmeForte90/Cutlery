@@ -132,6 +132,27 @@ public class AnimationManager : MonoBehaviour
     if (e.Data.Name == "bigspell" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(BigSpell, BPoint.position, BigSpell.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "bigfork" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(BigForks, BPoint.position, BigForks.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "bombing" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(RainFire, BPoint.position, RainFire.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "fenix" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(BenedictioFenix, BPoint.position, BenedictioFenix.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "flame" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Flame, BPoint.position, Flame.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "hellflame" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(HellFlame, BPoint.position, HellFlame.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "impulsum" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Impulsium, transform.position, Impulsium.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "hole" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Hole, transform.position, Hole.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "rageFork" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Rage, RPoint.position, Rage.transform.rotation); 
     VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}//Rage.gameObject.SetActive(true); StartCoroutine(StopVFX_Rage());}
@@ -143,15 +164,59 @@ public class AnimationManager : MonoBehaviour
     {AudioManager.instance.PlayUFX(8); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "slashB")
     {AudioManager.instance.PlayUFX(8); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
-    if (e.Data.Name == "Furyatk")
-    {AudioManager.instance.PlayUFX(8); Instantiate(Fury, BPoint.position, Fury.transform.rotation);}
+    if (e.Data.Name == "fury")
+    {AudioManager.instance.PlayUFX(8); Instantiate(Fury, BPoint.position, Fury.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "bigslash")
+    {AudioManager.instance.PlayUFX(8); Instantiate(BigSlash, transform.position, BigSlash.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "dance")
+    {AudioManager.instance.PlayUFX(8); Instantiate(DanceSwords, transform.position, DanceSwords.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "multislash")
+    {AudioManager.instance.PlayUFX(8); Instantiate(SlashBombing, transform.position, SlashBombing.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "rain")
+    {AudioManager.instance.PlayUFX(8); Instantiate(RainSwords, BPoint.position, RainSwords.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "saw")
+    {AudioManager.instance.PlayUFX(8); Instantiate(SawTrain, transform.position, SawTrain.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "stalactites")
+    {AudioManager.instance.PlayUFX(8); Instantiate(Stalactites, transform.position, Stalactites.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "turbine")
+    {AudioManager.instance.PlayUFX(8); Instantiate(SawTrain, transform.position, SawTrain.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "rageKnife" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Rage, transform.position, Rage.transform.rotation); 
     VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}//Rage.gameObject.SetActive(true); StartCoroutine(StopVFX_Rage());}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Spoon
     if (e.Data.Name == "cura")
-    {AudioManager.instance.PlayUFX(8); Instantiate(Cura, BPoint.position, Cura.transform.rotation); }
+    {AudioManager.instance.PlayUFX(8); Instantiate(Cura, BPoint.position, Cura.transform.rotation);
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "defence")
+    {AudioManager.instance.PlayUFX(8); Instantiate(BenedictionTower, BPoint.position, BenedictionTower.transform.rotation);
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "explosion")
+    {AudioManager.instance.PlayUFX(8); Instantiate(Explosion, transform.position, Explosion.transform.rotation);
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "reflect")
+    {AudioManager.instance.PlayUFX(8); Instantiate(Reflect, BPoint.position, Reflect.transform.rotation);
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "shield")
+    {AudioManager.instance.PlayUFX(8); Instantiate(Shields, transform.position, Shields.transform.rotation);
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "shockwave")
+    {AudioManager.instance.PlayUFX(8); Instantiate(ShockWave, transform.position, ShockWave.transform.rotation);
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "stun")
+    {AudioManager.instance.PlayUFX(8); Instantiate(HitStun, BPoint.position, HitStun.transform.rotation);
+    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "revive")
+    {AudioManager.instance.PlayUFX(8); Instantiate(Revive, BPoint.position, Revive.transform.rotation);
+    VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "punch")
     {AudioManager.instance.PlayUFX(8); ShiledI.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
 }
