@@ -25,6 +25,7 @@ MonoBehaviour:
   MaxDuration: 5
   SkillIcon: {fileID: 21300000, guid: fef7e76f4ab5fd0448ab48b5fa02d8a7, type: 3}
   isRage: 0
+  IsDirectional: 1
   damage: 10
   WhoCH: 0
   WhoSkill: 1

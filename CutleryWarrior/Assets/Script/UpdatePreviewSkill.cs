@@ -5,13 +5,16 @@ using TMPro;
 
 public class UpdatePreviewSkill : MonoBehaviour
 {
+    public Skill item;
     public GameObject infoPanel;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI DesText;
     public TextMeshProUGUI Utilizzi;
     public Image icon; 
     public static UpdatePreviewSkill instance;
-    private void Awake() {if (instance == null){instance = this;}}    
+    private void Awake() {if (instance == null){instance = this;}} 
+
+    public void OnEnable(){Utilizzi.text = item.Utilizzi.ToString();}
 
     public void UpdateInfoPanel(Skill itemInfo)
     {

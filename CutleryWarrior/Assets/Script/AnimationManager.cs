@@ -66,7 +66,6 @@ public class AnimationManager : MonoBehaviour
     //private bool Boom = false;
     private bool VFX = true;
     public Transform BPoint;
-    public Transform RPoint;
     public ChargeSkill CS;
     public static AnimationManager instance;
     #endregion
@@ -154,7 +153,7 @@ public class AnimationManager : MonoBehaviour
     {AudioManager.instance.PlayUFX(8); Instantiate(Hole, transform.position, Hole.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "rageFork" && VFX)
-    {AudioManager.instance.PlayUFX(8); Instantiate(Rage, RPoint.position, Rage.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(Rage, BPoint.position, Rage.transform.rotation); 
     VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}//Rage.gameObject.SetActive(true); StartCoroutine(StopVFX_Rage());}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Knife
@@ -217,6 +216,9 @@ public class AnimationManager : MonoBehaviour
     if (e.Data.Name == "revive")
     {AudioManager.instance.PlayUFX(8); Instantiate(Revive, BPoint.position, Revive.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_F());}
+     if (e.Data.Name == "rageSpoon" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Rage, transform.position, Rage.transform.rotation); 
+    VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "punch")
     {AudioManager.instance.PlayUFX(8); ShiledI.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
 }

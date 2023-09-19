@@ -24,10 +24,11 @@ MonoBehaviour:
   MaxDuration: 0
   SkillIcon: {fileID: 21300000, guid: bcadcd7ce8a621244a2fa6d25f44f262, type: 3}
   isRage: 0
+  IsDirectional: 1
   damage: 10
   WhoCH: 0
   WhoSkill: 8
   TimeSpell: 0
   TimeSkill: 0
-  Utilizzi: 0
-  UtilizziMAX: 0
+  Utilizzi: 1
+  UtilizziMAX: 1

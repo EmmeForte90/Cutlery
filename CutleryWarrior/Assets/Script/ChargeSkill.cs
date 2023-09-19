@@ -20,6 +20,8 @@ public class ChargeSkill : MonoBehaviour
     public GameObject VFX;
     public GameObject VFXRAGE;
     public GameObject Mossa;
+    public GameObject Indicatore;
+    public FollowMouse Character;
     public GameObject AnimationRage;
     public TextMeshProUGUI nameText; 
     //public TextMeshProUGUI Utilizzi;    
@@ -90,6 +92,8 @@ public class ChargeSkill : MonoBehaviour
     nameT = skill.itemName;
     SkillAtt = skill;
     TimeS = skill.TimeSkill;
+    if(skill.IsDirectional){Indicatore.SetActive(true); Character.Character = kindCh;}
+    else{
     GameManager.instance.TimerMenu();
     switch(skill.WhoSkill)
     {
@@ -126,10 +130,51 @@ public class ChargeSkill : MonoBehaviour
     case 10:
     Anm = SkillRage;VFXRAGE.SetActive(true);
     break;
-    }
+    }}
     }
     else
     {AudioManager.instance.PlayUFX(10); TimerSkill.instance.Notuse();}
+    }
+
+    public void ActiveSkill()
+    {
+    GameManager.instance.TimerMenu();
+    switch(SkillAtt.WhoSkill)
+    {
+    case 0:
+    Anm = Skill0;VFX.SetActive(true);
+    break;
+    case 1:
+    Anm = Skill1;VFX.SetActive(true);
+    break;
+    case 2:
+    Anm = Skill2;VFX.SetActive(true);
+    break;
+    case 3:
+    Anm = Skill3;VFX.SetActive(true);
+    break;
+    case 4:
+    Anm = Skill4;VFX.SetActive(true);
+    break;
+    case 5:
+    Anm = Skill5;VFX.SetActive(true);
+    break;
+    case 6:
+    Anm = Skill6;VFX.SetActive(true);
+    break;
+    case 7:
+    Anm = Skill7;VFX.SetActive(true);
+    break;
+    case 8:
+    Anm = Skill8;VFX.SetActive(true);
+    break;
+    case 9:
+    Anm = Skill9;VFX.SetActive(true);
+    break;
+    case 10:
+    Anm = SkillRage;VFXRAGE.SetActive(true);
+    break;
+    }
     }
 
    public void Update()

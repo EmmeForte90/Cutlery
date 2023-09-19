@@ -34,6 +34,7 @@ public class PickUpItem : MonoBehaviour
         else if(!QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(false);}
         }else if(IsSkill)
         {
+            
             switch(KindSkill)
             {
                 case 0:

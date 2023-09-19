@@ -1,4 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class PlayerStats : MonoBehaviour
 {
     #region Header
@@ -253,6 +257,8 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
+
+
     public void FSkillATT(int Act){Skill_F[Act] = true; Skill_FI[Act].SetActive(true); Skill_FIB[Act].SetActive(true);}
     public void SSkillATT(int Act){Skill_S[Act] = true; Skill_SI[Act].SetActive(true); Skill_SIB[Act].SetActive(true);}
     public void KSkillATT(int Act){Skill_K[Act] = true; Skill_KI[Act].SetActive(true); Skill_KIB[Act].SetActive(true);}
