@@ -23,6 +23,7 @@ TagManager:
   - Chest
   - FxTemporaire
   - Spell
+  - Rage
   layers:
   - Default
   - TransparentFX

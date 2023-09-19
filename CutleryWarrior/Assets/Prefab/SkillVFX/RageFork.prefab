@@ -9576,9 +9576,10 @@ GameObject:
   - component: {fileID: 643036506038822228}
   - component: {fileID: 516968212}
   - component: {fileID: 1449829224514851869}
+  - component: {fileID: 881934853759052968}
   m_Layer: 0
   m_Name: RageFork
-  m_TagString: Untagged
+  m_TagString: Rage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9648,6 +9649,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 15
   title: {fileID: 2116922667958864641}
+--- !u!114 &881934853759052968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116922667958864641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39091318fae92a489d8e600112a486c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  itemInfo: {fileID: 11400000, guid: 24f1cd5f1abedde4586939a8b13d0fe1, type: 2}
+  lifeTime: 15
 --- !u!1 &2807621868271303680
 GameObject:
   m_ObjectHideFlags: 0

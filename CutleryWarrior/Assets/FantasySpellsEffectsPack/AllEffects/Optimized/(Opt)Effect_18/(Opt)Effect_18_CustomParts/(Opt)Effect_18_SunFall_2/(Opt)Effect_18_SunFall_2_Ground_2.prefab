@@ -13929,9 +13929,10 @@ GameObject:
   - component: {fileID: 64770576734094242}
   - component: {fileID: 23796017798173712}
   - component: {fileID: 114415989842821472}
+  - component: {fileID: 6989691733643885344}
   m_Layer: 0
   m_Name: Effect_18_Decal
-  m_TagString: Untagged
+  m_TagString: Rage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14030,3 +14031,18 @@ MonoBehaviour:
   m_inputMaterial: {fileID: 2100000, guid: 409867a07fbd4d9409d042331c5141b5, type: 2}
   m_timeToReduce: 8
   m_reduceFactor: 0.5
+--- !u!114 &6989691733643885344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965549692112650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39091318fae92a489d8e600112a486c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  itemInfo: {fileID: 11400000, guid: 24f1cd5f1abedde4586939a8b13d0fe1, type: 2}
+  lifeTime: 15

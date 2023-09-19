@@ -22,6 +22,11 @@ public class SimpleEnemy : MonoBehaviour
     public Scrollbar healthBar;
     public GameObject Stats;
     public float SpeedRestore = 5f; // il massimo valore di essenza disponibile
+    [Header("Status")]
+    public float damagePerSecond = 0.1f;
+    public float duration = 5.0f;
+    private float elapsedTime = 0.0f;
+    private bool isDamaging = false;
     [Header("Move")]
     public float moveSpeed = 3f;
     public float attackRange = 1.5f;
@@ -100,6 +105,17 @@ public class SimpleEnemy : MonoBehaviour
         FacePlayer(); if(!isAttacking){ChasePlayer();}
         }else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
         if(currentHealth < 0){DieB = true; IconVFX.SetActive(true); Die();}
+        ////////////////////////
+        if (isDamaging)
+        {
+            elapsedTime += Time.deltaTime;
+            currentHealth -= damagePerSecond;
+            if (elapsedTime >= duration)
+            {
+                // Il periodo di danno è terminato
+                isDamaging = false;
+            }
+        }
         }
     }
     private void ChasePlayer()
@@ -123,6 +139,15 @@ public class SimpleEnemy : MonoBehaviour
         {if(!DieB){TakeDamage(PlayerStats.instance.S_attack);}}
         else if (collision.gameObject.CompareTag("Spell"))
         {if(!DieB){TakeDamage(PlayerStats.instance.F_attack + Bullet.instance.damage);}}
+    }
+    public void OnTriggerStay(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Rage"))
+        {if(!DieB)
+        {currentHealth -= DamageColl.instance.damage;
+        Instantiate(VFXHurt, transform.position, transform.rotation);
+        Anm.TemporaryChangeColor(Color.red);
+        }} 
     }
     
     private void StartAttack()
