@@ -120,6 +120,7 @@ public class SimpleEnemy : MonoBehaviour
     }
     private void ChasePlayer()
     {
+        if(!DM.inputCTR){
         if (player != null)
         {
             if(!isAttacking)
@@ -127,7 +128,7 @@ public class SimpleEnemy : MonoBehaviour
             if(!DieB){Anm.PlayAnimationLoop(WalkAnimationName);}}
             if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
             {StartAttack();}
-        }
+        }}else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
     }
     public void OnTriggerEnter(Collider collision)
     {   
@@ -145,6 +146,7 @@ public class SimpleEnemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Rage"))
         {if(!DieB)
         {currentHealth -= DamageColl.instance.damage;
+        Debug.Log("danno +"+ currentHealth);
         Instantiate(VFXHurt, transform.position, transform.rotation);
         Anm.TemporaryChangeColor(Color.red);
         }} 

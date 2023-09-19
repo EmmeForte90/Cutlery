@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Deus Vult
   NameSkin: 
-  itemDes: 
+  itemDes: The best defense is often offense.
   ID: 10
   KindItem: 2
   price: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
   WhoCH: 2
   WhoSkill: 10
   MaxDuration: 1
-  TimeSpell: 0
-  TimeSkill: 0
-  Utilizzi: 0
-  UtilizziMAX: 0
+  TimeSpell: 1
+  TimeSkill: 10
+  Utilizzi: 99
+  UtilizziMAX: 99

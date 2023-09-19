@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56cdccba5a6f6f9419ac405c1abccdff, type: 3}
   m_Name: ForkRage
   m_EditorClassIdentifier: 
-  itemName: Fire Destroyer
+  itemName: Vae victis
   NameSkin: 
-  itemDes: 
+  itemDes: A massive, scorching sphere that destroys and melts enemies.
   ID: 10
   KindItem: 2
   price: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
   SkillIcon: {fileID: 0}
   isRage: 1
   IsDirectional: 1
-  damage: 10
+  damage: 1
   WhoCH: 0
   WhoSkill: 10
   MaxDuration: 1
