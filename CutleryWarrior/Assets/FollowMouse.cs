@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 public class FollowMouse : MonoBehaviour
 {
     private float velocitaMovimento = 20f; // Velocità di movimento dell'oggetto.
@@ -12,11 +13,18 @@ public class FollowMouse : MonoBehaviour
     public ChargeSkill Spoon;
     public GameObject ptPoint;
 
+    private CinemachineVirtualCamera vCam;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        // Impedisci la rotazione dell'oggetto quando viene spostato con il mouse.
         rigidBody.freezeRotation = true;
+    }
+
+    public void OnEnable()
+    {
+        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+        vCam.Follow = indicator.transform;
     }
 
     void Update()
@@ -40,17 +48,22 @@ public class FollowMouse : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             ptPoint.transform.position = transform.position;
-            rigidBody.velocity = new Vector3(0f, 0f, 0f);  
+            rigidBody.velocity = new Vector3(0f, 0f, 0f);
+            GameManager.instance.CloseLittleM();
+            TimerSkill.instance.Use();  
             switch(Character)
             {
             case 0:
-            if(GameManager.instance.F_Unlock){Fork.ActiveSkill();}
+            if(GameManager.instance.F_Unlock){Fork.ActiveSkill();
+            vCam.Follow = Fork.transform;}
             break;
             case 1:
-            if(GameManager.instance.K_Unlock){Knife.ActiveSkill();}
+            if(GameManager.instance.K_Unlock){Knife.ActiveSkill();
+             vCam.Follow = Knife.transform;}
             break;
             case 2:
-            if(GameManager.instance.S_Unlock){Spoon.ActiveSkill();}
+            if(GameManager.instance.S_Unlock){Spoon.ActiveSkill();
+             vCam.Follow = Spoon.transform;}
             break;
             }
             indicator.SetActive(false);

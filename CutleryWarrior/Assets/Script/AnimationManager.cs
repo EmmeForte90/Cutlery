@@ -15,6 +15,7 @@ public class AnimationManager : MonoBehaviour
     [Header("Fork")]
     private GameObject ForkActive;
     private CharacterMove F_Script;
+    [HideInInspector] public GameObject BulletP;
     [HideInInspector] public GameObject Bullet;
     [HideInInspector] public GameObject BigSpell;
     [HideInInspector] public GameObject BigForks;
@@ -65,6 +66,7 @@ public class AnimationManager : MonoBehaviour
     Spine.EventData eventData;
     //private bool Boom = false;
     private bool VFX = true;
+    public Transform SkillPoint;
     public Transform BPoint;
     public ChargeSkill CS;
     public static AnimationManager instance;
@@ -132,13 +134,13 @@ public class AnimationManager : MonoBehaviour
     {AudioManager.instance.PlayUFX(8); Instantiate(BigSpell, BPoint.position, BigSpell.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "bigfork" && VFX)
-    {AudioManager.instance.PlayUFX(8); Instantiate(BigForks, BPoint.position, BigForks.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(BigForks, SkillPoint.position, BigForks.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "bombing" && VFX)
-    {AudioManager.instance.PlayUFX(8); Instantiate(RainFire, BPoint.position, RainFire.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(RainFire, SkillPoint.position, RainFire.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "fenix" && VFX)
-    {AudioManager.instance.PlayUFX(8); Instantiate(BenedictioFenix, BPoint.position, BenedictioFenix.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(BenedictioFenix, SkillPoint.position, BenedictioFenix.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "flame" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Flame, BPoint.position, Flame.transform.rotation); 
@@ -147,13 +149,13 @@ public class AnimationManager : MonoBehaviour
     {AudioManager.instance.PlayUFX(8); Instantiate(HellFlame, BPoint.position, HellFlame.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "impulsum" && VFX)
-    {AudioManager.instance.PlayUFX(8); Instantiate(Impulsium, transform.position, Impulsium.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(Impulsium, BPoint.position, Impulsium.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "hole" && VFX)
-    {AudioManager.instance.PlayUFX(8); Instantiate(Hole, transform.position, Hole.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(Hole, BPoint.position, Hole.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "rageFork" && VFX)
-    {AudioManager.instance.PlayUFX(8); Instantiate(Rage, BPoint.position, Rage.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(Rage, SkillPoint.position, Rage.transform.rotation); 
     VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}//Rage.gameObject.SetActive(true); StartCoroutine(StopVFX_Rage());}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Knife
@@ -167,22 +169,22 @@ public class AnimationManager : MonoBehaviour
     {AudioManager.instance.PlayUFX(8); Instantiate(Fury, BPoint.position, Fury.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "bigslash")
-    {AudioManager.instance.PlayUFX(8); Instantiate(BigSlash, transform.position, BigSlash.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(BigSlash, BPoint.position, BigSlash.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "dance")
-    {AudioManager.instance.PlayUFX(8); Instantiate(DanceSwords, transform.position, DanceSwords.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(DanceSwords, BPoint.position, DanceSwords.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "multislash")
-    {AudioManager.instance.PlayUFX(8); Instantiate(SlashBombing, transform.position, SlashBombing.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(SlashBombing, BPoint.position, SlashBombing.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "rain")
-    {AudioManager.instance.PlayUFX(8); Instantiate(RainSwords, BPoint.position, RainSwords.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(RainSwords, SkillPoint.position, RainSwords.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "saw")
-    {AudioManager.instance.PlayUFX(8); Instantiate(SawTrain, transform.position, SawTrain.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(SawTrain, BPoint.position, SawTrain.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "stalactites")
-    {AudioManager.instance.PlayUFX(8); Instantiate(Stalactites, transform.position, Stalactites.transform.rotation); 
+    {AudioManager.instance.PlayUFX(8); Instantiate(Stalactites, BPoint.position, Stalactites.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "turbine")
     {AudioManager.instance.PlayUFX(8); Instantiate(SawTrain, transform.position, SawTrain.transform.rotation); 
@@ -193,28 +195,28 @@ public class AnimationManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Spoon
     if (e.Data.Name == "cura")
-    {AudioManager.instance.PlayUFX(8); Instantiate(Cura, BPoint.position, Cura.transform.rotation);
+    {AudioManager.instance.PlayUFX(8); Instantiate(Cura, SkillPoint.position, Cura.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "defence")
     {AudioManager.instance.PlayUFX(8); Instantiate(BenedictionTower, BPoint.position, BenedictionTower.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "explosion")
-    {AudioManager.instance.PlayUFX(8); Instantiate(Explosion, transform.position, Explosion.transform.rotation);
+    {AudioManager.instance.PlayUFX(8); Instantiate(Explosion, BPoint.position, Explosion.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "reflect")
-    {AudioManager.instance.PlayUFX(8); Instantiate(Reflect, BPoint.position, Reflect.transform.rotation);
+    {AudioManager.instance.PlayUFX(8); Instantiate(Reflect, SkillPoint.position, Reflect.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "shield")
     {AudioManager.instance.PlayUFX(8); Instantiate(Shields, transform.position, Shields.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "shockwave")
-    {AudioManager.instance.PlayUFX(8); Instantiate(ShockWave, transform.position, ShockWave.transform.rotation);
+    {AudioManager.instance.PlayUFX(8); Instantiate(ShockWave, BPoint.position, ShockWave.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "stun")
-    {AudioManager.instance.PlayUFX(8); Instantiate(HitStun, BPoint.position, HitStun.transform.rotation);
+    {AudioManager.instance.PlayUFX(8); Instantiate(HitStun, SkillPoint.position, HitStun.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "revive")
-    {AudioManager.instance.PlayUFX(8); Instantiate(Revive, BPoint.position, Revive.transform.rotation);
+    {AudioManager.instance.PlayUFX(8); Instantiate(Revive, SkillPoint.position, Revive.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_F());}
      if (e.Data.Name == "rageSpoon" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Rage, transform.position, Rage.transform.rotation); 

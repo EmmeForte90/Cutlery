@@ -78,22 +78,28 @@ public class ChargeSkill : MonoBehaviour
     public void TakeData(Skill skill)
     {
     if(skill.Utilizzi > 0){
-    TimerSkill.instance.Use();
-    GameManager.instance.CloseLittleM();
+    VFX.SetActive(true);
     GameManager.instance.notChange = true;
     GameManager.instance.NotTouchOption = true;
     GameManager.instance.Charge();
     AudioManager.instance.PlayUFX(13);
     GameManager.instance.ChStopB();
     _spineAnimationState.SetAnimation(0, ChargeAnm, true); 
-    fillDuration = skill.MaxDuration; 
-    skill.Utilizzi--;
     UpdatePreviewSkill.instance.UpdateInfoPanel(skill);
     nameT = skill.itemName;
     SkillAtt = skill;
-    TimeS = skill.TimeSkill;
-    if(skill.IsDirectional){Indicatore.SetActive(true); Character.Character = kindCh;}
+    TimeS = skill.TimeSkill;//Tempo per ripristinare la battle
+    if(skill.IsDirectional){
+    GameManager.instance.CloseLittleMStop();
+    Indicatore.SetActive(true);
+    Indicatore.transform.position = MP.transform.position; 
+    Character.Character = kindCh; 
+    }
     else{
+    TimerSkill.instance.Use();//Tempo per utilizzare di nuovo la skill
+    GameManager.instance.CloseLittleM();
+    fillDuration = skill.MaxDuration; 
+    skill.Utilizzi--;
     GameManager.instance.TimerMenu();
     switch(skill.WhoSkill)
     {
@@ -138,6 +144,8 @@ public class ChargeSkill : MonoBehaviour
 
     public void ActiveSkill()
     {
+    fillDuration = SkillAtt.MaxDuration; 
+    SkillAtt.Utilizzi--;
     GameManager.instance.TimerMenu();
     switch(SkillAtt.WhoSkill)
     {

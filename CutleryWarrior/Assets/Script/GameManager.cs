@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     #region Header  
     public bool StartGame = false;    
-    private CinemachineVirtualCamera vCam;
     public GameObject player;
     public GameObject Fork;
     public  bool F_Unlock = true; 
@@ -351,6 +350,30 @@ public class GameManager : MonoBehaviour
             CameraZoom.instance.ZoomOut();
             DuelManager.instance.inputCTR = false;
             AudioManager.instance.PlayUFX(1);
+    }
+
+    public void CloseLittleMStop()
+    {
+            ChCanM();
+            stopInput = false;
+            notChange = false;
+            Esc.gameObject.SetActive(false);
+            Ord.gameObject.SetActive(false);
+            Itm.gameObject.SetActive(false);
+            Esc.gameObject.SetActive(false);
+            LittleM.gameObject.SetActive(false);
+            switch (rotationSwitcher.CharacterID)
+            {
+            case 1:
+            if(F_Unlock){ch_F.inputCTR = false;}
+            break;
+            case 2:
+            if(K_Unlock){ch_K.inputCTR = false;}
+            break;
+            case 3:
+            if(S_Unlock){ch_S.inputCTR = false;}
+            break;
+            }  
     }
     public void StopBattle()
     {ChStop(); notChange = true; DuelManager.instance.inputCTR = true;}
