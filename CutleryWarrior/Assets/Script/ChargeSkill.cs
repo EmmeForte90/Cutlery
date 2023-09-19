@@ -78,6 +78,7 @@ public class ChargeSkill : MonoBehaviour
     public void TakeData(Skill skill)
     {
     if(skill.Utilizzi > 0){
+    TimerSkill.instance.Use();//Tempo per utilizzare di nuovo la skill
     VFX.SetActive(true);
     GameManager.instance.notChange = true;
     GameManager.instance.NotTouchOption = true;
@@ -89,6 +90,8 @@ public class ChargeSkill : MonoBehaviour
     nameT = skill.itemName;
     SkillAtt = skill;
     TimeS = skill.TimeSkill;//Tempo per ripristinare la battle
+    fillDuration = skill.MaxDuration; 
+    skill.Utilizzi--;
     if(skill.IsDirectional){
     GameManager.instance.CloseLittleMStop();
     Indicatore.SetActive(true);
@@ -96,46 +99,21 @@ public class ChargeSkill : MonoBehaviour
     Character.Character = kindCh; 
     }
     else{
-    TimerSkill.instance.Use();//Tempo per utilizzare di nuovo la skill
     GameManager.instance.CloseLittleM();
-    fillDuration = skill.MaxDuration; 
-    skill.Utilizzi--;
     GameManager.instance.TimerMenu();
     switch(skill.WhoSkill)
     {
-    case 0:
-    Anm = Skill0;VFX.SetActive(true);
-    break;
-    case 1:
-    Anm = Skill1;VFX.SetActive(true);
-    break;
-    case 2:
-    Anm = Skill2;VFX.SetActive(true);
-    break;
-    case 3:
-    Anm = Skill3;VFX.SetActive(true);
-    break;
-    case 4:
-    Anm = Skill4;VFX.SetActive(true);
-    break;
-    case 5:
-    Anm = Skill5;VFX.SetActive(true);
-    break;
-    case 6:
-    Anm = Skill6;VFX.SetActive(true);
-    break;
-    case 7:
-    Anm = Skill7;VFX.SetActive(true);
-    break;
-    case 8:
-    Anm = Skill8;VFX.SetActive(true);
-    break;
-    case 9:
-    Anm = Skill9;VFX.SetActive(true);
-    break;
-    case 10:
-    Anm = SkillRage;VFXRAGE.SetActive(true);
-    break;
+    case 0:Anm = Skill0;break;
+    case 1:Anm = Skill1;break;
+    case 2:Anm = Skill2;break;
+    case 3:Anm = Skill3;break;
+    case 4:Anm = Skill4;break;
+    case 5:Anm = Skill5;break;
+    case 6:Anm = Skill6;break;
+    case 7:Anm = Skill7;break;
+    case 8:Anm = Skill8;break;
+    case 9:Anm = Skill9;break;
+    case 10:Anm = SkillRage;VFX.SetActive(false);VFXRAGE.SetActive(true);break;
     }}
     }
     else
@@ -144,44 +122,20 @@ public class ChargeSkill : MonoBehaviour
 
     public void ActiveSkill()
     {
-    fillDuration = SkillAtt.MaxDuration; 
-    SkillAtt.Utilizzi--;
     GameManager.instance.TimerMenu();
     switch(SkillAtt.WhoSkill)
     {
-    case 0:
-    Anm = Skill0;VFX.SetActive(true);
-    break;
-    case 1:
-    Anm = Skill1;VFX.SetActive(true);
-    break;
-    case 2:
-    Anm = Skill2;VFX.SetActive(true);
-    break;
-    case 3:
-    Anm = Skill3;VFX.SetActive(true);
-    break;
-    case 4:
-    Anm = Skill4;VFX.SetActive(true);
-    break;
-    case 5:
-    Anm = Skill5;VFX.SetActive(true);
-    break;
-    case 6:
-    Anm = Skill6;VFX.SetActive(true);
-    break;
-    case 7:
-    Anm = Skill7;VFX.SetActive(true);
-    break;
-    case 8:
-    Anm = Skill8;VFX.SetActive(true);
-    break;
-    case 9:
-    Anm = Skill9;VFX.SetActive(true);
-    break;
-    case 10:
-    Anm = SkillRage;VFXRAGE.SetActive(true);
-    break;
+    case 0:Anm = Skill0;break;
+    case 1:Anm = Skill1;break;
+    case 2:Anm = Skill2;break;
+    case 3:Anm = Skill3;break;
+    case 4:Anm = Skill4;break;
+    case 5:Anm = Skill5;break;
+    case 6:Anm = Skill6;break;
+    case 7:Anm = Skill7;break;
+    case 8:Anm = Skill8;break;
+    case 9:Anm = Skill9;break;
+    case 10:Anm = SkillRage;VFXRAGE.SetActive(true);break;
     }
     }
 
@@ -246,6 +200,7 @@ IEnumerator SkillLunch()
     GameManager.instance.ResumeBattle();
     CameraZoom.instance.ZoomOut();
     if(SkillAtt.isRage){CamSkillBack();}
+    fillPercentage = 0;
     curTime = 0;
     isSkillLaunched = false;
     GameManager.instance.ChCanM();

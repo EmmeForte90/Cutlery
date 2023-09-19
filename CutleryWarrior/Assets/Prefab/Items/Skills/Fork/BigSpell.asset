@@ -21,13 +21,14 @@ MonoBehaviour:
   Stackable: 0
   itemIcon: {fileID: 21300000, guid: bd78db6506d35064b85d0b344f47dd05, type: 3}
   TypesE: 0
-  MaxDuration: 3
   SkillIcon: {fileID: 21300000, guid: 92a808b78f0d26c4ab2c3cdbeaed57b3, type: 3}
   isRage: 0
+  IsDirectional: 0
   damage: 10
   WhoCH: 0
   WhoSkill: 0
-  TimeSpell: 0
+  MaxDuration: 1
+  TimeSpell: 5
   TimeSkill: 1
   Utilizzi: 5
   UtilizziMAX: 5

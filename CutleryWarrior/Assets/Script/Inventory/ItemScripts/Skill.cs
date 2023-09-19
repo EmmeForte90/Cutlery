@@ -3,7 +3,6 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "Skill", menuName = "Item/Skill")]
 public class Skill : Item
 {   
-    public float MaxDuration;  // Durata desiderata per riempire la barra in secondi
     public Sprite SkillIcon;
     public bool isRage = false;
     public bool IsDirectional = false;
@@ -12,9 +11,13 @@ public class Skill : Item
     [Tooltip("Che Character è? 0-Fork 1-Knife 2-Spoon")]
     [Range(0, 2)]
     public int WhoCH;
-     [Tooltip("Che Skill è?")]
+    [Tooltip("Che Skill è?")]
     [Range(0, 10)]
     public int WhoSkill;
+
+    [Tooltip("Tempo per far partire la skill")]
+    public float MaxDuration;  // Durata desiderata per riempire la barra in secondi
+
     [Tooltip("il tempo per ricaricarla")]
     public int TimeSpell;
     //Il time skill NON è il tempo per attivare la skill, ma il tempo per farla finire una volta lanciata per
