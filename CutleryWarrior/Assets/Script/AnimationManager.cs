@@ -38,7 +38,6 @@ public class AnimationManager : MonoBehaviour
     [HideInInspector] public GameObject HitStun;
     [HideInInspector] public GameObject Revive;
     [HideInInspector] public GameObject Reflect;
-
     [HideInInspector] public bool isDefence = false;
     /////////////////////////////
     [Header("Knife")]

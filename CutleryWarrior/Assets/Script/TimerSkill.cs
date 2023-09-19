@@ -10,11 +10,9 @@ public class TimerSkill : MonoBehaviour
     private float SpeedRestore = 1f; // il massimo valore di essenza disponibile
     [HideInInspector]public float curTime;
     private float TimeMin = 0f;
-    //private float TimeMax = 10f;
     private bool Start = true;        
     public TextMeshProUGUI Utilizzi;
     public static TimerSkill instance;
-
     private void Awake() {curTime = itemInfo.TimeSpell; if (instance == null){instance = this;}}    
     private void OnEnable(){Utilizzi.text = itemInfo.Utilizzi.ToString();}
     public void Update()

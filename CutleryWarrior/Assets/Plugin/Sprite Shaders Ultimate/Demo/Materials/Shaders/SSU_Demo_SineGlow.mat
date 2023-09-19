@@ -2,15 +2,22 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SSU_Demo_SineGlow
   m_Shader: {fileID: 4800000, guid: 0803c241834332942abfcbd27c498b46, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _ENABLESINEGLOW_ON _SHADERFADING_NONE _SHADERSPACE_UV
-    _STRONGTINTCONTRASTTOGGLE_ON
+  m_ValidKeywords:
+  - ETC1_EXTERNAL_ALPHA
+  - _ENABLEADDCOLOR_ON
+  - _ENABLESATURATION_ON
+  - _ENABLESINEGLOW_ON
+  - _SHADERFADING_NONE
+  - _SHADERSPACE_UV
+  - _STRONGTINTCONTRASTTOGGLE_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -92,7 +99,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RecolorRGBTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _RecolorRGBTintAreas:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RecolorRGBYCPTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -124,6 +139,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - PixelSnap: 0
     - _AddColorContrast: 0.5
@@ -191,7 +207,7 @@ Material:
     - _DirectionalGlowFadeRotation: 0
     - _DirectionalGlowFadeWidth: 0.1
     - _DstBlend: 0
-    - _EnableAddColor: 0
+    - _EnableAddColor: 1
     - _EnableAddHue: 0
     - _EnableAlphaTint: 0
     - _EnableBlackTint: 0
@@ -219,6 +235,7 @@ Material:
     - _EnableInkSpread: 0
     - _EnableInnerOutline: 0
     - _EnableMetal: 0
+    - _EnableNegative: 0
     - _EnableOuterOutline: 0
     - _EnablePingPongGlow: 0
     - _EnablePixelOutline: 0
@@ -227,7 +244,7 @@ Material:
     - _EnableRainbow: 0
     - _EnableRecolorRGB: 0
     - _EnableRecolorRGBYCP: 0
-    - _EnableSaturation: 0
+    - _EnableSaturation: 1
     - _EnableScreenTiling: 0
     - _EnableShadow: 0
     - _EnableSharpen: 0
@@ -324,6 +341,7 @@ Material:
     - _MetalMaskToggle: 0
     - _Metallic: 0
     - _Mode: 0
+    - _NegativeFade: 1
     - _OcclusionStrength: 1
     - _OuterOutlineDistortionToggle: 0
     - _OuterOutlineFade: 1
@@ -356,11 +374,13 @@ Material:
     - _RainbowNoiseFactor: 0.2
     - _RainbowSaturation: 1
     - _RainbowSpeed: 1
-    - _RecolorRGBFade: 1
+    - _RecolorRGBFade: 0.82
+    - _RecolorRGBTextureToggle: 0
     - _RecolorRGBYCPFade: 1
+    - _RecolorRGBYCPTextureToggle: 0
     - _RectHeight: 100
     - _RectWidth: 100
-    - _Saturation: 1
+    - _Saturation: 1.65
     - _ScreenTilingPixelsPerUnit: 100
     - _ScreenWidthUnits: 10
     - _ShaderFading: 0
@@ -470,7 +490,7 @@ Material:
     - _WorldTilingPixelsPerUnit: 100
     - _ZWrite: 1
     m_Colors:
-    - _AddColorColor: {r: 2.996078, g: 0, b: 0, a: 0}
+    - _AddColorColor: {r: 3.9999998, g: 3.9999998, b: 3.9999998, a: 0}
     - _AlphaTintColor: {r: 95.87451, g: 5.019608, b: 95.87451, a: 0}
     - _BlackTintColor: {r: 0, g: 0, b: 1, a: 0}
     - _BurnEdgeColor: {r: 11.98431, g: 1.129412, b: 0.1254902, a: 0}
@@ -575,7 +595,7 @@ Material:
     - _ShiftingColorA: {r: 1.498039, g: 0, b: 0, a: 0}
     - _ShiftingColorB: {r: 1.498039, g: 0.7490196, b: 0, a: 0}
     - _ShineColor: {r: 11.98431, g: 11.98431, b: 11.98431, a: 0}
-    - _SineGlowColor: {r: 2.9960783, g: 2.746405, b: 0, a: 0}
+    - _SineGlowColor: {r: 3.9999998, g: 3.9999998, b: 3.9999998, a: 0}
     - _SineMoveFrequency: {r: 1, g: 1, b: 0, a: 0}
     - _SineMoveOffset: {r: 0, g: 0.5, b: 0, a: 0}
     - _SineRotatePivot: {r: 0.5, g: 0.5, b: 0, a: 0}

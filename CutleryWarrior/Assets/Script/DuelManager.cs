@@ -139,9 +139,9 @@ public void Update()
         {MaxRageS.SetActive(true);} 
         else if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curRage < PlayerStats.instance.S_Rage)
         {MaxRageS.SetActive(false);}
-        if(GameManager.instance.K_Unlock && PlayerStats.instance.F_curRage >= PlayerStats.instance.F_Rage)
+        if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curRage >= PlayerStats.instance.F_Rage)
         {MaxRageF.SetActive(true);} 
-        else if(GameManager.instance.K_Unlock && PlayerStats.instance.F_curRage < PlayerStats.instance.F_Rage)
+        else if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curRage < PlayerStats.instance.F_Rage)
         {MaxRageF.SetActive(false);}
         //
         if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curHP <= 0)

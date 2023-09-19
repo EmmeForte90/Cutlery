@@ -376,7 +376,7 @@ public class GameManager : MonoBehaviour
             }  
     }
     public void StopBattle()
-    {ChStop(); notChange = true; DuelManager.instance.inputCTR = true;}
+    {ChStopWithoutANM(); notChange = true; DuelManager.instance.inputCTR = true;}
 
      public void ResumeBattle()
     {ChCanM(); notChange = false; DuelManager.instance.inputCTR = false;}
@@ -581,6 +581,18 @@ public class GameManager : MonoBehaviour
         if(S_Unlock){ch_S.Idle();}
         if(K_Unlock){ch_K.Idle();}
     }
+    public void ChStopWithoutANM()
+    {
+        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
+        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
+        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
+        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        if(F_Unlock){ch_F.Stop(); ch_F.inputCTR = true; ch_FAc.inputCTR = true; ch_F.isRun = false;}
+        if(K_Unlock){ch_K.Stop(); ch_K.inputCTR = true; ch_KAc.inputCTR = true; ch_K.isRun = false;}
+        if(S_Unlock){ch_S.Stop(); ch_S.inputCTR = true; ch_SAc.inputCTR = true; ch_S.isRun = false;}
+    } 
     public void ChStop()
     {
         if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}

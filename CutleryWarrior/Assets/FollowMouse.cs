@@ -25,6 +25,7 @@ public class FollowMouse : MonoBehaviour
     {
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         vCam.Follow = indicator.transform;
+        GameManager.instance.StopBattle();
     }
 
     void Update()

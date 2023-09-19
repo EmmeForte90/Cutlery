@@ -278,6 +278,8 @@ public class CharacterFollow : MonoBehaviour
             target = GameObject.Find("Knife");
             break;
     } 
+    if(target == null)
+    {DefenceEnm();}
     }
     private void ChaseEnm()
     {if (target != null)
@@ -287,7 +289,8 @@ public class CharacterFollow : MonoBehaviour
             Anm.PlayAnimationLoop(RunBAnimationName);}
             if (Vector3.Distance(transform.position, target.transform.position) <= attackRange)
             {StartAttack();}
-        }
+        }else if(target == null)
+    {DefenceEnm();}
     }
     private void StartAttack()
     {

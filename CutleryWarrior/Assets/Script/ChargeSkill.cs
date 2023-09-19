@@ -32,7 +32,7 @@ public class ChargeSkill : MonoBehaviour
     public float fillPercentage;
     public Spine.AnimationState _spineAnimationState;    
     public SkeletonAnimation _skeletonAnimation;
-    private bool isSkillLaunched = false;
+    private bool isSkillLaunched = true;
     public  AnimationManager AM;
     public string Anm;    
     public Transform RPoint;
@@ -86,7 +86,7 @@ public class ChargeSkill : MonoBehaviour
     AudioManager.instance.PlayUFX(13);
     GameManager.instance.ChStopB();
     _spineAnimationState.SetAnimation(0, ChargeAnm, true); 
-    UpdatePreviewSkill.instance.UpdateInfoPanel(skill);
+    if(!skill.isRage){UpdatePreviewSkill.instance.UpdateInfoPanel(skill);}
     nameT = skill.itemName;
     SkillAtt = skill;
     TimeS = skill.TimeSkill;//Tempo per ripristinare la battle
@@ -99,6 +99,7 @@ public class ChargeSkill : MonoBehaviour
     Character.Character = kindCh; 
     }
     else{
+    isSkillLaunched = false;
     GameManager.instance.CloseLittleM();
     GameManager.instance.TimerMenu();
     switch(skill.WhoSkill)
@@ -122,6 +123,7 @@ public class ChargeSkill : MonoBehaviour
 
     public void ActiveSkill()
     {
+    isSkillLaunched = false;
     GameManager.instance.TimerMenu();
     switch(SkillAtt.WhoSkill)
     {
@@ -173,39 +175,21 @@ IEnumerator SkillLunch()
     Mossa.SetActive(true);
     nameText.text = nameT.ToString();
     yield return new WaitForSeconds(3f);
-    VFX.SetActive(false);
-    VFXRAGE.SetActive(false);
-    Mossa.SetActive(false);
+    VFX.SetActive(false); VFXRAGE.SetActive(false);Mossa.SetActive(false);
     GameManager.instance.CloseTimerMenu();
-    //_spineAnimationState.SetAnimation(0, LunchAnm, false); 
     if(SkillAtt.isRage)
     {AnimationRage.SetActive(true);
     yield return new WaitForSeconds(2f);
     AnimationRage.SetActive(false);}
     AM.PlayAnimation(Anm);
     if(SkillAtt.isRage){RageCurr();}
-    /*switch(SkillAtt.WhoCH)
-    {
-    case 0:
-    PlayerStats.instance.F_curMP -= SkillAtt.CostMP; 
-    break;
-    case 1:
-    PlayerStats.instance.K_curMP -= SkillAtt.CostMP; 
-    break;
-    case 2:
-    PlayerStats.instance.S_curMP -= SkillAtt.CostMP; 
-    break;
-    }*/
     yield return new WaitForSeconds(TimeS);
     GameManager.instance.ResumeBattle();
     CameraZoom.instance.ZoomOut();
     if(SkillAtt.isRage){CamSkillBack();}
-    fillPercentage = 0;
-    curTime = 0;
-    isSkillLaunched = false;
+    fillPercentage = 0; curTime = 0; isSkillLaunched = false;
     GameManager.instance.ChCanM();
     GameManager.instance.NotTouchOption = false;
-    
     GameManager.instance.StopWin();
 }
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}

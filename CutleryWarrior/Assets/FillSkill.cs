@@ -1,6 +1,5 @@
 using UnityEngine.UI;
 using UnityEngine;
-
 public class FillSkill : MonoBehaviour
 {
     public Image FillBar;

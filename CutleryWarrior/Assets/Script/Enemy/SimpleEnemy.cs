@@ -98,7 +98,7 @@ public class SimpleEnemy : MonoBehaviour
         healthBar.size = currentHealth / maxHealth;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
         FacePlayer(); if(!isAttacking){ChasePlayer();}
-        }
+        }else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
         if(currentHealth < 0){DieB = true; IconVFX.SetActive(true); Die();}
         }
     }

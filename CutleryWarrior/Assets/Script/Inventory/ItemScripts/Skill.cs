@@ -14,21 +14,16 @@ public class Skill : Item
     [Tooltip("Che Skill è?")]
     [Range(0, 10)]
     public int WhoSkill;
-
     [Tooltip("Tempo per far partire la skill")]
     public float MaxDuration;  // Durata desiderata per riempire la barra in secondi
-
     [Tooltip("il tempo per ricaricarla")]
     public int TimeSpell;
     //Il time skill NON è il tempo per attivare la skill, ma il tempo per farla finire una volta lanciata per
     //sapere quanto tempo serve per lanciare la skill guarda nello script "TimerSkill"
     [Tooltip("il tempo per farla finire una volta lanciata")]
     public int TimeSkill;
-    
-    //[HideInInspector]
     public int Utilizzi;
     public int UtilizziMAX;
-
     #if UNITY_EDITOR
     private void OnDisable()
     {
