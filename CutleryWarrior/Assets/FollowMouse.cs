@@ -50,7 +50,6 @@ public class FollowMouse : MonoBehaviour
             ptPoint.transform.position = transform.position;
             rigidBody.velocity = new Vector3(0f, 0f, 0f);
             GameManager.instance.CloseLittleM();
-            TimerSkill.instance.Use();  
             switch(Character)
             {
             case 0:
