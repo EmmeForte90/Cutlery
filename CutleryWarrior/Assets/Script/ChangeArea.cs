@@ -17,20 +17,18 @@ public class ChangeArea : MonoBehaviour
     #endregion
     public void Start()
     {        
-         if(GameManager.instance.F_Unlock){FAct = GameObject.FindWithTag("F_Player");}
-         if(GameManager.instance.S_Unlock){SAct = GameObject.FindWithTag("S_Player");}
-         if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}        
+        FAct = GameObject.FindWithTag("F_Player");
+        SAct = GameObject.FindWithTag("S_Player");
+        KAct = GameObject.FindWithTag("K_Player");        
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
         confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
     }
     public void OnTriggerEnter(Collider collision)
     {
         // Controlliamo se il player ha toccato il collider
-        if (GameManager.instance.F_Unlock && collision.gameObject.CompareTag("F_Player"))
-        {StartCoroutine(ChangeAreaF());}
-        else if (GameManager.instance.S_Unlock && collision.gameObject.CompareTag("S_Player"))
-        {StartCoroutine(ChangeAreaF());}
-        else if (GameManager.instance.K_Unlock && collision.gameObject.CompareTag("K_Player"))
+        if (collision.gameObject.CompareTag("F_Player")||
+        collision.gameObject.CompareTag("K_Player")||
+        collision.gameObject.CompareTag("S_Player"))
         {StartCoroutine(ChangeAreaF());}
     }
     public void ModifyConfiner()
@@ -50,9 +48,9 @@ public class ChangeArea : MonoBehaviour
         CharacterMove.instance.isRun = false;
         ModifyConfiner();
         GameManager.instance.player.transform.position = PointSpawn.transform.position;
-         if(GameManager.instance.K_Unlock){KAct.transform.position = PointSpawn.transform.position;}
-         if(GameManager.instance.F_Unlock){FAct.transform.position = PointSpawn.transform.position;}
-         if(GameManager.instance.S_Unlock){SAct.transform.position = PointSpawn.transform.position;}
+        KAct.transform.position = PointSpawn.transform.position;
+        FAct.transform.position = PointSpawn.transform.position;
+        SAct.transform.position = PointSpawn.transform.position;
         yield return new WaitForSeconds(2f);
         GameManager.instance.ChCanM();
         GameManager.instance.FadeOut();
