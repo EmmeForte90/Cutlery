@@ -4,7 +4,7 @@ using Spine.Unity;
 using UnityEngine.UI;
 public class SimpleEnemy : MonoBehaviour
 {
-    public int ID;
+     public int ID;
     [Header("Change Script")]
     public SimpleEnemy This;
     public DeathAnimation DeathANM;
@@ -27,6 +27,12 @@ public class SimpleEnemy : MonoBehaviour
     public float duration = 5.0f;
     private float elapsedTime = 0.0f;
     private bool isDamaging = false;
+    public GameObject VFXPoison;
+    private bool poisonState = false;
+    public int poisonResistance = 100;
+    public int poisonResistanceCont;
+    private int TimePoison = 5;   
+
     [Header("Move")]
     public float moveSpeed = 3f;
     public float attackRange = 1.5f;
@@ -61,6 +67,7 @@ public class SimpleEnemy : MonoBehaviour
         if (instance == null){instance = this;}
         currentHealth = maxHealth;
         DM = GameObject.Find("Script").GetComponent<DuelManager>();
+        poisonResistanceCont = poisonResistance;
         DM.EnemyinArena += 1;
     }
     private void Choise()
@@ -150,8 +157,21 @@ public class SimpleEnemy : MonoBehaviour
         Instantiate(VFXHurt, transform.position, transform.rotation);
         Anm.TemporaryChangeColor(Color.red);
         }} 
+         if (collision.gameObject.CompareTag("Poison_P"))
+        {if(poisonResistance > 0)
+        {poisonResistance--;
+        }else if(poisonResistance <= 0){Poison();}
+        } 
     }
-    
+    #region Stato Veleno
+    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true); poisonState = true;} 
+    private IEnumerator Poi()
+    {
+        yield return new WaitForSeconds(TimePoison);
+        poisonResistance = poisonResistanceCont; 
+        poisonState = false;
+    }
+    #endregion
     private void StartAttack()
     {
         isAttacking = true;
