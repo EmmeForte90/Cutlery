@@ -9,6 +9,8 @@ using Cinemachine;
     {
     public PlayableDirector _director;
     public GameObject Cutscene;
+    public GameObject Triangle;
+
     public int ID;
     private CinemachineVirtualCamera virtualCamera; //riferimento alla virtual camera di Cinemachine
     private GameObject player; // Variabile per il player
@@ -55,12 +57,14 @@ public  void TimelineDontRepeat()
 
     public void StartTimeline()
     {  
+        Triangle.SetActive(false);
         _director.time = _director.time;
         _director.playableGraph.GetRootPlayable(0).SetSpeed(1);
     }
 
     public void StopTimeline()
     {
+        Triangle.SetActive(true);
         _director.playableGraph.GetRootPlayable(0).SetSpeed(0);
     }
 

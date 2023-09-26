@@ -5,6 +5,7 @@ using Cinemachine;
 public class StartBattle : MonoBehaviour
 {
     #region Header
+    public bool isTutorial = false; 
     public GameObject DuelManagerO; // Variabile per il player
     public GameObject Notte; 
     public Material newSkyboxMaterial_N;
@@ -15,6 +16,9 @@ public class StartBattle : MonoBehaviour
     private SwitchCharacter Switch;
     private CinemachineVirtualCamera vCam;
     private GameObject player;
+    [Header("Tutorial")]
+    public GameObject ActiveTutorial; 
+
     [Header("Stats")]
     [Header("Fork")]
     public GameObject ForkHUD;
@@ -96,13 +100,43 @@ public class StartBattle : MonoBehaviour
         if(GameManager.instance.S_Unlock){KnifeActive.transform.localScale = new Vector3(1, 1,1);}
         if(GameManager.instance.S_Unlock){SpoonActive.transform.localScale = new Vector3(1, 1,1);}
         ////////////////////////
-        StartCoroutine(DuringInter());}
+        if(!isTutorial){StartCoroutine(DuringInter());}
+        else if(isTutorial){ActiveTutorial.SetActive(true); GameManager.instance.FadeOut();}
+    }
     IEnumerator DuringInter()
     {
         GameManager.instance.FadeOut();
         GameManager.instance.StopAllarm();
         GameManager.instance.Posebattle();
         yield return new WaitForSeconds(2f);
+        GameManager.instance.ChCanM();
+        if(Switch.isElement1Active)
+        {
+            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+            if(GameManager.instance.S_Unlock){player = GameObject.FindWithTag("S_Player");}
+            vCam.Follow = player.transform;
+        }else if(Switch.isElement2Active)
+        {
+            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+            if(GameManager.instance.F_Unlock){player = GameObject.FindWithTag("F_Player");}
+            vCam.Follow = player.transform;
+            
+        }else if(Switch.isElement3Active)
+        {
+            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+            if(GameManager.instance.K_Unlock){player = GameObject.FindWithTag("K_Player");}  
+            vCam.Follow = player.transform;
+        }
+        //GameManager.instance.Change();
+        GameManager.instance.ChCanM();
+        Duel_Script.inputCTR = false;
+    }
+
+    public void AfterTutorial()
+    {
+        GameManager.instance.FadeOut();
+        GameManager.instance.StopAllarm();
+        GameManager.instance.Posebattle();
         GameManager.instance.ChCanM();
         if(Switch.isElement1Active)
         {
