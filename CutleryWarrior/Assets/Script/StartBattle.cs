@@ -134,7 +134,6 @@ public class StartBattle : MonoBehaviour
 
     public void AfterTutorial()
     {
-        GameManager.instance.FadeOut();
         GameManager.instance.StopAllarm();
         GameManager.instance.Posebattle();
         GameManager.instance.ChCanM();

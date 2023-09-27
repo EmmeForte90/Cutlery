@@ -9,6 +9,7 @@ public class CameraWarning : MonoBehaviour
     public GameObject This;
     public GameObject Enemy;
     private GameObject  Player;
+    public GameObject  triangle;
     public GameObject Box;
     [TextArea(3, 10)]    
     public string ContentD;
@@ -47,7 +48,8 @@ public class CameraWarning : MonoBehaviour
         vcam.Follow = Enemy.transform;
         dialogueText.text = ContentD.ToString();
         Box.SetActive(true);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
+        triangle.SetActive(true);
         canpress = true;
     }
 }

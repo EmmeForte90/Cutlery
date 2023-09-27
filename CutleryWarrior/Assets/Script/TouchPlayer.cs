@@ -6,15 +6,17 @@ public class TouchPlayer : MonoBehaviour
 {
     #region Header
     public int IdENM;
-    public int IDBattle;
+    //public int IDBattle;
     public int IdAreaAtt;
+    public GameObject BattleObj;
+    public GameObject[] DeactiveObj; 
     public GameObject This;
     //public string spawnPointTag = "SpawnPoint";
     //private CinemachineVirtualCamera vCam;
     //public bool camFollowPlayer = true;
     private SceneEvent sceneEvent;
-    public string sceneName;
-    public string sceneReturn;
+    //public string sceneName;
+    //public string sceneReturn;
     public float stoppingDistance = 1f;
     public Vector3 savedPosition;
     private Transform Player;
@@ -32,9 +34,10 @@ public class TouchPlayer : MonoBehaviour
     if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
     sceneEvent = GetComponent<SceneEvent>();
     sceneEvent.onSceneChange.AddListener(ChangeScene);
-     if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
-     if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}
-     if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}
+    if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
+    if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}
+    if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}
+    BattleObj.SetActive(false);
     }
     public void Take(){Destroy(This);}
     public void Update()
@@ -51,8 +54,8 @@ public class TouchPlayer : MonoBehaviour
     }
     private void ChangeScene()
     {   
-    SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-    SceneManager.sceneLoaded += OnSceneLoaded;
+    //SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    //SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode){SceneManager.sceneLoaded -= OnSceneLoaded;}
     IEnumerator WaitForSceneLoad()
@@ -65,7 +68,9 @@ public class TouchPlayer : MonoBehaviour
     yield return new WaitForSeconds(1f);
     GameManager.instance.StopAllarm();
     GameManager.instance.Posebattle();
-    sceneEvent.InvokeOnSceneChange();
+    BattleObj.SetActive(true);
+    foreach (GameObject arenaObject in DeactiveObj){arenaObject.SetActive(false);}
+    //sceneEvent.InvokeOnSceneChange();
     }
     public void Flip()
     {
@@ -81,12 +86,13 @@ public class TouchPlayer : MonoBehaviour
     else if (other.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
     {Touch();}
     }
+    
     public void Touch()
     {   Mnpc.Behav = 0; Mnpc.isPaused = true;
         AudioManager.instance.CrossFadeOUTAudio(0);
-        GameManager.instance.sceneName = sceneReturn;
+        //GameManager.instance.sceneName = sceneReturn;
         GameManager.instance.IdAreaAtt = IdAreaAtt;
-        GameManager.instance.IDPorta = IDBattle;
+        //GameManager.instance.IDPorta = IDBattle;
         GameManager.instance.IdENM = IdENM;
         GameManager.instance.NotChange();
         AudioManager.instance.PlayUFX(7);

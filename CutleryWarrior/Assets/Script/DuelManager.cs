@@ -3,7 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class DuelManager : MonoBehaviour
 {
-    public LevelChanger LVCH;
+    //public LevelChanger LVCH;
+    public GameObject ThisBattle;
+
     [Header("Arena")]
     public int EnemyinArena;
     private bool win = true;
@@ -13,7 +15,10 @@ public class DuelManager : MonoBehaviour
     private int specificQuant = 1;
     private int result;
     private int Money;
-    private int ItemN;
+    private int ItemN; 
+    private GameObject FAct;
+    private GameObject KAct;
+    private GameObject SAct;    
     [Header("Fork")]
     public Scrollbar FhealthBar;
     public Image FRageBar;
@@ -22,6 +27,8 @@ public class DuelManager : MonoBehaviour
     public Scrollbar FMPBar;
     public float FcostMP = 20;
     public float F_SpeedRestore = 5f; // il massimo valore di essenza disponibile
+    public GameObject Enemies; 
+    public GameObject[] ActiveObj; 
     [SerializeField] CharacterFollow ch_FAc;
     [Header("Knife")]
     public float KcurrentHealth;
@@ -59,6 +66,7 @@ public class DuelManager : MonoBehaviour
     [SerializeField]  GameObject Item;
     [SerializeField]  GameObject Skill;
     [SerializeField]  GameObject Win;
+    private int ID_Enm;
     public bool inputCTR = false;
     [Header("AnimationUI")]
     public Animator animator;
@@ -83,9 +91,15 @@ public void Awake()
         if(GameManager.instance.S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
         if(GameManager.instance.F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
         if(GameManager.instance.K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
+        //
+        if(GameManager.instance.F_Unlock){FAct = GameObject.FindWithTag("F_Player");}
+        if(GameManager.instance.S_Unlock){SAct = GameObject.FindWithTag("S_Player");}
+        if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}
+        //
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage = 0;}       
         if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage = 0;}
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage = 0;}
+         ID_Enm = GameManager.instance.IdENM;
         StartCoroutine(StartAI());    
     }
 public void Update()
@@ -200,9 +214,9 @@ public void Update()
                 isDamaging = false;
             }
         }}
-        if(EnemyinArena <= 0)
-        {StartCoroutine(EndBattle());}
-        if(WinEnd){if (Input.GetMouseButtonDown(0)){L_C.Escape();}}
+        if(EnemyinArena <= 0){StartCoroutine(EndBattle());}
+        //
+        if(WinEnd){if(Input.GetMouseButtonDown(0)){StartCoroutine(RetunBattle());}}
     }
 
     // Metodo per iniziare il danno nel tempo
@@ -226,25 +240,6 @@ IEnumerator StartAI()
         if(GameManager.instance.S_Unlock){ch_SAc.order = 2;}
         if(GameManager.instance.F_Unlock){ch_FAc.order = 1;}
     }
-IEnumerator StartM()
-    {
-        //InputBattle.instance.inputCTR = true;
-        inputCTR = true;
-        GameManager.instance.ChStop();
-        Pause.gameObject.SetActive(true);
-        animator.SetTrigger("Open");
-        yield return new WaitForSeconds(1f);
-        ToggleTimeScale();
-    }
-IEnumerator EndP()
-    {
-        animator.SetTrigger("Close");
-        yield return new WaitForSeconds(1f);
-        Pause.gameObject.SetActive(false);
-        GameManager.instance.ChCanM();
-        inputCTR = false;
-        //InputBattle.instance.inputCTR = false;
-    }
 IEnumerator EndBattle()
     {
         GameManager.instance.ChStop();
@@ -262,7 +257,7 @@ IEnumerator EndBattle()
         if(GameManager.instance.K_Unlock){Stats.K_GainExperience(result);}
         GameManager.instance.AddTomoney(Money);
         PlayerStats.instance.EnemyDefeatArea(GameManager.instance.IdENM);
-        LVCH.sceneName = GameManager.instance.sceneName;
+        //LVCH.sceneName = GameManager.instance.sceneName;
         //Reward();
         win = false;}
         WinEnd = true;
@@ -272,6 +267,33 @@ IEnumerator EndBattle()
         if (Time.timeScale == 1){Time.timeScale = 0.01f;}
         else{Time.timeScale = 1;}
     }
+     IEnumerator RetunBattle()
+    {   
+    GameManager.instance.StartGame = false;
+    CharacterMove.instance.inputCTR = true;
+    CharacterMove.instance.Idle();
+    GameManager.instance.FadeIn();
+    AudioManager.instance.CrossFadeOUTAudio(1);
+    yield return new WaitForSeconds(2f);
+    foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);}
+    SwitchCharacter.instance.ActiveCH();
+    GameManager.instance.Exploration();
+    GameManager.instance.Change();
+    SpawnB(ID_Enm);
+    GameManager.instance.FadeOut();
+    }
+    public void SpawnB(int ID)
+    {
+    GameManager.instance.battle = false;
+    if(GameManager.instance.F_Unlock){FAct.transform.position = GameManager.instance.savedPosition;}
+    if(GameManager.instance.K_Unlock){KAct.transform.position = GameManager.instance.savedPosition;}
+    if(GameManager.instance.S_Unlock){SAct.transform.position = GameManager.instance.savedPosition;}
+    Enemies.SetActive(false);
+    GameManager.instance.StopWin();
+    GameManager.instance.ChCanM();
+    ThisBattle.SetActive(false);
+    }
+    //public void EnemiesActive(int ID){Enemies[ID].SetActive(false);}
     private void RandomReward()
     {
         int randomNumber = Random.Range(10, 20);

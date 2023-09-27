@@ -41,7 +41,7 @@ public class SimpleEnemy : MonoBehaviour
     public int attackPauseDuration = 1;
     private bool isAttacking = false;   
     public bool DieB = false;
-    private DuelManager DM;
+    public DuelManager DM;
 
     public static SimpleEnemy instance;
     [Header("VFX")]
@@ -66,7 +66,6 @@ public class SimpleEnemy : MonoBehaviour
     {
         if (instance == null){instance = this;}
         currentHealth = maxHealth;
-        DM = GameObject.Find("Script").GetComponent<DuelManager>();
         poisonResistanceCont = poisonResistance;
         DM.EnemyinArena += 1;
     }
