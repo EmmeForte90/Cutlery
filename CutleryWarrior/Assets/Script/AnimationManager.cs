@@ -10,6 +10,9 @@ public class AnimationManager : MonoBehaviour
     public bool fork;
     public bool knife;
     public bool spoon;
+    public bool canImp = false;
+    public GameObject impronte;
+    public Transform Foot;
     public GameObject Rage;
     [Header("Fork")]
     private GameObject ForkActive;
@@ -109,6 +112,12 @@ public class AnimationManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         VFX = true;
     }
+    IEnumerator StopVFX_Rapid()
+    {
+        //Boom = false;
+        yield return new WaitForSeconds(0.3f);
+        VFX = true;
+    }
     public void TemporaryChangeColor(Color color){_skeletonAnimation.Skeleton.SetColor(color); Invoke(nameof(ResetColor), 0.5f);}
     public void ChangeColor(){_skeletonAnimation.Skeleton.SetColor(Color.green);}
     public void ResetColor(){_skeletonAnimation.Skeleton.SetColor(Color.white);}
@@ -136,6 +145,8 @@ public class AnimationManager : MonoBehaviour
     void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
     //Normal VFX
     if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(0);}
+    if (e.Data.Name == "impronte" && VFX){if(canImp){Instantiate(impronte, Foot.position, impronte.transform.rotation);
+    VFX = false; StartCoroutine(StopVFX_Rapid());}}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
     if (e.Data.Name == "bigspell" && VFX)
@@ -176,28 +187,28 @@ public class AnimationManager : MonoBehaviour
     {AudioManager.instance.PlayUFX(8); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "slashB")
     {AudioManager.instance.PlayUFX(8); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
-    if (e.Data.Name == "bigslash")
+    if (e.Data.Name == "bigslash" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_0.Use(); Instantiate(BigSlash, BPoint.position, BigSlash.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "fury")
     {AudioManager.instance.PlayUFX(8); Skill_1.Use(); Instantiate(Fury, BPoint.position, Fury.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
-    if (e.Data.Name == "dance")
+    if (e.Data.Name == "dance" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_2.Use(); Instantiate(DanceSwords, BPoint.position, DanceSwords.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
-    if (e.Data.Name == "multislash")
+    if (e.Data.Name == "multislash" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_3.Use(); Instantiate(SlashBombing, BPoint.position, SlashBombing.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
-    if (e.Data.Name == "rain")
+    if (e.Data.Name == "rain" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_4.Use(); Instantiate(RainSwords, SkillPoint.position, RainSwords.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
-    if (e.Data.Name == "saw")
+    if (e.Data.Name == "saw" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_5.Use(); Instantiate(SawTrain, BPoint.position, SawTrain.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
-    if (e.Data.Name == "stalactites")
+    if (e.Data.Name == "stalactites" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_6.Use(); Instantiate(Stalactites, BPoint.position, Stalactites.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
-    if (e.Data.Name == "turbine")
+    if (e.Data.Name == "turbine" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_7.Use(); Instantiate(SawTrain, transform.position, SawTrain.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "rageKnife" && VFX)
