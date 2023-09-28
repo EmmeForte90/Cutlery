@@ -27,7 +27,7 @@ public class DuelManager : MonoBehaviour
     public Scrollbar FMPBar;
     public float FcostMP = 20;
     public float F_SpeedRestore = 5f; // il massimo valore di essenza disponibile
-    public GameObject Enemies; 
+    public GameObject[] Enemies; 
     public GameObject[] ActiveObj; 
     [SerializeField] CharacterFollow ch_FAc;
     [Header("Knife")]
@@ -45,7 +45,6 @@ public class DuelManager : MonoBehaviour
     public Scrollbar ShealthBar;
     public Image SRageBar;
     public GameObject MaxRageS;
-
     public float ScurrentMP;
     public Scrollbar SMPBar;
     public float ScostMP = 10;
@@ -288,7 +287,7 @@ IEnumerator EndBattle()
     if(GameManager.instance.F_Unlock){FAct.transform.position = GameManager.instance.savedPosition;}
     if(GameManager.instance.K_Unlock){KAct.transform.position = GameManager.instance.savedPosition;}
     if(GameManager.instance.S_Unlock){SAct.transform.position = GameManager.instance.savedPosition;}
-    Enemies.SetActive(false);
+    foreach (GameObject arenaObject in Enemies){arenaObject.SetActive(false);}
     GameManager.instance.StopWin();
     GameManager.instance.ChCanM();
     ThisBattle.SetActive(false);

@@ -12,6 +12,7 @@ public class NPCMove : MonoBehaviour
     private float RunSpeed = 6f; // Velocità di movimento del personaggio
     private float pauseTime = 2f; // Tempo di pausa in secondi quando raggiunge un punto
     bool Right = true;
+    public float stoppingDistance = 1f;
     private int currentWaypointIndex = 0; // Indice del punto attuale
     public bool isPaused = false; // Flag per indicare se è in pausa
     private float pauseTimer = 0f; // Timer per il conteggio della pausa
@@ -83,21 +84,35 @@ public class NPCMove : MonoBehaviour
         }
     }
     private void MoveToWaypoint()
-    {
+{
     if (waypoints.Length > 1 && currentWaypointIndex < waypoints.Length - 1)
     {
         Vector3 targetPosition = waypoints[currentWaypointIndex + 1].position;
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-        if (transform.position == targetPosition)
-        {isPaused = true; pauseTimer = 0f;}
+
+        // Verifica se il personaggio è vicino al punto di destinazione
+        if (Vector3.Distance(transform.position, targetPosition) < stoppingDistance)
+        {
+            isPaused = true;
+            pauseTimer = 0f;
+        }
     }
     else if (currentWaypointIndex == waypoints.Length - 1)
     {
         Vector3 initialPosition = waypoints[0].position;
         transform.position = Vector3.MoveTowards(transform.position, initialPosition, moveSpeed * Time.deltaTime);
-        if (transform.position == initialPosition)
-        {isPaused = true; pauseTimer = 0f; currentWaypointIndex = 0;}
-    }}
+
+        // Verifica se il personaggio è vicino al punto di destinazione
+        if (Vector3.Distance(transform.position, initialPosition) < stoppingDistance)
+        {
+            isPaused = true;
+            pauseTimer = 0f;
+            // Incrementa l'indice del waypoint o torna al punto 0 se siamo all'ultimo
+            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;       
+        }
+    }
+}
+
     private void PauseAtWaypoint()
     {
         if (pauseTimer < pauseTime){pauseTimer += Time.deltaTime;}

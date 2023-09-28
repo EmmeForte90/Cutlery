@@ -26,14 +26,15 @@ public class TouchPlayer : MonoBehaviour
     public Transform ENM;
     private SwitchCharacter Switch;
     public bool takeCoo = false;
+    public bool isMove = true;
     //public int IDAudio;
     public NPCMove Mnpc;
     #endregion
     public void Start()
     {
     if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
-    sceneEvent = GetComponent<SceneEvent>();
-    sceneEvent.onSceneChange.AddListener(ChangeScene);
+    if (isMove) {sceneEvent = GetComponent<SceneEvent>();
+    sceneEvent.onSceneChange.AddListener(ChangeScene);}
     if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
     if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}
     if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}
@@ -88,7 +89,7 @@ public class TouchPlayer : MonoBehaviour
     }
     
     public void Touch()
-    {   Mnpc.Behav = 0; Mnpc.isPaused = true;
+    {   if (isMove) {Mnpc.Behav = 0; Mnpc.isPaused = true;}
         AudioManager.instance.CrossFadeOUTAudio(0);
         //GameManager.instance.sceneName = sceneReturn;
         GameManager.instance.IdAreaAtt = IdAreaAtt;

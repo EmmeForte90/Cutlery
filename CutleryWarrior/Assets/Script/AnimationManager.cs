@@ -115,7 +115,7 @@ public class AnimationManager : MonoBehaviour
     IEnumerator StopVFX_Rapid()
     {
         //Boom = false;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         VFX = true;
     }
     public void TemporaryChangeColor(Color color){_skeletonAnimation.Skeleton.SetColor(color); Invoke(nameof(ResetColor), 0.5f);}
