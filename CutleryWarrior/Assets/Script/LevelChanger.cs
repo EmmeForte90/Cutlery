@@ -34,6 +34,7 @@ public class LevelChanger : MonoBehaviour
     other.CompareTag("K_Player") ||
     other.CompareTag("S_Player"))
     {GameManager.instance.ChStop();
+    StartScene.instance.StartGame = false;
     CameraZoom.instance.ZoomIn();
     StartCoroutine(WaitForSceneLoad());}
     }

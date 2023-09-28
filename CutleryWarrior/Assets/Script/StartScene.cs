@@ -39,8 +39,8 @@ public class StartScene : MonoBehaviour
     if (StartGame)
     {
     Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
-    confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    confiner.m_BoundingVolume = bCStart;       
+    //confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    //confiner.m_BoundingVolume = bCStart;       
     AudioManager.instance.CrossFadeINAudio(WhatMusic);
     }  
     defaultRotation = transform.rotation;
@@ -79,6 +79,7 @@ public class StartScene : MonoBehaviour
     public void Spawn(int ID)
     {
     ContainerHero.transform.position = SpawnArr[ID].transform.position;
+    
     if(GameManager.instance.F_Unlock){FAct.transform.position = ContainerHero.transform.position;}
     if(GameManager.instance.K_Unlock){KAct.transform.position = ContainerHero.transform.position;}
     if(GameManager.instance.S_Unlock){SAct.transform.position = ContainerHero.transform.position;}
