@@ -91,7 +91,7 @@ public class SwitchCharacter : MonoBehaviour
     }
     public void ActiveCH()
     {
-        ForkActive.gameObject.SetActive(true);
+        if(GameManager.instance.F_Unlock){ForkActive.gameObject.SetActive(true);}
         if(GameManager.instance.K_Unlock){KnifeActive.gameObject.SetActive(true);}
         if(GameManager.instance.S_Unlock){SpoonActive.gameObject.SetActive(true);}
     }
@@ -100,7 +100,7 @@ public class SwitchCharacter : MonoBehaviour
     {// Switcha tra gli elementi
     if (isElement1Active)
     {
-        Ind_F.gameObject.SetActive(true); 
+        if(GameManager.instance.F_Unlock){Ind_F.gameObject.SetActive(true);} 
     }
     else if (isElement2Active)
     {   

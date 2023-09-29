@@ -14,7 +14,7 @@ using Cinemachine;
     [Header("Activate&Deactivate")]
     public bool isCutscene = false;
     public GameObject PointView; // Variabile per il player
-    public GameObject ActorFork;
+    /*public GameObject ActorFork;
     public bool F_isRight = false;
     private GameObject ForkActive;
     public GameObject ActorSpoon;
@@ -22,7 +22,7 @@ using Cinemachine;
     private GameObject SpoonActive;
     public GameObject ActorKnife;
     public bool K_isRight = false;
-    private GameObject KnifeActive;
+    private GameObject KnifeActive;*/
 
     public int ID;
     private CinemachineVirtualCamera virtualCamera; //riferimento alla virtual camera di Cinemachine
@@ -33,19 +33,30 @@ using Cinemachine;
     private void Awake()
     {
     virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    player = GameObject.FindWithTag("Player");
+    switch(GameManager.instance.CharacterID)
+        {
+            case 1:
+            player = GameObject.FindGameObjectWithTag("F_Player");
+            break;
+            case 2:
+            player = GameObject.FindGameObjectWithTag("K_Player");
+            break;
+            case 3:
+            player = GameObject.FindGameObjectWithTag("S_Player");
+            break;
+        }
     GameManager.instance.ChStop();
     if(isCutscene)
     {
     virtualCamera.Follow =  PointView.transform;
-    if(GameManager.instance.F_Unlock)
+    /*if(GameManager.instance.F_Unlock)
     {ForkActive = GameObject.Find("F_Player");ForkActive.transform.position = ActorFork.transform.position;}
     if(GameManager.instance.S_Unlock)
     {SpoonActive = GameObject.Find("S_Player");SpoonActive.transform.position = ActorSpoon.transform.position;}
     if(GameManager.instance.K_Unlock)
     {KnifeActive = GameObject.Find("K_Player");KnifeActive.transform.position = ActorKnife.transform.position;}
-    }
-    }
+    }*/
+    }}
 
     private void Update()
     {
@@ -64,26 +75,10 @@ public  void StartMusicG()
 
 public  void ResetCamera()
 {
-if(isCutscene)
-    {
-    virtualCamera.Follow =  ForkActive.transform;
-    if(GameManager.instance.F_Unlock)
-    {ForkActive = GameObject.Find("F_Player");ForkActive.transform.position = ActorFork.transform.position;
-    if(F_isRight){ForkActive.transform.localScale = new Vector3(1, 1,1);}
-    else if(!F_isRight){ForkActive.transform.localScale = new Vector3(-1, 1,1);}
-    }
-    if(GameManager.instance.S_Unlock)
-    {SpoonActive = GameObject.Find("S_Player");SpoonActive.transform.position = ActorSpoon.transform.position;
-    if(S_isRight){SpoonActive.transform.localScale = new Vector3(1, 1,1);}
-    else if(!S_isRight){SpoonActive.transform.localScale = new Vector3(-1, 1,1);}
-    }
-    if(GameManager.instance.K_Unlock)
-    {KnifeActive = GameObject.Find("K_Player");KnifeActive.transform.position = ActorKnife.transform.position;
-    if(K_isRight){KnifeActive.transform.localScale = new Vector3(1, 1,1);}
-    else if(!K_isRight){KnifeActive.transform.localScale = new Vector3(-1, 1,1);}
-    }
-    }
-    GameManager.instance.ChCanM();
+    virtualCamera.Follow =  player.transform;
+    GameManager.instance.StopWin();
+    GameManager.instance.ChCanM();  
+    GameManager.instance.ActiveMinimap(); 
     Destroy(this);
 }
 
@@ -108,7 +103,5 @@ public  void TimelineDontRepeat()
     {
         Triangle.SetActive(true);
         _director.playableGraph.GetRootPlayable(0).SetSpeed(0);
-    }
-
-    
+    }  
 }

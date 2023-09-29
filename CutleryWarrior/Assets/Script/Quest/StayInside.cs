@@ -10,7 +10,7 @@ public class StayInside : MonoBehaviour
 
 	private IEnumerator FindMinimap()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2f);
 		if(MinimapCam == null){MinimapCam = GameObject.FindGameObjectWithTag("Minimap").transform;}
 		Take = true;
     }

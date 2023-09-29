@@ -12,13 +12,7 @@ public class TouchPlayer : MonoBehaviour
     public GameObject[] DeactiveObj; 
     public GameObject This;
     
-    [Header("Unclock Character?")]
-    public bool UnCh = false;
-    public UnlockCharacter Uc;
-    //public string spawnPointTag = "SpawnPoint";
-    //private CinemachineVirtualCamera vCam;
-    //public bool camFollowPlayer = true;
-    private SceneEvent sceneEvent;
+    //private SceneEvent sceneEvent;
     //public string sceneName;
     //public string sceneReturn;
     public float stoppingDistance = 1f;
@@ -31,14 +25,14 @@ public class TouchPlayer : MonoBehaviour
     private SwitchCharacter Switch;
     public bool takeCoo = false;
     public bool isMove = true;
+    [Header("DirectionPlayer")]
+    public bool isRight = true;
     //public int IDAudio;
     public NPCMove Mnpc;
     #endregion
     public void Start()
     {
     if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
-    if (isMove) {sceneEvent = GetComponent<SceneEvent>();
-    sceneEvent.onSceneChange.AddListener(ChangeScene);}
     if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
     if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}
     if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}
@@ -57,12 +51,7 @@ public class TouchPlayer : MonoBehaviour
     if ((transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
     {savedPosition = Player.transform.position; GameManager.instance.savedPosition = savedPosition; takeCoo = false;}
     }
-    private void ChangeScene()
-    {   
-    //SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-    //SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode){SceneManager.sceneLoaded -= OnSceneLoaded;}
+    
     IEnumerator WaitForSceneLoad()
     {   
     GameManager.instance.ChStop();
@@ -73,15 +62,9 @@ public class TouchPlayer : MonoBehaviour
     yield return new WaitForSeconds(1f);
     GameManager.instance.StopAllarm();
     GameManager.instance.Posebattle();
-
     BattleObj.SetActive(true);
     foreach (GameObject arenaObject in DeactiveObj){arenaObject.SetActive(false);}
     //sceneEvent.InvokeOnSceneChange();
-    }
-    public void Flip()
-    {
-        if (Player.localScale.z > 0f){transform.localScale = new Vector3(-1, 1,1);}
-        else if (Player.localScale.z < 0f){transform.localScale = new Vector3(1, 1,1);}
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -95,8 +78,9 @@ public class TouchPlayer : MonoBehaviour
     
     public void Touch()
     {   if (isMove) {Mnpc.Behav = 0; Mnpc.isPaused = true;}
-        if (UnCh) {Uc.Unlock();}
         AudioManager.instance.CrossFadeOUTAudio(0);
+        if (isRight) {GameManager.instance.Right();}
+        else if (!isRight) {GameManager.instance.Left();}
         //GameManager.instance.sceneName = sceneReturn;
         GameManager.instance.IdAreaAtt = IdAreaAtt;
         //GameManager.instance.IDPorta = IDBattle;

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Cinemachine;
 using TMPro;
 using UnityEngine.AI;
+using System.Xml.Serialization;
 public class GameManager : MonoBehaviour
 {
     #region Header  
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject MP_F;
     [SerializeField] public GameObject MP_S;
     [SerializeField] public GameObject MP_K;
+    public int CharacterID;
     [Header("Fork")]
     private  int F_LV;
     private float F_HP;
@@ -182,12 +184,15 @@ public class GameManager : MonoBehaviour
         {
             case 1:
             player = GameObject.FindGameObjectWithTag("F_Player");
+            CharacterID = 1;
             break;
             case 2:
             player = GameObject.FindGameObjectWithTag("K_Player");
+            CharacterID = 2;
             break;
             case 3:
             player = GameObject.FindGameObjectWithTag("S_Player");
+            CharacterID = 3;
             break;
         }}
         public void Order()
@@ -209,7 +214,7 @@ public class GameManager : MonoBehaviour
         moneyTextM.text = money.ToString(); 
         if(!NotTouchOption){
     if(!battle){
-        Minimap.SetActive(true);
+        //Minimap.SetActive(true);
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();
@@ -273,7 +278,7 @@ public class GameManager : MonoBehaviour
         } 
     }
     else if(battle){
-        Minimap.SetActive(false);
+        //Minimap.SetActive(false);
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();
@@ -581,6 +586,9 @@ public class GameManager : MonoBehaviour
     }
     public void Change(){notChange = false;} 
     public void NotChange(){notChange = true;} 
+    public void ActiveMinimap(){Minimap.SetActive(true);GameManager.instance.battle = false;}
+    public void DectiveMinimap(){Minimap.SetActive(false);GameManager.instance.battle = true;}
+
     public void TakeCamera()
     {
         if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
@@ -589,7 +597,25 @@ public class GameManager : MonoBehaviour
         if(F_Unlock){ch_F.TakeCamera();}
         if(S_Unlock){ch_S.TakeCamera();}
         if(K_Unlock){ch_K.TakeCamera();}
-    }   
+    }  
+    public void Right()
+    {
+        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
+        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(F_Unlock){ch_F.RightD();}
+        if(S_Unlock){ch_S.RightD();}
+        if(K_Unlock){ch_K.RightD();}
+    } 
+    public void Left()
+    {
+        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
+        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(F_Unlock){ch_F.LeftD();}
+        if(S_Unlock){ch_S.LeftD();}
+        if(K_Unlock){ch_K.LeftD();}
+    } 
 
     public void RecalculateCharacter()
     {

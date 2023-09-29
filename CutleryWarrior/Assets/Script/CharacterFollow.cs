@@ -260,6 +260,7 @@ public class CharacterFollow : MonoBehaviour
         if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
         else if (Player.localScale.x < 0f){transform.localScale = new Vector3(-1, 1,1);}
     }
+    
     public void FixedUpdate()
     {if (isGrounded){characterRigidbody.velocity = Vector3.zero;}}
     

@@ -95,6 +95,9 @@ public class NPCMove : MonoBehaviour
         {
             isPaused = true;
             pauseTimer = 0f;
+
+            // Ruota il personaggio sull'asse locale X
+            transform.localScale = new Vector3(-1, 1,1);
         }
     }
     else if (currentWaypointIndex == waypoints.Length - 1)
@@ -108,10 +111,14 @@ public class NPCMove : MonoBehaviour
             isPaused = true;
             pauseTimer = 0f;
             // Incrementa l'indice del waypoint o torna al punto 0 se siamo all'ultimo
-            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;       
+            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+
+            // Ruota il personaggio sull'asse locale X
+            transform.localScale = new Vector3(1, 1,1);
         }
     }
 }
+
 
     private void PauseAtWaypoint()
     {

@@ -61,6 +61,7 @@ public class StartBattle : MonoBehaviour
         GameManager.instance.battle = true;
         GameManager.instance.ChStop();
         GameManager.instance.TakeCamera();
+        GameManager.instance.DectiveMinimap();
         if(GameManager.instance.F_Unlock)
         {F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>(); ForkHUD.SetActive(true);}
         else{ForkHUD.SetActive(false);}

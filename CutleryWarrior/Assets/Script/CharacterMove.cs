@@ -447,6 +447,8 @@ public void Awake()
         if (hor > 0f){transform.localScale = new Vector3(1, 1,1);}
         else if (hor < 0f){transform.localScale = new Vector3(-1, 1,1);}
     }   
+    public void RightD(){transform.localScale = new Vector3(1, 1,1);}
+    public void LeftD(){transform.localScale = new Vector3(-1, 1,1);}
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void OnCollisionEnter(Collision collision)
     {if (collision.gameObject.CompareTag("Collider")){StopRun = true;}

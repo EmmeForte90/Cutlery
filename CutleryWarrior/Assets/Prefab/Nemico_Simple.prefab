@@ -205,6 +205,7 @@ MonoBehaviour:
   - {fileID: 364748373795080892}
   - {fileID: 364748374469275532}
   - {fileID: 364748375067316403}
+  stoppingDistance: 1
   isPaused: 0
   Behav: 0
   Agro: {fileID: 364748373421439491}
@@ -423,13 +424,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdENM: 1
-  IDBattle: 90
+  IdAreaAtt: 0
+  BattleObj: {fileID: 0}
+  DeactiveObj: []
   This: {fileID: 364748374214596965}
-  sceneName: TestBattle
   stoppingDistance: 10
   savedPosition: {x: 0, y: 0, z: 0}
   ENM: {fileID: 364748373917811412}
   takeCoo: 0
+  isMove: 1
+  isRight: 1
   Mnpc: {fileID: 364748373917811422}
 --- !u!114 &364748374623600919
 MonoBehaviour:

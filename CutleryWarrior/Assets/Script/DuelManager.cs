@@ -1,11 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
+
 public class DuelManager : MonoBehaviour
 {
     //public LevelChanger LVCH;
-    public GameObject ThisBattle;
-
+    public GameObject ThisBattle;    
+       
     [Header("Arena")]
     public int EnemyinArena;
     private bool win = true;
@@ -18,7 +20,8 @@ public class DuelManager : MonoBehaviour
     private int ItemN; 
     private GameObject FAct;
     private GameObject KAct;
-    private GameObject SAct;    
+    private GameObject SAct;
+
     [Header("Fork")]
     public Scrollbar FhealthBar;
     public Image FRageBar;
@@ -55,9 +58,9 @@ public class DuelManager : MonoBehaviour
     public float duration = 5.0f;
     private float elapsedTime = 0.0f;
     private bool isDamaging = false;
-    [Header("ChangeScene")]
+    /*[Header("ChangeScene")]
     public SceneEvent sceneEvent;
-    public LevelChanger L_C;
+    public LevelChanger L_C;*/
 
     [Header("Pause")]
     public bool stopInput = false;
@@ -70,6 +73,17 @@ public class DuelManager : MonoBehaviour
     [Header("AnimationUI")]
     public Animator animator;
     public int CharacterID;
+    [Header("TimelineAfterBattle")]
+    public GameObject pointView; 
+    private CinemachineVirtualCamera virtualCamera; //riferimento alla virtual camera di Cinemachine
+    public bool F_isRight = false;    
+    public bool S_isRight = false;
+    public bool K_isRight = false;
+    public bool isTimeline = false;
+    public GameObject ActorSpoon;
+    public GameObject ActorKnife;
+    public GameObject ActorFork;
+
     public static DuelManager instance;
 public void Awake()
     {
@@ -291,12 +305,37 @@ IEnumerator EndBattle()
     AudioManager.instance.CrossFadeOUTAudio(1);
     yield return new WaitForSeconds(2f);
     foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);}
-    SwitchCharacter.instance.ActiveCH();
+    //SwitchCharacter.instance.ActiveCH();
     GameManager.instance.Exploration();
     GameManager.instance.Change();
     GameManager.instance.RecalculateCharacter();
-    SpawnB(ID_Enm);
+    if(isTimeline){ResetCamera();}
+    else if(!isTimeline){SpawnB(ID_Enm);}
     GameManager.instance.FadeOut();
+    }
+
+    public  void ResetCamera()
+    {
+    virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    virtualCamera.Follow =  pointView.transform;
+    if(GameManager.instance.F_Unlock)
+    {FAct.transform.position = ActorFork.transform.position;
+    if(F_isRight){FAct.transform.localScale = new Vector3(1, 1,1);}
+    else if(!F_isRight){FAct.transform.localScale = new Vector3(-1, 1,1);}
+    }
+    if(GameManager.instance.S_Unlock)
+    {SAct.transform.position = ActorSpoon.transform.position;
+    if(S_isRight){SAct.transform.localScale = new Vector3(1, 1,1);}
+    else if(!S_isRight){SAct.transform.localScale = new Vector3(-1, 1,1);}
+    }
+    if(GameManager.instance.K_Unlock)
+    {KAct.transform.position = ActorKnife.transform.position;
+    if(K_isRight){KAct.transform.localScale = new Vector3(1, 1,1);}
+    else if(!K_isRight){KAct.transform.localScale = new Vector3(-1, 1,1);}
+    ThisBattle.SetActive(false);
+    }
+    GameManager.instance.ChCanM();
+    Destroy(this);
     }
     public void SpawnB(int ID)
     {
@@ -307,6 +346,7 @@ IEnumerator EndBattle()
     foreach (GameObject arenaObject in Enemies){arenaObject.SetActive(false);}
     GameManager.instance.StopWin();
     GameManager.instance.ChCanM();
+    GameManager.instance.ActiveMinimap();
     ThisBattle.SetActive(false);
     }
     //public void EnemiesActive(int ID){Enemies[ID].SetActive(false);}
