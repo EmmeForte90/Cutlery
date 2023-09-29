@@ -23,7 +23,7 @@ MonoBehaviour:
   TypesE: 0
   weaponDamage: 0
   MpCost: 0
-  DefenceDress: 10
+  DefenceDress: 5
   HP: 0
   MP: 0
   Res_Poison: 0

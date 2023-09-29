@@ -25,6 +25,8 @@ TagManager:
   - Spell
   - Rage
   - Poison_P
+  - Undefined
+  - Stairs
   layers:
   - Default
   - TransparentFX

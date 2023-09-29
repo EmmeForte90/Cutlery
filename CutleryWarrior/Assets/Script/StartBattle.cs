@@ -5,7 +5,11 @@ using Cinemachine;
 public class StartBattle : MonoBehaviour
 {
     #region Header
+    [Header("Tutorial")]
     public bool isTutorial = false; 
+    public GameObject ActiveTutorial; 
+    [Header("Battle direction")]
+    public bool isRight = true; 
     public GameObject DuelManagerO; // Variabile per il player
     public GameObject Notte; 
     public Material newSkyboxMaterial_N;
@@ -16,8 +20,7 @@ public class StartBattle : MonoBehaviour
     private SwitchCharacter Switch;
     private CinemachineVirtualCamera vCam;
     private GameObject player;
-    [Header("Tutorial")]
-    public GameObject ActiveTutorial; 
+    
 
     [Header("Stats")]
     [Header("Fork")]
@@ -26,17 +29,21 @@ public class StartBattle : MonoBehaviour
     private CharacterMove F_Script;
     public GameObject F_point; // Variabile per il player
     private ChangeHeroSkin Skin_F;
+    [SerializeField] CharacterFollow ch_FAc;
+
     [Header("Spoon")]
     public GameObject SpoonHUD;
     private GameObject SpoonActive;
     private CharacterMove S_Script;
     public GameObject S_point; // Variabile per il player
+    [SerializeField] CharacterFollow ch_SAc;
     private ChangeHeroSkin Skin_S;
     [Header("Knife")]
     public GameObject KnifeHUD;
     private GameObject KnifeActive;
     private CharacterMove K_Script;
     public GameObject K_point; // Variabile per il player
+    [SerializeField] CharacterFollow ch_KAc;
     private ChangeHeroSkin Skin_K;
     [Header("Enemy")]
     //public SimpleEnemy E_Script;
@@ -96,13 +103,42 @@ public class StartBattle : MonoBehaviour
         if(GameManager.instance.K_Unlock){KnifeActive.transform.position = K_point.transform.position;}
         if(GameManager.instance.S_Unlock){SpoonActive.transform.position = S_point.transform.position;}
         ////////////////////////
+        if(GameManager.instance.S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        if(GameManager.instance.F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
+        if(GameManager.instance.K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
+        //
+        if(GameManager.instance.F_Unlock){ForkActive = GameObject.FindWithTag("F_Player");}
+        if(GameManager.instance.S_Unlock){SpoonActive = GameObject.FindWithTag("S_Player");}
+        if(GameManager.instance.K_Unlock){KnifeActive = GameObject.FindWithTag("K_Player");}
+        //
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage = 0;}       
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage = 0;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage = 0;}
+        if(isRight){
         if(GameManager.instance.F_Unlock){ForkActive.transform.localScale = new Vector3(1, 1,1);}
         if(GameManager.instance.S_Unlock){KnifeActive.transform.localScale = new Vector3(1, 1,1);}
         if(GameManager.instance.S_Unlock){SpoonActive.transform.localScale = new Vector3(1, 1,1);}
+        if(GameManager.instance.S_Unlock){ch_SAc.transform.localScale = new Vector3(1, 1,1);}
+        if(GameManager.instance.F_Unlock){ch_FAc.transform.localScale = new Vector3(1, 1,1);}
+        if(GameManager.instance.K_Unlock){ch_KAc.transform.localScale = new Vector3(1, 1,1);}
+        }
+        else if(!isRight){
+        if(GameManager.instance.F_Unlock){ForkActive.transform.localScale = new Vector3(-1, 1,1);}
+        if(GameManager.instance.S_Unlock){KnifeActive.transform.localScale = new Vector3(-1, 1,1);}
+        if(GameManager.instance.S_Unlock){SpoonActive.transform.localScale = new Vector3(-1, 1,1);}
+        if(GameManager.instance.S_Unlock){ch_SAc.transform.localScale = new Vector3(-1, 1,1);}
+        if(GameManager.instance.F_Unlock){ch_FAc.transform.localScale = new Vector3(-1, 1,1);}
+        if(GameManager.instance.K_Unlock){ch_KAc.transform.localScale = new Vector3(-1, 1,1);}
+        }
         ////////////////////////
         if(!isTutorial){StartCoroutine(DuringInter());}
-        else if(isTutorial){ActiveTutorial.SetActive(true); GameManager.instance.FadeOut();}
+        else if(isTutorial){StartCoroutine(StartTutorial());}
     }
+    IEnumerator StartTutorial()
+    {vCam.Follow = PointView.transform;
+    yield return new WaitForSeconds(2f);
+    ActiveTutorial.SetActive(true); 
+    GameManager.instance.FadeOut();}
     IEnumerator DuringInter()
     {
         GameManager.instance.FadeOut();

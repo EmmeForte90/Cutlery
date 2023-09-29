@@ -22,6 +22,7 @@ public class CharacterMove : MonoBehaviour
     private Rigidbody rb;  
     [Header("Move")]
     public float Speed = 1;
+    private float SpeedStair = 1.5f;
     public float SpeedB = 2;
     public float Run = 3;
     private Transform cam;
@@ -345,16 +346,48 @@ public void Awake()
     }
     #endregion
     public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false);}
-    public void FixedUpdate()
-    {if(!inputCTR)
-    {if(!Interact && !isRun || isDefence)
-    {rb.MovePosition(transform.position + moveDir * 0.1f * Speed);} 
-    else if(!Interact && isRun  && !isDefence)//!StopM && !isDefence)
-    {rb.MovePosition(transform.position + moveDir * 0.1f * Run);
-    }else if(!Interact && !isDefence)//!StopM && !isDefence)
-    {rb.MovePosition(transform.position + moveDir * 0.1f * SpeedB);}
-    if(poisonState){StartCoroutine(Poi());}
-    }}
+  public void FixedUpdate()
+{
+    if (!inputCTR)
+    {
+        if (!Interact && !isRun || isDefence)
+        {
+            rb.MovePosition(transform.position + moveDir * 0.1f * Speed);
+        }
+        else if (!Interact && isRun && !isDefence)
+        {
+            RaycastHit hit;
+            // Lancia un Raycast verso il basso per rilevare la superficie
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.0f))
+            {
+                // Controlla se il personaggio è sopra una superficie solida (ad esempio, una scala)
+                if (hit.collider.CompareTag("Stairs")) // Cambia "Stairs" con il tag corretto
+                {
+                    rb.MovePosition(transform.position + moveDir * 0.1f * SpeedStair);
+                }
+                else
+                {
+                    rb.MovePosition(transform.position + moveDir * 0.1f * Run);
+                }
+            }
+            else
+            {
+                rb.MovePosition(transform.position + moveDir * 0.1f * Run);
+            }
+        }
+        else if (!Interact && !isDefence)
+        {
+            rb.MovePosition(transform.position + moveDir * 0.1f * SpeedB);
+        }
+        if (poisonState)
+        {
+            StartCoroutine(Poi());
+        }
+    }
+}
+
+
+
     #region Move
     //For Knife
     /*public void Move()

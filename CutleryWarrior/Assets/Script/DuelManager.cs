@@ -98,6 +98,22 @@ public void Awake()
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage = 0;}       
         if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage = 0;}
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage = 0;}
+        /*if(isRight){
+        if(GameManager.instance.F_Unlock){FAct.transform.localScale = new Vector3(1, 1,1);}
+        if(GameManager.instance.S_Unlock){KAct.transform.localScale = new Vector3(1, 1,1);}
+        if(GameManager.instance.S_Unlock){SAct.transform.localScale = new Vector3(1, 1,1);}
+        if(GameManager.instance.S_Unlock){ch_SAc.transform.localScale = new Vector3(1, 1,1);}
+        if(GameManager.instance.F_Unlock){ch_FAc.transform.localScale = new Vector3(1, 1,1);}
+        if(GameManager.instance.K_Unlock){ch_KAc.transform.localScale = new Vector3(1, 1,1);}
+        }
+        else if(!isRight){
+        if(GameManager.instance.F_Unlock){FAct.transform.localScale = new Vector3(-1, 1,1);}
+        if(GameManager.instance.S_Unlock){KAct.transform.localScale = new Vector3(-1, 1,1);}
+        if(GameManager.instance.S_Unlock){SAct.transform.localScale = new Vector3(-1, 1,1);}
+        if(GameManager.instance.S_Unlock){ch_SAc.transform.localScale = new Vector3(-1, 1,1);}
+        if(GameManager.instance.F_Unlock){ch_FAc.transform.localScale = new Vector3(-1, 1,1);}
+        if(GameManager.instance.K_Unlock){ch_KAc.transform.localScale = new Vector3(-1, 1,1);}
+        }*/
          ID_Enm = GameManager.instance.IdENM;
         StartCoroutine(StartAI());    
     }
@@ -278,6 +294,7 @@ IEnumerator EndBattle()
     SwitchCharacter.instance.ActiveCH();
     GameManager.instance.Exploration();
     GameManager.instance.Change();
+    GameManager.instance.RecalculateCharacter();
     SpawnB(ID_Enm);
     GameManager.instance.FadeOut();
     }

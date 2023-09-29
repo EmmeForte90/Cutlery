@@ -50,9 +50,12 @@ public class ChangeArea : MonoBehaviour
         CharacterMove.instance.isRun = false;
         ModifyConfiner();
         GameManager.instance.player.transform.position = PointSpawn.transform.position;
-         if(GameManager.instance.K_Unlock){KAct.transform.position = PointSpawn.transform.position;}
-         if(GameManager.instance.F_Unlock){FAct.transform.position = PointSpawn.transform.position;}
-         if(GameManager.instance.S_Unlock){SAct.transform.position = PointSpawn.transform.position;}
+        if(GameManager.instance.F_Unlock){FAct = GameObject.FindWithTag("F_Player");}
+        if(GameManager.instance.S_Unlock){SAct = GameObject.FindWithTag("S_Player");}
+        if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}  
+        if(GameManager.instance.K_Unlock){KAct.transform.position = PointSpawn.transform.position;}
+        if(GameManager.instance.F_Unlock){FAct.transform.position = PointSpawn.transform.position;}
+        if(GameManager.instance.S_Unlock){SAct.transform.position = PointSpawn.transform.position;}
         yield return new WaitForSeconds(2f);
         GameManager.instance.ChCanM();
         GameManager.instance.FadeOut();

@@ -590,6 +590,14 @@ public class GameManager : MonoBehaviour
         if(S_Unlock){ch_S.TakeCamera();}
         if(K_Unlock){ch_K.TakeCamera();}
     }   
+
+    public void RecalculateCharacter()
+    {
+        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
+        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
+        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        if(F_Unlock){ch_FAc.RetakeCh();}if(S_Unlock){ch_SAc.RetakeCh();}if(K_Unlock){ch_KAc.RetakeCh();}
+    }
     public void ChMov()
     {
         if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}

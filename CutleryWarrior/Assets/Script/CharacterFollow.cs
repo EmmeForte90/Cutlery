@@ -79,8 +79,14 @@ public class CharacterFollow : MonoBehaviour
         characterRigidbody = GetComponent<Rigidbody>();
         Player = GameObject.FindGameObjectWithTag("F_Player").transform;
         if(GameManager.instance.F_Unlock){F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.K_Unlock){K_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.S_Unlock){S_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.K_Unlock){K_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.S_Unlock){S_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+    }
+    public void RetakeCh()
+    {
+        if(GameManager.instance.F_Unlock){F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.K_Unlock){K_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.S_Unlock){S_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
     }
     public void Update()
     {
