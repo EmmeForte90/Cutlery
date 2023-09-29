@@ -11,6 +11,10 @@ public class TouchPlayer : MonoBehaviour
     public GameObject BattleObj;
     public GameObject[] DeactiveObj; 
     public GameObject This;
+    
+    [Header("Unclock Character?")]
+    public bool UnCh = false;
+    public UnlockCharacter Uc;
     //public string spawnPointTag = "SpawnPoint";
     //private CinemachineVirtualCamera vCam;
     //public bool camFollowPlayer = true;
@@ -69,6 +73,7 @@ public class TouchPlayer : MonoBehaviour
     yield return new WaitForSeconds(1f);
     GameManager.instance.StopAllarm();
     GameManager.instance.Posebattle();
+
     BattleObj.SetActive(true);
     foreach (GameObject arenaObject in DeactiveObj){arenaObject.SetActive(false);}
     //sceneEvent.InvokeOnSceneChange();
@@ -90,6 +95,7 @@ public class TouchPlayer : MonoBehaviour
     
     public void Touch()
     {   if (isMove) {Mnpc.Behav = 0; Mnpc.isPaused = true;}
+        if (UnCh) {Uc.Unlock();}
         AudioManager.instance.CrossFadeOUTAudio(0);
         //GameManager.instance.sceneName = sceneReturn;
         GameManager.instance.IdAreaAtt = IdAreaAtt;

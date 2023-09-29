@@ -10,10 +10,13 @@ public class GameManager : MonoBehaviour
     public bool StartGame = false;    
     public GameObject player;
     public GameObject Fork;
+    public GameObject[] OrderFork;
     public  bool F_Unlock = true; 
     public GameObject Spoon;
+    public GameObject[] OrderSpoon;
     public  bool S_Unlock = false; 
     public GameObject Knife;
+    public GameObject[] OrderKnife;
     public  bool K_Unlock = false;
     public GameObject Minimap;
     public static bool GameManagerExist; 
@@ -153,19 +156,25 @@ public class GameManager : MonoBehaviour
         if (GameManagerExist){Destroy(gameObject);}
         else {GameManagerExist = true; DontDestroyOnLoad(gameObject);}
         TakeCharacter();
+        foreach (GameObject arenaObjectN in OrderFork){arenaObjectN.SetActive(false);}
+        foreach (GameObject arenaObjectN in OrderKnife){arenaObjectN.SetActive(false);}
+        foreach (GameObject arenaObjectN in OrderSpoon){arenaObjectN.SetActive(false);}
         /*if(StartGame)
         {AudioManager.instance.PlayMFX(0);}*/
         if(F_Unlock){
         PStats.F_curHP = PStats.F_HP;
-        PStats.F_curMP = PStats.F_MP;}
+        PStats.F_curMP = PStats.F_MP;
+        foreach (GameObject arenaObjectN in OrderFork){arenaObjectN.SetActive(true);}}
         //
         if(K_Unlock){
         PStats.K_curHP = PStats.K_HP;
-        PStats.K_curMP = PStats.K_MP;}
+        PStats.K_curMP = PStats.K_MP;
+        foreach (GameObject arenaObjectN in OrderKnife){arenaObjectN.SetActive(true);}}
         //
         if(S_Unlock){
         PStats.S_curHP = PStats.S_HP;
-        PStats.S_curMP = PStats.S_MP;}
+        PStats.S_curMP = PStats.S_MP;
+        foreach (GameObject arenaObjectN in OrderSpoon){arenaObjectN.SetActive(true);}}
     }
     public void TakeCharacter()
     {
@@ -181,6 +190,14 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("S_Player");
             break;
         }}
+        public void Order()
+    {
+        if(F_Unlock){foreach (GameObject arenaObjectN in OrderFork){arenaObjectN.SetActive(true);}}
+        //
+        if(K_Unlock){foreach (GameObject arenaObjectN in OrderKnife){arenaObjectN.SetActive(true);}}
+        //
+        if(S_Unlock){foreach (GameObject arenaObjectN in OrderSpoon){arenaObjectN.SetActive(true);}}
+    }
     public void Start(){Application.targetFrameRate = 60; Day = true;}
     public void Update()
     {
@@ -188,6 +205,7 @@ public class GameManager : MonoBehaviour
         StatPlayer();
         BarStat();
         TakeCharacter();
+        Order();
         moneyTextM.text = money.ToString(); 
         if(!NotTouchOption){
     if(!battle){
