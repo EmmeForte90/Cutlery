@@ -10,10 +10,16 @@ public class AnimationManager : MonoBehaviour
     public bool fork;
     public bool knife;
     public bool spoon;
+    public bool Enemy;
+
+    [Header("Impronte")]
     public bool canImp = false;
     public GameObject impronte;
     public Transform Foot;
     public GameObject Rage;
+    [Header("Vfx")]
+    public GameObject VfxEnmSlash;
+
     [Header("Fork")]
     private GameObject ForkActive;
     private CharacterMove F_Script;
@@ -147,6 +153,9 @@ public class AnimationManager : MonoBehaviour
     if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(0);}
     if (e.Data.Name == "impronte" && VFX){if(canImp){Instantiate(impronte, Foot.position, impronte.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_Rapid());}}
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    if (e.Data.Name == "atk"){AudioManager.instance.PlayUFX(0); Instantiate(BigSpell, BPoint.position, BigSpell.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
     if (e.Data.Name == "bigspell" && VFX)

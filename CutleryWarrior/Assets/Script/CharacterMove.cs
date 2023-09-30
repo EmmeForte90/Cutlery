@@ -81,7 +81,10 @@ public class CharacterMove : MonoBehaviour
     Vector3 camF,camR,moveDir;  
     [Header("Dodge and Knockback")]    
     private DodgeController DodgeController;
-    private KnockbackController knockbackController;
+    private KnockbackController knockbackController;       
+    [Header("VFX")]
+    public GameObject VFXDodge;
+    public GameObject VFXHhitShield;
     [Header("Attacks")]
     private bool isAttacking = false;
     public float comboTimer = 0.5f; // Tempo di attesa tra le combo
@@ -203,7 +206,7 @@ public void Awake()
     //DODGE
         // Rileva l'input del tasto spazio
         if (Input.GetMouseButtonDown(1) && canDodge)
-        {DodgeF();}
+        {DodgeF();Instantiate(VFXDodge, transform.position, transform.rotation);}
     
     //Attack
         if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.F_curMP > 20)
@@ -220,7 +223,6 @@ public void Awake()
     private void DodgeF()
     {
         Vector3 DodgeDirection = transform.position;
-        //Anm.PlayAnimation(DodgeFAnimationName);
         PlayComboAnimation("Battle/dodge_front");
         DodgeController.ApplyDodge(DodgeDirection);
         canDodge = false;
@@ -239,28 +241,18 @@ public void Awake()
     public void KnifeB()
     {
         MoveB();
-        //DODGE
+        //SpecialeKnife
         if (Input.GetMouseButtonDown(1) && canDodge)
-        {DodgeK();}
+        {
+        //AttaccoPotente
+        }
         
     //Attack
         if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.K_curMP > 20)
         {HandleComboAttackK(); PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;} 
         else {AudioManager.instance.PlayUFX(10);}
     }
-    
-
-    private void DodgeK()
-    {
-        Vector3 DodgeDirection = transform.position;
-        //Anm.PlayAnimation(DodgeFAnimationName);
-        PlayComboAnimation("Battle/dodge_front");
-        DodgeController.ApplyDodge(DodgeDirection);
-        canDodge = false;
-        StartCoroutine(DodgeCooldown());
-    }
-
-    
+       
     private void HandleComboAttackK()
     {
         comboCount = (comboCount % 3) + 1;
@@ -337,13 +329,17 @@ public void Awake()
         switch (kindCh)
         {
             case 0:
-            PlayerStats.instance.F_curHP -= danno_subito;
+            if(!canDodge){PlayerStats.instance.F_curHP -= danno_subito;}
             break;
             case 1:
             PlayerStats.instance.K_curHP -= danno_subito;
             break; 
             case 2:
-            PlayerStats.instance.S_curHP -= danno_subito;
+            if(!isDefence){PlayerStats.instance.S_curHP -= danno_subito;}
+            else if(isDefence){
+                PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
+                Instantiate(VFXHhitShield, transform.position, transform.rotation);
+            }
             break;
         }
     AudioManager.instance.PlaySFX(8);
@@ -375,35 +371,6 @@ public void Awake()
   
     #region Move
     //For Knife
-    /*public void Move()
-    {if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
-        Flip();  
-        ////////////////////////////////
-        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        input = Vector2.ClampMagnitude(input, 1);
-        
-        if(Input.GetButton("Fire3")){isRun = true;} 
-        if (Input.GetButtonUp("Fire3")){isRun = false;}
-        
-        camF = cam.forward;
-        camR = cam.right;
-        camF.y = 0;
-        camR.y = 0;
-        camF = camF.normalized;
-        camR = camR.normalized;  
-        moveDir = camR * input.x + camF * input.y;
-        
-        if (moveDir.magnitude > 0)
-        {
-        if (!isRun && !isDefence){Anm.PlayAnimationLoop(WalkBAnimationName); stand = false;}
-        else if(!isRun && isDefence){Anm.PlayAnimationLoop(GuardWalkAnimationName); stand = false;} 
-        if (isRun && !isDefence){Anm.PlayAnimationLoop(RunBAnimationName); stand = false;}
-        else if(isRun && isDefence){Anm.PlayAnimationLoop(GuardRunAnimationName); stand = false;} 
-        }
-        else if(!isDefence){Anm.PlayAnimationLoop(IdleBAnimationName); stand = true;}
-        else if(isDefence){Anm.PlayAnimationLoop(GuardAnimationName); stand = true;}
-        hor = Input.GetAxisRaw("Horizontal");}
-*/
         public void MoveB()
         {if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
         Flip();  

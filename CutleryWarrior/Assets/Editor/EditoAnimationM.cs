@@ -41,8 +41,6 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("SawTrain"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Stalactites"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Whirlwinds"));
-            
-
             // Add other fields as needed
         }
         if (myScript.spoon)
@@ -57,6 +55,11 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Revive"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Reflect"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("ShiledI"));
+            // Add other fields as needed
+        }
+        if (myScript.Enemy)
+        {
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("VfxEnmSlash"));
             // Add other fields as needed
         }
         // Apply changes to serialized object

@@ -4,7 +4,7 @@ using Spine.Unity;
 using UnityEngine.UI;
 public class SimpleEnemy : MonoBehaviour
 {
-     public int ID;
+     //public int ID;
     [Header("Change Script")]
     public SimpleEnemy This;
     public DeathAnimation DeathANM;
@@ -36,7 +36,6 @@ public class SimpleEnemy : MonoBehaviour
     [Header("Move")]
     public float moveSpeed = 3f;
     public float attackRange = 1.5f;
-    public int attackDamage = 20;
     public int defense = 2;
     public int attackPauseDuration = 1;
     private bool isAttacking = false;   
