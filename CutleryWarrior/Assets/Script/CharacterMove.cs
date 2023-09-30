@@ -21,10 +21,9 @@ public class CharacterMove : MonoBehaviour
     public Transform BPoint;
     private Rigidbody rb;  
     [Header("Move")]
-    public float Speed = 1;
-    private float SpeedStair = 1.5f;
-    public float SpeedB = 2;
-    public float Run = 3;
+    public float Speed = 5.0f;
+    public float SpeedB = 3.0f;
+    public float Run = 3.0f;
     private Transform cam;
     Vector2 input;
     public Transform SpriteHero;
@@ -48,6 +47,7 @@ public class CharacterMove : MonoBehaviour
     private bool poisonState = false;
     private int TimePoison = 5;   
     private bool Right = true; 
+    public bool isMoving;
    
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string WalkAnimationName;
@@ -88,6 +88,8 @@ public class CharacterMove : MonoBehaviour
     public float DodgeSTimer = 0.5f; // Tempo di attesa tra le combo
     private float lastAttackTime = 0f;
     private float DodgeTime = 0f;
+    private CharacterController characterController; // Riferimento al CharacterController
+    public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
     public static CharacterMove instance;
 public void Awake()
     {
@@ -102,6 +104,7 @@ public void Awake()
         knockbackController = GetComponent<KnockbackController>();
         DodgeController = GetComponent<DodgeController>();
         rb = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
         rb.freezeRotation = true;
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
     }
@@ -117,8 +120,8 @@ public void Awake()
         //
         if(!inputCTR)
         {
-        if(!StopRun){if(Run >= 3 || Run <= 3){Run = 3;}}
-        else if(StopRun){if(Run >= 3 || Run <= 3){Run = 1;}}
+        /*if(!StopRun){if(Run >= 8 || Run <= 8){Run = 8;}}
+        else if(StopRun){if(Run >= 8 || Run <= 8){Run = 5;}}*/
         switch(IDAction){
         case 0:  
         ////////////////////////////////////////
@@ -126,8 +129,8 @@ public void Awake()
         break;
         ////////////////////////////////////////
         case 1: 
-        if(!StopRun){if(Run >= 3 || Run <= 3){Run = 3;}}
-        else if(StopRun){if(Run >= 3 || Run <= 3){Run = 1;}}
+        /*if(!StopRun){if(Run >= 8 || Run <= 8){Run = 8;}}
+        else if(StopRun){if(Run >= 8 || Run <= 8){Run = 5;}}*/
         switch (kindCh)
         {
             case 0:
@@ -153,25 +156,46 @@ public void Awake()
         {if(!warning)
         {if(!Win)
         {
-        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        input = Vector2.ClampMagnitude(input, 1); 
+        //
+        /*camF = cam.forward;camR = cam.right;camF.y = 0;camR.y = 0;
+        camF = camF.normalized;camR = camR.normalized;  
+        moveDir = camR * input.x + camF * input.y;*/
+        //
+        // Calcola la direzione del movimento in base agli input dell'utente
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 moveDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
         if(Input.GetButton("Fire3")){isRun = true; GameManager.instance.isRun = true;} 
         if (Input.GetButtonUp("Fire3")){isRun = false; GameManager.instance.isRun = false;} 
-        //
-        camF = cam.forward;camR = cam.right;camF.y = 0;camR.y = 0;
-        camF = camF.normalized;camR = camR.normalized;  
-        moveDir = camR * input.x + camF * input.y;
-        //
-        if (moveDir.magnitude > 0)
+        // Gestisci la gravità
+        if (!characterController.isGrounded)
         {
-        if (!isRun){Anm.PlayAnimationLoop(WalkAnimationName); stand = false;} 
-        else if (isRun){Anm.PlayAnimationLoop(RunAnimationName); stand = false;}
+            // Applica la gravità personalizzata se necessario
+            Vector3 gravityVector = new Vector3(0, -gravity, 0);
+            characterController.Move(gravityVector * Time.deltaTime);
         }
-        else{Anm.PlayAnimationLoop(IdleAnimationName); stand = true;}
-        hor = Input.GetAxisRaw("Horizontal");      
+        if (!inputCTR)
+        {
+        // Trasforma la direzione del movimento in base alla rotazione del personaggio
+        moveDirection = transform.TransformDirection(moveDirection);
+        //
+        if (!Interact && !isRun && isMoving)//Sta camminando
+        {Anm.PlayAnimationLoop(WalkAnimationName); stand = false; 
+        characterController.Move(moveDirection * Speed * Time.deltaTime);
+        } 
+        else if (!Interact && isRun && isMoving)//Sta correndo
+        {Anm.PlayAnimationLoop(RunAnimationName); stand = false; 
+        characterController.Move(moveDirection * Run * Time.deltaTime);
+        }
+        else if (!Interact && !isRun && !isMoving)//Sta fermo
+        {Anm.PlayAnimationLoop(IdleAnimationName); stand = true;}
+        hor = Input.GetAxisRaw("Horizontal");  
+        isMoving = Mathf.Abs(hor) > 0.0f || Mathf.Abs(verticalInput) > 0.0f;
+        }
         }
     }}}
 #endregion
+
 #region Fork
     public void ForkB()
     {
@@ -277,6 +301,8 @@ public void Awake()
 
     private void PlayComboAnimation(string animationName)
     {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, false);}}
+    private void PlayDodgeAnimation(string animationName)
+    {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, true);}}
     private IEnumerator ComboCooldown()
     {
         yield return new WaitForSeconds(comboCooldown);
@@ -285,7 +311,7 @@ public void Awake()
     private IEnumerator DodgeCooldown()
     {
         yield return new WaitForSeconds(dodgeCooldown);
-        PlayComboAnimation("Battle/walk_battle");
+        PlayDodgeAnimation("Battle/run_battle");
         canDodge = true;
     }
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
@@ -346,48 +372,7 @@ public void Awake()
     }
     #endregion
     public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false);}
-  public void FixedUpdate()
-{
-    if (!inputCTR)
-    {
-        if (!Interact && !isRun || isDefence)
-        {
-            rb.MovePosition(transform.position + moveDir * 0.1f * Speed);
-        }
-        else if (!Interact && isRun && !isDefence)
-        {
-            RaycastHit hit;
-            // Lancia un Raycast verso il basso per rilevare la superficie
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.0f))
-            {
-                // Controlla se il personaggio è sopra una superficie solida (ad esempio, una scala)
-                if (hit.collider.CompareTag("Stairs")) // Cambia "Stairs" con il tag corretto
-                {
-                    rb.MovePosition(transform.position + moveDir * 0.1f * SpeedStair);
-                }
-                else
-                {
-                    rb.MovePosition(transform.position + moveDir * 0.1f * Run);
-                }
-            }
-            else
-            {
-                rb.MovePosition(transform.position + moveDir * 0.1f * Run);
-            }
-        }
-        else if (!Interact && !isDefence)
-        {
-            rb.MovePosition(transform.position + moveDir * 0.1f * SpeedB);
-        }
-        if (poisonState)
-        {
-            StartCoroutine(Poi());
-        }
-    }
-}
-
-
-
+  
     #region Move
     //For Knife
     /*public void Move()
@@ -420,26 +405,39 @@ public void Awake()
         hor = Input.GetAxisRaw("Horizontal");}
 */
         public void MoveB()
-    {if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
+        {if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
         Flip();  
         ////////////////////////////////
-        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        input = Vector2.ClampMagnitude(input, 1);
-        
-        camF = cam.forward;
-        camR = cam.right;
-        camF.y = 0;
-        camR.y = 0;
-        camF = camF.normalized;
-        camR = camR.normalized;  
-        moveDir = camR * input.x + camF * input.y;
-        
-        if(moveDir.magnitude > 0 && !isDefence)
-        {Anm.PlayAnimationLoop(RunBAnimationName);  isRun = true;}
-        else if(moveDir.magnitude > 0 && isDefence){Anm.PlayAnimationLoop(GuardRunAnimationName); isRun = false;}
-        else if(!isDefence){Anm.PlayAnimationLoop(IdleBAnimationName); stand = true; isRun = false;}
-        else if(isDefence){Anm.PlayAnimationLoop(GuardAnimationName); stand = true; isRun = false;}
-        hor = Input.GetAxisRaw("Horizontal");}
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 moveDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
+        // Gestisci la gravità
+        if (!characterController.isGrounded)
+        {
+            // Applica la gravità personalizzata se necessario
+            Vector3 gravityVector = new Vector3(0, -gravity, 0);
+            characterController.Move(gravityVector * Time.deltaTime);
+        }
+        if (!inputCTR)
+        {
+        // Trasforma la direzione del movimento in base alla rotazione del personaggio
+        moveDirection = transform.TransformDirection(moveDirection);
+        //
+        if (isDefence && !isMoving)
+        {Anm.PlayAnimationLoop(GuardAnimationName); stand = false;} 
+        else if (!isDefence && isMoving)
+        {Anm.PlayAnimationLoop(RunBAnimationName); stand = false; 
+        characterController.Move(moveDirection * SpeedB * Time.deltaTime);}
+        else if (isDefence && isMoving)
+        {Anm.PlayAnimationLoop(GuardWalkAnimationName); stand = false; 
+        characterController.Move(moveDirection * Speed * Time.deltaTime);}
+        else if (!isDefence && !isMoving)
+        {Anm.PlayAnimationLoop(IdleBAnimationName); stand = true; isRun = false;}
+        hor = Input.GetAxisRaw("Horizontal");  
+        isMoving = (Mathf.Abs(hor) > 0.0f || Mathf.Abs(verticalInput) > 0.0f) && !isDefence;
+        if (poisonState){StartCoroutine(Poi());}     
+        }
+        }
 #endregion
     public void Stop(){rb.velocity = new Vector3(0f, 0f, 0f);}
     public void Flip()
