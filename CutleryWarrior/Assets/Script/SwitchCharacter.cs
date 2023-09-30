@@ -12,15 +12,15 @@ public class SwitchCharacter : MonoBehaviour
     [Header("Stats")]
     [Header("Fork")]
     public GameObject Ind_F;
-    private ManagerCharacter ForkActive;
+    public ManagerCharacter ForkActive;
     public bool isElement1Active = false;
     [Header("Knife")]
     public GameObject Ind_K;
-    private ManagerCharacter KnifeActive;
+    public ManagerCharacter KnifeActive;
     public bool isElement2Active = true;
     [Header("Spoon")]
     public GameObject Ind_S;
-    private ManagerCharacter SpoonActive;
+    public ManagerCharacter SpoonActive;
     public bool isElement3Active = false;
     public static SwitchCharacter instance;
     private CinemachineVirtualCamera vCam;
@@ -58,9 +58,9 @@ public class SwitchCharacter : MonoBehaviour
     }
      public void TakeCharacters()
     {
-        if(GameManager.instance.F_Unlock){ForkActive = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
-        if(GameManager.instance.S_Unlock){SpoonActive = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
-        if(GameManager.instance.K_Unlock){KnifeActive = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
+        //if(GameManager.instance.F_Unlock){ForkActive = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
+        //if(GameManager.instance.S_Unlock){SpoonActive = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
+        //if(GameManager.instance.K_Unlock){KnifeActive = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         //ottieni il riferimento alla virtual camera di Cinemachine
         //

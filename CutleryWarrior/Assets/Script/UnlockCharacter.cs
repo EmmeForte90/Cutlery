@@ -18,6 +18,7 @@ public class UnlockCharacter : MonoBehaviour
     {
     if(Spoon){GameManager.instance.SpoonUnlock(); 
     PlayerStats.instance.ResetStatS();
+    
     EquipM_S.instance.AddItem(Weapon, specificQuant);
     EquipM_S.instance.AddItem(Armor, specificQuant);} 
     else if(Knife)

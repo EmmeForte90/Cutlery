@@ -25,8 +25,8 @@ public class TouchPlayer : MonoBehaviour
     private SwitchCharacter Switch;
     public bool takeCoo = false;
     public bool isMove = true;
-    [Header("DirectionPlayer")]
-    public bool isRight = true;
+    /*[Header("DirectionPlayer")]
+    public bool isRight = true;*/
     //public int IDAudio;
     public NPCMove Mnpc;
     #endregion
@@ -44,6 +44,14 @@ public class TouchPlayer : MonoBehaviour
     if(Switch.isElement1Active){Player = Spoon;}
     else if(Switch.isElement2Active){Player = Fork;} 
     else if(Switch.isElement3Active){Player = Knife;} 
+    //
+    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    {if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
+    }
+    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
+    {if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}}
+    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    {if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}}
     //
     if(!takeCoo){
     if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance)
@@ -79,8 +87,8 @@ public class TouchPlayer : MonoBehaviour
     public void Touch()
     {   if (isMove) {Mnpc.Behav = 0; Mnpc.isPaused = true;}
         AudioManager.instance.CrossFadeOUTAudio(0);
-        if (isRight) {GameManager.instance.Right();}
-        else if (!isRight) {GameManager.instance.Left();}
+        //if (isRight) {GameManager.instance.Right();}
+        //else if (!isRight) {GameManager.instance.Left();}
         //GameManager.instance.sceneName = sceneReturn;
         GameManager.instance.IdAreaAtt = IdAreaAtt;
         //GameManager.instance.IDPorta = IDBattle;

@@ -27,6 +27,7 @@ TagManager:
   - Poison_P
   - Undefined
   - Stairs
+  - Scene
   layers:
   - Default
   - TransparentFX
