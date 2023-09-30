@@ -36,14 +36,21 @@ public class CharacterMove : MonoBehaviour
     private int comboCount = 0;
     private bool canAttack = true;
     public float comboCooldown = 0.3f; // Tempo di cooldown tra le combo in secondi
-    public float dodgeCooldown = 0.4f;
+    
+    private Vector3 moveDirection = Vector3.zero;
+    private bool isDodging = false;
+    [Header("Dodge")]
+
+    public float dodgeSpeed = 20.0f;
+    public float dodgeDuration = 1f;
+    public float cooldownTime = 0.5f;
     private bool canDodge = true;
+    public float stumpCooldown = 1f;
+    private bool Stump = true;
     public bool warning = false;
     private float hor;
     private float defense;
     private float danno_subito;
-    public GameObject VFXPoison;
-    public GameObject VFXHurt;
     private bool poisonState = false;
     private int TimePoison = 5;   
     private bool Right = true; 
@@ -68,6 +75,7 @@ public class CharacterMove : MonoBehaviour
     [SpineAnimation][SerializeField]  string GuardHitAnimationName;
     [SpineAnimation][SerializeField]  string DodgeFAnimationName;
     [SpineAnimation][SerializeField]  string DodgeBAnimationName;
+    [SpineAnimation][SerializeField]  string StumpAnimationName;
     [SpineAnimation][SerializeField]  string WinAnimationName;
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
@@ -85,6 +93,9 @@ public class CharacterMove : MonoBehaviour
     [Header("VFX")]
     public GameObject VFXDodge;
     public GameObject VFXHhitShield;
+    public GameObject VFXStump;
+    public GameObject VFXPoison;
+    public GameObject VFXHurt;
     [Header("Attacks")]
     private bool isAttacking = false;
     public float comboTimer = 0.5f; // Tempo di attesa tra le combo
@@ -206,8 +217,9 @@ public void Awake()
     //DODGE
         // Rileva l'input del tasto spazio
         if (Input.GetMouseButtonDown(1) && canDodge)
-        {DodgeF();Instantiate(VFXDodge, transform.position, transform.rotation);}
-    
+        {Dodge();}
+
+    if (isDodging){characterController.Move(moveDirection * Time.fixedDeltaTime);}
     //Attack
         if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.F_curMP > 20)
             {
@@ -220,14 +232,20 @@ public void Awake()
                 //lastAttackTime = Time.time;
             }else {AudioManager.instance.PlayUFX(10);}     
     }
-    private void DodgeF()
+    private void Dodge()
     {
-        Vector3 DodgeDirection = transform.position;
-        PlayComboAnimation("Battle/dodge_front");
-        DodgeController.ApplyDodge(DodgeDirection);
-        canDodge = false;
-        StartCoroutine(DodgeCooldown());
+        if (!isDodging)
+        {
+            isDodging = true;
+            canDodge = false;
+            if (hor > 0f){moveDirection = new Vector3(0f, 0f, dodgeSpeed);PlayComboAnimation(DodgeFAnimationName);}
+            else if (hor < 0f){moveDirection = new Vector3(0f, 0f, -dodgeSpeed);PlayComboAnimation(DodgeFAnimationName);}
+            Invoke("StopDodge", dodgeDuration);
+            Invoke("ResetDodgeCooldown", cooldownTime);
+        }
     }
+    private void StopDodge(){isDodging = false; moveDirection = Vector3.zero;}
+    private void ResetDodgeCooldown(){canDodge = true;}
     
     private void HandleComboAttackF()
     {
@@ -242,13 +260,11 @@ public void Awake()
     {
         MoveB();
         //SpecialeKnife
-        if (Input.GetMouseButtonDown(1) && canDodge)
-        {
-        //AttaccoPotente
-        }
+        if (Input.GetMouseButtonDown(1) && Stump)
+        {StumpK(); PlayerStats.instance.K_curMP -= 50;}
         
     //Attack
-        if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.K_curMP > 20)
+        if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.K_curMP > 20 && Stump)
         {HandleComboAttackK(); PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;} 
         else {AudioManager.instance.PlayUFX(10);}
     }
@@ -260,7 +276,18 @@ public void Awake()
         canAttack = false;
         StartCoroutine(ComboCooldown());
     }
+    private void StumpK()
+    {
+        Stump = false;
+        StartCoroutine(StumpKTime());
+    }
     
+    private IEnumerator StumpKTime()
+    {
+        yield return new WaitForSeconds(1);
+        Anm.PlayAnimationLoop(IdleBAnimationName);
+        Stump = true;
+    }  
 #endregion
 #region Spoon
     public void SpoonB()
@@ -300,12 +327,7 @@ public void Awake()
         yield return new WaitForSeconds(comboCooldown);
         canAttack = true;
     }
-    private IEnumerator DodgeCooldown()
-    {
-        yield return new WaitForSeconds(dodgeCooldown);
-        PlayDodgeAnimation("Battle/run_battle");
-        canDodge = true;
-    }
+    
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
@@ -329,23 +351,29 @@ public void Awake()
         switch (kindCh)
         {
             case 0:
-            if(!canDodge){PlayerStats.instance.F_curHP -= danno_subito;}
+            if(!canDodge)
+            {PlayerStats.instance.F_curHP -= danno_subito;
+            AudioManager.instance.PlaySFX(8);
+            Instantiate(VFXHurt, transform.position, transform.rotation);
+            Anm.TemporaryChangeColor(Color.red);
+            }
             break;
             case 1:
             PlayerStats.instance.K_curHP -= danno_subito;
             break; 
             case 2:
-            if(!isDefence){PlayerStats.instance.S_curHP -= danno_subito;}
-            else if(isDefence){
+            if(!isDefence)
+            {PlayerStats.instance.S_curHP -= danno_subito;
+            AudioManager.instance.PlaySFX(8);
+            Instantiate(VFXHurt, transform.position, transform.rotation);
+            Anm.TemporaryChangeColor(Color.red);
+            }else if(isDefence){
                 PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
                 Instantiate(VFXHhitShield, transform.position, transform.rotation);
             }
             break;
         }
-    AudioManager.instance.PlaySFX(8);
-    //Debug.Log("danno "+ danno_subito);
-    Instantiate(VFXHurt, transform.position, transform.rotation);
-    Anm.TemporaryChangeColor(Color.red);
+        //Debug.Log("danno "+ danno_subito);
     }
     #region Stato Veleno
     public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true); poisonState = true;} 
@@ -390,16 +418,18 @@ public void Awake()
         // Trasforma la direzione del movimento in base alla rotazione del personaggio
         moveDirection = transform.TransformDirection(moveDirection);
         //
-        if (isDefence && !isMoving)
+        if (isDefence && !isMoving && Stump)
         {Anm.PlayAnimationLoop(GuardAnimationName); stand = false;} 
-        else if (!isDefence && isMoving)
+        else if (!isDefence && isMoving && Stump)
         {Anm.PlayAnimationLoop(RunBAnimationName); stand = false; 
         characterController.Move(moveDirection * SpeedB * Time.deltaTime);}
-        else if (isDefence && isMoving)
+        else if (isDefence && isMoving && Stump)
         {Anm.PlayAnimationLoop(GuardWalkAnimationName); stand = false; 
         characterController.Move(moveDirection * Speed * Time.deltaTime);}
-        else if (!isDefence && !isMoving)
+        else if (!isDefence && !isMoving && Stump)
         {Anm.PlayAnimationLoop(IdleBAnimationName); stand = true;}
+        else if (!Stump)
+        {Anm.PlayAnimationLoop(StumpAnimationName); stand = true;}
         hor = Input.GetAxisRaw("Horizontal");  
         isMoving = (Mathf.Abs(hor) > 0.0f || Mathf.Abs(verticalInput) > 0.0f) && !isDefence;
         if (poisonState){StartCoroutine(Poi());}     
@@ -418,8 +448,8 @@ public void Awake()
     public void OnCollisionEnter(Collision collision)
     {if (collision.gameObject.CompareTag("Collider")){StopRun = true;}
     if (collision.gameObject.CompareTag("Question")){Attention = true;}
-    if (collision.gameObject.CompareTag("Scene"))
-    {transform.localScale = new Vector3(-1, 1,1);}
+    /*if (collision.gameObject.CompareTag("Scene"))
+    {transform.localScale = new Vector3(-1, 1,1);}*/
     }
 
     public void OnCollisionExit(Collision collision)

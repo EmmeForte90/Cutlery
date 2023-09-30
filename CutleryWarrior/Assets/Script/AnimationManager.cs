@@ -17,8 +17,8 @@ public class AnimationManager : MonoBehaviour
     public GameObject impronte;
     public Transform Foot;
     public GameObject Rage;
-    [Header("Vfx")]
-    public GameObject VfxEnmSlash;
+    [Header("Enemy")]
+    [HideInInspector] public GameObject VfxEnmSlash;
 
     [Header("Fork")]
     private GameObject ForkActive;
@@ -34,6 +34,7 @@ public class AnimationManager : MonoBehaviour
     [HideInInspector] public GameObject BenedictioFenix;
     [HideInInspector] public GameObject HellFlame;
     [HideInInspector] public GameObject Hole;
+    [HideInInspector] public GameObject Dodge;
     /////////////////////////////
     [Header("Spoon")]
     private GameObject SpoonActive;
@@ -52,6 +53,7 @@ public class AnimationManager : MonoBehaviour
     [Header("Knife")]
     private GameObject KnifeActive;
     private CharacterMove K_Script;
+    [HideInInspector] public GameObject Stump;
     [HideInInspector] public GameObject SlashV;
     [HideInInspector] public GameObject SlashH;
     [HideInInspector] public GameObject SlashB;
@@ -103,9 +105,11 @@ public class AnimationManager : MonoBehaviour
     IEnumerator StopVFX_K()
     {
         yield return new WaitForSeconds(1f);
+        if(knife){
         SlashV.gameObject.SetActive(false);
         SlashH.gameObject.SetActive(false);
-        SlashB.gameObject.SetActive(false);
+        SlashB.gameObject.SetActive(false);}
+        if(Enemy){VfxEnmSlash.gameObject.SetActive(false);}
     }
     IEnumerator StopVFX_Rage()
     {
@@ -116,6 +120,12 @@ public class AnimationManager : MonoBehaviour
     {
         //Boom = false;
         yield return new WaitForSeconds(5f);
+        VFX = true;
+    }
+    IEnumerator StopVFX_FNormal()
+    {
+        //Boom = false;
+        yield return new WaitForSeconds(2f);
         VFX = true;
     }
     IEnumerator StopVFX_Rapid()
@@ -153,11 +163,17 @@ public class AnimationManager : MonoBehaviour
     if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(0);}
     if (e.Data.Name == "impronte" && VFX){if(canImp){Instantiate(impronte, Foot.position, impronte.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_Rapid());}}
+    if (e.Data.Name == "stump" && VFX){Instantiate(Stump, Foot.position, Stump.transform.rotation);
+    VFX = false; StartCoroutine(StopVFX_FNormal());}
+     if (e.Data.Name == "dodge" && VFX){Instantiate(Dodge, Foot.position, Dodge.transform.rotation);
+    VFX = false; StartCoroutine(StopVFX_FNormal());}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    if (e.Data.Name == "atk"){AudioManager.instance.PlayUFX(0); Instantiate(BigSpell, BPoint.position, BigSpell.transform.rotation); 
-    VFX = false; StartCoroutine(StopVFX_F());}
+    if (e.Data.Name == "atk"){AudioManager.instance.PlayUFX(0); VfxEnmSlash.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
+    /*if (e.Data.Name == "shoot" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_Rapid());}*/
     if (e.Data.Name == "bigspell" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_0.Use(); Instantiate(BigSpell, BPoint.position, BigSpell.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}

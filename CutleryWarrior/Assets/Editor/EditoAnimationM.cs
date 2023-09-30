@@ -25,6 +25,7 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("BenedictioFenix"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("HellFlame"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Hole"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Dodge"));
 
             // Add other fields as needed
         }
@@ -40,7 +41,7 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("RainSwords"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("SawTrain"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Stalactites"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("Whirlwinds"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Stump"));
             // Add other fields as needed
         }
         if (myScript.spoon)

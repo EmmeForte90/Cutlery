@@ -10,6 +10,18 @@ public class movetest : MonoBehaviour
     public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
     private CharacterController characterController; // Riferimento al CharacterController
 
+    /// //////////////////////////// <summary>
+        /// ////////////////////////////
+        /// </summary>    
+        /// 
+    private Vector3 moveDirection = Vector3.zero;
+    private bool isDodging = false;
+    public float dodgeSpeed = 10.0f;
+    public float dodgeDuration = 0.5f;
+    public float cooldownTime = 2.0f;
+    private bool canDodge = true;
+        /// </summary>    
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -31,6 +43,11 @@ public class movetest : MonoBehaviour
         if(!isRun){characterController.Move(moveDirection * moveSpeed * Time.deltaTime);}
         else if(isRun){characterController.Move(moveDirection * runSpeed * Time.deltaTime);}
 
+        if (Input.GetMouseButtonDown(1) && canDodge)
+        {Dodge();}
+
+        if (isDodging){characterController.Move(moveDirection * Time.fixedDeltaTime);}
+
 
         // Gestisci la gravità
         if (!characterController.isGrounded)
@@ -40,4 +57,23 @@ public class movetest : MonoBehaviour
             characterController.Move(gravityVector * Time.deltaTime);
         }
     }
+
+    private void Dodge()
+    {
+        if (!isDodging)
+        {
+            isDodging = true;
+            canDodge = false;
+            moveDirection = transform.forward * dodgeSpeed;
+            Invoke("StopDodge", dodgeDuration);
+            Invoke("ResetDodgeCooldown", cooldownTime);
+        }
+    }
+    private void StopDodge()
+    {
+        isDodging = false;
+        moveDirection = Vector3.zero;
+    }private void ResetDodgeCooldown(){canDodge = true;}
+
+    
 }

@@ -141,6 +141,8 @@ public class SimpleEnemy : MonoBehaviour
         {if(!DieB){TakeDamage(PlayerStats.instance.F_attack);}} 
         else if (collision.gameObject.CompareTag("K_Coll"))
         {if(!DieB){TakeDamage(PlayerStats.instance.K_attack);}}
+        else if (collision.gameObject.CompareTag("K_Stump"))
+        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack + 50);}}
         else if (collision.gameObject.CompareTag("S_Coll"))
         {if(!DieB){TakeDamage(PlayerStats.instance.S_attack);}}
         else if (collision.gameObject.CompareTag("Spell"))

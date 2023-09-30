@@ -7,7 +7,7 @@ public class AtkEnm : MonoBehaviour
     private CharacterFollow ch_KAc;
     private CharacterMove S_Script;
     private CharacterFollow ch_SAc;
-    public int attackDamage = 20;
+    public int attackDamage = 5;
     public void Awake()
     {
         if(GameManager.instance.S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
