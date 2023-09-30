@@ -164,7 +164,7 @@ public class StartBattle : MonoBehaviour
             if(GameManager.instance.K_Unlock){player = GameObject.FindWithTag("K_Player");}  
             vCam.Follow = player.transform;
         }
-        //GameManager.instance.Change();
+        GameManager.instance.Change();
         GameManager.instance.ChCanM();
         Duel_Script.inputCTR = false;
     }
@@ -191,7 +191,7 @@ public class StartBattle : MonoBehaviour
             if(GameManager.instance.K_Unlock){player = GameObject.FindWithTag("K_Player");}  
             vCam.Follow = player.transform;
         }
-        //GameManager.instance.Change();
+        GameManager.instance.Change();
         GameManager.instance.ChCanM();
         Duel_Script.inputCTR = false;
     }

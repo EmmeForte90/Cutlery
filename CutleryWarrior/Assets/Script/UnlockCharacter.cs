@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UnlockCharacter : MonoBehaviour
 {
+    public GameObject This;
     public Item Weapon;
     public Item Armor;
     public int specificQuant;
@@ -18,7 +19,6 @@ public class UnlockCharacter : MonoBehaviour
     {
     if(Spoon){GameManager.instance.SpoonUnlock(); 
     PlayerStats.instance.ResetStatS();
-    
     EquipM_S.instance.AddItem(Weapon, specificQuant);
     EquipM_S.instance.AddItem(Armor, specificQuant);} 
     else if(Knife)
@@ -67,6 +67,9 @@ public class UnlockCharacter : MonoBehaviour
     //print("SwitchCharacter.instance.TakeCharacters");
     //Destroy(ThisObj);
     } 
+    //////////////////////////////////////////////////////////////////////////////////////
+    ///
+
     IEnumerator UnlockToFork()
     {yield return new WaitForSeconds(2f);
     if(Spoon){GameManager.instance.SpoonUnlock(); 
@@ -81,7 +84,8 @@ public class UnlockCharacter : MonoBehaviour
     else if(Fork){GameManager.instance.ForkUnlock();
     PlayerStats.instance.ResetStatF();
     EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);}}
+    EquipM_F.instance.AddItem(Armor, specificQuant);}
+     Destroy(This);}
 
     //////////////////////////////////////////////////////////////////////////////////////
     
@@ -99,7 +103,8 @@ public class UnlockCharacter : MonoBehaviour
     else if(Fork){GameManager.instance.ForkUnlock();
     PlayerStats.instance.ResetStatF();
     EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);}}
+    EquipM_F.instance.AddItem(Armor, specificQuant);}
+    Destroy(This);}
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -117,18 +122,14 @@ public class UnlockCharacter : MonoBehaviour
     else if(Fork){GameManager.instance.ForkUnlock();
     PlayerStats.instance.ResetStatF();
     EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);}}
+    EquipM_F.instance.AddItem(Armor, specificQuant);}
+    Destroy(This);}
 
     public void OnTriggerEnter(Collider other)
     {
-    if (other.CompareTag("F_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 1 && isTest)
-    {StartCoroutine(UnlockToFork());}
-    else if (other.CompareTag("K_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 2 && isTest)
-    {StartCoroutine(UnlockToKnife());}
-    else if (other.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3 && isTest)
-    {StartCoroutine(UnlockToSpoon());}
+    if (other.CompareTag("F_Player") && isTest && Fork){StartCoroutine(UnlockToFork());}
+    if (other.CompareTag("F_Player") && isTest && Knife){StartCoroutine(UnlockToKnife());}
+    if (other.CompareTag("F_Player") && isTest && Spoon){StartCoroutine(UnlockToSpoon());}
     SwitchCharacter.instance.TakeCharacters();
-    //print("SwitchCharacter.instance.TakeCharacters");
-    //Destroy(this);} 
     }
 }

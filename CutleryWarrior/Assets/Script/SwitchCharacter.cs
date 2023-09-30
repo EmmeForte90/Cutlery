@@ -8,7 +8,7 @@ using Cinemachine;
 public class SwitchCharacter : MonoBehaviour
 {
     #region Header
-    public bool battle = false;
+    //public bool battle = false;
     [Header("Stats")]
     [Header("Fork")]
     public GameObject Ind_F;

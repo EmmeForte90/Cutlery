@@ -32,7 +32,7 @@ public class AnimationManager : MonoBehaviour
     [Header("Spoon")]
     private GameObject SpoonActive;
     private CharacterMove S_Script;
-     [HideInInspector] public GameObject ShiledI;
+    [HideInInspector] public GameObject ShiledI;
     [HideInInspector] public GameObject BenedictionTower;
     [HideInInspector] public GameObject Cura;
     [HideInInspector] public GameObject ShockWave;
@@ -244,6 +244,6 @@ public class AnimationManager : MonoBehaviour
     {AudioManager.instance.PlayUFX(8); Instantiate(Rage, transform.position, Rage.transform.rotation); 
     VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "punch")
-    {AudioManager.instance.PlayUFX(8); ShiledI.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    {AudioManager.instance.PlayUFX(8); ShiledI.gameObject.SetActive(true);}
 }
 }

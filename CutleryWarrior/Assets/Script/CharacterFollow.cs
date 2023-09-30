@@ -23,6 +23,7 @@ public class CharacterFollow : MonoBehaviour
     private CharacterMove K_b;
     public bool inputCTR = false;
     public float AiSpeed = 3f;
+    public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
     public float followSpeed = 5f;
     public float RunSpeed = 6f;
     public float stoppingDistance = 1f;
@@ -38,7 +39,9 @@ public class CharacterFollow : MonoBehaviour
     public GameObject VFXPoison;
     public GameObject VFXHurt;
     private bool poisonState = false;
-    private int TimePoison = 5;       
+    private int TimePoison = 5;     
+    private CharacterController characterController;
+  
     [SpineAnimation][SerializeField]  string WalkAnimationName;    
     [SpineAnimation][SerializeField]  string RunAnimationName;
     [SpineAnimation][SerializeField]  string RunBAnimationName;    
@@ -76,6 +79,7 @@ public class CharacterFollow : MonoBehaviour
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
+        characterController = GetComponent<CharacterController>();
         characterRigidbody = GetComponent<Rigidbody>();
         Player = GameObject.FindGameObjectWithTag("F_Player").transform;
         if(GameManager.instance.F_Unlock){F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
@@ -131,31 +135,54 @@ public class CharacterFollow : MonoBehaviour
     #region MoveExploration
     public void SimpleMove()
     {
-    isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
-    if (!isFollowing){Anm.PlayAnimationLoop(IdleAnimationName); isWalking = false;}
-    if ((transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance){isFollowing = true;}
-    if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance){isFollowing = false;}
+    if (!characterController.isGrounded)
+        {
+            // Applica la gravità personalizzata se necessario
+            Vector3 gravityVector = new Vector3(0, -gravity, 0);
+            characterController.Move(gravityVector * Time.deltaTime);
+        }
 
-    if (isFollowing && (transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
-    {
-            // Calcola la direzione verso cui il personaggio deve muoversi
+        if (!isFollowing)
+        {
+            // Animate idle when not following
+            Anm.PlayAnimationLoop(IdleAnimationName);
+            isWalking = false;
+        }
+
+        float distanceToPlayer = Vector3.Distance(transform.position, Player.position);
+
+        if (distanceToPlayer > stoppingDistance)
+        {
+            isFollowing = true;
+        }
+        else
+        {
+            isFollowing = false;
+        }
+
+        if (isFollowing)
+        {
+            // Calculate the direction to move the character
             Vector3 direction = Player.position - transform.position;
             direction.y = 0f;
             direction.Normalize();
-            // Calcola la distanza dal giocatore
-            distance = Vector3.Distance(transform.position, Player.position);
-            
-            if (distance > stoppingDistance)
+
+            if (distanceToPlayer > stoppingDistance)
             {
                 if (!isWalking)
                 {
                     isWalking = true;
                     Anm.PlayAnimationLoop(GameManager.instance.isRun ? RunAnimationName : WalkAnimationName);
                 }
-                
-                // Muovi il personaggio verso il giocatore solo se la distanza supera la soglia di arresto
-                float speed = GameManager.instance.isRun ? RunSpeed : followSpeed;
-                characterRigidbody.MovePosition(transform.position + direction * speed * Time.deltaTime);
+
+                // Move the character towards the player only if the distance exceeds the stopping threshold
+                float speed = RunSpeed; // Use RunSpeed when running
+                if (!GameManager.instance.isRun)
+                {
+                    speed = followSpeed; // Use followSpeed when not running
+                }
+
+                characterController.Move(direction * speed * Time.deltaTime);
             }
             else
             {
@@ -164,11 +191,10 @@ public class CharacterFollow : MonoBehaviour
                     isWalking = false;
                     Anm.PlayAnimationLoop(IdleAnimationName);
                 }
-                
-                // Il personaggio è vicino al giocatore, smette di muoversi
+
+                // The character is close to the player, stop moving
                 isFollowing = false;
             }
-
         }
     }
     #endregion
@@ -261,8 +287,7 @@ public class CharacterFollow : MonoBehaviour
         else if (Player.localScale.x < 0f){transform.localScale = new Vector3(-1, 1,1);}
     }
     
-    public void FixedUpdate()
-    {if (isGrounded){characterRigidbody.velocity = Vector3.zero;}}
+    //dpublic void FixedUpdate(){if (isGrounded){characterRigidbody.velocity = Vector3.zero;}}
     
     #region Attack
     public void AttackEnm(){isGuard = false; if(!isAttacking){ChaseEnm();}}
@@ -276,29 +301,53 @@ public class CharacterFollow : MonoBehaviour
     switch(result)
     {
             case 0:
-            target = GameObject.Find("Spoon");
+            target = GameObject.Find("Enm_Spoon");
             break;
             case 1:
-            target = GameObject.Find("Fork");
+            target = GameObject.Find("Enm_Fork");
             break;
             case 2:
-            target = GameObject.Find("Knife");
+            target = GameObject.Find("Enm_Knife");
             break;
     } 
-    if(target == null)
-    {DefenceEnm();}
+    
     }
     private void ChaseEnm()
-    {if (target != null)
+{
+    if (target != null)
+    {
+        // Calcola la direzione verso il nemico
+        Vector3 directionToTarget = target.transform.position - transform.position;
+
+        // Controlla se il nemico si trova sopra o sotto il personaggio lungo l'asse Z
+        bool isEnemyAbove = directionToTarget.z > 0;
+
+        // Flippa il personaggio sull'asse X in base alla posizione relativa del nemico
+        if (isEnemyAbove && transform.position.z < target.transform.position.z)
         {
-            if(!isAttacking)
-            {transform.position = Vector3.MoveTowards(transform.position, target.transform.position, AiSpeed * Time.deltaTime);
-            Anm.PlayAnimationLoop(RunBAnimationName);}
-            if (Vector3.Distance(transform.position, target.transform.position) <= attackRange)
-            {StartAttack();}
-        }else if(target == null)
-    {DefenceEnm();}
+            // Il nemico è sopra e davanti al personaggio
+            transform.localScale = new Vector3(1, 1,1);
+        }
+        else if (!isEnemyAbove && transform.position.z > target.transform.position.z)
+        {
+            // Il nemico è sotto e davanti al personaggio
+            transform.localScale = new Vector3(-1, 1,1);
+        }
+
+        if (!isAttacking)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, AiSpeed * Time.deltaTime);
+            Anm.PlayAnimationLoop(RunBAnimationName);
+        }
+
+        if (Vector3.Distance(transform.position, target.transform.position) <= attackRange)
+        {
+            StartAttack();
+        }
     }
+    else if (target == null){order = 2;}
+}
+
     private void StartAttack()
     {
         isAttacking = true;

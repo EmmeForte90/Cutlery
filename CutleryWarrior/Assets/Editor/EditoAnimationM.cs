@@ -56,7 +56,7 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("HitStun"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Revive"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Reflect"));
-
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("ShiledI"));
             // Add other fields as needed
         }
         // Apply changes to serialized object

@@ -277,7 +277,7 @@ public void Awake()
     //DODGE
         // Rileva l'input del tasto spazio
         if (Input.GetMouseButtonDown(1) && PlayerStats.instance.S_curMP > 20)
-        {isDefence = true; Anm.PlayAnimationLoop(GuardAnimationName);}
+        {isDefence = true;}
 
         // Verifica se il tasto del mouse è stato rilasciato
         if (Input.GetMouseButtonUp(1)){isDefence = false;}
@@ -432,7 +432,7 @@ public void Awake()
         {Anm.PlayAnimationLoop(GuardWalkAnimationName); stand = false; 
         characterController.Move(moveDirection * Speed * Time.deltaTime);}
         else if (!isDefence && !isMoving)
-        {Anm.PlayAnimationLoop(IdleBAnimationName); stand = true; isRun = false;}
+        {Anm.PlayAnimationLoop(IdleBAnimationName); stand = true;}
         hor = Input.GetAxisRaw("Horizontal");  
         isMoving = (Mathf.Abs(hor) > 0.0f || Mathf.Abs(verticalInput) > 0.0f) && !isDefence;
         if (poisonState){StartCoroutine(Poi());}     
