@@ -19,6 +19,9 @@ public class NPCMove : MonoBehaviour
     public int Behav = 0; // Tempo di pausa in secondi quando raggiunge un punto
     public Transform Agro;
     public float agroDistance = 1f;
+    private CharacterController characterController;
+    public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
+
     private SwitchCharacter rotationSwitcher;
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string IdleAnimationName;
@@ -32,6 +35,7 @@ public class NPCMove : MonoBehaviour
     #endregion
     public void Start()
     {
+        characterController = GetComponent<CharacterController>();
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         rotationSwitcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
         ForkActive = GameObject.Find("F_Player");
@@ -45,7 +49,7 @@ public class NPCMove : MonoBehaviour
     }
     public void Update()
     {
-        PlayerTaking();
+        PlayerTaking(); Gravity();
         if ((transform.position - player.transform.position).sqrMagnitude > agroDistance * agroDistance)
         {Behav = 0;} 
         else if ((transform.position - player.transform.position).sqrMagnitude < agroDistance * agroDistance)
@@ -61,6 +65,15 @@ public class NPCMove : MonoBehaviour
             case 1:
             ChasePlayer(); Run(); FacePlayer();
             break;
+        }
+    }
+    private void Gravity()
+    {
+    if (!characterController.isGrounded)
+        {
+            // Applica la gravità personalizzata se necessario
+            Vector3 gravityVector = new Vector3(0, -gravity, 0);
+            characterController.Move(gravityVector * Time.deltaTime);
         }
     }
     private void ChasePlayer()

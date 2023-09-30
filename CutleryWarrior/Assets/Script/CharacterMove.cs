@@ -217,7 +217,7 @@ public void Awake()
     //DODGE
         // Rileva l'input del tasto spazio
         if (Input.GetMouseButtonDown(1) && canDodge)
-        {Dodge();}
+        {Dodge(); PlayerStats.instance.K_curMP -= 5;}
 
     if (isDodging){characterController.Move(moveDirection * Time.fixedDeltaTime);}
     //Attack

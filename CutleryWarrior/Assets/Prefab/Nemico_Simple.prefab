@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 364748373917811416}
   - component: {fileID: 364748373917811417}
   - component: {fileID: 364748373917811422}
+  - component: {fileID: 5026484103116899372}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Enemy
@@ -210,10 +211,29 @@ MonoBehaviour:
   Behav: 0
   Agro: {fileID: 364748373421439491}
   agroDistance: 26
+  gravity: 9.81
   IdleAnimationName: Explore/idle
   WalkAnimationName: Explore/walk
   RunAnimationName: Explore/run
   _skeletonAnimation: {fileID: 364748373917811417}
+--- !u!143 &5026484103116899372
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364748373917811413}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 6
+  m_Radius: 1.5
+  m_SlopeLimit: 100
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &364748373952434247
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +453,6 @@ MonoBehaviour:
   ENM: {fileID: 364748373917811412}
   takeCoo: 0
   isMove: 1
-  isRight: 1
   Mnpc: {fileID: 364748373917811422}
 --- !u!114 &364748374623600919
 MonoBehaviour:
