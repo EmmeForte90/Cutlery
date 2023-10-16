@@ -47,9 +47,9 @@ public class SceneBattle : MonoBehaviour
     //
     if(!takeCoo){
     if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance)
-    {savedPosition = Player.transform.position; GameManager.instance.savedPosition = savedPosition; takeCoo = true;}
+    {savedPosition = Player.transform.position; GameManager.instance.savedPosition = savedPosition; takeCoo = true;
     if(!isRight){Player.transform.localScale = new Vector3(-1, 1,1);}else if(isRight){Player.transform.localScale = new Vector3(1, 1,1);}
-
+    }
     }
     if ((transform.position - Player.transform.position).sqrMagnitude > stoppingDistance * stoppingDistance)
     {savedPosition = Player.transform.position; GameManager.instance.savedPosition = savedPosition; takeCoo = false;}
