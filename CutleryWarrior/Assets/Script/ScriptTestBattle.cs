@@ -87,6 +87,9 @@ public class ScriptTestBattle : MonoBehaviour
         if(GameManager.instance.F_Unlock){Stats.F_curHP =  Stats.F_HP;}
         if(GameManager.instance.S_Unlock){Stats.S_curHP =  Stats.K_HP;}
         if(GameManager.instance.K_Unlock){Stats.K_curHP =  Stats.S_HP;}
+        if(GameManager.instance.F_Unlock){Stats.F_curMP =  Stats.F_MP;}
+        if(GameManager.instance.S_Unlock){Stats.S_curMP =  Stats.K_MP;}
+        if(GameManager.instance.K_Unlock){Stats.K_curMP =  Stats.S_MP;}   
         if(GameManager.instance.K_Unlock){Stats.K_paralysisResistance = Stats.K_paralysisResistanceCont;}
         if(GameManager.instance.F_Unlock){Stats.F_paralysisResistance = Stats.F_paralysisResistanceCont;}
         if(GameManager.instance.S_Unlock){Stats.S_paralysisResistance = Stats.S_paralysisResistanceCont;}

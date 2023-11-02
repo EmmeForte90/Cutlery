@@ -174,6 +174,13 @@ public void Update()
         if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curMP >= PlayerStats.instance.S_MP)
         {PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;}
         //
+        if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curMP <= 0)
+        {PlayerStats.instance.F_curMP = 1;}
+        if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curMP <= 0)
+        {PlayerStats.instance.S_curMP = 1;}
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curMP <= 0)
+        {PlayerStats.instance.K_curMP = 1;}
+        //
         if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curRage >= PlayerStats.instance.K_Rage)
         {MaxRageK.SetActive(true);} 
         else if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curRage < PlayerStats.instance.K_Rage)

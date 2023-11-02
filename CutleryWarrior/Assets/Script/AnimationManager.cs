@@ -25,6 +25,7 @@ public class AnimationManager : MonoBehaviour
     private CharacterMove F_Script;
     [HideInInspector] public GameObject BulletP;
     [HideInInspector] public GameObject Bullet;
+    [HideInInspector] public GameObject BigSB;
     [HideInInspector] public GameObject BigSpell;
     [HideInInspector] public GameObject BigForks;
     [HideInInspector] public GameObject Flame;
@@ -39,7 +40,9 @@ public class AnimationManager : MonoBehaviour
     [Header("Spoon")]
     private GameObject SpoonActive;
     private CharacterMove S_Script;
-    [HideInInspector] public GameObject ShiledI;
+    [HideInInspector] public GameObject ShiledT;
+     [HideInInspector] public GameObject ShiledB; 
+     [HideInInspector] public GameObject Crush;
     [HideInInspector] public GameObject BenedictionTower;
     [HideInInspector] public GameObject Cura;
     [HideInInspector] public GameObject ShockWave;
@@ -84,7 +87,7 @@ public class AnimationManager : MonoBehaviour
     public Spine.Skeleton _skeleton;
     Spine.EventData eventData;
     //private bool Boom = false;
-    private bool VFX = true;
+    public bool VFX = true;
     public Transform SkillPoint;
     public Transform BPoint;
     public ChargeSkill CS;
@@ -108,7 +111,26 @@ public class AnimationManager : MonoBehaviour
         if(knife){
         SlashV.gameObject.SetActive(false);
         SlashH.gameObject.SetActive(false);
-        SlashB.gameObject.SetActive(false);}
+        SlashB.gameObject.SetActive(false);
+        
+        }
+        if(Enemy){VfxEnmSlash.gameObject.SetActive(false);}
+    }
+    IEnumerator StopVFX_S()
+    {
+        yield return new WaitForSeconds(1f);
+        if(spoon){
+        ShiledT.gameObject.SetActive(false);
+        ShiledB.gameObject.SetActive(false);
+        Crush.gameObject.SetActive(false);
+        }
+        if(Enemy){VfxEnmSlash.gameObject.SetActive(false);}
+    }
+    IEnumerator StopVFX_K2()
+    {
+        yield return new WaitForSeconds(2f);
+        if(knife){
+        BigSlash.gameObject.SetActive(false);}
         if(Enemy){VfxEnmSlash.gameObject.SetActive(false);}
     }
     IEnumerator StopVFX_Rage()
@@ -140,7 +162,7 @@ public class AnimationManager : MonoBehaviour
     public void PlayAnimation(string animationName)
     {
         if (currentAnimationName != animationName)
-        {_skeletonAnimation.state.SetAnimation(0, animationName, false);}
+        {_skeletonAnimation.state.SetAnimation(0, animationName, false); _spineAnimationState.Event += HandleEvent;}
         _skeletonAnimation.state.GetCurrent(0).Complete += OnAttackAnimationComplete;
     }
     public void PlayAnimationLoop(string animationName)
@@ -171,9 +193,12 @@ public class AnimationManager : MonoBehaviour
     if (e.Data.Name == "atk"){AudioManager.instance.PlayUFX(0); VfxEnmSlash.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
-    /*if (e.Data.Name == "shoot" && VFX)
+    if (e.Data.Name == "shoot" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
-    VFX = false; StartCoroutine(StopVFX_Rapid());}*/
+    VFX = false;}
+    if (e.Data.Name == "bigshoot" && VFX)
+    {AudioManager.instance.PlayUFX(8); Skill_0.Use(); Instantiate(BigSB, BPoint.position, BigSB.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_F());}
     if (e.Data.Name == "bigspell" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_0.Use(); Instantiate(BigSpell, BPoint.position, BigSpell.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
@@ -212,9 +237,11 @@ public class AnimationManager : MonoBehaviour
     {AudioManager.instance.PlayUFX(8); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "slashB")
     {AudioManager.instance.PlayUFX(8); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
-    if (e.Data.Name == "bigslash" && VFX)
+    if (e.Data.Name == "bigslash")
+    {AudioManager.instance.PlayUFX(8); BigSlash.gameObject.SetActive(true); StartCoroutine(StopVFX_K2());}
+    /*if (e.Data.Name == "bigslash" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_0.Use(); Instantiate(BigSlash, BPoint.position, BigSlash.transform.rotation); 
-    VFX = false; StartCoroutine(StopVFX_F());}
+    VFX = false; StartCoroutine(StopVFX_F());}*/
     if (e.Data.Name == "fury")
     {AudioManager.instance.PlayUFX(8); Skill_1.Use(); Instantiate(Fury, BPoint.position, Fury.transform.rotation); 
     VFX = false; StartCoroutine(StopVFX_F());}
@@ -241,6 +268,12 @@ public class AnimationManager : MonoBehaviour
     VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}//Rage.gameObject.SetActive(true); StartCoroutine(StopVFX_Rage());}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Spoon
+     if (e.Data.Name == "punch")
+    {AudioManager.instance.PlayUFX(8); ShiledT.gameObject.SetActive(true); StartCoroutine(StopVFX_S());}
+     if (e.Data.Name == "punch2")
+    {AudioManager.instance.PlayUFX(8); ShiledB.gameObject.SetActive(true); StartCoroutine(StopVFX_S());}
+     if (e.Data.Name == "crush")
+    {AudioManager.instance.PlayUFX(8); Crush.gameObject.SetActive(true); StartCoroutine(StopVFX_S());}
     if (e.Data.Name == "defence")
     {AudioManager.instance.PlayUFX(8); Skill_0.Use(); Instantiate(BenedictionTower, BPoint.position, BenedictionTower.transform.rotation);
     VFX = false; StartCoroutine(StopVFX_F());}
@@ -268,7 +301,5 @@ public class AnimationManager : MonoBehaviour
      if (e.Data.Name == "rageSpoon" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Rage, transform.position, Rage.transform.rotation); 
     VFX = false; CS.CamSkill(); StartCoroutine(StopVFX_F());}
-    if (e.Data.Name == "punch")
-    {AudioManager.instance.PlayUFX(8); ShiledI.gameObject.SetActive(true);}
 }
 }

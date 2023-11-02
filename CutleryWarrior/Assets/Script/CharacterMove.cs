@@ -38,7 +38,7 @@ public class CharacterMove : MonoBehaviour
     public float comboCooldown = 0.3f; // Tempo di cooldown tra le combo in secondi
     
     private Vector3 moveDirection = Vector3.zero;
-    private bool isDodging = false;
+    public bool isDodging = false;
     [Header("Dodge")]
 
     public float dodgeSpeed = 20.0f;
@@ -225,9 +225,10 @@ public void Awake()
             {
                 HandleComboAttackF();
                 Stop();
-                AudioManager.instance.PlayUFX(8);
-                AudioManager.instance.PlayUFX(0); 
-                Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
+                //AudioManager.instance.PlayUFX(8);
+                //AudioManager.instance.PlayUFX(0); 
+                //Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
+                AnimationManager.instance.VFX = true;
                 PlayerStats.instance.F_curMP -= PlayerStats.instance.F_CostMP;  
                 //lastAttackTime = Time.time;
             }else {AudioManager.instance.PlayUFX(10);}     
@@ -244,12 +245,12 @@ public void Awake()
             Invoke("ResetDodgeCooldown", cooldownTime);
         }
     }
-    private void StopDodge(){isDodging = false; moveDirection = Vector3.zero;}
+    private void StopDodge(){isDodging = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
     private void ResetDodgeCooldown(){canDodge = true;}
     
     private void HandleComboAttackF()
     {
-        comboCount = (comboCount % 2) + 1;
+        comboCount = (comboCount % 3) + 1;
         PlayComboAnimation("Battle/attack_" + comboCount.ToString());
         canAttack = false;
         StartCoroutine(ComboCooldown());
@@ -306,14 +307,17 @@ public void Awake()
     
     //Attack
        // Verifica se il tasto del mouse è stato premuto
-        if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > comboTimer 
-        && PlayerStats.instance.S_curMP > 20)
-            {
-                Stop();
-                Anm.PlayAnimation(Atk1AnimationName);
-                PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;  
-                lastAttackTime = Time.time;
-            } else {AudioManager.instance.PlayUFX(10);}
+         if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.S_curMP > 20 && Stump)
+        {HandleComboAttackS(); PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;} 
+        else {AudioManager.instance.PlayUFX(10);}
+    }
+
+    private void HandleComboAttackS()
+    {
+        comboCount = (comboCount % 3) + 1;
+        PlayComboAnimation("Battle/attack_" + comboCount.ToString());
+        canAttack = false;
+        StartCoroutine(ComboCooldown());
     }
     
 #endregion
@@ -430,8 +434,8 @@ public void Awake()
         {Anm.PlayAnimationLoop(IdleBAnimationName); stand = true;}
         else if (!Stump)
         {Anm.PlayAnimationLoop(StumpAnimationName); stand = true;}
-        hor = Input.GetAxisRaw("Horizontal");  
-        isMoving = (Mathf.Abs(hor) > 0.0f || Mathf.Abs(verticalInput) > 0.0f) && !isDefence;
+        if(!isDodging){hor = Input.GetAxisRaw("Horizontal"); 
+        isMoving = (Mathf.Abs(hor) > 0.0f || Mathf.Abs(verticalInput) > 0.0f) && !isDefence;}
         if (poisonState){StartCoroutine(Poi());}     
         }
         }

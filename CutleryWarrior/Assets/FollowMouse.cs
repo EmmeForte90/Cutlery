@@ -6,12 +6,23 @@ public class FollowMouse : MonoBehaviour
 {
     private float velocitaMovimento = 20f; // Velocità di movimento dell'oggetto.
     private Rigidbody rigidBody;
+    public bool isSkill = true;    
     public GameObject indicator;    
     [HideInInspector]public int Character;
     public ChargeSkill Fork;
+    public Transform T_F;
     public ChargeSkill Knife;
+    public Transform T_K;
     public ChargeSkill Spoon;
+    public Transform T_S;
+    public CharacterFollow AI_F;
+    public CharacterFollow AI_K;
+    public CharacterFollow AI_S;
+    public SwitchCharacter Sch;
     public GameObject ptPoint;
+    public GameObject FPoint;
+    public GameObject KPoint;
+    public GameObject SPoint;
 
     private CinemachineVirtualCamera vCam;
 
@@ -27,6 +38,7 @@ public class FollowMouse : MonoBehaviour
         vCam.Follow = indicator.transform;
         GameManager.instance.StopBattle();
     }
+    public void CharacterC(int Ch){Character = Ch;}
 
     void Update()
     {
@@ -48,9 +60,11 @@ public class FollowMouse : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            ptPoint.transform.position = transform.position;
             rigidBody.velocity = new Vector3(0f, 0f, 0f);
             GameManager.instance.CloseLittleM();
+            ///////////////////////////////////////////////
+            if(isSkill){
+            ptPoint.transform.position = transform.position;
             switch(Character)
             {
             case 0:
@@ -66,8 +80,22 @@ public class FollowMouse : MonoBehaviour
              vCam.Follow = Spoon.transform;}
             break;
             }
+            }
+            ///////////////////////////////////////////////
+            else if(!isSkill){
+            if(GameManager.instance.F_Unlock && Character == 0){AI_F.order = 3; FPoint.transform.position = transform.position;}
+            else
+            if(GameManager.instance.K_Unlock && Character == 1){AI_K.order = 3; KPoint.transform.position = transform.position;}
+            else
+            if(GameManager.instance.S_Unlock && Character == 2){AI_S.order = 3; SPoint.transform.position = transform.position;}
+            ///////////////////////////////////////////////
+            if(Sch.isElement1Active){vCam.Follow = T_S.transform;}
+            else
+            if(Sch.isElement2Active){vCam.Follow = T_F.transform;}
+            else
+            if(Sch.isElement3Active){vCam.Follow = T_K.transform;}
+            }
             indicator.SetActive(false);
+            }
         }
-
     }
-}

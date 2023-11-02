@@ -10,6 +10,9 @@ public class CharacterFollow : MonoBehaviour
     [Tooltip("Scegli personaggi 0.Fork 1.Knife 2.Spoon")]
     [Range(0, 2)]
     public int kindCh;
+    public GameObject Indicatore;
+    public GameObject StartP;
+    public Transform MoveP;
     public Transform Fork;
     public Transform Knife;
     public Transform Spoon;
@@ -27,6 +30,7 @@ public class CharacterFollow : MonoBehaviour
     public float followSpeed = 5f;
     public float RunSpeed = 6f;
     public float stoppingDistance = 1f;
+    public float  OrderDistance = 2f;
     public float groundCheckDistance = 0.2f;
     public LayerMask groundLayer;
     private Rigidbody characterRigidbody;
@@ -215,6 +219,7 @@ public class CharacterFollow : MonoBehaviour
             DefenceEnm();
             break;
             case 3:
+            MoveInPoint();
             break;
             case 4:
             break;
@@ -240,6 +245,7 @@ public class CharacterFollow : MonoBehaviour
             DefenceEnm();
             break;
             case 3:
+            MoveInPoint();
             break;
             case 4:
             break;
@@ -265,6 +271,7 @@ public class CharacterFollow : MonoBehaviour
             DefenceEnm();
             break;
             case 3:
+            MoveInPoint();
             break;
             case 4:
             break;
@@ -276,6 +283,7 @@ public class CharacterFollow : MonoBehaviour
     public void Ordini(int ord){order = ord;}
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
+
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
     public void Allarm(){Allarming = true;}   
     //public void PoseWin(){Win = true;}    
@@ -292,6 +300,9 @@ public class CharacterFollow : MonoBehaviour
     #region Attack
     public void AttackEnm(){isGuard = false; if(!isAttacking){ChaseEnm();}}
     public void AttackEnmF(){isGuard = false; if(!isAttacking){StartAttack();}}
+
+    private void PlayComboAnimation(string animationName)
+    {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, false);}}
     private void Choise()
     {
     // Genera un numero casuale tra 1 e 3
@@ -302,12 +313,15 @@ public class CharacterFollow : MonoBehaviour
     {
             case 0:
             target = GameObject.Find("Enm_Spoon");
+            if(target == null){Choise();}
             break;
             case 1:
             target = GameObject.Find("Enm_Fork");
+            if(target == null){Choise();}
             break;
             case 2:
             target = GameObject.Find("Enm_Knife");
+            if(target == null){Choise();}
             break;
     } 
     
@@ -347,13 +361,36 @@ public class CharacterFollow : MonoBehaviour
     }
     else if (target == null){order = 2;}
 }
+    public void PointStart()
+    {Indicatore.transform.position = StartP.transform.position;}
+    
+    public void MoveInPoint()
+    {
+    float distanceToTarget = Vector3.Distance(transform.position, MoveP.transform.position);
+    // Flippa il personaggio sull'asse X in base alla posizione relativa del nemico
+    if (transform.position.z < MoveP.transform.position.z){transform.localScale = new Vector3(1, 1,1);}
+    else if (transform.position.z > MoveP.transform.position.z){transform.localScale = new Vector3(-1, 1,1);}
+
+    if (distanceToTarget > OrderDistance)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, MoveP.transform.position, AiSpeed * Time.deltaTime);
+        Anm.PlayAnimationLoop(RunBAnimationName);
+    }
+    else if (distanceToTarget < OrderDistance)
+    {
+        // Quando il personaggio raggiunge il punto di destinazione, puoi fare qualcosa qui, ad esempio:
+        order = 0;
+        Anm.PlayAnimationLoop(IdleBAnimationName);
+    }
+    }
 
     private void StartAttack()
     {
         isAttacking = true;
-        Anm.PlayAnimation(Atk1AnimationName);
+        PlayComboAnimation(Atk1AnimationName);
         StartCoroutine(AttackPause());
     }
+
     private IEnumerator AttackPause()
     {        
         yield return new WaitForSeconds(attackPauseDuration);
@@ -432,6 +469,8 @@ private void OnDrawGizmos()
     //Gizmos.DrawLine(transform.position, transform.position + new Vector3(transform.localScale.x, 0, 0) * wallDistance);
     Gizmos.color = Color.blue;
     Gizmos.DrawWireSphere(transform.position, stoppingDistance);
+    Gizmos.color = Color.green;
+    Gizmos.DrawWireSphere(transform.position, OrderDistance);
     }
 #endregion
 #endif

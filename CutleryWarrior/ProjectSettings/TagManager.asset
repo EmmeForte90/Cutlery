@@ -29,6 +29,8 @@ TagManager:
   - Stairs
   - Scene
   - K_Stump
+  - F_Stump
+  - S_Stump
   layers:
   - Default
   - TransparentFX

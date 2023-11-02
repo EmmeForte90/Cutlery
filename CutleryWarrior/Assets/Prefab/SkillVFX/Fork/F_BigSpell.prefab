@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51e5d5c8a479c54ea0171d6989c8588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  damage: 30
+  speed: 40
+  damage: 50
   isSkill: 1
   itemInfo: {fileID: 11400000, guid: a6e87a1f7dbf99a4581819b8afdeb74e, type: 2}
   lifeTime: 2
@@ -123,6 +123,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2229810527413035249, guid: a897f2220dde73a41bde2ca1c261301e,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229810527413035249, guid: a897f2220dde73a41bde2ca1c261301e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229810527413035249, guid: a897f2220dde73a41bde2ca1c261301e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229810527413035249, guid: a897f2220dde73a41bde2ca1c261301e,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -170,6 +185,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229810527413035249, guid: a897f2220dde73a41bde2ca1c261301e,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2449059153173592631, guid: a897f2220dde73a41bde2ca1c261301e,
         type: 3}

@@ -26,8 +26,9 @@ public class AtkEnm : MonoBehaviour
     }
     public void ForkD()
     {
+        if(GameManager.instance.F_Unlock && F_Script.isDodging){
         if(GameManager.instance.F_Unlock){F_Script.TakeDamage(attackDamage);}
-        if(GameManager.instance.F_Unlock){ch_FAc.TakeDamage(attackDamage);}
+        if(GameManager.instance.F_Unlock){ch_FAc.TakeDamage(attackDamage);}}
     }
     public void KnifeD()
     {

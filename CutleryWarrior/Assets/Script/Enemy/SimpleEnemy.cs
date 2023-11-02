@@ -139,12 +139,16 @@ public class SimpleEnemy : MonoBehaviour
     {   
         if (collision.gameObject.CompareTag("F_Coll"))
         {if(!DieB){TakeDamage(PlayerStats.instance.F_attack);}} 
+        else if (collision.gameObject.CompareTag("F_Stump"))
+        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack + 10);}}
         else if (collision.gameObject.CompareTag("K_Coll"))
         {if(!DieB){TakeDamage(PlayerStats.instance.K_attack);}}
         else if (collision.gameObject.CompareTag("K_Stump"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack + 50);}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack + 10);}}
         else if (collision.gameObject.CompareTag("S_Coll"))
         {if(!DieB){TakeDamage(PlayerStats.instance.S_attack);}}
+         else if (collision.gameObject.CompareTag("S_Stump"))
+        {if(!DieB){TakeDamage(PlayerStats.instance.S_attack + 10);}}
         else if (collision.gameObject.CompareTag("Spell"))
         {if(!DieB){TakeDamage(PlayerStats.instance.F_attack + Bullet.instance.damage);}}
     }

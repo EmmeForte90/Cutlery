@@ -26,7 +26,7 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("HellFlame"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Hole"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Dodge"));
-
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("BigSB"));
             // Add other fields as needed
         }
         if (myScript.knife)
@@ -55,7 +55,10 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("HitStun"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Revive"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Reflect"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("ShiledI"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("ShiledB"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("ShiledT"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Crush"));
+
             // Add other fields as needed
         }
         if (myScript.Enemy)
