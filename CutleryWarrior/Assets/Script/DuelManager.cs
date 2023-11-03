@@ -313,6 +313,9 @@ IEnumerator EndBattle()
     yield return new WaitForSeconds(2f);
     foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);}
     //SwitchCharacter.instance.ActiveCH();
+    if(GameManager.instance.K_Unlock){ch_KAc.IDAction = 0;}
+    if(GameManager.instance.S_Unlock){ch_SAc.IDAction = 0;}
+    if(GameManager.instance.F_Unlock){ch_FAc.IDAction = 0;}
     GameManager.instance.Exploration();
     GameManager.instance.Change();
     GameManager.instance.RecalculateCharacter();

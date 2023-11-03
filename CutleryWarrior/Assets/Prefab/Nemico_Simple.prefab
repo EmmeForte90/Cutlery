@@ -211,6 +211,8 @@ MonoBehaviour:
   Behav: 0
   Agro: {fileID: 364748373421439491}
   agroDistance: 26
+  TouchO: {fileID: 364748374623600912}
+  TouchDistance: 1
   gravity: 9.81
   IdleAnimationName: Explore/idle
   WalkAnimationName: Explore/walk

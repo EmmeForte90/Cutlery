@@ -19,6 +19,8 @@ public class NPCMove : MonoBehaviour
     public int Behav = 0; // Tempo di pausa in secondi quando raggiunge un punto
     public Transform Agro;
     public float agroDistance = 1f;
+    public Transform TouchO;
+    public float TouchDistance = 1f;
     private CharacterController characterController;
     public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
 
@@ -65,6 +67,9 @@ public class NPCMove : MonoBehaviour
             case 1:
             ChasePlayer(); Run(); FacePlayer();
             break;
+            case 2:
+            FacePlayer(); Idle(); 
+            break;
         }
     }
     private void Gravity()
@@ -78,8 +83,12 @@ public class NPCMove : MonoBehaviour
     }
     private void ChasePlayer()
     {
-        if (player != null)
+        float distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
+        if (player != null && distanceToTarget > TouchDistance)
         {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, RunSpeed * Time.deltaTime);}
+        else if(player != null && distanceToTarget < TouchDistance)
+        {Behav = 2;}
+    
     }
     private void PlayerTaking()
     {
@@ -176,6 +185,8 @@ public class NPCMove : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(Agro.position, agroDistance);
+         Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(TouchO.position, TouchDistance);
     }
     #endregion
     #endif

@@ -381,6 +381,16 @@ public class CharacterFollow : MonoBehaviour
         // Quando il personaggio raggiunge il punto di destinazione, puoi fare qualcosa qui, ad esempio:
         order = 0;
         Anm.PlayAnimationLoop(IdleBAnimationName);
+        if (transform.position.z < target.transform.position.z)
+        {
+            // Il nemico è sopra e davanti al personaggio
+            transform.localScale = new Vector3(1, 1,1);
+        }
+        else if (transform.position.z > target.transform.position.z)
+        {
+            // Il nemico è sotto e davanti al personaggio
+            transform.localScale = new Vector3(-1, 1,1);
+        }
     }
     }
 
