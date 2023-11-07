@@ -27,6 +27,24 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Hole"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Dodge"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("BigSB"));
+            ////////////////////////////////////////////////////////////////////
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_0"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_1"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_2"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_3"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_4"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_5"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_6"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_7"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_8"));
+            ////////////////////////////////////////////////////////////////////
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("impronte"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Foot"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Rage"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("SkillPoint"));
+            //EditorGUILayout.PropertyField(serializedObject.FindProperty("BPoint"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("CS"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("canImp"));
             // Add other fields as needed
         }
         if (myScript.knife)
@@ -42,6 +60,24 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("SawTrain"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Stalactites"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Stump"));
+            ////////////////////////////////////////////////////////////////////
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_0"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_1"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_2"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_3"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_4"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_5"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_6"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_7"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_8"));
+            ////////////////////////////////////////////////////////////////////
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("impronte"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Foot"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Rage"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("SkillPoint"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("BPoint"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("CS"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("canImp"));
             // Add other fields as needed
         }
         if (myScript.spoon)
@@ -58,12 +94,30 @@ public class EditoAnimationM : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("ShiledB"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("ShiledT"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Crush"));
-
+            ////////////////////////////////////////////////////////////////////
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_0"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_1"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_2"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_3"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_4"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_5"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_6"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_7"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Skill_8"));
+            ////////////////////////////////////////////////////////////////////
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("impronte"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Foot"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Rage"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("SkillPoint"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("BPoint"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("CS"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("canImp"));
             // Add other fields as needed
         }
         if (myScript.Enemy)
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("VfxEnmSlash"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Bullet"));
             // Add other fields as needed
         }
         // Apply changes to serialized object

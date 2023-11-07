@@ -20,25 +20,36 @@ public class SaveManager : MonoBehaviour
 
     public void SaveGameData(PlayerStats data)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string savePath = Application.persistentDataPath + "/savegame.dat";
+        string savePath = Application.persistentDataPath + "/savegame.json";
+        string jsonData = JsonUtility.ToJson(data);
 
-        using (FileStream stream = new FileStream(savePath, FileMode.Create))
+        try
         {
-            formatter.Serialize(stream, data);
+            File.WriteAllText(savePath, jsonData);
+            Debug.Log("Game data saved.");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error saving game data: " + e.Message);
         }
     }
 
     public PlayerStats LoadGameData()
     {
-        string savePath = Application.persistentDataPath + "/savegame.dat";
+        string savePath = Application.persistentDataPath + "/savegame.json";
+        
         if (File.Exists(savePath))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-
-            using (FileStream stream = new FileStream(savePath, FileMode.Open))
+            try
             {
-                return formatter.Deserialize(stream) as PlayerStats;
+                string jsonData = File.ReadAllText(savePath);
+                PlayerStats data = JsonUtility.FromJson<PlayerStats>(jsonData);
+                return data;
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("Error loading game data: " + e.Message);
+                return null;
             }
         }
         else

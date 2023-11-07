@@ -11,7 +11,9 @@ public class ScriptTestBattle : MonoBehaviour
     private CharacterMove S_Script;
     private CharacterFollow ch_SAc;
     private SwitchCharacter Switch;
-    public SimpleEnemy[] Enm;
+    public ForkSemple[] EnmF;
+    public KnifeSample[] EnmK;
+    public SpoonSemple[] EnmS;
 
     public float DamageTest;
     public void Awake()
@@ -110,12 +112,13 @@ public class ScriptTestBattle : MonoBehaviour
 
     public void Win()
     {
-        Enm[0].currentHealth =  0;
-        Enm[1].currentHealth =  0;
-        Enm[2].currentHealth =  0;
-        Enm[0].Die();
-        Enm[1].Die();
-        Enm[2].Die();
+        EnmF[0].currentHealth =  0;
+        EnmS[0].currentHealth =  0;
+        EnmK[0].currentHealth =  0;
+
+        EnmF[0].Die();        
+        EnmS[0].Die();
+        EnmK[0].Die();
     }
     public void RageLess()
     {

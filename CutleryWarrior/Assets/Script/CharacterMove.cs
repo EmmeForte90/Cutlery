@@ -36,7 +36,9 @@ public class CharacterMove : MonoBehaviour
     private int comboCount = 0;
     private bool canAttack = true;
     public float comboCooldown = 0.3f; // Tempo di cooldown tra le combo in secondi
-    
+    private PlayerStats Stats;
+    public bool isCharging = false; // Flag per il colpo caricato
+
     private Vector3 moveDirection = Vector3.zero;
     public bool isDodging = false;
     [Header("Dodge")]
@@ -69,6 +71,8 @@ public class CharacterMove : MonoBehaviour
     [SpineAnimation][SerializeField]  string Atk2AnimationName;
     [SpineAnimation][SerializeField]  string Atk3AnimationName;
     [SpineAnimation][SerializeField]  string Atk4AnimationName;
+    [SpineAnimation][SerializeField]  string ChargeFAnimationName;
+    [SpineAnimation][SerializeField]  string ReleaseChargeFAnimationName;
     [SpineAnimation][SerializeField]  string GuardAnimationName;
     [SpineAnimation][SerializeField]  string GuardWalkAnimationName;
     [SpineAnimation][SerializeField]  string GuardRunAnimationName;
@@ -84,7 +88,7 @@ public class CharacterMove : MonoBehaviour
     Spine.EventData eventData;
     private SwitchCharacter Switch;
     private Transform Player;
-    private bool isDefence = false;
+    public bool isDefence = false;
     public AnimationManager Anm;
     Vector3 camF,camR,moveDir;  
     [Header("Dodge and Knockback")]    
@@ -121,6 +125,7 @@ public void Awake()
         characterController = GetComponent<CharacterController>();
         rb.freezeRotation = true;
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
+        Stats = GameObject.Find("Stats").GetComponent<PlayerStats>();
     }
    
     public void Update()
@@ -258,37 +263,65 @@ public void Awake()
 #endregion
 #region Knife
     public void KnifeB()
+{
+    if(!isCharging){MoveB();}
+    
+    // Inizia a caricare il colpo
+    if (Input.GetMouseButtonDown(1) && !isCharging)
     {
-        MoveB();
-        //SpecialeKnife
-        if (Input.GetMouseButtonDown(1) && Stump)
-        {StumpK(); PlayerStats.instance.K_curMP -= 50;}
-        
-    //Attack
-        if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.K_curMP > 20 && Stump)
-        {HandleComboAttackK(); PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;} 
-        else {AudioManager.instance.PlayUFX(10);}
+        isCharging = true;
+        Anm.PlayAnimationLoop(ChargeFAnimationName);
     }
-       
-    private void HandleComboAttackK()
+
+    // Rilascia il colpo caricato
+    if (Input.GetMouseButtonUp(1) && isCharging)
     {
-        comboCount = (comboCount % 3) + 1;
-        PlayComboAnimation("Battle/attack_" + comboCount.ToString());
-        canAttack = false;
-        StartCoroutine(ComboCooldown());
-    }
-    private void StumpK()
-    {
-        Stump = false;
-        StartCoroutine(StumpKTime());
+        ReleaseChargedShot(); // Funzione da implementare per il colpo caricato
+        PlayerStats.instance.K_curMP -= 50;
     }
     
-    private IEnumerator StumpKTime()
+    // Esegue un colpo normale
+    if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.K_curMP > 20 && !isCharging)
     {
-        yield return new WaitForSeconds(1);
-        Anm.PlayAnimationLoop(IdleBAnimationName);
-        Stump = true;
-    }  
+        HandleComboAttackK();
+        PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
+    }
+    else
+    {
+        AudioManager.instance.PlayUFX(10);
+    }
+}
+
+private void ReleaseChargedShot()
+{
+    // Implementa qui il comportamento del colpo caricato
+    // Ad esempio, puoi sparare un proiettile più potente o eseguire un'animazione speciale.
+    // Assicurati di reimpostare isCharging dopo il rilascio del colpo caricato.
+    Anm.PlayAnimationLoop(ReleaseChargeFAnimationName);
+    StumpK();
+}
+
+private void HandleComboAttackK()
+{
+    comboCount = (comboCount % 3) + 1;
+    PlayComboAnimation("Battle/attack_" + comboCount.ToString());
+    canAttack = false;
+    StartCoroutine(ComboCooldown());
+}
+
+private void StumpK()
+{
+    Stump = false;
+    isCharging = false;
+    StartCoroutine(StumpKTime());
+}
+
+private IEnumerator StumpKTime()
+{
+    yield return new WaitForSeconds(1);
+    Anm.PlayAnimationLoop(IdleBAnimationName);
+    Stump = true;
+}
 #endregion
 #region Spoon
     public void SpoonB()
@@ -357,6 +390,7 @@ public void Awake()
             case 0:
             if(!canDodge)
             {PlayerStats.instance.F_curHP -= danno_subito;
+            if(GameManager.instance.F_Unlock){Stats.F_curRage +=  5;}
             AudioManager.instance.PlaySFX(8);
             Instantiate(VFXHurt, transform.position, transform.rotation);
             Anm.TemporaryChangeColor(Color.red);
@@ -364,10 +398,12 @@ public void Awake()
             break;
             case 1:
             PlayerStats.instance.K_curHP -= danno_subito;
+            if(GameManager.instance.K_Unlock){Stats.K_curRage +=  5;}
             break; 
             case 2:
             if(!isDefence)
             {PlayerStats.instance.S_curHP -= danno_subito;
+            if(GameManager.instance.S_Unlock){Stats.S_curRage +=  5;}
             AudioManager.instance.PlaySFX(8);
             Instantiate(VFXHurt, transform.position, transform.rotation);
             Anm.TemporaryChangeColor(Color.red);

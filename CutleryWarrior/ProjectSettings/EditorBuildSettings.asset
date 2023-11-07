@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Loading.unity
     guid: c87efbca7f8d35646a856c088f26760d
   - enabled: 1
-    path: Assets/Scenes/Temple.unity
+    path: Assets/Scenes/FirstD.unity
     guid: a5a9e63182aa0594e9f3553e00727e96
   - enabled: 1
     path: Assets/Scenes/TestExploration.unity

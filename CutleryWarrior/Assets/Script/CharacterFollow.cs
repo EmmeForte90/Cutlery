@@ -37,7 +37,7 @@ public class CharacterFollow : MonoBehaviour
     private bool isFollowing;
     private bool isGrounded;
     private bool isWalking;
-    private bool isGuard;
+    public bool isGuard;
     private float defense;
     private float danno_subito;
     public GameObject VFXPoison;
@@ -62,6 +62,7 @@ public class CharacterFollow : MonoBehaviour
     private bool isAttacking = false;   
     private bool take = false; 
     private bool Die = false;
+    private PlayerStats Stats;
     public int result;
     public AnimationManager Anm;
     public bool Allarming;
@@ -89,6 +90,7 @@ public class CharacterFollow : MonoBehaviour
         if(GameManager.instance.F_Unlock){F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
         if(GameManager.instance.K_Unlock){K_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
         if(GameManager.instance.S_Unlock){S_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        Stats = GameObject.Find("Stats").GetComponent<PlayerStats>();
     }
     public void RetakeCh()
     {
@@ -434,12 +436,15 @@ public class CharacterFollow : MonoBehaviour
         {
             case 0:
             PlayerStats.instance.F_curHP -= danno_subito;
+            if(GameManager.instance.F_Unlock){Stats.F_curRage +=  5;}
             break;
             case 1:
             PlayerStats.instance.K_curHP -= danno_subito;
+            if(GameManager.instance.K_Unlock){Stats.K_curRage +=  5;}
             break; 
             case 2:
             PlayerStats.instance.S_curHP -= danno_subito;
+            if(GameManager.instance.S_Unlock){Stats.S_curRage +=  5;}
             break;
         }
     AudioManager.instance.PlaySFX(8);
@@ -479,7 +484,7 @@ private void OnDrawGizmos()
     //Gizmos.DrawLine(transform.position, transform.position + new Vector3(transform.localScale.x, 0, 0) * wallDistance);
     Gizmos.color = Color.blue;
     Gizmos.DrawWireSphere(transform.position, stoppingDistance);
-    Gizmos.color = Color.green;
+    Gizmos.color = Color.black;
     Gizmos.DrawWireSphere(transform.position, OrderDistance);
     }
 #endregion

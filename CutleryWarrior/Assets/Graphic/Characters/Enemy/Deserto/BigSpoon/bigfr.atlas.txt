@@ -1,0 +1,18 @@
+bigfr.png
+size:1024,512
+filter:Linear,Linear
+pma:true
+Body
+bounds:2,108,580,401
+Eye
+bounds:2,27,66,79
+Gamba
+bounds:856,133,118,153
+rotate:90
+Head
+bounds:856,253,154,256
+Livello 2
+bounds:584,2,507,270
+rotate:90
+Tail
+bounds:856,2,123,129

@@ -13,10 +13,10 @@ public class AnimationManager : MonoBehaviour
     public bool Enemy;
 
     [Header("Impronte")]
-    public bool canImp = false;
-    public GameObject impronte;
-    public Transform Foot;
-    public GameObject Rage;
+    [HideInInspector]public bool canImp = false;
+    [HideInInspector]public GameObject impronte;
+    [HideInInspector]public Transform Foot;
+    [HideInInspector]public GameObject Rage;
     [Header("Enemy")]
     [HideInInspector] public GameObject VfxEnmSlash;
 
@@ -69,15 +69,15 @@ public class AnimationManager : MonoBehaviour
     [HideInInspector] public GameObject Stalactites;
     [HideInInspector] public GameObject Whirlwinds;
     /////////////////////////////////////////////////
-    public TimerSkill Skill_0;
-    public TimerSkill Skill_1;
-    public TimerSkill Skill_2;
-    public TimerSkill Skill_3;
-    public TimerSkill Skill_4;
-    public TimerSkill Skill_5;
-    public TimerSkill Skill_6;
-    public TimerSkill Skill_7;
-    public TimerSkill Skill_8;
+    [HideInInspector] public TimerSkill Skill_0;
+    [HideInInspector] public TimerSkill Skill_1;
+    [HideInInspector] public TimerSkill Skill_2;
+    [HideInInspector] public TimerSkill Skill_3;
+    [HideInInspector] public TimerSkill Skill_4;
+    [HideInInspector] public TimerSkill Skill_5;
+    [HideInInspector] public TimerSkill Skill_6;
+    [HideInInspector] public TimerSkill Skill_7;
+    [HideInInspector] public TimerSkill Skill_8;
 
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
@@ -88,9 +88,9 @@ public class AnimationManager : MonoBehaviour
     Spine.EventData eventData;
     //private bool Boom = false;
     public bool VFX = true;
-    public Transform SkillPoint;
+    [HideInInspector]public Transform SkillPoint;
     public Transform BPoint;
-    public ChargeSkill CS;
+    [HideInInspector]public ChargeSkill CS;
     public static AnimationManager instance;
     #endregion
     public void Awake()
@@ -191,6 +191,8 @@ public class AnimationManager : MonoBehaviour
     VFX = false; StartCoroutine(StopVFX_FNormal());}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     if (e.Data.Name == "atk"){AudioManager.instance.PlayUFX(0); VfxEnmSlash.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    if (e.Data.Name == "shootEnm" && VFX){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_FNormal());}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
     if (e.Data.Name == "shoot" && VFX)

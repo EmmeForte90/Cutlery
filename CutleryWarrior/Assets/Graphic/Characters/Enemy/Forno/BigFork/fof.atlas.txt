@@ -1,0 +1,10 @@
+fof.png
+size:1024,512
+filter:Linear,Linear
+pma:true
+Eye
+bounds:501,28,43,51
+Head
+bounds:501,81,262,428
+Rock
+bounds:2,2,497,507

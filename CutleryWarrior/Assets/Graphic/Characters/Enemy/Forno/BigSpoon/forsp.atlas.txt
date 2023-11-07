@@ -1,0 +1,15 @@
+forsp.png
+size:1024,1024
+filter:Linear,Linear
+pma:true
+Body
+bounds:2,476,551,532
+Eye
+bounds:311,423,43,51
+Gamba
+bounds:555,814,109,194
+Head
+bounds:2,88,307,386
+Piede
+bounds:2,2,84,145
+rotate:90

@@ -1,0 +1,28 @@
+Fork.png
+size:1024,256
+filter:Linear,Linear
+pma:true
+K/Livello 2
+bounds:2,101,140,318
+rotate:90
+Rust/Braccio
+bounds:245,54,45,87
+rotate:90
+Rust/Dita
+bounds:120,3,22,53
+rotate:90
+Rust/Dress
+bounds:830,23,124,218
+Rust/Fur
+bounds:2,2,116,97
+Rust/Gamba
+bounds:956,113,33,128
+Rust/Livello 2
+bounds:322,101,140,252
+rotate:90
+Rust/Spalla
+bounds:120,27,72,123
+rotate:90
+S/Livello 2
+bounds:576,101,140,252
+rotate:90
