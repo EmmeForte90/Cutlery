@@ -45,12 +45,19 @@ public class TouchPlayer : MonoBehaviour
     else if(Switch.isElement2Active){Player = Fork;} 
     else if(Switch.isElement3Active){Player = Knife;} 
     //
-    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 1 &&
+    SwitchCharacter.instance.rotationSwitcher.CharacterIDSec == 3 &&
+    SwitchCharacter.instance.rotationSwitcher.CharacterIDTer == 2)
     {if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
     }
-    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
-    {if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}}
-    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 2 &&
+    SwitchCharacter.instance.rotationSwitcher.CharacterIDSec == 1 &&
+    SwitchCharacter.instance.rotationSwitcher.CharacterIDTer == 3)
+    {if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}
+    }
+    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 3 &&
+    SwitchCharacter.instance.rotationSwitcher.CharacterIDSec == 2 &&
+    SwitchCharacter.instance.rotationSwitcher.CharacterIDTer == 1)
     {if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}}
     //
     if(!takeCoo){

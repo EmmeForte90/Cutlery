@@ -14,20 +14,25 @@ public class StunAnimation : MonoBehaviour
     public float TimeStun;
     public SwitchCharacter SwitcherUI;
     public ManagerCharacter MC;
+    public StunAnimation This;
+
     [SpineAnimation][SerializeField]  string StunAnimationName;
+    public GameObject ScriptEnm;
+
     public void Awake()
     {spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState; spineAnimationState = skeletonAnimation.AnimationState;}
     private void OnDisable(){VFX.SetActive(false);}
     private void OnEnable() 
     {
         VFX.SetActive(true);
-         if(!isPlayer){StartCoroutine(Stun()); spineAnimationState.SetAnimation(0, StunAnimationName, false);}
+         if(!isPlayer){StartCoroutine(Stun()); spineAnimationState.SetAnimation(0, StunAnimationName, true);}
         else if(isPlayer){StunLoop(); StartCoroutine(Stun());}
     }
     void Update(){}    
     private IEnumerator Stun()
     {
         yield return new WaitForSeconds(TimeStun);
+        if(isPlayer){
         if(MC.kindCH == 0){
         switch (SwitcherUI.rotationSwitcher.CharacterID)
         {
@@ -67,6 +72,8 @@ public class StunAnimation : MonoBehaviour
             break;
         }
         }
+        }else if(!isPlayer)
+        {This.enabled = false;}
     }
     public void StunLoop(){spineAnimationState.SetAnimation(0, StunAnimationName, true);}
 }

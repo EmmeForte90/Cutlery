@@ -129,12 +129,12 @@ public class SwitchCharacter : MonoBehaviour
         AudioManager.instance.PlayUFX(3);
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         vCam.Follow = player.transform;
+        }
         //////////////////////////////
         if(GameManager.instance.K_Unlock){isElement1Active = false;isElement2Active = true;}
         else if(!GameManager.instance.K_Unlock){isElement1Active = false;isElement3Active = true;}
         else if(!GameManager.instance.S_Unlock){isElement1Active = false;isElement2Active = true;}
         else if(!GameManager.instance.S_Unlock && !GameManager.instance.K_Unlock){isElement1Active = true;}
-        }
     }
     else if (isElement2Active)
     {   
@@ -151,10 +151,10 @@ public class SwitchCharacter : MonoBehaviour
         AudioManager.instance.PlayUFX(3);
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         vCam.Follow = player.transform;
+        }
         //////////////////////////////
         if(GameManager.instance.S_Unlock){isElement2Active = false;isElement3Active = true;}
         else if(!GameManager.instance.S_Unlock){isElement2Active = false;isElement1Active = true;}
-        }
     }
     else if (isElement3Active)
     {   
@@ -171,10 +171,10 @@ public class SwitchCharacter : MonoBehaviour
         AudioManager.instance.PlayUFX(3);
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         vCam.Follow = player.transform;
+        }
         //////////////////////////////
         if(GameManager.instance.F_Unlock){isElement3Active = false; isElement1Active = true;}
         else if(!GameManager.instance.F_Unlock){isElement3Active = false;isElement2Active = true;}
-        }
     }
     }
 #endregion

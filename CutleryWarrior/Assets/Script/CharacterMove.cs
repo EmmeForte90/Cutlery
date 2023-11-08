@@ -37,8 +37,10 @@ public class CharacterMove : MonoBehaviour
     private bool canAttack = true;
     public float comboCooldown = 0.3f; // Tempo di cooldown tra le combo in secondi
     private PlayerStats Stats;
-    public bool isCharging = false; // Flag per il colpo caricato
-
+    private bool isCharging = false; // Flag per il colpo caricato
+    public float chargeStartTime; // Tempo di inizio della carica
+    public float chargeTime;
+    public float maxChargeTime = 2.0f; // Tempo massimo di carica
     private Vector3 moveDirection = Vector3.zero;
     public bool isDodging = false;
     [Header("Dodge")]
@@ -100,6 +102,10 @@ public class CharacterMove : MonoBehaviour
     public GameObject VFXStump;
     public GameObject VFXPoison;
     public GameObject VFXHurt;
+    public GameObject VFXCharge;
+    public GameObject VFXChargeComplete;
+    public GameObject VFXChargeMAX;
+
     [Header("Attacks")]
     private bool isAttacking = false;
     public float comboTimer = 0.5f; // Tempo di attesa tra le combo
@@ -131,7 +137,6 @@ public void Awake()
     public void Update()
     {
         if(Interact){Anm.PlayAnimationLoop(TalkingAnimationName);}
-        //if(Win){Anm.PlayAnimationLoop(WinAnimationName);}
         if(warning){Anm.PlayAnimationLoop(AllarmAnimationName);}
         //
         if(Attention){Esclamation.SetActive(true);}
@@ -264,22 +269,46 @@ public void Awake()
 #region Knife
     public void KnifeB()
 {
-    if(!isCharging){MoveB();}
-    
+    if (!isCharging)
+    {
+        MoveB();
+    } 
+    else if(isCharging)
+    {
+        if (chargeTime >= maxChargeTime){VFXChargeMAX.SetActive(true); VFXCharge.SetActive(false);}
+        else if (chargeTime < maxChargeTime){VFXChargeMAX.SetActive(false); VFXCharge.SetActive(true);}
+    }
+
     // Inizia a caricare il colpo
     if (Input.GetMouseButtonDown(1) && !isCharging)
     {
         isCharging = true;
+        chargeStartTime = Time.time;
         Anm.PlayAnimationLoop(ChargeFAnimationName);
+        
     }
+   
 
     // Rilascia il colpo caricato
     if (Input.GetMouseButtonUp(1) && isCharging)
     {
-        ReleaseChargedShot(); // Funzione da implementare per il colpo caricato
-        PlayerStats.instance.K_curMP -= 50;
+        chargeTime = Time.time - chargeStartTime;
+        if (chargeTime >= maxChargeTime)
+        {
+            ReleaseChargedShot(); // Funzione da implementare per il colpo caricato
+            VFXChargeComplete.SetActive(true);
+            PlayerStats.instance.K_curMP -= 30;
+        }
+        else
+        {
+            // Il tempo di carica non è sufficiente, puoi fare qualcosa qui (ad esempio un feedback visivo o sonoro).
+            isCharging = false;
+            VFXCharge.SetActive(false);
+            VFXChargeMAX.SetActive(false);
+            VFXChargeComplete.SetActive(false);
+        }
     }
-    
+
     // Esegue un colpo normale
     if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.K_curMP > 20 && !isCharging)
     {
@@ -295,8 +324,10 @@ public void Awake()
 private void ReleaseChargedShot()
 {
     // Implementa qui il comportamento del colpo caricato
-    // Ad esempio, puoi sparare un proiettile più potente o eseguire un'animazione speciale.
     // Assicurati di reimpostare isCharging dopo il rilascio del colpo caricato.
+    VFXChargeMAX.SetActive(false);
+    VFXCharge.SetActive(false);
+    VFXChargeComplete.SetActive(false);
     Anm.PlayAnimationLoop(ReleaseChargeFAnimationName);
     StumpK();
 }

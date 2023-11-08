@@ -128,7 +128,7 @@ public class AnimationManager : MonoBehaviour
     }
     IEnumerator StopVFX_K2()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         if(knife){
         BigSlash.gameObject.SetActive(false);}
         if(Enemy){VfxEnmSlash.gameObject.SetActive(false);}
@@ -174,12 +174,16 @@ public class AnimationManager : MonoBehaviour
                     _spineAnimationState.Event += HandleEvent;
                 }
     }
+    public void ClearAnm()
+    {
+        _skeletonAnimation.state.ClearTrack(0);
+    }
     private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
-{
-    trackEntry.Complete -= OnAttackAnimationComplete;
-    _skeletonAnimation.state.ClearTrack(0);
-   _skeletonAnimation.state.SetAnimation(0, IdleBAnimationName, true);
-}
+    {
+        trackEntry.Complete -= OnAttackAnimationComplete;
+        _skeletonAnimation.state.ClearTrack(0);
+    _skeletonAnimation.state.SetAnimation(0, IdleBAnimationName, true);
+    }
     void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
     //Normal VFX
     if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(0);}
@@ -195,6 +199,8 @@ public class AnimationManager : MonoBehaviour
     VFX = false; StartCoroutine(StopVFX_FNormal());}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
+    if (e.Data.Name == "shootAI" && VFX){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
+    VFX = false; StartCoroutine(StopVFX_FNormal());}
     if (e.Data.Name == "shoot" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
     VFX = false;}
