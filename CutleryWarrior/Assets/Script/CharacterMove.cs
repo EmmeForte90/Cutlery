@@ -16,7 +16,8 @@ public class CharacterMove : MonoBehaviour
     [Tooltip("0 - Exploration, 1 - Battle")]
     public int IDAction = 0; //Che tipo di personaggio è
     public GameObject Esclamation;
-     public bool Attention;
+    public bool Attention;
+    public GameObject CantMove;
     public GameObject Bullet;
     public Transform BPoint;
     private Rigidbody rb;  
@@ -132,6 +133,7 @@ public void Awake()
         rb.freezeRotation = true;
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
         Stats = GameObject.Find("Stats").GetComponent<PlayerStats>();
+        CantMove.SetActive(false);
     }
    
     public void Update()
@@ -153,18 +155,22 @@ public void Awake()
         break;
         ////////////////////////////////////////
         case 1: 
-        /*if(!StopRun){if(Run >= 8 || Run <= 8){Run = 8;}}
-        else if(StopRun){if(Run >= 8 || Run <= 8){Run = 5;}}*/
         switch (kindCh)
         {
             case 0:
             ForkB();
+            if(PlayerStats.instance.F_curMP <= 0){ CantMove.SetActive(true);}
+            else if(PlayerStats.instance.F_curMP > 0){ CantMove.SetActive(false);}
             break;
             case 1:
             KnifeB();
+            if(PlayerStats.instance.K_curMP <= 0){ CantMove.SetActive(true);}
+            else if(PlayerStats.instance.K_curMP > 0){ CantMove.SetActive(false);}
             break; 
             case 2:
             SpoonB();
+            if(PlayerStats.instance.S_curMP <= 0){ CantMove.SetActive(true);}
+            else if(PlayerStats.instance.S_curMP > 0){ CantMove.SetActive(false);}
             break;
         }
         break;
