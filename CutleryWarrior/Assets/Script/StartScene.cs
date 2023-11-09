@@ -10,7 +10,7 @@ public class StartScene : MonoBehaviour
     public bool Testing = false;
     public GameObject StartGameOBJ;
     public GameObject PStart;
-    private GameObject player;
+    //private GameObject player;
     private GameObject ContainerHero;
     private GameObject FAct;
     private GameObject KAct;
@@ -26,7 +26,7 @@ public class StartScene : MonoBehaviour
     //public Collider[] BoxConfiner;    
     private CinemachineConfiner confiner;
     private CinemachineVirtualCamera vCam;
-    public Collider bCStart;
+    //public Collider bCStart;
     private SwitchCharacter Switcher;
     private int IDPorta;
     private int ID_Enm;
