@@ -38,6 +38,7 @@ public class CharacterMove : MonoBehaviour
     private bool canAttack = true;
     public float comboCooldown = 0.3f; // Tempo di cooldown tra le combo in secondi
     private PlayerStats Stats;
+    private bool top = true;
     private bool isCharging = false; // Flag per il colpo caricato
     public float chargeStartTime; // Tempo di inizio della carica
     public float chargeTime;
@@ -63,8 +64,11 @@ public class CharacterMove : MonoBehaviour
    
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string WalkAnimationName;
+    [SpineAnimation][SerializeField]  string WalkUPAnimationName;
     [SpineAnimation][SerializeField]  string RunAnimationName;
+    [SpineAnimation][SerializeField]  string RunUPAnimationName;
     [SpineAnimation][SerializeField]  string IdleAnimationName;
+    [SpineAnimation][SerializeField]  string IdleUPAnimationName;
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
     [SpineAnimation][SerializeField]  string WalkBAnimationName;
     [SpineAnimation][SerializeField]  string RunBAnimationName;
@@ -210,15 +214,29 @@ public void Awake()
         moveDirection = transform.TransformDirection(moveDirection);
         //
         if (!Interact && !isRun && isMoving)//Sta camminando
-        {Anm.PlayAnimationLoop(WalkAnimationName); stand = false; 
+        {
+        if (verticalInput > 0)//Sta fermo
+        {Anm.PlayAnimationLoop(WalkUPAnimationName); top = false; } 
+        else if (verticalInput < 0)//Sta fermo
+        {Anm.PlayAnimationLoop(WalkAnimationName); top = true; }     
+        stand = false;  
         characterController.Move(moveDirection * Speed * Time.deltaTime);
         } 
         else if (!Interact && isRun && isMoving)//Sta correndo
-        {Anm.PlayAnimationLoop(RunAnimationName); stand = false; 
+        {
+        if (verticalInput > 0)//Sta fermo
+        {Anm.PlayAnimationLoop(RunUPAnimationName); top = false; } 
+        else if (verticalInput < 0)//Sta fermo
+        {Anm.PlayAnimationLoop(RunAnimationName); top = true; } 
+        stand = false; 
         characterController.Move(moveDirection * Run * Time.deltaTime);
         }
         else if (!Interact && !isRun && !isMoving)//Sta fermo
-        {Anm.PlayAnimationLoop(IdleAnimationName); stand = true;}
+        {if (verticalInput == 0 && !top)//Sta fermo
+        {Anm.PlayAnimationLoop(IdleUPAnimationName);} 
+        else if (verticalInput == 0 && top)//Sta fermo
+        {Anm.PlayAnimationLoop(IdleAnimationName);} 
+        stand = true;}
         hor = Input.GetAxisRaw("Horizontal");  
         isMoving = Mathf.Abs(hor) > 0.0f || Mathf.Abs(verticalInput) > 0.0f;
         }
