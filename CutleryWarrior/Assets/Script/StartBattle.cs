@@ -10,7 +10,6 @@ public class StartBattle : MonoBehaviour
     public GameObject ActiveTutorial; 
     [Header("Battle direction")]
     public bool isRight = true; 
-    public GameObject DuelManagerO; // Variabile per il player
     public GameObject Notte; 
     public Material newSkyboxMaterial_N;
     public GameObject Giorno;
