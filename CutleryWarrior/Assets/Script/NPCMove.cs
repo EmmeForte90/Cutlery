@@ -7,6 +7,7 @@ public class NPCMove : MonoBehaviour
     private GameObject ForkActive;
 	private GameObject SpoonActive;
 	private GameObject KnifeActive;
+    public bool isWalk, isRun, top = false;
     public Transform[] waypoints; // Array di punti verso cui muoversi
     private float moveSpeed = 5f; // Velocità di movimento del personaggio
     private float RunSpeed = 6f; // Velocità di movimento del personaggio
@@ -22,6 +23,8 @@ public class NPCMove : MonoBehaviour
     public Transform TouchO;
     public float TouchDistance = 1f;
     private CharacterController characterController;
+    private float previousZPosition; // Aggiungi questa variabile
+
     public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
 
     private SwitchCharacter rotationSwitcher;
@@ -29,6 +32,9 @@ public class NPCMove : MonoBehaviour
     [SpineAnimation][SerializeField] private string IdleAnimationName;
     [SpineAnimation][SerializeField] private string WalkAnimationName;
     [SpineAnimation][SerializeField] private string RunAnimationName;
+    [SpineAnimation][SerializeField] private string IdleUPAnimationName;
+    [SpineAnimation][SerializeField] private string WalkUPAnimationName;
+    [SpineAnimation][SerializeField] private string RunUPAnimationName;
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
@@ -50,28 +56,65 @@ public class NPCMove : MonoBehaviour
         if (waypoints.Length > 0){transform.position = waypoints[0].position;}
     }
     public void Update()
+{
+    PlayerTaking();
+    Gravity();
+
+    if (top && isWalk && !isRun)
+    {WalkUP();}
+    else if (!top  && isWalk && !isRun)
+    {Walk();}
+    else if (top && !isWalk && isRun)
+    {RunUP();}
+    else if (!top && !isWalk && isRun)
+    {Run();}
+    else if (top && !isRun && !isWalk)
+    {IdleUP();}
+    else if (!top && !isRun && !isWalk)
+    {Idle();}
+
+    // Verifica della distanza tra il nemico e il giocatore
+    if ((transform.position - player.transform.position).sqrMagnitude > agroDistance * agroDistance)
     {
-        PlayerTaking(); Gravity();
-        if ((transform.position - player.transform.position).sqrMagnitude > agroDistance * agroDistance)
-        {Behav = 0;} 
-        else if ((transform.position - player.transform.position).sqrMagnitude < agroDistance * agroDistance)
-        {Behav = 1;}
-        switch(Behav)
-        {
-            case 0:
-            if (!isPaused)
-            {MoveToWaypoint(); Walk(); Flip();}
-            else
-            {PauseAtWaypoint(); Idle(); Flip();}
-            break;
-            case 1:
-            ChasePlayer(); Run(); FacePlayer();
-            break;
-            case 2:
-            FacePlayer(); Idle(); 
-            break;
-        }
+        Behav = 0;
     }
+    else if ((transform.position - player.transform.position).sqrMagnitude < agroDistance * agroDistance)
+    {
+        Behav = 1;
+    }
+
+    switch (Behav)
+    {
+        case 0:
+            if (!isPaused)
+            {
+                MoveToWaypoint();
+                Flip();
+                isWalk = true;
+                isRun = false;
+            }
+            else
+            {
+                PauseAtWaypoint();
+                isWalk = false;
+                isRun = false;
+                Flip();
+            }
+            break;
+        case 1:
+            ChasePlayer();
+            isWalk = false;
+            isRun = true;
+            FacePlayer();
+            break;
+        case 2:
+            FacePlayer();
+            isWalk = false;
+            isRun = false;
+            break;
+    }
+}
+
     private void Gravity()
     {
     if (!characterController.isGrounded)
@@ -105,8 +148,11 @@ public class NPCMove : MonoBehaviour
             break;
         }
     }
-    private void MoveToWaypoint()
+
+private void MoveToWaypoint()
 {
+    float currentZPosition = transform.position.z;
+
     if (waypoints.Length > 1 && currentWaypointIndex < waypoints.Length - 1)
     {
         Vector3 targetPosition = waypoints[currentWaypointIndex + 1].position;
@@ -118,8 +164,17 @@ public class NPCMove : MonoBehaviour
             isPaused = true;
             pauseTimer = 0f;
 
-            // Ruota il personaggio sull'asse locale X
-            transform.localScale = new Vector3(-1, 1,1);
+            // Ruota il personaggio in base all'asse locale X o Z
+            if (currentZPosition > previousZPosition)
+            {
+                top = false;
+            }
+            else
+            {
+                top = true;
+            }
+
+            previousZPosition = currentZPosition;
         }
     }
     else if (currentWaypointIndex == waypoints.Length - 1)
@@ -132,14 +187,25 @@ public class NPCMove : MonoBehaviour
         {
             isPaused = true;
             pauseTimer = 0f;
+
             // Incrementa l'indice del waypoint o torna al punto 0 se siamo all'ultimo
             currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
 
-            // Ruota il personaggio sull'asse locale X
-            transform.localScale = new Vector3(1, 1,1);
+            // Ruota il personaggio in base all'asse locale X o Z
+            if (currentZPosition > previousZPosition)
+            {
+                top = false;
+            }
+            else
+            {
+                top = true;
+            }
+
+            previousZPosition = currentZPosition;
         }
     }
 }
+
 
 
     private void PauseAtWaypoint()
@@ -213,6 +279,31 @@ public class NPCMove : MonoBehaviour
         {
         _spineAnimationState.SetAnimation(0, IdleAnimationName, true);
         currentAnimationName = IdleAnimationName;
+        }
+    }
+
+    public void WalkUP()
+    {
+    if (currentAnimationName != WalkUPAnimationName)
+        {
+        _spineAnimationState.SetAnimation(0, WalkUPAnimationName, true);
+        currentAnimationName = WalkUPAnimationName;
+        }
+    }
+    public void RunUP()
+    {
+    if (currentAnimationName != RunUPAnimationName)
+        {
+        _spineAnimationState.SetAnimation(0, RunUPAnimationName, true);
+        currentAnimationName = RunUPAnimationName;
+        }
+    }
+    public void IdleUP()
+    {
+    if (currentAnimationName != IdleUPAnimationName)
+        {
+        _spineAnimationState.SetAnimation(0, IdleUPAnimationName, true);
+        currentAnimationName = IdleUPAnimationName;
         }
     }
     private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)

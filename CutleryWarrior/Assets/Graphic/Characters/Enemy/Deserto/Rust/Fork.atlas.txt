@@ -2,27 +2,31 @@ Fork.png
 size:1024,256
 filter:Linear,Linear
 pma:true
+Eye
+bounds:300,19,45,46
 K/Livello 2
-bounds:2,101,140,318
+bounds:2,114,140,318
 rotate:90
+K/back
+bounds:718,36,124,218
 Rust/Braccio
-bounds:245,54,45,87
+bounds:245,67,45,87
 rotate:90
 Rust/Dita
-bounds:120,3,22,53
+bounds:245,43,22,53
 rotate:90
 Rust/Dress
-bounds:830,23,124,218
+bounds:844,36,124,218
 Rust/Fur
-bounds:2,2,116,97
+bounds:2,15,116,97
 Rust/Gamba
-bounds:956,113,33,128
+bounds:120,5,33,128
+rotate:90
 Rust/Livello 2
-bounds:322,101,140,252
+bounds:322,114,140,252
 rotate:90
 Rust/Spalla
-bounds:120,27,72,123
+bounds:120,40,72,123
 rotate:90
 S/Livello 2
-bounds:576,101,140,252
-rotate:90
+bounds:576,2,140,252

@@ -202,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e878b11c6d77314e88d1aa584e333bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Brain: {fileID: 364748373917811413}
   waypoints:
   - {fileID: 364748373795080892}
   - {fileID: 364748374469275532}
@@ -217,6 +218,9 @@ MonoBehaviour:
   IdleAnimationName: Explore/idle
   WalkAnimationName: Explore/walk
   RunAnimationName: Explore/run
+  IdleUPAnimationName: Explore/idle_up
+  WalkUPAnimationName: Explore/walk_up
+  RunUPAnimationName: Explore/run_up
   _skeletonAnimation: {fileID: 364748373917811417}
 --- !u!143 &5026484103116899372
 CharacterController:
