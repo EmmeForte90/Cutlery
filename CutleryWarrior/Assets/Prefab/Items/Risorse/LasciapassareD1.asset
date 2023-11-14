@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b728530c479d843803971ca11c5f55, type: 3}
   m_Name: LasciapassareD1
   m_EditorClassIdentifier: 
-  itemName: Lasciapassare per le miniere
+  itemName: Pass for the mines
   NameSkin: 
-  itemDes: Un lasciapassare dato da ferrante, per accedere alle miniere
+  itemDes: A pass given by Ferrante, to access the mines
   ID: 0
   KindItem: 2
   price: 0

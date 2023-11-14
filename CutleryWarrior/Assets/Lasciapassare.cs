@@ -21,6 +21,11 @@ public class Lasciapassare : MonoBehaviour
     public int obj1;
     [Header("Dialogue")]
     public TextMeshProUGUI dialogueText; // Reference to the TextMeshProUGUI component
+    [TextArea(1, 3)]
+    public string TextNO;
+    [TextArea(1, 3)]
+    public string TextYES;
+
     public GameObject button;
     public GameObject dialogueBox;
     public bool heFlip;
@@ -111,7 +116,7 @@ public class Lasciapassare : MonoBehaviour
     { 
         dialogueBox.gameObject.SetActive(true); 
         dialogueText.gameObject.SetActive(true); 
-        dialogueText.text = "Oh, you have permission. Ok then, you can go!";
+        dialogueText.text = TextYES; //"Oh, you have permission. Ok then, you can go!";
         EventManager.instance.EventDesertEnd(IdEvent);
         Collider.SetActive(false);
         StartCoroutine(BoxDel());
@@ -120,7 +125,7 @@ public class Lasciapassare : MonoBehaviour
         AudioManager.instance.PlayUFX(10);
         dialogueBox.gameObject.SetActive(true); 
         dialogueText.gameObject.SetActive(true); 
-        dialogueText.text = "No one shall not pass without the permission!";
+        dialogueText.text = TextNO;
         StartCoroutine(BoxDel());
     }
     }
