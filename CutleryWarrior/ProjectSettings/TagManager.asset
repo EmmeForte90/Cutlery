@@ -32,6 +32,7 @@ TagManager:
   - F_Stump
   - S_Stump
   - Enm_Bullet
+  - Event
   layers:
   - Default
   - TransparentFX

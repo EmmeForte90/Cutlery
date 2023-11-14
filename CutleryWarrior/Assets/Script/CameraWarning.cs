@@ -6,6 +6,7 @@ using TMPro;
 
 public class CameraWarning : MonoBehaviour
 {    
+    public int IdEvent;
     public GameObject This;
     public GameObject Enemy;
     private GameObject  Player;
@@ -17,6 +18,9 @@ public class CameraWarning : MonoBehaviour
     public TextMeshProUGUI dialogueText; 
     private CinemachineVirtualCamera vcam; // La telecamera virtuale Cinemachine
     public static CameraWarning instance;
+
+    public void Take(){Destroy(gameObject);}
+
     void Start()
     {
         Player = GameManager.instance.player;       
@@ -26,6 +30,7 @@ public class CameraWarning : MonoBehaviour
         if(Input.GetButtonDown("Fire1")){Box.SetActive(false);
         vcam.Follow = Player.transform;
         GameManager.instance.ChCanM();
+        EventManager.instance.EventDesertEnd(IdEvent);
         Destroy(This);}}}
 
     public void OnTriggerEnter(Collider collision)

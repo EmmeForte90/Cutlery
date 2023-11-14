@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class SceneBattle : MonoBehaviour
 {
+    public int IdEvent;
     public GameObject BattleObj;
     public GameObject[] DeactiveObj; 
     public GameObject This;
@@ -20,7 +21,6 @@ public class SceneBattle : MonoBehaviour
     public bool isRight = false;
     private CinemachineVirtualCamera vcam; // La telecamera virtuale Cinemachine
 
-    
     public void Start()
     {
     vcam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
@@ -86,6 +86,7 @@ public class SceneBattle : MonoBehaviour
     GameManager.instance.StopAllarm();
     GameManager.instance.Posebattle();
     BattleObj.SetActive(true);
+    EventManager.instance.EventDesertEnd(IdEvent);
     foreach (GameObject arenaObject in DeactiveObj){arenaObject.SetActive(false);}
     }
 }
