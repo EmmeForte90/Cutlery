@@ -22,6 +22,8 @@ public class QuestCharacters : MonoBehaviour
      [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-Weapom 4-Armor")]
     private int KindItem;
     public Item Reward;
+    public bool NeedKey = false;
+    public Item KeyForQuest;
     public int specificQuant;
     //public Transform RewardPoint;
     private string[] dialogue; // array of string to store the dialogues
@@ -224,6 +226,9 @@ public class QuestCharacters : MonoBehaviour
             CameraZoom.instance.ZoomOut();
             GameManager.instance.notChange = false;
             GameManager.instance.ChCanM();
+            if(NeedKey)
+            {KeyManager.instance.AddItem(KeyForQuest, specificQuant);
+            Inventory.instance.Reward(KeyForQuest, specificQuant);}
             notGo = false;
             FirstD = false;
     }

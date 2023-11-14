@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00023975e9de553489b884dbb12dc3fc, type: 3}
+  m_Name: MQ_2
+  m_EditorClassIdentifier: 
+  id: 2
+  KindQuest: 0
+  CharacterName: Ferrante
+  questName: Find Armin
+  Description: Ferrante can only give you the pass to the city of Mollica if you
+    find his nephew Armin in the mine. The mine is south-east of the village of Briciola.
+  Bigicon: {fileID: 21300000, guid: b6921313e6d2c0e40bd93876bfb17958, type: 3}
+  Desicon: {fileID: 0}
+  Startdialogue:
+  - Mh? Who are you, stranger? I don't have time to talk now.... My brave young nephew
+    was trapped in the<color=red>Shining Mine</color>. His life is intrinsically
+    linked to that of the entire village.
+  - Mmmh... The city of <color=red>Mollica</color>? it's inaccessible at the moment,
+    only I can give you a pass into the city... Mmmh, but... If you can bring my
+    nephew back to me safe and sound I could give you one.
+  - The mine is located southeast from here, keep this mine pass or the soldiers
+    won't let you continue. Normally I wouldn't ask like this at the first person
+    who comes along but I'm really desperate.
+  - Good luck, stranger. If you don't come back I will prepare a grave for you...
+    and for my nephew.
+  Middledialogue:
+  - You can find the <color=red>Shining Mine</color> to the Southeast.
+  Endingdialogue:
+  - You did! my nephew told me what you did. A thousand thanks. Now he wants to join
+    your adventures. I don't want it, but what can I do?
+  - Please take care of him, it seems strong but in the truth it's  too fragile.
+  - Oh, almost forgot, take here, <color=red> the pass for the city. </color>
+  - Here, and good luck in your journey!
+  Afterdialogue:
+  - Good luck in your journey!
+  isActive: 0
+  isComplete: 0
+  AfterQuest: 0

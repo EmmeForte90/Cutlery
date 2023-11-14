@@ -161,6 +161,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a571a5a83377a7948b7bf96bde9db50d, type: 2}
   obj1: 0
   dialogueText: {fileID: 8370675185166504615}
+  TextNO: No one shall not pass without the <color=red> pass for the mines! </color>
+  TextYES: Oh, you have permission. Ok then, you can go!
   button: {fileID: 4266226267555154103}
   dialogueBox: {fileID: 8370675185921287923}
   heFlip: 0
