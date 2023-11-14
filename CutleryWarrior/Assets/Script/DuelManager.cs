@@ -13,11 +13,9 @@ public class DuelManager : MonoBehaviour
     private bool win = true;
     public bool WinEnd = false;
     public AttStats Stats;
-    public Item[] Rewards;
-    private int specificQuant = 1;
+    //public Item[] Rewards;
     private int result;
     private int Money;
-    private int ItemN; 
     private GameObject FAct;
     private GameObject KAct;
     private GameObject SAct;
@@ -28,29 +26,29 @@ public class DuelManager : MonoBehaviour
     public GameObject MaxRageF;
     public float FcurrentMP;
     public Scrollbar FMPBar;
-    public float FcostMP = 20;
+    //public float FcostMP = 20;
     public float F_SpeedRestore = 5f; // il massimo valore di essenza disponibile
     public GameObject[] Enemies; 
     public GameObject[] ActiveObj; 
     [SerializeField] CharacterFollow ch_FAc;
     [Header("Knife")]
-    public float KcurrentHealth;
+    //public float KcurrentHealth;
     public Scrollbar KhealthBar;
     public Image KRageBar;
     public GameObject MaxRageK;
-    public float KcurrentMP;
+    //public float KcurrentMP;
     public Scrollbar KMPBar;
-    public float KcostMP = 15;
+    //public float KcostMP = 15;
     public float K_SpeedRestore = 5f; // il massimo valore di essenza disponibile
     [SerializeField] CharacterFollow ch_KAc;
     [Header("Spoon")]
-    public float ScurrentHealth;
+    //public float ScurrentHealth;
     public Scrollbar ShealthBar;
     public Image SRageBar;
     public GameObject MaxRageS;
-    public float ScurrentMP;
+    //public float ScurrentMP;
     public Scrollbar SMPBar;
-    public float ScostMP = 10;
+    //public float ScostMP = 10;
     public float S_SpeedRestore = 5f; // il massimo valore di essenza disponibile
     [SerializeField] CharacterFollow ch_SAc;
     [Header("Status")]
@@ -63,15 +61,15 @@ public class DuelManager : MonoBehaviour
     public LevelChanger L_C;*/
 
     [Header("Pause")]
-    public bool stopInput = false;
-    [SerializeField]  GameObject Pause;
-    [SerializeField]  GameObject Item;
-    [SerializeField]  GameObject Skill;
+    //public bool stopInput = false;
+    //[SerializeField]  GameObject Pause;
+    //[SerializeField]  GameObject Item;
+    //[SerializeField]  GameObject Skill;
     [SerializeField]  GameObject Win;
     private int ID_Enm;
     public bool inputCTR = false;
-    [Header("AnimationUI")]
-    public Animator animator;
+    //[Header("AnimationUI")]
+    //public Animator animator;
     public int CharacterID;
     [Header("TimelineAfterBattle")]
     public GameObject pointView; 

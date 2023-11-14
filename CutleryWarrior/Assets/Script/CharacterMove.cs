@@ -218,7 +218,16 @@ public void Awake()
         if (verticalInput > 0)//Sta fermo
         {Anm.PlayAnimationLoop(WalkUPAnimationName); top = false; } 
         else if (verticalInput < 0)//Sta fermo
-        {Anm.PlayAnimationLoop(WalkAnimationName); top = true; }     
+        {Anm.PlayAnimationLoop(WalkAnimationName); top = true; } 
+        else if (horizontalInput > 0 && !top)//Sta fermo
+        {Anm.PlayAnimationLoop(WalkUPAnimationName); top = false; } 
+        else if (horizontalInput < 0 && !top)//Sta fermo
+        {Anm.PlayAnimationLoop(WalkUPAnimationName); top = false; } 
+         else if (horizontalInput > 0 && top)//Sta fermo
+        {Anm.PlayAnimationLoop(WalkAnimationName); top = true; } 
+        else if (horizontalInput < 0 && top)//Sta fermo
+        {Anm.PlayAnimationLoop(WalkAnimationName); top = true; } 
+           
         stand = false;  
         characterController.Move(moveDirection * Speed * Time.deltaTime);
         } 
@@ -227,7 +236,16 @@ public void Awake()
         if (verticalInput > 0)//Sta fermo
         {Anm.PlayAnimationLoop(RunUPAnimationName); top = false; } 
         else if (verticalInput < 0)//Sta fermo
+        {Anm.PlayAnimationLoop(RunAnimationName); top = true; }
+        else if (horizontalInput > 0 && !top)//Sta fermo
+        {Anm.PlayAnimationLoop(RunUPAnimationName); top = false; } 
+        else if (horizontalInput < 0 && !top)//Sta fermo
+        {Anm.PlayAnimationLoop(RunUPAnimationName); top = false; } 
+         else if (horizontalInput > 0 && top)//Sta fermo
         {Anm.PlayAnimationLoop(RunAnimationName); top = true; } 
+        else if (horizontalInput < 0 && top)//Sta fermo
+        {Anm.PlayAnimationLoop(RunAnimationName); top = true; }  
+
         stand = false; 
         characterController.Move(moveDirection * Run * Time.deltaTime);
         }
