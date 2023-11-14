@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy") || other.CompareTag("Collider")|| other.CompareTag("Ground"))
+        if(other.CompareTag("Enemy") || other.CompareTag("Collider"))
         {
         AudioManager.instance.PlayUFX(9);
         if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}

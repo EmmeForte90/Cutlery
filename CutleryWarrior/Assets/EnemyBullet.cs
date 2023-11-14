@@ -6,7 +6,8 @@ public class EnemyBullet : MonoBehaviour
 {
     public float speed = 20f;  // Velocità del proiettile
     private GameObject player;  // Riferimento al giocatore
-    public int resultP;
+    public GameObject OBJ;
+    private int resultP;
     public float lifeTime = 1f;
     private CharacterMove F_Script;
     private CharacterFollow ch_FAc;
@@ -32,7 +33,7 @@ public class EnemyBullet : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, lifeTime);
+        Destroy(OBJ, lifeTime);
         Choise();
         switch(resultP)
         {
@@ -46,6 +47,7 @@ public class EnemyBullet : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("K_Player");  // Trova il giocatore per tag
             break;
         } 
+        lastKnownPlayerPosition = player.transform.position;  // Aggiorna le coordinate conosciute del giocatore
     }
 
     private void Choise()
@@ -83,18 +85,9 @@ public class EnemyBullet : MonoBehaviour
     {
         if (player == null)
         {
-            Destroy(gameObject);  // Se il giocatore non è più presente, distruggi il proiettile
+            Destroy(OBJ);  // Se il giocatore non è più presente, distruggi il proiettile
             return;
         }
-
-        if (player == null)
-        {
-            Destroy(gameObject);  // Se il giocatore non è più presente, distruggi il proiettile
-            return;
-        }
-
-
-        lastKnownPlayerPosition = player.transform.position;  // Aggiorna le coordinate conosciute del giocatore
 
         Vector3 direction = (lastKnownPlayerPosition - transform.position).normalized;  // Calcola la direzione verso il giocatore
 
@@ -107,8 +100,7 @@ public class EnemyBullet : MonoBehaviour
         else if (collision.gameObject.CompareTag("K_Player")){KnifeD();} 
         else if (collision.gameObject.CompareTag("S_Player")){SpoonD();} 
         else if (collision.gameObject.CompareTag("Ground"))
-        {if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
-        Destroy(gameObject);} 
+        {if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}}
     }
     public void ForkD()
     {
@@ -118,7 +110,7 @@ public class EnemyBullet : MonoBehaviour
         AudioManager.instance.PlayUFX(9);
         Debug.Log("danno +"+ attackDamage);
         if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
-        Destroy(gameObject);
+        Destroy(OBJ);
     }
     public void KnifeD()
     {
@@ -128,7 +120,7 @@ public class EnemyBullet : MonoBehaviour
         AudioManager.instance.PlayUFX(9);
         Debug.Log("danno +"+ attackDamage);
         if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
-        Destroy(gameObject);    
+        Destroy(OBJ);    
     }
     public void SpoonD()
     {
@@ -139,6 +131,6 @@ public class EnemyBullet : MonoBehaviour
         AudioManager.instance.PlayUFX(9);
         Debug.Log("danno +"+ attackDamage);
         if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
-        Destroy(gameObject);
+        Destroy(OBJ);
     }
 }

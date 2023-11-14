@@ -24175,8 +24175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4999bf23a4ffa434a991073685042978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  resultP: 0
+  speed: 50
+  OBJ: {fileID: 8398752575585346106}
+  lifeTime: 0.5
   attackDamage: 10
   hitEffect: {fileID: 1920225923742602794, guid: 2b204abdb96feae43ba8dab437bf8026,
     type: 3}
