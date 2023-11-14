@@ -127,10 +127,22 @@ public class NPCMove : MonoBehaviour
     private void ChasePlayer()
     {
         float distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
+        float currentZPosition = transform.position.z;
         if (player != null && distanceToTarget > TouchDistance)
         {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, RunSpeed * Time.deltaTime);}
         else if(player != null && distanceToTarget < TouchDistance)
         {Behav = 2;}
+         // Ruota il personaggio in base all'asse locale X o Z
+            if (currentZPosition > previousZPosition)
+            {
+                top = false;
+            }
+            else
+            {
+                top = true;
+            }
+
+            previousZPosition = currentZPosition;
     
     }
     private void PlayerTaking()

@@ -29,12 +29,11 @@ public class AtkEnm : MonoBehaviour
     }
     public void ForkD()
     {
-        if(GameManager.instance.F_Unlock && !F_Script.isDodging && canATK){F_Script.TakeDamage(attackDamage); canATK = false;}
-        else if(GameManager.instance.F_Unlock && F_Script.isDodging && canATK){canATK = false;}
+        if(GameManager.instance.F_Unlock && canATK){F_Script.TakeDamage(attackDamage); canATK = false;}
         if(GameManager.instance.F_Unlock && !ch_FAc.isGuard && canATK){ch_FAc.TakeDamage(attackDamage); canATK = false;}
         else if(GameManager.instance.F_Unlock && ch_FAc.isGuard && canATK){ch_FAc.TakeDamage(5); canATK = false;}   
         AudioManager.instance.PlayUFX(9);
-        Debug.Log("danno +"+ attackDamage);
+        //Debug.Log("danno +"+ attackDamage);
         StartCoroutine(StumpKTime());
     }
     public void KnifeD()
@@ -43,7 +42,7 @@ public class AtkEnm : MonoBehaviour
         if(GameManager.instance.K_Unlock && !ch_KAc.isGuard && canATK){ch_KAc.TakeDamage(attackDamage); canATK = false;}
         else if(GameManager.instance.K_Unlock && ch_KAc.isGuard && canATK){ch_KAc.TakeDamage(5); canATK = false;}        
         AudioManager.instance.PlayUFX(9);
-        Debug.Log("danno +"+ attackDamage);
+        //Debug.Log("danno +"+ attackDamage);
         StartCoroutine(StumpKTime());
     }
     public void SpoonD()
@@ -53,7 +52,7 @@ public class AtkEnm : MonoBehaviour
         if(GameManager.instance.S_Unlock && !ch_SAc.isGuard && canATK){ch_SAc.TakeDamage(attackDamage); canATK = false;}
         else if(GameManager.instance.S_Unlock && ch_SAc.isGuard && canATK){ canATK = false;}
         AudioManager.instance.PlayUFX(9);
-        Debug.Log("danno +"+ attackDamage);
+        //Debug.Log("danno +"+ attackDamage);
         StartCoroutine(StumpKTime());
     }
 

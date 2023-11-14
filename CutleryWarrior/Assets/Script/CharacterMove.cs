@@ -12,6 +12,7 @@ public class CharacterMove : MonoBehaviour
     [Tooltip("Scegli personaggi 0.Fork 1.Knife 2.Spoon")]
     [Range(0, 2)]
     public int kindCh;
+    public PlayerStats Stats;
 
     [Tooltip("0 - Exploration, 1 - Battle")]
     public int IDAction = 0; //Che tipo di personaggio è
@@ -37,7 +38,7 @@ public class CharacterMove : MonoBehaviour
     private int comboCount = 0;
     private bool canAttack = true;
     public float comboCooldown = 0.3f; // Tempo di cooldown tra le combo in secondi
-    private PlayerStats Stats;
+    //private PlayerStats Stats;
     private bool top = true;
     private bool isCharging = false; // Flag per il colpo caricato
     public float chargeStartTime; // Tempo di inizio della carica
@@ -51,11 +52,11 @@ public class CharacterMove : MonoBehaviour
     public float dodgeDuration = 1f;
     public float cooldownTime = 0.5f;
     private bool canDodge = true;
-    public float stumpCooldown = 1f;
+    //public float stumpCooldown = 1f;
     private bool Stump = true;
     public bool warning = false;
     private float hor;
-    private float defense;
+    //private float defense;
     private float danno_subito;
     private bool poisonState = false;
     private int TimePoison = 5;   
@@ -136,7 +137,7 @@ public void Awake()
         characterController = GetComponent<CharacterController>();
         rb.freezeRotation = true;
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
-        Stats = GameObject.Find("Stats").GetComponent<PlayerStats>();
+        //Stats = GameObject.Find("Stats").GetComponent<PlayerStats>();
         CantMove.SetActive(false);
     }
    
@@ -163,18 +164,18 @@ public void Awake()
         {
             case 0:
             ForkB();
-            if(PlayerStats.instance.F_curMP <= 0){ CantMove.SetActive(true);}
-            else if(PlayerStats.instance.F_curMP > 0){ CantMove.SetActive(false);}
+            if(Stats.F_curMP <= 0){ CantMove.SetActive(true);}
+            else if(Stats.F_curMP > 0){ CantMove.SetActive(false);}
             break;
             case 1:
             KnifeB();
-            if(PlayerStats.instance.K_curMP <= 0){ CantMove.SetActive(true);}
-            else if(PlayerStats.instance.K_curMP > 0){ CantMove.SetActive(false);}
+            if(Stats.K_curMP <= 0){ CantMove.SetActive(true);}
+            else if(Stats.K_curMP > 0){ CantMove.SetActive(false);}
             break; 
             case 2:
             SpoonB();
-            if(PlayerStats.instance.S_curMP <= 0){ CantMove.SetActive(true);}
-            else if(PlayerStats.instance.S_curMP > 0){ CantMove.SetActive(false);}
+            if(Stats.S_curMP <= 0){ CantMove.SetActive(true);}
+            else if(Stats.S_curMP > 0){ CantMove.SetActive(false);}
             break;
         }
         break;
@@ -200,7 +201,11 @@ public void Awake()
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 moveDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
         if(Input.GetButton("Fire3")){isRun = true; GameManager.instance.isRun = true;} 
-        if (Input.GetButtonUp("Fire3")){isRun = false; GameManager.instance.isRun = false;} 
+        if (Input.GetButtonUp("Fire3")){isRun = false; GameManager.instance.isRun = false;
+        if (verticalInput == 0 && !top)//Sta fermo
+        {Anm.PlayAnimationLoop(IdleUPAnimationName);} 
+        else if (verticalInput == 0 && top)//Sta fermo
+        {Anm.PlayAnimationLoop(IdleAnimationName);} } 
         // Gestisci la gravità
         if (!characterController.isGrounded)
         {
@@ -269,11 +274,11 @@ public void Awake()
     //DODGE
         // Rileva l'input del tasto spazio
         if (Input.GetMouseButtonDown(1) && canDodge)
-        {Dodge(); PlayerStats.instance.K_curMP -= 5;}
+        {Dodge(); Stats.K_curMP -= 5;}
 
     if (isDodging){characterController.Move(moveDirection * Time.fixedDeltaTime);}
     //Attack
-        if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.F_curMP > 20)
+        if (Input.GetMouseButtonDown(0) && canAttack && Stats.F_curMP > 20)
             {
                 HandleComboAttackF();
                 Stop();
@@ -281,7 +286,7 @@ public void Awake()
                 //AudioManager.instance.PlayUFX(0); 
                 //Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
                 AnimationManager.instance.VFX = true;
-                PlayerStats.instance.F_curMP -= PlayerStats.instance.F_CostMP;  
+                Stats.F_curMP -= Stats.F_CostMP;  
                 //lastAttackTime = Time.time;
             }else {AudioManager.instance.PlayUFX(10);}     
     }
@@ -339,7 +344,7 @@ public void Awake()
         {
             ReleaseChargedShot(); // Funzione da implementare per il colpo caricato
             VFXChargeComplete.SetActive(true);
-            PlayerStats.instance.K_curMP -= 30;
+            Stats.K_curMP -= 30;
         }
         else
         {
@@ -352,10 +357,10 @@ public void Awake()
     }
 
     // Esegue un colpo normale
-    if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.K_curMP > 20 && !isCharging)
+    if (Input.GetMouseButtonDown(0) && canAttack && Stats.K_curMP > 20 && !isCharging)
     {
         HandleComboAttackK();
-        PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
+        Stats.K_curMP -= Stats.K_CostMP;
     }
     else
     {
@@ -402,7 +407,7 @@ private IEnumerator StumpKTime()
            MoveB();  
     //DODGE
         // Rileva l'input del tasto spazio
-        if (Input.GetMouseButtonDown(1) && PlayerStats.instance.S_curMP > 20)
+        if (Input.GetMouseButtonDown(1) && Stats.S_curMP > 20)
         {isDefence = true;}
 
         // Verifica se il tasto del mouse è stato rilasciato
@@ -413,8 +418,8 @@ private IEnumerator StumpKTime()
     
     //Attack
        // Verifica se il tasto del mouse è stato premuto
-         if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.S_curMP > 20 && Stump)
-        {HandleComboAttackS(); PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;} 
+         if (Input.GetMouseButtonDown(0) && canAttack && Stats.S_curMP > 20 && Stump)
+        {HandleComboAttackS(); Stats.S_curMP -= Stats.S_CostMP;} 
         else {AudioManager.instance.PlayUFX(10);}
     }
 
@@ -444,50 +449,48 @@ private IEnumerator StumpKTime()
     public void Allarm(){warning = true;}
     public void StopAllarm(){warning = false;}
     public void TakeDamage(float damage)
+{
+    switch (kindCh)
     {
-        switch (kindCh)
-        {
-            case 0:
-            defense = PlayerStats.instance.F_defense;
-            break;
-            case 1:
-            defense = PlayerStats.instance.K_defense;
-            break; 
-            case 2:
-            defense = PlayerStats.instance.S_defense;
-            break;
-        }
-        danno_subito = Mathf.Max(damage - defense, 0);
-        switch (kindCh)
-        {
-            case 0:
-            if(!canDodge)
-            {PlayerStats.instance.F_curHP -= danno_subito;
-            if(GameManager.instance.F_Unlock){Stats.F_curRage +=  5;}
-            AudioManager.instance.PlaySFX(8);
+        case 0:
+        if (canDodge)
+            {danno_subito = Mathf.Max(damage - Stats.F_defense, 0);
+            Stats.F_curHP -= danno_subito;
+            Stats.F_curRage += 5;
+            AudioManager.instance?.PlaySFX(8);
             Instantiate(VFXHurt, transform.position, transform.rotation);
-            Anm.TemporaryChangeColor(Color.red);
+            Anm?.TemporaryChangeColor(Color.red);}
+            //Debug.Log("danno " +  Stats.F_curHP);
+            break;
+        case 1:
+            danno_subito = Mathf.Max(damage - Stats.K_defense, 0);
+            Stats.K_curHP -= danno_subito;
+            Stats.K_curRage += 5;
+            AudioManager.instance?.PlaySFX(8);
+            Instantiate(VFXHurt, transform.position, transform.rotation);
+            Anm?.TemporaryChangeColor(Color.red);
+            //Debug.Log("danno " +  Stats.K_curHP);
+            break;
+        case 2:
+            if (!isDefence)
+            {
+                danno_subito = Mathf.Max(damage - Stats.S_defense, 0);
+                Stats.S_curHP -= danno_subito;
+                Stats.S_curRage += 5;
+                AudioManager.instance?.PlaySFX(8);
+                Instantiate(VFXHurt, transform.position, transform.rotation);
+                Anm?.TemporaryChangeColor(Color.red);
+                //Debug.Log("danno " +  Stats.S_curHP);
             }
-            break;
-            case 1:
-            PlayerStats.instance.K_curHP -= danno_subito;
-            if(GameManager.instance.K_Unlock){Stats.K_curRage +=  5;}
-            break; 
-            case 2:
-            if(!isDefence)
-            {PlayerStats.instance.S_curHP -= danno_subito;
-            if(GameManager.instance.S_Unlock){Stats.S_curRage +=  5;}
-            AudioManager.instance.PlaySFX(8);
-            Instantiate(VFXHurt, transform.position, transform.rotation);
-            Anm.TemporaryChangeColor(Color.red);
-            }else if(isDefence){
-                PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
+            else
+            {
+                Stats.S_curMP -= Stats.S_CostMP;
                 Instantiate(VFXHhitShield, transform.position, transform.rotation);
             }
             break;
-        }
-        //Debug.Log("danno "+ danno_subito);
     }
+}
+
     #region Stato Veleno
     public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true); poisonState = true;} 
     private IEnumerator Poi()

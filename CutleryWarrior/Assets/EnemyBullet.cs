@@ -7,6 +7,7 @@ public class EnemyBullet : MonoBehaviour
     public float speed = 20f;  // Velocità del proiettile
     private GameObject player;  // Riferimento al giocatore
     public int resultP;
+    public float lifeTime = 1f;
     private CharacterMove F_Script;
     private CharacterFollow ch_FAc;
     private CharacterMove K_Script;
@@ -31,6 +32,7 @@ public class EnemyBullet : MonoBehaviour
 
     private void Start()
     {
+        Destroy(gameObject, lifeTime);
         Choise();
         switch(resultP)
         {
@@ -85,6 +87,13 @@ public class EnemyBullet : MonoBehaviour
             return;
         }
 
+        if (player == null)
+        {
+            Destroy(gameObject);  // Se il giocatore non è più presente, distruggi il proiettile
+            return;
+        }
+
+
         lastKnownPlayerPosition = player.transform.position;  // Aggiorna le coordinate conosciute del giocatore
 
         Vector3 direction = (lastKnownPlayerPosition - transform.position).normalized;  // Calcola la direzione verso il giocatore
@@ -103,8 +112,7 @@ public class EnemyBullet : MonoBehaviour
     }
     public void ForkD()
     {
-        if(GameManager.instance.F_Unlock && !F_Script.isDodging){F_Script.TakeDamage(attackDamage);}
-        else if(GameManager.instance.F_Unlock && F_Script.isDodging){}
+        if(GameManager.instance.F_Unlock){F_Script.TakeDamage(attackDamage);}
         if(GameManager.instance.F_Unlock && !ch_FAc.isGuard){ch_FAc.TakeDamage(attackDamage);}
         else if(GameManager.instance.F_Unlock && ch_FAc.isGuard){ch_FAc.TakeDamage(5);}   
         AudioManager.instance.PlayUFX(9);
