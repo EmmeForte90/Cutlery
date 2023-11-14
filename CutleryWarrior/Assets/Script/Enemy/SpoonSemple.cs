@@ -13,21 +13,15 @@ public class SpoonSemple : MonoBehaviour
     public GameObject player;
     public GameObject Icon;
     public GameObject IconVFX;
-    public GameObject VFXStun;
-    public bool isStun = false;
-    public int StunProbability = 0;
-    public int StunProbabilityCount = 2;
-    public int StunProbabilityMAX = 10;
-    public int result;
-    public bool Test = false;  
-    public int timeStun = 3;
+    //public bool Test = false;  
+    
     private bool take = false; 
     [Header("Hp")]
     public float maxHealth = 100f;
     public float currentHealth;
     public Scrollbar healthBar;
-    public GameObject Stats;
-    public float SpeedRestore = 5f; // il massimo valore di essenza disponibile
+    //public GameObject Stats;
+    //public float SpeedRestore = 5f; // il massimo valore di essenza disponibile
     [Header("Status")]
     public float damagePerSecond = 0.1f;
     public float duration = 5.0f;
@@ -38,6 +32,13 @@ public class SpoonSemple : MonoBehaviour
     public int poisonResistance = 100;
     public int poisonResistanceCont;
     private int TimePoison = 5;   
+    public GameObject VFXStun;
+    public bool isStun = false;
+    public int StunProbability = 0;
+    public int StunProbabilityCount = 2;
+    public int StunProbabilityMAX = 10;
+    public int result;
+    public int timeStun = 3;
 
     [Header("Move")]
     public float moveSpeed = 3f;
@@ -57,10 +58,10 @@ public class SpoonSemple : MonoBehaviour
     [SerializeField] GameObject VFXDie;
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string IdleAnimationName;
-    [SpineAnimation][SerializeField] private string IdleBAnimationName;
+    //[SpineAnimation][SerializeField] private string IdleBAnimationName;
     [SpineAnimation][SerializeField] private string WalkAnimationName;
     [SpineAnimation][SerializeField] private string Atk1AnimationName;
-    [SpineAnimation][SerializeField] private string GuardAnimationName;
+    //[SpineAnimation][SerializeField] private string GuardAnimationName;
     [SpineAnimation][SerializeField] private string DieAnimationName;
     [SpineAnimation][SerializeField] private string StunStartAnimationName;
     [SpineAnimation][SerializeField] private string StunAnimationName;
@@ -281,7 +282,7 @@ private IEnumerator StunTime()
         Instantiate(VFXDie, transform.position, transform.rotation);
         VFXStun.SetActive(false);
         AudioManager.instance.PlayUFX(11);
-        Stats.gameObject.SetActive(false);
+        //Stats.gameObject.SetActive(false);
         DM.EnemyinArena -= 1;
         Anm.ClearAnm();
         Icon.SetActive(false);
@@ -294,6 +295,7 @@ private IEnumerator StunTime()
     {
     Anm.PlayAnimationLoop(DieAnimationName);
     yield return new WaitForSeconds(2f);
+    //Stats.gameObject.SetActive(false);
     Destroy(gameObject);
     }   
 

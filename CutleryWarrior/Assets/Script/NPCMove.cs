@@ -157,12 +157,12 @@ private void MoveToWaypoint()
     {
         Vector3 targetPosition = waypoints[currentWaypointIndex + 1].position;
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
         // Verifica se il personaggio è vicino al punto di destinazione
         if (Vector3.Distance(transform.position, targetPosition) < stoppingDistance)
         {
             isPaused = true;
             pauseTimer = 0f;
+            transform.localScale = new Vector3(-1, 1,1);
 
             // Ruota il personaggio in base all'asse locale X o Z
             if (currentZPosition > previousZPosition)
@@ -187,6 +187,7 @@ private void MoveToWaypoint()
         {
             isPaused = true;
             pauseTimer = 0f;
+            transform.localScale = new Vector3(1, 1,1);
 
             // Incrementa l'indice del waypoint o torna al punto 0 se siamo all'ultimo
             currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;

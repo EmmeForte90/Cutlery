@@ -68,6 +68,7 @@ public class Treasure : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && canOpen)
         {
         canOpen = false;
+        Icon.SetActive(false);
         Anm.Play("Treasure_Anm");
         Instantiate(VFXTake, transform.position, transform.rotation);
         AudioManager.instance.PlaySFX(11);

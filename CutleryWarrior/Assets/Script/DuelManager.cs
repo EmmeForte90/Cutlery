@@ -9,6 +9,7 @@ public class DuelManager : MonoBehaviour
     public GameObject ThisBattle;    
        
     [Header("Arena")]
+    public Vector3 savedPosition;
     public int EnemyinArena;
     private bool win = true;
     public bool WinEnd = false;
@@ -86,6 +87,7 @@ public class DuelManager : MonoBehaviour
 public void Awake()
     {
         if (instance == null){instance = this;}
+        savedPosition = GameManager.instance.savedPosition;
         Animator animator = GetComponent<Animator>();
         if(GameManager.instance.F_Unlock){
         PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
@@ -318,7 +320,7 @@ IEnumerator EndBattle()
     GameManager.instance.Change();
     GameManager.instance.RecalculateCharacter();
     if(isTimeline){ResetCamera();}
-    else if(!isTimeline){SpawnB(ID_Enm);}
+    else if(!isTimeline){SpawnB();}
     GameManager.instance.FadeOut();
     }
 
@@ -345,12 +347,12 @@ IEnumerator EndBattle()
     GameManager.instance.ChCanM();
     Destroy(this);
     }
-    public void SpawnB(int ID)
+    public void SpawnB()
     {
     GameManager.instance.battle = false;
-    if(GameManager.instance.F_Unlock){FAct.transform.position = GameManager.instance.savedPosition;}
-    if(GameManager.instance.K_Unlock){KAct.transform.position = GameManager.instance.savedPosition;}
-    if(GameManager.instance.S_Unlock){SAct.transform.position = GameManager.instance.savedPosition;}
+    if(GameManager.instance.F_Unlock){FAct.transform.position = savedPosition;}
+    if(GameManager.instance.K_Unlock){KAct.transform.position = savedPosition;}
+    if(GameManager.instance.S_Unlock){SAct.transform.position = savedPosition;}
     foreach (GameObject arenaObject in Enemies){arenaObject.SetActive(false);}
     GameManager.instance.StopWin();
     GameManager.instance.ChCanM();

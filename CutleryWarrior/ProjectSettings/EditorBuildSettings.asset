@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InnerCity.unity
     guid: 286e4ed03b450b5499deb531a00417fa
+  - enabled: 1
+    path: Assets/Scenes/Miniera.unity
+    guid: ad123b354ef4fa947bdf92277bf9429e
   - enabled: 0
     path: Assets/Scenes/TestBattle.unity
     guid: a253503fcfd8462438c507987e1018f8

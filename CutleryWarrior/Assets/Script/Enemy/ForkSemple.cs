@@ -19,14 +19,14 @@ public class ForkSemple : MonoBehaviour
     public int StunProbabilityCount = 2;
     public int StunProbabilityMAX = 10;
     public int result;
-    public bool Test = false;   
+    //public bool Test = false;   
     private bool take = false; 
     [Header("Hp")]
     public float maxHealth = 100f;
     public float currentHealth;
     public Scrollbar healthBar;
-    public GameObject Stats;
-    public float SpeedRestore = 5f; // il massimo valore di essenza disponibile
+    //public GameObject Stats;
+    //public float SpeedRestore = 5f; // il massimo valore di essenza disponibile
     [Header("Status")]
     public float damagePerSecond = 0.1f;
     public float duration = 5.0f;
@@ -294,7 +294,7 @@ private IEnumerator StunTime()
         Instantiate(VFXDie, transform.position, transform.rotation);
         VFXStun.SetActive(false);
         AudioManager.instance.PlayUFX(11);
-        Stats.gameObject.SetActive(false);
+        //Stats.gameObject.SetActive(false);
         DM.EnemyinArena -= 1;
         Anm.ClearAnm();
         Icon.SetActive(false);
