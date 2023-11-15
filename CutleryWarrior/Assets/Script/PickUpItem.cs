@@ -13,6 +13,7 @@ public class PickUpItem : MonoBehaviour
     public int specificQuant;
     [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-Weapom 4-Armor")]
     private int KindItem;
+    private bool takeitem = true;
     public bool IsQuest = false;
     public Quests Quest;
     [Header("Skill List")]
@@ -60,12 +61,16 @@ public class PickUpItem : MonoBehaviour
     }
     public void Touch()
     {
+        if(takeitem)
+        {
         Instantiate(VFXTake, transform.position, transform.rotation);
         AudioManager.instance.PlayUFX(5);
         AddSpecificItem();
         if(!StartGame){Inventory.instance.Reward(specificItem, specificQuant);}
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
         Inventory.instance.itemsArea(Id);
+        takeitem = false;
+        }
     }
     void AddSpecificItem()
     {

@@ -9,6 +9,7 @@ public class EventCinematic : MonoBehaviour
     private SwitchCharacter Switch;    
     public GameObject PointView;
     public bool HavePersistOBJ = false;
+    public bool Viewcam = false;
     public GameObject PersistOBJ;
     public float TimeWait;
     private Transform Player;
@@ -51,7 +52,7 @@ public class EventCinematic : MonoBehaviour
         GameManager.instance.ChStop();
         GameManager.instance.Allarm();
         CameraZoom.instance.ZoomIn();
-        vcam.Follow = PointView.transform;
+        if(Viewcam){vcam.Follow = PointView.transform;}
         //AudioManager.instance.CrossFadeINAudio(1);
         StartCoroutine(WaitForSceneLoad());
     }
@@ -62,7 +63,7 @@ public class EventCinematic : MonoBehaviour
     GameManager.instance.StopAllarm();
     GameManager.instance.Change();
     GameManager.instance.ChCanM();
-    vcam.Follow = Player.transform;
+    if(Viewcam){vcam.Follow = Player.transform;}
     EventManager.instance.EventDesertEnd(IdEvent);
     foreach (GameObject arenaObject in DeactiveObj){arenaObject.SetActive(false);}
     }
