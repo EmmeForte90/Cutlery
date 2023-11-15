@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class DuelManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class DuelManager : MonoBehaviour
     public int EnemyinArena;
     private bool win = true;
     public bool WinEnd = false;
+    public bool Ending = false;
+    public int DieCont = 0;
+    public GameObject GameOverBox;
     public AttStats Stats;
     //public Item[] Rewards;
     private int result;
@@ -88,6 +92,11 @@ public void Awake()
     {
         if (instance == null){instance = this;}
         savedPosition = GameManager.instance.savedPosition;
+        //
+        if(GameManager.instance.F_Unlock){DieCont++;}       
+        if(GameManager.instance.S_Unlock){DieCont++;}      
+        if(GameManager.instance.K_Unlock){DieCont++;}
+        //
         Animator animator = GetComponent<Animator>();
         if(GameManager.instance.F_Unlock){
         PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
@@ -135,7 +144,7 @@ public void Update()
     {
         if(GameManager.instance.F_Unlock){
         FhealthBar.size = PlayerStats.instance.F_curHP / PlayerStats.instance.F_HP;
-        FhealthBar.size = Mathf.Clamp(FhealthBar.size, 0.01f, 1);
+        FhealthBar.size = Mathf.Clamp(FhealthBar.size, 0.01f, 1);        
         //
         FMPBar.size = PlayerStats.instance.F_curMP / PlayerStats.instance.F_MP;
         FMPBar.size = Mathf.Clamp(FMPBar.size, 0.01f, 1);
@@ -195,11 +204,11 @@ public void Update()
         {MaxRageF.SetActive(false);}
         //
         if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curHP <= 0)
-        {GameManager.instance.PoseDeathS();}
+        {GameManager.instance.PoseDeathS(); DieCont--;}
         if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curHP <= 0)
-        {GameManager.instance.PoseDeathK();}
+        {GameManager.instance.PoseDeathK(); DieCont--;}
         if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curHP <= 0)
-        {GameManager.instance.PoseDeathF();}
+        {GameManager.instance.PoseDeathF(); DieCont--;}
         //
         if(GameManager.instance.F_Unlock && PlayerStats.instance.F_paralysisResistance <= 0)
         {GameManager.instance.StunF();}
@@ -253,7 +262,31 @@ public void Update()
         if(EnemyinArena <= 0){StartCoroutine(EndBattle());}
         //
         if(WinEnd){if(Input.GetMouseButtonDown(0)){StartCoroutine(RetunBattle());}}
+        if(DieCont <= 0){StartCoroutine(GameOver());}   
+        if(Ending){if(Input.GetMouseButtonDown(0)){StartCoroutine(ReturnMainMenu());}} 
+
     }
+    IEnumerator GameOver()
+    {
+        inputCTR = true;
+        AudioManager.instance.CrossFadeOUTAudio(1);
+       yield return new WaitForSeconds(5f);
+        AudioManager.instance.StopMFX(1);
+       AudioManager.instance.PlayMFX(2);
+       GameOverBox.SetActive(true);
+       Ending = true;
+    }
+
+    IEnumerator ReturnMainMenu()
+    {   
+    GameManager.instance.FadeIn();
+    yield return new WaitForSeconds(2f);
+    GameManager.instance.FadeOut();
+    GameManager.instance.StartGame = true;
+    SceneManager.LoadScene (sceneName:"MainMenu");
+    GameManager.instance.DestroyManager();
+    }
+    
 
     // Metodo per iniziare il danno nel tempo
     public void StartDamaging()

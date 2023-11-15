@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 public class GameManager : MonoBehaviour
 {
     #region Header  
+    public GameObject GM;
     public bool StartGame = false;    
     public GameObject player;
     public GameObject Fork;
@@ -443,6 +444,8 @@ public class GameManager : MonoBehaviour
             TimerM.gameObject.SetActive(false);
             AudioManager.instance.PlayUFX(1);   
         }
+    public void DestroyManager(){GameManagerExist = false; Destroy(GM);}
+    
     public void StatPlayer()
     {
     //Fork

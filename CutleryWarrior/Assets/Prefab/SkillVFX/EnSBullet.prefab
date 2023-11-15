@@ -24178,7 +24178,7 @@ MonoBehaviour:
   speed: 50
   OBJ: {fileID: 8398752575585346106}
   lifeTime: 0.5
-  attackDamage: 20
+  attackDamage: 15
   hitEffect: {fileID: 1920225923742602794, guid: 2b204abdb96feae43ba8dab437bf8026,
     type: 3}
 --- !u!199 &4497444391694307622
