@@ -97,7 +97,7 @@ public void Awake()
         if(GameManager.instance.S_Unlock){DieCont++;}      
         if(GameManager.instance.K_Unlock){DieCont++;}
         //
-        Animator animator = GetComponent<Animator>();
+        //Animator animator = GetComponent<Animator>();
         if(GameManager.instance.F_Unlock){
         PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
         PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;}
@@ -281,7 +281,6 @@ public void Update()
     {   
     GameManager.instance.FadeIn();
     yield return new WaitForSeconds(2f);
-    GameManager.instance.FadeOut();
     GameManager.instance.StartGame = true;
     SceneManager.LoadScene (sceneName:"MainMenu");
     GameManager.instance.DestroyManager();

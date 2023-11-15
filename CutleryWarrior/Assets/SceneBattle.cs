@@ -86,7 +86,7 @@ public class SceneBattle : MonoBehaviour
     GameManager.instance.StopAllarm();
     GameManager.instance.Posebattle();
     BattleObj.SetActive(true);
-    EventManager.instance.EventDesertEnd(IdEvent);
+    PlayerStats.instance.EventDesertEnd(IdEvent);
     foreach (GameObject arenaObject in DeactiveObj){arenaObject.SetActive(false);}
     }
 }

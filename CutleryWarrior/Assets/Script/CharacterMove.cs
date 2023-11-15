@@ -12,26 +12,26 @@ public class CharacterMove : MonoBehaviour
     [Tooltip("Scegli personaggi 0.Fork 1.Knife 2.Spoon")]
     [Range(0, 2)]
     public int kindCh;
-    public PlayerStats Stats;
+    //public PlayerStats Stats;
 
     [Tooltip("0 - Exploration, 1 - Battle")]
     public int IDAction = 0; //Che tipo di personaggio è
     public GameObject Esclamation;
     public bool Attention;
     public GameObject CantMove;
-    public GameObject Bullet;
-    public Transform BPoint;
+    //public GameObject Bullet;
+    //public Transform BPoint;
     private Rigidbody rb;  
     [Header("Move")]
     public float Speed = 5.0f;
     public float SpeedB = 3.0f;
     public float Run = 3.0f;
     private Transform cam;
-    Vector2 input;
-    public Transform SpriteHero;
-    private bool stand = true;
+    //Vector2 input;
+    //public Transform SpriteHero;
+    //private bool stand = true;
     public bool isRun = false;
-    private bool StopRun = false;
+    //private bool StopRun = false;
     public bool inputCTR = false;
     public bool Interact = false;
     public bool Win = false;
@@ -60,7 +60,7 @@ public class CharacterMove : MonoBehaviour
     private float danno_subito;
     private bool poisonState = false;
     private int TimePoison = 5;   
-    private bool Right = true; 
+    //private bool Right = true; 
     public bool isMoving;
    
     [Header("Animations")]
@@ -71,41 +71,41 @@ public class CharacterMove : MonoBehaviour
     [SpineAnimation][SerializeField]  string IdleAnimationName;
     [SpineAnimation][SerializeField]  string IdleUPAnimationName;
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
-    [SpineAnimation][SerializeField]  string WalkBAnimationName;
+    //[SpineAnimation][SerializeField]  string WalkBAnimationName;
     [SpineAnimation][SerializeField]  string RunBAnimationName;
     [SpineAnimation][SerializeField]  string TalkingAnimationName;
     [SpineAnimation][SerializeField]  string AllarmAnimationName;
-    [SpineAnimation][SerializeField]  string Atk1AnimationName;
-    [SpineAnimation][SerializeField]  string Atk2AnimationName;
-    [SpineAnimation][SerializeField]  string Atk3AnimationName;
-    [SpineAnimation][SerializeField]  string Atk4AnimationName;
+    //[SpineAnimation][SerializeField]  string Atk1AnimationName;
+    //[SpineAnimation][SerializeField]  string Atk2AnimationName;
+    //[SpineAnimation][SerializeField]  string Atk3AnimationName;
+    //[SpineAnimation][SerializeField]  string Atk4AnimationName;
     [SpineAnimation][SerializeField]  string ChargeFAnimationName;
     [SpineAnimation][SerializeField]  string ReleaseChargeFAnimationName;
     [SpineAnimation][SerializeField]  string GuardAnimationName;
     [SpineAnimation][SerializeField]  string GuardWalkAnimationName;
-    [SpineAnimation][SerializeField]  string GuardRunAnimationName;
-    [SpineAnimation][SerializeField]  string GuardHitAnimationName;
+    //[SpineAnimation][SerializeField]  string GuardRunAnimationName;
+    //[SpineAnimation][SerializeField]  string GuardHitAnimationName;
     [SpineAnimation][SerializeField]  string DodgeFAnimationName;
-    [SpineAnimation][SerializeField]  string DodgeBAnimationName;
+    //[SpineAnimation][SerializeField]  string DodgeBAnimationName;
     [SpineAnimation][SerializeField]  string StumpAnimationName;
-    [SpineAnimation][SerializeField]  string WinAnimationName;
-    private string currentAnimationName;
+    //[SpineAnimation][SerializeField]  string WinAnimationName;
+    //private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
-    Spine.EventData eventData;
+    //Spine.EventData eventData;
     private SwitchCharacter Switch;
-    private Transform Player;
+    //private Transform Player;
     public bool isDefence = false;
     public AnimationManager Anm;
-    Vector3 camF,camR,moveDir;  
+    //Vector3 camF,camR,moveDir;  
     [Header("Dodge and Knockback")]    
     private DodgeController DodgeController;
     private KnockbackController knockbackController;       
     [Header("VFX")]
-    public GameObject VFXDodge;
+    //public GameObject VFXDodge;
     public GameObject VFXHhitShield;
-    public GameObject VFXStump;
+    //public GameObject VFXStump;
     public GameObject VFXPoison;
     public GameObject VFXHurt;
     public GameObject VFXCharge;
@@ -113,11 +113,11 @@ public class CharacterMove : MonoBehaviour
     public GameObject VFXChargeMAX;
 
     [Header("Attacks")]
-    private bool isAttacking = false;
-    public float comboTimer = 0.5f; // Tempo di attesa tra le combo
-    public float DodgeSTimer = 0.5f; // Tempo di attesa tra le combo
-    private float lastAttackTime = 0f;
-    private float DodgeTime = 0f;
+    //private bool isAttacking = false;
+    //public float comboTimer = 0.5f; // Tempo di attesa tra le combo
+    //public float DodgeSTimer = 0.5f; // Tempo di attesa tra le combo
+    //private float lastAttackTime = 0f;
+    //private float DodgeTime = 0f;
     private CharacterController characterController; // Riferimento al CharacterController
     public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
     public static CharacterMove instance;
@@ -164,18 +164,18 @@ public void Awake()
         {
             case 0:
             ForkB();
-            if(Stats.F_curMP <= 0){ CantMove.SetActive(true);}
-            else if(Stats.F_curMP > 0){ CantMove.SetActive(false);}
+            if(PlayerStats.instance.F_curMP <= 0){ CantMove.SetActive(true);}
+            else if(PlayerStats.instance.F_curMP > 0){ CantMove.SetActive(false);}
             break;
             case 1:
             KnifeB();
-            if(Stats.K_curMP <= 0){ CantMove.SetActive(true);}
-            else if(Stats.K_curMP > 0){ CantMove.SetActive(false);}
+            if(PlayerStats.instance.K_curMP <= 0){ CantMove.SetActive(true);}
+            else if(PlayerStats.instance.K_curMP > 0){ CantMove.SetActive(false);}
             break; 
             case 2:
             SpoonB();
-            if(Stats.S_curMP <= 0){ CantMove.SetActive(true);}
-            else if(Stats.S_curMP > 0){ CantMove.SetActive(false);}
+            if(PlayerStats.instance.S_curMP <= 0){ CantMove.SetActive(true);}
+            else if(PlayerStats.instance.S_curMP > 0){ CantMove.SetActive(false);}
             break;
         }
         break;
@@ -233,7 +233,7 @@ public void Awake()
         else if (horizontalInput < 0 && top)//Sta fermo
         {Anm.PlayAnimationLoop(WalkAnimationName); top = true; } 
            
-        stand = false;  
+        //stand = false;  
         characterController.Move(moveDirection * Speed * Time.deltaTime);
         } 
         else if (!Interact && isRun && isMoving)//Sta correndo
@@ -251,15 +251,15 @@ public void Awake()
         else if (horizontalInput < 0 && top)//Sta fermo
         {Anm.PlayAnimationLoop(RunAnimationName); top = true; }  
 
-        stand = false; 
+        //stand = false; 
         characterController.Move(moveDirection * Run * Time.deltaTime);
         }
         else if (!Interact && !isRun && !isMoving)//Sta fermo
         {if (verticalInput == 0 && !top)//Sta fermo
         {Anm.PlayAnimationLoop(IdleUPAnimationName);} 
         else if (verticalInput == 0 && top)//Sta fermo
-        {Anm.PlayAnimationLoop(IdleAnimationName);} 
-        stand = true;}
+        {Anm.PlayAnimationLoop(IdleAnimationName);} }
+        //stand = true;}
         hor = Input.GetAxisRaw("Horizontal");  
         isMoving = Mathf.Abs(hor) > 0.0f || Mathf.Abs(verticalInput) > 0.0f;
         }
@@ -274,11 +274,11 @@ public void Awake()
     //DODGE
         // Rileva l'input del tasto spazio
         if (Input.GetMouseButtonDown(1) && canDodge)
-        {Dodge(); Stats.K_curMP -= 5;}
+        {Dodge(); PlayerStats.instance.K_curMP -= 5;}
 
     if (isDodging){characterController.Move(moveDirection * Time.fixedDeltaTime);}
     //Attack
-        if (Input.GetMouseButtonDown(0) && canAttack && Stats.F_curMP > 20)
+        if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.F_curMP > 20)
             {
                 HandleComboAttackF();
                 Stop();
@@ -286,7 +286,7 @@ public void Awake()
                 //AudioManager.instance.PlayUFX(0); 
                 //Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
                 AnimationManager.instance.VFX = true;
-                Stats.F_curMP -= Stats.F_CostMP;  
+                PlayerStats.instance.F_curMP -= PlayerStats.instance.F_CostMP;  
                 //lastAttackTime = Time.time;
             }else {AudioManager.instance.PlayUFX(10);}     
     }
@@ -344,7 +344,7 @@ public void Awake()
         {
             ReleaseChargedShot(); // Funzione da implementare per il colpo caricato
             VFXChargeComplete.SetActive(true);
-            Stats.K_curMP -= 30;
+            PlayerStats.instance.K_curMP -= 30;
         }
         else
         {
@@ -357,10 +357,10 @@ public void Awake()
     }
 
     // Esegue un colpo normale
-    if (Input.GetMouseButtonDown(0) && canAttack && Stats.K_curMP > 20 && !isCharging)
+    if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.K_curMP > 20 && !isCharging)
     {
         HandleComboAttackK();
-        Stats.K_curMP -= Stats.K_CostMP;
+        PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
     }
     else
     {
@@ -407,7 +407,7 @@ private IEnumerator StumpKTime()
            MoveB();  
     //DODGE
         // Rileva l'input del tasto spazio
-        if (Input.GetMouseButtonDown(1) && Stats.S_curMP > 20)
+        if (Input.GetMouseButtonDown(1) && PlayerStats.instance.S_curMP > 20)
         {isDefence = true;}
 
         // Verifica se il tasto del mouse è stato rilasciato
@@ -418,8 +418,8 @@ private IEnumerator StumpKTime()
     
     //Attack
        // Verifica se il tasto del mouse è stato premuto
-         if (Input.GetMouseButtonDown(0) && canAttack && Stats.S_curMP > 20 && Stump)
-        {HandleComboAttackS(); Stats.S_curMP -= Stats.S_CostMP;} 
+         if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.S_curMP > 20 && Stump)
+        {HandleComboAttackS(); PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;} 
         else {AudioManager.instance.PlayUFX(10);}
     }
 
@@ -454,18 +454,18 @@ private IEnumerator StumpKTime()
     {
         case 0:
         if (canDodge)
-            {danno_subito = Mathf.Max(damage - Stats.F_defense, 0);
-            Stats.F_curHP -= danno_subito;
-            Stats.F_curRage += 5;
+            {danno_subito = Mathf.Max(damage - PlayerStats.instance.F_defense, 0);
+            PlayerStats.instance.F_curHP -= danno_subito;
+            PlayerStats.instance.F_curRage += 5;
             AudioManager.instance?.PlaySFX(8);
             Instantiate(VFXHurt, transform.position, transform.rotation);
             Anm?.TemporaryChangeColor(Color.red);}
             //Debug.Log("danno " +  Stats.F_curHP);
             break;
         case 1:
-            danno_subito = Mathf.Max(damage - Stats.K_defense, 0);
-            Stats.K_curHP -= danno_subito;
-            Stats.K_curRage += 5;
+            danno_subito = Mathf.Max(damage - PlayerStats.instance.K_defense, 0);
+            PlayerStats.instance.K_curHP -= danno_subito;
+            PlayerStats.instance.K_curRage += 5;
             AudioManager.instance?.PlaySFX(8);
             Instantiate(VFXHurt, transform.position, transform.rotation);
             Anm?.TemporaryChangeColor(Color.red);
@@ -474,9 +474,9 @@ private IEnumerator StumpKTime()
         case 2:
             if (!isDefence)
             {
-                danno_subito = Mathf.Max(damage - Stats.S_defense, 0);
-                Stats.S_curHP -= danno_subito;
-                Stats.S_curRage += 5;
+                danno_subito = Mathf.Max(damage - PlayerStats.instance.S_defense, 0);
+                PlayerStats.instance.S_curHP -= danno_subito;
+                PlayerStats.instance.S_curRage += 5;
                 AudioManager.instance?.PlaySFX(8);
                 Instantiate(VFXHurt, transform.position, transform.rotation);
                 Anm?.TemporaryChangeColor(Color.red);
@@ -484,7 +484,7 @@ private IEnumerator StumpKTime()
             }
             else
             {
-                Stats.S_curMP -= Stats.S_CostMP;
+                PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
                 Instantiate(VFXHhitShield, transform.position, transform.rotation);
             }
             break;
@@ -535,17 +535,17 @@ private IEnumerator StumpKTime()
         moveDirection = transform.TransformDirection(moveDirection);
         //
         if (isDefence && !isMoving && Stump)
-        {Anm.PlayAnimationLoop(GuardAnimationName); stand = false;} 
+        {Anm.PlayAnimationLoop(GuardAnimationName);} 
         else if (!isDefence && isMoving && Stump)
-        {Anm.PlayAnimationLoop(RunBAnimationName); stand = false; 
+        {Anm.PlayAnimationLoop(RunBAnimationName);  
         characterController.Move(moveDirection * SpeedB * Time.deltaTime);}
         else if (isDefence && isMoving && Stump)
-        {Anm.PlayAnimationLoop(GuardWalkAnimationName); stand = false; 
+        {Anm.PlayAnimationLoop(GuardWalkAnimationName); 
         characterController.Move(moveDirection * Speed * Time.deltaTime);}
         else if (!isDefence && !isMoving && Stump)
-        {Anm.PlayAnimationLoop(IdleBAnimationName); stand = true;}
+        {Anm.PlayAnimationLoop(IdleBAnimationName);}
         else if (!Stump)
-        {Anm.PlayAnimationLoop(StumpAnimationName); stand = true;}
+        {Anm.PlayAnimationLoop(StumpAnimationName);}
         if(!isDodging){hor = Input.GetAxisRaw("Horizontal"); 
         isMoving = (Mathf.Abs(hor) > 0.0f || Mathf.Abs(verticalInput) > 0.0f) && !isDefence;}
         if (poisonState){StartCoroutine(Poi());}     
@@ -562,14 +562,14 @@ private IEnumerator StumpKTime()
     public void LeftD(){transform.localScale = new Vector3(-1, 1,1);}
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void OnCollisionEnter(Collision collision)
-    {if (collision.gameObject.CompareTag("Collider")){StopRun = true;}
+    {if (collision.gameObject.CompareTag("Collider")){}//StopRun = true;}
     if (collision.gameObject.CompareTag("Question")){Attention = true;}
     /*if (collision.gameObject.CompareTag("Scene"))
     {transform.localScale = new Vector3(-1, 1,1);}*/
     }
 
     public void OnCollisionExit(Collision collision)
-    {if (collision.gameObject.CompareTag("Collider")){StopRun = false;}
+    {if (collision.gameObject.CompareTag("Collider")){}//StopRun = false;}
     if (collision.gameObject.CompareTag("Question")){Attention = false;}}
     
 }

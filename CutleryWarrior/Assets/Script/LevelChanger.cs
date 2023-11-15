@@ -5,11 +5,14 @@ public class LevelChanger : MonoBehaviour
 {
     public string sceneName;
     public int IDPorta;
+    public bool Loading = false;
     private SceneEvent sceneEvent;
     public void Start()
     {
     sceneEvent = GetComponent<SceneEvent>();
     sceneEvent.onSceneChange.AddListener(ChangeScene);
+    Loading = PlayerStats.instance.CanLoading;
+    if(Loading){sceneName = PlayerStats.instance.NameScene;}
     }
     private void ChangeScene()
     {

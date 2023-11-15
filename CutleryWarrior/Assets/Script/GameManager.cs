@@ -1,10 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using Cinemachine;
 using TMPro;
-using UnityEngine.AI;
-using System.Xml.Serialization;
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     #region Header  
@@ -13,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject Fork;
     public GameObject[] OrderFork;
-    public  bool F_Unlock = true; 
+    public bool F_Unlock = true; 
     public GameObject Spoon;
     public GameObject[] OrderSpoon;
     public  bool S_Unlock = false; 
@@ -149,6 +148,15 @@ public class GameManager : MonoBehaviour
     //[SerializeField] GameObject ExpObjectM;
     public UIRotationSwitcher rotationSwitcher;
     public SwitchCharacter SwitcherUI;
+
+    public GameObject[] Skill_FI;
+    public GameObject[] Skill_FIB;
+
+    public GameObject[] Skill_KI;
+    public GameObject[] Skill_KIB;
+
+    public GameObject[] Skill_SI;
+    public GameObject[] Skill_SIB;
     public int IdENM;
     public bool NotTouchOption = false;
     public static GameManager instance;
@@ -589,9 +597,20 @@ public class GameManager : MonoBehaviour
     }
     public void Change(){notChange = false;} 
     public void NotChange(){notChange = true;} 
-    public void ActiveMinimap(){Minimap.SetActive(true);GameManager.instance.battle = false;}
-    public void DectiveMinimap(){Minimap.SetActive(false);GameManager.instance.battle = true;}
-
+    public void ActiveMinimap(){Minimap.SetActive(true);battle = false;}
+    public void DectiveMinimap(){Minimap.SetActive(false);battle = true;}
+    public void ReturnMainMenu()
+        {   
+        FadeIn();
+        StartGame = true;
+        StartCoroutine(enoughGame());
+        }
+    IEnumerator enoughGame()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene (sceneName:"MainMenu");
+        DestroyManager();
+    }
     public void TakeCamera()
     {
         if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}

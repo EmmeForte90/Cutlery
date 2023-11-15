@@ -64,7 +64,7 @@ public class EventCinematic : MonoBehaviour
     GameManager.instance.Change();
     GameManager.instance.ChCanM();
     if(Viewcam){vcam.Follow = Player.transform;}
-    EventManager.instance.EventDesertEnd(IdEvent);
+    PlayerStats.instance.EventDesertEnd(IdEvent);
     foreach (GameObject arenaObject in DeactiveObj){arenaObject.SetActive(false);}
     }
 }

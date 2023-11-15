@@ -30,7 +30,7 @@ public class CameraWarning : MonoBehaviour
         if(Input.GetButtonDown("Fire1")){Box.SetActive(false);
         vcam.Follow = Player.transform;
         GameManager.instance.ChCanM();
-        EventManager.instance.EventDesertEnd(IdEvent);
+        PlayerStats.instance.EventDesertEnd(IdEvent);
         Destroy(This);}}}
 
     public void OnTriggerEnter(Collider collision)

@@ -14,7 +14,7 @@ public class Oste : MonoBehaviour
     public GameObject Menu;
 
     public Dialogues DManager;
-    private bool changeD = false; // o la variabile che deve attivare la sostituzione
+    //private bool changeD = false; // o la variabile che deve attivare la sostituzione
     private bool StopButton = false; // o la variabile che deve attivare la sostituzione
     public GameObject PointSpawn;
     private CinemachineConfiner confiner;
@@ -26,7 +26,7 @@ public class Oste : MonoBehaviour
     public bool needDeactivateObject;
     public GameObject[] objDeactivate;
     public GameObject[] objActivate;
-    public int IDCharater;
+    //public int IDCharater;
     private string[] dialogue; // array of string to store the dialogues
     private GameObject player; // Reference to the player's position
     public TextMeshProUGUI dialogueText; // Reference to the TextMeshProUGUI component
@@ -36,11 +36,11 @@ public class Oste : MonoBehaviour
     public float dialogueDuration; // variable to set the duration of the dialogue
     private int dialogueIndex; // variable to keep track of the dialogue status
     private float elapsedTime; // variable to keep track of the elapsed time
-    private Animator anim; // componente Animator del personaggio
+    //private Animator anim; // componente Animator del personaggio
     public bool isInteragible;
     public bool heFlip;    
-    private bool EndDia = false;
-    public bool moreDialogue;
+    //private bool EndDia = false;
+    //public bool moreDialogue;
     private bool _isInTrigger;
     private bool _isDialogueActive;
     private bool Talk = false;
@@ -53,7 +53,7 @@ public class Oste : MonoBehaviour
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
-    Spine.EventData eventData;
+    //Spine.EventData eventData;
     [Header("Audio")]
     [Tooltip("0,1-Male 2,3-Female 4-Kid")]
     public int IDAudio;    
@@ -243,7 +243,7 @@ public class Oste : MonoBehaviour
         dialogueIndex++; // Increment the dialogue index
         if (dialogueIndex >= dialogue.Length)
         {
-            EndDia = true;
+            //EndDia = true;
             Menu.gameObject.SetActive(true);
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
         }

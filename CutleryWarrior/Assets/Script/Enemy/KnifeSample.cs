@@ -32,7 +32,7 @@ public class KnifeSample : MonoBehaviour
     private float elapsedTime = 0.0f;
     private bool isDamaging = false;
     public GameObject VFXPoison;
-    private bool poisonState = false;
+    //private bool poisonState = false;
     public int poisonResistance = 100;
     public int poisonResistanceCont;
     private int TimePoison = 5;   
@@ -185,12 +185,12 @@ public class KnifeSample : MonoBehaviour
         } 
     }
     #region Stato Veleno
-    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true); poisonState = true;} 
+    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true);}// poisonState = true;} 
     private IEnumerator Poi()
     {
         yield return new WaitForSeconds(TimePoison);
         poisonResistance = poisonResistanceCont; 
-        poisonState = false;
+        //poisonState = false;
     }
     #endregion
     private void StartAttack()

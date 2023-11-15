@@ -2,12 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using System.Data.SqlTypes;
 
 [System.Serializable]
 public class PlayerStats : MonoBehaviour
 {
     #region Header
     [Header("Stats")]
+    public bool HaveData = false;
+    public bool CanLoading = false;
+    public string NameScene;
+    public Vector3 savedPosition;
+    public bool F_Unlock = true; 
+    public  bool S_Unlock = false; 
+    public  bool K_Unlock = false;
+    public int Money;
+
     [Header("Fork")]
     [SerializeField] public int F_LV = 1;
     [SerializeField] public float F_HP = 0;
@@ -109,18 +121,61 @@ public class PlayerStats : MonoBehaviour
     public static PlayerStats instance;
     [Header("Skill List")]
     public bool[] Skill_F;
-    public GameObject[] Skill_FI;
-    public GameObject[] Skill_FIB;
-    public bool[] Skill_K;
-    public GameObject[] Skill_KI;
-    public GameObject[] Skill_KIB;
+    public bool[] Skill_K; 
     public bool[] Skill_S;
-    public GameObject[] Skill_SI;
-    public GameObject[] Skill_SIB;
+    
+    [Header("Item List")]
+    public List<Item> I_itemList = new List<Item>();
+    public List<int> I_quantityList = new List<int>();
+    public List<Item> IBattle_itemList = new List<Item>();
+    public List<int> IBattle_quantityList = new List<int>();
+    public List<Item> F_itemList = new List<Item>();
+    public List<int> F_quantityList = new List<int>();
+    public List<Item> S_itemList = new List<Item>();
+    public List<int> S_quantityList = new List<int>();
+    public List<Item> K_itemList = new List<Item>();
+    public List<int> K_quantityList = new List<int>();
+    public List<Item> Key_itemList = new List<Item>();
+    public List<int> Key_quantityList = new List<int>();
+    public List<Item> Quest_itemList = new List<Item>();
+    public List<int> Quest_quantityList = new List<int>();
+    
+    [Header("Events")]
+    public bool[] EventsDesert;    
+
+
     #endregion
-    public void Awake(){if (instance == null){instance = this;}}
+    public void Awake(){if (instance == null){instance = this;} 
+    transform.parent = null;
+    DontDestroyOnLoad(gameObject); }
     public void Start()
     {
+    Money = GameManager.instance.money;
+    F_Unlock = GameManager.instance.F_Unlock;
+    K_Unlock = GameManager.instance.K_Unlock;
+    S_Unlock = GameManager.instance.S_Unlock;
+    //
+    I_itemList = Inventory.instance.itemList;
+    I_quantityList = Inventory.instance.quantityList;
+    //
+    IBattle_itemList = InventoryB.instance.itemList;
+    IBattle_quantityList = InventoryB.instance.quantityList;
+    //
+    F_itemList = EquipM_F.instance.itemList;
+    F_quantityList = EquipM_F.instance.quantityList;
+    //
+    K_itemList = EquipM_K.instance.itemList;
+    K_quantityList = EquipM_K.instance.quantityList;
+    //
+    S_itemList = EquipM_S.instance.itemList;
+    S_quantityList = EquipM_S.instance.quantityList;
+    //
+    Key_itemList = KeyManager.instance.itemList;
+    Key_quantityList = KeyManager.instance.quantityList;
+    //
+    Quest_itemList = QuestsManager.instance.itemList;
+    Quest_quantityList = QuestsManager.instance.quantityList;
+    //
     if(GameManager.instance.F_Unlock){
     F_HPCont = F_HP;
     F_curHP = F_HP;
@@ -200,7 +255,58 @@ public class PlayerStats : MonoBehaviour
     K_sleepResistanceCont = K_sleepResistance;
     K_rustResistanceCont = K_rustResistance;}  
     }
+
+     public void EventDesertEnd(int id){EventsDesert[id] = true;}
     
+    public void UpdateInventorySaving()
+    {
+    I_itemList = Inventory.instance.itemList;
+    I_quantityList = Inventory.instance.quantityList;
+    //
+    F_itemList = EquipM_F.instance.itemList;
+    F_quantityList = EquipM_F.instance.quantityList;
+    //
+    K_itemList = EquipM_K.instance.itemList;
+    K_quantityList = EquipM_K.instance.quantityList;
+    //
+    S_itemList = EquipM_S.instance.itemList;
+    S_quantityList = EquipM_S.instance.quantityList;
+    //
+    Key_itemList = KeyManager.instance.itemList;
+    Key_quantityList = KeyManager.instance.quantityList;
+    //
+    Quest_itemList = QuestsManager.instance.itemList;
+    Quest_quantityList = QuestsManager.instance.quantityList;
+    }
+
+    public void DeactivateWarning()
+    {
+        // Cerca tutti i GameObjects con il tag "Enemy"
+        GameObject[] WarningEvent = GameObject.FindGameObjectsWithTag("Event");
+    
+    foreach (GameObject Character in WarningEvent)
+        {
+            // Ottiene il componente QuestCharacters
+            CameraWarning Event = Character.GetComponent<CameraWarning>();
+
+            // Verifica se il componente esiste
+            if (Event != null)
+            {
+                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
+                int Id = Event.IdEvent;
+                for (int i = 0; i <  EventsDesert.Length; i++)
+                {
+                    if ( EventsDesert[i] && i == Id)
+                    {
+                        // Imposta ordaliT.FirstD a false
+                        Event.Take();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
 
 
 
@@ -260,9 +366,9 @@ public class PlayerStats : MonoBehaviour
     }
 
 
-    public void FSkillATT(int Act){Skill_F[Act] = true; Skill_FI[Act].SetActive(true); Skill_FIB[Act].SetActive(true);}
-    public void SSkillATT(int Act){Skill_S[Act] = true; Skill_SI[Act].SetActive(true); Skill_SIB[Act].SetActive(true);}
-    public void KSkillATT(int Act){Skill_K[Act] = true; Skill_KI[Act].SetActive(true); Skill_KIB[Act].SetActive(true);}
+    public void FSkillATT(int Act){Skill_F[Act] = true; GameManager.instance.Skill_FI[Act].SetActive(true); GameManager.instance.Skill_FIB[Act].SetActive(true);}
+    public void SSkillATT(int Act){Skill_S[Act] = true; GameManager.instance.Skill_SI[Act].SetActive(true); GameManager.instance.Skill_SIB[Act].SetActive(true);}
+    public void KSkillATT(int Act){Skill_K[Act] = true; GameManager.instance.Skill_KI[Act].SetActive(true); GameManager.instance.Skill_KIB[Act].SetActive(true);}
 
     public void EnemyDefeatArea(int Defeat){Enemies[Defeat] = true;}
     public void TreasureOpen(int Open){Treasure[Open] = true;}
@@ -338,4 +444,38 @@ public class PlayerStats : MonoBehaviour
         GameManager.instance.StatPlayer();
     }
 #endregion
+}
+
+public class SaveManager : MonoBehaviour
+{
+    public static SaveManager instance;
+    private string percorsoSalvataggio;
+
+    private void Awake()
+    {
+    
+        percorsoSalvataggio = Path.Combine(Application.persistentDataPath, "datigioco.json");
+
+    }
+    // Salvataggio
+    public void SalvaDati(PlayerStats dati)
+    {
+        string datiJson = JsonUtility.ToJson(dati);
+        File.WriteAllText(percorsoSalvataggio, datiJson);
+    }
+
+    // Caricamento
+    public PlayerStats CaricaDati()
+    {
+        if (File.Exists(percorsoSalvataggio))
+        {
+            string datiJson = File.ReadAllText(percorsoSalvataggio);
+            return JsonUtility.FromJson<PlayerStats>(datiJson);
+        }
+        else
+        {
+            return new PlayerStats(); // Ritorna nuovi dati se il file non esiste
+        }
+    }
+
 }

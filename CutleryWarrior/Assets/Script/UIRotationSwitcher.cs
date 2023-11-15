@@ -17,9 +17,9 @@ public class UIRotationSwitcher : MonoBehaviour
     private Vector3 element1StartPosition;
     private Vector3 element2StartPosition;
     private Vector3 element3StartPosition;
-    private bool isElement1Active = true;
-    private bool isElement2Active = false;
-    private bool isElement3Active = false;
+    //private bool isElement1Active = true;
+    //private bool isElement2Active = false;
+    //private bool isElement3Active = false;
     public GameObject M_F;
     public GameObject M_K;
     public GameObject M_S;
@@ -136,8 +136,8 @@ public class UIRotationSwitcher : MonoBehaviour
         SetColor1(color1);
         SetColor2(color2);
         SetColor3(color2);
-        isElement1Active = false;
-        isElement2Active = true;
+        //isElement1Active = false;
+        //isElement2Active = true;
     }
     else if (CharacterID == 2)
     {
@@ -153,8 +153,8 @@ public class UIRotationSwitcher : MonoBehaviour
         SetColor1(color2);
         SetColor2(color2);
         SetColor3(color1);
-        isElement2Active = false;
-        isElement3Active = true;
+        //isElement2Active = false;
+        //isElement3Active = true;
     }
     else if (CharacterID == 3)
     {
@@ -170,8 +170,8 @@ public class UIRotationSwitcher : MonoBehaviour
         SetColor1(color2);
         SetColor2(color1);
         SetColor3(color2);
-        isElement3Active = false;
-        isElement1Active = true;
+        //isElement3Active = false;
+        //isElement1Active = true;
     }
 }
     private IEnumerator MoveElement(GameObject element, Vector3 targetPosition)

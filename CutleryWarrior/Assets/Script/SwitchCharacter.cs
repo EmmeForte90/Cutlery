@@ -23,7 +23,7 @@ public class SwitchCharacter : MonoBehaviour
     public ManagerCharacter SpoonActive;
     public bool isElement3Active = false;
     public static SwitchCharacter instance;
-    private CinemachineVirtualCamera vCam;
+    public CinemachineVirtualCamera vCam;
     private GameObject player;
     public int ConInt;
     public UIRotationSwitcher rotationSwitcher;
@@ -61,7 +61,7 @@ public class SwitchCharacter : MonoBehaviour
         //if(GameManager.instance.F_Unlock){ForkActive = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
         //if(GameManager.instance.S_Unlock){SpoonActive = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
         //if(GameManager.instance.K_Unlock){KnifeActive = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+        //vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
         //ottieni il riferimento alla virtual camera di Cinemachine
         //
         switch(rotationSwitcher.CharacterID)

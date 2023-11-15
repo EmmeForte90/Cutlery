@@ -1,0 +1,209 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8244634831866167441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8244634831866167442}
+  - component: {fileID: 8244634831866167443}
+  m_Layer: 0
+  m_Name: Data
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8244634831866167442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244634831866167441}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8244634831866167443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244634831866167441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 770e4252619f7b04a98a91681e2d4bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HaveData: 0
+  CanLoading: 0
+  NameScene: 
+  savedPosition: {x: 0, y: 0, z: 0}
+  F_Unlock: 1
+  S_Unlock: 0
+  K_Unlock: 0
+  Money: 0
+  F_LV: 1
+  F_HP: 100
+  F_curHP: 0
+  F_MP: 100
+  F_curMP: 0
+  F_curRage: 0
+  F_Rage: 100
+  F_CostMP: 10
+  F_Exp: 0
+  F_curExp: 0
+  F_attack: 10
+  F_defense: 5
+  F_poisonResistance: 4
+  F_paralysisResistance: 3
+  F_sleepResistance: 7
+  F_rustResistance: 4
+  F_HPCont: 0
+  F_curHPCont: 0
+  F_MPCont: 0
+  F_curMPCont: 0
+  F_CostMPCont: 0
+  F_ExpCont: 0
+  F_curExpCont: 0
+  F_attackCont: 0
+  F_defenseCont: 0
+  F_poisonResistanceCont: 0
+  F_paralysisResistanceCont: 0
+  F_sleepResistanceCont: 0
+  F_rustResistanceCont: 0
+  S_LV: 1
+  S_HP: 100
+  S_curHP: 0
+  S_MP: 100
+  S_curMP: 0
+  S_curRage: 0
+  S_Rage: 100
+  S_CostMP: 10
+  S_Exp: 0
+  S_curExp: 0
+  S_attack: 5
+  S_defense: 15
+  S_poisonResistance: 5
+  S_paralysisResistance: 3
+  S_sleepResistance: 2
+  S_rustResistance: 5
+  S_HPCont: 0
+  S_curHPCont: 0
+  S_MPCont: 0
+  S_curMPCont: 0
+  S_CostMPCont: 0
+  S_ExpCont: 0
+  S_curExpCont: 0
+  S_attackCont: 0
+  S_defenseCont: 0
+  S_poisonResistanceCont: 0
+  S_paralysisResistanceCont: 0
+  S_sleepResistanceCont: 0
+  S_rustResistanceCont: 0
+  K_LV: 1
+  K_HP: 100
+  K_curHP: 0
+  K_MP: 100
+  K_curMP: 0
+  K_CostMP: 10
+  K_curRage: 0
+  K_Rage: 100
+  K_Exp: 0
+  K_curExp: 0
+  K_attack: 20
+  K_defense: 5
+  K_poisonResistance: 1
+  K_paralysisResistance: 1
+  K_sleepResistance: 1
+  K_rustResistance: 1
+  K_HPCont: 0
+  K_curHPCont: 0
+  K_MPCont: 0
+  K_curMPCont: 0
+  K_CostMPCont: 0
+  K_ExpCont: 0
+  K_curExpCont: 0
+  K_attackCont: 0
+  K_defenseCont: 0
+  K_poisonResistanceCont: 0
+  K_paralysisResistanceCont: 0
+  K_sleepResistanceCont: 0
+  K_rustResistanceCont: 0
+  Enemies: 000000000000000000000000000000000000000000000000000000000000
+  Treasure: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  Skill_F: 0100000000000000000001
+  Skill_K: 0100000000000000000001
+  Skill_KI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Skill_KIB:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Skill_S: 0100000000000000000001
+  Skill_SI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Skill_SIB:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  I_itemList: []
+  I_quantityList: 
+  IBattle_itemList: []
+  IBattle_quantityList: 
+  F_itemList: []
+  F_quantityList: 
+  S_itemList: []
+  S_quantityList: 
+  K_itemList: []
+  K_quantityList: 
+  Key_itemList: []
+  Key_quantityList: 
+  Quest_itemList: []
+  Quest_quantityList: 
+  EventsDesert: 0000000000

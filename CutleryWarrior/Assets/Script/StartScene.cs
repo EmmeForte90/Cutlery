@@ -8,9 +8,9 @@ public class StartScene : MonoBehaviour
     public int WhatMusic;
     public bool StartGame = false;
     public bool Test = false;
-    public bool Testing = false;
-    public GameObject GM;
+    //public bool Testing = false;
     public GameObject StartGameOBJ;
+    public GameObject Data;
     public GameObject PStart;
     //private GameObject player;
     private GameObject ContainerHero;
@@ -32,19 +32,24 @@ public class StartScene : MonoBehaviour
     private SwitchCharacter Switcher;
     private int IDPorta;
     private int ID_Enm;
+    private bool Once = true;
     private Quaternion defaultRotation;
     public static StartScene instance;
     #endregion
     public void Awake()
     {
     if (instance == null){instance = this;}
+    /*if (PlayerStats.instance == null)
+    {Instantiate(Data, transform.position, transform.rotation); PlayerStats.instance.CanLoading = false;}*/
+
     if (Test)
+    {if (Once)
     {
-    Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);     
-    AudioManager.instance.CrossFadeINAudio(WhatMusic);
-    }  
-    if(GM == null && !StartGame){Destroy(GM);}
-    else if(GM != null && StartGame){AudioManager.instance.CrossFadeINAudio(WhatMusic);}
+    Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
+    Instantiate(Data, transform.position, transform.rotation);     
+    AudioManager.instance.CrossFadeINAudio(WhatMusic); Once = false;}
+    }
+    
     defaultRotation = transform.rotation;
     //
     if(!GameManager.instance.StartGame){
@@ -54,13 +59,19 @@ public class StartScene : MonoBehaviour
     if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}
     vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
     confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    
     IDPorta = GameManager.instance.IDPorta;
     ID_Enm = GameManager.instance.IdENM;
     ContainerHero = GameObject.Find("Hero");
-    if(!GameManager.instance.battle){Spawn(IDPorta);}
-    else if(GameManager.instance.battle){SpawnB(IDPorta);}
-    //if (!Testing){ Confiner(IDPorta);}
-    //PlayerStats.instance.DeactivateENM();
+    if(!GameManager.instance.battle && !PlayerStats.instance.CanLoading){Spawn(IDPorta);}
+    else if(GameManager.instance.battle && !PlayerStats.instance.CanLoading){SpawnB(IDPorta);}
+    else if(PlayerStats.instance.CanLoading)
+    {
+    if(GameManager.instance.F_Unlock){FAct.transform.position = PlayerStats.instance.savedPosition;}
+    if(GameManager.instance.K_Unlock){KAct.transform.position = PlayerStats.instance.savedPosition;}
+    if(GameManager.instance.S_Unlock){SAct.transform.position = PlayerStats.instance.savedPosition;}
+    PlayerStats.instance.CanLoading = false;
+    }  
     Inventory.instance.DeactivateItem();
     Switcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
     Switcher.TakeCharacters();
@@ -95,7 +106,7 @@ public class StartScene : MonoBehaviour
     if(GameManager.instance.K_Unlock){KAct.transform.position = GameManager.instance.savedPosition;}
     if(GameManager.instance.S_Unlock){SAct.transform.position = GameManager.instance.savedPosition;}
     EnemiesActive(ID_Enm);
-    if (!Testing){AreaActive(GameManager.instance.IdAreaAtt);}
+    //if (!Testing){AreaActive(GameManager.instance.IdAreaAtt);}
     GameManager.instance.StopWin();
     }
     IEnumerator BoxDel()

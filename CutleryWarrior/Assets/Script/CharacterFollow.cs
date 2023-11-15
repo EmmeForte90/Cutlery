@@ -31,11 +31,11 @@ public class CharacterFollow : MonoBehaviour
     public float RunSpeed = 6f;
     public float stoppingDistance = 1f;
     public float  OrderDistance = 2f;
-    public float groundCheckDistance = 0.2f;
-    public LayerMask groundLayer;
+    //public float groundCheckDistance = 0.2f;
+    //public LayerMask groundLayer;
     private Rigidbody characterRigidbody;
     private bool isFollowing;
-    private bool isGrounded;
+    //private bool isGrounded;
     private bool isWalking;
     public bool isGuard;
     private float defense;
@@ -52,7 +52,7 @@ public class CharacterFollow : MonoBehaviour
     [SpineAnimation][SerializeField]  string IdleAnimationName;
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
     [SpineAnimation][SerializeField]  string AllarmAnimationName;
-    [SpineAnimation][SerializeField]  string WinAnimationName;
+    //[SpineAnimation][SerializeField]  string WinAnimationName;
     [SpineAnimation][SerializeField]  string GuardAnimationName;
     [SpineAnimation][SerializeField]  string Atk1AnimationName;
     [Header("Battle")]
@@ -61,14 +61,14 @@ public class CharacterFollow : MonoBehaviour
     private GameObject target;
     private bool isAttacking = false;   
     private bool take = false; 
-    private bool Die = false;
-    private PlayerStats Stats;
+    //private bool Die = false;
+    //private PlayerStats Stats;
     public int result;
     public AnimationManager Anm;
     public bool Allarming;
     public bool Win;
-    private string currentAnimationName;
-    private float distance;
+    //private string currentAnimationName;
+    //private float distance;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
@@ -90,7 +90,7 @@ public class CharacterFollow : MonoBehaviour
         if(GameManager.instance.F_Unlock){F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
         if(GameManager.instance.K_Unlock){K_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
         if(GameManager.instance.S_Unlock){S_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        Stats = GameObject.Find("Stats").GetComponent<PlayerStats>();
+        //Stats = GameObject.Find("Stats").GetComponent<PlayerStats>();
     }
     public void RetakeCh()
     {
@@ -436,15 +436,15 @@ public class CharacterFollow : MonoBehaviour
         {
             case 0:
             PlayerStats.instance.F_curHP -= danno_subito;
-            if(GameManager.instance.F_Unlock){Stats.F_curRage +=  5;}
+            if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage +=  5;}
             break;
             case 1:
             PlayerStats.instance.K_curHP -= danno_subito;
-            if(GameManager.instance.K_Unlock){Stats.K_curRage +=  5;}
+            if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage +=  5;}
             break; 
             case 2:
             PlayerStats.instance.S_curHP -= danno_subito;
-            if(GameManager.instance.S_Unlock){Stats.S_curRage +=  5;}
+            if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage +=  5;}
             break;
         }
     AudioManager.instance.PlaySFX(8);

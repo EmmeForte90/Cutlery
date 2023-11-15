@@ -117,7 +117,7 @@ public class Lasciapassare : MonoBehaviour
         dialogueBox.gameObject.SetActive(true); 
         dialogueText.gameObject.SetActive(true); 
         dialogueText.text = TextYES; //"Oh, you have permission. Ok then, you can go!";
-        EventManager.instance.EventDesertEnd(IdEvent);
+        PlayerStats.instance.EventDesertEnd(IdEvent);
         Collider.SetActive(false);
         StartCoroutine(BoxDel());
     }else

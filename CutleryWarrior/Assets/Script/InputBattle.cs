@@ -25,11 +25,11 @@ public class InputBattle : MonoBehaviour
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
-    Spine.EventData eventData;
+    //Spine.EventData eventData;
     public static InputBattle instance;
   
     [Header("Attacks")]
-    private bool isAttacking = false;
+    //private bool isAttacking = false;
     public float comboTimer = 0.5f; // Tempo di attesa tra le combo
 
     public float DodgeSTimer = 0.5f; // Tempo di attesa tra le combo
