@@ -111,6 +111,7 @@ public class CharacterMove : MonoBehaviour
     public GameObject VFXCharge;
     public GameObject VFXChargeComplete;
     public GameObject VFXChargeMAX;
+    public GameObject VFXCantATK;
 
     [Header("Attacks")]
     //private bool isAttacking = false;
@@ -273,8 +274,10 @@ public void Awake()
         MoveB();
     //DODGE
         // Rileva l'input del tasto spazio
-        if (Input.GetMouseButtonDown(1) && canDodge)
+        if (Input.GetMouseButtonDown(1) && canDodge && PlayerStats.instance.F_curMP > 5)
         {Dodge(); PlayerStats.instance.K_curMP -= 5;}
+        else if(PlayerStats.instance.F_curMP <= 5)
+        {StartCoroutine(CantATKTime());}
 
     if (isDodging){characterController.Move(moveDirection * Time.fixedDeltaTime);}
     //Attack
@@ -288,7 +291,7 @@ public void Awake()
                 AnimationManager.instance.VFX = true;
                 PlayerStats.instance.F_curMP -= PlayerStats.instance.F_CostMP;  
                 //lastAttackTime = Time.time;
-            }else {AudioManager.instance.PlayUFX(10);}     
+            }else {AudioManager.instance.PlayUFX(10); StartCoroutine(CantATKTime());}     
     }
     private void Dodge()
     {
@@ -327,13 +330,13 @@ public void Awake()
     }
 
     // Inizia a caricare il colpo
-    if (Input.GetMouseButtonDown(1) && !isCharging)
+    if (Input.GetMouseButtonDown(1) && !isCharging && PlayerStats.instance.K_curMP > 20)
     {
         isCharging = true;
         chargeStartTime = Time.time;
         Anm.PlayAnimationLoop(ChargeFAnimationName);
-        
     }
+    else if (PlayerStats.instance.K_curMP <= 10){AudioManager.instance.PlayUFX(10); StartCoroutine(CantATKTime());} 
    
 
     // Rilascia il colpo caricato
@@ -364,7 +367,7 @@ public void Awake()
     }
     else
     {
-        AudioManager.instance.PlayUFX(10);
+        AudioManager.instance.PlayUFX(10); StartCoroutine(CantATKTime());
     }
 }
 
@@ -400,6 +403,7 @@ private IEnumerator StumpKTime()
     Anm.PlayAnimationLoop(IdleBAnimationName);
     Stump = true;
 }
+
 #endregion
 #region Spoon
     public void SpoonB()
@@ -409,6 +413,8 @@ private IEnumerator StumpKTime()
         // Rileva l'input del tasto spazio
         if (Input.GetMouseButtonDown(1) && PlayerStats.instance.S_curMP > 20)
         {isDefence = true;}
+        else if (PlayerStats.instance.S_curMP <= 0)
+        {AudioManager.instance.PlayUFX(10); StartCoroutine(CantATKTime());}     
 
         // Verifica se il tasto del mouse è stato rilasciato
         if (Input.GetMouseButtonUp(1)){isDefence = false;}
@@ -420,7 +426,7 @@ private IEnumerator StumpKTime()
        // Verifica se il tasto del mouse è stato premuto
          if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.S_curMP > 20 && Stump)
         {HandleComboAttackS(); PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;} 
-        else {AudioManager.instance.PlayUFX(10);}
+        else {AudioManager.instance.PlayUFX(10); StartCoroutine(CantATKTime());}
     }
 
     private void HandleComboAttackS()
@@ -432,6 +438,13 @@ private IEnumerator StumpKTime()
     }
     
 #endregion
+
+    private IEnumerator CantATKTime()
+    {
+    VFXCantATK.SetActive(true);
+    yield return new WaitForSeconds(1);
+    VFXCantATK.SetActive(false);
+    }
 
     private void PlayComboAnimation(string animationName)
     {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, false);}}
