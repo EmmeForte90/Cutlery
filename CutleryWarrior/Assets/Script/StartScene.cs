@@ -7,7 +7,9 @@ public class StartScene : MonoBehaviour
     #region Header
     public int WhatMusic;
     public bool StartGame = false;
+    public bool Test = false;
     public bool Testing = false;
+    public GameObject GM;
     public GameObject StartGameOBJ;
     public GameObject PStart;
     //private GameObject player;
@@ -36,13 +38,13 @@ public class StartScene : MonoBehaviour
     public void Awake()
     {
     if (instance == null){instance = this;}
-    if (StartGame)
+    if (Test)
     {
-    Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
-    //confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    //confiner.m_BoundingVolume = bCStart;       
+    Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);     
     AudioManager.instance.CrossFadeINAudio(WhatMusic);
     }  
+    if(GM == null && !StartGame){Destroy(GM);}
+    else if(GM != null && StartGame){AudioManager.instance.CrossFadeINAudio(WhatMusic);}
     defaultRotation = transform.rotation;
     //
     if(!GameManager.instance.StartGame){
