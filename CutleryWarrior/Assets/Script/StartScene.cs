@@ -52,7 +52,11 @@ public class StartScene : MonoBehaviour
     AudioManager.instance.CrossFadeINAudio(WhatMusic); Once = false;}
     }
     if(startMusic)
-    {AudioManager.instance.CrossFadeINAudio(WhatMusic);}
+    {
+        AudioManager.instance.CrossFadeOUTAudio(PlayerStats.instance.WhatMusic);
+        AudioManager.instance.CrossFadeINAudio(WhatMusic); 
+        PlayerStats.instance.WhatMusic = WhatMusic;
+    }
     
     defaultRotation = transform.rotation;
     //

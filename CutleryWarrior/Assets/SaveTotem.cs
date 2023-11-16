@@ -7,7 +7,7 @@ public class SaveTotem : MonoBehaviour
     public Vector3 savedPosition;
     public string NameScene;
     private SwitchCharacter Switch;
-    //private PlayerStats Dati;
+    public GameObject VFXTake;
     private Transform Player;
     private Transform Fork;
     private Transform Spoon;
@@ -30,7 +30,9 @@ public class SaveTotem : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
     if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
-    {            
+    {      
+        Instantiate(VFXTake, transform.position, transform.rotation);
+        AudioManager.instance.PlaySFX(12);
         if(GameManager.instance.F_Unlock){
         PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
         PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;}

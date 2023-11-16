@@ -202,7 +202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e878b11c6d77314e88d1aa584e333bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Brain: {fileID: 364748373917811413}
+  isMonster: 1
+  isWalk: 0
+  isRun: 0
+  top: 0
   waypoints:
   - {fileID: 364748373795080892}
   - {fileID: 364748374469275532}

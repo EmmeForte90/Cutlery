@@ -8,8 +8,10 @@ public class EventCinematic : MonoBehaviour
     public int IdEvent;
     private SwitchCharacter Switch;    
     public GameObject PointView;
-    public bool HavePersistOBJ = false;
     public bool Viewcam = false;
+    [Header("Oggetto da attivare")]
+    [Tooltip("Se hai un oggetto che deve restare attivo dopo l'evento")]
+    public bool HavePersistOBJ = false;
     public GameObject PersistOBJ;
     public float TimeWait;
     private Transform Player;

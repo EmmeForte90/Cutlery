@@ -12,12 +12,15 @@ public class GameManager : MonoBehaviour
     public bool StartGame = false;    
     public GameObject player;
     public GameObject Fork;
+    public GameObject F_SkillW;
     public GameObject[] OrderFork;
     public bool F_Unlock = true; 
     public GameObject Spoon;
+    public GameObject S_SkillW;
     public GameObject[] OrderSpoon;
     public  bool S_Unlock = false; 
     public GameObject Knife;
+    public GameObject K_SkillW;
     public GameObject[] OrderKnife;
     public  bool K_Unlock = false;
     public GameObject Minimap;
@@ -220,6 +223,17 @@ public class GameManager : MonoBehaviour
         //
         if(S_Unlock){foreach (GameObject arenaObjectN in OrderSpoon){arenaObjectN.SetActive(true);}}
     }
+    public void SkillINMenu()
+    {
+        if(F_Unlock){F_SkillW.SetActive(true);}
+        else if(!F_Unlock){F_SkillW.SetActive(false);}
+        //
+        if(K_Unlock){K_SkillW.SetActive(true);}
+        else if(!K_Unlock){K_SkillW.SetActive(false);}
+        //
+        if(S_Unlock){S_SkillW.SetActive(true);}
+        else if(!S_Unlock){S_SkillW.SetActive(false);}
+    }
     public void Start(){Application.targetFrameRate = 60; Day = true;}
     public void Update()
     {
@@ -227,6 +241,7 @@ public class GameManager : MonoBehaviour
         StatPlayer();
         BarStat();
         TakeCharacter();
+        SkillINMenu();
         Order();
         moneyTextM.text = money.ToString(); 
         if(!NotTouchOption){

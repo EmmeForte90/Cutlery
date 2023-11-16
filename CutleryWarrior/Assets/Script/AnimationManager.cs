@@ -192,7 +192,7 @@ public class AnimationManager : MonoBehaviour
     if (e.Data.Name == "stump" && VFX){Instantiate(Stump, Foot.position, Stump.transform.rotation);
     StartCoroutine(StopVFX_FNormal()); VFX = false; }
      if (e.Data.Name == "dodge" && VFX){Instantiate(Dodge, Foot.position, Dodge.transform.rotation);
-    StartCoroutine(StopVFX_FNormal()); VFX = false; }
+    StartCoroutine(StopVFX_Rapid()); VFX = false; }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     if (e.Data.Name == "atk"){AudioManager.instance.PlayUFX(0); VfxEnmSlash.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "shootEnm" && VFX){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
@@ -200,7 +200,7 @@ public class AnimationManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
     if (e.Data.Name == "shootAI" && VFX){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
-    StartCoroutine(StopVFX_FNormal()); VFX = false;}
+    VFX = false;}
     if (e.Data.Name == "shoot" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
     VFX = false;}

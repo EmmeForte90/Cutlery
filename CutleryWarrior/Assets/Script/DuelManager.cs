@@ -33,7 +33,7 @@ public class DuelManager : MonoBehaviour
     public float FcurrentMP;
     public Scrollbar FMPBar;
     //public float FcostMP = 20;
-    public float F_SpeedRestore = 5f; // il massimo valore di essenza disponibile
+    public float F_SpeedRestore = 10f; // il massimo valore di essenza disponibile
     public GameObject[] Enemies; 
     public GameObject[] ActiveObj; 
     [SerializeField] CharacterFollow ch_FAc;
@@ -263,16 +263,18 @@ public void Update()
         if(EnemyinArena <= 0){StartCoroutine(EndBattle());}
         //
         if(WinEnd){if(Input.GetMouseButtonDown(0)){StartCoroutine(RetunBattle());}}
-        if(DieCont <= 0){StartCoroutine(GameOver());}   
+        if(DieCont <= 0)
+        {StartCoroutine(GameOver());}   
         if(Ending){if(Input.GetMouseButtonDown(0)){StartCoroutine(ReturnMainMenu());}} 
 
     }
     IEnumerator GameOver()
     {
         inputCTR = true;
-        AudioManager.instance.CrossFadeOUTAudio(1);
-       yield return new WaitForSeconds(5f);
-        AudioManager.instance.CrossFadeINAudio(2);
+        AudioManager.instance.StopMFX(1);
+       yield return new WaitForSeconds(2f);
+        AudioManager.instance.PlayMFX(2);
+
        GameOverBox.SetActive(true);
        Ending = true;
     }
@@ -314,6 +316,7 @@ IEnumerator EndBattle()
         AudioManager.instance.CrossFadeOUTAudio(1);
         yield return new WaitForSeconds(3f);
         GameManager.instance.battle = true;
+        GameManager.instance.notChange = false;
         if(win)
         {Win.gameObject.SetActive(true);
         RandomReward();

@@ -41,6 +41,7 @@ public class SpoonSemple : MonoBehaviour
     public int timeStun = 3;
 
     [Header("Move")]
+    public int WaitAtk = 3;
     public float moveSpeed = 3f;
     public float attackRange = 1.5f;
     public int defense = 2;
@@ -212,7 +213,7 @@ public class SpoonSemple : MonoBehaviour
 
     private IEnumerator AttackPause()
     {        
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(WaitAtk);        
         if(!DieB){Anm.PlayAnimationLoop(IdleAnimationName);}
         yield return new WaitForSeconds(attackPauseDuration);
         take = false;
@@ -225,7 +226,7 @@ public class SpoonSemple : MonoBehaviour
     int danno_subito = Mathf.Max(damage - defense, 0);
     currentHealth -= danno_subito;
     AudioManager.instance.PlaySFX(8);
-    Debug.Log("danno +"+ danno_subito);
+    //Debug.Log("danno +"+ danno_subito);
     Instantiate(VFXHurt, transform.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);}
     }

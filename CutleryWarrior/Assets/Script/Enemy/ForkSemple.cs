@@ -39,6 +39,7 @@ public class ForkSemple : MonoBehaviour
     private int TimePoison = 5;   
 
     [Header("Move")]
+    public int WaitAtk = 3;
     public float moveSpeed = 3f;
     public float PointTange = 1f;
     public int defense = 2;
@@ -226,7 +227,7 @@ public class ForkSemple : MonoBehaviour
 
     private IEnumerator AttackPause()
     {        
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(WaitAtk);
         if(!DieB){Anm.PlayAnimationLoop(IdleAnimationName);}
         yield return new WaitForSeconds(attackPauseDuration);
         take = false;

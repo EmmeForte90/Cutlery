@@ -19892,7 +19892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savedPosition: {x: 0, y: 0, z: 0}
-  NameScene: test
+  NameScene: FirstD
+  VFXTake: {fileID: 1988170249196224223, guid: 657fe776cee95cb42a940229b6651a3d, type: 3}
 --- !u!1 &6926591211867406710
 GameObject:
   m_ObjectHideFlags: 0

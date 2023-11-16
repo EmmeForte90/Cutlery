@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ScriptTestBattle : MonoBehaviour
 {
-    private PlayerStats Stats;
+    //private PlayerStats PlayerStats.instance;
     public DuelManager DM;
     private CharacterMove F_Script;
     private CharacterFollow ch_FAc;
@@ -27,7 +27,7 @@ public class ScriptTestBattle : MonoBehaviour
         if(GameManager.instance.F_Unlock){F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
         if(GameManager.instance.K_Unlock){K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
         //
-        Stats = GameObject.Find("Stats").GetComponent<PlayerStats>();
+        //PlayerStats.instance = GameObject.Find("PlayerStats.instance").GetComponent<PlayerStats>();
         Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
 
     }
@@ -56,17 +56,17 @@ public class ScriptTestBattle : MonoBehaviour
     //Funziona
     public void Restore()
     {
-        if(GameManager.instance.F_Unlock){Stats.F_curHP =  Stats.F_HP;}
-        if(GameManager.instance.S_Unlock){Stats.S_curHP =  Stats.K_HP;}
-        if(GameManager.instance.K_Unlock){Stats.K_curHP =  Stats.S_HP;}   
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curHP =  PlayerStats.instance.F_HP;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curHP =  PlayerStats.instance.K_HP;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curHP =  PlayerStats.instance.S_HP;}   
     }
 
     //Funziona
     public void DeathPL()
     {
-        if(GameManager.instance.F_Unlock){Stats.F_curHP =  0;}
-        if(GameManager.instance.S_Unlock){Stats.S_curHP =  0;}
-        if(GameManager.instance.K_Unlock){Stats.K_curHP =  0;}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curHP =  0;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curHP =  0;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curHP =  0;}
     }
     public void DeathEN()
     {
@@ -74,40 +74,40 @@ public class ScriptTestBattle : MonoBehaviour
     }
     public void Stun()
     {
-        if(GameManager.instance.K_Unlock){Stats.K_paralysisResistance = 0;}
-        if(GameManager.instance.F_Unlock){Stats.F_paralysisResistance = 0;}
-        if(GameManager.instance.S_Unlock){Stats.S_paralysisResistance = 0;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_paralysisResistance = 0;}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_paralysisResistance = 0;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_paralysisResistance = 0;}
     }
     public void Poison()
     {
-        if(GameManager.instance.K_Unlock){Stats.K_poisonResistance = 0;}
-        if(GameManager.instance.S_Unlock){Stats.S_poisonResistance = 0;}
-        if(GameManager.instance.F_Unlock){Stats.F_poisonResistance = 0;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_poisonResistance = 0;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_poisonResistance = 0;}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_poisonResistance = 0;}
     }
     public void Recover()
     {
-        if(GameManager.instance.F_Unlock){Stats.F_curHP =  Stats.F_HP;}
-        if(GameManager.instance.S_Unlock){Stats.S_curHP =  Stats.K_HP;}
-        if(GameManager.instance.K_Unlock){Stats.K_curHP =  Stats.S_HP;}
-        if(GameManager.instance.F_Unlock){Stats.F_curMP =  Stats.F_MP;}
-        if(GameManager.instance.S_Unlock){Stats.S_curMP =  Stats.K_MP;}
-        if(GameManager.instance.K_Unlock){Stats.K_curMP =  Stats.S_MP;}   
-        if(GameManager.instance.K_Unlock){Stats.K_paralysisResistance = Stats.K_paralysisResistanceCont;}
-        if(GameManager.instance.F_Unlock){Stats.F_paralysisResistance = Stats.F_paralysisResistanceCont;}
-        if(GameManager.instance.S_Unlock){Stats.S_paralysisResistance = Stats.S_paralysisResistanceCont;}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curHP =  PlayerStats.instance.F_HP;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curHP =  PlayerStats.instance.K_HP;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curHP =  PlayerStats.instance.S_HP;}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curMP =  PlayerStats.instance.F_MP;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curMP =  PlayerStats.instance.K_MP;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curMP =  PlayerStats.instance.S_MP;}   
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_paralysisResistance = PlayerStats.instance.K_paralysisResistanceCont;}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_paralysisResistance = PlayerStats.instance.F_paralysisResistanceCont;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_paralysisResistance = PlayerStats.instance.S_paralysisResistanceCont;}
         //
-        if(GameManager.instance.K_Unlock){Stats.K_poisonResistance = Stats.K_poisonResistanceCont;}
-        if(GameManager.instance.F_Unlock){Stats.F_poisonResistance = Stats.F_poisonResistanceCont;}
-        if(GameManager.instance.S_Unlock){ Stats.S_poisonResistance = Stats.S_poisonResistanceCont;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_poisonResistance = PlayerStats.instance.K_poisonResistanceCont;}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_poisonResistance = PlayerStats.instance.F_poisonResistanceCont;}
+        if(GameManager.instance.S_Unlock){ PlayerStats.instance.S_poisonResistance = PlayerStats.instance.S_poisonResistanceCont;}
         if(GameManager.instance.F_Unlock){GameManager.instance.RestoreF();}
         if(GameManager.instance.K_Unlock){GameManager.instance.RestoreK(); }
         if(GameManager.instance.S_Unlock){GameManager.instance.RestoreS();}
     }
     public void RageMax()
     {
-        if(GameManager.instance.F_Unlock){Stats.F_curRage =  100;}
-        if(GameManager.instance.S_Unlock){Stats.S_curRage =  100;}
-        if(GameManager.instance.K_Unlock){Stats.K_curRage =  100;}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage =  100;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage =  100;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage =  100;}
     }
 
     public void Win()
@@ -122,8 +122,8 @@ public class ScriptTestBattle : MonoBehaviour
     }
     public void RageLess()
     {
-        if(GameManager.instance.F_Unlock){Stats.F_curRage =  0;}
-        if(GameManager.instance.S_Unlock){Stats.S_curRage =  0;}
-        if(GameManager.instance.K_Unlock){Stats.K_curRage =  0;}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage =  0;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage =  0;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage =  0;}
     }
 }

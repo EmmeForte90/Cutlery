@@ -15,7 +15,7 @@ public class KnifeSample : MonoBehaviour
     public GameObject VFXStun;
     public bool isStun = false;
      public int StunProbability = 0;
-    public int StunProbabilityCount = 2;
+    public int StunProbabilityCount = 1;
     public int StunProbabilityMAX = 10;
     public int result;
     //public bool Test = false;   
@@ -38,6 +38,7 @@ public class KnifeSample : MonoBehaviour
     private int TimePoison = 5;   
 
     [Header("Move")]
+    public int WaitAtk = 1;
     public float moveSpeed = 3f;
     public float attackRange = 1.5f;
     public int defense = 2;
@@ -203,7 +204,7 @@ public class KnifeSample : MonoBehaviour
 
     private IEnumerator AttackPause()
     {        
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(WaitAtk);        
         if(!DieB){Anm.PlayAnimationLoop(IdleAnimationName);}
         yield return new WaitForSeconds(attackPauseDuration);
         take = false;
@@ -216,7 +217,7 @@ public class KnifeSample : MonoBehaviour
     int danno_subito = Mathf.Max(damage - defense, 0);
     currentHealth -= danno_subito;
     AudioManager.instance.PlaySFX(8);
-    Debug.Log("danno +"+ danno_subito);
+    //Debug.Log("danno +"+ danno_subito);
     Instantiate(VFXHurt, transform.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);}
     }

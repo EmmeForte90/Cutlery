@@ -19,6 +19,7 @@ public class PlayerStats : MonoBehaviour
     public  bool S_Unlock = false; 
     public  bool K_Unlock = false;
     public int Money;
+    public int WhatMusic = 0;
     public  bool StartData = false;
 
     [Header("Fork")]

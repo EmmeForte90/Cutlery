@@ -7,7 +7,7 @@ public class NPCMove : MonoBehaviour
     private GameObject ForkActive;
 	private GameObject SpoonActive;
 	private GameObject KnifeActive;
-    public bool isWalk, isRun, top = false;
+    public bool isMonster, isWalk, isRun, top = false;
     public Transform[] waypoints; // Array di punti verso cui muoversi
     private float moveSpeed = 5f; // Velocità di movimento del personaggio
     private float RunSpeed = 6f; // Velocità di movimento del personaggio
@@ -78,9 +78,10 @@ public class NPCMove : MonoBehaviour
     {
         Behav = 0;
     }
-    else if ((transform.position - player.transform.position).sqrMagnitude < agroDistance * agroDistance)
+    else if ((transform.position - player.transform.position).sqrMagnitude < agroDistance * agroDistance && isMonster)
     {
         Behav = 1;
+        AudioManager.instance.PlaySFX(14);
     }
 
     switch (Behav)

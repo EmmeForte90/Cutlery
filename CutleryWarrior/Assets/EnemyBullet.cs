@@ -17,7 +17,7 @@ public class EnemyBullet : MonoBehaviour
     private CharacterFollow ch_SAc;
     public int attackDamage = 5;
     public GameObject hitEffect;
-
+    public bool Take = true;
     public void Awake()
     {
         if(GameManager.instance.S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
@@ -104,33 +104,39 @@ public class EnemyBullet : MonoBehaviour
     }
     public void ForkD()
     {
+        if(Take){
         if(GameManager.instance.F_Unlock){F_Script.TakeDamage(attackDamage);}
         if(GameManager.instance.F_Unlock && !ch_FAc.isGuard){ch_FAc.TakeDamage(attackDamage);}
         else if(GameManager.instance.F_Unlock && ch_FAc.isGuard){ch_FAc.TakeDamage(5);}   
         AudioManager.instance.PlayUFX(9);
-        Debug.Log("danno +"+ attackDamage);
+        //Debug.Log("danno +"+ attackDamage);
         if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
+        Take = false;}
         Destroy(OBJ);
     }
     public void KnifeD()
     {
+        if(Take){
         if(GameManager.instance.K_Unlock){K_Script.TakeDamage(attackDamage);}
         if(GameManager.instance.K_Unlock && !ch_KAc.isGuard){ch_KAc.TakeDamage(attackDamage);}
         else if(GameManager.instance.K_Unlock && ch_KAc.isGuard){ch_KAc.TakeDamage(5);}        
         AudioManager.instance.PlayUFX(9);
-        Debug.Log("danno +"+ attackDamage);
+        //Debug.Log("danno +"+ attackDamage);
         if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
+        Take = false;}
         Destroy(OBJ);    
     }
     public void SpoonD()
     {
+        if(Take){
         if(GameManager.instance.S_Unlock && !S_Script.isDefence){S_Script.TakeDamage(attackDamage);}
         else if(GameManager.instance.S_Unlock && S_Script.isDefence){}
         if(GameManager.instance.S_Unlock && !ch_SAc.isGuard){ch_SAc.TakeDamage(attackDamage);}
         else if(GameManager.instance.S_Unlock && ch_SAc.isGuard){}
         AudioManager.instance.PlayUFX(9);
-        Debug.Log("danno +"+ attackDamage);
+        //Debug.Log("danno +"+ attackDamage);
         if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
+        Take = false;}
         Destroy(OBJ);
     }
 }

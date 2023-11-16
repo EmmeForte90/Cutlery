@@ -54,7 +54,7 @@ public class Switch : MonoBehaviour
         AudioManager.instance.PlaySFX(11);
         GameManager.instance.EsclamationStop();
         PlayerStats.instance.EventSwitchEnd(IDEvent);
-        print("Leva usata" + IDEvent);
+        //print("Leva usata" + IDEvent);
         }
     }
 }

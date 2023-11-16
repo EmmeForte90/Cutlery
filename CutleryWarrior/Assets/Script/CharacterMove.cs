@@ -39,6 +39,7 @@ public class CharacterMove : MonoBehaviour
     public float comboCooldown = 0.3f; // Tempo di cooldown tra le combo in secondi
     //private PlayerStats Stats;
     private bool top = true;
+    private bool StopRanm = false;
     private bool isCharging = false; // Flag per il colpo caricato
     public float chargeStartTime; // Tempo di inizio della carica
     public float chargeTime;
@@ -195,12 +196,15 @@ public void Awake()
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 moveDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
-        if(Input.GetButton("Fire3")){isRun = true; GameManager.instance.isRun = true;} 
-        if (Input.GetButtonUp("Fire3")){isRun = false; GameManager.instance.isRun = false;
-        if (verticalInput == 0 && !top)//Sta fermo
+        if(Input.GetButton("Fire3")){isRun = true; GameManager.instance.isRun = true; StopRanm = true;} 
+        if (Input.GetButtonUp("Fire3")){isRun = false; GameManager.instance.isRun = false; StopRanm = false;
+        } 
+        //
+        if (verticalInput == 0 && horizontalInput == 0 && !top && isRun && StopRanm)
         {Anm.PlayAnimationLoop(IdleUPAnimationName);} 
-        else if (verticalInput == 0 && top)//Sta fermo
-        {Anm.PlayAnimationLoop(IdleAnimationName);} } 
+        else if (verticalInput == 0 && horizontalInput == 0 && top && isRun && StopRanm )
+        {Anm.PlayAnimationLoop(IdleAnimationName);} 
+        
         // Gestisci la gravità
         if (!characterController.isGrounded)
         {
@@ -268,8 +272,8 @@ public void Awake()
         MoveB();
     //DODGE
         // Rileva l'input del tasto spazio
-        if (Input.GetMouseButtonDown(1) && canDodge && PlayerStats.instance.F_curMP > 5)
-        {Dodge(); PlayerStats.instance.F_curMP -= 5;}
+        if (Input.GetMouseButtonDown(1) && canDodge && PlayerStats.instance.F_curMP > 2)
+        {Dodge(); PlayerStats.instance.F_curMP -= 2;}
         else if(PlayerStats.instance.F_curMP < 20)
         {VFXCantATK.SetActive(true);}
 
@@ -279,12 +283,8 @@ public void Awake()
             {
                 HandleComboAttackF();
                 Stop();
-                //AudioManager.instance.PlayUFX(8);
-                //AudioManager.instance.PlayUFX(0); 
-                //Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
                 AnimationManager.instance.VFX = true;
                 PlayerStats.instance.F_curMP -= PlayerStats.instance.F_CostMP;  
-                //lastAttackTime = Time.time;
             }else if(PlayerStats.instance.F_curMP < 20){AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);}     
     }
     private void Dodge()
