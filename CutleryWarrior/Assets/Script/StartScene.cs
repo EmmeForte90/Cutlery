@@ -6,8 +6,8 @@ public class StartScene : MonoBehaviour
 {
     #region Header
     public int WhatMusic;
-    public bool StartGame = false;
-    public bool Test = false;
+    //public bool StartGame = false;
+    public bool Start = false;
     //public bool Testing = false;
     public GameObject StartGameOBJ;
     public GameObject Data;
@@ -42,11 +42,12 @@ public class StartScene : MonoBehaviour
     /*if (PlayerStats.instance == null)
     {Instantiate(Data, transform.position, transform.rotation); PlayerStats.instance.CanLoading = false;}*/
 
-    if (Test)
+    if (Start)
     {if (Once)
     {
     Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
-    Instantiate(Data, transform.position, transform.rotation);     
+    Instantiate(Data, transform.position, transform.rotation); 
+    PlayerStats.instance.StartData = true;
     AudioManager.instance.CrossFadeINAudio(WhatMusic); Once = false;}
     }
     

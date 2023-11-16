@@ -19,6 +19,7 @@ public class PlayerStats : MonoBehaviour
     public  bool S_Unlock = false; 
     public  bool K_Unlock = false;
     public int Money;
+    public  bool StartData = false;
 
     [Header("Fork")]
     [SerializeField] public int F_LV = 1;
@@ -143,13 +144,17 @@ public class PlayerStats : MonoBehaviour
     [Header("Events")]
     public bool[] EventsDesert;    
 
+    public static bool DataManager; 
 
     #endregion
-    public void Awake(){if (instance == null){instance = this;} 
-    transform.parent = null;
-    DontDestroyOnLoad(gameObject); }
-    public void Start()
+    public void Awake(){
+    if (instance == null){instance = this;} 
+    if (DataManager){Destroy(gameObject);}
+    else {DataManager = true; DontDestroyOnLoad(gameObject);} 
+    }
+    public void Update()
     {
+    if(StartData){
     Money = GameManager.instance.money;
     F_Unlock = GameManager.instance.F_Unlock;
     K_Unlock = GameManager.instance.K_Unlock;
@@ -211,6 +216,8 @@ public class PlayerStats : MonoBehaviour
     S_paralysisResistanceCont = S_paralysisResistance;
     S_sleepResistanceCont = S_sleepResistance;
     S_rustResistanceCont = S_rustResistance;}   
+    }
+    StartData = false;
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     public void ResetStatF()

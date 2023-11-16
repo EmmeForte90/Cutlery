@@ -93,7 +93,7 @@ public class AnimationManager : MonoBehaviour
     [HideInInspector]public ChargeSkill CS;
     public static AnimationManager instance;
     #endregion
-    public void Awake()
+    public void Start()
     {
          if (instance == null){instance = this;}
         _skeletonAnimation = GetComponent<SkeletonAnimation>();

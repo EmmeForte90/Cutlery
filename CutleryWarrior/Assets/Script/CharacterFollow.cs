@@ -75,7 +75,7 @@ public class CharacterFollow : MonoBehaviour
     Spine.EventData eventData;
     public static CharacterFollow instance;
     #endregion
-    public void Awake()
+    public void Start()
     {
          if (instance == null){instance = this;}
         _skeletonAnimation = GetComponent<SkeletonAnimation>();

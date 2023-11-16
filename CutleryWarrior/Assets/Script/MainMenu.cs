@@ -14,6 +14,11 @@ public class MainMenu : MonoBehaviour
     public AudioMixer MSX;
     public AudioMixer SFX;
     Resolution[] resolutions;
+    public GameObject StartGameOBJ;
+    public GameObject Data;
+    public GameObject PStart;
+    public bool StartGameNew = true;
+
     public static MainMenu instance;
     public void Start()
     {
@@ -36,6 +41,12 @@ public class MainMenu : MonoBehaviour
     {           
         Fade.gameObject.SetActive(true);
         yield return new WaitForSeconds(Timelife);
+        if(StartGameNew)
+        {
+        Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
+        StartGameNew = false;
+        }
+        PlayerStats.instance.StartData = true;
         SceneManager.LoadScene(startScene);       
     }
     public void QuitGame()
