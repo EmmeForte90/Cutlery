@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using Spine.Unity;
-using Spine;
-using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class CharacterMove : MonoBehaviour
 {
@@ -43,7 +40,7 @@ public class CharacterMove : MonoBehaviour
     private bool isCharging = false; // Flag per il colpo caricato
     public float chargeStartTime; // Tempo di inizio della carica
     public float chargeTime;
-    public float maxChargeTime = 2.0f; // Tempo massimo di carica
+    public float maxChargeTime = 1f; // Tempo massimo di carica
     private Vector3 moveDirection = Vector3.zero;
     public bool isDodging = false;
     [Header("Dodge")]
@@ -112,13 +109,11 @@ public class CharacterMove : MonoBehaviour
     public GameObject VFXChargeComplete;
     public GameObject VFXChargeMAX;
     public GameObject VFXCantATK;
+    public GameObject BP;
 
     [Header("Attacks")]
-    //private bool isAttacking = false;
-    //public float comboTimer = 0.5f; // Tempo di attesa tra le combo
-    //public float DodgeSTimer = 0.5f; // Tempo di attesa tra le combo
-    //private float lastAttackTime = 0f;
-    //private float DodgeTime = 0f;
+    public Scrollbar KChargeATK;
+    public GameObject TimeBar;
     private CharacterController characterController; // Riferimento al CharacterController
     public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
     public static CharacterMove instance;
@@ -150,6 +145,8 @@ public void Awake()
         if(Attention){Esclamation.SetActive(true);}
         else if(!Attention){Esclamation.SetActive(false);}
         //
+        if(isCharging){chargeTime = Time.time - chargeStartTime;}
+        //
         if(!inputCTR)
         {
         /*if(!StopRun){if(Run >= 8 || Run <= 8){Run = 8;}}
@@ -170,6 +167,8 @@ public void Awake()
             case 1:
             KnifeB();
             if(PlayerStats.instance.K_curMP > 19){VFXCantATK.SetActive(false);}
+            KChargeATK.size = chargeTime / maxChargeTime;
+            KChargeATK.size = Mathf.Clamp(KChargeATK.size, 0.01f, 1);
             break; 
             case 2:
             SpoonB();
@@ -326,6 +325,8 @@ public void Awake()
     // Inizia a caricare il colpo
     if (Input.GetMouseButtonDown(1) && !isCharging && PlayerStats.instance.K_curMP > 20)
     {
+        TimeBar.SetActive(true);
+        KChargeATK.transform.position = BP.transform.position;
         isCharging = true;
         chargeStartTime = Time.time;
         Anm.PlayAnimationLoop(ChargeFAnimationName);
@@ -336,10 +337,11 @@ public void Awake()
     // Rilascia il colpo caricato
     if (Input.GetMouseButtonUp(1) && isCharging)
     {
-        chargeTime = Time.time - chargeStartTime;
+        //chargeTime = Time.time - chargeStartTime;
         if (chargeTime >= maxChargeTime)
         {
             ReleaseChargedShot(); // Funzione da implementare per il colpo caricato
+            TimeBar.SetActive(false);
             VFXChargeComplete.SetActive(true);
             PlayerStats.instance.K_curMP -= 30;
         }
@@ -347,6 +349,7 @@ public void Awake()
         {
             // Il tempo di carica non è sufficiente, puoi fare qualcosa qui (ad esempio un feedback visivo o sonoro).
             isCharging = false;
+            TimeBar.SetActive(false);
             VFXCharge.SetActive(false);
             VFXChargeMAX.SetActive(false);
             VFXChargeComplete.SetActive(false);

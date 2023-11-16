@@ -162,6 +162,7 @@ public void Update()
         //
         KRageBar.fillAmount = PlayerStats.instance.K_curRage / PlayerStats.instance.K_Rage;
         KRageBar.fillAmount = Mathf.Clamp(KRageBar.fillAmount, 0.01f, 1);}
+        //
         //////////////////////////////////////////////////////////
         if(GameManager.instance.S_Unlock){
         ShealthBar.size = PlayerStats.instance.S_curHP / PlayerStats.instance.S_HP;

@@ -381,7 +381,7 @@ public class CharacterFollow : MonoBehaviour
     else if (distanceToTarget < OrderDistance)
     {
         // Quando il personaggio raggiunge il punto di destinazione, puoi fare qualcosa qui, ad esempio:
-        order = 0;
+        order = 2;
         Anm.PlayAnimationLoop(IdleBAnimationName);
         if (transform.position.z < target.transform.position.z)
         {
