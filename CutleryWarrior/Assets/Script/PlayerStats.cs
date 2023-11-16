@@ -262,8 +262,6 @@ public class PlayerStats : MonoBehaviour
     K_sleepResistanceCont = K_sleepResistance;
     K_rustResistanceCont = K_rustResistance;}  
     }
-
-     public void EventDesertEnd(int id){EventsDesert[id] = true;}
     
     public void UpdateInventorySaving()
     {
@@ -372,12 +370,47 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void DeactivateSwitch()
+    {
+        // Cerca tutti i GameObjects con il tag "Enemy"
+        GameObject[] Event = GameObject.FindGameObjectsWithTag("Event");
+    
+    foreach (GameObject Character in Event)
+        {
+            // Ottiene il componente QuestCharacters
+            Switch tre = Character.GetComponent<Switch>();
+
+            // Verifica se il componente esiste
+            if (tre != null)
+            {
+                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
+                int Id = tre.IDEvent;
+                for (int i = 0; i <  Enemies.Length; i++)
+                {
+                    if ( EventsDesert[i] && i == Id)
+                    {
+                        // Imposta ordaliT.FirstD a false
+                        tre.Take();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
 
     public void FSkillATT(int Act){Skill_F[Act] = true; GameManager.instance.Skill_FI[Act].SetActive(true); GameManager.instance.Skill_FIB[Act].SetActive(true);}
     public void SSkillATT(int Act){Skill_S[Act] = true; GameManager.instance.Skill_SI[Act].SetActive(true); GameManager.instance.Skill_SIB[Act].SetActive(true);}
     public void KSkillATT(int Act){Skill_K[Act] = true; GameManager.instance.Skill_KI[Act].SetActive(true); GameManager.instance.Skill_KIB[Act].SetActive(true);}
 
     public void EnemyDefeatArea(int Defeat){Enemies[Defeat] = true;}
+    public void EventDesertEnd(int id)
+    {
+        EventsDesert[id] = true;
+        DeactivateWarning();
+        DeactivateSwitch();
+    }
+
     public void TreasureOpen(int Open){Treasure[Open] = true;}
 
     #region Levelup

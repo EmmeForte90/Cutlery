@@ -112,7 +112,10 @@ public class StartScene : MonoBehaviour
     }
     IEnumerator BoxDel()
     {yield return new WaitForSeconds(0.5f);
-    CameraZoom.instance.ZoomOut();GameManager.instance.FadeOut(); GameManager.instance.ChCanM();}
+    CameraZoom.instance.ZoomOut();GameManager.instance.FadeOut(); GameManager.instance.ChCanM(); 
+    PlayerStats.instance.DeactivateWarning();
+    PlayerStats.instance.DeactivateSwitch();
+    PlayerStats.instance.DeactivateCHEST();}
     public void EnemiesActive(int ID){Enemies[ID].SetActive(false);}
     public void AreaActive(int ID)
     {

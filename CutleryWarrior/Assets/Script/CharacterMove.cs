@@ -18,7 +18,6 @@ public class CharacterMove : MonoBehaviour
     public int IDAction = 0; //Che tipo di personaggio è
     public GameObject Esclamation;
     public bool Attention;
-    public GameObject CantMove;
     //public GameObject Bullet;
     //public Transform BPoint;
     private Rigidbody rb;  
@@ -139,7 +138,7 @@ public void Awake()
         rb.freezeRotation = true;
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
         //Stats = GameObject.Find("Stats").GetComponent<PlayerStats>();
-        CantMove.SetActive(false);
+        VFXCantATK.SetActive(false);
     }
    
     public void Update()
@@ -165,18 +164,15 @@ public void Awake()
         {
             case 0:
             ForkB();
-            if(PlayerStats.instance.F_curMP <= 0){ CantMove.SetActive(true);}
-            else if(PlayerStats.instance.F_curMP > 0){ CantMove.SetActive(false);}
+            if(PlayerStats.instance.F_curMP > 18){VFXCantATK.SetActive(false);}
             break;
             case 1:
             KnifeB();
-            if(PlayerStats.instance.K_curMP <= 0){ CantMove.SetActive(true);}
-            else if(PlayerStats.instance.K_curMP > 0){ CantMove.SetActive(false);}
+            if(PlayerStats.instance.K_curMP > 18){VFXCantATK.SetActive(false);}
             break; 
             case 2:
             SpoonB();
-            if(PlayerStats.instance.S_curMP <= 0){ CantMove.SetActive(true);}
-            else if(PlayerStats.instance.S_curMP > 0){ CantMove.SetActive(false);}
+            if(PlayerStats.instance.S_curMP > 18){VFXCantATK.SetActive(false);}
             break;
         }
         break;
@@ -275,9 +271,9 @@ public void Awake()
     //DODGE
         // Rileva l'input del tasto spazio
         if (Input.GetMouseButtonDown(1) && canDodge && PlayerStats.instance.F_curMP > 5)
-        {Dodge(); PlayerStats.instance.K_curMP -= 5;}
-        else if(PlayerStats.instance.F_curMP <= 5)
-        {StartCoroutine(CantATKTime());}
+        {Dodge(); PlayerStats.instance.F_curMP -= 5;}
+        else if(PlayerStats.instance.F_curMP < 20)
+        {VFXCantATK.SetActive(true);}
 
     if (isDodging){characterController.Move(moveDirection * Time.fixedDeltaTime);}
     //Attack
@@ -291,7 +287,7 @@ public void Awake()
                 AnimationManager.instance.VFX = true;
                 PlayerStats.instance.F_curMP -= PlayerStats.instance.F_CostMP;  
                 //lastAttackTime = Time.time;
-            }else {AudioManager.instance.PlayUFX(10); StartCoroutine(CantATKTime());}     
+            }else if(PlayerStats.instance.F_curMP < 20){AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);}     
     }
     private void Dodge()
     {
@@ -336,7 +332,7 @@ public void Awake()
         chargeStartTime = Time.time;
         Anm.PlayAnimationLoop(ChargeFAnimationName);
     }
-    else if (PlayerStats.instance.K_curMP <= 10){AudioManager.instance.PlayUFX(10); StartCoroutine(CantATKTime());} 
+    else if (PlayerStats.instance.K_curMP < 20){AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);} 
    
 
     // Rilascia il colpo caricato
@@ -365,9 +361,9 @@ public void Awake()
         HandleComboAttackK();
         PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
     }
-    else
+    else if(PlayerStats.instance.K_curMP < 20)
     {
-        AudioManager.instance.PlayUFX(10); StartCoroutine(CantATKTime());
+        AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);
     }
 }
 
@@ -413,8 +409,8 @@ private IEnumerator StumpKTime()
         // Rileva l'input del tasto spazio
         if (Input.GetMouseButtonDown(1) && PlayerStats.instance.S_curMP > 20)
         {isDefence = true;}
-        else if (PlayerStats.instance.S_curMP <= 0)
-        {AudioManager.instance.PlayUFX(10); StartCoroutine(CantATKTime());}     
+        else if (PlayerStats.instance.S_curMP < 10)
+        {AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);}     
 
         // Verifica se il tasto del mouse è stato rilasciato
         if (Input.GetMouseButtonUp(1)){isDefence = false;}
@@ -426,7 +422,7 @@ private IEnumerator StumpKTime()
        // Verifica se il tasto del mouse è stato premuto
          if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.S_curMP > 20 && Stump)
         {HandleComboAttackS(); PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;} 
-        else {AudioManager.instance.PlayUFX(10); StartCoroutine(CantATKTime());}
+        else if(PlayerStats.instance.S_curMP < 20){AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);}
     }
 
     private void HandleComboAttackS()
@@ -439,12 +435,7 @@ private IEnumerator StumpKTime()
     
 #endregion
 
-    private IEnumerator CantATKTime()
-    {
-    VFXCantATK.SetActive(true);
-    yield return new WaitForSeconds(1);
-    VFXCantATK.SetActive(false);
-    }
+    
 
     private void PlayComboAnimation(string animationName)
     {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, false);}}
