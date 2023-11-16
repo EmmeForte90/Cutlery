@@ -73,6 +73,7 @@ public class AudioManager : MonoBehaviour
             bgmActive = false;
         }
     }
+    
     public void PlaySFX(int soundToPlay)
     {
         if (!sgmActive)

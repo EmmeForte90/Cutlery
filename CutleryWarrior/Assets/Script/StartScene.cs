@@ -8,6 +8,7 @@ public class StartScene : MonoBehaviour
     public int WhatMusic;
     //public bool StartGame = false;
     public bool Start = false;
+    public bool startMusic = false;
     //public bool Testing = false;
     public GameObject StartGameOBJ;
     public GameObject Data;
@@ -50,6 +51,8 @@ public class StartScene : MonoBehaviour
     PlayerStats.instance.StartData = true;
     AudioManager.instance.CrossFadeINAudio(WhatMusic); Once = false;}
     }
+    if(startMusic)
+    {AudioManager.instance.CrossFadeINAudio(WhatMusic);}
     
     defaultRotation = transform.rotation;
     //
