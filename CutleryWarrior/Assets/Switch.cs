@@ -21,8 +21,8 @@ public class Switch : MonoBehaviour
     public void Take(){
     Anm.Play("Switch_Anm");
     AnmGate.Play("GateOpen_Anm");
-    Gate.SetActive(false);
-    Leva.SetActive(false);
+    //Gate.SetActive(false);
+    //Leva.SetActive(false);
     canOpen = false;
     IconSwitch.SetActive(false);
     IconGate.SetActive(false);}
@@ -53,7 +53,7 @@ public class Switch : MonoBehaviour
         Instantiate(VFXTake, transform.position, transform.rotation);
         AudioManager.instance.PlaySFX(11);
         GameManager.instance.EsclamationStop();
-        PlayerStats.instance.EventDesertEnd(IDEvent);
+        PlayerStats.instance.EventSwitchEnd(IDEvent);
         print("Leva usata" + IDEvent);
         }
     }

@@ -164,15 +164,15 @@ public void Awake()
         {
             case 0:
             ForkB();
-            if(PlayerStats.instance.F_curMP > 18){VFXCantATK.SetActive(false);}
+            if(PlayerStats.instance.F_curMP > 19){VFXCantATK.SetActive(false);}
             break;
             case 1:
             KnifeB();
-            if(PlayerStats.instance.K_curMP > 18){VFXCantATK.SetActive(false);}
+            if(PlayerStats.instance.K_curMP > 19){VFXCantATK.SetActive(false);}
             break; 
             case 2:
             SpoonB();
-            if(PlayerStats.instance.S_curMP > 18){VFXCantATK.SetActive(false);}
+            if(PlayerStats.instance.S_curMP > 19){VFXCantATK.SetActive(false);}
             break;
         }
         break;
@@ -189,9 +189,7 @@ public void Awake()
         {if(!Win)
         {
         //
-        /*camF = cam.forward;camR = cam.right;camF.y = 0;camR.y = 0;
-        camF = camF.normalized;camR = camR.normalized;  
-        moveDir = camR * input.x + camF * input.y;*/
+        VFXCantATK.SetActive(false);
         //
         // Calcola la direzione del movimento in base agli input dell'utente
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -449,7 +447,7 @@ private IEnumerator StumpKTime()
     
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
-    public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
+    public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName); VFXCantATK.SetActive(false);}
     public void Allarm(){warning = true;}
     public void StopAllarm(){warning = false;}
     public void TakeDamage(float damage)

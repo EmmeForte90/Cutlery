@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class DuelManager : MonoBehaviour
 {
     //public LevelChanger LVCH;
-    public GameObject ThisBattle;    
+    public GameObject ThisBattle; 
+    public int WhatMusicAB;
        
     [Header("Arena")]
     public Vector3 savedPosition;
@@ -271,8 +272,7 @@ public void Update()
         inputCTR = true;
         AudioManager.instance.CrossFadeOUTAudio(1);
        yield return new WaitForSeconds(5f);
-        AudioManager.instance.StopMFX(1);
-       AudioManager.instance.PlayMFX(2);
+        AudioManager.instance.CrossFadeINAudio(2);
        GameOverBox.SetActive(true);
        Ending = true;
     }
@@ -389,6 +389,7 @@ IEnumerator EndBattle()
     GameManager.instance.StopWin();
     GameManager.instance.ChCanM();
     GameManager.instance.ActiveMinimap();
+    AudioManager.instance.CrossFadeINAudio(WhatMusicAB);
     ThisBattle.SetActive(false);
     }
     //public void EnemiesActive(int ID){Enemies[ID].SetActive(false);}

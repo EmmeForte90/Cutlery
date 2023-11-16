@@ -13835,7 +13835,7 @@ GameObject:
   - component: {fileID: 204599702012727712}
   - component: {fileID: 1068041182353930536}
   m_Layer: 0
-  m_Name: Script
+  m_Name: DuelManager
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -13899,6 +13899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisBattle: {fileID: 1657294146021087943}
+  WhatMusicAB: 0
   savedPosition: {x: 0, y: 0, z: 0}
   EnemyinArena: 0
   WinEnd: 0
@@ -13976,6 +13977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: 
   IDPorta: 0
+  Loading: 0
 --- !u!1 &763053706583373782
 GameObject:
   m_ObjectHideFlags: 0
@@ -132507,7 +132509,7 @@ GameObject:
   - component: {fileID: 3251738256148354412}
   - component: {fileID: 6753749673643370847}
   m_Layer: 0
-  m_Name: Script
+  m_Name: DuelManager
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -132571,6 +132573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisBattle: {fileID: 0}
+  WhatMusicAB: 0
   savedPosition: {x: 0, y: 0, z: 0}
   EnemyinArena: 0
   WinEnd: 0
@@ -132648,6 +132651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: 
   IDPorta: 0
+  Loading: 0
 --- !u!1 &9175585383367431927
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,6 +52,7 @@ MonoBehaviour:
   S_Unlock: 0
   K_Unlock: 0
   Money: 0
+  StartData: 0
   F_LV: 1
   F_HP: 100
   F_curHP: 0
@@ -143,55 +144,7 @@ MonoBehaviour:
   Treasure: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   Skill_F: 0100000000000000000001
   Skill_K: 0100000000000000000001
-  Skill_KI:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Skill_KIB:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   Skill_S: 0100000000000000000001
-  Skill_SI:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Skill_SIB:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   I_itemList: []
   I_quantityList: 
   IBattle_itemList: []
@@ -207,3 +160,4 @@ MonoBehaviour:
   Quest_itemList: []
   Quest_quantityList: 
   EventsDesert: 0000000000
+  SwitchDesert: 0000000000

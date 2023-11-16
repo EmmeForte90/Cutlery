@@ -142,7 +142,10 @@ public class PlayerStats : MonoBehaviour
     public List<int> Quest_quantityList = new List<int>();
     
     [Header("Events")]
-    public bool[] EventsDesert;    
+    public bool[] EventsDesert;  
+     public bool[] SwitchDesert;
+
+
 
     public static bool DataManager; 
 
@@ -387,7 +390,7 @@ public class PlayerStats : MonoBehaviour
                 int Id = tre.IDEvent;
                 for (int i = 0; i <  Enemies.Length; i++)
                 {
-                    if ( EventsDesert[i] && i == Id)
+                    if ( SwitchDesert[i] && i == Id)
                     {
                         // Imposta ordaliT.FirstD a false
                         tre.Take();
@@ -408,6 +411,11 @@ public class PlayerStats : MonoBehaviour
     {
         EventsDesert[id] = true;
         DeactivateWarning();
+    }
+
+    public void EventSwitchEnd(int id)
+    {
+        SwitchDesert[id] = true;
         DeactivateSwitch();
     }
 
