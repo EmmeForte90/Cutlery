@@ -12,13 +12,6 @@ public class KnifeSample : MonoBehaviour
     public GameObject player;
     public GameObject Icon;
     public GameObject IconVFX;
-    public GameObject VFXStun;
-    public bool isStun = false;
-     public int StunProbability = 0;
-    public int StunProbabilityCount = 1;
-    public int StunProbabilityMAX = 10;
-    public int result;
-    //public bool Test = false;   
     private bool take = false; 
     [Header("Hp")]
     public float maxHealth = 100f;
@@ -36,6 +29,26 @@ public class KnifeSample : MonoBehaviour
     public int poisonResistance = 100;
     public int poisonResistanceCont;
     private int TimePoison = 5;   
+
+    [Header("Stun")]
+   
+    public GameObject VFXStun;
+    public bool isStun = false;
+    public int StunProbability = 0;
+    public int StunProbabilityCount = 2;
+    public int StunProbabilityMAX = 10;
+    public int result;
+    public int timeStun = 3;
+    public int StunTimer = 5;
+
+    [Header("Sleep")]
+
+    public GameObject VFXSleep;
+    public bool isSleep = false;
+    public int SleepProbability = 0;
+    public int SleepProbabilityCount = 2;
+    public int SleepProbabilityMAX = 10;
+    public int timeSleep = 3;
 
     [Header("Move")]
     public int WaitAtk = 1;
@@ -63,6 +76,8 @@ public class KnifeSample : MonoBehaviour
     [SpineAnimation][SerializeField] private string StunStartAnimationName;
     [SpineAnimation][SerializeField] private string StunAnimationName;
     [SpineAnimation][SerializeField] private string StunEndAnimationName;
+    [SpineAnimation][SerializeField] private string StunFlashAnimationName;
+    [SpineAnimation][SerializeField] private string SleepAnimationName;
     public AnimationManager Anm;
     
     public void Awake()
@@ -256,7 +271,7 @@ private IEnumerator StunTime()
     Anm.PlayAnimationLoop(StunStartAnimationName);
     yield return new WaitForSeconds(0.5f);
     Anm.PlayAnimationLoop(StunAnimationName);
-    yield return new WaitForSeconds(5);
+    yield return new WaitForSeconds(StunTimer);
     Anm.PlayAnimationLoop(StunEndAnimationName);
     yield return new WaitForSeconds(0.5f);
     VFXStun.SetActive(false);
@@ -266,7 +281,82 @@ private IEnumerator StunTime()
     Action = 0;
     }
     }
-  #endregion
+    
+    #endregion
+
+    #region Stato StunFlash
+
+    public void StunFlash()
+{
+    if (!isStun && !DieB)
+    {
+        isStun = true;
+        VFXStun.SetActive(true);
+        AudioManager.instance.PlayUFX(11);
+        Anm.ClearAnm();
+        StartCoroutine(StunFlashTime());
+    }if (!isStun && DieB)
+    {
+        VFXStun.SetActive(false);
+        StunProbability = 0;
+        StunProbabilityCount = 0;
+        Die();
+    }
+}
+
+private IEnumerator StunFlashTime()
+{
+    if (!DieB)
+    {
+    yield return new WaitForSeconds(StunTimer);
+    Anm.PlayAnimationLoop(StunFlashAnimationName);
+    yield return new WaitForSeconds(0.5f);
+    VFXStun.SetActive(false);
+    isStun = false; // Reimposta la flag dopo la fine dello stordimento
+    StunProbability = 0;
+    StunProbabilityCount = 0;
+    Action = 0;
+    }
+    }
+    
+    #endregion
+
+    #region Stato Sleep
+
+    public void Sleep()
+{
+    if (!isSleep && !DieB)
+    {
+        isSleep = true;
+        VFXSleep.SetActive(true);
+        AudioManager.instance.PlayUFX(11);
+        Anm.ClearAnm();
+        StartCoroutine(SleepTime());
+    }if (!isSleep && DieB)
+    {
+        VFXSleep.SetActive(false);
+        SleepProbability = 0;
+        SleepProbabilityCount = 0;
+        Die();
+    }
+}
+
+private IEnumerator SleepTime()
+{
+    if (!DieB)
+    {
+    yield return new WaitForSeconds(5);
+    Anm.PlayAnimationLoop(SleepAnimationName);
+    yield return new WaitForSeconds(0.5f);
+    VFXSleep.SetActive(false);
+    isSleep = false; // Reimposta la flag dopo la fine dello stordimento
+    SleepProbability = 0;
+    SleepProbabilityCount = 0;
+    Action = 0;
+    }
+    }
+    
+    #endregion
     public void Die()
     {
         //Debug.Log("Il nemico è morto!");
