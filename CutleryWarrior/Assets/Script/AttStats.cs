@@ -26,12 +26,12 @@ public class AttStats : MonoBehaviour
     [HideInInspector] public float F_CostMPCont;
     [HideInInspector] public float F_ExpCont;
     [HideInInspector] public float F_curExpCont;
-    [HideInInspector] public int F_attackCont;
-    [HideInInspector] public int F_defenseCont;
-    [HideInInspector] public int F_poisonResistanceCont;
-    [HideInInspector] public int F_paralysisResistanceCont;
-    [HideInInspector] public int F_sleepResistanceCont;
-    [HideInInspector] public int F_rustResistanceCont;
+    [HideInInspector] public float F_attackCont;
+    [HideInInspector] public float F_defenseCont;
+    [HideInInspector] public float F_poisonResistanceCont;
+    [HideInInspector] public float F_paralysisResistanceCont;
+    [HideInInspector] public float F_sleepResistanceCont;
+    [HideInInspector] public float F_rustResistanceCont;
     //
     [HideInInspector] public int S_LV;
     [Header("Spoon")]
@@ -54,12 +54,12 @@ public class AttStats : MonoBehaviour
     [HideInInspector] public float S_CostMPCont;
     [HideInInspector] public float S_ExpCont;
     [HideInInspector] public float S_curExpCont;
-    [HideInInspector] public int S_attackCont;
-    [HideInInspector] public int S_defenseCont;
-    [HideInInspector] public int S_poisonResistanceCont;
-    [HideInInspector] public int S_paralysisResistanceCont;
-    [HideInInspector] public int S_sleepResistanceCont;
-    [HideInInspector] public int S_rustResistanceCont;
+    [HideInInspector] public float S_attackCont;
+    [HideInInspector] public float S_defenseCont;
+    [HideInInspector] public float S_poisonResistanceCont;
+    [HideInInspector] public float S_paralysisResistanceCont;
+    [HideInInspector] public float S_sleepResistanceCont;
+    [HideInInspector] public float S_rustResistanceCont;
     //
     [HideInInspector] public int K_LV;
     [Header("Knife")]
@@ -83,12 +83,12 @@ public class AttStats : MonoBehaviour
     [HideInInspector] public float K_CostMPCont;
     [HideInInspector] public float K_ExpCont;
     [HideInInspector] public float K_curExpCont;
-    [HideInInspector] public int K_attackCont;
-    [HideInInspector] public int K_defenseCont;
-    [HideInInspector] public int K_poisonResistanceCont;
-    [HideInInspector] public int K_paralysisResistanceCont;
-    [HideInInspector] public int K_sleepResistanceCont;
-    [HideInInspector] public int K_rustResistanceCont;
+    [HideInInspector] public float K_attackCont;
+    [HideInInspector] public float K_defenseCont;
+    [HideInInspector] public float K_poisonResistanceCont;
+    [HideInInspector] public float K_paralysisResistanceCont;
+    [HideInInspector] public float K_sleepResistanceCont;
+    [HideInInspector] public float K_rustResistanceCont;
     //
     public static AttStats instance;
     #endregion

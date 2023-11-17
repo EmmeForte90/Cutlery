@@ -7,7 +7,7 @@ public class Skill : Item
     public bool isRage = false;
     public bool IsDirectional = false;
     //public bool isDamageSecond = false;
-    public int damage = 10;
+    public float damage = 10;
     //public float CostMP;
     [Tooltip("Che Character è? 0-Fork 1-Knife 2-Spoon")]
     [Range(0, 2)]

@@ -45,7 +45,7 @@ public class SpoonSemple : MonoBehaviour
     public float moveSpeed = 3f;
     public float attackRange = 1.5f;
     public int defense = 2;
-    public int defenseSpell = 10;
+    public float defenseSpell = 10;
     public int attackPauseDuration = 1;
     private bool isAttacking = false;   
     public bool DieB = false;
@@ -184,7 +184,7 @@ public class SpoonSemple : MonoBehaviour
         if (collision.gameObject.CompareTag("Rage"))
         {if(!DieB)
         {currentHealth -= DamageColl.instance.damage;
-        Debug.Log("danno +"+ currentHealth);
+        //Debug.Log("danno +"+ currentHealth);
         Instantiate(VFXHurt, transform.position, transform.rotation);
         Anm.TemporaryChangeColor(Color.red);
         }} 
@@ -220,10 +220,10 @@ public class SpoonSemple : MonoBehaviour
         isAttacking = false;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
     if(!DieB){
-    int danno_subito = Mathf.Max(damage - defense, 0);
+    float danno_subito = Mathf.Max(damage - defense, 0);
     currentHealth -= danno_subito;
     AudioManager.instance.PlaySFX(8);
     //Debug.Log("danno +"+ danno_subito);

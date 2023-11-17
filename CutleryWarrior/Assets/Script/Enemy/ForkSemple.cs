@@ -234,10 +234,10 @@ public class ForkSemple : MonoBehaviour
         isAttacking = false;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
     if(!DieB){
-    int danno_subito = Mathf.Max(damage - defense, 0);
+    float danno_subito = Mathf.Max(damage - defense, 0);
     currentHealth -= danno_subito;
     AudioManager.instance.PlaySFX(8);
     Debug.Log("danno +"+ danno_subito);

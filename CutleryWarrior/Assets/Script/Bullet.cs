@@ -3,7 +3,7 @@ public class Bullet : MonoBehaviour
 {
     #region Header
     public float speed = 10f;
-    public int damage = 10;
+    public float damage = 10;
     public bool isSkill = true;
     public Skill itemInfo;
     public float lifeTime = 2f;

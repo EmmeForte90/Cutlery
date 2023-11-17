@@ -792,7 +792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 36, y: 5}
+  m_AnchoredPosition: {x: 36, y: -206}
   m_SizeDelta: {x: 1347.231, y: 258.0425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7968480889839324216
@@ -74559,6 +74559,7 @@ MonoBehaviour:
   VFXPoison: {fileID: 4016552358831944208}
   poisonResistance: 100
   poisonResistanceCont: 0
+  WaitAtk: 1
   moveSpeed: 5
   attackRange: 5
   defense: 2
@@ -75093,6 +75094,7 @@ MonoBehaviour:
   VFXPoison: {fileID: 8685440031080412932}
   poisonResistance: 100
   poisonResistanceCont: 0
+  WaitAtk: 3
   moveSpeed: 5
   PointTange: 1
   defense: 2
@@ -75774,7 +75776,7 @@ MonoBehaviour:
   player: {fileID: 0}
   Icon: {fileID: 1837253166408712065}
   IconVFX: {fileID: 6352685755891374706}
-  maxHealth: 100
+  maxHealth: 150
   currentHealth: 0
   healthBar: {fileID: 5289625634937170527}
   damagePerSecond: 0.1
@@ -75789,6 +75791,7 @@ MonoBehaviour:
   StunProbabilityMAX: 10
   result: 0
   timeStun: 3
+  WaitAtk: 3
   moveSpeed: 3
   attackRange: 5
   defense: 2
@@ -106969,6 +106972,7 @@ MonoBehaviour:
   StunProbabilityMAX: 10
   result: 0
   timeStun: 3
+  WaitAtk: 3
   moveSpeed: 3
   attackRange: 5
   defense: 2
@@ -111000,7 +111004,7 @@ MonoBehaviour:
   StunProbabilityCount: 2
   StunProbabilityMAX: 10
   result: 0
-  maxHealth: 100
+  maxHealth: 50
   currentHealth: 0
   healthBar: {fileID: 8099257245113179833}
   damagePerSecond: 0.1
@@ -111008,6 +111012,7 @@ MonoBehaviour:
   VFXPoison: {fileID: 3668114968253556437}
   poisonResistance: 100
   poisonResistanceCont: 0
+  WaitAtk: 3
   moveSpeed: 5
   PointTange: 1
   defense: 2
@@ -131929,6 +131934,7 @@ MonoBehaviour:
   VFXPoison: {fileID: 8391765136976239614}
   poisonResistance: 100
   poisonResistanceCont: 0
+  WaitAtk: 1
   moveSpeed: 5
   attackRange: 5
   defense: 2
@@ -132908,7 +132914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 36, y: 5}
+  m_AnchoredPosition: {x: 36, y: -206}
   m_SizeDelta: {x: 1347.231, y: 258.0425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4706216568973832949

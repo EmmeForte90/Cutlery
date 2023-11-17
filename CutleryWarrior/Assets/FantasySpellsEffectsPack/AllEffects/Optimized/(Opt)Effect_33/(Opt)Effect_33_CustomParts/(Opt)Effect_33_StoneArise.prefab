@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 23056704986926960}
   - component: {fileID: 114797535927819204}
   - component: {fileID: 114063701280205490}
+  - component: {fileID: 7510738140297798240}
+  - component: {fileID: 5426609264849613986}
   m_Layer: 0
   m_Name: Effect_33_Stone
-  m_TagString: Untagged
+  m_TagString: Rage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,6 +121,34 @@ MonoBehaviour:
   m_durationTime: 15
   m_lerpValue: 2
   m_lookValue: 0
+--- !u!65 &7510738140297798240
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000592324785336}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.19813848, y: 0.11175198, z: 0.22877}
+  m_Center: {x: 0.0172413, y: 0.004408598, z: -0.03782983}
+--- !u!114 &5426609264849613986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000592324785336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39091318fae92a489d8e600112a486c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  itemInfo: {fileID: 11400000, guid: e64e05f55b9902249bf22dcc53c456cf, type: 2}
+  lifeTime: 5
 --- !u!1 &1071816757407854
 GameObject:
   m_ObjectHideFlags: 0

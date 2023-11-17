@@ -9,7 +9,7 @@ public class TimerSkill : MonoBehaviour
     public GameObject HandleObjA;
     private float SpeedRestore = 1f; // il massimo valore di essenza disponibile
     [HideInInspector]public float curTime;
-    private float TimeMin = 0f;
+    [HideInInspector]public float TimeMin = 0f;
     private bool Start = true;        
     public TextMeshProUGUI Utilizzi;
     public static TimerSkill instance;
@@ -17,8 +17,6 @@ public class TimerSkill : MonoBehaviour
     private void OnEnable(){Utilizzi.text = itemInfo.Utilizzi.ToString();}
     public void Update()
     {
-        //FillBar.fillAmount = curTime / TimeMax;
-        //FillBar.fillAmount = Mathf.Clamp(FillBar.fillAmount, 0.01f, 1);
         if(Start)
         {
         curTime -= SpeedRestore * Time.deltaTime;

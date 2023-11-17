@@ -65,12 +65,12 @@ public class GameManager : MonoBehaviour
     private float F_MP;
     private float F_Exp;
     private float F_curExp;
-    private int F_attack;
-    private int F_defense;
-    private int F_poisonResistance;
-    private int F_paralysisResistance;
-    private int F_sleepResistance;
-    private int F_rustResistance;
+    private float F_attack;
+    private float F_defense;
+    private float F_poisonResistance;
+    private float F_paralysisResistance;
+    private float F_sleepResistance;
+    private float F_rustResistance;
     [Header("Fork")]
     [SerializeField] public TextMeshProUGUI F_ExpTextM;
     [SerializeField] public TextMeshProUGUI F_ExpText;
@@ -95,12 +95,12 @@ public class GameManager : MonoBehaviour
     private float S_MP;
     private float S_Exp;
     private float S_curExp;
-    private int S_attack;
-    private int S_defense;
-    private int S_poisonResistance;
-    private int S_paralysisResistance;
-    private int S_sleepResistance;
-    private int S_rustResistance;
+    private float S_attack;
+    private float S_defense;
+    private float S_poisonResistance;
+    private float S_paralysisResistance;
+    private float S_sleepResistance;
+    private float S_rustResistance;
     [Header("Spoon")]
     [SerializeField] public TextMeshProUGUI S_ExpTextM;
     [SerializeField] public TextMeshProUGUI S_ExpText;
@@ -125,12 +125,12 @@ public class GameManager : MonoBehaviour
     private float K_MP;
     private float K_Exp;
     private float K_curExp;
-    private int K_attack;
-    private int K_defense;
-    private int K_poisonResistance;
-    private int K_paralysisResistance;
-    private int K_sleepResistance;
-    private int K_rustResistance;
+    private float K_attack;
+    private float K_defense;
+    private float K_poisonResistance;
+    private float K_paralysisResistance;
+    private float K_sleepResistance;
+    private float K_rustResistance;
     [Header("Knife")]
     [SerializeField] public TextMeshProUGUI K_ExpTextM;
     [SerializeField] public TextMeshProUGUI K_ExpText;

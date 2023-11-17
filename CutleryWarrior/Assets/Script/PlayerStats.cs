@@ -33,12 +33,12 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float F_CostMP = 0;
     [SerializeField] public float F_Exp = 0;
     [SerializeField] public float F_curExp = 0;
-    [SerializeField] public int F_attack = 10;
-    [SerializeField] public int F_defense = 5;
-    [SerializeField] public int F_poisonResistance = 0;
-    [SerializeField] public int F_paralysisResistance = 0;
-    [SerializeField] public int F_sleepResistance = 0;
-    [SerializeField] public int F_rustResistance = 0;
+    [SerializeField] public float F_attack = 10;
+    [SerializeField] public float F_defense = 5;
+    [SerializeField] public float F_poisonResistance = 0;
+    [SerializeField] public float F_paralysisResistance = 0;
+    [SerializeField] public float F_sleepResistance = 0;
+    [SerializeField] public float F_rustResistance = 0;
     //
     [HideInInspector] public float F_HPCont;
     [HideInInspector] public float F_curHPCont;
@@ -47,12 +47,12 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float F_CostMPCont;
     [HideInInspector] public float F_ExpCont;
     [HideInInspector] public float F_curExpCont;
-    [HideInInspector] public int F_attackCont;
-    [HideInInspector] public int F_defenseCont;
-    [HideInInspector] public int F_poisonResistanceCont;
-    [HideInInspector] public int F_paralysisResistanceCont;
-    [HideInInspector] public int F_sleepResistanceCont;
-    [HideInInspector] public int F_rustResistanceCont;
+    [HideInInspector] public float F_attackCont;
+    [HideInInspector] public float F_defenseCont;
+    [HideInInspector] public float F_poisonResistanceCont;
+    [HideInInspector] public float F_paralysisResistanceCont;
+    [HideInInspector] public float F_sleepResistanceCont;
+    [HideInInspector] public float F_rustResistanceCont;
     [Header("Spoon")]
     [SerializeField] public int S_LV = 1;
     [SerializeField] public float S_HP = 0;
@@ -64,12 +64,12 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float S_CostMP = 0;
     [SerializeField] public float S_Exp = 0;
     [SerializeField] public float S_curExp = 0;
-    [SerializeField] public int S_attack = 10;
-    [SerializeField] public int S_defense = 5;
-    [SerializeField] public int S_poisonResistance = 0;
-    [SerializeField] public int S_paralysisResistance = 0;
-    [SerializeField] public int S_sleepResistance = 0;
-    [SerializeField] public int S_rustResistance = 0; 
+    [SerializeField] public float S_attack = 10;
+    [SerializeField] public float S_defense = 5;
+    [SerializeField] public float S_poisonResistance = 0;
+    [SerializeField] public float S_paralysisResistance = 0;
+    [SerializeField] public float S_sleepResistance = 0;
+    [SerializeField] public float S_rustResistance = 0; 
     //
     [HideInInspector] public float S_HPCont;
     [HideInInspector] public float S_curHPCont;
@@ -78,12 +78,12 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float S_CostMPCont;
     [HideInInspector] public float S_ExpCont;
     [HideInInspector] public float S_curExpCont;
-    [HideInInspector] public int S_attackCont;
-    [HideInInspector] public int S_defenseCont;
-    [HideInInspector] public int S_poisonResistanceCont;
-    [HideInInspector] public int S_paralysisResistanceCont;
-    [HideInInspector] public int S_sleepResistanceCont;
-    [HideInInspector] public int S_rustResistanceCont;
+    [HideInInspector] public float S_attackCont;
+    [HideInInspector] public float S_defenseCont;
+    [HideInInspector] public float S_poisonResistanceCont;
+    [HideInInspector] public float S_paralysisResistanceCont;
+    [HideInInspector] public float S_sleepResistanceCont;
+    [HideInInspector] public float S_rustResistanceCont;
     [Header("Knife")]
     [SerializeField] public int K_LV = 1;
     [SerializeField] public float K_HP = 0;
@@ -95,12 +95,12 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float K_Rage = 100;
     [SerializeField] public float K_Exp = 0;
     [SerializeField] public float K_curExp = 0;
-    [SerializeField] public int K_attack = 10;
-    [SerializeField] public int K_defense = 5;
-    [SerializeField] public int K_poisonResistance = 0;
-    [SerializeField] public int K_paralysisResistance = 0;
-    [SerializeField] public int K_sleepResistance = 0;
-    [SerializeField] public int K_rustResistance = 0; 
+    [SerializeField] public float K_attack = 10;
+    [SerializeField] public float K_defense = 5;
+    [SerializeField] public float K_poisonResistance = 0;
+    [SerializeField] public float K_paralysisResistance = 0;
+    [SerializeField] public float K_sleepResistance = 0;
+    [SerializeField] public float K_rustResistance = 0; 
     //
     [HideInInspector] public float K_HPCont;
     [HideInInspector] public float K_curHPCont;
@@ -109,12 +109,12 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float K_CostMPCont;
     [HideInInspector] public float K_ExpCont;
     [HideInInspector] public float K_curExpCont;
-    [HideInInspector] public int K_attackCont;
-    [HideInInspector] public int K_defenseCont;
-    [HideInInspector] public int K_poisonResistanceCont;
-    [HideInInspector] public int K_paralysisResistanceCont;
-    [HideInInspector] public int K_sleepResistanceCont;
-    [HideInInspector] public int K_rustResistanceCont;
+    [HideInInspector] public float K_attackCont;
+    [HideInInspector] public float K_defenseCont;
+    [HideInInspector] public float K_poisonResistanceCont;
+    [HideInInspector] public float K_paralysisResistanceCont;
+    [HideInInspector] public float K_sleepResistanceCont;
+    [HideInInspector] public float K_rustResistanceCont;
     //
     [Header("Enemies List")]
     public bool[] Enemies;

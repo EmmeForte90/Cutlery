@@ -9294,6 +9294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4521017841362983411}
   - component: {fileID: 4509895913702620528}
+  - component: {fileID: -1503198797737959306}
   m_Layer: 0
   m_Name: F_BigFork
   m_TagString: Untagged
@@ -9335,6 +9336,19 @@ MonoBehaviour:
   - {fileID: 1199909715730254, guid: 60cbb628993106943a87c2877f903881, type: 3}
   m_movePos: {fileID: 0}
   m_randomRotationValue: {x: 0, y: 0, z: 0}
+--- !u!65 &-1503198797737959306
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031103343607389033}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4214533632050442821
 GameObject:
   m_ObjectHideFlags: 0
