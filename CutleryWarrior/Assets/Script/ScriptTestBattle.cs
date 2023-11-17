@@ -70,7 +70,7 @@ public class ScriptTestBattle : MonoBehaviour
     public Skill S_Skill_5;
     public Skill S_Skill_6;
     public Skill S_Skill_7;
-    //public Skill S_Skill_8;
+    public Skill S_Skill_8;
     //public Skill S_Skill_9;
     //public Skill S_Skill_10;
 
@@ -82,7 +82,7 @@ public class ScriptTestBattle : MonoBehaviour
     private TimerSkill S_Time_Skill_5;
     private TimerSkill S_Time_Skill_6;
     private TimerSkill S_Time_Skill_7;
-    //private TimerSkill S_Time_Skill_8;
+    private TimerSkill S_Time_Skill_8;
     //private TimerSkill S_Time_Skill_9;
     //private TimerSkill S_Time_Skill_10;
 
@@ -118,12 +118,12 @@ public class ScriptTestBattle : MonoBehaviour
             S_Time_Skill_0 = GameObject.Find("Benediction_T").GetComponent<TimerSkill>();
             S_Time_Skill_1 = GameObject.Find("Cura_T").GetComponent<TimerSkill>();
             S_Time_Skill_2 = GameObject.Find("ShockWave_T").GetComponent<TimerSkill>();
-            S_Time_Skill_3 = GameObject.Find("Shields_T").GetComponent<TimerSkill>();
-            S_Time_Skill_4 = GameObject.Find("Explosion_T").GetComponent<TimerSkill>();
+            S_Time_Skill_3 = GameObject.Find("Linfa_T").GetComponent<TimerSkill>();
+            S_Time_Skill_4 = GameObject.Find("Regene_T").GetComponent<TimerSkill>();
             S_Time_Skill_5 = GameObject.Find("HitStun_T").GetComponent<TimerSkill>();
             S_Time_Skill_6 = GameObject.Find("Revive_T").GetComponent<TimerSkill>();
             S_Time_Skill_7 = GameObject.Find("Reflect_T").GetComponent<TimerSkill>();
-            //S_Time_Skill_8 = GameObject.Find("Hole_T").GetComponent<TimerSkill>();
+            S_Time_Skill_8 = GameObject.Find("Panacea_T").GetComponent<TimerSkill>();
             //F_Time_Skill_9 = GameObject.Find("BigSpell_T").GetComponent<TimerSkill>();
             //F_Time_Skill_10 = GameObject.Find("BigSpell_T").GetComponent<TimerSkill>();
         }
@@ -209,7 +209,7 @@ public class ScriptTestBattle : MonoBehaviour
             S_Skill_5.Utilizzi = S_Skill_5.UtilizziMAX;
             S_Skill_6.Utilizzi = S_Skill_6.UtilizziMAX;
             S_Skill_7.Utilizzi = S_Skill_7.UtilizziMAX;
-            //S_Skill_8.Utilizzi = S_Skill_8.UtilizziMAX;
+            S_Skill_8.Utilizzi = S_Skill_8.UtilizziMAX;
             //S_Skill_9.Utilizzi = S_Skill_9.UtilizziMAX;
             //S_Skill_10.Utilizzi = S_Skill_10.UtilizziMAX;
             //
@@ -221,7 +221,7 @@ public class ScriptTestBattle : MonoBehaviour
             S_Time_Skill_5.curTime = S_Time_Skill_5.TimeMin;
             S_Time_Skill_6.curTime = S_Time_Skill_6.TimeMin;
             S_Time_Skill_7.curTime = S_Time_Skill_7.TimeMin;
-            //S_Time_Skill_8.curTime = S_Skill_8.TimeMin;
+            S_Time_Skill_8.curTime = S_Time_Skill_8.TimeMin;
             //S_Time_Skill_9.curTime = S_Skill_9.TimeMin;
             //S_Time_Skill_10.curTime = S_Skill_10.TimeMin;
         }

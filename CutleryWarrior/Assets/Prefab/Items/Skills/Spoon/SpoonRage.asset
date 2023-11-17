@@ -21,7 +21,7 @@ MonoBehaviour:
   Stackable: 0
   itemIcon: {fileID: 21300000, guid: 2092a93f05cfc8e409d531edd669e7cf, type: 3}
   TypesE: 0
-  SkillIcon: {fileID: 0}
+  SkillIcon: {fileID: 21300000, guid: a9549b025fa6ece4ba48f5195d8c6fd4, type: 3}
   isRage: 1
   IsDirectional: 1
   damage: 10

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56cdccba5a6f6f9419ac405c1abccdff, type: 3}
   m_Name: Panacea
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Panacea
   NameSkin: 
-  itemDes: 
+  itemDes: Restore allies from status
   ID: 0
   KindItem: 0
   price: 0
@@ -27,8 +27,8 @@ MonoBehaviour:
   damage: 10
   WhoCH: 0
   WhoSkill: 0
-  MaxDuration: 0
-  TimeSpell: 0
-  TimeSkill: 0
-  Utilizzi: 0
-  UtilizziMAX: 0
+  MaxDuration: 0.5
+  TimeSpell: 1
+  TimeSkill: 1
+  Utilizzi: 5
+  UtilizziMAX: 5
