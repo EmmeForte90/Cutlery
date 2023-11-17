@@ -25,9 +25,9 @@ public class TouchPlayer : MonoBehaviour
     private SwitchCharacter Switch;
     public bool takeCoo = false;
     public bool isMove = true;
-    /*[Header("DirectionPlayer")]
-    public bool isRight = true;*/
-    //public int IDAudio;
+    private bool Var_1 = false;
+    private bool Var_2 = true;
+    private bool Var_3 = false;
     public NPCMove Mnpc;
     #endregion
     public void Start()
@@ -41,9 +41,17 @@ public class TouchPlayer : MonoBehaviour
     public void Take(){Destroy(This);}
     public void Update()
     {
-    if(Switch.isElement1Active){Player = Spoon;}
-    else if(Switch.isElement2Active){Player = Fork;} 
-    else if(Switch.isElement3Active){Player = Knife;} 
+    if(Switch.isElement1Active)
+    {if(GameManager.instance.S_Unlock && Var_1){Spoon = GameObject.Find("S_Player").transform;} 
+    Player = Spoon; Var_1 = false; Var_2 = true;}
+    else 
+    if(Switch.isElement2Active && Var_2)
+    {if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;} 
+    Player = Fork;  Var_2 = false; Var_3 = true;} 
+    else 
+    if(Switch.isElement3Active && Var_3)
+    {if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;} 
+    Player = Knife; Var_3 = false; Var_1 = true;} 
     //
     if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 1 &&
     SwitchCharacter.instance.rotationSwitcher.CharacterIDSec == 3 &&

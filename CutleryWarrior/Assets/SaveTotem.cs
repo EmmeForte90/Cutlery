@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveTotem : MonoBehaviour
@@ -12,6 +13,10 @@ public class SaveTotem : MonoBehaviour
     private Transform Fork;
     private Transform Spoon;
     private Transform Knife;
+    private bool Var_1 = false;
+    private bool Var_2 = true;
+    private bool Var_3 = false;
+
     public void Start()
         {
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
@@ -22,9 +27,17 @@ public class SaveTotem : MonoBehaviour
         }
     public void Update()
     {
-    if(Switch.isElement1Active){Player = Spoon;}
-    else if(Switch.isElement2Active){Player = Fork;} 
-    else if(Switch.isElement3Active){Player = Knife;} 
+    if(Switch.isElement1Active)
+    {if(GameManager.instance.S_Unlock && Var_1){Spoon = GameObject.Find("S_Player").transform;} 
+    Player = Spoon; Var_1 = false; Var_2 = true;}
+    else 
+    if(Switch.isElement2Active && Var_2)
+    {if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;} 
+    Player = Fork;  Var_2 = false; Var_3 = true;} 
+    else 
+    if(Switch.isElement3Active && Var_3)
+    {if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;} 
+    Player = Knife; Var_3 = false; Var_1 = true;} 
     }
 
     private void OnTriggerEnter(Collider collision)

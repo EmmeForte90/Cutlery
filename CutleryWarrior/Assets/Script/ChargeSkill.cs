@@ -77,6 +77,7 @@ public class ChargeSkill : MonoBehaviour
 
     public void TakeData(Skill skill)
     {
+    //Calcola il numero di utilizzi
     if(skill.Utilizzi > 0){
     TimerSkill.instance.Use();//Tempo per utilizzare di nuovo la skill
     VFX.SetActive(true);
@@ -86,19 +87,22 @@ public class ChargeSkill : MonoBehaviour
     AudioManager.instance.PlayUFX(13);
     GameManager.instance.ChStopB();
     _spineAnimationState.SetAnimation(0, ChargeAnm, true); 
+    //Se non è una skill rage si comporta diversamente
     if(!skill.isRage){UpdatePreviewSkill.instance.UpdateInfoPanel(skill);}
     nameT = skill.itemName;
     SkillAtt = skill;
     TimeS = skill.TimeSkill;//Tempo per ripristinare la battle
     fillDuration = skill.MaxDuration; 
     skill.Utilizzi--;
+    //Se è direzionale attiva il marker
     if(skill.IsDirectional){
     GameManager.instance.CloseLittleMStop();
     Indicatore.SetActive(true);
     Indicatore.transform.position = MP.transform.position; 
     Character.Character = kindCh; 
     }
-    else{
+    else //Se non è direziola enon lo attiva e fa partire il timer direttamente
+    {
     isSkillLaunched = false;
     GameManager.instance.CloseLittleM();
     GameManager.instance.TimerMenu();
@@ -121,6 +125,7 @@ public class ChargeSkill : MonoBehaviour
     {AudioManager.instance.PlayUFX(10); TimerSkill.instance.Notuse();}
     }
 
+    //Fa partire l'animazione che instanziera la skill
     public void ActiveSkill()
     {
     isSkillLaunched = false;
@@ -160,7 +165,7 @@ public class ChargeSkill : MonoBehaviour
             if (curTime >= fillDuration)
             {
                 curTime = fillDuration;
-                print("StartSkil");
+                //print("StartSkill");
                 StartCoroutine(SkillLunch());
                 isSkillLaunched = true; // Imposta il flag per evitare ulteriori avvii
             }
@@ -177,12 +182,14 @@ IEnumerator SkillLunch()
     yield return new WaitForSeconds(3f);
     VFX.SetActive(false); VFXRAGE.SetActive(false);Mossa.SetActive(false);
     GameManager.instance.CloseTimerMenu();
+    //
     if(SkillAtt.isRage)
     {AnimationRage.SetActive(true);
     yield return new WaitForSeconds(2f);
     AnimationRage.SetActive(false);}
     AM.PlayAnimation(Anm);
     if(SkillAtt.isRage){RageCurr();}
+    //
     yield return new WaitForSeconds(TimeS);
     GameManager.instance.ResumeBattle();
     CameraZoom.instance.ZoomOut();

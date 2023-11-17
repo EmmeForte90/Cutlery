@@ -207,6 +207,7 @@ public class AnimationManager : MonoBehaviour
     if (e.Data.Name == "bigshoot" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_0.Use(); Instantiate(BigSB, BPoint.position, BigSB.transform.rotation); 
     StartCoroutine(StopVFX_F()); VFX = false; }
+    //--------------------------------------//
     if (e.Data.Name == "bigspell" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_0.Use(); Instantiate(BigSpell, BPoint.position, BigSpell.transform.rotation); 
      StartCoroutine(StopVFX_F()); VFX = false; }
@@ -247,9 +248,7 @@ public class AnimationManager : MonoBehaviour
     {AudioManager.instance.PlayUFX(8); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "bigslash")
     {AudioManager.instance.PlayUFX(8); BigSlash.gameObject.SetActive(true); StartCoroutine(StopVFX_K2());}
-    /*if (e.Data.Name == "bigslash" && VFX)
-    {AudioManager.instance.PlayUFX(8); Skill_0.Use(); Instantiate(BigSlash, BPoint.position, BigSlash.transform.rotation); 
-    VFX = false; StartCoroutine(StopVFX_F());}*/
+    //--------------------------------------//
     if (e.Data.Name == "fury")
     {AudioManager.instance.PlayUFX(8); Skill_1.Use(); Instantiate(Fury, BPoint.position, Fury.transform.rotation); 
     StartCoroutine(StopVFX_F()); VFX = false; }
@@ -282,6 +281,7 @@ public class AnimationManager : MonoBehaviour
     {AudioManager.instance.PlayUFX(8); ShiledB.gameObject.SetActive(true); StartCoroutine(StopVFX_S());}
      if (e.Data.Name == "crush")
     {AudioManager.instance.PlayUFX(8); Crush.gameObject.SetActive(true); StartCoroutine(StopVFX_S());}
+    //--------------------------------------//
     if (e.Data.Name == "defence")
     {AudioManager.instance.PlayUFX(8); Skill_0.Use(); Instantiate(BenedictionTower, BPoint.position, BenedictionTower.transform.rotation);
     StartCoroutine(StopVFX_F()); VFX = false; }
