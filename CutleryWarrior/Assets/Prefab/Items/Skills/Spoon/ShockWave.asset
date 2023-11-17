@@ -28,7 +28,7 @@ MonoBehaviour:
   WhoCH: 2
   WhoSkill: 2
   MaxDuration: 1
-  TimeSpell: 2
+  TimeSpell: 20
   TimeSkill: 1
   Utilizzi: 3
   UtilizziMAX: 3

@@ -28,8 +28,8 @@ MonoBehaviour:
   damage: 10
   WhoCH: 0
   WhoSkill: 3
-  MaxDuration: 1
+  MaxDuration: 2
   TimeSpell: 50
-  TimeSkill: 0
+  TimeSkill: 3
   Utilizzi: 1
   UtilizziMAX: 1

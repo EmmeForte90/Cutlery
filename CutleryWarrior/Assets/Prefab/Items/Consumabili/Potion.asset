@@ -17,6 +17,7 @@ MonoBehaviour:
   itemDes: A simple potion, restore 30 HP
   ID: 1
   KindItem: 0
+  WhoConsumable: 1
   price: 5
   Stackable: 1
   itemIcon: {fileID: 21300000, guid: 7a23ebae02ab7c341991c99a3722217c, type: 3}

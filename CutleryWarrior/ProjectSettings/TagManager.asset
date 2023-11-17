@@ -34,6 +34,7 @@ TagManager:
   - Enm_Bullet
   - Event
   - Data
+  - Bomb
   layers:
   - Default
   - TransparentFX

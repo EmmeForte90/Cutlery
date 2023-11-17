@@ -337,4 +337,4 @@ MonoBehaviour:
   isSkill: 1
   one: 1
   itemInfo: {fileID: 11400000, guid: 5a84bd3b370668b4d9823f4a303b3163, type: 2}
-  lifeTime: 10
+  lifeTime: 100

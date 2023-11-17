@@ -7,6 +7,7 @@ public class Healt : MonoBehaviour
     #region Header
     public float restore = 10;
     public bool isSkill = true;
+    public bool isMana = false;
     public bool one = true;
     public Skill itemInfo;
     public float lifeTime = 2f;
@@ -26,22 +27,25 @@ public class Healt : MonoBehaviour
         if(other.CompareTag("F_Player"))
         {
         AudioManager.instance.PlayUFX(9);
-        PlayerStats.instance.F_curHP += restore;
+        if(!isMana){PlayerStats.instance.F_curHP += restore;}
+        else if(isMana){PlayerStats.instance.F_curMP += restore;}
         one = false;
         }
         if(other.CompareTag("K_Player"))
         {
         AudioManager.instance.PlayUFX(9);
-        PlayerStats.instance.K_curHP += restore;
+        if(!isMana){PlayerStats.instance.K_curHP += restore;}
+        else if(isMana){PlayerStats.instance.K_curMP += restore;}
         one = false;        
         }
         if(other.CompareTag("S_Player"))
         {
         AudioManager.instance.PlayUFX(9);
-        PlayerStats.instance.S_curHP += restore;
-        Destroy(gameObject, lifeTime);
+        if(!isMana){PlayerStats.instance.S_curHP += restore;}
+        else if(isMana){PlayerStats.instance.S_curMP += restore;}
         one = false;
         }
         }
+        Destroy(gameObject, lifeTime);
     }
 }

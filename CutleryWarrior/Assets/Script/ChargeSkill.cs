@@ -15,12 +15,14 @@ public class ChargeSkill : MonoBehaviour
     private PlayerStats Stats;
     public Scrollbar TimeBar;
     private Skill SkillAtt;
+    private Item itemUse;
     private int TimeS;
     public GameObject MP;
     public GameObject VFX;
     public GameObject VFXRAGE;
     public GameObject Mossa;
     public GameObject Indicatore;
+    public GameObject Indicatore_Item;
     public FollowMouse Character;
     public GameObject AnimationRage;
     public TextMeshProUGUI nameText; 
@@ -38,17 +40,44 @@ public class ChargeSkill : MonoBehaviour
     public Transform RPoint;
     public Transform Player;
     [SpineAnimation][SerializeField] string ChargeAnm;
-    [SpineAnimation][SerializeField] string Skill0;
-    [SpineAnimation][SerializeField] string Skill1;
-    [SpineAnimation][SerializeField] string Skill2;
-    [SpineAnimation][SerializeField] string Skill3;
-    [SpineAnimation][SerializeField] string Skill4;
-    [SpineAnimation][SerializeField] string Skill5;
-    [SpineAnimation][SerializeField] string Skill6;
-    [SpineAnimation][SerializeField] string Skill7;
-    [SpineAnimation][SerializeField] string Skill8;
-    [SpineAnimation][SerializeField] string Skill9;
+    [SpineAnimation][SerializeField] string SearchAnm;
+    [SpineAnimation][SerializeField] string Skill_0;
+    [SpineAnimation][SerializeField] string Skill_1;
+    [SpineAnimation][SerializeField] string Skill_2;
+    [SpineAnimation][SerializeField] string Skill_3;
+    [SpineAnimation][SerializeField] string Skill_4;
+    [SpineAnimation][SerializeField] string Skill_5;
+    [SpineAnimation][SerializeField] string Skill_6;
+    [SpineAnimation][SerializeField] string Skill_7;
+    [SpineAnimation][SerializeField] string Skill_8;
+    [SpineAnimation][SerializeField] string Skill_9;
     [SpineAnimation][SerializeField] string SkillRage;
+    /////////////////////////////////////////////////////
+    [Header("Recupero")]    
+    [SpineAnimation][SerializeField] string item_0;
+    [SpineAnimation][SerializeField] string item_1;
+    [SpineAnimation][SerializeField] string item_2;
+    [SpineAnimation][SerializeField] string item_3;
+    [SpineAnimation][SerializeField] string item_4;
+    [SpineAnimation][SerializeField] string item_5;
+    [SpineAnimation][SerializeField] string item_6;
+    [SpineAnimation][SerializeField] string item_7;
+    [SpineAnimation][SerializeField] string item_8;
+    [SpineAnimation][SerializeField] string item_9;
+    [SpineAnimation][SerializeField] string item_10;
+    [SpineAnimation][SerializeField] string item_11;
+    /////////////////////////////////////////////////////
+    [Header("Trappole")]    
+    [SpineAnimation][SerializeField] string item_12;
+    [SpineAnimation][SerializeField] string item_13;
+    [SpineAnimation][SerializeField] string item_14;
+    [SpineAnimation][SerializeField] string item_15;
+    [SpineAnimation][SerializeField] string item_16;
+    [SpineAnimation][SerializeField] string item_17;
+    [SpineAnimation][SerializeField] string item_18;
+    [SpineAnimation][SerializeField] string item_19;
+    [SpineAnimation][SerializeField] string item_20;
+
     public static ChargeSkill instance;
 
     public void Awake()
@@ -74,6 +103,24 @@ public class ChargeSkill : MonoBehaviour
         PlayerStats.instance.S_curRage =  0;
     break;
     }}}
+    public void ItemData(Item Item)
+    {
+        TimerSkill.instance.Use();//Tempo per utilizzare di nuovo la skill
+        VFX.SetActive(true);
+        GameManager.instance.notChange = true;
+        GameManager.instance.NotTouchOption = true;
+        GameManager.instance.Charge();
+        AudioManager.instance.PlayUFX(13);
+        GameManager.instance.ChStopB();
+        _spineAnimationState.SetAnimation(0, SearchAnm, true); 
+        nameT = Item.itemName;
+        TimeS = Item.TimeItem;//Tempo per ripristinare la battle
+        fillDuration = Item.MaxDurationItem; 
+        GameManager.instance.CloseLittleMStop();
+        Indicatore_Item.SetActive(true);
+        Indicatore_Item.transform.position = MP.transform.position; 
+        Character.Character = kindCh; 
+    }
 
     public void TakeData(Skill skill)
     {
@@ -108,16 +155,16 @@ public class ChargeSkill : MonoBehaviour
     GameManager.instance.TimerMenu();
     switch(skill.WhoSkill)
     {
-    case 0:Anm = Skill0;break;
-    case 1:Anm = Skill1;break;
-    case 2:Anm = Skill2;break;
-    case 3:Anm = Skill3;break;
-    case 4:Anm = Skill4;break;
-    case 5:Anm = Skill5;break;
-    case 6:Anm = Skill6;break;
-    case 7:Anm = Skill7;break;
-    case 8:Anm = Skill8;break;
-    case 9:Anm = Skill9;break;
+    case 0:Anm = Skill_0;break;
+    case 1:Anm = Skill_1;break;
+    case 2:Anm = Skill_2;break;
+    case 3:Anm = Skill_3;break;
+    case 4:Anm = Skill_4;break;
+    case 5:Anm = Skill_5;break;
+    case 6:Anm = Skill_6;break;
+    case 7:Anm = Skill_7;break;
+    case 8:Anm = Skill_8;break;
+    case 9:Anm = Skill_9;break;
     case 10:Anm = SkillRage;VFX.SetActive(false);VFXRAGE.SetActive(true);break;
     }}
     }
@@ -132,17 +179,47 @@ public class ChargeSkill : MonoBehaviour
     GameManager.instance.TimerMenu();
     switch(SkillAtt.WhoSkill)
     {
-    case 0:Anm = Skill0;break;
-    case 1:Anm = Skill1;break;
-    case 2:Anm = Skill2;break;
-    case 3:Anm = Skill3;break;
-    case 4:Anm = Skill4;break;
-    case 5:Anm = Skill5;break;
-    case 6:Anm = Skill6;break;
-    case 7:Anm = Skill7;break;
-    case 8:Anm = Skill8;break;
-    case 9:Anm = Skill9;break;
+    case 0:Anm = Skill_0;break;
+    case 1:Anm = Skill_1;break;
+    case 2:Anm = Skill_2;break;
+    case 3:Anm = Skill_3;break;
+    case 4:Anm = Skill_4;break;
+    case 5:Anm = Skill_5;break;
+    case 6:Anm = Skill_6;break;
+    case 7:Anm = Skill_7;break;
+    case 8:Anm = Skill_8;break;
+    case 9:Anm = Skill_9;break;
     case 10:Anm = SkillRage;VFXRAGE.SetActive(true);break;
+    }
+    }
+
+    public void ActiveItem()
+    {
+    isSkillLaunched = false;
+    //GameManager.instance.TimerMenu();
+    switch(itemUse.WhoConsumable)
+    {
+    case 0:Anm = item_0;break;
+    case 1:Anm = item_1;break;
+    case 2:Anm = item_2;break;
+    case 3:Anm = item_3;break;
+    case 4:Anm = item_4;break;
+    case 5:Anm = item_5;break;
+    case 6:Anm = item_6;break;
+    case 7:Anm = item_7;break;
+    case 8:Anm = item_8;break;
+    case 9:Anm = item_9;break;
+    case 10:Anm = item_10;break;
+    case 11:Anm = item_11;break;
+    case 12:Anm = item_12;break;
+    case 13:Anm = item_13;break;
+    case 14:Anm = item_14;break;
+    case 15:Anm = item_15;break;
+    case 16:Anm = item_16;break;
+    case 17:Anm = item_17;break;
+    case 18:Anm = item_18;break;
+    case 19:Anm = item_19;break;
+    case 20:Anm = item_20;break;
     }
     }
 

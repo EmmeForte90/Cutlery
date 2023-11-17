@@ -17,6 +17,7 @@ MonoBehaviour:
   itemDes: A raw Iron, need to make Iron Ore
   ID: 2
   KindItem: 0
+  WhoConsumable: 0
   price: 300
   Stackable: 1
   itemIcon: {fileID: 21300000, guid: d239bda4508257346a8f525d3eeb777e, type: 3}

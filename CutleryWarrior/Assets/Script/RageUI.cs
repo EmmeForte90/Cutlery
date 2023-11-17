@@ -21,22 +21,25 @@ public class RageUI : MonoBehaviour
         switch (SwitcherUI.rotationSwitcher.CharacterID)
         {
             case 1:
+            if(GameManager.instance.F_Unlock){
             if(PlayerStats.instance.F_curRage >= PlayerStats.instance.F_Rage)
             {F_Button.SetActive(true);} 
             else if(PlayerStats.instance.F_curRage < PlayerStats.instance.F_Rage)
-            {F_Button.SetActive(false);}  
+            {F_Button.SetActive(false);}}
             break;
             case 2:
+            if(GameManager.instance.K_Unlock){
             if(PlayerStats.instance.K_curRage >= PlayerStats.instance.K_Rage)
             {K_Button.SetActive(true);} 
             else if(PlayerStats.instance.K_curRage < PlayerStats.instance.K_Rage)
-            {K_Button.SetActive(false);}
+            {K_Button.SetActive(false);}}
             break; 
             case 3:
+            if(GameManager.instance.S_Unlock){
             if(PlayerStats.instance.S_curRage >= PlayerStats.instance.S_Rage)
             {S_Button.SetActive(true);} 
             else if(PlayerStats.instance.S_curRage < PlayerStats.instance.S_Rage)
-            {S_Button.SetActive(false);}
+            {S_Button.SetActive(false);}}
             break;
         }
     }

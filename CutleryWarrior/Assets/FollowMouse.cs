@@ -6,7 +6,8 @@ public class FollowMouse : MonoBehaviour
 {
     private float velocitaMovimento = 20f; // Velocità di movimento dell'oggetto.
     private Rigidbody rigidBody;
-    public bool isSkill = true;    
+    public bool isSkill = true; 
+    public bool isItem = false;    
     public GameObject indicator;    
     [HideInInspector]public int Character;
     public ChargeSkill Fork;
@@ -63,7 +64,7 @@ public class FollowMouse : MonoBehaviour
             rigidBody.velocity = new Vector3(0f, 0f, 0f);
             GameManager.instance.CloseLittleM();
             ///////////////////////////////////////////////
-            if(isSkill){
+            if(isSkill && !isItem){//Se è una skill indirizza dove usarla
             ptPoint.transform.position = transform.position;
             switch(Character)
             {
@@ -78,24 +79,44 @@ public class FollowMouse : MonoBehaviour
             case 2:
             if(GameManager.instance.S_Unlock){Spoon.ActiveSkill();
              vCam.Follow = Spoon.transform;}
-            break;
-            }
+            break;}
             }
             ///////////////////////////////////////////////
-            else if(!isSkill){
-            if(GameManager.instance.F_Unlock && Character == 0){AI_F.order = 3; FPoint.transform.position = transform.position;}
+            else if(!isSkill && !isItem){//Ordini di movimento
+            if(GameManager.instance.F_Unlock && Character == 0)
+            {AI_F.order = 3; FPoint.transform.position = transform.position;}
             else
-            if(GameManager.instance.K_Unlock && Character == 1){AI_K.order = 3; KPoint.transform.position = transform.position;}
+            if(GameManager.instance.K_Unlock && Character == 1)
+            {AI_K.order = 3; KPoint.transform.position = transform.position;}
             else
-            if(GameManager.instance.S_Unlock && Character == 2){AI_S.order = 3; SPoint.transform.position = transform.position;}
-            ///////////////////////////////////////////////
+            if(GameManager.instance.S_Unlock && Character == 2)
+            {AI_S.order = 3; SPoint.transform.position = transform.position;}
+            //
             if(Sch.isElement1Active){vCam.Follow = T_S.transform;}
             else
             if(Sch.isElement2Active){vCam.Follow = T_F.transform;}
             else
             if(Sch.isElement3Active){vCam.Follow = T_K.transform;}
             }
+            ///////////////////////////////////////////////
+            else if(isSkill && isItem){//Se è una skill indirizza dove usarla
+            ptPoint.transform.position = transform.position;
+            switch(Character)
+            {
+            case 0:
+            if(GameManager.instance.F_Unlock){Fork.ActiveItem();
+            vCam.Follow = Fork.transform;}
+            break;
+            case 1:
+            if(GameManager.instance.K_Unlock){Knife.ActiveItem();
+             vCam.Follow = Knife.transform;}
+            break;
+            case 2:
+            if(GameManager.instance.S_Unlock){Spoon.ActiveItem();
+             vCam.Follow = Spoon.transform;}
+            break;}
+            }
             indicator.SetActive(false);
             }
         }
-    }
+}

@@ -822,6 +822,31 @@ public class GameManager : MonoBehaviour
         if(S_Unlock){Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
         Manager_S.SwitchScriptsDeath();}
     }
+    //----------------//
+    public void RestoreDeathF()
+    {
+        if(F_Unlock)
+        {
+        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
+        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
+        if(F_Unlock){Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
+        Manager_F.SwitchScriptsActor();
+        }
+    }
+    public void RestoreDeathhK()
+    {
+        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
+        if(K_Unlock){Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
+        Manager_K.SwitchScriptsActor();
+    }
+    public void RestoreDeathS()
+    {
+        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        if(S_Unlock){Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
+        Manager_S.SwitchScriptsActor();
+    }
     #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region Stun

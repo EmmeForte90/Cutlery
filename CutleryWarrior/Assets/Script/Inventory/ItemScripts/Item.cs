@@ -13,12 +13,21 @@ public class Item : ScriptableObject
     [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-EquipFork 4-EquipKnife 5-EquipSpoon")]
     [Range(0, 5)]
     public int KindItem;
+    
+    [Tooltip("Consumabile? 0-Pozione 1-MediaPozione 2-AltaPozione 3-EquipFork 4-EquipKnife 5-EquipSpoon")]
+    [Range(0, 10)]
+    public int WhoConsumable;
     public int price;
     public bool Stackable;
+
+    
     public Sprite itemIcon;
     [Tooltip("Che tipo di Equipaggiamento? 0-Armor 1-Weapon ")]
     [Range(0, 1)]
     public int TypesE;
+    [HideInInspector]public int TimeItem = 0;
+    [HideInInspector]public int MaxDurationItem = 0;
+
     private Inventory Inv;
     #endregion
     public void Use(int whatDo)

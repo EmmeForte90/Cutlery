@@ -178,6 +178,8 @@ public class SpoonSemple : MonoBehaviour
         {if(!DieB){TakeDamage(PlayerStats.instance.S_attack);}}
         else if (collision.gameObject.CompareTag("Spell"))
         {if(!DieB){TakeDamage(PlayerStats.instance.F_attack + Bullet.instance.damage - defenseSpell);}}
+        else if (collision.gameObject.CompareTag("Bomb"))
+        {if(!DieB){TakeDamage(Bomb.instance.damage);}}
     }
     public void OnTriggerStay(Collider collision)
     {

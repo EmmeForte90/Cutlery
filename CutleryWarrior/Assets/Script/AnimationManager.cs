@@ -11,6 +11,32 @@ public class AnimationManager : MonoBehaviour
     public bool knife;
     public bool spoon;
     public bool Enemy;
+    
+    [Header("Items")]
+    public GameObject Potion;//HP
+    public GameObject MediaPotion;//HP
+    public GameObject AltaPotion;//HP
+    public GameObject Intruglio;//MP
+    public GameObject MediaIntruglio;//MP
+    public GameObject AltaIntruglio;//MP
+    public GameObject Vaccino;//Cura il veleno
+    public GameObject Aglio;//Cura il sonno
+    public GameObject Malox;//Cura il mutismo
+    public GameObject Caffé;//Cura la paralisi
+    public GameObject Panacea;//Cura tutto
+    public GameObject Ristoro;//Cura la morte
+    //-----------------------//
+    public GameObject BombaPiccola;//Danneggia il nemico
+    public GameObject BombaMedia;//Danneggia il nemico
+    public GameObject BombaGrande;//Danneggia il nemico
+    public GameObject Veleno;//Avvelena il nemico
+    public GameObject Fumogeno;//Blocca il nemico
+    public GameObject Spine;//Crea un area che piò Danneggiare il nemico finché ci resta sopra
+    public GameObject Flash;//Blocca il nemico
+    public GameObject Camomilla;//Blocca il nemico
+    public GameObject Barricata;//Crea un ostacolo per il nemico
+    public GameObject Bengala;//Crea un area dove curarsi
+
 
     [Header("Impronte")]
     [HideInInspector]public bool canImp = false;
@@ -68,6 +94,7 @@ public class AnimationManager : MonoBehaviour
     [HideInInspector] public GameObject SawTrain;
     [HideInInspector] public GameObject Stalactites;
     [HideInInspector] public GameObject Whirlwinds;
+    [HideInInspector] public GameObject Motivation;
     /////////////////////////////////////////////////
     [HideInInspector] public TimerSkill Skill_0;
     [HideInInspector] public TimerSkill Skill_1;
@@ -194,6 +221,76 @@ public class AnimationManager : MonoBehaviour
      if (e.Data.Name == "dodge" && VFX){Instantiate(Dodge, Foot.position, Dodge.transform.rotation);
     StartCoroutine(StopVFX_Rapid()); VFX = false; }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///UsingItems
+    if (e.Data.Name == "item/potion" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Potion, BPoint.position, Potion.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }
+     if (e.Data.Name == "item/mediapotion" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(MediaPotion, BPoint.position, MediaPotion.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }
+     if (e.Data.Name == "item/altapotion" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(AltaPotion, BPoint.position, AltaPotion.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }  
+     if (e.Data.Name == "item/mana" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Intruglio, BPoint.position, Intruglio.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; } 
+     if (e.Data.Name == "item/mediamana" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(MediaIntruglio, BPoint.position, MediaIntruglio.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }  
+     if (e.Data.Name == "item/altamana" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(AltaIntruglio, BPoint.position, AltaIntruglio.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }
+     if (e.Data.Name == "item/vaccino" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Vaccino, BPoint.position, Vaccino.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }
+     if (e.Data.Name == "item/aglio" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Aglio, BPoint.position, Aglio.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; } 
+     if (e.Data.Name == "item/panacea" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Panacea, BPoint.position, Panacea.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; } 
+     if (e.Data.Name == "item/coffe" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Caffé, BPoint.position, Caffé.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; } 
+     if (e.Data.Name == "item/malox" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Malox, BPoint.position, Malox.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; } 
+     if (e.Data.Name == "item/ristoro" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Ristoro, BPoint.position, Ristoro.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }  
+     //----------------------------------------//
+    if (e.Data.Name == "item/bomb" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(BombaPiccola, BPoint.position, BombaPiccola.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; } 
+    if (e.Data.Name == "item/mediabomb" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(BombaMedia, BPoint.position, BombaMedia.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }   
+    if (e.Data.Name == "item/altabomb" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(BombaGrande, BPoint.position, BombaGrande.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; } 
+    if (e.Data.Name == "item/flash" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Flash, BPoint.position, Flash.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }
+    if (e.Data.Name == "item/spine" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Spine, BPoint.position, Spine.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }  
+    if (e.Data.Name == "item/poison" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Veleno, BPoint.position, Veleno.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }
+     if (e.Data.Name == "item/smoke" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Fumogeno, BPoint.position, Fumogeno.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }  
+     if (e.Data.Name == "item/calm" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Camomilla, BPoint.position, Camomilla.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }
+     if (e.Data.Name == "item/bengala" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Bengala, BPoint.position, Bengala.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; } 
+     if (e.Data.Name == "item/barricata" && VFX)
+    {AudioManager.instance.PlayUFX(8); Instantiate(Barricata, BPoint.position, Barricata.transform.rotation); 
+     StartCoroutine(StopVFX_F()); VFX = false; }  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///Enemy
     if (e.Data.Name == "atk"){AudioManager.instance.PlayUFX(0); VfxEnmSlash.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "shootEnm" && VFX){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
     StartCoroutine(StopVFX_FNormal()); VFX = false;}
@@ -270,6 +367,9 @@ public class AnimationManager : MonoBehaviour
     if (e.Data.Name == "turbine" && VFX)
     {AudioManager.instance.PlayUFX(8); Skill_7.Use(); Instantiate(SawTrain, transform.position, SawTrain.transform.rotation); 
     StartCoroutine(StopVFX_F()); VFX = false; }
+    if (e.Data.Name == "motivation" && VFX)
+    {AudioManager.instance.PlayUFX(8); Skill_8.Use(); Instantiate(Motivation, transform.position, Motivation.transform.rotation); 
+    StartCoroutine(StopVFX_F()); VFX = false; }
     if (e.Data.Name == "rageKnife" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Rage, transform.position, Rage.transform.rotation); 
     CS.CamSkill(); StartCoroutine(StopVFX_F()); VFX = false;}//Rage.gameObject.SetActive(true); StartCoroutine(StopVFX_Rage());}
@@ -305,6 +405,9 @@ public class AnimationManager : MonoBehaviour
     StartCoroutine(StopVFX_F()); VFX = false; }
     if (e.Data.Name == "reflect")
     {AudioManager.instance.PlayUFX(8); Skill_7.Use(); Instantiate(Reflect, SkillPoint.position, Reflect.transform.rotation);
+    StartCoroutine(StopVFX_F()); VFX = false; }
+     if (e.Data.Name == "pana")
+    {AudioManager.instance.PlayUFX(8); Skill_8.Use(); Instantiate(Reflect, SkillPoint.position, Reflect.transform.rotation);
     StartCoroutine(StopVFX_F()); VFX = false; }
      if (e.Data.Name == "rageSpoon" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Rage, transform.position, Rage.transform.rotation); 
