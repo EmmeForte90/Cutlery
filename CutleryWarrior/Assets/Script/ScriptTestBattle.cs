@@ -47,7 +47,7 @@ public class ScriptTestBattle : MonoBehaviour
     public Skill K_Skill_5;
     public Skill K_Skill_6;
     public Skill K_Skill_7;
-    //public Skill K_Skill_8;
+    public Skill K_Skill_8;
     //public Skill K_Skill_9;
     //public Skill K_Skill_10;
     private TimerSkill K_Time_Skill_0;
@@ -58,7 +58,7 @@ public class ScriptTestBattle : MonoBehaviour
     private TimerSkill K_Time_Skill_5;
     private TimerSkill K_Time_Skill_6;
     private TimerSkill K_Time_Skill_7;
-    //private TimerSkill K_Time_Skill_8;
+    private TimerSkill K_Time_Skill_8;
     //private TimerSkill K_Time_Skill_9;
     //private TimerSkill K_Time_Skill_10;
     public SpoonSemple[] EnmS;
@@ -237,7 +237,7 @@ public class ScriptTestBattle : MonoBehaviour
             K_Skill_5.Utilizzi = K_Skill_5.UtilizziMAX;
             K_Skill_6.Utilizzi = K_Skill_6.UtilizziMAX;
             K_Skill_7.Utilizzi = K_Skill_7.UtilizziMAX;
-            //K_Skill_8.Utilizzi = K_Skill_8.UtilizziMAX;
+            K_Skill_8.Utilizzi = K_Skill_8.UtilizziMAX;
             //K_Skill_9.Utilizzi = K_Skill_9.UtilizziMAX;
             //K_Skill_10.Utilizzi = K_Skill_10.UtilizziMAX;
             //
@@ -249,7 +249,7 @@ public class ScriptTestBattle : MonoBehaviour
             K_Time_Skill_5.curTime = K_Time_Skill_5.TimeMin;
             K_Time_Skill_6.curTime = K_Time_Skill_6.TimeMin;
             K_Time_Skill_7.curTime = K_Time_Skill_7.TimeMin;
-            //K_Time_Skill_8.curTime = K_Skill_8.TimeMin;
+            K_Time_Skill_8.curTime = K_Time_Skill_8.TimeMin;
             //K_Time_Skill_9.curTime = K_Skill_9.TimeMin;
             //K_Time_Skill_10.curTime = K_Skill_10.TimeMin;
         }
