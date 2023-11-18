@@ -35,6 +35,7 @@ public class ChargeSkill : MonoBehaviour
     public Spine.AnimationState _spineAnimationState;    
     public SkeletonAnimation _skeletonAnimation;
     private bool isSkillLaunched = true;
+    private bool isItemLaunched = true;
     public  AnimationManager AM;
     public string Anm;    
     public Transform RPoint;
@@ -105,17 +106,18 @@ public class ChargeSkill : MonoBehaviour
     }}}
     public void ItemData(Item Item)
     {
-        TimerSkill.instance.Use();//Tempo per utilizzare di nuovo la skill
         VFX.SetActive(true);
         GameManager.instance.notChange = true;
         GameManager.instance.NotTouchOption = true;
         GameManager.instance.Charge();
         AudioManager.instance.PlayUFX(13);
         GameManager.instance.ChStopB();
-        _spineAnimationState.SetAnimation(0, SearchAnm, true); 
+        //
+        itemUse = Item;
         nameT = Item.itemName;
         TimeS = Item.TimeItem;//Tempo per ripristinare la battle
         fillDuration = Item.MaxDurationItem; 
+        //
         GameManager.instance.CloseLittleMStop();
         Indicatore_Item.SetActive(true);
         Indicatore_Item.transform.position = MP.transform.position; 
@@ -148,7 +150,7 @@ public class ChargeSkill : MonoBehaviour
     Indicatore.transform.position = MP.transform.position; 
     Character.Character = kindCh; 
     }
-    else //Se non è direziola enon lo attiva e fa partire il timer direttamente
+    else //Se non è direzionale non lo attiva e fa partire il timer direttamente
     {
     isSkillLaunched = false;
     GameManager.instance.CloseLittleM();
@@ -195,8 +197,8 @@ public class ChargeSkill : MonoBehaviour
 
     public void ActiveItem()
     {
-    isSkillLaunched = false;
-    //GameManager.instance.TimerMenu();
+    isItemLaunched = false;
+    GameManager.instance.TimerMenu();
     switch(itemUse.WhoConsumable)
     {
     case 0:Anm = item_0;break;
@@ -221,6 +223,7 @@ public class ChargeSkill : MonoBehaviour
     case 19:Anm = item_19;break;
     case 20:Anm = item_20;break;
     }
+    //print("use" + Anm);
     }
 
    public void Update()
@@ -242,12 +245,59 @@ public class ChargeSkill : MonoBehaviour
             if (curTime >= fillDuration)
             {
                 curTime = fillDuration;
+                //Anm.ClearAnm();
                 //print("StartSkill");
                 StartCoroutine(SkillLunch());
-                isSkillLaunched = true; // Imposta il flag per evitare ulteriori avvii
+                //isSkillLaunched = true; // Imposta il flag per evitare ulteriori avvii
             }
         }
     }
+
+    if (!isItemLaunched)
+    {
+        if (curTime < fillDuration)
+        {
+
+            // Incrementa il tempo trascorso in base a Time.deltaTime
+            curTime += Time.deltaTime;
+
+            // Calcola la percentuale di completamento
+            fillPercentage = curTime / fillDuration;
+
+            // Imposta la dimensione della barra (assicurandoti che sia compresa tra 0.01f e 1)
+            TimeBar.size = Mathf.Clamp(fillPercentage, 0.01f, 1);
+
+            if (curTime >= fillDuration)
+            {
+                curTime = fillDuration;
+                //print("StartItem");
+                StartCoroutine(ItemLunch());
+                //isItemLaunched = true; // Imposta il flag per evitare ulteriori avvii
+            }
+        }
+    }
+
+
+}
+
+IEnumerator ItemLunch()
+{    
+    GameManager.instance.StopBattle();
+    CameraZoom.instance.ZoomIn(); 
+    Mossa.SetActive(true);
+    nameText.text = nameT.ToString();
+    yield return new WaitForSeconds(3f);
+    VFX.SetActive(false); VFXRAGE.SetActive(false);Mossa.SetActive(false);
+    GameManager.instance.CloseTimerMenu();
+    AM.PlayAnimation(Anm);
+    //
+    yield return new WaitForSeconds(TimeS);
+    GameManager.instance.ResumeBattle();
+    CameraZoom.instance.ZoomOut();
+    fillPercentage = 0; curTime = 0; isItemLaunched = false;
+    GameManager.instance.ChCanM();
+    GameManager.instance.NotTouchOption = false;
+    GameManager.instance.StopWin();
 }
 
 IEnumerator SkillLunch()

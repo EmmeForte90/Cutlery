@@ -14,8 +14,8 @@ public class Item : ScriptableObject
     [Range(0, 5)]
     public int KindItem;
     
-    [Tooltip("Consumabile? 0-Pozione 1-MediaPozione 2-AltaPozione 3-EquipFork 4-EquipKnife 5-EquipSpoon")]
-    [Range(0, 10)]
+    //[Tooltip("0-Potion 1-MediaPotion 2-AltaPotion 3-Mana 4-Mediamana 5-Altamana 6-Coffe 7-malox 8-vaccino 9-aglio 10-panacea 11-ristoro")]
+    [Range(0, 20)]
     public int WhoConsumable;
     public int price;
     public bool Stackable;
@@ -25,8 +25,8 @@ public class Item : ScriptableObject
     [Tooltip("Che tipo di Equipaggiamento? 0-Armor 1-Weapon ")]
     [Range(0, 1)]
     public int TypesE;
-    [HideInInspector]public int TimeItem = 0;
-    [HideInInspector]public int MaxDurationItem = 0;
+    public int TimeItem;
+    public int MaxDurationItem;
 
     private Inventory Inv;
     #endregion

@@ -2,8 +2,8 @@
 [CreateAssetMenu(fileName = "Consumable", menuName = "Item/Consumable")]
 public class Consumable : Item
 {
-    public consumableType typeOfConsumable;
-    public int HPRecover;
+    //public consumableType typeOfConsumable;
+    //public int HPRecover;
     public override void Sell()
     {
         base.Sell(); 
@@ -11,5 +11,5 @@ public class Consumable : Item
         Inventory.instance.RemoveItem(this, 1);
         Debug.Log("Hai Venduto!");
     }
-    public enum consumableType { Potion, Food }
+    //public enum consumableType { Potion, Food }
 }

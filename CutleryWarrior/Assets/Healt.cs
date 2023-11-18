@@ -17,6 +17,7 @@ public class Healt : MonoBehaviour
     {
         if (instance == null){instance = this;}
         if (isSkill){restore = itemInfo.damage;}
+        //print("lanciato");
         Destroy(gameObject, lifeTime);
     }
 

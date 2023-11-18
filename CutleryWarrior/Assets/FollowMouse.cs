@@ -6,8 +6,9 @@ public class FollowMouse : MonoBehaviour
 {
     private float velocitaMovimento = 20f; // Velocità di movimento dell'oggetto.
     private Rigidbody rigidBody;
-    public bool isSkill = true; 
-    public bool isItem = false;    
+    [Tooltip("che indicatore è? 0.Skill 1.Ordini 2.Item")]
+    [Range(0, 2)]
+    public int WhatIs;  
     public GameObject indicator;    
     [HideInInspector]public int Character;
     public ChargeSkill Fork;
@@ -64,7 +65,10 @@ public class FollowMouse : MonoBehaviour
             rigidBody.velocity = new Vector3(0f, 0f, 0f);
             GameManager.instance.CloseLittleM();
             ///////////////////////////////////////////////
-            if(isSkill && !isItem){//Se è una skill indirizza dove usarla
+            ///
+            switch(WhatIs)
+            {
+            case 0:
             ptPoint.transform.position = transform.position;
             switch(Character)
             {
@@ -80,9 +84,9 @@ public class FollowMouse : MonoBehaviour
             if(GameManager.instance.S_Unlock){Spoon.ActiveSkill();
              vCam.Follow = Spoon.transform;}
             break;}
-            }
-            ///////////////////////////////////////////////
-            else if(!isSkill && !isItem){//Ordini di movimento
+            break;
+            ////////////////////////
+            case 1:
             if(GameManager.instance.F_Unlock && Character == 0)
             {AI_F.order = 3; FPoint.transform.position = transform.position;}
             else
@@ -97,9 +101,9 @@ public class FollowMouse : MonoBehaviour
             if(Sch.isElement2Active){vCam.Follow = T_F.transform;}
             else
             if(Sch.isElement3Active){vCam.Follow = T_K.transform;}
-            }
-            ///////////////////////////////////////////////
-            else if(isSkill && isItem){//Se è una skill indirizza dove usarla
+            break;
+            ////////////////////////
+            case 2:
             ptPoint.transform.position = transform.position;
             switch(Character)
             {
@@ -115,8 +119,9 @@ public class FollowMouse : MonoBehaviour
             if(GameManager.instance.S_Unlock){Spoon.ActiveItem();
              vCam.Follow = Spoon.transform;}
             break;}
+            break;
             }
-            indicator.SetActive(false);
-            }
+            indicator.SetActive(false); 
         }
+}
 }

@@ -15,7 +15,7 @@ public class InventoryB : MonoBehaviour
     public GameObject inventoryItem;
     // The slotListItem is the list of slots on the inventory, you can turn this List public and place the slots manually inside of it
     // Currently it's making the list based on the inventoryPanel children objects on GatherSlots() in line 86
-    private readonly List<InventorySlot> slotListItem = new();
+    private readonly List<InventorySlotBattle> slotListItem = new();
 
     #region Singleton
 
@@ -28,7 +28,7 @@ public class InventoryB : MonoBehaviour
 
     public void Start()
     {
-        foreach (InventorySlot child in inventoryItem.GetComponentsInChildren<InventorySlot>())
+        foreach (InventorySlotBattle child in inventoryItem.GetComponentsInChildren<InventorySlotBattle>())
         {slotListItem.Add(child);}
     }
     // AddItem() can be called in other scripts with the following line:
@@ -113,7 +113,7 @@ public class InventoryB : MonoBehaviour
         // This int is to count how many slots are full
         int ind = 0;
         // For each slot in the list it's attributed an Item from the itemList and the corresponding quantity
-      foreach(InventorySlot slot in slotListItem)
+      foreach(InventorySlotBattle slot in slotListItem)
         {
             if (itemList.Count != 0)
             {

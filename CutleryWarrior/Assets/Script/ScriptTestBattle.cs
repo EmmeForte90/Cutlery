@@ -327,6 +327,10 @@ public class ScriptTestBattle : MonoBehaviour
         EnmF[0].poisonResistance = EnmF[0].poisonResistanceCont;
         EnmS[0].poisonResistance = EnmS[0].poisonResistanceCont;
         EnmK[0].poisonResistance = EnmK[0].poisonResistanceCont;
+        //
+        EnmF[0].StunProbability = 0;
+        EnmS[0].StunProbability = 0;
+        EnmK[0].StunProbability = 0;
 
     }
     public void RageMax()
