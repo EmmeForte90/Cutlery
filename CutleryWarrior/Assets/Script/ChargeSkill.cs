@@ -113,6 +113,8 @@ public class ChargeSkill : MonoBehaviour
         AudioManager.instance.PlayUFX(13);
         GameManager.instance.ChStopB();
         //
+        ClearAnm();
+        _spineAnimationState.SetAnimation(0, SearchAnm, true); 
         itemUse = Item;
         nameT = Item.itemName;
         TimeS = Item.TimeItem;//Tempo per ripristinare la battle
@@ -123,6 +125,7 @@ public class ChargeSkill : MonoBehaviour
         Indicatore_Item.transform.position = MP.transform.position; 
         Character.Character = kindCh; 
     }
+    public void ClearAnm(){_skeletonAnimation.state.ClearTrack(0);}
 
     public void TakeData(Skill skill)
     {
@@ -135,6 +138,7 @@ public class ChargeSkill : MonoBehaviour
     GameManager.instance.Charge();
     AudioManager.instance.PlayUFX(13);
     GameManager.instance.ChStopB();
+    ClearAnm();
     _spineAnimationState.SetAnimation(0, ChargeAnm, true); 
     //Se non è una skill rage si comporta diversamente
     if(!skill.isRage){UpdatePreviewSkill.instance.UpdateInfoPanel(skill);}
@@ -294,7 +298,8 @@ IEnumerator ItemLunch()
     yield return new WaitForSeconds(TimeS);
     GameManager.instance.ResumeBattle();
     CameraZoom.instance.ZoomOut();
-    fillPercentage = 0; curTime = 0; isItemLaunched = false;
+    fillPercentage = 0; curTime = 0; fillDuration = 0;
+    isItemLaunched = true;
     GameManager.instance.ChCanM();
     GameManager.instance.NotTouchOption = false;
     GameManager.instance.StopWin();
@@ -321,7 +326,8 @@ IEnumerator SkillLunch()
     GameManager.instance.ResumeBattle();
     CameraZoom.instance.ZoomOut();
     if(SkillAtt.isRage){CamSkillBack();}
-    fillPercentage = 0; curTime = 0; isSkillLaunched = false;
+    fillPercentage = 0; curTime = 0; fillDuration = 0;
+    isSkillLaunched = true;
     GameManager.instance.ChCanM();
     GameManager.instance.NotTouchOption = false;
     GameManager.instance.StopWin();
