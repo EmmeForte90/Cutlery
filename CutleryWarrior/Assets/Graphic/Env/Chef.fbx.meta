@@ -3,7 +3,32 @@ guid: b481cd43df8e2a346b96bb653038e0cf
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CheffStatue
+    second: {fileID: 2100000, guid: 1c7f6622e7a6c7b4ca4d3ab79e6d5ea0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Face
+    second: {fileID: 2100000, guid: d620ea5508a3cf54b8646ea95d7dfdcc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Prussianina
+    second: {fileID: 2100000, guid: 7103b51944438ee4ea81b03838bb03e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Queen
+    second: {fileID: 2100000, guid: af8c11b86f6287e4893c65b241381039, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallText_1
+    second: {fileID: 2100000, guid: 6315307fbd94a9b41ba1bd33143e017a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

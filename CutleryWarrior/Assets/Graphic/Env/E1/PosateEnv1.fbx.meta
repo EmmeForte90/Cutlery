@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Dark
+    second: {fileID: 2100000, guid: e1a8006d3a6c6814fac2e253a13ac29c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: DoorCastle
     second: {fileID: 2100000, guid: 6f1c70f18d1daad49ad0996848ebcca7, type: 2}
   - first:
@@ -27,8 +32,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Queen
+    second: {fileID: 2100000, guid: 5774455aad76b5c43b74898a185d5945, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: TorreM1.001
     second: {fileID: 2100000, guid: b91bd3c39d4441e4fa11c92b02373357, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallText_1
+    second: {fileID: 2100000, guid: 9f6003ff8c9ab06499fada05823f5618, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodT
+    second: {fileID: 2100000, guid: 7e16c75d808854b43bfa2e3f7ebbda80, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
