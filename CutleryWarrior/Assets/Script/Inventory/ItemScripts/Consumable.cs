@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+[System.Serializable]
+
 [CreateAssetMenu(fileName = "Consumable", menuName = "Item/Consumable")]
 public class Consumable : Item
 {

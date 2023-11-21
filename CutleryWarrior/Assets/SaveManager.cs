@@ -359,6 +359,14 @@ public class SaveManager : MonoBehaviour
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream fileStream = File.Create(saveFilePath);
         formatter.Serialize(fileStream, gameData);
+        formatter.Serialize(fileStream, I_quantityList);
+            //formatter.Serialize(fileStream, IBattle_quantityList);
+            //IBattle_quantityList = I_quantityList;
+            formatter.Serialize(fileStream, F_quantityList);
+            formatter.Serialize(fileStream, S_quantityList);
+            formatter.Serialize(fileStream, K_quantityList);
+            formatter.Serialize(fileStream, Key_quantityList);
+            formatter.Serialize(fileStream, Quest_quantityList);
         fileStream.Close();
 
         Debug.Log("Gioco salvato con successo!");
@@ -375,8 +383,24 @@ public class SaveManager : MonoBehaviour
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream fileStream = File.Open(saveFilePath, FileMode.Open);
             GameData gameData = (GameData)formatter.Deserialize(fileStream);
+            I_quantityList = (List<int>)formatter.Deserialize(fileStream);
+                //IBattle_quantityList = (List<int>)formatter.Deserialize(fileStream);
+                F_quantityList = (List<int>)formatter.Deserialize(fileStream);
+                S_quantityList = (List<int>)formatter.Deserialize(fileStream);
+                K_quantityList = (List<int>)formatter.Deserialize(fileStream);
+                Key_quantityList = (List<int>)formatter.Deserialize(fileStream);
+                Quest_quantityList = (List<int>)formatter.Deserialize(fileStream);
+
+                PlayerStats.instance.I_quantityList = gameData.I_quantityList;
+                PlayerStats.instance.IBattle_quantityList = gameData.IBattle_quantityList;
+                PlayerStats.instance.F_quantityList = gameData.F_quantityList;
+                PlayerStats.instance.S_quantityList = gameData.S_quantityList;
+                PlayerStats.instance.K_quantityList = gameData.K_quantityList;
+                PlayerStats.instance.Key_quantityList = gameData.Key_quantityList;
+                PlayerStats.instance.Quest_quantityList = gameData.Quest_quantityList;
             fileStream.Close();
-        PlayerStats.instance.savedPosition = gameData.savedPosition.ToVector3();
+            PlayerStats.instance.savedPosition = gameData.savedPosition.ToVector3();
+        
         #region DatiDaCaricare
         //
         PlayerStats.instance.HaveData = gameData.HaveData;

@@ -87,6 +87,7 @@ public class StartScene : MonoBehaviour
     }}
     public void Update()
     {
+        
         if(!GameManager.instance.Day)
         {foreach (GameObject arenaObject in Giorno){arenaObject.SetActive(false);}
         foreach (GameObject arenaObjectN in Notte){arenaObjectN.SetActive(true);}

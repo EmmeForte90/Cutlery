@@ -518,6 +518,7 @@ public class PlayerStats : MonoBehaviour
 #region ResetStatForNewGame
 public void ResetStatNewGame()
 {
+    //SaveManager.instance.ResetValueStat();
     HaveData = false;
     CanLoading = false;
     NameScene = null;

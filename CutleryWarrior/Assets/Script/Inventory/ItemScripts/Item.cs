@@ -44,9 +44,9 @@ public class Item : ScriptableObject
     public virtual void Sell()
     {}//Vai allo script Consumable per verificarne la function
 }
-/*
+
 [System.Serializable]
-public class SerializableItem
+public class ItemData
 {
     public string itemName;
     public string NameSkin;
@@ -61,4 +61,6 @@ public class SerializableItem
     public int TimeItem;
     public int MaxDurationItem;
     private Inventory Inv;
-}*/
+    public Item item;
+    public int quantity;
+}

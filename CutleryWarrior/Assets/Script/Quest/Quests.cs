@@ -37,7 +37,7 @@ if (!EditorApplication.isPlaying){isActive = false; isComplete = false; AfterQue
 #endif
 }
 
-/*[System.Serializable]
+[System.Serializable]
 public class SerializableQuest
 {
 public int id;
@@ -55,4 +55,4 @@ public string[] Afterdialogue; // array of string to store the dialogues
 public bool isActive;
 public bool isComplete;
 public bool AfterQuest;
-}*/
+}

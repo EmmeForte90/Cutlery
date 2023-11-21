@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEditor;
+[System.Serializable]
+
 [CreateAssetMenu(fileName = "Skill", menuName = "Item/Skill")]
 public class Skill : Item
 {   

@@ -71,4 +71,27 @@ public class SaveTotem : MonoBehaviour
         print("Hai salvato");
     }
     }
+
+    /*public void Saving()
+    {
+            Save.SaveGame
+            (
+            PlayerStats.instance.questDatabase,
+            PlayerStats.instance.I_itemList,
+            PlayerStats.instance.I_quantityList,
+            PlayerStats.instance.IBattle_itemList,
+            PlayerStats.instance.IBattle_quantityList,
+            PlayerStats.instance.F_itemList,
+            PlayerStats.instance.F_quantityList,
+            PlayerStats.instance.S_itemList,
+            PlayerStats.instance.S_quantityList,
+            PlayerStats.instance.K_itemList,
+            PlayerStats.instance.K_quantityList,
+            PlayerStats.instance.Key_itemList,
+            PlayerStats.instance.Key_quantityList,
+            PlayerStats.instance.Quest_itemList,
+            PlayerStats.instance.Quest_quantityList
+            );
+
+    }*/
 }
