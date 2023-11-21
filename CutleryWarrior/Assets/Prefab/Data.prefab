@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8244634831866167442}
   - component: {fileID: 8244634831866167443}
+  - component: {fileID: 8760654960572201012}
   m_Layer: 0
   m_Name: Data
-  m_TagString: Untagged
+  m_TagString: Save
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,6 +53,7 @@ MonoBehaviour:
   S_Unlock: 0
   K_Unlock: 0
   Money: 0
+  WhatMusic: 0
   StartData: 0
   F_LV: 1
   F_HP: 100
@@ -161,3 +163,22 @@ MonoBehaviour:
   Quest_quantityList: 
   EventsDesert: 0000000000
   SwitchDesert: 0000000000
+  questDatabase: []
+  quest: 
+  QuestActive: 
+  QuestComplete: 
+  QuestSegnal: 
+  items: 
+--- !u!114 &8760654960572201012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244634831866167441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb182877e24684385f74f1bb50122e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PS: {fileID: 8244634831866167443}

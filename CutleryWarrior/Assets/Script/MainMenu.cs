@@ -43,6 +43,7 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(Timelife);
         if(StartGameNew)
         {
+        PlayerStats.instance.ResetStatNewGame();
         Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
         StartGameNew = false;
         }

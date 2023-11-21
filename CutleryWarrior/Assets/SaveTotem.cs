@@ -16,10 +16,12 @@ public class SaveTotem : MonoBehaviour
     private bool Var_1 = false;
     private bool Var_2 = true;
     private bool Var_3 = false;
-
+    private SaveManager Save;
+    private bool isSave = true;
     public void Start()
         {
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
+        //if (Save == null) {Save = GameObject.Find("Data").GetComponent<SaveManager>();} 
         //if (Dati == null) {Dati = GameObject.Find("Stats").GetComponent<PlayerStats>();} 
         if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
         if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}
@@ -27,6 +29,7 @@ public class SaveTotem : MonoBehaviour
         }
     public void Update()
     {
+    if (Save == null && isSave) {Save = GameObject.FindGameObjectWithTag("Save").GetComponent<SaveManager>(); isSave = false;} 
     if(Switch.isElement1Active)
     {if(GameManager.instance.S_Unlock && Var_1){Spoon = GameObject.Find("S_Player").transform;} 
     Player = Spoon; Var_1 = false; Var_2 = true;}
@@ -64,7 +67,7 @@ public class SaveTotem : MonoBehaviour
         PlayerStats.instance.HaveData = true;
         PlayerStats.instance.NameScene = NameScene;
         PlayerStats.instance.UpdateInventorySaving();
-        //SaveManager.instance.SalvaDati(Dati);
+        Save.SaveGame();
         print("Hai salvato");
     }
     }

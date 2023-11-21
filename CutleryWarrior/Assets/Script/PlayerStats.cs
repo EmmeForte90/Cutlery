@@ -1,10 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-using System.Data.SqlTypes;
+
 
 [System.Serializable]
 public class PlayerStats : MonoBehaviour
@@ -120,11 +116,11 @@ public class PlayerStats : MonoBehaviour
     public bool[] Enemies;
     [Header("Treasure List")]
     public bool[] Treasure;
-    public static PlayerStats instance;
     [Header("Skill List")]
     public bool[] Skill_F;
     public bool[] Skill_K; 
     public bool[] Skill_S;
+
     
     [Header("Item List")]
     public List<Item> I_itemList = new List<Item>();
@@ -144,8 +140,20 @@ public class PlayerStats : MonoBehaviour
     
     [Header("Events")]
     public bool[] EventsDesert;  
-     public bool[] SwitchDesert;
+    public bool[] SwitchDesert;
 
+    [Header("Quests")]
+    public List<Quests> questDatabase;
+     // Array di booleani che mantengono lo stato delle quest
+    public bool[] quest;
+    public bool[] QuestActive;
+    public bool[] QuestComplete;
+    public bool[] QuestSegnal;
+
+    [Header("Item List")]
+    public bool[] items;
+
+    public static PlayerStats instance;
 
 
     public static bool DataManager; 
@@ -163,6 +171,14 @@ public class PlayerStats : MonoBehaviour
     F_Unlock = GameManager.instance.F_Unlock;
     K_Unlock = GameManager.instance.K_Unlock;
     S_Unlock = GameManager.instance.S_Unlock;
+    //
+    items = Inventory.instance.items;
+    //
+    questDatabase = QuestsManager.instance.questDatabase;
+    quest = QuestsManager.instance.quest;
+    QuestActive = QuestsManager.instance.QuestActive;
+    QuestComplete = QuestsManager.instance.QuestComplete;
+    QuestSegnal = QuestsManager.instance.QuestSegnal;
     //
     I_itemList = Inventory.instance.itemList;
     I_quantityList = Inventory.instance.quantityList;
@@ -403,9 +419,15 @@ public class PlayerStats : MonoBehaviour
     }
 
 
-    public void FSkillATT(int Act){Skill_F[Act] = true; GameManager.instance.Skill_FI[Act].SetActive(true); GameManager.instance.Skill_FIB[Act].SetActive(true);}
-    public void SSkillATT(int Act){Skill_S[Act] = true; GameManager.instance.Skill_SI[Act].SetActive(true); GameManager.instance.Skill_SIB[Act].SetActive(true);}
-    public void KSkillATT(int Act){Skill_K[Act] = true; GameManager.instance.Skill_KI[Act].SetActive(true); GameManager.instance.Skill_KIB[Act].SetActive(true);}
+    public void FSkillATT(int Act)
+    {Skill_F[Act] = true; GameManager.instance.Skill_FI[Act].SetActive(true); 
+    GameManager.instance.Skill_FIB[Act].SetActive(true);}
+    public void SSkillATT(int Act)
+    {Skill_S[Act] = true; GameManager.instance.Skill_SI[Act].SetActive(true);
+     GameManager.instance.Skill_SIB[Act].SetActive(true);}
+    public void KSkillATT(int Act)
+    {Skill_K[Act] = true; GameManager.instance.Skill_KI[Act].SetActive(true);
+     GameManager.instance.Skill_KIB[Act].SetActive(true);}
 
     public void EnemyDefeatArea(int Defeat){Enemies[Defeat] = true;}
     public void EventDesertEnd(int id)
@@ -427,12 +449,12 @@ public class PlayerStats : MonoBehaviour
     {
         F_HP += 50;
         F_MP = +50;
-        F_attack += 10;
+        F_attack += 5;
         F_defense += 5;
-        F_poisonResistance += 2;
+        F_poisonResistance += 3;
         F_paralysisResistance += 2;
-        F_sleepResistance += 2;
-        F_rustResistance += 2;
+        F_sleepResistance += 3;
+        F_rustResistance += 1;
         F_HPCont = F_HP;
         F_MPCont = F_MP;
         F_attackCont = F_attack;
@@ -442,7 +464,7 @@ public class PlayerStats : MonoBehaviour
         F_sleepResistanceCont = F_sleepResistance;
         F_rustResistanceCont = F_rustResistance;
         F_LV++;
-        F_Exp += 500; // Ad esempio, aumentiamo di 50 ogni volta che si sale di livello
+        F_Exp += 100; // Ad esempio, aumentiamo di 50 ogni volta che si sale di livello
         F_curExp = 0;
         GameManager.instance.StatPlayer();
     }
@@ -450,7 +472,7 @@ public class PlayerStats : MonoBehaviour
     {
         K_HP += 100;
         K_MP = +30;
-        K_attack += 20;
+        K_attack += 10;
         K_defense += 5;
         K_poisonResistance += 1;
         K_paralysisResistance += 1;
@@ -465,7 +487,7 @@ public class PlayerStats : MonoBehaviour
         K_sleepResistanceCont = K_sleepResistance;
         K_rustResistanceCont = K_rustResistance;
         K_LV++;
-        K_Exp += 500; // Ad esempio, aumentiamo di 50 ogni volta che si sale di livello
+        K_Exp += 100; // Ad esempio, aumentiamo di 50 ogni volta che si sale di livello
         K_curExp = 0;
         GameManager.instance.StatPlayer();
     }
@@ -488,43 +510,123 @@ public class PlayerStats : MonoBehaviour
         S_sleepResistanceCont = S_sleepResistance;
         S_rustResistanceCont = S_rustResistance;
         S_LV++;
-        S_Exp += 500; // Ad esempio, aumentiamo di 50 ogni volta che si sale di livello
+        S_Exp += 100; // Ad esempio, aumentiamo di 50 ogni volta che si sale di livello
         S_curExp = 0;
         GameManager.instance.StatPlayer();
     }
 #endregion
-}
-
-public class SaveManager : MonoBehaviour
+#region ResetStatForNewGame
+public void ResetStatNewGame()
 {
-    public static SaveManager instance;
-    private string percorsoSalvataggio;
+    HaveData = false;
+    CanLoading = false;
+    NameScene = null;
+    savedPosition = new Vector3(0,0,0);
+    F_Unlock = true; 
+    S_Unlock = false; 
+    K_Unlock = false;
+    Money = 100;
+    WhatMusic = 0;
+    StartData = false;
+    //
+    F_LV = 1;
+    F_HP = 100;
+    F_curHP = 0;
+    F_MP = 100;
+    F_curMP = 0;
+    F_curRage = 0;
+    F_Rage = 100;
+    F_CostMP = 0;
+    F_Exp = 0;
+    F_curExp = 0;
+    F_attack = 10;
+    F_defense = 5;
+    F_poisonResistance = 0;
+    F_paralysisResistance = 0;
+    F_sleepResistance = 0;
+    F_rustResistance = 0;
+    //
+    S_LV = 1;
+    S_HP = 100;
+    S_curHP = 0;
+    S_MP = 100;
+    S_curMP = 0;
+    S_curRage = 0;
+    S_Rage = 100;
+    S_CostMP = 0;
+    S_Exp = 0;
+    S_curExp = 0;
+    S_attack = 10;
+    S_defense = 5;
+    S_poisonResistance = 0;
+    S_paralysisResistance = 0;
+    S_sleepResistance = 0;
+    S_rustResistance = 0; 
+    //
+    K_LV = 1;
+    K_HP = 100;
+    K_curHP = 0;
+    K_MP = 100;
+    K_curMP = 0;
+    K_CostMP = 0;
+    K_curRage = 0;
+    K_Rage = 100;
+    K_Exp = 0;
+    K_curExp = 0;
+    K_attack = 10;
+    K_defense = 5;
+    K_poisonResistance = 0;
+    K_paralysisResistance = 0;
+    K_sleepResistance = 0;
+    K_rustResistance = 0; 
+    //
+    Enemies = new bool[10]; 
+    SetAllElementsFalse(Enemies);
+    //
+    Treasure = new bool[10]; 
+    SetAllElementsFalse(Treasure);
+    //
+    Skill_F = new bool[10]; 
+    SetAllElementsFalse(Skill_F);
+    Skill_K = new bool[10]; 
+    SetAllElementsFalse(Skill_K);
+    Skill_S = new bool[10]; 
+    SetAllElementsFalse(Skill_S);
+    //
+    I_itemList = null;
+    I_quantityList = null;
+    IBattle_itemList = null;
+    IBattle_quantityList = null;
+    F_itemList = null;
+    F_quantityList = null;
+    S_itemList = null;
+    S_quantityList = null;
+    K_itemList = null;
+    K_quantityList = null;
+    Key_itemList = null;
+    Key_quantityList = null;
+    Quest_itemList = null;
+    Quest_quantityList = null;
+    //
+    EventsDesert = new bool[10]; 
+    SetAllElementsFalse(EventsDesert);
+    SwitchDesert = new bool[10]; 
+    SetAllElementsFalse(SwitchDesert);
+    //
+    questDatabase = null;
+    quest = new bool[10]; 
+    SetAllElementsFalse(quest);
+    QuestActive = new bool[10]; 
+    SetAllElementsFalse(QuestActive);
+    QuestComplete = new bool[10]; 
+    SetAllElementsFalse(QuestComplete);
+    QuestSegnal = new bool[10]; 
+    SetAllElementsFalse(QuestSegnal);
+    //
+    items = new bool[10]; 
+    SetAllElementsFalse(items);
+}
+void SetAllElementsFalse(bool[] array){for (int i = 0; i < array.Length; i++){array[i] = false;}}
 
-    private void Awake()
-    {
-    
-        percorsoSalvataggio = Path.Combine(Application.persistentDataPath, "datigioco.json");
-
-    }
-    // Salvataggio
-    public void SalvaDati(PlayerStats dati)
-    {
-        string datiJson = JsonUtility.ToJson(dati);
-        File.WriteAllText(percorsoSalvataggio, datiJson);
-    }
-
-    // Caricamento
-    public PlayerStats CaricaDati()
-    {
-        if (File.Exists(percorsoSalvataggio))
-        {
-            string datiJson = File.ReadAllText(percorsoSalvataggio);
-            return JsonUtility.FromJson<PlayerStats>(datiJson);
-        }
-        else
-        {
-            return new PlayerStats(); // Ritorna nuovi dati se il file non esiste
-        }
-    }
-
+#endregion
 }

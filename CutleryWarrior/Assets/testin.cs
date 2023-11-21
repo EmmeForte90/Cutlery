@@ -32,6 +32,19 @@ public class testin : MonoBehaviour
         PlayerStats.instance.SSkillATT(6);
         PlayerStats.instance.SSkillATT(7);
         //PlayerStats.instance.SSkillATT(8);
+    }
+    public void Addlevel()
+    {
+        if(PlayerStats.instance.F_Unlock){PlayerStats.instance.F_LevelUp();}
+        if(PlayerStats.instance.K_Unlock){PlayerStats.instance.K_LevelUp();}
+        if(PlayerStats.instance.S_Unlock){PlayerStats.instance.S_LevelUp();}
+    }
+    public void LoadGameF()
+    {
+        SaveManager.instance.LoadGame();
+        
 
     }
+
+
 }
