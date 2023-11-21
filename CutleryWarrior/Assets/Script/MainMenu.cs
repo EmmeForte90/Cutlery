@@ -34,6 +34,7 @@ public class MainMenu : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
     public void StartGame(){StartCoroutine(fade());}
+    public void ContinueGame(){StartCoroutine(fadeContinue());}
     public void SetQuality(int qualityIndex){QualitySettings.SetQualityLevel(qualityIndex);}
     public void SetFullscreen(bool isFullScreen){Screen.fullScreen = isFullScreen;}
     IEnumerator StartM(){yield return new WaitForSeconds(13);Music.Play();}
@@ -46,6 +47,19 @@ public class MainMenu : MonoBehaviour
         Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
         PlayerStats.instance.ResetStatNewGame();
         //SaveManager.instance.ResetValueStat();
+        StartGameNew = false;
+        }
+        PlayerStats.instance.StartData = true;
+        SceneManager.LoadScene(startScene);       
+    }
+
+    IEnumerator fadeContinue()
+    {           
+        Fade.gameObject.SetActive(true);
+        yield return new WaitForSeconds(Timelife);
+        if(StartGameNew)
+        {
+        Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
         StartGameNew = false;
         }
         PlayerStats.instance.StartData = true;

@@ -33,13 +33,16 @@ public class StartScene : MonoBehaviour
     private SwitchCharacter Switcher;
     private int IDPorta;
     private int ID_Enm;
-    private bool Once = true;
+    public bool Once = true;
     private Quaternion defaultRotation;
     public static StartScene instance;
     #endregion
     public void Awake()
     {
     if (instance == null){instance = this;}
+    if(SaveManager.instance != null){Once = false;}
+    else  if(SaveManager.instance == null){Once = true;}
+
     /*if (PlayerStats.instance == null)
     {Instantiate(Data, transform.position, transform.rotation); PlayerStats.instance.CanLoading = false;}*/
 
@@ -49,8 +52,20 @@ public class StartScene : MonoBehaviour
     Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
     Instantiate(Data, transform.position, transform.rotation); 
     PlayerStats.instance.StartData = true;
-    AudioManager.instance.CrossFadeINAudio(WhatMusic); Once = false;}
+    AudioManager.instance.CrossFadeINAudio(WhatMusic); Once = false;
     }
+    else if(!Once)
+    {if(SaveManager.instance.Saving)
+    {   SaveManager.instance.LoadGame();
+        if(GameManager.instance.F_Unlock){FAct = GameObject.FindWithTag("F_Player");}
+        if(GameManager.instance.S_Unlock){SAct = GameObject.FindWithTag("S_Player");}
+        if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}
+        if(GameManager.instance.F_Unlock){FAct.transform.position = PlayerStats.instance.savedPosition;}
+        if(GameManager.instance.K_Unlock){KAct.transform.position = PlayerStats.instance.savedPosition;}
+        if(GameManager.instance.S_Unlock){SAct.transform.position = PlayerStats.instance.savedPosition;}
+    }}
+    }
+    
     if(startMusic)
     {
         AudioManager.instance.CrossFadeOUTAudio(PlayerStats.instance.WhatMusic);
@@ -62,7 +77,7 @@ public class StartScene : MonoBehaviour
     //
     if(!GameManager.instance.StartGame){
     GameManager.instance.ChStop();
-    FAct = GameObject.FindWithTag("F_Player");
+    if(GameManager.instance.F_Unlock){FAct = GameObject.FindWithTag("F_Player");}
     if(GameManager.instance.S_Unlock){SAct = GameObject.FindWithTag("S_Player");}
     if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}
     vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine

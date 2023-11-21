@@ -11,8 +11,10 @@ public class LevelChanger : MonoBehaviour
     {
     sceneEvent = GetComponent<SceneEvent>();
     sceneEvent.onSceneChange.AddListener(ChangeScene);
-    Loading = PlayerStats.instance.CanLoading;
-    if(Loading){sceneName = PlayerStats.instance.NameScene;}
+    //Loading = PlayerStats.instance.CanLoading;
+    //if(Loading){sceneName = PlayerStats.instance.NameScene;}
+    if(SaveManager.instance.Saving)
+    {sceneName = SaveManager.instance.NameScene;}
     }
     private void ChangeScene()
     {
@@ -75,13 +77,5 @@ public class LevelChanger : MonoBehaviour
     GameManager.instance.Exploration();
     GameManager.instance.Change();
     sceneEvent.InvokeOnSceneChange();
-    //CharacterMove.instance.isRun = false;
-    //yield return new WaitForSeconds(2f);
-    //CharacterMove.instance.inputCTR = false;
-    //GameManager.instance.StopWin();
-    //GameManager.instance.ChMov();
-    //GameManager.instance.FadeOut();
-    //SwitchCharacter.instance.Take();
-    //yield return new WaitForSeconds(2f);
     }
 }
