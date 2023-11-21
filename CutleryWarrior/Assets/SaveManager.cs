@@ -189,9 +189,9 @@ public class SaveManager : MonoBehaviour
     {
         // Crea un'istanza del tuo oggetto di dati di gioco
         GameData gameData = new GameData();
-        //gameData.playerScore = PlayerStats.instance.F_HP; // Sostituisci con il valore reale
-        //gameData.playerHealth = PlayerStats.instance.F_MP; // Sostituisci con il valore reale
-           gameData.HaveData = PlayerStats.instance.HaveData;
+        gameData.savedPosition = new SaveVector3(PlayerStats.instance.savedPosition);
+        //
+        gameData.HaveData = PlayerStats.instance.HaveData;
         gameData.CanLoading = PlayerStats.instance.CanLoading;
         gameData.NameScene = PlayerStats.instance.NameScene;
         gameData.F_Unlock = PlayerStats.instance.F_Unlock; 
@@ -313,7 +313,6 @@ public class SaveManager : MonoBehaviour
         gameData.QuestComplete = PlayerStats.instance.QuestComplete;
         gameData.QuestSegnal = PlayerStats.instance.QuestSegnal;
 
-        //gameData.savedPosition = new SaveVector3(PlayerStats.instance.savedPosition);
         
 
         // Serializza l'oggetto di dati di gioco in binario
@@ -334,8 +333,8 @@ public class SaveManager : MonoBehaviour
             FileStream fileStream = File.Open(saveFilePath, FileMode.Open);
             GameData gameData = (GameData)formatter.Deserialize(fileStream);
             fileStream.Close();
-            //PlayerStats.instance.savedPosition = gameData.savedPosition.ToVector3();
-            //PlayerStats.instance.HaveData = gameData.HaveData;
+        PlayerStats.instance.savedPosition = gameData.savedPosition.ToVector3();
+        //
         PlayerStats.instance.HaveData = gameData.HaveData;
         PlayerStats.instance.CanLoading = gameData.CanLoading;
         PlayerStats.instance.NameScene = gameData.NameScene;

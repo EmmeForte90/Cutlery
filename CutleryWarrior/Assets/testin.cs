@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class testin : MonoBehaviour
 {
+    private GameObject FAct;
+    private GameObject KAct;
+    private GameObject SAct;  
+    public void Start()
+    {
+        FAct = GameObject.FindWithTag("F_Player");
+    }
         public void addskill()
     {
         PlayerStats.instance.FSkillATT(1);        
@@ -42,9 +49,9 @@ public class testin : MonoBehaviour
     public void LoadGameF()
     {
         SaveManager.instance.LoadGame();
-        
-
+        if(GameManager.instance.F_Unlock){FAct.transform.position = PlayerStats.instance.savedPosition;}
+        if(GameManager.instance.K_Unlock){KAct.transform.position = PlayerStats.instance.savedPosition;}
+        if(GameManager.instance.S_Unlock){SAct.transform.position = PlayerStats.instance.savedPosition;}
     }
-
 
 }
