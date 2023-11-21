@@ -125,30 +125,26 @@ public class GameData
     public bool[] EventsDesert;  
     public bool[] SwitchDesert;
 
-    //public List<Quests> questDatabase;
     public bool[] quest;
     public bool[] QuestActive;
     public bool[] QuestComplete;
     public bool[] QuestSegnal;
-
-    /*
-    [Header("Item List")]
-    public List<Item> I_itemList = new List<Item>();
-    public List<int> I_quantityList = new List<int>();
-    public List<Item> IBattle_itemList = new List<Item>();
-    public List<int> IBattle_quantityList = new List<int>();
-    public List<Item> F_itemList = new List<Item>();
-    public List<int> F_quantityList = new List<int>();
-    public List<Item> S_itemList = new List<Item>();
-    public List<int> S_quantityList = new List<int>();
-    public List<Item> K_itemList = new List<Item>();
-    public List<int> K_quantityList = new List<int>();
-    public List<Item> Key_itemList = new List<Item>();
-    public List<int> Key_quantityList = new List<int>();
-    public List<Item> Quest_itemList = new List<Item>();
-    public List<int> Quest_quantityList = new List<int>();
-    [Header("Item List")]
-    public bool[] items;*/
+    public bool[] items;
+    public List<Item> I_itemList;
+        public List<int> I_quantityList;
+        public List<Item> IBattle_itemList;
+        public List<int> IBattle_quantityList;
+        public List<Item> F_itemList;
+        public List<int> F_quantityList;
+        public List<Item> S_itemList;
+        public List<int> S_quantityList;
+        public List<Item> K_itemList;
+        public List<int> K_quantityList;
+        public List<Item> Key_itemList;
+        public List<int> Key_quantityList;
+        public List<Item> Quest_itemList;
+        public List<int> Quest_quantityList;
+    
 }
 
 [Serializable]
@@ -171,10 +167,25 @@ public class SaveVector3
     }
 }
 
-
 public class SaveManager : MonoBehaviour
 {
+    public List<Quests> questDatabase;
+    public List<Item> I_itemList = new List<Item>();
+    public List<int> I_quantityList = new List<int>();
+    public List<Item> IBattle_itemList = new List<Item>();
+    public List<int> IBattle_quantityList = new List<int>();
+    public List<Item> F_itemList = new List<Item>();
+    public List<int> F_quantityList = new List<int>();
+    public List<Item> S_itemList = new List<Item>();
+    public List<int> S_quantityList = new List<int>();
+    public List<Item> K_itemList = new List<Item>();
+    public List<int> K_quantityList = new List<int>();
+    public List<Item> Key_itemList = new List<Item>();
+    public List<int> Key_quantityList = new List<int>();
+    public List<Item> Quest_itemList = new List<Item>();
+    public List<int> Quest_quantityList = new List<int>();
     private string saveFilePath;
+
     public static SaveManager instance;
 
     private void Start()
@@ -182,13 +193,14 @@ public class SaveManager : MonoBehaviour
         if (instance == null){instance = this;} 
         // Imposta il percorso del file di salvataggio
         saveFilePath = Application.persistentDataPath + "/save.txt";
-
     }
+    
 
     public void SaveGame()
     {
         // Crea un'istanza del tuo oggetto di dati di gioco
         GameData gameData = new GameData();
+        #region DatiDaSalvare
         gameData.savedPosition = new SaveVector3(PlayerStats.instance.savedPosition);
         //
         gameData.HaveData = PlayerStats.instance.HaveData;
@@ -312,10 +324,38 @@ public class SaveManager : MonoBehaviour
         gameData.QuestActive = PlayerStats.instance.QuestActive;
         gameData.QuestComplete = PlayerStats.instance.QuestComplete;
         gameData.QuestSegnal = PlayerStats.instance.QuestSegnal;
-
+        //
+        
+            I_itemList = PlayerStats.instance.I_itemList;
+            I_quantityList = PlayerStats.instance.I_quantityList;
+            IBattle_itemList = PlayerStats.instance.IBattle_itemList;
+            IBattle_quantityList = PlayerStats.instance.IBattle_quantityList;
+            F_itemList = PlayerStats.instance.F_itemList;
+            F_quantityList = PlayerStats.instance.F_quantityList;
+            S_itemList = PlayerStats.instance.S_itemList;
+            S_quantityList = PlayerStats.instance.S_quantityList;
+            K_itemList = PlayerStats.instance.K_itemList;
+            K_quantityList = PlayerStats.instance.K_quantityList;
+            Key_itemList = PlayerStats.instance.Key_itemList;
+            Key_quantityList = PlayerStats.instance.Key_quantityList;
+            Quest_itemList = PlayerStats.instance.Quest_itemList;
+            Quest_quantityList = PlayerStats.instance.Quest_quantityList;
         
 
+        /*gameData.I_quantityList = PlayerStats.instance.I_quantityList;
+        gameData.IBattle_quantityList = PlayerStats.instance.IBattle_quantityList;
+        gameData.F_quantityList = PlayerStats.instance.F_quantityList;
+        gameData.S_quantityList = PlayerStats.instance.S_quantityList;
+        gameData.K_quantityList = PlayerStats.instance.K_quantityList;
+        gameData.Key_quantityList = PlayerStats.instance.Key_quantityList;
+        gameData.Quest_quantityList = PlayerStats.instance.Quest_quantityList;*/
+        #endregion
+
         // Serializza l'oggetto di dati di gioco in binario
+        // Per salvare
+        //MyScriptableObjectContainer container = new MyScriptableObjectContainer();
+        //container.Save(Application.persistentDataPath + "/save.txt");
+
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream fileStream = File.Create(saveFilePath);
         formatter.Serialize(fileStream, gameData);
@@ -328,12 +368,16 @@ public class SaveManager : MonoBehaviour
     {
         if (File.Exists(saveFilePath))
         {
+            // Per caricare
+            //MyScriptableObjectContainer loadedContainer = new MyScriptableObjectContainer();
+            //loadedContainer.Load(Application.persistentDataPath + "/save.txt");
             // Deserializza l'oggetto di dati di gioco da binario
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream fileStream = File.Open(saveFilePath, FileMode.Open);
             GameData gameData = (GameData)formatter.Deserialize(fileStream);
             fileStream.Close();
         PlayerStats.instance.savedPosition = gameData.savedPosition.ToVector3();
+        #region DatiDaCaricare
         //
         PlayerStats.instance.HaveData = gameData.HaveData;
         PlayerStats.instance.CanLoading = gameData.CanLoading;
@@ -451,34 +495,21 @@ public class SaveManager : MonoBehaviour
         PlayerStats.instance.K_Unlock = gameData.K_Unlock;
         PlayerStats.instance.S_Unlock = gameData.S_Unlock;
         //
-        //gameData.questDatabase = PlayerStats.instance.questDatabase;
         PlayerStats.instance.quest = gameData.quest;
         PlayerStats.instance.QuestActive = gameData.QuestActive;
         PlayerStats.instance.QuestComplete = gameData.QuestComplete;
         PlayerStats.instance.QuestSegnal = gameData.QuestSegnal;
+        #endregion
         //
-        //
-        /*gameData.I_itemList = PlayerStats.instance.I_itemList;
-        gameData.I_quantityList = PlayerStats.instance.I_quantityList;
-        gameData.IBattle_itemList = PlayerStats.instance.IBattle_itemList;
-        gameData.IBattle_quantityList = PlayerStats.instance.IBattle_quantityList;
-        gameData.F_itemList = PlayerStats.instance.F_itemList;
-        gameData.F_quantityList = PlayerStats.instance.F_quantityList;
-        gameData.S_itemList = PlayerStats.instance.S_itemList;
-        gameData.S_quantityList = PlayerStats.instance.S_quantityList;
-        gameData.K_itemList = PlayerStats.instance.K_itemList;
-        gameData.K_quantityList = PlayerStats.instance.K_quantityList;
-        gameData.Key_itemList = PlayerStats.instance.Key_itemList;
-        gameData.Key_quantityList = PlayerStats.instance.Key_quantityList;
-        gameData.Key_itemList = PlayerStats.instance.Key_itemList;
-        gameData.Quest_itemList = PlayerStats.instance.Quest_itemList;
-        gameData.Quest_quantityList = PlayerStats.instance.Quest_quantityList;
-        //
-        gameData.items = PlayerStats.instance.items;*/
-     
-
+        PlayerStats.instance.I_quantityList = gameData.I_quantityList;
+        PlayerStats.instance.IBattle_quantityList = gameData.IBattle_quantityList;
+        PlayerStats.instance.F_quantityList = gameData.F_quantityList;
+        PlayerStats.instance.S_quantityList = gameData.S_quantityList;
+        PlayerStats.instance.K_quantityList = gameData.K_quantityList;
+        PlayerStats.instance.Key_quantityList = gameData.Key_quantityList;
+        PlayerStats.instance.Quest_quantityList = gameData.Quest_quantityList;
             // Usa i dati caricati per ripristinare lo stato del gioco
-            Debug.Log("Caricato il gioco con successo. Score: " + gameData.playerScore + ", Health: " + gameData.playerHealth);
+            //Debug.Log("Caricato il gioco con successo. Score: " + gameData.playerScore + ", Health: " + gameData.playerHealth);
         }
         else
         {

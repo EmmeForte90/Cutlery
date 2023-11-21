@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+[System.Serializable]
 [CreateAssetMenu(fileName ="New Quest", menuName = "Quest/Create New Quest")]
 public class Quests : ScriptableObject
 {public int id;
@@ -35,3 +36,23 @@ private void OnDisable()
 if (!EditorApplication.isPlaying){isActive = false; isComplete = false; AfterQuest = false;}}
 #endif
 }
+
+/*[System.Serializable]
+public class SerializableQuest
+{
+public int id;
+public int KindQuest;
+public string CharacterName;
+public string questName;
+public string Description;
+public Sprite Bigicon;
+public Sprite Desicon;
+public string[] Startdialogue; // array of string to store the dialogues
+public string[] Middledialogue; // array of string to store the dialogues
+public string[] Endingdialogue; // array of string to store the dialogues
+public string[] Afterdialogue; // array of string to store the dialogues
+//
+public bool isActive;
+public bool isComplete;
+public bool AfterQuest;
+}*/

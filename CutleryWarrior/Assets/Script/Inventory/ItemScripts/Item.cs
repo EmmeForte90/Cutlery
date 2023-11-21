@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using System;
+[System.Serializable]
 public class Item : ScriptableObject
 {
     #region Header
@@ -43,3 +44,21 @@ public class Item : ScriptableObject
     public virtual void Sell()
     {}//Vai allo script Consumable per verificarne la function
 }
+/*
+[System.Serializable]
+public class SerializableItem
+{
+    public string itemName;
+    public string NameSkin;
+     public string itemDes;
+    public int ID;
+    public int KindItem;
+    public int WhoConsumable;
+    public int price;
+    public bool Stackable;
+    public Sprite itemIcon;
+    public int TypesE;
+    public int TimeItem;
+    public int MaxDurationItem;
+    private Inventory Inv;
+}*/
