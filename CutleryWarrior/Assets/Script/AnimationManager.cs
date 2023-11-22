@@ -52,6 +52,7 @@ public class AnimationManager : MonoBehaviour
     private GameObject ForkActive;
     private CharacterMove F_Script;
     [HideInInspector] public GameObject BulletP;
+    [HideInInspector] public GameObject Bullet_AI;
     [HideInInspector] public GameObject Bullet;
     [HideInInspector] public GameObject BigSB;
     [HideInInspector] public GameObject BigSpell;
@@ -323,7 +324,7 @@ public class AnimationManager : MonoBehaviour
     StartCoroutine(StopVFX_FNormal()); VFX = false;}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
-    if (e.Data.Name == "shootAI" && VFX){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
+    if (e.Data.Name == "shootAI" && VFX){Instantiate(Bullet_AI, BPoint.position, Bullet_AI.transform.rotation); 
     Invoke("StopAtk", Cooldown); VFX = false;}
     if (e.Data.Name == "shoot" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 

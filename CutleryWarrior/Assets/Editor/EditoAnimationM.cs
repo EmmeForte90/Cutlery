@@ -16,6 +16,7 @@ public class EditoAnimationM : Editor
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Bullet"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("BulletP"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Bullet_AI"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("BigSpell"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("BigForks"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Flame"));

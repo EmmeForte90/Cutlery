@@ -40,6 +40,7 @@ public class ForkSemple : MonoBehaviour
     public int StunProbabilityCount = 2;
     public int StunProbabilityMAX = 10;
     public int result;
+    public int resultPoint;
     public int timeStun = 3; 
     public int StunTimer = 5;
 
@@ -53,9 +54,10 @@ public class ForkSemple : MonoBehaviour
     public int timeSleep = 3;
 
     [Header("Move")]
+    public int N__Shoot = 2;
+    public float PointTange = 1f;
     public int WaitAtk = 3;
     public float moveSpeed = 3f;
-    public float PointTange = 1f;
     public int defense = 2;
     public int attackPauseDuration = 1;
     public GameObject P1, P2, P3; 
@@ -96,7 +98,10 @@ public class ForkSemple : MonoBehaviour
         GameManager.instance.S_Unlock &&
         GameManager.instance.K_Unlock){
         int randomNumber = Random.Range(0, 2);
-        result = Mathf.RoundToInt(randomNumber);} 
+        result = Mathf.RoundToInt(randomNumber);
+        int randomNumberPoint = Random.Range(0, 2);
+        resultPoint = Mathf.RoundToInt(randomNumberPoint);
+        } 
         else if(GameManager.instance.F_Unlock &&
         !GameManager.instance.S_Unlock &&
         !GameManager.instance.K_Unlock){
@@ -140,6 +145,13 @@ public class ForkSemple : MonoBehaviour
             DieB = true; IconVFX.SetActive(true); Die();
             break;
        }
+       if(N__Shoot <= 0)
+       {
+        Choise();
+       }
+
+
+
        }
         else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
         if(currentHealth < 0){Action = 2;}
@@ -170,7 +182,7 @@ public class ForkSemple : MonoBehaviour
             if(!isAttacking)
             {
                
-                switch(result)
+                switch(resultPoint)
         {
             case 0:
             transform.position = Vector3.MoveTowards(transform.position, P1.transform.position, moveSpeed * Time.deltaTime);
@@ -188,7 +200,7 @@ public class ForkSemple : MonoBehaviour
             if (Vector3.Distance(transform.position, P1.transform.position) <= PointTange ||
             Vector3.Distance(transform.position, P2.transform.position) <= PointTange ||
             Vector3.Distance(transform.position, P3.transform.position) <= PointTange)
-            {StartAttack();}
+            {N__Shoot = 2; StartAttack();}
         }}else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
     }
     public void OnTriggerEnter(Collider collision)
@@ -239,6 +251,7 @@ public class ForkSemple : MonoBehaviour
         isAttacking = true;
         FacePlayer();
         Anm.PlayAnimation(Atk1AnimationName);
+        N__Shoot--;
         //Debug.Log("Attacco!");
         StartCoroutine(AttackPause());
     }
