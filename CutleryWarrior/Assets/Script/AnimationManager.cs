@@ -43,6 +43,7 @@ public class AnimationManager : MonoBehaviour
     [HideInInspector]public GameObject impronte;
     [HideInInspector]public Transform Foot;
     [HideInInspector]public GameObject Rage;
+
     [Header("Enemy")]
     [HideInInspector] public GameObject VfxEnmSlash;
 
@@ -111,6 +112,8 @@ public class AnimationManager : MonoBehaviour
 
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
+    [SpineAnimation][SerializeField]  string WalkBAnimationName;
+
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
@@ -186,6 +189,8 @@ public class AnimationManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         VFX = true;
     }
+    
+
     public void TemporaryChangeColor(Color color){_skeletonAnimation.Skeleton.SetColor(color); Invoke(nameof(ResetColor), 0.5f);}
     public void ChangeColor(){_skeletonAnimation.Skeleton.SetColor(Color.green);}
     public void ResetColor(){_skeletonAnimation.Skeleton.SetColor(Color.white);}
@@ -223,6 +228,7 @@ public class AnimationManager : MonoBehaviour
     StartCoroutine(StopVFX_FNormal()); VFX = false; }
      if (e.Data.Name == "dodge" && VFX){Instantiate(Dodge, Foot.position, Dodge.transform.rotation);
     StartCoroutine(StopVFX_Rapid()); VFX = false; }
+    if (e.Data.Name == "EndAtk" && VFX){PlayAnimationLoop(WalkBAnimationName);}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     ///UsingItems
     if (e.Data.Name == "item/potion" && VFX)
@@ -300,7 +306,7 @@ public class AnimationManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
     if (e.Data.Name == "shootAI" && VFX){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
-    VFX = false;}
+    StartCoroutine(StopVFX_F()); VFX = false;}
     if (e.Data.Name == "shoot" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
     VFX = false;}

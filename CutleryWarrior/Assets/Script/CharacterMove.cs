@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class CharacterMove : MonoBehaviour
 {
     [Header("Character")]
+    float horizontalInput;
+    float verticalInput;
     [Tooltip("Scegli personaggi 0.Fork 1.Knife 2.Spoon")]
     [Range(0, 2)]
     public int kindCh;
@@ -33,7 +35,7 @@ public class CharacterMove : MonoBehaviour
     public bool Win = false;
     private int comboCount = 0;
     private bool canAttack = true;
-    public float comboCooldown = 0.3f; // Tempo di cooldown tra le combo in secondi
+    public float comboCooldown = 0.5f; // Tempo di cooldown tra le combo in secondi
     //private PlayerStats Stats;
     private bool top = true;
     private bool StopRanm = false;
@@ -178,6 +180,7 @@ public void Awake()
         break;
         }}
     }
+    
 #region MoveExploration
     public void SimpleMove()
     {
@@ -192,8 +195,8 @@ public void Awake()
         VFXCantATK.SetActive(false);
         //
         // Calcola la direzione del movimento in base agli input dell'utente
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
         Vector3 moveDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
         if(Input.GetButton("Fire3")){isRun = true; GameManager.instance.isRun = true; StopRanm = true;} 
         if (Input.GetButtonUp("Fire3")){isRun = false; GameManager.instance.isRun = false; StopRanm = false;
@@ -225,7 +228,7 @@ public void Awake()
         else if (horizontalInput > 0 && !top)//Sta fermo
         {Anm.PlayAnimationLoop(WalkUPAnimationName); top = false; } 
         else if (horizontalInput < 0 && !top)//Sta fermo
-        {Anm.PlayAnimationLoop(WalkUPAnimationName); top = false; } 
+        {Anm.ClearAnm(); Anm.PlayAnimationLoop(WalkUPAnimationName); top = false; } 
          else if (horizontalInput > 0 && top)//Sta fermo
         {Anm.PlayAnimationLoop(WalkAnimationName); top = true; } 
         else if (horizontalInput < 0 && top)//Sta fermo
@@ -304,9 +307,12 @@ public void Awake()
     private void HandleComboAttackF()
     {
         comboCount = (comboCount % 3) + 1;
+        Stop();
         PlayComboAnimation("Battle/attack_" + comboCount.ToString());
         canAttack = false;
-        StartCoroutine(ComboCooldown());
+        inputCTR = true;
+        Invoke("StopAtk", comboCooldown);
+        //StartCoroutine(ComboCooldown());
     }
 #endregion
 #region Knife
@@ -359,6 +365,7 @@ public void Awake()
     // Esegue un colpo normale
     if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && canAttack && PlayerStats.instance.K_curMP > 20 && !isCharging)
     {
+        Stop();
         HandleComboAttackK();
         PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
     }
@@ -384,7 +391,8 @@ private void HandleComboAttackK()
     comboCount = (comboCount % 3) + 1;
     PlayComboAnimation("Battle/attack_" + comboCount.ToString());
     canAttack = false;
-    StartCoroutine(ComboCooldown());
+    Invoke("StopAtk", comboCooldown);
+    //StartCoroutine(ComboCooldown());
 }
 
 private void StumpK()
@@ -421,8 +429,9 @@ private IEnumerator StumpKTime()
     
     //Attack
        // Verifica se il tasto del mouse è stato premuto
-         if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && canAttack && PlayerStats.instance.S_curMP > 20 && Stump)
-        {HandleComboAttackS(); PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;} 
+         if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && canAttack && PlayerStats.instance.S_curMP > 20 
+         && Stump)
+        {HandleComboAttackS(); PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP; Stop();} 
         else if(PlayerStats.instance.S_curMP < 20){AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);}
     }
 
@@ -431,7 +440,8 @@ private IEnumerator StumpKTime()
         comboCount = (comboCount % 3) + 1;
         PlayComboAnimation("Battle/attack_" + comboCount.ToString());
         canAttack = false;
-        StartCoroutine(ComboCooldown());
+        Invoke("StopAtk", comboCooldown);
+        //StartCoroutine(ComboCooldown());
     }
     
 #endregion
@@ -442,12 +452,8 @@ private IEnumerator StumpKTime()
     {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, false);}}
     private void PlayDodgeAnimation(string animationName)
     {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, true);}}
-    private IEnumerator ComboCooldown()
-    {
-        yield return new WaitForSeconds(comboCooldown);
-        canAttack = true;
-    }
     
+    private void StopAtk(){canAttack = true; inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName); VFXCantATK.SetActive(false);}
@@ -524,8 +530,8 @@ private IEnumerator StumpKTime()
         {if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
         Flip();  
         ////////////////////////////////
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
         Vector3 moveDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
         // Gestisci la gravità
         if (!characterController.isGrounded)
@@ -551,13 +557,13 @@ private IEnumerator StumpKTime()
         {Anm.PlayAnimationLoop(IdleBAnimationName);}
         else if (!Stump)
         {Anm.PlayAnimationLoop(StumpAnimationName);}
-        if(!isDodging){hor = Input.GetAxisRaw("Horizontal"); 
+        if(!isDodging || !canAttack){hor = Input.GetAxisRaw("Horizontal"); 
         isMoving = (Mathf.Abs(hor) > 0.0f || Mathf.Abs(verticalInput) > 0.0f) && !isDefence;}
         if (poisonState){StartCoroutine(Poi());}     
         }
         }
 #endregion
-    public void Stop(){rb.velocity = new Vector3(0f, 0f, 0f);}
+    public void Stop(){rb.velocity = new Vector3(0f, 0f, 0f); verticalInput = 0; horizontalInput = 0;}
     public void Flip()
     {
         if (hor > 0f){transform.localScale = new Vector3(1, 1,1);}
