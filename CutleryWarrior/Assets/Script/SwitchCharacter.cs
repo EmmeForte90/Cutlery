@@ -30,7 +30,16 @@ public class SwitchCharacter : MonoBehaviour
     #endregion
     public void Update()
     {if(!GameManager.instance.notChange)
-    {if(Input.GetKeyDown(KeyCode.Space)){StartCoroutine(CoordinateActor()); ind();}}}
+    {
+        if(!GameManager.instance.NotParty)
+        {
+        if(Input.GetButtonDown("Change") ){StartCoroutine(CoordinateActor()); ind();}
+        }
+        
+    }
+    
+    
+    }
     public void Start(){TakeCharacters();}
     public void Awake(){if (instance == null){instance = this;} ConInt = 1;}
     public void Take(){StartCoroutine(CoordinateActor());}

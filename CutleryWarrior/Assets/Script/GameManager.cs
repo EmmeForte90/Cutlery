@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public bool Day = true;
     public bool isRun = false;
     public bool Interact = false; 
+    public bool NotParty = true; 
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject LittleM;
     [SerializeField]  GameObject TimerM;

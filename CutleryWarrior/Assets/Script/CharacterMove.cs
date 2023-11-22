@@ -271,14 +271,14 @@ public void Awake()
         MoveB();
     //DODGE
         // Rileva l'input del tasto spazio
-        if (Input.GetMouseButtonDown(1) && canDodge && PlayerStats.instance.F_curMP > 2)
+        if (Input.GetMouseButtonDown(1)|| Input.GetButton("Fire2") && canDodge && PlayerStats.instance.F_curMP > 2)
         {Dodge(); PlayerStats.instance.F_curMP -= 2;}
         else if(PlayerStats.instance.F_curMP < 20)
         {VFXCantATK.SetActive(true);}
 
     if (isDodging){characterController.Move(moveDirection * Time.fixedDeltaTime);}
     //Attack
-        if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.F_curMP > 20)
+        if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && canAttack && PlayerStats.instance.F_curMP > 20)
             {
                 HandleComboAttackF();
                 Stop();
@@ -323,7 +323,7 @@ public void Awake()
     }
 
     // Inizia a caricare il colpo
-    if (Input.GetMouseButtonDown(1) && !isCharging && PlayerStats.instance.K_curMP > 20)
+    if (Input.GetMouseButtonDown(1)|| Input.GetButton("Fire2") && !isCharging && PlayerStats.instance.K_curMP > 20)
     {
         TimeBar.SetActive(true);
         KChargeATK.transform.position = BP.transform.position;
@@ -335,7 +335,7 @@ public void Awake()
    
 
     // Rilascia il colpo caricato
-    if (Input.GetMouseButtonUp(1) && isCharging)
+    if (Input.GetMouseButtonUp(1)|| Input.GetButtonUp("Fire2") && isCharging)
     {
         //chargeTime = Time.time - chargeStartTime;
         if (chargeTime >= maxChargeTime)
@@ -357,7 +357,7 @@ public void Awake()
     }
 
     // Esegue un colpo normale
-    if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.K_curMP > 20 && !isCharging)
+    if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && canAttack && PlayerStats.instance.K_curMP > 20 && !isCharging)
     {
         HandleComboAttackK();
         PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
@@ -408,20 +408,20 @@ private IEnumerator StumpKTime()
            MoveB();  
     //DODGE
         // Rileva l'input del tasto spazio
-        if (Input.GetMouseButtonDown(1) && PlayerStats.instance.S_curMP > 20)
+        if (Input.GetMouseButtonDown(1)|| Input.GetButton("Fire2") && PlayerStats.instance.S_curMP > 20)
         {isDefence = true;}
         else if (PlayerStats.instance.S_curMP < 10)
         {AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);}     
 
         // Verifica se il tasto del mouse è stato rilasciato
-        if (Input.GetMouseButtonUp(1)){isDefence = false;}
+        if (Input.GetMouseButtonUp(1)|| Input.GetButtonUp("Fire2")){isDefence = false;}
 
         // Continua ad eseguire l'azione mentre il tasto del mouse è premuto
         //if (isDefence){Anm.PlayAnimationLoop(GuardAnimationName);}
     
     //Attack
        // Verifica se il tasto del mouse è stato premuto
-         if (Input.GetMouseButtonDown(0) && canAttack && PlayerStats.instance.S_curMP > 20 && Stump)
+         if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && canAttack && PlayerStats.instance.S_curMP > 20 && Stump)
         {HandleComboAttackS(); PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;} 
         else if(PlayerStats.instance.S_curMP < 20){AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);}
     }

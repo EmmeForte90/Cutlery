@@ -72,6 +72,7 @@ public class UnlockCharacter : MonoBehaviour
 
     IEnumerator UnlockToFork()
     {yield return new WaitForSeconds(2f);
+    GameManager.instance.NotParty = false;
     if(Spoon){GameManager.instance.SpoonUnlock(); 
     PlayerStats.instance.ResetStatS();
     EquipM_S.instance.AddItem(Weapon, specificQuant);
@@ -91,6 +92,7 @@ public class UnlockCharacter : MonoBehaviour
     
     IEnumerator UnlockToKnife()
     {yield return new WaitForSeconds(2f);
+    GameManager.instance.NotParty = false;
     if(Spoon){GameManager.instance.SpoonUnlock(); 
     PlayerStats.instance.ResetStatS();
     EquipM_S.instance.AddItem(Weapon, specificQuant);
@@ -110,6 +112,7 @@ public class UnlockCharacter : MonoBehaviour
 
     IEnumerator UnlockToSpoon()
     {yield return new WaitForSeconds(2f);
+    GameManager.instance.NotParty = false;
     if(Spoon){GameManager.instance.SpoonUnlock(); 
     PlayerStats.instance.ResetStatS();
     EquipM_S.instance.AddItem(Weapon, specificQuant);

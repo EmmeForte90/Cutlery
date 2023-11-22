@@ -13832,8 +13832,6 @@ GameObject:
   - component: {fileID: 7828768296297916443}
   - component: {fileID: 2825241787351946964}
   - component: {fileID: 1561206441109212130}
-  - component: {fileID: 204599702012727712}
-  - component: {fileID: 1068041182353930536}
   m_Layer: 0
   m_Name: DuelManager
   m_TagString: Untagged
@@ -13948,36 +13946,6 @@ MonoBehaviour:
   ActorSpoon: {fileID: 0}
   ActorKnife: {fileID: 0}
   ActorFork: {fileID: 0}
---- !u!114 &204599702012727712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 755363044326325947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 900e4f745b06e584ea395815198c01cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onSceneChange:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1068041182353930536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 755363044326325947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 128afdc1e9c865a4cab4b71705f5a90d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: 
-  IDPorta: 0
-  Loading: 0
 --- !u!1 &763053706583373782
 GameObject:
   m_ObjectHideFlags: 0
@@ -31182,8 +31150,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DM: {fileID: 0}
   EnmF: []
+  F_Skill_0: {fileID: 0}
+  F_Skill_1: {fileID: 0}
+  F_Skill_2: {fileID: 0}
+  F_Skill_3: {fileID: 0}
+  F_Skill_4: {fileID: 0}
+  F_Skill_5: {fileID: 0}
+  F_Skill_6: {fileID: 0}
+  F_Skill_7: {fileID: 0}
+  F_Skill_8: {fileID: 0}
   EnmK: []
+  K_Skill_0: {fileID: 0}
+  K_Skill_1: {fileID: 0}
+  K_Skill_2: {fileID: 0}
+  K_Skill_3: {fileID: 0}
+  K_Skill_4: {fileID: 0}
+  K_Skill_5: {fileID: 0}
+  K_Skill_6: {fileID: 0}
+  K_Skill_7: {fileID: 0}
+  K_Skill_8: {fileID: 0}
   EnmS: []
+  S_Skill_0: {fileID: 0}
+  S_Skill_1: {fileID: 0}
+  S_Skill_2: {fileID: 0}
+  S_Skill_3: {fileID: 0}
+  S_Skill_4: {fileID: 0}
+  S_Skill_5: {fileID: 0}
+  S_Skill_6: {fileID: 0}
+  S_Skill_7: {fileID: 0}
+  S_Skill_8: {fileID: 0}
   DamageTest: 20
 --- !u!1 &1657294145737118765
 GameObject:
@@ -74545,12 +74540,6 @@ MonoBehaviour:
   player: {fileID: 0}
   Icon: {fileID: 3470101093774255305}
   IconVFX: {fileID: 3502697041217272319}
-  VFXStun: {fileID: 9037504249058050806}
-  isStun: 0
-  StunProbability: 0
-  StunProbabilityCount: 2
-  StunProbabilityMAX: 10
-  result: 0
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 9084200297713337244}
@@ -74559,6 +74548,20 @@ MonoBehaviour:
   VFXPoison: {fileID: 4016552358831944208}
   poisonResistance: 100
   poisonResistanceCont: 0
+  VFXStun: {fileID: 9037504249058050806}
+  isStun: 0
+  StunProbability: 0
+  StunProbabilityCount: 2
+  StunProbabilityMAX: 10
+  result: 0
+  timeStun: 3
+  StunTimer: 5
+  VFXSleep: {fileID: 0}
+  isSleep: 0
+  SleepProbability: 0
+  SleepProbabilityCount: 2
+  SleepProbabilityMAX: 10
+  timeSleep: 3
   WaitAtk: 1
   moveSpeed: 5
   attackRange: 5
@@ -74578,6 +74581,8 @@ MonoBehaviour:
   StunStartAnimationName: Battle/fly
   StunAnimationName: Battle/stun
   StunEndAnimationName: Battle/stun_idle
+  StunFlashAnimationName: 
+  SleepAnimationName: 
   Anm: {fileID: 7663121722372745849}
 --- !u!33 &6234494347578268063
 MeshFilter:
@@ -74715,6 +74720,28 @@ MonoBehaviour:
   knife: 0
   spoon: 0
   Enemy: 1
+  Potion: {fileID: 0}
+  MediaPotion: {fileID: 0}
+  AltaPotion: {fileID: 0}
+  Intruglio: {fileID: 0}
+  MediaIntruglio: {fileID: 0}
+  AltaIntruglio: {fileID: 0}
+  Vaccino: {fileID: 0}
+  Aglio: {fileID: 0}
+  Malox: {fileID: 0}
+  "Caff\xE9": {fileID: 0}
+  Panacea: {fileID: 0}
+  Ristoro: {fileID: 0}
+  BombaPiccola: {fileID: 0}
+  BombaMedia: {fileID: 0}
+  BombaGrande: {fileID: 0}
+  Veleno: {fileID: 0}
+  Fumogeno: {fileID: 0}
+  Spine: {fileID: 0}
+  Flash: {fileID: 0}
+  Camomilla: {fileID: 0}
+  Barricata: {fileID: 0}
+  Bengala: {fileID: 0}
   canImp: 0
   impronte: {fileID: 0}
   Foot: {fileID: 0}
@@ -74757,6 +74784,7 @@ MonoBehaviour:
   SawTrain: {fileID: 0}
   Stalactites: {fileID: 0}
   Whirlwinds: {fileID: 0}
+  Motivation: {fileID: 0}
   Skill_0: {fileID: 0}
   Skill_1: {fileID: 0}
   Skill_2: {fileID: 0}
@@ -74766,6 +74794,7 @@ MonoBehaviour:
   Skill_6: {fileID: 0}
   Skill_7: {fileID: 0}
   Skill_8: {fileID: 0}
+  ItemTimer: {fileID: 0}
   IdleBAnimationName: Battle/idle
   _skeletonAnimation: {fileID: 5594239637986761413}
   VFX: 1
@@ -75080,12 +75109,6 @@ MonoBehaviour:
   player: {fileID: 0}
   Icon: {fileID: 7879803157073663941}
   IconVFX: {fileID: 102897831771908241}
-  VFXStun: {fileID: 5853027446135242030}
-  isStun: 0
-  StunProbability: 0
-  StunProbabilityCount: 2
-  StunProbabilityMAX: 10
-  result: 0
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 2193944686541853099}
@@ -75094,6 +75117,20 @@ MonoBehaviour:
   VFXPoison: {fileID: 8685440031080412932}
   poisonResistance: 100
   poisonResistanceCont: 0
+  VFXStun: {fileID: 5853027446135242030}
+  isStun: 0
+  StunProbability: 0
+  StunProbabilityCount: 2
+  StunProbabilityMAX: 10
+  result: 0
+  timeStun: 3
+  StunTimer: 5
+  VFXSleep: {fileID: 0}
+  isSleep: 0
+  SleepProbability: 0
+  SleepProbabilityCount: 2
+  SleepProbabilityMAX: 10
+  timeSleep: 3
   WaitAtk: 3
   moveSpeed: 5
   PointTange: 1
@@ -75116,6 +75153,8 @@ MonoBehaviour:
   StunStartAnimationName: 
   StunAnimationName: 
   StunEndAnimationName: 
+  StunFlashAnimationName: 
+  SleepAnimationName: 
   Anm: {fileID: 8107440715276799307}
 --- !u!33 &3917154276318917219
 MeshFilter:
@@ -75253,6 +75292,28 @@ MonoBehaviour:
   knife: 0
   spoon: 0
   Enemy: 1
+  Potion: {fileID: 0}
+  MediaPotion: {fileID: 0}
+  AltaPotion: {fileID: 0}
+  Intruglio: {fileID: 0}
+  MediaIntruglio: {fileID: 0}
+  AltaIntruglio: {fileID: 0}
+  Vaccino: {fileID: 0}
+  Aglio: {fileID: 0}
+  Malox: {fileID: 0}
+  "Caff\xE9": {fileID: 0}
+  Panacea: {fileID: 0}
+  Ristoro: {fileID: 0}
+  BombaPiccola: {fileID: 0}
+  BombaMedia: {fileID: 0}
+  BombaGrande: {fileID: 0}
+  Veleno: {fileID: 0}
+  Fumogeno: {fileID: 0}
+  Spine: {fileID: 0}
+  Flash: {fileID: 0}
+  Camomilla: {fileID: 0}
+  Barricata: {fileID: 0}
+  Bengala: {fileID: 0}
   canImp: 0
   impronte: {fileID: 0}
   Foot: {fileID: 0}
@@ -75295,6 +75356,7 @@ MonoBehaviour:
   SawTrain: {fileID: 0}
   Stalactites: {fileID: 0}
   Whirlwinds: {fileID: 0}
+  Motivation: {fileID: 0}
   Skill_0: {fileID: 0}
   Skill_1: {fileID: 0}
   Skill_2: {fileID: 0}
@@ -75304,6 +75366,7 @@ MonoBehaviour:
   Skill_6: {fileID: 0}
   Skill_7: {fileID: 0}
   Skill_8: {fileID: 0}
+  ItemTimer: {fileID: 0}
   IdleBAnimationName: Battle/idle
   _skeletonAnimation: {fileID: 2243353673734631658}
   VFX: 1
@@ -75791,6 +75854,13 @@ MonoBehaviour:
   StunProbabilityMAX: 10
   result: 0
   timeStun: 3
+  StunTimer: 5
+  VFXSleep: {fileID: 0}
+  isSleep: 0
+  SleepProbability: 0
+  SleepProbabilityCount: 1
+  SleepProbabilityMAX: 10
+  timeSleep: 3
   WaitAtk: 3
   moveSpeed: 3
   attackRange: 5
@@ -75810,6 +75880,8 @@ MonoBehaviour:
   StunStartAnimationName: Battle/fly
   StunAnimationName: Battle/stun
   StunEndAnimationName: Battle/stun_idle
+  StunFlashAnimationName: 
+  SleepAnimationName: 
   Anm: {fileID: 4806637584311009777}
 --- !u!33 &6603886082386369466
 MeshFilter:
@@ -75947,6 +76019,28 @@ MonoBehaviour:
   knife: 0
   spoon: 0
   Enemy: 1
+  Potion: {fileID: 0}
+  MediaPotion: {fileID: 0}
+  AltaPotion: {fileID: 0}
+  Intruglio: {fileID: 0}
+  MediaIntruglio: {fileID: 0}
+  AltaIntruglio: {fileID: 0}
+  Vaccino: {fileID: 0}
+  Aglio: {fileID: 0}
+  Malox: {fileID: 0}
+  "Caff\xE9": {fileID: 0}
+  Panacea: {fileID: 0}
+  Ristoro: {fileID: 0}
+  BombaPiccola: {fileID: 0}
+  BombaMedia: {fileID: 0}
+  BombaGrande: {fileID: 0}
+  Veleno: {fileID: 0}
+  Fumogeno: {fileID: 0}
+  Spine: {fileID: 0}
+  Flash: {fileID: 0}
+  Camomilla: {fileID: 0}
+  Barricata: {fileID: 0}
+  Bengala: {fileID: 0}
   canImp: 0
   impronte: {fileID: 0}
   Foot: {fileID: 0}
@@ -75989,6 +76083,7 @@ MonoBehaviour:
   SawTrain: {fileID: 0}
   Stalactites: {fileID: 0}
   Whirlwinds: {fileID: 0}
+  Motivation: {fileID: 0}
   Skill_0: {fileID: 0}
   Skill_1: {fileID: 0}
   Skill_2: {fileID: 0}
@@ -75998,6 +76093,7 @@ MonoBehaviour:
   Skill_6: {fileID: 0}
   Skill_7: {fileID: 0}
   Skill_8: {fileID: 0}
+  ItemTimer: {fileID: 0}
   IdleBAnimationName: Battle/idle
   _skeletonAnimation: {fileID: 6910693156528222786}
   VFX: 1
@@ -106972,6 +107068,13 @@ MonoBehaviour:
   StunProbabilityMAX: 10
   result: 0
   timeStun: 3
+  StunTimer: 5
+  VFXSleep: {fileID: 0}
+  isSleep: 0
+  SleepProbability: 0
+  SleepProbabilityCount: 1
+  SleepProbabilityMAX: 10
+  timeSleep: 3
   WaitAtk: 3
   moveSpeed: 3
   attackRange: 5
@@ -106991,6 +107094,8 @@ MonoBehaviour:
   StunStartAnimationName: 
   StunAnimationName: 
   StunEndAnimationName: 
+  StunFlashAnimationName: 
+  SleepAnimationName: 
   Anm: {fileID: 6096159240616704248}
 --- !u!33 &2196011935116845325
 MeshFilter:
@@ -107128,6 +107233,28 @@ MonoBehaviour:
   knife: 0
   spoon: 0
   Enemy: 1
+  Potion: {fileID: 0}
+  MediaPotion: {fileID: 0}
+  AltaPotion: {fileID: 0}
+  Intruglio: {fileID: 0}
+  MediaIntruglio: {fileID: 0}
+  AltaIntruglio: {fileID: 0}
+  Vaccino: {fileID: 0}
+  Aglio: {fileID: 0}
+  Malox: {fileID: 0}
+  "Caff\xE9": {fileID: 0}
+  Panacea: {fileID: 0}
+  Ristoro: {fileID: 0}
+  BombaPiccola: {fileID: 0}
+  BombaMedia: {fileID: 0}
+  BombaGrande: {fileID: 0}
+  Veleno: {fileID: 0}
+  Fumogeno: {fileID: 0}
+  Spine: {fileID: 0}
+  Flash: {fileID: 0}
+  Camomilla: {fileID: 0}
+  Barricata: {fileID: 0}
+  Bengala: {fileID: 0}
   canImp: 0
   impronte: {fileID: 0}
   Foot: {fileID: 0}
@@ -107170,6 +107297,7 @@ MonoBehaviour:
   SawTrain: {fileID: 0}
   Stalactites: {fileID: 0}
   Whirlwinds: {fileID: 0}
+  Motivation: {fileID: 0}
   Skill_0: {fileID: 0}
   Skill_1: {fileID: 0}
   Skill_2: {fileID: 0}
@@ -107179,6 +107307,7 @@ MonoBehaviour:
   Skill_6: {fileID: 0}
   Skill_7: {fileID: 0}
   Skill_8: {fileID: 0}
+  ItemTimer: {fileID: 0}
   IdleBAnimationName: Battle/idle
   _skeletonAnimation: {fileID: 4902472640267629921}
   VFX: 1
@@ -110998,12 +111127,6 @@ MonoBehaviour:
   player: {fileID: 0}
   Icon: {fileID: 6386677443084558876}
   IconVFX: {fileID: 684777805822619568}
-  VFXStun: {fileID: 5218673975355663424}
-  isStun: 0
-  StunProbability: 0
-  StunProbabilityCount: 2
-  StunProbabilityMAX: 10
-  result: 0
   maxHealth: 50
   currentHealth: 0
   healthBar: {fileID: 8099257245113179833}
@@ -111012,6 +111135,20 @@ MonoBehaviour:
   VFXPoison: {fileID: 3668114968253556437}
   poisonResistance: 100
   poisonResistanceCont: 0
+  VFXStun: {fileID: 5218673975355663424}
+  isStun: 0
+  StunProbability: 0
+  StunProbabilityCount: 2
+  StunProbabilityMAX: 10
+  result: 0
+  timeStun: 3
+  StunTimer: 5
+  VFXSleep: {fileID: 0}
+  isSleep: 0
+  SleepProbability: 0
+  SleepProbabilityCount: 2
+  SleepProbabilityMAX: 10
+  timeSleep: 3
   WaitAtk: 3
   moveSpeed: 5
   PointTange: 1
@@ -111034,6 +111171,8 @@ MonoBehaviour:
   StunStartAnimationName: Battle/fly
   StunAnimationName: Battle/stun
   StunEndAnimationName: Battle/stun_idle
+  StunFlashAnimationName: 
+  SleepAnimationName: 
   Anm: {fileID: 2813710674775794642}
 --- !u!33 &8673458003997386496
 MeshFilter:
@@ -111171,6 +111310,28 @@ MonoBehaviour:
   knife: 0
   spoon: 0
   Enemy: 1
+  Potion: {fileID: 0}
+  MediaPotion: {fileID: 0}
+  AltaPotion: {fileID: 0}
+  Intruglio: {fileID: 0}
+  MediaIntruglio: {fileID: 0}
+  AltaIntruglio: {fileID: 0}
+  Vaccino: {fileID: 0}
+  Aglio: {fileID: 0}
+  Malox: {fileID: 0}
+  "Caff\xE9": {fileID: 0}
+  Panacea: {fileID: 0}
+  Ristoro: {fileID: 0}
+  BombaPiccola: {fileID: 0}
+  BombaMedia: {fileID: 0}
+  BombaGrande: {fileID: 0}
+  Veleno: {fileID: 0}
+  Fumogeno: {fileID: 0}
+  Spine: {fileID: 0}
+  Flash: {fileID: 0}
+  Camomilla: {fileID: 0}
+  Barricata: {fileID: 0}
+  Bengala: {fileID: 0}
   canImp: 0
   impronte: {fileID: 0}
   Foot: {fileID: 0}
@@ -111213,6 +111374,7 @@ MonoBehaviour:
   SawTrain: {fileID: 0}
   Stalactites: {fileID: 0}
   Whirlwinds: {fileID: 0}
+  Motivation: {fileID: 0}
   Skill_0: {fileID: 0}
   Skill_1: {fileID: 0}
   Skill_2: {fileID: 0}
@@ -111222,6 +111384,7 @@ MonoBehaviour:
   Skill_6: {fileID: 0}
   Skill_7: {fileID: 0}
   Skill_8: {fileID: 0}
+  ItemTimer: {fileID: 0}
   IdleBAnimationName: Battle/idle
   _skeletonAnimation: {fileID: 7612748290380013679}
   VFX: 1
@@ -131920,12 +132083,6 @@ MonoBehaviour:
   player: {fileID: 0}
   Icon: {fileID: 4097827562615272190}
   IconVFX: {fileID: 8199221033929549491}
-  VFXStun: {fileID: 5672656205340111758}
-  isStun: 0
-  StunProbability: 0
-  StunProbabilityCount: 2
-  StunProbabilityMAX: 10
-  result: 0
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 5664359551511802376}
@@ -131934,6 +132091,20 @@ MonoBehaviour:
   VFXPoison: {fileID: 8391765136976239614}
   poisonResistance: 100
   poisonResistanceCont: 0
+  VFXStun: {fileID: 5672656205340111758}
+  isStun: 0
+  StunProbability: 0
+  StunProbabilityCount: 2
+  StunProbabilityMAX: 10
+  result: 0
+  timeStun: 3
+  StunTimer: 5
+  VFXSleep: {fileID: 0}
+  isSleep: 0
+  SleepProbability: 0
+  SleepProbabilityCount: 2
+  SleepProbabilityMAX: 10
+  timeSleep: 3
   WaitAtk: 1
   moveSpeed: 5
   attackRange: 5
@@ -131953,6 +132124,8 @@ MonoBehaviour:
   StunStartAnimationName: 
   StunAnimationName: 
   StunEndAnimationName: 
+  StunFlashAnimationName: 
+  SleepAnimationName: 
   Anm: {fileID: 1146038028936791023}
 --- !u!33 &949404954633828379
 MeshFilter:
@@ -132090,6 +132263,28 @@ MonoBehaviour:
   knife: 0
   spoon: 0
   Enemy: 1
+  Potion: {fileID: 0}
+  MediaPotion: {fileID: 0}
+  AltaPotion: {fileID: 0}
+  Intruglio: {fileID: 0}
+  MediaIntruglio: {fileID: 0}
+  AltaIntruglio: {fileID: 0}
+  Vaccino: {fileID: 0}
+  Aglio: {fileID: 0}
+  Malox: {fileID: 0}
+  "Caff\xE9": {fileID: 0}
+  Panacea: {fileID: 0}
+  Ristoro: {fileID: 0}
+  BombaPiccola: {fileID: 0}
+  BombaMedia: {fileID: 0}
+  BombaGrande: {fileID: 0}
+  Veleno: {fileID: 0}
+  Fumogeno: {fileID: 0}
+  Spine: {fileID: 0}
+  Flash: {fileID: 0}
+  Camomilla: {fileID: 0}
+  Barricata: {fileID: 0}
+  Bengala: {fileID: 0}
   canImp: 0
   impronte: {fileID: 0}
   Foot: {fileID: 0}
@@ -132132,6 +132327,7 @@ MonoBehaviour:
   SawTrain: {fileID: 0}
   Stalactites: {fileID: 0}
   Whirlwinds: {fileID: 0}
+  Motivation: {fileID: 0}
   Skill_0: {fileID: 0}
   Skill_1: {fileID: 0}
   Skill_2: {fileID: 0}
@@ -132141,6 +132337,7 @@ MonoBehaviour:
   Skill_6: {fileID: 0}
   Skill_7: {fileID: 0}
   Skill_8: {fileID: 0}
+  ItemTimer: {fileID: 0}
   IdleBAnimationName: Battle/idle
   _skeletonAnimation: {fileID: 8724631830986625141}
   VFX: 1
@@ -132512,8 +132709,6 @@ GameObject:
   - component: {fileID: 6400179911178792494}
   - component: {fileID: 3529511589024756389}
   - component: {fileID: 5073002695190756782}
-  - component: {fileID: 3251738256148354412}
-  - component: {fileID: 6753749673643370847}
   m_Layer: 0
   m_Name: DuelManager
   m_TagString: Untagged
@@ -132628,36 +132823,6 @@ MonoBehaviour:
   ActorSpoon: {fileID: 0}
   ActorKnife: {fileID: 0}
   ActorFork: {fileID: 0}
---- !u!114 &3251738256148354412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9169018023455334437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 900e4f745b06e584ea395815198c01cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onSceneChange:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6753749673643370847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9169018023455334437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 128afdc1e9c865a4cab4b71705f5a90d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: 
-  IDPorta: 0
-  Loading: 0
 --- !u!1 &9175585383367431927
 GameObject:
   m_ObjectHideFlags: 0
