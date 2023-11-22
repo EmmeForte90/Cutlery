@@ -208,6 +208,7 @@ public class SaveManager : MonoBehaviour
 
     public void SaveGame()
     {
+        List<string> serializedStrings = new List<string>();
         // Create an instance of your game data object
         GameData gameData = new GameData();
         // Assign your game data values here...
@@ -365,16 +366,32 @@ public class SaveManager : MonoBehaviour
         // Chiamare il metodo per la serializzazione della lista di ScriptableObject
            
         //
-        SerializeItemList(I_itemList, saveFilePath);
+        /*SerializeItemList(I_itemList, saveFilePath);
         SerializeItemList(IBattle_itemList, saveFilePath);
         SerializeItemList(F_itemList, saveFilePath);
         SerializeItemList(S_itemList, saveFilePath);
         SerializeItemList(K_itemList, saveFilePath);
         SerializeItemList(Key_itemList, saveFilePath);
-        SerializeItemList(Quest_itemList, saveFilePath);
+        SerializeItemList(Quest_itemList, saveFilePath);*/
+
+        
+
 
         // Convert the game data to JSON
-        string jsonData = gameData.ToJson();
+        // Supponendo che gameData sia un oggetto che desideri serializzare
+        string gameDataJson = JsonUtility.ToJson(gameData);
+
+        foreach (var scriptableObject in I_itemList)
+        {
+            serializedStrings.Add(scriptableObject.IdItem);
+        }
+
+        // Serializza la lista di stringhe
+        string serializedStringsJson = JsonUtility.ToJson(serializedStrings);
+
+        // Puoi combinare le due stringhe JSON come desideri, ad esempio concatenandole
+        string jsonData = gameDataJson + serializedStringsJson;
+
 
         // Save the JSON data to a file
         File.WriteAllText(saveFilePath, jsonData);
@@ -547,19 +564,20 @@ public class SaveManager : MonoBehaviour
             PS.Key_quantityList = loadedGameData.Key_quantityList;
             PS.Quest_quantityList = loadedGameData.Quest_quantityList;
             //
-            /*I_itemList = DeserializeItemList(saveFilePath);
-            IBattle_itemList = DeserializeItemList(saveFilePath);
-            F_itemList = DeserializeItemList(saveFilePath);
-            S_itemList = DeserializeItemList(saveFilePath);
-            K_itemList = DeserializeItemList(saveFilePath);
-            Key_itemList = DeserializeItemList(saveFilePath);
-            Quest_itemList = DeserializeItemList(saveFilePath);*/
+            List<string> serializedStrings = JsonUtility.FromJson<List<string>>(jsonData);
+            I_itemList.Clear();
 
-        }
-        else
-        {
-            Debug.Log("Save file not found. Creating a new one.");
-        }
+            foreach (var serializedString in serializedStrings)
+            {
+                Item scriptableObject = ScriptableObject.CreateInstance<Item>();
+                scriptableObject.IdItem = serializedString;
+                I_itemList.Add(scriptableObject);
+            }
+            }
+            else
+            {
+                Debug.Log("Save file not found. Creating a new one.");
+            }
     }
 
         public List<Item> DeserializeItemList(string filePath)

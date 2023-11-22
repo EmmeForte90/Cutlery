@@ -36,6 +36,7 @@ public class AnimationManager : MonoBehaviour
     public GameObject Camomilla;//Blocca il nemico
     public GameObject Barricata;//Crea un ostacolo per il nemico
     public GameObject Bengala;//Crea un area dove curarsi
+    public float Cooldown = 0.5f; // Tempo di cooldown tra le combo in secondi
 
 
     [Header("Impronte")]
@@ -111,6 +112,8 @@ public class AnimationManager : MonoBehaviour
     public TimerSkill ItemTimer;
 
     [Header("Animations")]
+    [SpineAnimation][SerializeField]  string IdleAnimationName;
+
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
     [SpineAnimation][SerializeField]  string WalkBAnimationName;
 
@@ -200,6 +203,13 @@ public class AnimationManager : MonoBehaviour
         {_skeletonAnimation.state.SetAnimation(0, animationName, false); _spineAnimationState.Event += HandleEvent;}
         _skeletonAnimation.state.GetCurrent(0).Complete += OnAttackAnimationComplete;
     }
+
+    public void PlayAnimationExplore(string animationName)
+    {
+        if (currentAnimationName != animationName)
+        {_skeletonAnimation.state.SetAnimation(0, animationName, false); _spineAnimationState.Event += HandleEvent;}
+        _skeletonAnimation.state.GetCurrent(0).Complete += OnExploreAnimationComplete;
+    }
     public void PlayAnimationLoop(string animationName)
     {
     if (currentAnimationName != animationName)
@@ -209,9 +219,17 @@ public class AnimationManager : MonoBehaviour
                     _spineAnimationState.Event += HandleEvent;
                 }
     }
+    private void StopAtk(){VFX = true;}
+
     public void ClearAnm()
     {
         _skeletonAnimation.state.ClearTrack(0);
+    }
+    private void OnExploreAnimationComplete(Spine.TrackEntry trackEntry)
+    {
+        trackEntry.Complete -= OnExploreAnimationComplete;
+        _skeletonAnimation.state.ClearTrack(0);
+    _skeletonAnimation.state.SetAnimation(0, IdleAnimationName, true);
     }
     private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     {
@@ -226,7 +244,7 @@ public class AnimationManager : MonoBehaviour
     StartCoroutine(StopVFX_Rapid()); VFX = false; }}
     if (e.Data.Name == "stump" && VFX){Instantiate(Stump, Foot.position, Stump.transform.rotation);
     StartCoroutine(StopVFX_FNormal()); VFX = false; }
-     if (e.Data.Name == "dodge" && VFX){Instantiate(Dodge, Foot.position, Dodge.transform.rotation);
+     if (e.Data.Name == "dodge"){Instantiate(Dodge, Foot.position, Dodge.transform.rotation);
     StartCoroutine(StopVFX_Rapid()); VFX = false; }
     if (e.Data.Name == "EndAtk" && VFX){PlayAnimationLoop(WalkBAnimationName);}
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -306,7 +324,7 @@ public class AnimationManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
     if (e.Data.Name == "shootAI" && VFX){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
-    StartCoroutine(StopVFX_F()); VFX = false;}
+    Invoke("StopAtk", Cooldown); VFX = false;}
     if (e.Data.Name == "shoot" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
     VFX = false;}

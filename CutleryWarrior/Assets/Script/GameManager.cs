@@ -167,6 +167,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] Skill_SIB;
     public int IdENM;
     public bool NotTouchOption = false;
+    public float Cooldown = 1.2f; // Tempo di cooldown tra le combo in secondi
+
     public static GameManager instance;
     #endregion
     public void Awake()
@@ -248,15 +250,14 @@ public class GameManager : MonoBehaviour
         SkillINMenu();
         Order();
         moneyTextM.text = money.ToString(); 
+////////////////////////////////////////////////////////////////////////////
         if(!NotTouchOption){
     if(!battle){
         //Minimap.SetActive(true);
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();
-            MouseCursorIcon.SetActive(true);
             switch (rotationSwitcher.CharacterID)
-            
     {
     case 1:
     if(!notChange){
@@ -265,7 +266,10 @@ public class GameManager : MonoBehaviour
         ch_F.Idle();
         stopInput = true;
         ch_F.inputCTR = true;}
-        Pause.gameObject.SetActive(true);}
+        OpenBookF();
+        Invoke("OpenMenu", Cooldown);
+        //OpenBook();
+        }
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.PlayUFX(1);     
     break;
@@ -276,7 +280,10 @@ public class GameManager : MonoBehaviour
         ch_K.Idle();
         stopInput = true;
         ch_K.inputCTR = true;}
-        Pause.gameObject.SetActive(true);}
+        OpenBookK();
+        Invoke("OpenMenu", Cooldown);
+        //OpenBook();
+        }
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.PlayUFX(1);  
     break;
@@ -287,7 +294,9 @@ public class GameManager : MonoBehaviour
         ch_S.Idle();
         stopInput = true;
         ch_S.inputCTR = true;}
-        Pause.gameObject.SetActive(true);}
+        OpenBookS();
+        Invoke("OpenMenu", Cooldown);
+        }
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.PlayUFX(1);   
     break;
@@ -295,33 +304,46 @@ public class GameManager : MonoBehaviour
         }
         else if(Input.GetButtonDown("Pause") && stopInput)
         {
-            ChCanM();
-            stopInput = false;
-            MouseCursorIcon.SetActive(false);
-            Pause.gameObject.SetActive(false);
-            CharacterMove.instance.inputCTR = false;
+            
             switch (rotationSwitcher.CharacterID)
             {
             case 1:
-            if(F_Unlock){ch_F.inputCTR = false;}    
+            if(F_Unlock){ch_F.inputCTR = false; CloseBookF();}    
             break;
             case 2:
-            if(K_Unlock){ch_K.inputCTR = false;}    
+            if(K_Unlock){ch_K.inputCTR = false; CloseBookK();}    
             break;
             case 3:
-            if(S_Unlock){ch_S.inputCTR = false;}    
+            if(S_Unlock){ch_S.inputCTR = false; CloseBookS();
+}    
             break;
             }  
+            MouseCursorIcon.SetActive(false);
+            Pause.gameObject.SetActive(false);
+            switch (rotationSwitcher.CharacterID)
+            {
+            case 1:
+            if(F_Unlock){ch_F.inputCTR = false; CloseBookF();}    
+            break;
+            case 2:
+            if(K_Unlock){ch_K.inputCTR = false; CloseBookK();}    
+            break;
+            case 3:
+            if(S_Unlock){ch_S.inputCTR = false; CloseBookS();}    
+            break;
+            }  
+            Invoke("CloseMenu", Cooldown);
             CameraZoom.instance.ZoomOut();
             AudioManager.instance.PlayUFX(1);
         } 
     }
+////////////////////////////////////////////////////////////////////////////
     else if(battle){
         //Minimap.SetActive(false);
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();
-            Posebattle();
+            //Posebattle();
             MouseCursorIcon.SetActive(true);
             notChange = true;
             DuelManager.instance.inputCTR = true;
@@ -388,9 +410,18 @@ public class GameManager : MonoBehaviour
         } 
     }}
     }
-    
-    
 
+    public void OpenMenu()
+    {Pause.gameObject.SetActive(true); MouseCursorIcon.SetActive(true);}
+    
+    public void CloseMenu()
+    {
+        ChCanM();
+        ChMov();
+        stopInput = false;
+        CharacterMove.instance.inputCTR = false;
+    }
+    
     public void CloseLittleM()
     {
             ChCanM();
@@ -770,6 +801,40 @@ public class GameManager : MonoBehaviour
         if(instance.K_Unlock){ch_K.Posebattle();ch_KAc.Posebattle();}
         if(instance.S_Unlock){ch_S.Posebattle();ch_SAc.Posebattle();}
     }
+
+    public void OpenBookF()
+    {
+        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
+        if(F_Unlock){ch_F.OpenBook();}
+    }
+    public void OpenBookK()
+    {
+        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(K_Unlock){ch_K.OpenBook();}
+    }
+    public void OpenBookS()
+    {
+        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        if(S_Unlock){ch_S.OpenBook();}
+    }
+    public void CloseBookF()
+    {
+        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
+        if(F_Unlock){ch_F.CloseBook();}
+    }
+    public void CloseBookK()
+    {
+        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(K_Unlock){ch_K.CloseBook();}
+    }
+    public void CloseBookS()
+    {
+        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        if(S_Unlock){ch_S.CloseBook();}
+    }
+
+
+
     public void Charge()
     {
         if(F_Unlock){Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}

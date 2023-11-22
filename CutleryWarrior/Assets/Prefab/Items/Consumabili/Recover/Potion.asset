@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086ce4bd4efb77c4180089179b220146, type: 3}
   m_Name: Potion
   m_EditorClassIdentifier: 
+  IdItem: Potion
   itemName: Potion
   NameSkin: 
   itemDes: A simple potion, restore 30 HP
@@ -20,6 +21,21 @@ MonoBehaviour:
   WhoConsumable: 0
   price: 5
   Stackable: 1
+  itemData:
+    itemName: 
+    NameSkin: 
+    itemDes: 
+    ID: 0
+    KindItem: 0
+    WhoConsumable: 0
+    price: 0
+    Stackable: 0
+    itemIcon: {fileID: 0}
+    TypesE: 0
+    TimeItem: 0
+    MaxDurationItem: 0
+    item: {fileID: 0}
+    quantity: 0
   itemIcon: {fileID: 21300000, guid: 7a23ebae02ab7c341991c99a3722217c, type: 3}
   TypesE: 0
   TimeItem: 1

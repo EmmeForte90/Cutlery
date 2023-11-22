@@ -5,6 +5,8 @@ using System;
 public class Item : ScriptableObject
 {
     #region Header
+    public string IdItem;
+
     [TextArea(3, 10)] public string itemName;
     public string NameSkin;
     [TextArea(3, 10)] public string itemDes;

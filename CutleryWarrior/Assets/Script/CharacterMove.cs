@@ -87,6 +87,9 @@ public class CharacterMove : MonoBehaviour
     [SpineAnimation][SerializeField]  string DodgeFAnimationName;
     //[SpineAnimation][SerializeField]  string DodgeBAnimationName;
     [SpineAnimation][SerializeField]  string StumpAnimationName;
+    [SpineAnimation][SerializeField]  string OpenBookAnimationName;
+    [SpineAnimation][SerializeField]  string CloseBookAnimationName;
+
     //[SpineAnimation][SerializeField]  string WinAnimationName;
     //private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
@@ -455,6 +458,9 @@ private IEnumerator StumpKTime()
     
     private void StopAtk(){canAttack = true; inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
+    public void OpenBook(){Anm.PlayAnimationExplore(OpenBookAnimationName);}
+    public void CloseBook(){Anm.PlayAnimationExplore(CloseBookAnimationName);}
+
     public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName); VFXCantATK.SetActive(false);}
     public void Allarm(){warning = true;}
