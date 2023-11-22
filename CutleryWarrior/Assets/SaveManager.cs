@@ -130,24 +130,34 @@ public class GameData
     public bool[] QuestComplete;
     public bool[] QuestSegnal;
     public bool[] items;
-    public List<Item> I_itemList;
-        public List<int> I_quantityList;
-        public List<Item> IBattle_itemList;
-        public List<int> IBattle_quantityList;
-        public List<Item> F_itemList;
-        public List<int> F_quantityList;
-        public List<Item> S_itemList;
-        public List<int> S_quantityList;
-        public List<Item> K_itemList;
-        public List<int> K_quantityList;
-        public List<Item> Key_itemList;
-        public List<int> Key_quantityList;
-        public List<Item> Quest_itemList;
-        public List<int> Quest_quantityList;
+    [SerializeField]    public List<SerializedItem> I_itemList;
+    [SerializeField]    public List<int> I_quantityList;
+    [SerializeField]    public List<SerializedItem> IBattle_itemList;
+    [SerializeField]    public List<int> IBattle_quantityList;
+    [SerializeField]    public List<SerializedItem> F_itemList;
+    [SerializeField]    public List<int> F_quantityList;
+    [SerializeField]    public List<SerializedItem> S_itemList;
+    [SerializeField]    public List<int> S_quantityList;
+    [SerializeField]    public List<SerializedItem> K_itemList;
+    [SerializeField]    public List<int> K_quantityList;
+    [SerializeField]    public List<SerializedItem> Key_itemList;
+    [SerializeField]    public List<int> Key_quantityList;
+    [SerializeField]    public List<SerializedItem> Quest_itemList;
+   [SerializeField]    public List<int> Quest_quantityList;
+
+    public string ToJson()
+    {
+        return JsonUtility.ToJson(this);
+    }
+
+    public static GameData FromJson(string json)
+    {
+        return JsonUtility.FromJson<GameData>(json);
+    }
     
 }
 
-[Serializable]
+[System.Serializable]
 public class SaveVector3
 {
     public float x;
@@ -171,40 +181,35 @@ public class SaveManager : MonoBehaviour
 {
     public bool Saving = false;
     public string NameScene;
-    public List<Quests> questDatabase;
-    public List<Item> I_itemList = new List<Item>();
-    public List<int> I_quantityList = new List<int>();
-    public List<Item> IBattle_itemList = new List<Item>();
-    public List<int> IBattle_quantityList = new List<int>();
-    public List<Item> F_itemList = new List<Item>();
-    public List<int> F_quantityList = new List<int>();
-    public List<Item> S_itemList = new List<Item>();
-    public List<int> S_quantityList = new List<int>();
-    public List<Item> K_itemList = new List<Item>();
-    public List<int> K_quantityList = new List<int>();
-    public List<Item> Key_itemList = new List<Item>();
-    public List<int> Key_quantityList = new List<int>();
-    public List<Item> Quest_itemList = new List<Item>();
-    public List<int> Quest_quantityList = new List<int>();
     private string saveFilePath;
-
     public static SaveManager instance;
+    //
+    [SerializeField]    public List<Item> I_itemList;
+    [SerializeField]    public List<int> I_quantityList;
+    [SerializeField]    public List<Item> IBattle_itemList;
+    [SerializeField]    public List<int> IBattle_quantityList;
+    [SerializeField]    public List<Item> F_itemList;
+    [SerializeField]    public List<int> F_quantityList;
+    [SerializeField]    public List<Item> S_itemList;
+    [SerializeField]    public List<int> S_quantityList;
+    [SerializeField]    public List<Item> K_itemList;
+    [SerializeField]    public List<int> K_quantityList;
+    [SerializeField]    public List<Item> Key_itemList;
+    [SerializeField]    public List<int> Key_quantityList;
+    [SerializeField]    public List<Item> Quest_itemList;
+   [SerializeField]    public List<int> Quest_quantityList;
 
-    private void Start()
-    {
-        if (instance == null){instance = this;} 
-        // Imposta il percorso del file di salvataggio
-        saveFilePath = Application.persistentDataPath + "/save.txt";
-    }
-    
+
+    private void Start(){saveFilePath = Path.Combine(Application.persistentDataPath, "saveData.json");}
 
     public void SaveGame()
     {
-        // Crea un'istanza del tuo oggetto di dati di gioco
-        Saving = true;
+        // Create an instance of your game data object
         GameData gameData = new GameData();
-        #region DatiDaSalvare
+        // Assign your game data values here...
         gameData.savedPosition = new SaveVector3(PlayerStats.instance.savedPosition);
+        //Debug.Log("Save position: " + gameData.savedPosition.ToVector3());
+        #region DatiDaSalvare
         //
         NameScene = PlayerStats.instance.NameScene;
         gameData.HaveData = PlayerStats.instance.HaveData;
@@ -345,191 +350,164 @@ public class SaveManager : MonoBehaviour
             Quest_quantityList = PlayerStats.instance.Quest_quantityList;
         #endregion
 
-        BinaryFormatter formatter = new BinaryFormatter();
-        FileStream fileStream = File.Create(saveFilePath);
-        //
-        formatter.Serialize(fileStream, gameData);
-        //
-        //formatter.Serialize(fileStream, I_itemList);
-        //
-        formatter.Serialize(fileStream, I_quantityList);
-        formatter.Serialize(fileStream, F_quantityList);
-        formatter.Serialize(fileStream, S_quantityList);
-        formatter.Serialize(fileStream, K_quantityList);
-        formatter.Serialize(fileStream, Key_quantityList);
-        formatter.Serialize(fileStream, Quest_quantityList);
-        //
+        // Convert the game data to JSON
+        string jsonData = gameData.ToJson();
 
-        fileStream.Close();
+        // Save the JSON data to a file
+        File.WriteAllText(saveFilePath, jsonData);
 
-        Debug.Log("Gioco salvato con successo!");
+       
+
     }
 
     public void LoadGame()
     {
         if (File.Exists(saveFilePath))
         {
-            
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream fileStream = File.Open(saveFilePath, FileMode.Open);
-            GameData gameData = (GameData)formatter.Deserialize(fileStream);
-            //
-            //I_itemList  = (List<Item>)formatter.Deserialize(fileStream);
-            //
-            I_quantityList = (List<int>)formatter.Deserialize(fileStream);
-            F_quantityList = (List<int>)formatter.Deserialize(fileStream);
-            S_quantityList = (List<int>)formatter.Deserialize(fileStream);
-            K_quantityList = (List<int>)formatter.Deserialize(fileStream);
-            Key_quantityList = (List<int>)formatter.Deserialize(fileStream);
-            Quest_quantityList = (List<int>)formatter.Deserialize(fileStream);
-            //
-                PlayerStats.instance.I_quantityList = gameData.I_quantityList;
-                PlayerStats.instance.IBattle_quantityList = gameData.IBattle_quantityList;
-                PlayerStats.instance.F_quantityList = gameData.F_quantityList;
-                PlayerStats.instance.S_quantityList = gameData.S_quantityList;
-                PlayerStats.instance.K_quantityList = gameData.K_quantityList;
-                PlayerStats.instance.Key_quantityList = gameData.Key_quantityList;
-                PlayerStats.instance.Quest_quantityList = gameData.Quest_quantityList;
-            fileStream.Close();
-            PlayerStats.instance.savedPosition = gameData.savedPosition.ToVector3();
-        
-        #region DatiDaCaricare
+            // Read the JSON from the file
+            string jsonData = File.ReadAllText(saveFilePath);
+
+            // Deserialize the JSON into a GameData object
+            GameData loadedGameData = GameData.FromJson(jsonData);
+
+            // Restore your game data values here...
+            //Debug.Log("Loaded position: " + loadedGameData.savedPosition.ToVector3());
+            PlayerStats.instance.savedPosition = loadedGameData.savedPosition.ToVector3();
+            #region DatiDaCaricare
         //
-        PlayerStats.instance.HaveData = gameData.HaveData;
-        PlayerStats.instance.CanLoading = gameData.CanLoading;
-        PlayerStats.instance.NameScene = gameData.NameScene;
-        PlayerStats.instance.F_Unlock = gameData.F_Unlock; 
-        PlayerStats.instance.S_Unlock = gameData.S_Unlock; 
-        PlayerStats.instance.K_Unlock = gameData.K_Unlock;
-        PlayerStats.instance.Money = gameData.Money;
-        PlayerStats.instance.WhatMusic = gameData.WhatMusic;
+        PlayerStats.instance.I_quantityList = loadedGameData.I_quantityList;
+        PlayerStats.instance.IBattle_quantityList = loadedGameData.IBattle_quantityList;
+        PlayerStats.instance.F_quantityList = loadedGameData.F_quantityList;
+        PlayerStats.instance.S_quantityList = loadedGameData.S_quantityList;
+        PlayerStats.instance.K_quantityList = loadedGameData.K_quantityList;
+        PlayerStats.instance.Key_quantityList = loadedGameData.Key_quantityList;
+        PlayerStats.instance.Quest_quantityList = loadedGameData.Quest_quantityList;
         //
-        PlayerStats.instance.F_LV = gameData.F_LV;
-        PlayerStats.instance.F_HP = gameData.F_HP;
-        PlayerStats.instance.F_curHP = gameData.F_curHP;
-        PlayerStats.instance.F_MP = gameData.F_MP;
-        PlayerStats.instance.F_curMP = gameData.F_curMP;
-        PlayerStats.instance.F_curRage = gameData.F_curRage;
-        PlayerStats.instance.F_Rage = gameData.F_Rage;
-        PlayerStats.instance.F_CostMP = gameData.F_CostMP;
-        PlayerStats.instance.F_Exp = gameData.F_Exp;
-        PlayerStats.instance.F_curExp = gameData.F_curExp;
-        PlayerStats.instance.F_attack = gameData.F_attack;
-        PlayerStats.instance.F_defense = gameData.F_defense;
-        PlayerStats.instance.F_poisonResistance = gameData.F_poisonResistance;
-        PlayerStats.instance.F_paralysisResistance = gameData.F_paralysisResistance;
-        PlayerStats.instance.F_sleepResistance = gameData.F_sleepResistance;
-        PlayerStats.instance.F_rustResistance = gameData.F_rustResistance;
+        PlayerStats.instance.HaveData = loadedGameData.HaveData;
+        PlayerStats.instance.CanLoading = loadedGameData.CanLoading;
+        PlayerStats.instance.NameScene = loadedGameData.NameScene;
+        PlayerStats.instance.F_Unlock = loadedGameData.F_Unlock; 
+        PlayerStats.instance.S_Unlock = loadedGameData.S_Unlock; 
+        PlayerStats.instance.K_Unlock = loadedGameData.K_Unlock;
+        PlayerStats.instance.Money = loadedGameData.Money;
+        PlayerStats.instance.WhatMusic = loadedGameData.WhatMusic;
         //
-        PlayerStats.instance.F_HPCont = gameData.F_HPCont;
-        PlayerStats.instance.F_curHPCont = gameData.F_curHPCont;
-        PlayerStats.instance.F_MPCont = gameData.F_MPCont;
-        PlayerStats.instance.F_curMPCont = gameData.F_curMPCont;
-        PlayerStats.instance.F_CostMPCont = gameData.F_CostMPCont;
-        PlayerStats.instance.F_ExpCont = gameData.F_ExpCont;
-        PlayerStats.instance.F_curExpCont = gameData.F_curExpCont;
-        PlayerStats.instance.F_attackCont = gameData.F_attackCont;
-        PlayerStats.instance.F_defenseCont = gameData.F_defenseCont;
-        PlayerStats.instance.F_poisonResistanceCont = gameData.F_poisonResistanceCont;
-        PlayerStats.instance.F_paralysisResistanceCont = gameData.F_paralysisResistanceCont;
-        PlayerStats.instance.F_sleepResistanceCont = gameData.F_sleepResistanceCont;
-        PlayerStats.instance.F_rustResistanceCont = gameData.F_rustResistanceCont; 
+        PlayerStats.instance.F_LV = loadedGameData.F_LV;
+        PlayerStats.instance.F_HP = loadedGameData.F_HP;
+        PlayerStats.instance.F_curHP = loadedGameData.F_curHP;
+        PlayerStats.instance.F_MP = loadedGameData.F_MP;
+        PlayerStats.instance.F_curMP = loadedGameData.F_curMP;
+        PlayerStats.instance.F_curRage = loadedGameData.F_curRage;
+        PlayerStats.instance.F_Rage = loadedGameData.F_Rage;
+        PlayerStats.instance.F_CostMP = loadedGameData.F_CostMP;
+        PlayerStats.instance.F_Exp = loadedGameData.F_Exp;
+        PlayerStats.instance.F_curExp = loadedGameData.F_curExp;
+        PlayerStats.instance.F_attack = loadedGameData.F_attack;
+        PlayerStats.instance.F_defense = loadedGameData.F_defense;
+        PlayerStats.instance.F_poisonResistance = loadedGameData.F_poisonResistance;
+        PlayerStats.instance.F_paralysisResistance = loadedGameData.F_paralysisResistance;
+        PlayerStats.instance.F_sleepResistance = loadedGameData.F_sleepResistance;
+        PlayerStats.instance.F_rustResistance = loadedGameData.F_rustResistance;
         //
-        PlayerStats.instance.S_LV = gameData.S_LV;
-        PlayerStats.instance.S_HP = gameData.S_HP;
-        PlayerStats.instance.S_curHP = gameData.S_curHP;
-        PlayerStats.instance.S_MP = gameData.S_MP;
-        PlayerStats.instance.S_curMP = gameData.S_curMP;
-        PlayerStats.instance.S_curRage = gameData.S_curRage;
-        PlayerStats.instance.S_Rage = gameData.S_Rage;
-        PlayerStats.instance.S_CostMP = gameData.S_CostMP;
-        PlayerStats.instance.S_Exp = gameData.S_Exp;
-        PlayerStats.instance.S_curExp = gameData.S_curExp;
-        PlayerStats.instance.S_attack = gameData.S_attack;
-        PlayerStats.instance.S_defense = gameData.S_defense;
-        PlayerStats.instance.S_poisonResistance = gameData.S_poisonResistance;
-        PlayerStats.instance.S_paralysisResistance = gameData.S_paralysisResistance;
-        PlayerStats.instance.S_sleepResistance = gameData.S_sleepResistance;
-        PlayerStats.instance.S_rustResistance = gameData.S_rustResistance;
+        PlayerStats.instance.F_HPCont = loadedGameData.F_HPCont;
+        PlayerStats.instance.F_curHPCont = loadedGameData.F_curHPCont;
+        PlayerStats.instance.F_MPCont = loadedGameData.F_MPCont;
+        PlayerStats.instance.F_curMPCont = loadedGameData.F_curMPCont;
+        PlayerStats.instance.F_CostMPCont = loadedGameData.F_CostMPCont;
+        PlayerStats.instance.F_ExpCont = loadedGameData.F_ExpCont;
+        PlayerStats.instance.F_curExpCont = loadedGameData.F_curExpCont;
+        PlayerStats.instance.F_attackCont = loadedGameData.F_attackCont;
+        PlayerStats.instance.F_defenseCont = loadedGameData.F_defenseCont;
+        PlayerStats.instance.F_poisonResistanceCont = loadedGameData.F_poisonResistanceCont;
+        PlayerStats.instance.F_paralysisResistanceCont = loadedGameData.F_paralysisResistanceCont;
+        PlayerStats.instance.F_sleepResistanceCont = loadedGameData.F_sleepResistanceCont;
+        PlayerStats.instance.F_rustResistanceCont = loadedGameData.F_rustResistanceCont; 
         //
-        PlayerStats.instance.S_HPCont = gameData.S_HPCont;
-        PlayerStats.instance.S_curHPCont = gameData.S_curHPCont;
-        PlayerStats.instance.S_MPCont = gameData.S_MPCont;
-        PlayerStats.instance.S_curMPCont = gameData.S_curMPCont;
-        PlayerStats.instance.S_CostMPCont = gameData.S_CostMPCont;
-        PlayerStats.instance.S_ExpCont = gameData.S_ExpCont;
-        PlayerStats.instance.S_curExpCont = gameData.S_curExpCont;
-        PlayerStats.instance.S_attackCont = gameData.S_attackCont;
-        PlayerStats.instance.S_defenseCont = gameData.S_defenseCont;
-        PlayerStats.instance.S_poisonResistanceCont = gameData.S_poisonResistanceCont;
-        PlayerStats.instance.S_paralysisResistanceCont = gameData.S_paralysisResistanceCont;
-        PlayerStats.instance.S_sleepResistanceCont = gameData.S_sleepResistanceCont;
-        PlayerStats.instance.S_rustResistanceCont = gameData.S_rustResistanceCont; 
+        PlayerStats.instance.S_LV = loadedGameData.S_LV;
+        PlayerStats.instance.S_HP = loadedGameData.S_HP;
+        PlayerStats.instance.S_curHP = loadedGameData.S_curHP;
+        PlayerStats.instance.S_MP = loadedGameData.S_MP;
+        PlayerStats.instance.S_curMP = loadedGameData.S_curMP;
+        PlayerStats.instance.S_curRage = loadedGameData.S_curRage;
+        PlayerStats.instance.S_Rage = loadedGameData.S_Rage;
+        PlayerStats.instance.S_CostMP = loadedGameData.S_CostMP;
+        PlayerStats.instance.S_Exp = loadedGameData.S_Exp;
+        PlayerStats.instance.S_curExp = loadedGameData.S_curExp;
+        PlayerStats.instance.S_attack = loadedGameData.S_attack;
+        PlayerStats.instance.S_defense = loadedGameData.S_defense;
+        PlayerStats.instance.S_poisonResistance = loadedGameData.S_poisonResistance;
+        PlayerStats.instance.S_paralysisResistance = loadedGameData.S_paralysisResistance;
+        PlayerStats.instance.S_sleepResistance = loadedGameData.S_sleepResistance;
+        PlayerStats.instance.S_rustResistance = loadedGameData.S_rustResistance;
         //
-        PlayerStats.instance.K_LV = gameData.K_LV;
-        PlayerStats.instance.K_HP = gameData.K_HP;
-        PlayerStats.instance.K_curHP = gameData.K_curHP;
-        PlayerStats.instance.K_MP = gameData.K_MP;
-        PlayerStats.instance.K_curMP = gameData.K_curMP;
-        PlayerStats.instance.K_curRage = gameData.K_curRage;
-        PlayerStats.instance.K_Rage = gameData.K_Rage;
-        PlayerStats.instance.K_CostMP = gameData.K_CostMP;
-        PlayerStats.instance.K_Exp = gameData.K_Exp;
-        PlayerStats.instance.K_curExp = gameData.K_curExp;
-        PlayerStats.instance.K_attack = gameData.K_attack;
-        PlayerStats.instance.K_defense = gameData.K_defense;
-        PlayerStats.instance.K_poisonResistance = gameData.K_poisonResistance;
-        PlayerStats.instance.K_paralysisResistance = gameData.K_paralysisResistance;
-        PlayerStats.instance.K_sleepResistance = gameData.K_sleepResistance;
-        PlayerStats.instance.K_rustResistance = gameData.K_rustResistance;
+        PlayerStats.instance.S_HPCont = loadedGameData.S_HPCont;
+        PlayerStats.instance.S_curHPCont = loadedGameData.S_curHPCont;
+        PlayerStats.instance.S_MPCont = loadedGameData.S_MPCont;
+        PlayerStats.instance.S_curMPCont = loadedGameData.S_curMPCont;
+        PlayerStats.instance.S_CostMPCont = loadedGameData.S_CostMPCont;
+        PlayerStats.instance.S_ExpCont = loadedGameData.S_ExpCont;
+        PlayerStats.instance.S_curExpCont = loadedGameData.S_curExpCont;
+        PlayerStats.instance.S_attackCont = loadedGameData.S_attackCont;
+        PlayerStats.instance.S_defenseCont = loadedGameData.S_defenseCont;
+        PlayerStats.instance.S_poisonResistanceCont = loadedGameData.S_poisonResistanceCont;
+        PlayerStats.instance.S_paralysisResistanceCont = loadedGameData.S_paralysisResistanceCont;
+        PlayerStats.instance.S_sleepResistanceCont = loadedGameData.S_sleepResistanceCont;
+        PlayerStats.instance.S_rustResistanceCont = loadedGameData.S_rustResistanceCont; 
         //
-        PlayerStats.instance.K_HPCont = gameData.K_HPCont;
-        PlayerStats.instance.K_curHPCont = gameData.K_curHPCont;
-        PlayerStats.instance.K_MPCont = gameData.K_MPCont;
-        PlayerStats.instance.K_curMPCont = gameData.K_curMPCont;
-        PlayerStats.instance.K_CostMPCont = gameData.K_CostMPCont;
-        PlayerStats.instance.K_ExpCont = gameData.K_ExpCont;
-        PlayerStats.instance.K_curExpCont = gameData.K_curExpCont;
-        PlayerStats.instance.K_attackCont = gameData.K_attackCont;
-        PlayerStats.instance.K_defenseCont = gameData.K_defenseCont;
-        PlayerStats.instance.K_poisonResistanceCont = gameData.K_poisonResistanceCont;
-        PlayerStats.instance.K_paralysisResistanceCont = gameData.K_paralysisResistanceCont;
-        PlayerStats.instance.K_sleepResistanceCont = gameData.K_sleepResistanceCont;
-        PlayerStats.instance.K_rustResistanceCont = gameData.K_rustResistanceCont; 
+        PlayerStats.instance.K_LV = loadedGameData.K_LV;
+        PlayerStats.instance.K_HP = loadedGameData.K_HP;
+        PlayerStats.instance.K_curHP = loadedGameData.K_curHP;
+        PlayerStats.instance.K_MP = loadedGameData.K_MP;
+        PlayerStats.instance.K_curMP = loadedGameData.K_curMP;
+        PlayerStats.instance.K_curRage = loadedGameData.K_curRage;
+        PlayerStats.instance.K_Rage = loadedGameData.K_Rage;
+        PlayerStats.instance.K_CostMP = loadedGameData.K_CostMP;
+        PlayerStats.instance.K_Exp = loadedGameData.K_Exp;
+        PlayerStats.instance.K_curExp = loadedGameData.K_curExp;
+        PlayerStats.instance.K_attack = loadedGameData.K_attack;
+        PlayerStats.instance.K_defense = loadedGameData.K_defense;
+        PlayerStats.instance.K_poisonResistance = loadedGameData.K_poisonResistance;
+        PlayerStats.instance.K_paralysisResistance = loadedGameData.K_paralysisResistance;
+        PlayerStats.instance.K_sleepResistance = loadedGameData.K_sleepResistance;
+        PlayerStats.instance.K_rustResistance = loadedGameData.K_rustResistance;
         //
-        PlayerStats.instance.Enemies = gameData.Enemies;
-        PlayerStats.instance.Treasure = gameData.Treasure;
+        PlayerStats.instance.K_HPCont = loadedGameData.K_HPCont;
+        PlayerStats.instance.K_curHPCont = loadedGameData.K_curHPCont;
+        PlayerStats.instance.K_MPCont = loadedGameData.K_MPCont;
+        PlayerStats.instance.K_curMPCont = loadedGameData.K_curMPCont;
+        PlayerStats.instance.K_CostMPCont = loadedGameData.K_CostMPCont;
+        PlayerStats.instance.K_ExpCont = loadedGameData.K_ExpCont;
+        PlayerStats.instance.K_curExpCont = loadedGameData.K_curExpCont;
+        PlayerStats.instance.K_attackCont = loadedGameData.K_attackCont;
+        PlayerStats.instance.K_defenseCont = loadedGameData.K_defenseCont;
+        PlayerStats.instance.K_poisonResistanceCont = loadedGameData.K_poisonResistanceCont;
+        PlayerStats.instance.K_paralysisResistanceCont = loadedGameData.K_paralysisResistanceCont;
+        PlayerStats.instance.K_sleepResistanceCont = loadedGameData.K_sleepResistanceCont;
+        PlayerStats.instance.K_rustResistanceCont = loadedGameData.K_rustResistanceCont; 
         //
-        PlayerStats.instance.Skill_F  = gameData.Skill_F;
-        PlayerStats.instance.Skill_K  = gameData.Skill_K;
-        PlayerStats.instance.Skill_S  = gameData.Skill_S;
+        PlayerStats.instance.Enemies = loadedGameData.Enemies;
+        PlayerStats.instance.Treasure = loadedGameData.Treasure;
         //
-        PlayerStats.instance.EventsDesert = gameData.EventsDesert; 
-        PlayerStats.instance.SwitchDesert = gameData.SwitchDesert; 
+        PlayerStats.instance.Skill_F  = loadedGameData.Skill_F;
+        PlayerStats.instance.Skill_K  = loadedGameData.Skill_K;
+        PlayerStats.instance.Skill_S  = loadedGameData.Skill_S;
         //
-        PlayerStats.instance.F_Unlock = gameData.F_Unlock;
-        PlayerStats.instance.K_Unlock = gameData.K_Unlock;
-        PlayerStats.instance.S_Unlock = gameData.S_Unlock;
+        PlayerStats.instance.EventsDesert = loadedGameData.EventsDesert; 
+        PlayerStats.instance.SwitchDesert = loadedGameData.SwitchDesert; 
         //
-        PlayerStats.instance.quest = gameData.quest;
-        PlayerStats.instance.QuestActive = gameData.QuestActive;
-        PlayerStats.instance.QuestComplete = gameData.QuestComplete;
-        PlayerStats.instance.QuestSegnal = gameData.QuestSegnal;
+        PlayerStats.instance.F_Unlock = loadedGameData.F_Unlock;
+        PlayerStats.instance.K_Unlock = loadedGameData.K_Unlock;
+        PlayerStats.instance.S_Unlock = loadedGameData.S_Unlock;
+        //
+        PlayerStats.instance.quest = loadedGameData.quest;
+        PlayerStats.instance.QuestActive = loadedGameData.QuestActive;
+        PlayerStats.instance.QuestComplete = loadedGameData.QuestComplete;
+        PlayerStats.instance.QuestSegnal = loadedGameData.QuestSegnal;
         #endregion
-        //
-        PlayerStats.instance.I_quantityList = gameData.I_quantityList;
-        PlayerStats.instance.IBattle_quantityList = gameData.IBattle_quantityList;
-        PlayerStats.instance.F_quantityList = gameData.F_quantityList;
-        PlayerStats.instance.S_quantityList = gameData.S_quantityList;
-        PlayerStats.instance.K_quantityList = gameData.K_quantityList;
-        PlayerStats.instance.Key_quantityList = gameData.Key_quantityList;
-        PlayerStats.instance.Quest_quantityList = gameData.Quest_quantityList;
-            // Usa i dati caricati per ripristinare lo stato del gioco
-            //Debug.Log("Caricato il gioco con successo. Score: " + gameData.playerScore + ", Health: " + gameData.playerHealth);
         }
         else
         {
-            Debug.Log("Nessun file di salvataggio trovato.");
+            Debug.Log("Save file not found. Creating a new one.");
         }
     }
 }

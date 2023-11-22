@@ -46,7 +46,7 @@ public class Item : ScriptableObject
 }
 
 [System.Serializable]
-public class ItemData
+public class SerializedItem
 {
     public string itemName;
     public string NameSkin;
