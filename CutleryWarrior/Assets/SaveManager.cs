@@ -349,16 +349,42 @@ public class SaveManager : MonoBehaviour
             Quest_itemList = PlayerStats.instance.Quest_itemList;
             Quest_quantityList = PlayerStats.instance.Quest_quantityList;
         #endregion
+        // Chiamare il metodo per la serializzazione della lista di ScriptableObject
+        SerializeItemList(I_itemList, saveFilePath);
+        SerializeItemList(IBattle_itemList, saveFilePath);
+        SerializeItemList(F_itemList, saveFilePath);
+        SerializeItemList(S_itemList, saveFilePath);
+        SerializeItemList(K_itemList, saveFilePath);
+        SerializeItemList(Key_itemList, saveFilePath);
+        SerializeItemList(Quest_itemList, saveFilePath);
 
         // Convert the game data to JSON
         string jsonData = gameData.ToJson();
 
         // Save the JSON data to a file
         File.WriteAllText(saveFilePath, jsonData);
-
-       
-
     }
+    public void SerializeItemList(List<Item> itemList, string filePath)
+{
+    // Creare una lista di oggetti serializzati
+    List<string> serializedObjects = new List<string>();
+
+    // Ciclare attraverso la lista di Item e serializzare ciascuno
+    foreach (Item item in itemList)
+    {
+        string json = JsonUtility.ToJson(item);
+        serializedObjects.Add(json);
+    }
+
+    // Converti la lista in un array
+    string[] serializedArray = serializedObjects.ToArray();
+
+    // Serializza l'array in formato JSON
+    string finalJson = JsonUtility.ToJson(serializedArray, true);
+
+    // Salva il JSON su file o fai qualsiasi altra cosa tu voglia
+    File.WriteAllText(filePath, finalJson);
+}
 
     public void LoadGame()
     {
@@ -504,10 +530,40 @@ public class SaveManager : MonoBehaviour
         PlayerStats.instance.QuestComplete = loadedGameData.QuestComplete;
         PlayerStats.instance.QuestSegnal = loadedGameData.QuestSegnal;
         #endregion
+            // Chiamare il metodo per la deserializzazione della lista di Item
+            I_itemList = DeserializeItemList(saveFilePath);
+            IBattle_itemList = DeserializeItemList(saveFilePath);
+            F_itemList = DeserializeItemList(saveFilePath);
+            S_itemList = DeserializeItemList(saveFilePath);
+            K_itemList = DeserializeItemList(saveFilePath);
+            Key_itemList = DeserializeItemList(saveFilePath);
+            Quest_itemList = DeserializeItemList(saveFilePath);
+
         }
         else
         {
             Debug.Log("Save file not found. Creating a new one.");
         }
     }
+
+        public List<Item> DeserializeItemList(string filePath)
+{
+    // Carica il JSON della lista di Item da file o da qualsiasi altra fonte
+    string json = File.ReadAllText(filePath);
+
+    // Deserializza l'array
+    string[] serializedArray = JsonUtility.FromJson<string[]>(json);
+
+    // Creare una nuova lista di Item
+    List<Item> itemList = new List<Item>();
+
+    // Ciclare attraverso l'array serializzato e deserializzare ciascun oggetto
+    foreach (string serializedObject in serializedArray)
+    {
+        Item item = JsonUtility.FromJson<Item>(serializedObject);
+        itemList.Add(item);
+    }
+
+    return itemList;
+}
 }
