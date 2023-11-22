@@ -2,6 +2,9 @@ Fork.png
 size:512,1024
 filter:Linear,Linear
 pma:true
+Book
+bounds:412,337,100,70
+rotate:90
 Braccio
 bounds:465,935,45,87
 Dita
@@ -34,11 +37,11 @@ bounds:270,233,115,118
 Dress/Mantle_1
 bounds:270,113,115,118
 Dress/Mantle_2
-bounds:387,233,115,118
+bounds:387,217,115,118
 Dress/Mantle_3
-bounds:387,113,115,118
+bounds:388,97,115,118
 Eye1
-bounds:412,386,34,51
+bounds:388,44,34,51
 Gamba
 bounds:465,805,33,128
 Livello 2

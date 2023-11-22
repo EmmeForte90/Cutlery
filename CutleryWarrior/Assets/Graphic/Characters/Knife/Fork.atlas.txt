@@ -2,8 +2,10 @@ Fork.png
 size:2048,512
 filter:Linear,Linear
 pma:true
+Book
+bounds:127,4,100,70
 Braccio
-bounds:127,29,45,87
+bounds:229,29,45,87
 rotate:90
 Dita
 bounds:964,175,22,53
