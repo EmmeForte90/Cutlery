@@ -18,8 +18,8 @@ public class Item : ScriptableObject
     public int WhoConsumable;
     public int price;
     public bool Stackable;
+    public SerializedItem itemData;
 
-    
     public Sprite itemIcon;
     [Tooltip("Che tipo di Equipaggiamento? 0-Armor 1-Weapon ")]
     [Range(0, 1)]
@@ -43,6 +43,19 @@ public class Item : ScriptableObject
     {}//Vai allo script Weapon per verificarne la function
     public virtual void Sell()
     {}//Vai allo script Consumable per verificarne la function
+
+
+    public string ToJson()
+    {
+        return JsonUtility.ToJson(itemData);
+    }
+
+    public void FromJson(string json)
+    {
+        itemData = JsonUtility.FromJson<SerializedItem>(json);
+    }
+
+
 }
 
 [System.Serializable]
