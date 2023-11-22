@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     #region Header  
     public GameObject GM;
+    public GameObject MouseCursorIcon;
     public bool StartGame = false;    
     public GameObject player;
     public GameObject Fork;
@@ -52,7 +53,9 @@ public class GameManager : MonoBehaviour
     public int IdAreaAtt;
     public int IDCharacter;
     [Header("Stats")]
-    //public PlayerStats PlayerStats.instance;
+    public float mouseSensitivity = 2.0f;
+    public float joystickSensitivity = 2.0f; 
+    public bool UsingAnalogic = false;   
     [SerializeField] public GameObject F_Hero;
     [SerializeField] public GameObject K_Hero;
     [SerializeField] public GameObject S_Hero;
@@ -251,7 +254,9 @@ public class GameManager : MonoBehaviour
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();
+            MouseCursorIcon.SetActive(true);
             switch (rotationSwitcher.CharacterID)
+            
     {
     case 1:
     if(!notChange){
@@ -292,6 +297,7 @@ public class GameManager : MonoBehaviour
         {
             ChCanM();
             stopInput = false;
+            MouseCursorIcon.SetActive(false);
             Pause.gameObject.SetActive(false);
             CharacterMove.instance.inputCTR = false;
             switch (rotationSwitcher.CharacterID)
@@ -316,6 +322,7 @@ public class GameManager : MonoBehaviour
         {
             ChStop();
             Posebattle();
+            MouseCursorIcon.SetActive(true);
             notChange = true;
             DuelManager.instance.inputCTR = true;
             switch (rotationSwitcher.CharacterID)
@@ -354,6 +361,7 @@ public class GameManager : MonoBehaviour
         else if(Input.GetButtonDown("Pause") && stopInput)
         {
             ChCanM();
+            MouseCursorIcon.SetActive(false);
             notChange = false;
             stopInput = false;
             Esc.gameObject.SetActive(false);
@@ -380,6 +388,9 @@ public class GameManager : MonoBehaviour
         } 
     }}
     }
+    
+    
+
     public void CloseLittleM()
     {
             ChCanM();
