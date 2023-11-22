@@ -323,13 +323,13 @@ public class GameManager : MonoBehaviour
             switch (rotationSwitcher.CharacterID)
             {
             case 1:
-            if(F_Unlock){ch_F.inputCTR = false; CloseBookF();}    
+            if(F_Unlock){CloseBookF();}    
             break;
             case 2:
-            if(K_Unlock){ch_K.inputCTR = false; CloseBookK();}    
+            if(K_Unlock){CloseBookK();}    
             break;
             case 3:
-            if(S_Unlock){ch_S.inputCTR = false; CloseBookS();}    
+            if(S_Unlock){CloseBookS();}    
             break;
             }  
             Invoke("CloseMenu", Cooldown);
