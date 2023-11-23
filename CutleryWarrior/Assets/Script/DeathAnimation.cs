@@ -13,6 +13,7 @@ public class DeathAnimation : MonoBehaviour
         spineAnimationState = skeletonAnimation.AnimationState;}
     public void Start()
     {
+        spineAnimationState.ClearTrack(0);
          if(!isPlayer){StartCoroutine(Death()); spineAnimationState.SetAnimation(0, DeathAnimationName, false);}
         else if(isPlayer)
         {

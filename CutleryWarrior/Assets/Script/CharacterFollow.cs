@@ -314,8 +314,8 @@ public class CharacterFollow : MonoBehaviour
     public void AttackEnm(){isGuard = false; if(!isAttacking){ChaseEnm();}}
     public void AttackEnmF(){isGuard = false; if(!isAttacking){StartAttack();}}
 
-    private void PlayComboAnimation(string animationName)
-    {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, false);}}
+    /*private void PlayComboAnimation(string animationName)
+    {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, false);}}*/
     private void Choise()
     {
     if(!Win){

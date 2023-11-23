@@ -140,8 +140,9 @@ public void Update()
         FMPBar.size = PlayerStats.instance.F_curMP / PlayerStats.instance.F_MP;
         FMPBar.size = Mathf.Clamp(FMPBar.size, 0.01f, 1);
         //
+        if(!F_Die){
         FRageBar.fillAmount = PlayerStats.instance.F_curRage / PlayerStats.instance.F_Rage;
-        FRageBar.fillAmount = Mathf.Clamp(FRageBar.fillAmount, 0.01f, 1);}
+        FRageBar.fillAmount = Mathf.Clamp(FRageBar.fillAmount, 0.01f, 1);}}
         ////////////////////////////////////////////////////////
         if(GameManager.instance.K_Unlock){
         KhealthBar.size = PlayerStats.instance.K_curHP / PlayerStats.instance.K_HP;
@@ -150,8 +151,9 @@ public void Update()
         KMPBar.size = PlayerStats.instance.K_curMP / PlayerStats.instance.K_MP;
         KMPBar.size = Mathf.Clamp(KMPBar.size, 0.01f, 1);
         //
+        if(!K_Die){
         KRageBar.fillAmount = PlayerStats.instance.K_curRage / PlayerStats.instance.K_Rage;
-        KRageBar.fillAmount = Mathf.Clamp(KRageBar.fillAmount, 0.01f, 1);}
+        KRageBar.fillAmount = Mathf.Clamp(KRageBar.fillAmount, 0.01f, 1);}}
         //
         //////////////////////////////////////////////////////////
         if(GameManager.instance.S_Unlock){
@@ -161,8 +163,9 @@ public void Update()
         SMPBar.size = PlayerStats.instance.S_curMP / PlayerStats.instance.S_MP;
         SMPBar.size = Mathf.Clamp(SMPBar.size, 0.01f, 1);
         //
+        if(!S_Die){
         SRageBar.fillAmount = PlayerStats.instance.S_curRage / PlayerStats.instance.S_Rage;
-        SRageBar.fillAmount = Mathf.Clamp(SRageBar.fillAmount, 0.01f, 1);}
+        SRageBar.fillAmount = Mathf.Clamp(SRageBar.fillAmount, 0.01f, 1);}}
         //           
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curMP += F_SpeedRestore * Time.deltaTime;}
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curMP += K_SpeedRestore * Time.deltaTime;}

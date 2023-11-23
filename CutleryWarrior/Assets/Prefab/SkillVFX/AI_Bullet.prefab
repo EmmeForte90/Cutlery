@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2603150479533674099}
   m_Layer: 0
   m_Name: AI_Bullet
-  m_TagString: Enm_Bullet
+  m_TagString: F_Coll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,13 +55,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d74de39ba53a9845b398f2061060ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 50
   OBJ: {fileID: 5058301377314277496}
   lifeTime: 1
-  attackDamage: 5
+  target: {fileID: 0}
   hitEffect: {fileID: 1920225923742602794, guid: 2b204abdb96feae43ba8dab437bf8026,
     type: 3}
-  Take: 1
 --- !u!199 &925154844514564964
 ParticleSystemRenderer:
   serializedVersion: 6

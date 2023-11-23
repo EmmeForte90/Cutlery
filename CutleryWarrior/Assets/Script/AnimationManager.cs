@@ -169,19 +169,16 @@ public class AnimationManager : MonoBehaviour
     }
     IEnumerator StopVFX_F()
     {
-        //Boom = false;
         yield return new WaitForSeconds(5f);
         VFX = true;
     }
     IEnumerator StopVFX_FNormal()
     {
-        //Boom = false;
         yield return new WaitForSeconds(2f);
         VFX = true;
     }
     IEnumerator StopVFX_Rapid()
     {
-        //Boom = false;
         yield return new WaitForSeconds(0.1f);
         VFX = true;
     }
@@ -317,7 +314,7 @@ public class AnimationManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Fork
     if (e.Data.Name == "shootAI" && VFX){Instantiate(Bullet_AI, BPoint.position, Bullet_AI.transform.rotation); 
-    Invoke("StopAtk", Cooldown); VFX = false;}
+    StartCoroutine(StopVFX_Rapid()); VFX = false;}
     if (e.Data.Name == "shoot" && VFX)
     {AudioManager.instance.PlayUFX(8); Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
     VFX = false;}

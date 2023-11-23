@@ -90,14 +90,14 @@ public class ScriptTestBattle : MonoBehaviour
     public void Awake()
     {
         //if (instance == null){instance = this;} 
-        if(GameManager.instance.S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
-        if(GameManager.instance.F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(GameManager.instance.K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
+        if(GameManager.instance.S_Unlock){ch_SAc = GameManager.instance.S_Hero.GetComponent<CharacterFollow>();}
+        if(GameManager.instance.F_Unlock){ch_FAc = GameManager.instance.F_Hero.GetComponent<CharacterFollow>();}
+        if(GameManager.instance.K_Unlock){ch_KAc = GameManager.instance.K_Hero.GetComponent<CharacterFollow>();}
         
         //
-        if(GameManager.instance.S_Unlock){S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.F_Unlock){F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.K_Unlock){K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.S_Unlock){S_Script = GameManager.instance.S_Hero.GetComponent<CharacterMove>();}
+        if(GameManager.instance.F_Unlock){F_Script = GameManager.instance.F_Hero.GetComponent<CharacterMove>();}
+        if(GameManager.instance.K_Unlock){K_Script = GameManager.instance.K_Hero.GetComponent<CharacterMove>();}
         //
         if(GameManager.instance.F_Unlock)
         {
@@ -137,7 +137,7 @@ public class ScriptTestBattle : MonoBehaviour
             K_Time_Skill_5 = GameObject.Find("SawTrain_T").GetComponent<TimerSkill>();
             K_Time_Skill_6 = GameObject.Find("Stalactities_T").GetComponent<TimerSkill>();
             K_Time_Skill_7 = GameObject.Find("Whirlwinds_T").GetComponent<TimerSkill>();
-            //S_Time_Skill_8 = GameObject.Find("Hole_T").GetComponent<TimerSkill>();
+            K_Time_Skill_8 = GameObject.Find("Motivation_T").GetComponent<TimerSkill>();
             //F_Time_Skill_9 = GameObject.Find("BigSpell_T").GetComponent<TimerSkill>();
             //F_Time_Skill_10 = GameObject.Find("BigSpell_T").GetComponent<TimerSkill>();
         }
