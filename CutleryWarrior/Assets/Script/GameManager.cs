@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public GameObject Minimap;
     public static bool GameManagerExist; 
     public Vector3 savedPosition;
+    public Transform savedPositionEscape;
     public string sceneName;
     public bool notChange = false;
     [Header("Pause")]
@@ -472,7 +473,7 @@ public class GameManager : MonoBehaviour
             }  
     }
     public void StopBattle(){ChStopWithoutANM(); notChange = true; DuelManager.instance.inputCTR = true;}
-
+    public void Escapebattle(){DuelManager.instance.Escape(); MouseCursorIcon.SetActive(false);}
     public void ResumeBattle(){ChCanM(); notChange = false; DuelManager.instance.inputCTR = false;}
      
         public void TimerMenu()

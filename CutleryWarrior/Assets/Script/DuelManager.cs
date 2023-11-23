@@ -357,6 +357,38 @@ public void Update()
         isIndicator = false;
     }
 
+    public void Escape(){StartCoroutine(EscapeBattle());}
+    IEnumerator EscapeBattle()
+    {   
+    GameManager.instance.StartGame = false;
+    CharacterMove.instance.inputCTR = true;
+    CharacterMove.instance.Idle();
+    GameManager.instance.FadeIn();
+    AudioManager.instance.CrossFadeOUTAudio(1);
+    yield return new WaitForSeconds(2f);
+    foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);}
+    if(GameManager.instance.K_Unlock){ch_KAc.IDAction = 0;}
+    if(GameManager.instance.S_Unlock){ch_SAc.IDAction = 0;}
+    if(GameManager.instance.F_Unlock){ch_FAc.IDAction = 0;}
+    GameManager.instance.money -= 300;
+    GameManager.instance.Exploration();
+    GameManager.instance.Change();
+    GameManager.instance.RecalculateCharacter();
+    EscapePoint();
+    GameManager.instance.FadeOut();
+    }
+     public void EscapePoint()
+    {
+    GameManager.instance.battle = false;
+    if(GameManager.instance.F_Unlock){FAct.transform.position = GameManager.instance.savedPositionEscape.position;}
+    if(GameManager.instance.K_Unlock){KAct.transform.position = GameManager.instance.savedPositionEscape.position;}
+    if(GameManager.instance.S_Unlock){SAct.transform.position = GameManager.instance.savedPositionEscape.position;}
+    GameManager.instance.StopWin();
+    GameManager.instance.ChCanM();
+    GameManager.instance.ActiveMinimap();
+    AudioManager.instance.CrossFadeINAudio(WhatMusicAB);
+    }
+
     void HighlightCurrentObject()
     {
         // Disattiva tutti gli oggetti

@@ -11,6 +11,7 @@ public class TouchPlayer : MonoBehaviour
     public GameObject This;
     public float stoppingDistance = 1f;
     public Vector3 savedPosition;
+    public Transform savedPositionEscape;
     private Transform Player;
     private Transform Fork;
     private Transform Spoon;
@@ -72,7 +73,7 @@ public class TouchPlayer : MonoBehaviour
     GameManager.instance.ChStop();
     yield return new WaitForSeconds(1f);
     GameManager.instance.battle = true;
-    GameManager.instance.savedPosition = savedPosition;
+    GameManager.instance.savedPositionEscape = savedPositionEscape;
     GameManager.instance.FadeIn();
     yield return new WaitForSeconds(1f);
     GameManager.instance.StopAllarm();
