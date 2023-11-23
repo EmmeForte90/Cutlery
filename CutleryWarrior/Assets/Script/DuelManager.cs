@@ -1,8 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using UnityEditor;
 
 public class DuelManager : MonoBehaviour
 {
@@ -62,20 +65,23 @@ public class DuelManager : MonoBehaviour
     public float duration = 5.0f;
     private float elapsedTime = 0.0f;
     private bool isDamaging = false;
-    /*[Header("ChangeScene")]
-    public SceneEvent sceneEvent;
-    public LevelChanger L_C;*/
+    
+    [Header("IndicatoreNemico")]
+    public int ATK_Ch;
+    public GameObject[] objectsToHighlight;
+    public GameObject highlightedObjectIndicator;
+    //public float minValue = 0f;
+    //public float maxValue = 1f;
+    //public float step = 0.1f;
+    private int currentIndex = 0;
+    private CinemachineVirtualCamera vCam;
+    private bool isIndicator = false;
+    private bool CamPlayer = true;
 
-    [Header("Pause")]
-    //public bool stopInput = false;
-    //[SerializeField]  GameObject Pause;
-    //[SerializeField]  GameObject Item;
-    //[SerializeField]  GameObject Skill;
     [SerializeField]  GameObject Win;
     private int ID_Enm;
     public bool inputCTR = false;
-    //[Header("AnimationUI")]
-    //public Animator animator;
+    
     public int CharacterID;
     [Header("TimelineAfterBattle")]
     public GameObject pointView; 
@@ -87,18 +93,20 @@ public class DuelManager : MonoBehaviour
     public GameObject ActorSpoon;
     public GameObject ActorKnife;
     public GameObject ActorFork;
-
+    //public bool isMove = true;
+    //private Transform Player;
     public static DuelManager instance;
 public void Awake()
     {
         if (instance == null){instance = this;}
         savedPosition = GameManager.instance.savedPosition;
         //
+        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+        //
         if(GameManager.instance.F_Unlock){DieCont++;}       
         if(GameManager.instance.S_Unlock){DieCont++;}      
         if(GameManager.instance.K_Unlock){DieCont++;}
         //
-        //Animator animator = GetComponent<Animator>();
         if(GameManager.instance.F_Unlock){
         PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
         PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;}
@@ -110,7 +118,7 @@ public void Awake()
         if(GameManager.instance.S_Unlock){
         PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
         PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;}
-        CharacterID = 1; 
+        //CharacterID = 1; 
         if(GameManager.instance.S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
         if(GameManager.instance.F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
         if(GameManager.instance.K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
@@ -138,7 +146,7 @@ public void Awake()
         if(GameManager.instance.F_Unlock){ch_FAc.transform.localScale = new Vector3(-1, 1,1);}
         if(GameManager.instance.K_Unlock){ch_KAc.transform.localScale = new Vector3(-1, 1,1);}
         }*/
-         ID_Enm = GameManager.instance.IdENM;
+        ID_Enm = GameManager.instance.IdENM;
         StartCoroutine(StartAI());    
     }
 public void Update()
@@ -262,13 +270,158 @@ public void Update()
             }
         }}
         if(EnemyinArena <= 0){StartCoroutine(EndBattle());}
-        //
+        ////////////
+        CharacterID = GameManager.instance.CharacterID;
+        ////////
         if(WinEnd){if(Input.GetMouseButtonDown(0)){StartCoroutine(RetunBattle());}}
         if(DieCont <= 0)
         {StartCoroutine(GameOver());}   
         if(Ending){if(Input.GetMouseButtonDown(0)){StartCoroutine(ReturnMainMenu());}} 
+        /////////////
+        if(isIndicator)
+        {
+            CamPlayer = false;
+            highlightedObjectIndicator.SetActive(true);
+            inputCTR = true;
+            // Input per diminuire il valore
+            if (Input.GetKeyDown(KeyCode.A)){DecreaseValue();}
+
+            // Input per aumentare il valore
+            if (Input.GetKeyDown(KeyCode.D)){IncreaseValue();}
+
+            // Input per Confermare
+            if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1"))
+            {CamBack(); SelectionENM();}
+
+            // Input per testare la rimozione di un'unità
+            if (Input.GetKeyDown(KeyCode.R)){RemoveUnitAtIndex(currentIndex);}
+
+            // Assicurati che l'indice sia all'interno dei limiti dell'array
+            currentIndex = Mathf.Clamp(currentIndex, 0, objectsToHighlight.Length - 1);
+
+            // Evidenzia l'oggetto corrente
+            //HighlightCurrentObject();
+
+            // Aggiorna la posizione dell'indicatore dell'oggetto evidenziato
+            UpdateIndicatorPosition();
+        }
 
     }
+    #region Indicatore per evidenziare i nemici
+    public void Character(int ord)
+    {
+        GameManager.instance.ChStopB();
+        GameManager.instance.NotChange();
+        ATK_Ch = ord; isIndicator = true;
+    }
+
+    public void CamBack()
+    {
+        CamPlayer = true;
+        switch(CharacterID)
+        {
+            case 1:
+            vCam.Follow = FAct.transform;
+            break;
+            case 2:
+            vCam.Follow = KAct.transform;
+            break;
+            case 3:
+            vCam.Follow = SAct.transform;
+            break;    
+        }
+    }
+    
+    void SelectionENM()
+    {
+        switch(ATK_Ch)
+        {
+            case 0:
+            ch_FAc.target.transform.position = objectsToHighlight[currentIndex].transform.position;
+            ch_FAc.order = 1;
+            break;
+            case 1:
+            ch_KAc.target.transform.position = objectsToHighlight[currentIndex].transform.position;
+            ch_KAc.order = 1;
+            break;
+            case 2:
+            ch_SAc.target.transform.position = objectsToHighlight[currentIndex].transform.position;
+            ch_SAc.order = 1;
+            break;
+        }
+        
+        GameManager.instance.Change();
+        GameManager.instance.ChCanM();
+        inputCTR = false; 
+        highlightedObjectIndicator.SetActive(false); 
+        isIndicator = false;
+    }
+
+    void HighlightCurrentObject()
+    {
+        // Disattiva tutti gli oggetti
+        foreach (var obj in objectsToHighlight)
+        {
+            obj.SetActive(false);
+        }
+
+        // Attiva l'oggetto corrente
+        if (objectsToHighlight.Length > 0)
+        {
+            objectsToHighlight[currentIndex].SetActive(true);
+        }
+    }
+
+    void UpdateIndicatorPosition()
+    {
+        // Posiziona l'indicatore nell'oggetto corrente
+        if (highlightedObjectIndicator != null && objectsToHighlight.Length > 0)
+        {
+            highlightedObjectIndicator.transform.position = objectsToHighlight[currentIndex].transform.position;
+            if(!CamPlayer){vCam.Follow = objectsToHighlight[currentIndex].transform;}
+        }
+    }
+
+    void IncreaseValue()
+    {
+        currentIndex++;
+        if (currentIndex >= objectsToHighlight.Length)
+        {
+            // Se supera il massimo, riporta l'indice a 0
+            currentIndex = 0;
+        }
+    }
+
+    void DecreaseValue()
+    {
+        currentIndex--;
+        if (currentIndex < 0)
+        {
+            // Se scende al di sotto del minimo, riporta l'indice al massimo
+            currentIndex = objectsToHighlight.Length - 1;
+        }
+    }
+
+    void RemoveUnitAtIndex(int index)
+{
+    if (index >= 0 && index < objectsToHighlight.Length)
+    {
+        GameObject removedObject = objectsToHighlight[index];
+
+        // Rimuovi l'oggetto dall'array
+        List<GameObject> tempList = objectsToHighlight.ToList();
+        tempList.RemoveAt(index);
+        objectsToHighlight = tempList.ToArray();
+
+        // Distruisci l'oggetto rimosso
+        Destroy(removedObject);
+    }
+}
+#endregion
+
+
+
+
     IEnumerator GameOver()
     {
         inputCTR = true;

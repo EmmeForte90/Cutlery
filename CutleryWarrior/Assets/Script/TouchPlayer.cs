@@ -41,7 +41,7 @@ public class TouchPlayer : MonoBehaviour
     public void Take(){Destroy(This);}
     public void Update()
     {
-    if(Switch.isElement1Active)
+    if(Switch.isElement1Active && Var_1)
     {if(GameManager.instance.S_Unlock && Var_1){Spoon = GameObject.Find("S_Player").transform;} 
     Player = Spoon; Var_1 = false; Var_2 = true;}
     else 
@@ -105,7 +105,7 @@ public class TouchPlayer : MonoBehaviour
         //if (isRight) {GameManager.instance.Right();}
         //else if (!isRight) {GameManager.instance.Left();}
         //GameManager.instance.sceneName = sceneReturn;
-        GameManager.instance.IdAreaAtt = IdAreaAtt;
+        //GameManager.instance.IdAreaAtt = IdAreaAtt;
         //GameManager.instance.IDPorta = IDBattle;
         GameManager.instance.IdENM = IdENM;
         GameManager.instance.NotChange();

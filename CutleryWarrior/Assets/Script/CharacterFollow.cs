@@ -58,7 +58,7 @@ public class CharacterFollow : MonoBehaviour
     [Header("Battle")]
     public int attackPauseDuration = 1;
     public float attackRange = 3f;
-    private GameObject target;
+    public GameObject target;
     private bool isAttacking = false;   
     private bool take = false; 
     //private bool Die = false;
@@ -74,6 +74,7 @@ public class CharacterFollow : MonoBehaviour
     public Spine.Skeleton _skeleton;
     Spine.EventData eventData;
     public static CharacterFollow instance;
+    public DuelManager DM;
     #endregion
     public void Start()
     {
@@ -118,7 +119,10 @@ public class CharacterFollow : MonoBehaviour
         ////////////////////////////////////////
         case 1: 
         if(!Win){
-        if (target == null && !take){Choise(); take = true;}
+        if (target == null && !take)
+        {Choise();         
+        DM = GameObject.Find("DuelManager").GetComponent<DuelManager>();
+        take = true;}
         if(poisonState){StartCoroutine(Poi());}
         switch (kindCh)
         {
@@ -282,7 +286,7 @@ public class CharacterFollow : MonoBehaviour
         }
     }
 #endregion
-    public void Ordini(int ord){order = ord;}
+    public void Character(int ord){DM.Character(ord); order = 0; }//order = ord;}
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
 

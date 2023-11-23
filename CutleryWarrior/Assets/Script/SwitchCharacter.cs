@@ -34,8 +34,7 @@ public class SwitchCharacter : MonoBehaviour
         if(!GameManager.instance.NotParty)
         {
         if(Input.GetButtonDown("Change") ){StartCoroutine(CoordinateActor()); ind();}
-        }
-        
+        }  
     }
     
     
@@ -80,7 +79,7 @@ public class SwitchCharacter : MonoBehaviour
             if(GameManager.instance.K_Unlock){KnifeActive.SwitchScriptsActor();} 
             if(GameManager.instance.S_Unlock){SpoonActive.SwitchScriptsActor();} 
             //
-            if(GameManager.instance.F_Unlock){vCam.Follow = ForkActive.transform; ConInt = 1;}
+            if(GameManager.instance.F_Unlock){vCam.Follow = ForkActive.transform; ConInt = 1; GameManager.instance.CharacterID = 1;}
             break;
             case 2:
             if(GameManager.instance.F_Unlock){ForkActive.SwitchScriptsActor();}
