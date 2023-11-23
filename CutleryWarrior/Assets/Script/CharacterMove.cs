@@ -36,6 +36,10 @@ public class CharacterMove : MonoBehaviour
     private int comboCount = 0;
     private bool canAttack = true;
     public float comboCooldown = 0.5f; // Tempo di cooldown tra le combo in secondi
+    public float comboCooldownK = 0.3f; // Tempo di cooldown tra le combo in secondi
+    private bool isAttacking = false; // Aggiunto il flag per controllare se il personaggio sta attaccando
+
+
     //private PlayerStats Stats;
     private bool top = true;
     private bool StopRanm = false;
@@ -74,30 +78,18 @@ public class CharacterMove : MonoBehaviour
     [SpineAnimation][SerializeField]  string RunBAnimationName;
     [SpineAnimation][SerializeField]  string TalkingAnimationName;
     [SpineAnimation][SerializeField]  string AllarmAnimationName;
-    //[SpineAnimation][SerializeField]  string Atk1AnimationName;
-    //[SpineAnimation][SerializeField]  string Atk2AnimationName;
-    //[SpineAnimation][SerializeField]  string Atk3AnimationName;
-    //[SpineAnimation][SerializeField]  string Atk4AnimationName;
     [SpineAnimation][SerializeField]  string ChargeFAnimationName;
     [SpineAnimation][SerializeField]  string ReleaseChargeFAnimationName;
     [SpineAnimation][SerializeField]  string GuardAnimationName;
     [SpineAnimation][SerializeField]  string GuardWalkAnimationName;
-    //[SpineAnimation][SerializeField]  string GuardRunAnimationName;
-    //[SpineAnimation][SerializeField]  string GuardHitAnimationName;
     [SpineAnimation][SerializeField]  string DodgeFAnimationName;
-    //[SpineAnimation][SerializeField]  string DodgeBAnimationName;
     [SpineAnimation][SerializeField]  string StumpAnimationName;
     [SpineAnimation][SerializeField]  string OpenBookAnimationName;
     [SpineAnimation][SerializeField]  string CloseBookAnimationName;
-
-    //[SpineAnimation][SerializeField]  string WinAnimationName;
-    //private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
-    //Spine.EventData eventData;
     private SwitchCharacter Switch;
-    //private Transform Player;
     public bool isDefence = false;
     public AnimationManager Anm;
     //Vector3 camF,camR,moveDir;  
@@ -105,9 +97,10 @@ public class CharacterMove : MonoBehaviour
     private DodgeController DodgeController;
     private KnockbackController knockbackController;       
     [Header("VFX")]
-    //public GameObject VFXDodge;
+    public GameObject SlashV;
+    public GameObject SlashH;
+    public GameObject SlashB;
     public GameObject VFXHhitShield;
-    //public GameObject VFXStump;
     public GameObject VFXPoison;
     public GameObject VFXHurt;
     public GameObject VFXCharge;
@@ -366,19 +359,39 @@ public void Awake()
     }
 
     // Esegue un colpo normale
-    if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && canAttack && PlayerStats.instance.K_curMP > 20 && !isCharging)
-    {
-        Stop();
-        HandleComboAttackK();
-        PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
-    }
-    else if(PlayerStats.instance.K_curMP < 20)
-    {
-        AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);
-    }
+    if ((Input.GetMouseButtonDown(0) || Input.GetButton("Fire1")) && canAttack && 
+    PlayerStats.instance.K_curMP > 20 && !isCharging && !isAttacking)
+{
+    Stop();
+    HandleComboAttackK();
+    canAttack = false;
+    PlayerStats.instance.K_curMP -= PlayerStats.instance.K_CostMP;
+    StartCoroutine(ComboCooldownK());
+}
+else if (PlayerStats.instance.K_curMP < 20)
+{
+    AudioManager.instance.PlayUFX(10); 
+    VFXCantATK.SetActive(true);
+}
 }
 
-private void ReleaseChargedShot()
+    private void HandleComboAttackK()
+{
+    comboCount = (comboCount % 3) + 1;
+    PlayComboAnimation("Battle/attack_" + comboCount.ToString());
+    isAttacking = true; // Imposta il flag per indicare che il personaggio sta attaccando
+}
+
+private IEnumerator ComboCooldownK()
+{
+    moveDirection = Vector3.zero;
+    yield return new WaitForSeconds(comboCooldownK);
+    isAttacking = false; // Resetta il flag quando l'animazione è completa
+    SlashV.SetActive(false); SlashH.SetActive(false); SlashB.SetActive(false);
+    canAttack = true;
+}
+
+    private void ReleaseChargedShot()
 {
     // Implementa qui il comportamento del colpo caricato
     // Assicurati di reimpostare isCharging dopo il rilascio del colpo caricato.
@@ -387,15 +400,6 @@ private void ReleaseChargedShot()
     VFXChargeComplete.SetActive(false);
     Anm.PlayAnimationLoop(ReleaseChargeFAnimationName);
     StumpK();
-}
-
-private void HandleComboAttackK()
-{
-    comboCount = (comboCount % 3) + 1;
-    PlayComboAnimation("Battle/attack_" + comboCount.ToString());
-    canAttack = false;
-    Invoke("StopAtk", comboCooldown);
-    //StartCoroutine(ComboCooldown());
 }
 
 private void StumpK()

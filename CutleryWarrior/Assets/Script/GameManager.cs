@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     public bool isRun = false;
     public bool Interact = false; 
     public bool NotParty = true; 
+    public bool F_Die, K_Die, S_Die = false;
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject LittleM;
     [SerializeField]  GameObject TimerM;
@@ -208,7 +209,7 @@ public class GameManager : MonoBehaviour
     }
     public void TakeCharacter()
     {
-        switch(rotationSwitcher.CharacterID)
+        switch(CharacterID)
         {
             case 1:
             player = GameObject.FindGameObjectWithTag("F_Player");
@@ -245,7 +246,7 @@ public class GameManager : MonoBehaviour
     public void Start(){Application.targetFrameRate = 60; Day = true;}
     public void Update()
     {
-        IDCharacter = rotationSwitcher.CharacterID;
+        CharacterID = rotationSwitcher.CharacterID;
         StatPlayer();
         BarStat();
         TakeCharacter();
@@ -259,7 +260,7 @@ public class GameManager : MonoBehaviour
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();
-            switch (rotationSwitcher.CharacterID)
+            switch (CharacterID)
     {
     case 1:
     if(!notChange){
@@ -307,7 +308,7 @@ public class GameManager : MonoBehaviour
         else if(Input.GetButtonDown("Pause") && stopInput)
         {
             
-            switch (rotationSwitcher.CharacterID)
+            switch (CharacterID)
             {
             case 1:
             if(F_Unlock){ch_F.inputCTR = false; CloseBookF();}    
@@ -322,7 +323,7 @@ public class GameManager : MonoBehaviour
             }  
             MouseCursorIcon.SetActive(false);
             Pause.gameObject.SetActive(false);
-            switch (rotationSwitcher.CharacterID)
+            switch (CharacterID)
             {
             case 1:
             if(F_Unlock){CloseBookF();}    
@@ -349,7 +350,7 @@ public class GameManager : MonoBehaviour
             MouseCursorIcon.SetActive(true);
             notChange = true;
             DuelManager.instance.inputCTR = true;
-            switch (rotationSwitcher.CharacterID)
+            switch (CharacterID)
         {
     case 1:
         if(F_Unlock){ch_F.Stop();
@@ -394,7 +395,7 @@ public class GameManager : MonoBehaviour
             Esc.gameObject.SetActive(false);
             LittleM.gameObject.SetActive(false);
             CharacterMove.instance.inputCTR = false;
-            switch (rotationSwitcher.CharacterID)
+            switch (CharacterID)
             {
             case 1:
                 ch_F.inputCTR = false;    
@@ -429,13 +430,14 @@ public class GameManager : MonoBehaviour
             ChCanM();
             stopInput = false;
             notChange = false;
+            MouseCursorIcon.SetActive(false);
             Esc.gameObject.SetActive(false);
             Ord.gameObject.SetActive(false);
             Itm.gameObject.SetActive(false);
             Esc.gameObject.SetActive(false);
             LittleM.gameObject.SetActive(false);
             CharacterMove.instance.inputCTR = false;
-            switch (rotationSwitcher.CharacterID)
+            switch (CharacterID)
             {
             case 1:
             if(F_Unlock){ch_F.inputCTR = false;}
@@ -458,6 +460,8 @@ public class GameManager : MonoBehaviour
             Itm.gameObject.SetActive(false);
             Esc.gameObject.SetActive(false);
             LittleM.gameObject.SetActive(false);
+            MouseCursorIcon.SetActive(false);
+            CameraZoom.instance.ZoomOut();
     }
 
     public void CloseLittleMStop()
@@ -465,12 +469,13 @@ public class GameManager : MonoBehaviour
             ChCanM();
             stopInput = false;
             notChange = false;
+            MouseCursorIcon.SetActive(false);
             Esc.gameObject.SetActive(false);
             Ord.gameObject.SetActive(false);
             Itm.gameObject.SetActive(false);
             Esc.gameObject.SetActive(false);
             LittleM.gameObject.SetActive(false);
-            switch (rotationSwitcher.CharacterID)
+            switch (CharacterID)
             {
             case 1:
             if(F_Unlock){ch_F.inputCTR = false;}
@@ -498,7 +503,7 @@ public class GameManager : MonoBehaviour
             Esc.gameObject.SetActive(false);
             LittleM.gameObject.SetActive(false);
            
-            switch (rotationSwitcher.CharacterID)
+            switch (CharacterID)
             {
         case 1:
             TimerM.gameObject.SetActive(true);
@@ -1034,7 +1039,7 @@ public class GameManager : MonoBehaviour
         if(F_Unlock){Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
         if(S_Unlock){Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
         if(K_Unlock){Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
-        switch(rotationSwitcher.CharacterID)
+        switch(CharacterID)
         {
             case 1:
             if(F_Unlock){Manager_F.SwitchScriptsPlayer();}

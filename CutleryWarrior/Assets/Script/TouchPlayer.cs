@@ -7,14 +7,11 @@ public class TouchPlayer : MonoBehaviour
     #region Header
     public int IdENM;
     //public int IDBattle;
-    public int IdAreaAtt;
+    //public int IdAreaAtt;
     public GameObject BattleObj;
     public GameObject[] DeactiveObj; 
     public GameObject This;
     
-    //private SceneEvent sceneEvent;
-    //public string sceneName;
-    //public string sceneReturn;
     public float stoppingDistance = 1f;
     public Vector3 savedPosition;
     private Transform Player;
@@ -25,9 +22,6 @@ public class TouchPlayer : MonoBehaviour
     private SwitchCharacter Switch;
     public bool takeCoo = false;
     public bool isMove = true;
-    private bool Var_1 = false;
-    private bool Var_2 = true;
-    private bool Var_3 = false;
     public NPCMove Mnpc;
     #endregion
     public void Start()
@@ -41,32 +35,33 @@ public class TouchPlayer : MonoBehaviour
     public void Take(){Destroy(This);}
     public void Update()
     {
-    if(Switch.isElement1Active && Var_1)
-    {if(GameManager.instance.S_Unlock && Var_1){Spoon = GameObject.Find("S_Player").transform;} 
-    Player = Spoon; Var_1 = false; Var_2 = true;}
-    else 
-    if(Switch.isElement2Active && Var_2)
-    {if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;} 
-    Player = Fork;  Var_2 = false; Var_3 = true;} 
-    else 
-    if(Switch.isElement3Active && Var_3)
-    {if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;} 
-    Player = Knife; Var_3 = false; Var_1 = true;} 
-    //
-    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 1 &&
-    SwitchCharacter.instance.rotationSwitcher.CharacterIDSec == 3 &&
-    SwitchCharacter.instance.rotationSwitcher.CharacterIDTer == 2)
-    {if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
-    }
-    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 2 &&
-    SwitchCharacter.instance.rotationSwitcher.CharacterIDSec == 1 &&
-    SwitchCharacter.instance.rotationSwitcher.CharacterIDTer == 3)
-    {if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}
-    }
-    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 3 &&
-    SwitchCharacter.instance.rotationSwitcher.CharacterIDSec == 2 &&
-    SwitchCharacter.instance.rotationSwitcher.CharacterIDTer == 1)
-    {if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}}
+        switch(GameManager.instance.CharacterID)
+        {
+            case 1:
+            if(GameManager.instance.F_Unlock)
+            {
+                Fork = GameObject.Find("F_Player").transform;
+                Player = GameObject.FindWithTag("F_Player").transform;
+            }
+            Player = Fork.transform;
+            break;
+            case 2:
+            if(GameManager.instance.K_Unlock)
+            {
+                Knife = GameObject.Find("K_Player").transform;
+                Player = GameObject.FindWithTag("K_Player").transform; 
+            }  
+            Player = Knife.transform;
+            break;
+            case 3:
+            if(GameManager.instance.S_Unlock)
+            {
+                Spoon = GameObject.Find("S_Player").transform;
+                Player = GameObject.FindWithTag("S_Player").transform;
+            }
+            Player = Spoon.transform;
+            break;
+        }
     //
     if(!takeCoo){
     if ((transform.position - Player.transform.position).sqrMagnitude < stoppingDistance * stoppingDistance)
@@ -91,22 +86,17 @@ public class TouchPlayer : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-    if (other.CompareTag("F_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    if (other.CompareTag("F_Player") && GameManager.instance.CharacterID == 1)
     {Touch();}
-    else if (other.CompareTag("K_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
+    else if (other.CompareTag("K_Player") && GameManager.instance.CharacterID == 2)
     {Touch();}
-    else if (other.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    else if (other.CompareTag("S_Player") && GameManager.instance.CharacterID == 3)
     {Touch();}
     }
     
     public void Touch()
     {   if (isMove) {Mnpc.Behav = 0; Mnpc.isPaused = true;}
         AudioManager.instance.CrossFadeOUTAudio(0);
-        //if (isRight) {GameManager.instance.Right();}
-        //else if (!isRight) {GameManager.instance.Left();}
-        //GameManager.instance.sceneName = sceneReturn;
-        //GameManager.instance.IdAreaAtt = IdAreaAtt;
-        //GameManager.instance.IDPorta = IDBattle;
         GameManager.instance.IdENM = IdENM;
         GameManager.instance.NotChange();
         AudioManager.instance.PlayUFX(7);

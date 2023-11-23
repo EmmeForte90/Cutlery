@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Spine.Unity;
+using JetBrains.Annotations;
 public class CharacterFollow : MonoBehaviour
 {   
     #region Header
@@ -18,8 +19,8 @@ public class CharacterFollow : MonoBehaviour
     public Transform Spoon;
     public int order = 0;
     private Transform Player;
-     public GameObject Esclamation;
-     public bool Attention;
+    public GameObject Esclamation;
+    public bool Attention;
     private SwitchCharacter Switch;
     private CharacterMove F_b;
     private CharacterMove S_b;
@@ -44,8 +45,7 @@ public class CharacterFollow : MonoBehaviour
     public GameObject VFXHurt;
     private bool poisonState = false;
     private int TimePoison = 5;     
-    private CharacterController characterController;
-  
+    private CharacterController characterController;  
     [SpineAnimation][SerializeField]  string WalkAnimationName;    
     [SpineAnimation][SerializeField]  string RunAnimationName;
     [SpineAnimation][SerializeField]  string RunBAnimationName;    
@@ -61,18 +61,14 @@ public class CharacterFollow : MonoBehaviour
     public GameObject target;
     private bool isAttacking = false;   
     private bool take = false; 
-    //private bool Die = false;
-    //private PlayerStats Stats;
     public int result;
     public AnimationManager Anm;
     public bool Allarming;
     public bool Win;
-    //private string currentAnimationName;
-    //private float distance;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
-    Spine.EventData eventData;
+    //Spine.EventData eventData;
     public static CharacterFollow instance;
     public DuelManager DM;
     #endregion
@@ -91,7 +87,6 @@ public class CharacterFollow : MonoBehaviour
         if(GameManager.instance.F_Unlock){F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
         if(GameManager.instance.K_Unlock){K_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
         if(GameManager.instance.S_Unlock){S_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        //Stats = GameObject.Find("Stats").GetComponent<PlayerStats>();
     }
     public void RetakeCh()
     {
@@ -99,22 +94,23 @@ public class CharacterFollow : MonoBehaviour
         if(GameManager.instance.K_Unlock){K_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
         if(GameManager.instance.S_Unlock){S_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
     }
+    
     public void Update()
     {
         if(Allarming){Anm.PlayAnimationLoop(AllarmAnimationName);}
-        //if(Win){Anm.PlayAnimationLoop(WinAnimationName);}
         //
         if(Attention){Esclamation.SetActive(true);}
         else if(!Attention){Esclamation.SetActive(false);}
         //
         if(!inputCTR){
-        switch(IDAction)//Combatte o esplora?
+        //Combatte o esplora?
+        switch(IDAction)
         {case 0:  
         if(!Allarming || !Attention)
-        {SimpleMove();
-        if(Switch.isElement1Active){Player = Spoon;Flip();}
-        else if(Switch.isElement2Active){Player = Fork;Flip();} 
-        else if(Switch.isElement3Active){Player = Knife;Flip();}} 
+        {
+        SimpleMove();
+        TargetPlayer();
+        }
         break;
         ////////////////////////////////////////
         case 1: 
@@ -143,6 +139,26 @@ public class CharacterFollow : MonoBehaviour
     }
     
     #region MoveExploration
+
+    public void TargetPlayer()
+    {
+        switch(GameManager.instance.CharacterID)
+        {
+            case 1:
+            if(GameManager.instance.F_Unlock)
+            {Player = Fork.transform; Flip();}
+            break;
+            case 2:
+            if(GameManager.instance.K_Unlock)
+            {Player = Knife;Flip();}  
+            break;
+            case 3:
+            if(GameManager.instance.S_Unlock)
+            {Player = Spoon;Flip();}
+            break;
+        }
+    }
+
     public void SimpleMove()
     {
     if (!characterController.isGrounded)
@@ -291,18 +307,14 @@ public class CharacterFollow : MonoBehaviour
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
 
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
-    public void Allarm(){Allarming = true;}   
-    //public void PoseWin(){Win = true;}    
-    //public void StopWin(){Win = false;}    
+    public void Allarm(){Allarming = true;}       
     public void StopAllarm(){Allarming = false;}    
     private void Flip()
     {
         if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
         else if (Player.localScale.x < 0f){transform.localScale = new Vector3(-1, 1,1);}
     }
-    
-    //dpublic void FixedUpdate(){if (isGrounded){characterRigidbody.velocity = Vector3.zero;}}
-    
+        
     #region Attack
     public void AttackEnm(){isGuard = false; if(!isAttacking){ChaseEnm();}}
     public void AttackEnmF(){isGuard = false; if(!isAttacking){StartAttack();}}
@@ -311,65 +323,51 @@ public class CharacterFollow : MonoBehaviour
     {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, false);}}
     private void Choise()
     {
-    // Genera un numero casuale tra 1 e 3
+    if(!Win){
     int randomNumber = Random.Range(0, 2);
     result = Mathf.RoundToInt(randomNumber);
-    //Debug.Log("Numero casuale: " + result);
     switch(result)
     {
             case 0:
             target = GameObject.Find("Enm_Spoon");
-            if(target == null){Choise();}
+            if(target == null){Choise(); isAttacking = false;}
             break;
             case 1:
             target = GameObject.Find("Enm_Fork");
-            if(target == null){Choise();}
+            if(target == null){Choise(); isAttacking = false;}
             break;
             case 2:
             target = GameObject.Find("Enm_Knife");
-            if(target == null){Choise();}
+            if(target == null){Choise(); isAttacking = false;}
             break;
     } 
-    
+    }else if(Win){order = 0;}
     }
     private void ChaseEnm()
-{
+    {
     if (target != null)
     {
-        // Calcola la direzione verso il nemico
         Vector3 directionToTarget = target.transform.position - transform.position;
-
-        // Controlla se il nemico si trova sopra o sotto il personaggio lungo l'asse Z
         bool isEnemyAbove = directionToTarget.z > 0;
-
-        // Flippa il personaggio sull'asse X in base alla posizione relativa del nemico
+        //Flippa
         if (isEnemyAbove && transform.position.z < target.transform.position.z)
-        {
-            // Il nemico è sopra e davanti al personaggio
-            transform.localScale = new Vector3(1, 1,1);
-        }
+        {transform.localScale = new Vector3(1, 1,1);}
         else if (!isEnemyAbove && transform.position.z > target.transform.position.z)
-        {
-            // Il nemico è sotto e davanti al personaggio
-            transform.localScale = new Vector3(-1, 1,1);
-        }
-
+        {transform.localScale = new Vector3(-1, 1,1);}
+        //Insegue
         if (!isAttacking)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, AiSpeed * Time.deltaTime);
-            Anm.PlayAnimationLoop(RunBAnimationName);
-        }
-
+        if (target != null){transform.position = Vector3.MoveTowards(transform.position, target.transform.position, AiSpeed * Time.deltaTime);
+        isAttacking = false;}}
+        else if (target != null){order = 2;}
+        //Attacca altrimenti insegue
         if (Vector3.Distance(transform.position, target.transform.position) <= attackRange)
-        {
-            StartAttack();
-        }
+        {StartAttack();}
+        else if (Vector3.Distance(transform.position, target.transform.position) > attackRange)
+        { isAttacking = false; Anm.PlayAnimationLoop(RunBAnimationName);}
+    }else if (target == null){order = 2;}
     }
-    else if (target == null){order = 2;}
-}
-    public void PointStart()
-    {Indicatore.transform.position = StartP.transform.position;}
-    
+    public void PointStart(){Indicatore.transform.position = StartP.transform.position;}
     public void MoveInPoint()
     {
     float distanceToTarget = Vector3.Distance(transform.position, MoveP.transform.position);
@@ -385,25 +383,15 @@ public class CharacterFollow : MonoBehaviour
     else if (distanceToTarget < OrderDistance)
     {
         // Quando il personaggio raggiunge il punto di destinazione, puoi fare qualcosa qui, ad esempio:
-        order = 2;
-        Anm.PlayAnimationLoop(IdleBAnimationName);
-        if (transform.position.z < target.transform.position.z)
-        {
-            // Il nemico è sopra e davanti al personaggio
-            transform.localScale = new Vector3(1, 1,1);
-        }
-        else if (transform.position.z > target.transform.position.z)
-        {
-            // Il nemico è sotto e davanti al personaggio
-            transform.localScale = new Vector3(-1, 1,1);
-        }
+        order = 2;//Si mette in difesa
+        if (transform.position.z < target.transform.position.z){transform.localScale = new Vector3(1, 1,1);}
+        else if (transform.position.z > target.transform.position.z){transform.localScale = new Vector3(-1, 1,1);}
     }
     }
-
     private void StartAttack()
     {
         isAttacking = true;
-        PlayComboAnimation(Atk1AnimationName);
+        Anm.PlayAnimation(Atk1AnimationName);
         StartCoroutine(AttackPause());
     }
 
@@ -414,13 +402,10 @@ public class CharacterFollow : MonoBehaviour
         isAttacking = false;
     }
     #endregion
-
-//Creare la function di danno prima di proseguire con la difesa
-
+    //Creare la function di danno prima di proseguire con la difesa
     #region Defence
     public void DefenceEnm(){Anm.PlayAnimationLoop(GuardAnimationName); isGuard = true;}
     #endregion
-
     public void TakeDamage(float damage)
     {
         switch (kindCh)
@@ -484,8 +469,6 @@ private void OnDrawGizmos()
     {
     Gizmos.color = Color.red;
     Gizmos.DrawWireSphere(transform.position, attackRange);
-    // disegna un Gizmo che rappresenta il Raycast
-    //Gizmos.DrawLine(transform.position, transform.position + new Vector3(transform.localScale.x, 0, 0) * wallDistance);
     Gizmos.color = Color.blue;
     Gizmos.DrawWireSphere(transform.position, stoppingDistance);
     Gizmos.color = Color.black;

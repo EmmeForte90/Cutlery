@@ -20,7 +20,6 @@ public class StartBattle : MonoBehaviour
     private CinemachineVirtualCamera vCam;
     private GameObject player;
     
-
     [Header("Stats")]
     [Header("Fork")]
     public GameObject ForkHUD;
@@ -45,7 +44,6 @@ public class StartBattle : MonoBehaviour
     [SerializeField] CharacterFollow ch_KAc;
     private ChangeHeroSkin Skin_K;
     [Header("Enemy")]
-    //public SimpleEnemy E_Script;
     public DuelManager Duel_Script;
     #endregion
     public void Awake()
@@ -57,10 +55,14 @@ public class StartBattle : MonoBehaviour
         if(!GameManager.instance.Day){Giorno.SetActive(false); Notte.SetActive(true); RenderSettings.skybox = newSkyboxMaterial_N;}
         else if(GameManager.instance.Day){Giorno.SetActive(true); Notte.SetActive(false); RenderSettings.skybox = newSkyboxMaterial_G;}
         Duel_Script.inputCTR = true;
+        //
+        GameManager.instance.NotTouchOption = true;
+        //
         GameManager.instance.battle = true;
         GameManager.instance.ChStop();
         GameManager.instance.TakeCamera();
         GameManager.instance.DectiveMinimap();
+        //
         if(GameManager.instance.F_Unlock)
         {F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>(); ForkHUD.SetActive(true);}
         else{ForkHUD.SetActive(false);}
@@ -93,12 +95,6 @@ public class StartBattle : MonoBehaviour
     }
     public void Start()
     {
-        // Genera un numero casuale tra 1 e 2
-        //float randomNumber = Random.Range(1f, 2f);
-        // Converte il numero in intero
-        //result = Mathf.RoundToInt(randomNumber);
-         // Stampa il risultato nella console
-        //Debug.Log("Numero casuale: " + result);
         if(GameManager.instance.F_Unlock){ForkActive.transform.position = F_point.transform.position;}
         if(GameManager.instance.K_Unlock){KnifeActive.transform.position = K_point.transform.position;}
         if(GameManager.instance.S_Unlock){SpoonActive.transform.position = S_point.transform.position;}
@@ -146,25 +142,25 @@ public class StartBattle : MonoBehaviour
         GameManager.instance.Posebattle();
         yield return new WaitForSeconds(2f);
         GameManager.instance.ChCanM();
-        if(Switch.isElement1Active)
+        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+        switch(GameManager.instance.CharacterID)
         {
-            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
-            if(GameManager.instance.S_Unlock){player = GameObject.FindWithTag("S_Player");}
-            vCam.Follow = player.transform;
-        }else if(Switch.isElement2Active)
-        {
-            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+            case 1:
             if(GameManager.instance.F_Unlock){player = GameObject.FindWithTag("F_Player");}
             vCam.Follow = player.transform;
-            
-        }else if(Switch.isElement3Active)
-        {
-            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
-            if(GameManager.instance.K_Unlock){player = GameObject.FindWithTag("K_Player");}  
+            break;
+            case 2:
+             if(GameManager.instance.K_Unlock){player = GameObject.FindWithTag("K_Player");}  
             vCam.Follow = player.transform;
+            break;
+            case 3:
+            if(GameManager.instance.S_Unlock){player = GameObject.FindWithTag("S_Player");}
+            vCam.Follow = player.transform;
+            break;
         }
         GameManager.instance.Change();
         GameManager.instance.ChCanM();
+        GameManager.instance.NotTouchOption = false;
         Duel_Script.inputCTR = false;
     }
 
@@ -173,25 +169,25 @@ public class StartBattle : MonoBehaviour
         GameManager.instance.StopAllarm();
         GameManager.instance.Posebattle();
         GameManager.instance.ChCanM();
-        if(Switch.isElement1Active)
+        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+        switch(GameManager.instance.CharacterID)
         {
-            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
-            if(GameManager.instance.S_Unlock){player = GameObject.FindWithTag("S_Player");}
-            vCam.Follow = player.transform;
-        }else if(Switch.isElement2Active)
-        {
-            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+            case 1:
             if(GameManager.instance.F_Unlock){player = GameObject.FindWithTag("F_Player");}
             vCam.Follow = player.transform;
-            
-        }else if(Switch.isElement3Active)
-        {
-            vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
-            if(GameManager.instance.K_Unlock){player = GameObject.FindWithTag("K_Player");}  
+            break;
+            case 2:
+             if(GameManager.instance.K_Unlock){player = GameObject.FindWithTag("K_Player");}  
             vCam.Follow = player.transform;
+            break;
+            case 3:
+            if(GameManager.instance.S_Unlock){player = GameObject.FindWithTag("S_Player");}
+            vCam.Follow = player.transform;
+            break;
         }
         GameManager.instance.Change();
         GameManager.instance.ChCanM();
+        GameManager.instance.NotTouchOption = false;
         Duel_Script.inputCTR = false;
     }
 }

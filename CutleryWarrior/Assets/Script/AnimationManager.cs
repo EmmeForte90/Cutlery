@@ -366,11 +366,11 @@ public class AnimationManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Knife
     if (e.Data.Name == "slashV")
-    {AudioManager.instance.PlayUFX(8); SlashV.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    {AudioManager.instance.PlayUFX(8); SlashV.gameObject.SetActive(true);} //StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "slashH")
-    {AudioManager.instance.PlayUFX(8); SlashH.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    {AudioManager.instance.PlayUFX(8); SlashH.gameObject.SetActive(true);} //StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "slashB")
-    {AudioManager.instance.PlayUFX(8); SlashB.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    {AudioManager.instance.PlayUFX(8); SlashB.gameObject.SetActive(true);} //StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "bigslash")
     {AudioManager.instance.PlayUFX(8); BigSlash.gameObject.SetActive(true); StartCoroutine(StopVFX_K2());}
     //--------------------------------------//

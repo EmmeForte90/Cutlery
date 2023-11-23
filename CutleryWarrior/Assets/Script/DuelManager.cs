@@ -65,6 +65,7 @@ public class DuelManager : MonoBehaviour
     public float duration = 5.0f;
     private float elapsedTime = 0.0f;
     private bool isDamaging = false;
+    public bool F_Die, K_Die, S_Die = false;
     
     [Header("IndicatoreNemico")]
     public int ATK_Ch;
@@ -103,10 +104,6 @@ public void Awake()
         //
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
         //
-        if(GameManager.instance.F_Unlock){DieCont++;}       
-        if(GameManager.instance.S_Unlock){DieCont++;}      
-        if(GameManager.instance.K_Unlock){DieCont++;}
-        //
         if(GameManager.instance.F_Unlock){
         PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
         PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;}
@@ -130,22 +127,7 @@ public void Awake()
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage = 0;}       
         if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage = 0;}
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage = 0;}
-        /*if(isRight){
-        if(GameManager.instance.F_Unlock){FAct.transform.localScale = new Vector3(1, 1,1);}
-        if(GameManager.instance.S_Unlock){KAct.transform.localScale = new Vector3(1, 1,1);}
-        if(GameManager.instance.S_Unlock){SAct.transform.localScale = new Vector3(1, 1,1);}
-        if(GameManager.instance.S_Unlock){ch_SAc.transform.localScale = new Vector3(1, 1,1);}
-        if(GameManager.instance.F_Unlock){ch_FAc.transform.localScale = new Vector3(1, 1,1);}
-        if(GameManager.instance.K_Unlock){ch_KAc.transform.localScale = new Vector3(1, 1,1);}
-        }
-        else if(!isRight){
-        if(GameManager.instance.F_Unlock){FAct.transform.localScale = new Vector3(-1, 1,1);}
-        if(GameManager.instance.S_Unlock){KAct.transform.localScale = new Vector3(-1, 1,1);}
-        if(GameManager.instance.S_Unlock){SAct.transform.localScale = new Vector3(-1, 1,1);}
-        if(GameManager.instance.S_Unlock){ch_SAc.transform.localScale = new Vector3(-1, 1,1);}
-        if(GameManager.instance.F_Unlock){ch_FAc.transform.localScale = new Vector3(-1, 1,1);}
-        if(GameManager.instance.K_Unlock){ch_KAc.transform.localScale = new Vector3(-1, 1,1);}
-        }*/
+        //
         ID_Enm = GameManager.instance.IdENM;
         StartCoroutine(StartAI());    
     }
@@ -212,14 +194,21 @@ public void Update()
         {MaxRageF.SetActive(true);} 
         else if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curRage < PlayerStats.instance.F_Rage)
         {MaxRageF.SetActive(false);}
-        //
+        ///////////////////////////////////////////////////////////////////////////GameOver
         if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curHP <= 0)
-        {GameManager.instance.PoseDeathS(); DieCont--;}
+        {GameManager.instance.PoseDeathS(); S_Die = true; GameManager.instance.S_Die = true;}
+        //print("S_Die" + S_Die);
         if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curHP <= 0)
-        {GameManager.instance.PoseDeathK(); DieCont--;}
+        {GameManager.instance.PoseDeathK(); K_Die = true; GameManager.instance.K_Die = true;}
+        //print("K_Die" + K_Die);
         if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curHP <= 0)
-        {GameManager.instance.PoseDeathF(); DieCont--;}
-        //
+        {GameManager.instance.PoseDeathF(); F_Die = true; GameManager.instance.F_Die = true;}
+        //print("F_Die" + F_Die);
+        if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curHP > 0){S_Die = false; GameManager.instance.S_Die = false;}
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curHP > 0){K_Die = false; GameManager.instance.K_Die = false;}
+        if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curHP > 0){F_Die = false; GameManager.instance.F_Die = false;}
+        /////////////////////////////////////////////////////////////////////////////////
+        #region Status
         if(GameManager.instance.F_Unlock && PlayerStats.instance.F_paralysisResistance <= 0)
         {GameManager.instance.StunF();}
         if(GameManager.instance.K_Unlock && PlayerStats.instance.K_paralysisResistance <= 0)
@@ -269,12 +258,13 @@ public void Update()
                 isDamaging = false;
             }
         }}
+        #endregion
         if(EnemyinArena <= 0){StartCoroutine(EndBattle());}
         ////////////
         CharacterID = GameManager.instance.CharacterID;
         ////////
         if(WinEnd){if(Input.GetMouseButtonDown(0)){StartCoroutine(RetunBattle());}}
-        if(DieCont <= 0)
+        if(F_Die && K_Die && S_Die )
         {StartCoroutine(GameOver());}   
         if(Ending){if(Input.GetMouseButtonDown(0)){StartCoroutine(ReturnMainMenu());}} 
         /////////////
@@ -337,21 +327,28 @@ public void Update()
         switch(ATK_Ch)
         {
             case 0:
-            ch_FAc.target.transform.position = objectsToHighlight[currentIndex].transform.position;
+            ch_FAc.target = objectsToHighlight[currentIndex];
+            if(ch_FAc.target != null)
+            {ch_FAc.target.transform.position = objectsToHighlight[currentIndex].transform.position;}
             ch_FAc.order = 1;
             break;
             case 1:
-            ch_KAc.target.transform.position = objectsToHighlight[currentIndex].transform.position;
+            ch_KAc.target = objectsToHighlight[currentIndex];
+            if(ch_KAc.target != null)
+            {ch_KAc.target.transform.position = objectsToHighlight[currentIndex].transform.position;}
             ch_KAc.order = 1;
             break;
             case 2:
-            ch_SAc.target.transform.position = objectsToHighlight[currentIndex].transform.position;
+            ch_SAc.target = objectsToHighlight[currentIndex];
+            if(ch_SAc.target != null)
+            {ch_SAc.target.transform.position = objectsToHighlight[currentIndex].transform.position;}
             ch_SAc.order = 1;
             break;
         }
         
         GameManager.instance.Change();
         GameManager.instance.ChCanM();
+        GameManager.instance.stopInput = false;
         inputCTR = false; 
         highlightedObjectIndicator.SetActive(false); 
         isIndicator = false;

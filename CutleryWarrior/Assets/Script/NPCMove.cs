@@ -3,7 +3,7 @@ using Spine.Unity;
 public class NPCMove : MonoBehaviour
 {
     #region Header
-    private GameObject player;
+    private Transform Player;
     private GameObject ForkActive;
 	private GameObject SpoonActive;
 	private GameObject KnifeActive;
@@ -24,6 +24,9 @@ public class NPCMove : MonoBehaviour
     public float TouchDistance = 1f;
     private CharacterController characterController;
     private float previousZPosition; // Aggiungi questa variabile
+    private Transform Fork;
+    private Transform Spoon;
+    private Transform Knife;
 
     public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
 
@@ -57,8 +60,8 @@ public class NPCMove : MonoBehaviour
     }
     public void Update()
 {
-    PlayerTaking();
     Gravity();
+    TargetPlayer();
 
     if (top && isWalk && !isRun)
     {WalkUP();}
@@ -74,11 +77,11 @@ public class NPCMove : MonoBehaviour
     {Idle();}
 
     // Verifica della distanza tra il nemico e il giocatore
-    if ((transform.position - player.transform.position).sqrMagnitude > agroDistance * agroDistance)
+    if ((transform.position - Player.transform.position).sqrMagnitude > agroDistance * agroDistance)
     {
         Behav = 0;
     }
-    else if ((transform.position - player.transform.position).sqrMagnitude < agroDistance * agroDistance && isMonster)
+    else if ((transform.position - Player.transform.position).sqrMagnitude < agroDistance * agroDistance && isMonster)
     {
         Behav = 1;
         AudioManager.instance.PlaySFX(14);
@@ -125,13 +128,44 @@ public class NPCMove : MonoBehaviour
             characterController.Move(gravityVector * Time.deltaTime);
         }
     }
+
+    public void TargetPlayer()
+    {
+        switch(GameManager.instance.CharacterID)
+        {
+            case 1:
+            if(GameManager.instance.F_Unlock)
+            {
+                Fork = GameObject.Find("F_Player").transform;
+                Player = GameObject.FindWithTag("F_Player").transform;
+            }
+            Player = Fork.transform;
+            break;
+            case 2:
+            if(GameManager.instance.K_Unlock)
+            {
+                Knife = GameObject.Find("K_Player").transform;
+                Player = GameObject.FindWithTag("K_Player").transform; 
+            }  
+            Player = Knife.transform;
+            break;
+            case 3:
+            if(GameManager.instance.S_Unlock)
+            {
+                Spoon = GameObject.Find("S_Player").transform;
+                Player = GameObject.FindWithTag("S_Player").transform;
+            }
+            Player = Spoon.transform;
+            break;
+        }
+    }
     private void ChasePlayer()
     {
-        float distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
+        float distanceToTarget = Vector3.Distance(transform.position, Player.transform.position);
         float currentZPosition = transform.position.z;
-        if (player != null && distanceToTarget > TouchDistance)
-        {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, RunSpeed * Time.deltaTime);}
-        else if(player != null && distanceToTarget < TouchDistance)
+        if (Player != null && distanceToTarget > TouchDistance)
+        {transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, RunSpeed * Time.deltaTime);}
+        else if(Player != null && distanceToTarget < TouchDistance)
         {Behav = 2;}
          // Ruota il personaggio in base all'asse locale X o Z
             if (currentZPosition > previousZPosition)
@@ -146,22 +180,7 @@ public class NPCMove : MonoBehaviour
             previousZPosition = currentZPosition;
     
     }
-    private void PlayerTaking()
-    {
-        switch(rotationSwitcher.ConInt)
-        {
-            case 1:
-			player = ForkActive;
-            break;
-            case 2:
-			player = KnifeActive;
-            break;
-            case 3:
-			player = SpoonActive;
-            break;
-        }
-    }
-
+   
 private void MoveToWaypoint()
 {
     float currentZPosition = transform.position.z;
@@ -239,21 +258,9 @@ private void MoveToWaypoint()
     }
     private void FacePlayer()
     {
-        switch(SwitchCharacter.instance.rotationSwitcher.CharacterID)
+        if (Player != null)
         {
-            case 1:
-            player = GameObject.Find("F_Player");
-            break;
-            case 2:
-            player = GameObject.Find("K_Player");       
-            break;
-            case 3:
-            player = GameObject.Find("S_Player");
-            break;
-        }
-        if (player != null)
-        {
-            if (player.transform.position.z > transform.position.z){transform.localScale = new Vector3(-1, 1, 1);}
+            if (Player.transform.position.z > transform.position.z){transform.localScale = new Vector3(-1, 1, 1);}
             else{transform.localScale = new Vector3(1, 1, 1);}
         }
     }

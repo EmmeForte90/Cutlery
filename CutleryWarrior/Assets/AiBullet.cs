@@ -29,8 +29,8 @@ public class AiBullet : MonoBehaviour
     public void Start()
     {
         Destroy(OBJ, lifeTime);
-        Choise();
-        switch(resultP)
+        //Choise();
+        /*switch(resultP)
         {
             case 0:
         player = GameObject.FindGameObjectWithTag("F_Player");  // Trova il giocatore per tag
@@ -43,9 +43,10 @@ public class AiBullet : MonoBehaviour
             break;
         } 
         lastKnownPlayerPosition = player.transform.position;  // Aggiorna le coordinate conosciute del giocatore
+        */
     }
 
-    private void Choise()
+    /*private void Choise()
     {
         // Genera un numero casuale tra 1 e 3
         int randomNumber = Random.Range(0, 2);
@@ -66,7 +67,7 @@ public class AiBullet : MonoBehaviour
             else if(!GameManager.instance.S_Unlock){Choise();}
             break;
         } 
-    }
+    }*/
 
     private void Update()
     {
