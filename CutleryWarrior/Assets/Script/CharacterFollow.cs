@@ -21,7 +21,7 @@ public class CharacterFollow : MonoBehaviour
     private Transform Player;
     public GameObject Esclamation;
     public bool Attention;
-    private SwitchCharacter Switch;
+    //private SwitchCharacter Switch;
     private CharacterMove F_b;
     private CharacterMove S_b;
     private CharacterMove K_b;
@@ -32,11 +32,8 @@ public class CharacterFollow : MonoBehaviour
     public float RunSpeed = 6f;
     public float stoppingDistance = 1f;
     public float  OrderDistance = 2f;
-    //public float groundCheckDistance = 0.2f;
-    //public LayerMask groundLayer;
     private Rigidbody characterRigidbody;
     private bool isFollowing;
-    //private bool isGrounded;
     private bool isWalking;
     public bool isGuard;
     private float defense;
@@ -52,7 +49,6 @@ public class CharacterFollow : MonoBehaviour
     [SpineAnimation][SerializeField]  string IdleAnimationName;
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
     [SpineAnimation][SerializeField]  string AllarmAnimationName;
-    //[SpineAnimation][SerializeField]  string WinAnimationName;
     [SpineAnimation][SerializeField]  string GuardAnimationName;
     [SpineAnimation][SerializeField]  string Atk1AnimationName;
     [Header("Battle")]
@@ -68,7 +64,6 @@ public class CharacterFollow : MonoBehaviour
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
-    //Spine.EventData eventData;
     public static CharacterFollow instance;
     public DuelManager DM;
     #endregion
@@ -77,22 +72,22 @@ public class CharacterFollow : MonoBehaviour
          if (instance == null){instance = this;}
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");} 
-        if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();;} 
+        //if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();;} 
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
         characterController = GetComponent<CharacterController>();
         characterRigidbody = GetComponent<Rigidbody>();
-        Player = GameObject.FindGameObjectWithTag("F_Player").transform;
-        if(GameManager.instance.F_Unlock){F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.K_Unlock){K_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.S_Unlock){S_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        Player = GameManager.instance.F_Hero.transform;
+        if(GameManager.instance.F_Unlock){F_b = GameManager.instance.F_Hero.GetComponent<CharacterMove>();}
+        if(GameManager.instance.K_Unlock){K_b = GameManager.instance.K_Hero.GetComponent<CharacterMove>();}
+        if(GameManager.instance.S_Unlock){S_b = GameManager.instance.S_Hero.GetComponent<CharacterMove>();}
     }
     public void RetakeCh()
     {
-        if(GameManager.instance.F_Unlock){F_b = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.K_Unlock){K_b = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.S_Unlock){S_b = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
+        if(GameManager.instance.F_Unlock){F_b = GameManager.instance.F_Hero.GetComponent<CharacterMove>();}
+        if(GameManager.instance.K_Unlock){K_b = GameManager.instance.K_Hero.GetComponent<CharacterMove>();}
+        if(GameManager.instance.S_Unlock){S_b = GameManager.instance.S_Hero.GetComponent<CharacterMove>();}
     }
     
     public void Update()

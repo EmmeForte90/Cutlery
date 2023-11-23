@@ -42,35 +42,6 @@ public class QuestsManager : MonoBehaviour
     public void Start()
     {foreach (InventorySlot child in inventoryQuestsItem.GetComponentsInChildren<InventorySlot>()){slotListItem.Add(child);}}
     
-    /*private void OnSceneLoaded()
-    {
-        // Cerca tutti i GameObjects con il tag "Ch_Quest"
-        GameObject[] QuestCH = GameObject.FindGameObjectsWithTag("QuestCH");
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        // Itera attraverso tutti gli oggetti trovati
-        foreach (GameObject Character in QuestCH)
-        {
-            // Ottiene il componente QuestCharacters
-            TriggerOrdalia ordaliT = Character.GetComponent<TriggerOrdalia>();
-
-            // Verifica se il componente esiste
-            if (ordaliT != null)
-            {
-                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
-                int Id = ordaliT.id;
-                for (int i = 0; i < OrdaliaActive.Length; i++)
-                {
-                    if (OrdaliaActive[i] && i == Id)
-                    {
-                        // Imposta ordaliT.FirstD a false
-                        ordaliT.OrdaliaDoesntExist();
-                        break;
-                    }
-                }
-            }
-        }
-    }*/
 
     // Metodo per aggiungere una nuova quest al database
     public void AddQuest(Quests newQuest){questDatabase.Add(newQuest);}

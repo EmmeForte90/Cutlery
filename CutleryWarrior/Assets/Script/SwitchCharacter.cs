@@ -8,7 +8,6 @@ using Cinemachine;
 public class SwitchCharacter : MonoBehaviour
 {
     #region Header
-    //public bool battle = false;
     [Header("Stats")]
     [Header("Fork")]
     public GameObject Ind_F;
@@ -66,12 +65,6 @@ public class SwitchCharacter : MonoBehaviour
     }
      public void TakeCharacters()
     {
-        //if(GameManager.instance.F_Unlock){ForkActive = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
-        //if(GameManager.instance.S_Unlock){SpoonActive = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
-        //if(GameManager.instance.K_Unlock){KnifeActive = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
-        //vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
-        //ottieni il riferimento alla virtual camera di Cinemachine
-        //
         switch(rotationSwitcher.CharacterID)
         {
             case 1:
@@ -133,9 +126,9 @@ public class SwitchCharacter : MonoBehaviour
         rotationSwitcher.CharacterIDTer = 2;
         yield return new WaitForSeconds(0.01f);
         Flip();
-        player = GameObject.FindGameObjectWithTag("F_Player");
+        player = GameManager.instance.F_Hero;
         AudioManager.instance.PlayUFX(3);
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+        vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); 
         vCam.Follow = player.transform;
         }
         //////////////////////////////
@@ -155,9 +148,9 @@ public class SwitchCharacter : MonoBehaviour
         rotationSwitcher.CharacterIDTer = 3;
         yield return new WaitForSeconds(0.01f);
         Flip();
-        player = GameObject.FindGameObjectWithTag("K_Player");
+        player = GameManager.instance.K_Hero;;
         AudioManager.instance.PlayUFX(3);
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+        vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); 
         vCam.Follow = player.transform;
         }
         //////////////////////////////
@@ -175,9 +168,9 @@ public class SwitchCharacter : MonoBehaviour
         rotationSwitcher.CharacterIDTer = 1;
         yield return new WaitForSeconds(0.01f);
         Flip();
-        player = GameObject.FindGameObjectWithTag("S_Player");
+        player = GameManager.instance.S_Hero;;
         AudioManager.instance.PlayUFX(3);
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+        vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); 
         vCam.Follow = player.transform;
         }
         //////////////////////////////

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -52,15 +51,15 @@ public class InventorySlotBattle : MonoBehaviour
             switch(rotationSwitcher.rotationSwitcher.CharacterID)
         {
             case 1:
-            UseItemCharacter = GameObject.Find("F_Player").GetComponent<ChargeSkill>();
+            UseItemCharacter = GameManager.instance.F_Hero.GetComponent<ChargeSkill>();
             UseItemCharacter.ItemData(item);//Richiama lo script chargeskill per preparare l'oggetto da lanciare
             break;
             case 2:
-            UseItemCharacter = GameObject.Find("K_Player").GetComponent<ChargeSkill>();
+            UseItemCharacter = GameManager.instance.K_Hero.GetComponent<ChargeSkill>();
             UseItemCharacter.ItemData(item);
             break;
             case 3:
-            UseItemCharacter = GameObject.Find("S_Player").GetComponent<ChargeSkill>();
+            UseItemCharacter = GameManager.instance.S_Hero.GetComponent<ChargeSkill>();
             UseItemCharacter.ItemData(item);
             break;
         }

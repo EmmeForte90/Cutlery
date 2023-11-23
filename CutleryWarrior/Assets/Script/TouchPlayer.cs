@@ -6,12 +6,9 @@ public class TouchPlayer : MonoBehaviour
 {
     #region Header
     public int IdENM;
-    //public int IDBattle;
-    //public int IdAreaAtt;
     public GameObject BattleObj;
     public GameObject[] DeactiveObj; 
     public GameObject This;
-    
     public float stoppingDistance = 1f;
     public Vector3 savedPosition;
     private Transform Player;
@@ -19,17 +16,17 @@ public class TouchPlayer : MonoBehaviour
     private Transform Spoon;
     private Transform Knife;
     public Transform ENM;
-    private SwitchCharacter Switch;
+    //private SwitchCharacter Switch;
     public bool takeCoo = false;
     public bool isMove = true;
     public NPCMove Mnpc;
     #endregion
     public void Start()
     {
-    if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
-    if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
-    if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}
-    if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}
+    //if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
+    if(GameManager.instance.F_Unlock){Fork = GameManager.instance.F_Hero.transform;}
+    if(GameManager.instance.S_Unlock){Spoon = GameManager.instance.S_Hero.transform;}
+    if(GameManager.instance.K_Unlock){Knife = GameManager.instance.K_Hero.transform;}
     BattleObj.SetActive(false);
     }
     public void Take(){Destroy(This);}
@@ -40,24 +37,24 @@ public class TouchPlayer : MonoBehaviour
             case 1:
             if(GameManager.instance.F_Unlock)
             {
-                Fork = GameObject.Find("F_Player").transform;
-                Player = GameObject.FindWithTag("F_Player").transform;
+                Fork = GameManager.instance.F_Hero.transform;
+                Player = GameManager.instance.F_Hero.transform;
             }
             Player = Fork.transform;
             break;
             case 2:
             if(GameManager.instance.K_Unlock)
             {
-                Knife = GameObject.Find("K_Player").transform;
-                Player = GameObject.FindWithTag("K_Player").transform; 
+                Knife = GameManager.instance.K_Hero.transform;
+                Player = GameManager.instance.K_Hero.transform; 
             }  
             Player = Knife.transform;
             break;
             case 3:
             if(GameManager.instance.S_Unlock)
             {
-                Spoon = GameObject.Find("S_Player").transform;
-                Player = GameObject.FindWithTag("S_Player").transform;
+                Spoon = GameManager.instance.S_Hero.transform;
+                Player = GameManager.instance.S_Hero.transform;
             }
             Player = Spoon.transform;
             break;
@@ -82,7 +79,6 @@ public class TouchPlayer : MonoBehaviour
     GameManager.instance.Posebattle();
     BattleObj.SetActive(true);
     foreach (GameObject arenaObject in DeactiveObj){arenaObject.SetActive(false);}
-    //sceneEvent.InvokeOnSceneChange();
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -111,8 +107,6 @@ public class TouchPlayer : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(ENM.transform.position, stoppingDistance);
-        //Gizmos.color = Color.blue;
-        //Gizmos.DrawWireSphere(Agro.position, agroDistance);
     }
     #endregion
     #endif

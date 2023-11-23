@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class testin : MonoBehaviour
@@ -10,7 +8,7 @@ public class testin : MonoBehaviour
     public SaveManager Save;
     public void Start()
     {
-        FAct = GameObject.FindWithTag("F_Player");
+        FAct = GameManager.instance.F_Hero;
         Save = GameObject.FindWithTag("Save").GetComponent<SaveManager>();
 
     }
@@ -32,7 +30,6 @@ public class testin : MonoBehaviour
         PlayerStats.instance.KSkillATT(5);
         PlayerStats.instance.KSkillATT(6);
         PlayerStats.instance.KSkillATT(7);
-        //PlayerStats.instance.KSkillATT(8);
         //
         PlayerStats.instance.SSkillATT(1);        
         PlayerStats.instance.SSkillATT(2);
@@ -41,7 +38,6 @@ public class testin : MonoBehaviour
         PlayerStats.instance.SSkillATT(5);
         PlayerStats.instance.SSkillATT(6);
         PlayerStats.instance.SSkillATT(7);
-        //PlayerStats.instance.SSkillATT(8);
     }
     public void Addlevel()
     {
@@ -57,7 +53,5 @@ public class testin : MonoBehaviour
         if(GameManager.instance.K_Unlock){KAct.transform.position = PlayerStats.instance.savedPosition;}
         if(GameManager.instance.S_Unlock){SAct.transform.position = PlayerStats.instance.savedPosition;}
         PlayerStats.instance.IBattle_quantityList =   PlayerStats.instance.I_quantityList; 
-
     }
-
 }

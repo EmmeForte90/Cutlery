@@ -7,8 +7,6 @@ public class Lasciapassare : MonoBehaviour
 {
     #region Header
     [Header("Data")]
-    //public Dialogues Dialogue;
-    //private int IDDialogue;
     public int IdEvent;
     private GameObject player; // Reference to the player's position
     private KeyManager M_K;
@@ -17,7 +15,6 @@ public class Lasciapassare : MonoBehaviour
     private GameObject Fork;
     private GameObject Spoon;
     private GameObject Knife;
-    private SwitchCharacter Switch;
     public int obj1;
     [Header("Dialogue")]
     public TextMeshProUGUI dialogueText; // Reference to the TextMeshProUGUI component
@@ -25,7 +22,6 @@ public class Lasciapassare : MonoBehaviour
     public string TextNO;
     [TextArea(1, 3)]
     public string TextYES;
-
     public GameObject button;
     public GameObject dialogueBox;
     public bool heFlip;
@@ -49,8 +45,7 @@ public class Lasciapassare : MonoBehaviour
     public void Take(){Destroy(gameObject);}
     void Awake()
     {
-            //if (instance == null){instance = this;}
-            if (M_K == null && Switch == null){StartCoroutine(StartData());}
+            if (M_K == null){StartCoroutine(StartData());}
             _skeletonAnimation = GetComponent<SkeletonAnimation>();
             if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");}        
             _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
@@ -59,14 +54,12 @@ public class Lasciapassare : MonoBehaviour
     }
      IEnumerator StartData()
     {yield return new WaitForSeconds(0.01f);
-    if (M_K == null) {M_K = GameObject.FindWithTag("Manager").GetComponent<KeyManager>(); } 
-    if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} start = true;}
+    if (M_K == null) {M_K = GameObject.FindWithTag("Manager").GetComponent<KeyManager>();}}
     void Start()
     {        
         button.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueText.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-        //anim = GetComponent<Animator>();
     }
     void Update()
     {
@@ -79,22 +72,22 @@ public class Lasciapassare : MonoBehaviour
             AddQuestItem();
         }
 
-    if(start){
-    if(Switch.isElement1Active){player = Spoon;}
-    else if(Switch.isElement2Active){player = Fork;} 
-    else if(Switch.isElement3Active){player = Knife;} 
+    if(start)
+    {
+    if (GameManager.instance.CharacterID == 1)
+    {if(GameManager.instance.F_Unlock)
+    {Fork = GameManager.instance.F_Hero; player = Fork;}}
     //
-    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
-    {if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player");}
+    if (GameManager.instance.CharacterID == 2)
+    {if(GameManager.instance.K_Unlock)
+    {Knife = GameManager.instance.K_Hero; player = Knife;}}
+    //
+    if (GameManager.instance.CharacterID == 3)
+    {if(GameManager.instance.S_Unlock)
+    {Spoon = GameManager.instance.S_Hero; player = Spoon;}}
     }
-    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
-    {if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player");}}
-    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
-    {if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player");}}}
     }
     
-
-
     private void OnTriggerEnter(Collider collision)
     {
     if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
@@ -108,8 +101,6 @@ public class Lasciapassare : MonoBehaviour
     if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
     {button.gameObject.SetActive(false);}
     }
-
-
     public void AddQuestItem()
     {
     if(M_K.itemList.Contains(objectToCheck[obj1]))
@@ -136,7 +127,6 @@ public class Lasciapassare : MonoBehaviour
     dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
     dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
     CharacterMove.instance.Interact = false;}
-
     void FacePlayer()
     {
         if (player != null)
@@ -145,7 +135,6 @@ public class Lasciapassare : MonoBehaviour
             else{transform.localScale = new Vector3(-1, 1, 1);}
         }
     }
-    
  #region Animations
      public void Idle()
 {

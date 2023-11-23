@@ -17,11 +17,11 @@ public class ChangeArea : MonoBehaviour
     #endregion
     public void Start()
     {        
-         if(GameManager.instance.F_Unlock){FAct = GameObject.FindWithTag("F_Player");}
-         if(GameManager.instance.S_Unlock){SAct = GameObject.FindWithTag("S_Player");}
-         if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}        
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-        confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
+         if(GameManager.instance.F_Unlock){FAct = GameManager.instance.F_Hero;}
+         if(GameManager.instance.S_Unlock){SAct = GameManager.instance.S_Hero;}
+         if(GameManager.instance.K_Unlock){KAct = GameManager.instance.K_Hero;}        
+        vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+        confiner = GameManager.instance.vcam.GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
     }
     public void OnTriggerEnter(Collider collision)
     {
@@ -50,9 +50,9 @@ public class ChangeArea : MonoBehaviour
         CharacterMove.instance.isRun = false;
         ModifyConfiner();
         GameManager.instance.player.transform.position = PointSpawn.transform.position;
-        if(GameManager.instance.F_Unlock){FAct = GameObject.FindWithTag("F_Player");}
-        if(GameManager.instance.S_Unlock){SAct = GameObject.FindWithTag("S_Player");}
-        if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}  
+        if(GameManager.instance.F_Unlock){FAct = GameManager.instance.F_Hero;}
+        if(GameManager.instance.S_Unlock){SAct = GameManager.instance.S_Hero;}
+        if(GameManager.instance.K_Unlock){KAct = GameManager.instance.K_Hero;}  
         if(GameManager.instance.K_Unlock){KAct.transform.position = PointSpawn.transform.position;}
         if(GameManager.instance.F_Unlock){FAct.transform.position = PointSpawn.transform.position;}
         if(GameManager.instance.S_Unlock){SAct.transform.position = PointSpawn.transform.position;}

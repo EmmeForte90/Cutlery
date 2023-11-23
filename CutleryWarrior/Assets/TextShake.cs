@@ -5,9 +5,6 @@ using TMPro;
 public class TextShake : MonoBehaviour
 {
     public float shakeIntensity = 3f;
-    //public float shakeDuration = 1f;
-   // public bool Haveduration = false;
-
     private TextMeshProUGUI textMeshPro;
     private Vector3 originalPosition;
 
@@ -20,30 +17,9 @@ public class TextShake : MonoBehaviour
 
     void Update()
     {
-       
         float x = originalPosition.x + Random.Range(-1f, 1f) * shakeIntensity;
-            float y = originalPosition.y + Random.Range(-1f, 1f) * shakeIntensity;
-            transform.position = new Vector3(x, y, originalPosition.z);
-            
-        
-        
+        float y = originalPosition.y + Random.Range(-1f, 1f) * shakeIntensity;
+        transform.position = new Vector3(x, y, originalPosition.z);
     }
 
-    /*IEnumerator ShakeText()
-    {
-        float elapsedTime = 0f;
-       
-        while (elapsedTime < shakeDuration)
-        {
-            float x = originalPosition.x + Random.Range(-1f, 1f) * shakeIntensity;
-            float y = originalPosition.y + Random.Range(-1f, 1f) * shakeIntensity;
-
-            transform.position = new Vector3(x, y, originalPosition.z);
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        // Ripristina la posizione originale del testo
-        transform.position = originalPosition;
-    }*/
 }

@@ -11,25 +11,17 @@ public class CharacterMove : MonoBehaviour
     [Tooltip("Scegli personaggi 0.Fork 1.Knife 2.Spoon")]
     [Range(0, 2)]
     public int kindCh;
-    //public PlayerStats Stats;
-
     [Tooltip("0 - Exploration, 1 - Battle")]
     public int IDAction = 0; //Che tipo di personaggio è
     public GameObject Esclamation;
     public bool Attention;
-    //public GameObject Bullet;
-    //public Transform BPoint;
     private Rigidbody rb;  
     [Header("Move")]
     public float Speed = 5.0f;
     public float SpeedB = 3.0f;
     public float Run = 3.0f;
     private Transform cam;
-    //Vector2 input;
-    //public Transform SpriteHero;
-    //private bool stand = true;
     public bool isRun = false;
-    //private bool StopRun = false;
     public bool inputCTR = false;
     public bool Interact = false;
     public bool Win = false;
@@ -38,9 +30,6 @@ public class CharacterMove : MonoBehaviour
     public float comboCooldown = 0.5f; // Tempo di cooldown tra le combo in secondi
     public float comboCooldownK = 0.3f; // Tempo di cooldown tra le combo in secondi
     private bool isAttacking = false; // Aggiunto il flag per controllare se il personaggio sta attaccando
-
-
-    //private PlayerStats Stats;
     private bool top = true;
     private bool StopRanm = false;
     private bool isCharging = false; // Flag per il colpo caricato
@@ -50,22 +39,17 @@ public class CharacterMove : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     public bool isDodging = false;
     [Header("Dodge")]
-
     public float dodgeSpeed = 20.0f;
     public float dodgeDuration = 1f;
     public float cooldownTime = 0.5f;
     private bool canDodge = true;
-    //public float stumpCooldown = 1f;
     private bool Stump = true;
     public bool warning = false;
     private float hor;
-    //private float defense;
     private float danno_subito;
     private bool poisonState = false;
     private int TimePoison = 5;   
-    //private bool Right = true; 
     public bool isMoving;
-   
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string WalkAnimationName;
     [SpineAnimation][SerializeField]  string WalkUPAnimationName;
@@ -74,7 +58,6 @@ public class CharacterMove : MonoBehaviour
     [SpineAnimation][SerializeField]  string IdleAnimationName;
     [SpineAnimation][SerializeField]  string IdleUPAnimationName;
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
-    //[SpineAnimation][SerializeField]  string WalkBAnimationName;
     [SpineAnimation][SerializeField]  string RunBAnimationName;
     [SpineAnimation][SerializeField]  string TalkingAnimationName;
     [SpineAnimation][SerializeField]  string AllarmAnimationName;
@@ -89,10 +72,8 @@ public class CharacterMove : MonoBehaviour
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
-    private SwitchCharacter Switch;
     public bool isDefence = false;
     public AnimationManager Anm;
-    //Vector3 camF,camR,moveDir;  
     [Header("Dodge and Knockback")]    
     private DodgeController DodgeController;
     private KnockbackController knockbackController;       
@@ -121,7 +102,7 @@ public void Awake()
         {instance = this;}
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");}  
-        cam = GameObject.FindWithTag("MainCamera").transform;      
+        cam = GameManager.instance.vcam.transform;      
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;        
@@ -130,7 +111,7 @@ public void Awake()
         rb = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();
         rb.freezeRotation = true;
-        if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
+        //if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
         //Stats = GameObject.Find("Stats").GetComponent<PlayerStats>();
         VFXCantATK.SetActive(false);
     }
@@ -180,7 +161,7 @@ public void Awake()
 #region MoveExploration
     public void SimpleMove()
     {
-        if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
+        if(cam == null){cam = GameManager.instance.vcam.transform;}
         Flip();  
         ////////////////////////////////
         if(!Interact)
@@ -441,7 +422,6 @@ private IEnumerator StumpKTime()
         {HandleComboAttackS(); PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP; Stop();} 
         else if(PlayerStats.instance.S_curMP < 20){AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);}
     }
-
     private void HandleComboAttackS()
     {
         comboCount = (comboCount % 3) + 1;
@@ -449,11 +429,8 @@ private IEnumerator StumpKTime()
         canAttack = false;
         Invoke("StopAtk", comboCooldown);
         //StartCoroutine(ComboCooldown());
-    }
-    
+    }  
 #endregion
-
-    
 
     private void PlayComboAnimation(string animationName)
     {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, false);}}
@@ -465,7 +442,7 @@ private IEnumerator StumpKTime()
     public void OpenBook(){Anm.PlayAnimationExplore(OpenBookAnimationName);}
     public void CloseBook(){Anm.PlayAnimationExplore(CloseBookAnimationName);}
 
-    public void TakeCamera(){cam = GameObject.FindWithTag("MainCamera").transform;}
+    public void TakeCamera(){cam = GameManager.instance.vcam.transform;}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName); VFXCantATK.SetActive(false);}
     public void Allarm(){warning = true;}
     public void StopAllarm(){warning = false;}
@@ -537,7 +514,7 @@ private IEnumerator StumpKTime()
     #region Move
     //For Knife
         public void MoveB()
-        {if(cam == null){cam = GameObject.FindWithTag("MainCamera").transform;}
+        {if(cam == null){cam = GameManager.instance.vcam.transform;}
         Flip();  
         ////////////////////////////////
         horizontalInput = Input.GetAxis("Horizontal");
@@ -585,10 +562,7 @@ private IEnumerator StumpKTime()
     public void OnCollisionEnter(Collision collision)
     {if (collision.gameObject.CompareTag("Collider")){}//StopRun = true;}
     if (collision.gameObject.CompareTag("Question")){Attention = true;}
-    /*if (collision.gameObject.CompareTag("Scene"))
-    {transform.localScale = new Vector3(-1, 1,1);}*/
     }
-
     public void OnCollisionExit(Collision collision)
     {if (collision.gameObject.CompareTag("Collider")){}//StopRun = false;}
     if (collision.gameObject.CompareTag("Question")){Attention = false;}}

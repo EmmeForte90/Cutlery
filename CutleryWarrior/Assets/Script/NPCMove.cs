@@ -136,24 +136,24 @@ public class NPCMove : MonoBehaviour
             case 1:
             if(GameManager.instance.F_Unlock)
             {
-                Fork = GameObject.Find("F_Player").transform;
-                Player = GameObject.FindWithTag("F_Player").transform;
+                Fork = GameManager.instance.F_Hero.transform;
+                Player = GameManager.instance.F_Hero.transform;
             }
             Player = Fork.transform;
             break;
             case 2:
             if(GameManager.instance.K_Unlock)
             {
-                Knife = GameObject.Find("K_Player").transform;
-                Player = GameObject.FindWithTag("K_Player").transform; 
+                Knife = GameManager.instance.K_Hero.transform;
+                Player = GameManager.instance.K_Hero.transform; 
             }  
             Player = Knife.transform;
             break;
             case 3:
             if(GameManager.instance.S_Unlock)
             {
-                Spoon = GameObject.Find("S_Player").transform;
-                Player = GameObject.FindWithTag("S_Player").transform;
+                Spoon = GameManager.instance.S_Hero.transform;
+                Player = GameManager.instance.S_Hero.transform;
             }
             Player = Spoon.transform;
             break;

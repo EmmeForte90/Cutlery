@@ -11,7 +11,6 @@ public class AnimationManager : MonoBehaviour
     public bool knife;
     public bool spoon;
     public bool Enemy;
-    
     [Header("Items")]
     public GameObject Potion;//HP
     public GameObject MediaPotion;//HP
@@ -37,7 +36,6 @@ public class AnimationManager : MonoBehaviour
     public GameObject Barricata;//Crea un ostacolo per il nemico
     public GameObject Bengala;//Crea un area dove curarsi
     public float Cooldown = 0.5f; // Tempo di cooldown tra le combo in secondi
-
 
     [Header("Impronte")]
     [HideInInspector]public bool canImp = false;
@@ -70,8 +68,8 @@ public class AnimationManager : MonoBehaviour
     private GameObject SpoonActive;
     private CharacterMove S_Script;
     [HideInInspector] public GameObject ShiledT;
-     [HideInInspector] public GameObject ShiledB; 
-     [HideInInspector] public GameObject Crush;
+    [HideInInspector] public GameObject ShiledB; 
+    [HideInInspector] public GameObject Crush;
     [HideInInspector] public GameObject BenedictionTower;
     [HideInInspector] public GameObject Cura;
     [HideInInspector] public GameObject ShockWave;
@@ -108,22 +106,16 @@ public class AnimationManager : MonoBehaviour
     [HideInInspector] public TimerSkill Skill_6;
     [HideInInspector] public TimerSkill Skill_7;
     [HideInInspector] public TimerSkill Skill_8;
-
-    //
     public TimerSkill ItemTimer;
-
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string IdleAnimationName;
-
     [SpineAnimation][SerializeField]  string IdleBAnimationName;
     [SpineAnimation][SerializeField]  string WalkBAnimationName;
-
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
     Spine.EventData eventData;
-    //private bool Boom = false;
     public bool VFX = true;
     [HideInInspector]public Transform SkillPoint;
     public Transform BPoint;
@@ -138,9 +130,9 @@ public class AnimationManager : MonoBehaviour
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;   
-        if(GameManager.instance.F_Unlock){F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.K_Unlock){K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(GameManager.instance.S_Unlock){S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>();}    
+        if(GameManager.instance.F_Unlock){F_Script = GameManager.instance.F_Hero.GetComponent<CharacterMove>();}
+        if(GameManager.instance.K_Unlock){K_Script = GameManager.instance.K_Hero.GetComponent<CharacterMove>();}
+        if(GameManager.instance.S_Unlock){S_Script = GameManager.instance.S_Hero.GetComponent<CharacterMove>();}    
     }
     IEnumerator StopVFX_K()
     {

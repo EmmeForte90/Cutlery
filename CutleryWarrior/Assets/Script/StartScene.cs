@@ -6,14 +6,11 @@ public class StartScene : MonoBehaviour
 {
     #region Header
     public int WhatMusic;
-    //public bool StartGame = false;
     public bool Start = false;
     public bool startMusic = false;
-    //public bool Testing = false;
     public GameObject StartGameOBJ;
     public GameObject Data;
     public GameObject PStart;
-    //private GameObject player;
     private GameObject ContainerHero;
     private GameObject FAct;
     private GameObject KAct;
@@ -26,10 +23,8 @@ public class StartScene : MonoBehaviour
     public GameObject[] Giorno;
     public Material newSkyboxMaterial_G; // Il nuovo materiale Skybox che desideri applicare
     public GameObject[] Enemies; 
-    //public Collider[] BoxConfiner;    
     private CinemachineConfiner confiner;
     private CinemachineVirtualCamera vCam;
-    //public Collider bCStart;
     private SwitchCharacter Switcher;
     private int IDPorta;
     private int ID_Enm;
@@ -43,9 +38,6 @@ public class StartScene : MonoBehaviour
     if(SaveManager.instance != null){Once = false;}
     else  if(SaveManager.instance == null){Once = true;}
 
-    /*if (PlayerStats.instance == null)
-    {Instantiate(Data, transform.position, transform.rotation); PlayerStats.instance.CanLoading = false;}*/
-
     if (Start)
     {if (Once)
     {
@@ -57,9 +49,9 @@ public class StartScene : MonoBehaviour
     else if(!Once)
     {if(SaveManager.instance.Saving)
     {   SaveManager.instance.LoadGame();
-        if(GameManager.instance.F_Unlock){FAct = GameObject.FindWithTag("F_Player");}
-        if(GameManager.instance.S_Unlock){SAct = GameObject.FindWithTag("S_Player");}
-        if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}
+        if(GameManager.instance.F_Unlock){FAct = GameManager.instance.F_Hero;}
+        if(GameManager.instance.S_Unlock){SAct = GameManager.instance.S_Hero;}
+        if(GameManager.instance.K_Unlock){KAct = GameManager.instance.K_Hero;}
         if(GameManager.instance.F_Unlock){FAct.transform.position = PlayerStats.instance.savedPosition;}
         if(GameManager.instance.K_Unlock){KAct.transform.position = PlayerStats.instance.savedPosition;}
         if(GameManager.instance.S_Unlock){SAct.transform.position = PlayerStats.instance.savedPosition;}
@@ -77,11 +69,11 @@ public class StartScene : MonoBehaviour
     //
     if(!GameManager.instance.StartGame){
     GameManager.instance.ChStop();
-    if(GameManager.instance.F_Unlock){FAct = GameObject.FindWithTag("F_Player");}
-    if(GameManager.instance.S_Unlock){SAct = GameObject.FindWithTag("S_Player");}
-    if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}
-    vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    if(GameManager.instance.F_Unlock){FAct = GameManager.instance.F_Hero;}
+    if(GameManager.instance.S_Unlock){SAct = GameManager.instance.S_Hero;}
+    if(GameManager.instance.K_Unlock){KAct = GameManager.instance.K_Hero;}
+    vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    confiner = GameManager.instance.vcam.GetComponent<CinemachineConfiner>(); //ottieni il riferimento alla virtual camera di Cinemachine
     
     IDPorta = GameManager.instance.IDPorta;
     ID_Enm = GameManager.instance.IdENM;
@@ -130,7 +122,6 @@ public class StartScene : MonoBehaviour
     if(GameManager.instance.K_Unlock){KAct.transform.position = GameManager.instance.savedPosition;}
     if(GameManager.instance.S_Unlock){SAct.transform.position = GameManager.instance.savedPosition;}
     EnemiesActive(ID_Enm);
-    //if (!Testing){AreaActive(GameManager.instance.IdAreaAtt);}
     GameManager.instance.StopWin();
     }
     IEnumerator BoxDel()
@@ -143,37 +134,12 @@ public class StartScene : MonoBehaviour
     public void AreaActive(int ID)
     {
             // Disattiva tutti gli oggetti nel tuo array
-            for (int i = 0; i < ActiveObjAB.Length; i++)
-            {
-                ActiveObjAB[i].SetActive(false);
-            }
+            for (int i = 0; i < ActiveObjAB.Length; i++){ActiveObjAB[i].SetActive(false);}
 
             // Calcola l'indice dell'array in base all'ID
             int arrayIndex = ID;
 
             // Attiva l'oggetto corrispondente
             ActiveObjAB[arrayIndex].SetActive(true);
-
-            // Chiama la funzione Confiner con l'ID + 5
-            //Confiner(ID);
-        
     }
-
-    /*public void Confiner(int ID)
-    {
-        confiner.m_BoundingVolume  = null; 
-        confiner.m_BoundingVolume  = BoxConfiner[ID];       
-        switch(GameManager.instance.IDCharacter)
-        {
-            case 1:
-            vCam.Follow = FAct.transform;
-            break;
-            case 2:
-            vCam.Follow = KAct.transform;
-            break;
-            case 3:
-            vCam.Follow = SAct.transform;
-            break;
-        }  
-    }*/
 }

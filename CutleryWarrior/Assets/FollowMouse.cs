@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 public class FollowMouse : MonoBehaviour
@@ -36,7 +34,7 @@ public class FollowMouse : MonoBehaviour
 
     public void OnEnable()
     {
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+        vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); 
         vCam.Follow = indicator.transform;
         GameManager.instance.StopBattle();
     }

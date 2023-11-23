@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine;
 using TMPro;
@@ -25,7 +23,6 @@ public class QuestCharacters : MonoBehaviour
     public bool NeedKey = false;
     public Item KeyForQuest;
     public int specificQuant;
-    //public Transform RewardPoint;
     private string[] dialogue; // array of string to store the dialogues
     public float dialogueDuration; // variable to set the duration of the dialogue
     private int dialogueIndex; // variable to keep track of the dialogue status
@@ -52,7 +49,7 @@ public class QuestCharacters : MonoBehaviour
     private SkeletonAnimation _skeletonAnimation;
     private Spine.AnimationState _spineAnimationState;
     private Spine.Skeleton _skeleton;
-    Spine.EventData eventData;
+    //Spine.EventData eventData;
     public static QuestCharacters instance;
     #endregion
     public void Awake()
@@ -260,16 +257,16 @@ public class QuestCharacters : MonoBehaviour
     
     void FacePlayer()
     {
-        switch(SwitchCharacter.instance.rotationSwitcher.CharacterID)
+        switch(GameManager.instance.CharacterID)
         {
             case 1:
-            player = GameObject.Find("F_Player");
+            player = GameManager.instance.F_Hero;
             break;
             case 2:
-            player = GameObject.Find("K_Player");       
+            player = GameManager.instance.K_Hero;       
             break;
             case 3:
-            player = GameObject.Find("S_Player");
+            player = GameManager.instance.S_Hero;
             break;
         }
         if (player != null)

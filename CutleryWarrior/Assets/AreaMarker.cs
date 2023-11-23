@@ -56,38 +56,8 @@ public class AreaMarker : MonoBehaviour
     {
         if (selectionMarker != null)
         {
-            //Destroy(selectionMarker);
+            
         }
     }
 
-    // Seleziona le unità all'interno dell'area
-    /*private void SelectUnitsInArea(Vector3 start, Vector3 end)
-    {
-        // Effettua il raycast dal punto di inizio al punto di fine per selezionare le unità
-        Ray selectionRay = Camera.main.ScreenPointToRay(start);
-        RaycastHit[] hits;
-        hits = Physics.RaycastAll(selectionRay, Vector3.Distance(start, end));
-
-        // Deseleziona tutte le unità prima di selezionarne di nuove
-        DeselectAllUnits();
-
-        foreach (RaycastHit hit in hits)
-        {
-            if (hit.collider.CompareTag("SelectableUnit"))
-            {
-                // Seleziona l'unità
-                hit.collider.GetComponent<SelectableUnit>().Select();
-            }
-        }
-    }
-
-    // Deseleziona tutte le unità
-    private void DeselectAllUnits()
-    {
-        SelectableUnit[] units = FindObjectsOfType<SelectableUnit>();
-        foreach (SelectableUnit unit in units)
-        {
-            unit.Deselect();
-        }
-    }*/
 }

@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
         if (instance == null){instance = this;}
         rb = GetComponent<Rigidbody>();
         if (isSkill){damage = itemInfo.damage;}
-        player = GameObject.FindGameObjectWithTag("F_Player").transform;
+        player = GameManager.instance.F_Hero.transform;
         if(player.transform.localScale.x == 1){Vector3 direction = player.right; rb.velocity = direction.normalized * speed;}
         else if(player.transform.localScale.x == -1){Vector3 direction = -player.right; rb.velocity = direction.normalized * speed;}
         Destroy(gameObject, lifeTime);

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using TMPro;
@@ -24,7 +23,7 @@ public class CameraWarning : MonoBehaviour
     void Start()
     {
         Player = GameManager.instance.player;       
-        vcam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+        vcam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
     }
     void Update(){if(canpress){
         if(Input.GetButtonDown("Fire1")){Box.SetActive(false);

@@ -11,8 +11,6 @@ public class LevelChanger : MonoBehaviour
     {
     sceneEvent = GetComponent<SceneEvent>();
     sceneEvent.onSceneChange.AddListener(ChangeScene);
-    //Loading = PlayerStats.instance.CanLoading;
-    //if(Loading){sceneName = PlayerStats.instance.NameScene;}
     if(SaveManager.instance.Saving)
     {sceneName = SaveManager.instance.NameScene;}
     }

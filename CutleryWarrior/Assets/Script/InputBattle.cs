@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
-using Spine;
 
 public class InputBattle : MonoBehaviour
 {
@@ -17,10 +15,7 @@ public class InputBattle : MonoBehaviour
     [SpineAnimation][SerializeField] private string GuardHitAnimationName;
     [SpineAnimation][SerializeField] private string DodgeFAnimationName;
     [SpineAnimation][SerializeField] private string DodgeBAnimationName;
- // Nome dell'animazione di attacco base
-    //[SerializeField] private string attackAnimationName = "attack";
-
-    // Nome delle animazioni di combo (aggiunto a un numero per formare il nome completo)
+ 
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;

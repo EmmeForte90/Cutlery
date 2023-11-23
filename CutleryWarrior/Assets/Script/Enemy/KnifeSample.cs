@@ -117,6 +117,12 @@ public class KnifeSample : MonoBehaviour
             break;
         } 
     }
+    public void ChoseFork()
+    { if(GameManager.instance.F_Unlock){player = GameManager.instance.F_Hero;}}
+    public void ChoseKnife()
+    { if(GameManager.instance.K_Unlock){player = GameManager.instance.K_Hero;}}
+    public void ChoseSpoon()
+    { if(GameManager.instance.S_Unlock){player = GameManager.instance.S_Hero;}}
     
 
     public void Update()
@@ -171,19 +177,19 @@ public class KnifeSample : MonoBehaviour
     public void OnTriggerEnter(Collider collision)
     {   
         if (collision.gameObject.CompareTag("F_Coll"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack);}} 
+        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack); ChoseFork();}} 
         else if (collision.gameObject.CompareTag("F_Stump"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack);}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack); ChoseFork();}} 
         else if (collision.gameObject.CompareTag("K_Coll"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack);}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack); ChoseKnife();}}
         else if (collision.gameObject.CompareTag("K_Stump"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack); StunProbability += StunProbabilityCount;}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack); ChoseKnife(); StunProbability += StunProbabilityCount;}}
         else if (collision.gameObject.CompareTag("S_Coll"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.S_attack);}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.S_attack); ChoseSpoon();}}
          else if (collision.gameObject.CompareTag("S_Stump"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.S_attack);}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.S_attack); ChoseSpoon();}}
         else if (collision.gameObject.CompareTag("Spell"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack + Bullet.instance.damage);}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack + Bullet.instance.damage); ChoseFork();}} 
         else if (collision.gameObject.CompareTag("Bomb"))
         {if(!DieB){TakeDamage(Bomb.instance.damage);}}
     }

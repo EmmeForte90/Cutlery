@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 using Spine.Unity;
 using Cinemachine;
 public class Oste : MonoBehaviour
@@ -12,9 +11,7 @@ public class Oste : MonoBehaviour
     public GameObject Notte; // Il nuovo materiale Skybox che desideri applicare
     public bool changeSkyboxOnTrigger = true; // Imposta questo booleano su "true" se vuoi cambiare il materiale Skybox quando il trigger viene attivato
     public GameObject Menu;
-
     public Dialogues DManager;
-    //private bool changeD = false; // o la variabile che deve attivare la sostituzione
     private bool StopButton = false; // o la variabile che deve attivare la sostituzione
     public GameObject PointSpawn;
     private CinemachineConfiner confiner;
@@ -26,7 +23,6 @@ public class Oste : MonoBehaviour
     public bool needDeactivateObject;
     public GameObject[] objDeactivate;
     public GameObject[] objActivate;
-    //public int IDCharater;
     private string[] dialogue; // array of string to store the dialogues
     private GameObject player; // Reference to the player's position
     public TextMeshProUGUI dialogueText; // Reference to the TextMeshProUGUI component
@@ -36,24 +32,18 @@ public class Oste : MonoBehaviour
     public float dialogueDuration; // variable to set the duration of the dialogue
     private int dialogueIndex; // variable to keep track of the dialogue status
     private float elapsedTime; // variable to keep track of the elapsed time
-    //private Animator anim; // componente Animator del personaggio
     public bool isInteragible;
     public bool heFlip;    
-    //private bool EndDia = false;
-    //public bool moreDialogue;
     private bool _isInTrigger;
     private bool _isDialogueActive;
     private bool Talk = false;
-
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string TalnkAnimationName;
     [SpineAnimation][SerializeField] private string IdleAnimationName;
-
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
-    //Spine.EventData eventData;
     [Header("Audio")]
     [Tooltip("0,1-Male 2,3-Female 4-Kid")]
     public int IDAudio;    
@@ -69,11 +59,11 @@ public class Oste : MonoBehaviour
         //player = GameObject.FindWithTag("Player");
         dialogue = DManager.dialogue;
         CharacterName.text = DManager.CharacterName;
-        FAct = GameObject.FindWithTag("F_Player");
-        SAct = GameObject.FindWithTag("S_Player");
-        KAct = GameObject.FindWithTag("K_Player");        
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-        confiner = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineConfiner>(); //ottieni il riferime
+        FAct = GameManager.instance.F_Hero;
+        SAct = GameManager.instance.S_Hero;
+        KAct = GameManager.instance.K_Hero;        
+        vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+        confiner = GameManager.instance.vcam.GetComponent<CinemachineConfiner>(); //ottieni il riferime
     }
      void Update()
     {
@@ -94,12 +84,8 @@ public class Oste : MonoBehaviour
         else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton && !GameManager.instance.stopInput)
         {
             NextDialogue();
-            //StopButton = false;
         }
     }
-
-
-
 
     #region Collision
     public void OnTriggerEnter(Collider collision)
@@ -218,7 +204,6 @@ public class Oste : MonoBehaviour
         }
                 dialogueText.text = currentDialogue; // Set the dialogue text to the full current dialogue
                 StopButton = true;
-
     }
 
     public void Back()
@@ -234,8 +219,6 @@ public class Oste : MonoBehaviour
                     Menu.gameObject.SetActive(false);
         }
 
-
-
     void NextDialogue()
     {
 
@@ -243,7 +226,6 @@ public class Oste : MonoBehaviour
         dialogueIndex++; // Increment the dialogue index
         if (dialogueIndex >= dialogue.Length)
         {
-            //EndDia = true;
             Menu.gameObject.SetActive(true);
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
         }
@@ -264,15 +246,12 @@ public class Oste : MonoBehaviour
             }
         }
     }
-
-
     public void Idle()
 {
     if (currentAnimationName != IdleAnimationName)
                 {
                     _spineAnimationState.SetAnimation(2, IdleAnimationName, true);
                     currentAnimationName = IdleAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
                 }
 }
  public void Talking()
@@ -281,7 +260,6 @@ public class Oste : MonoBehaviour
                 {
                     _spineAnimationState.SetAnimation(2, TalnkAnimationName, true);
                     currentAnimationName = TalnkAnimationName;
-                    //_spineAnimationState.Event += HandleEvent;
                 }
 }
 }

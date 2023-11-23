@@ -102,7 +102,7 @@ public void Awake()
         if (instance == null){instance = this;}
         savedPosition = GameManager.instance.savedPosition;
         //
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+        vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>();
         //
         if(GameManager.instance.F_Unlock){
         PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
@@ -116,13 +116,13 @@ public void Awake()
         PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
         PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;}
         //CharacterID = 1; 
-        if(GameManager.instance.S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
-        if(GameManager.instance.F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(GameManager.instance.K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
+        if(GameManager.instance.S_Unlock){ch_SAc = GameManager.instance.S_Hero.GetComponent<CharacterFollow>();}
+        if(GameManager.instance.F_Unlock){ch_FAc = GameManager.instance.F_Hero.GetComponent<CharacterFollow>();}
+        if(GameManager.instance.K_Unlock){ch_KAc = GameManager.instance.K_Hero.GetComponent<CharacterFollow>();}
         //
-        if(GameManager.instance.F_Unlock){FAct = GameObject.FindWithTag("F_Player");}
-        if(GameManager.instance.S_Unlock){SAct = GameObject.FindWithTag("S_Player");}
-        if(GameManager.instance.K_Unlock){KAct = GameObject.FindWithTag("K_Player");}
+        if(GameManager.instance.F_Unlock){FAct = GameManager.instance.F_Hero;}
+        if(GameManager.instance.S_Unlock){SAct = GameManager.instance.S_Hero;}
+        if(GameManager.instance.K_Unlock){KAct = GameManager.instance.K_Hero;}
         //
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage = 0;}       
         if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage = 0;}
@@ -511,7 +511,7 @@ IEnumerator EndBattle()
 
     public  void ResetCamera()
     {
-    virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    virtualCamera = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
     virtualCamera.Follow =  pointView.transform;
     if(GameManager.instance.F_Unlock)
     {FAct.transform.position = ActorFork.transform.position;

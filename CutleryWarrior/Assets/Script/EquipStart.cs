@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EquipStart : MonoBehaviour
@@ -19,14 +17,11 @@ public class EquipStart : MonoBehaviour
     public int specificQuant_I = 1;
     public int specificQuant_M = 1;
     public int specificQuant = 10;
-
-    //public void Awake(){KindItem = specificItem.KindItem;}
     void Start()
     {
         Inventory.instance.AddItem(Potions, specificQuant);  
         InventoryB.instance.AddItem(Potions, specificQuant);    
         QuestsManager.instance.AddItem(Amulet, specificQuant_M);                
-        //KeyManager.instance.AddItem(specificItem, specificQuant_M); 
         //               
         EquipM_F.instance.AddItem(F_Weapon, specificQuant); 
         EquipM_F.instance.AddItem(F_Armor, specificQuant); 

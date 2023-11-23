@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
-
+using Cinemachine;
 public class GameManager : MonoBehaviour
 {
     #region Header  
@@ -49,14 +48,8 @@ public class GameManager : MonoBehaviour
     [Header("Money")]
     [SerializeField] public int money = 0;
     [SerializeField] public TextMeshProUGUI moneyTextM;
-    //[SerializeField] GameObject moneyObjectM;
     public int IDPorta;
-    //public int IdAreaAtt;
-    private int IDCharacter;
     [Header("Stats")]
-    public float mouseSensitivity = 2.0f;
-    public float joystickSensitivity = 2.0f; 
-    public bool UsingAnalogic = false;   
     [SerializeField] public GameObject F_Hero;
     [SerializeField] public GameObject K_Hero;
     [SerializeField] public GameObject S_Hero;
@@ -156,22 +149,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] CharacterMove ch_K;
     [SerializeField] CharacterFollow ch_KAc;
     [SerializeField] ManagerCharacter Manager_K;
-    //[SerializeField] GameObject ExpObjectM;
     public UIRotationSwitcher rotationSwitcher;
     public SwitchCharacter SwitcherUI;
-
     public GameObject[] Skill_FI;
     public GameObject[] Skill_FIB;
-
     public GameObject[] Skill_KI;
     public GameObject[] Skill_KIB;
-
     public GameObject[] Skill_SI;
     public GameObject[] Skill_SIB;
     public int IdENM;
     public bool NotTouchOption = false;
-    public float Cooldown = 1.2f; // Tempo di cooldown tra le combo in secondi
-
+    public float Cooldown = 1.2f; // Tempo di cooldown tra le combo in second
+    public CinemachineVirtualCamera vcam; // La telecamera virtuale Cinemachine
     public static GameManager instance;
     #endregion
     public void Awake()
@@ -183,8 +172,6 @@ public class GameManager : MonoBehaviour
         foreach (GameObject arenaObjectN in OrderFork){arenaObjectN.SetActive(false);}
         foreach (GameObject arenaObjectN in OrderKnife){arenaObjectN.SetActive(false);}
         foreach (GameObject arenaObjectN in OrderSpoon){arenaObjectN.SetActive(false);}
-        /*if(StartGame)
-        {AudioManager.instance.PlayMFX(0);}*/
         if(PlayerStats.instance == null)
         {print("Sta caricando i dati");}
         StartCoroutine(StartData());
@@ -212,15 +199,15 @@ public class GameManager : MonoBehaviour
         switch(CharacterID)
         {
             case 1:
-            player = GameObject.FindGameObjectWithTag("F_Player");
+            player = F_Hero;
             CharacterID = 1;
             break;
             case 2:
-            player = GameObject.FindGameObjectWithTag("K_Player");
+            player = K_Hero;
             CharacterID = 2;
             break;
             case 3:
-            player = GameObject.FindGameObjectWithTag("S_Player");
+            player = S_Hero;
             CharacterID = 3;
             break;
         }}
@@ -271,7 +258,6 @@ public class GameManager : MonoBehaviour
         ch_F.inputCTR = true;}
         OpenBookF();
         Invoke("OpenMenu", Cooldown);
-        //OpenBook();
         }
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.PlayUFX(1);     
@@ -285,7 +271,6 @@ public class GameManager : MonoBehaviour
         ch_K.inputCTR = true;}
         OpenBookK();
         Invoke("OpenMenu", Cooldown);
-        //OpenBook();
         }
         CameraZoom.instance.ZoomIn();
         AudioManager.instance.PlayUFX(1);  
@@ -304,8 +289,8 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.PlayUFX(1);   
     break;
     }             
-        }
-        else if(Input.GetButtonDown("Pause") && stopInput)
+    }
+    else if(Input.GetButtonDown("Pause") && stopInput)
         {
             
             switch (CharacterID)
@@ -317,8 +302,7 @@ public class GameManager : MonoBehaviour
             if(K_Unlock){ch_K.inputCTR = false; CloseBookK();}    
             break;
             case 3:
-            if(S_Unlock){ch_S.inputCTR = false; CloseBookS();
-}    
+            if(S_Unlock){ch_S.inputCTR = false; CloseBookS();}    
             break;
             }  
             MouseCursorIcon.SetActive(false);
@@ -410,8 +394,7 @@ public class GameManager : MonoBehaviour
             CameraZoom.instance.ZoomOut();
             DuelManager.instance.inputCTR = false;
             AudioManager.instance.PlayUFX(1);
-        } 
-    }}
+        }}}
     }
 
     public void OpenMenu()
@@ -488,11 +471,9 @@ public class GameManager : MonoBehaviour
             break;
             }  
     }
-    public void StopBattle()
-    {ChStopWithoutANM(); notChange = true; DuelManager.instance.inputCTR = true;}
+    public void StopBattle(){ChStopWithoutANM(); notChange = true; DuelManager.instance.inputCTR = true;}
 
-     public void ResumeBattle()
-    {ChCanM(); notChange = false; DuelManager.instance.inputCTR = false;}
+    public void ResumeBattle(){ChCanM(); notChange = false; DuelManager.instance.inputCTR = false;}
      
         public void TimerMenu()
     {
@@ -502,7 +483,6 @@ public class GameManager : MonoBehaviour
             Itm.gameObject.SetActive(false);
             Esc.gameObject.SetActive(false);
             LittleM.gameObject.SetActive(false);
-           
             switch (CharacterID)
             {
         case 1:
@@ -521,7 +501,6 @@ public class GameManager : MonoBehaviour
             AudioManager.instance.PlayUFX(1);   
         break;
         }}
-
         public void CloseTimerMenu()
         {
             ChCanM();
@@ -534,7 +513,6 @@ public class GameManager : MonoBehaviour
             AudioManager.instance.PlayUFX(1);   
         }
     public void DestroyManager(){GameManagerExist = false; Destroy(GM);}
-    
     public void StatPlayer()
     {
     //Fork
@@ -562,18 +540,13 @@ public class GameManager : MonoBehaviour
     F_Sleep.text = F_sleepResistance.ToString();
     F_mpTextM.text = F_MP.ToString();
     F_hpTextM.text = F_HP.ToString();
-    
+    //
         F_Hp.size = PlayerStats.instance.F_curHP / PlayerStats.instance.F_HP;
         F_Hp.size = Mathf.Clamp(F_Hp.size, 1f, 1);
         //
         F_Mp.size = PlayerStats.instance.F_curMP / PlayerStats.instance.F_MP;
         F_Mp.size = Mathf.Clamp(F_Mp.size, 1f, 1);
-        //
-        //FRageBar.fillAmount = PlayerStats.instance.F_curRage / PlayerStats.instance.F_Rage;
-        //FRageBar.fillAmount = Mathf.Clamp(FRageBar.fillAmount, 0.01f, 1);}
-        
     }
-
 
     //Knife
     if(K_Unlock){
@@ -600,19 +573,13 @@ public class GameManager : MonoBehaviour
     K_Sleep.text = K_sleepResistance.ToString();
     K_mpTextM.text = K_MP.ToString();
     K_hpTextM.text = K_HP.ToString();
-    
+        //
         K_Hp.size = PlayerStats.instance.K_curHP / PlayerStats.instance.K_HP;
         K_Hp.size = Mathf.Clamp(K_Hp.size, 1f, 1);
         //
         K_Mp.size = PlayerStats.instance.K_curMP / PlayerStats.instance.K_MP;
         K_Mp.size = Mathf.Clamp(K_Mp.size, 1f, 1);
-        //
-        //FRageBar.fillAmount = PlayerStats.instance.F_curRage / PlayerStats.instance.F_Rage;
-        //FRageBar.fillAmount = Mathf.Clamp(FRageBar.fillAmount, 0.01f, 1);}
-        
     }
-
-
     //Spoon
     if(S_Unlock){
     S_LV = PlayerStats.instance.S_LV;
@@ -645,9 +612,6 @@ public class GameManager : MonoBehaviour
         S_Mp.size = PlayerStats.instance.K_curMP / PlayerStats.instance.S_MP;
         S_Mp.size = Mathf.Clamp(S_Mp.size, 1f, 1);
         //
-        //FRageBar.fillAmount = PlayerStats.instance.F_curRage / PlayerStats.instance.F_Rage;
-        //FRageBar.fillAmount = Mathf.Clamp(FRageBar.fillAmount, 0.01f, 1);}
-        
     }
     }   
     public void BarStat()
@@ -692,29 +656,35 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene (sceneName:"MainMenu");
         DestroyManager();
     }
+    public void RecognizeCharacters()
+    {
+        if(F_Unlock){ch_F = F_Hero.GetComponent<CharacterMove>();}
+        if(S_Unlock){ch_S = S_Hero.GetComponent<CharacterMove>();}
+        if(K_Unlock){ch_K = K_Hero.GetComponent<CharacterMove>();}
+        if(F_Unlock){ch_FAc = F_Hero.GetComponent<CharacterFollow>();}
+        if(K_Unlock){ch_KAc = K_Hero.GetComponent<CharacterFollow>();}
+        if(S_Unlock){ch_SAc = S_Hero.GetComponent<CharacterFollow>();}
+        if(F_Unlock){Manager_F = F_Hero.GetComponent<ManagerCharacter>();}
+        if(S_Unlock){Manager_S = S_Hero.GetComponent<ManagerCharacter>();}
+        if(K_Unlock){Manager_K = K_Hero.GetComponent<ManagerCharacter>();}
+    }
     public void TakeCamera()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.TakeCamera();}
         if(S_Unlock){ch_S.TakeCamera();}
         if(K_Unlock){ch_K.TakeCamera();}
     }  
     public void Right()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.RightD();}
         if(S_Unlock){ch_S.RightD();}
         if(K_Unlock){ch_K.RightD();}
     } 
     public void Left()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.LeftD();}
         if(S_Unlock){ch_S.LeftD();}
         if(K_Unlock){ch_K.LeftD();}
@@ -722,40 +692,26 @@ public class GameManager : MonoBehaviour
 
     public void RecalculateCharacter()
     {
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_FAc.RetakeCh();}if(S_Unlock){ch_SAc.RetakeCh();}if(K_Unlock){ch_KAc.RetakeCh();}
     }
     public void ChMov()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.Idle();}
         if(S_Unlock){ch_S.Idle();}
         if(K_Unlock){ch_K.Idle();}
     }
     public void ChStopWithoutANM()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.Stop(); ch_F.inputCTR = true; ch_FAc.inputCTR = true; ch_F.isRun = false;}
         if(K_Unlock){ch_K.Stop(); ch_K.inputCTR = true; ch_KAc.inputCTR = true; ch_K.isRun = false;}
         if(S_Unlock){ch_S.Stop(); ch_S.inputCTR = true; ch_SAc.inputCTR = true; ch_S.isRun = false;}
     } 
     public void ChStop()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.Idle();ch_F.Stop(); ch_F.inputCTR = true; ch_FAc.inputCTR = true; ch_F.isRun = false;}
         if(K_Unlock){ch_K.Idle();ch_K.Stop(); ch_K.inputCTR = true; ch_KAc.inputCTR = true; ch_K.isRun = false;}
         if(S_Unlock){ch_S.Idle();ch_S.Stop(); ch_S.inputCTR = true; ch_SAc.inputCTR = true; ch_S.isRun = false;}
@@ -763,9 +719,7 @@ public class GameManager : MonoBehaviour
     
     public void ChInteract()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.Interact = true;} 
         if(K_Unlock){ch_K.Interact = true;} 
         if(S_Unlock){ch_S.Interact = true;}
@@ -773,9 +727,7 @@ public class GameManager : MonoBehaviour
     }  
     public void ChInteractStop()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.Interact = false;} 
         if(K_Unlock){ch_K.Interact = false;}
         if(S_Unlock){ch_S.Interact = false;}
@@ -783,216 +735,102 @@ public class GameManager : MonoBehaviour
     }  
     public void ChStopB()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.inputCTR = true; ch_FAc.inputCTR = true;}
         if(K_Unlock){ch_K.inputCTR = true; ch_KAc.inputCTR = true;}
         if(S_Unlock){ch_S.inputCTR = true; ch_SAc.inputCTR = true;} 
     }  
     public void ChCanM()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        
+        RecognizeCharacters();
         if(F_Unlock){ch_F.inputCTR = false; ch_FAc.inputCTR = false;}
         if(K_Unlock){ch_K.inputCTR = false; ch_KAc.inputCTR = false;}
         if(S_Unlock){ch_S.inputCTR = false; ch_SAc.inputCTR = false;}
     }
     public void Posebattle()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        
+        RecognizeCharacters();
         if(F_Unlock){ch_F.Posebattle();ch_FAc.Posebattle();}
         if(instance.K_Unlock){ch_K.Posebattle();ch_KAc.Posebattle();}
         if(instance.S_Unlock){ch_S.Posebattle();ch_SAc.Posebattle();}
     }
 
-    public void OpenBookF()
-    {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_F.OpenBook();}
-    }
-    public void OpenBookK()
-    {
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K.OpenBook();}
-    }
-    public void OpenBookS()
-    {
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S.OpenBook();}
-    }
+    public void OpenBookF(){RecognizeCharacters();if(F_Unlock){ch_F.OpenBook();}}
+    public void OpenBookK(){RecognizeCharacters();if(K_Unlock){ch_K.OpenBook();}}
+    public void OpenBookS(){RecognizeCharacters();if(S_Unlock){ch_S.OpenBook();}}
     public void CloseBookF()
-    {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_F.CloseBook();}
-    }
+    {RecognizeCharacters();if(F_Unlock){ch_F.CloseBook();}}
     public void CloseBookK()
-    {
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K.CloseBook();}
-    }
+    {RecognizeCharacters();if(K_Unlock){ch_K.CloseBook();}}
     public void CloseBookS()
-    {
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S.CloseBook();}
-    }
-
-
+    {RecognizeCharacters();if(S_Unlock){ch_S.CloseBook();}}
 
     public void Charge()
     {
-        if(F_Unlock){Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
-        if(S_Unlock){Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
-        if(K_Unlock){Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
+        RecognizeCharacters();
         if(F_Unlock){Manager_F.SwitchScriptsCharge();}
         if(S_Unlock){Manager_S.SwitchScriptsCharge();}
         if(K_Unlock){Manager_K.SwitchScriptsCharge();}
     }
     public void Die()
     {
-        if(F_Unlock){Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
-        if(S_Unlock){Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
-        if(K_Unlock){Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
+        RecognizeCharacters();
         if(F_Unlock){Manager_F.SwitchScriptsDeath();}
         if(S_Unlock){Manager_S.SwitchScriptsDeath();}
         if(K_Unlock){Manager_K.SwitchScriptsDeath();}
     }
     public void Stun()
     {
-        if(F_Unlock){Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
-        if(S_Unlock){Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
-        if(K_Unlock){Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
+        RecognizeCharacters();
         if(F_Unlock){Manager_F.SwitchScriptsStun();}
         if(S_Unlock){Manager_S.SwitchScriptsStun();}
         if(K_Unlock){Manager_K.SwitchScriptsStun();}
     }
     public void Poison()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.Poison();ch_FAc.Poison();}
         if(K_Unlock){ch_K.Poison();ch_KAc.Poison();}
         if(S_Unlock){ch_S.Poison();ch_SAc.Poison();}
     }
     public void PoseWin()
     {
-       
         if(F_Unlock){Manager_F.SwitchScriptsWin();}
         if(S_Unlock){Manager_S.SwitchScriptsWin();}
         if(K_Unlock){Manager_K.SwitchScriptsWin();}
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region Death
-    public void PoseDeathF()
-    {
-        if(F_Unlock)
-        {Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();
-        Manager_F.SwitchScriptsDeath();}
-    }
-    public void PoseDeathK()
-    {
-        if(K_Unlock){Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();
-        Manager_K.SwitchScriptsDeath();}
-    }
-    public void PoseDeathS()
-    {
-        if(S_Unlock){Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();
-        Manager_S.SwitchScriptsDeath();}
-    }
+    public void PoseDeathF(){if(F_Unlock){RecognizeCharacters();Manager_F.SwitchScriptsDeath();}}
+    public void PoseDeathK(){if(K_Unlock){RecognizeCharacters(); Manager_K.SwitchScriptsDeath();}}
+    public void PoseDeathS(){if(S_Unlock){RecognizeCharacters();Manager_S.SwitchScriptsDeath();}}
     //----------------//
-    public void RestoreDeathF()
-    {
-        if(F_Unlock)
-        {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(F_Unlock){Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
-        Manager_F.SwitchScriptsActor();
-        }
-    }
-    public void RestoreDeathhK()
-    {
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
-        Manager_K.SwitchScriptsActor();
-    }
-    public void RestoreDeathS()
-    {
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
-        Manager_S.SwitchScriptsActor();
-    }
+    public void RestoreDeathF(){if(F_Unlock){RecognizeCharacters();Manager_F.SwitchScriptsActor();}}
+    public void RestoreDeathhK(){RecognizeCharacters();Manager_K.SwitchScriptsActor();}
+    public void RestoreDeathS(){RecognizeCharacters(); Manager_S.SwitchScriptsActor();}
     #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region Stun
     public void StunF()
-    {if(F_Unlock){Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();Manager_F.SwitchScriptsStun();}}
+    {if(F_Unlock){ RecognizeCharacters();Manager_F.SwitchScriptsStun();}}
     public void StunK()
-    {if(K_Unlock){Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();Manager_K.SwitchScriptsStun();}}
+    {if(K_Unlock){ RecognizeCharacters();Manager_K.SwitchScriptsStun();}}
     public void StunS()
-    {if(S_Unlock){Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();Manager_S.SwitchScriptsStun();}}
+    {if(S_Unlock){ RecognizeCharacters();Manager_S.SwitchScriptsStun();}}
     #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region PoisonState
-    public void PoisonF()
-    {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(F_Unlock){
-        ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();
-        ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();
-        ch_FAc.Poison();
-        ch_F.Poison();}   
-    }
-    public void PoisonK()
-    { 
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){
-        ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();    
-        ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();
-        ch_KAc.Poison();
-        ch_K.Poison();}  
-    }
-    public void PoisonS()
-    {
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock)
-        {ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();
-        ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();
-        ch_SAc.Poison();
-        ch_S.Poison();} 
-    }
+    public void PoisonF(){if(F_Unlock){RecognizeCharacters();ch_FAc.Poison();ch_F.Poison();}}
+    public void PoisonK(){if(K_Unlock){RecognizeCharacters();ch_KAc.Poison();ch_K.Poison();}}
+    public void PoisonS(){if(S_Unlock){ RecognizeCharacters();ch_SAc.Poison();ch_S.Poison();}}
     #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region Restore
     public void RestoreF()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(F_Unlock)
         {PlayerStats.instance.F_paralysisResistance = PlayerStats.instance.F_paralysisResistanceCont;
         PlayerStats.instance.F_poisonResistance = PlayerStats.instance.F_poisonResistanceCont;
@@ -1000,12 +838,7 @@ public class GameManager : MonoBehaviour
     }
     public void RestoreK()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(K_Unlock)
         {PlayerStats.instance.K_paralysisResistance = PlayerStats.instance.K_paralysisResistanceCont;
         PlayerStats.instance.K_poisonResistance = PlayerStats.instance.K_poisonResistanceCont;   
@@ -1013,12 +846,7 @@ public class GameManager : MonoBehaviour
     }
     public void RestoreS()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(S_Unlock)
         {PlayerStats.instance.S_paralysisResistance = PlayerStats.instance.S_paralysisResistanceCont;
         PlayerStats.instance.S_poisonResistance = PlayerStats.instance.S_poisonResistanceCont;   
@@ -1026,19 +854,9 @@ public class GameManager : MonoBehaviour
     }
     #endregion   
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    
     public void StopWin()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
-        if(F_Unlock){Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
-        if(S_Unlock){Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
-        if(K_Unlock){Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
+        RecognizeCharacters();
         switch(CharacterID)
         {
             case 1:
@@ -1060,88 +878,50 @@ public class GameManager : MonoBehaviour
        if(F_Unlock){ch_F.Idle();ch_F.Stop();ch_F.ReCol();ch_FAc.ReCol();ch_FAc.Idle();}
        if(S_Unlock){ch_S.Idle();ch_S.Stop();ch_S.ReCol();ch_SAc.ReCol();ch_SAc.Idle();}
        if(K_Unlock){ch_K.Idle();ch_K.Stop();ch_K.ReCol();ch_KAc.ReCol();ch_KAc.Idle();}
-
     }
     public void Allarm()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.Allarm();ch_F.Attention = true;ch_FAc.Allarm();ch_FAc.Attention = true;}
         if(K_Unlock){ch_K.Allarm();ch_K.warning = false;ch_K.Attention = true;ch_KAc.Allarm();ch_KAc.Attention = true;}
         if(S_Unlock){ch_S.Allarm();ch_S.warning = false;ch_S.Attention = true;ch_SAc.Allarm();ch_SAc.Attention = true;}
     }
     public void StopAllarm()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_FAc.StopAllarm();ch_F.StopAllarm();ch_F.Attention = false;ch_FAc.Attention = false;}
         if(K_Unlock){ch_KAc.StopAllarm();ch_K.StopAllarm();ch_K.Attention = false;ch_KAc.Attention = false;}
         if(S_Unlock){ch_SAc.StopAllarm();ch_S.StopAllarm();ch_S.Attention = false;ch_SAc.Attention = false;}
     }
     public void Esclamation()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}    
+        RecognizeCharacters();
         if(F_Unlock){ch_F.Attention = true;} 
         if(S_Unlock){ch_S.Attention = true;} 
         if(K_Unlock){ch_K.Attention = true;} 
     }
     public void EsclamationStop()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.Attention = false;}         
         if(K_Unlock){ch_K.Attention = false;} 
         if(S_Unlock){ch_S.Attention = false;}
     }
     public void Exploration()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.IDAction = 0;ch_FAc.IDAction = 0;}
         if(S_Unlock){ch_S.IDAction = 0;ch_SAc.IDAction = 0;}
         if(K_Unlock){ch_K.IDAction = 0;ch_KAc.IDAction = 0;}
     }
     public void Battle()
     {
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
+        RecognizeCharacters();
         if(F_Unlock){ch_F.IDAction = 1;ch_FAc.IDAction = 1;}
         if(S_Unlock){ch_S.IDAction = 1;ch_SAc.IDAction = 1;}
         if(K_Unlock){ch_K.IDAction = 1;ch_KAc.IDAction = 1;}
     }
-    public void TakeData()
-    {   
-        if(F_Unlock){Manager_F = GameObject.Find("F_Player").GetComponent<ManagerCharacter>();}
-        if(S_Unlock){Manager_S = GameObject.Find("S_Player").GetComponent<ManagerCharacter>();}
-        if(K_Unlock){Manager_K = GameObject.Find("K_Player").GetComponent<ManagerCharacter>();}
-        //
-        if(F_Unlock){ch_F = GameObject.Find("F_Player").GetComponent<CharacterMove>();}
-        if(S_Unlock){ch_S = GameObject.Find("S_Player").GetComponent<CharacterMove>();}
-        if(K_Unlock){ch_K = GameObject.Find("K_Player").GetComponent<CharacterMove>();}
-        //
-        if(F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
-        if(S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
-    }
+    //public void TakeData(){RecognizeCharacters();}
     public void AddTomoney(int pointsToAdd){money += pointsToAdd; moneyTextM.text = money.ToString();}
     public void ForkUnlock(){Fork.SetActive(true); F_Unlock = true; Manager_F.SwitchScriptsActor();}   
     public void SpoonUnlock(){Spoon.SetActive(true); S_Unlock = true; Manager_S.SwitchScriptsActor();}   

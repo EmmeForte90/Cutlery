@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
 public class EventCinematic : MonoBehaviour
 {
     public int IdEvent;
-    private SwitchCharacter Switch;    
+    //private SwitchCharacter Switch;    
     public GameObject PointView;
     public bool Viewcam = false;
     [Header("Oggetto da attivare")]
@@ -23,11 +22,10 @@ public class EventCinematic : MonoBehaviour
     private CinemachineVirtualCamera vcam; // La telecamera virtuale Cinemachine
      public void Start()
     {
-    vcam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
-    if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
-    if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}
-    if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}
+    vcam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    if(GameManager.instance.F_Unlock){Fork = GameManager.instance.F_Hero.transform;}
+    if(GameManager.instance.S_Unlock){Spoon = GameManager.instance.S_Hero.transform;}
+    if(GameManager.instance.K_Unlock){Knife = GameManager.instance.K_Hero.transform;}
     }
     public void Take(){if(HavePersistOBJ){PersistOBJ.SetActive(true);}Destroy(gameObject); }
 
@@ -39,11 +37,11 @@ public class EventCinematic : MonoBehaviour
 
      public void OnTriggerEnter(Collider other)
     {
-    if (other.CompareTag("F_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    if (other.CompareTag("F_Player") && GameManager.instance.CharacterID == 1)
     {Touch();}
-    else if (other.CompareTag("K_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
+    else if (other.CompareTag("K_Player") && GameManager.instance.CharacterID == 2)
     {Touch();}
-    else if (other.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    else if (other.CompareTag("S_Player") && GameManager.instance.CharacterID == 3)
     {Touch();}
     }
     public void Touch()

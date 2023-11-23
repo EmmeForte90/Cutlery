@@ -54,11 +54,11 @@ public class Treasure : MonoBehaviour
     }
     public void OnTriggerStay(Collider other)
     {
-    if (other.CompareTag("F_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    if (other.CompareTag("F_Player") && GameManager.instance.CharacterID == 1)
     {Touch();}
-    else if (other.CompareTag("K_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
+    else if (other.CompareTag("K_Player") && GameManager.instance.CharacterID == 2)
     {Touch();}
-    else if (other.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    else if (other.CompareTag("S_Player") && GameManager.instance.CharacterID == 3)
     {Touch();}
     }
     public void Touch()
@@ -82,11 +82,11 @@ public class Treasure : MonoBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
-    if (other.CompareTag("F_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    if (other.CompareTag("F_Player") && GameManager.instance.CharacterID == 1)
     {ExitTouch();}
-    else if (other.CompareTag("K_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
+    else if (other.CompareTag("K_Player") && GameManager.instance.CharacterID == 2)
     {ExitTouch();}
-    else if (other.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    else if (other.CompareTag("S_Player") && GameManager.instance.CharacterID == 3)
     {ExitTouch();}
     }
     public void ExitTouch(){GameManager.instance.EsclamationStop();}

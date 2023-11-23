@@ -1,46 +1,58 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveTotem : MonoBehaviour
 {
     public Vector3 savedPosition;
     public string NameScene;
-    private SwitchCharacter Switch;
     public GameObject VFXTake;
     private Transform Player;
     private Transform Fork;
     private Transform Spoon;
     private Transform Knife;
-    private bool Var_1 = false;
-    private bool Var_2 = true;
-    private bool Var_3 = false;
     private SaveManager Save;
     private bool isSave = true;
     public void Start()
         {
-        if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();} 
-        //if (Save == null) {Save = GameObject.Find("Data").GetComponent<SaveManager>();} 
-        //if (Dati == null) {Dati = GameObject.Find("Stats").GetComponent<PlayerStats>();} 
-        if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;}
-        if(GameManager.instance.S_Unlock){Spoon = GameObject.Find("S_Player").transform;}
-        if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;}
+        if(GameManager.instance.F_Unlock){Fork = GameManager.instance.F_Hero.transform;}
+        if(GameManager.instance.S_Unlock){Spoon = GameManager.instance.S_Hero.transform;}
+        if(GameManager.instance.K_Unlock){Knife = GameManager.instance.K_Hero.transform;}
         }
     public void Update()
     {
-    if (Save == null && isSave) {Save = GameObject.FindGameObjectWithTag("Save").GetComponent<SaveManager>(); isSave = false;} 
-    if(Switch.isElement1Active)
-    {if(GameManager.instance.S_Unlock && Var_1){Spoon = GameObject.Find("S_Player").transform;} 
-    Player = Spoon; Var_1 = false; Var_2 = true;}
-    else 
-    if(Switch.isElement2Active && Var_2)
-    {if(GameManager.instance.F_Unlock){Fork = GameObject.Find("F_Player").transform;} 
-    Player = Fork;  Var_2 = false; Var_3 = true;} 
-    else 
-    if(Switch.isElement3Active && Var_3)
-    {if(GameManager.instance.K_Unlock){Knife = GameObject.Find("K_Player").transform;} 
-    Player = Knife; Var_3 = false; Var_1 = true;} 
+    if (Save == null && isSave)
+    {Save = GameObject.FindGameObjectWithTag("Save").GetComponent<SaveManager>(); isSave = false;} 
+    Chose();
+    }
+
+    public void Chose()
+    {
+        switch(GameManager.instance.CharacterID)
+        {
+            case 1:
+            if(GameManager.instance.F_Unlock)
+            {
+                Fork = GameManager.instance.F_Hero.transform;
+                Player = GameManager.instance.F_Hero.transform;
+            }
+            Player = Fork.transform;
+            break;
+            case 2:
+            if(GameManager.instance.K_Unlock)
+            {
+                Knife = GameManager.instance.K_Hero.transform;
+                Player = GameManager.instance.K_Hero.transform; 
+            }  
+            Player = Knife.transform;
+            break;
+            case 3:
+            if(GameManager.instance.S_Unlock)
+            {
+                Spoon = GameManager.instance.S_Hero.transform;
+                Player = GameManager.instance.S_Hero.transform;
+            }
+            Player = Spoon.transform;
+            break;
+        }
     }
 
     private void OnTriggerEnter(Collider collision)

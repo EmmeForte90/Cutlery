@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Switch : MonoBehaviour
@@ -9,31 +7,24 @@ public class Switch : MonoBehaviour
     public Animator AnmGate;
     public GameObject Gate;
     public GameObject Leva;
-
     public GameObject IconSwitch;
     public GameObject IconGate;
     public GameObject VFXTake;
     public bool canOpen = true;
-    //public GameObject GateClosed;
-    //public GameObject GateOpen;
-    //public void Awake(){GateClosed.SetActive(true); GateOpen.SetActive(false);}
-
     public void Take(){
     Anm.Play("Switch_Anm");
     AnmGate.Play("GateOpen_Anm");
-    //Gate.SetActive(false);
-    //Leva.SetActive(false);
     canOpen = false;
     IconSwitch.SetActive(false);
     IconGate.SetActive(false);}
 
    public void OnTriggerStay(Collider other)
     {
-    if (other.CompareTag("F_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    if (other.CompareTag("F_Player") && GameManager.instance.CharacterID == 1)
     {Touch();}
-    else if (other.CompareTag("K_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
+    else if (other.CompareTag("K_Player") && GameManager.instance.CharacterID == 2)
     {Touch();}
-    else if (other.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    else if (other.CompareTag("S_Player") && GameManager.instance.CharacterID == 3)
     {Touch();}
     }
 
@@ -43,8 +34,6 @@ public class Switch : MonoBehaviour
         else if(!canOpen){GameManager.instance.EsclamationStop();}
         if(Input.GetMouseButtonDown(0) && canOpen)
         {
-        //GateClosed.SetActive(false);
-        //GateOpen.SetActive(true);
         canOpen = false;
         IconSwitch.SetActive(false);
         IconGate.SetActive(false);

@@ -50,7 +50,7 @@ public class StartBattle : MonoBehaviour
     {
         if (instance == null){instance = this;}
         if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+        vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>();
         vCam.Follow = PointView.transform;
         if(!GameManager.instance.Day){Giorno.SetActive(false); Notte.SetActive(true); RenderSettings.skybox = newSkyboxMaterial_N;}
         else if(GameManager.instance.Day){Giorno.SetActive(true); Notte.SetActive(false); RenderSettings.skybox = newSkyboxMaterial_G;}
@@ -64,18 +64,18 @@ public class StartBattle : MonoBehaviour
         GameManager.instance.DectiveMinimap();
         //
         if(GameManager.instance.F_Unlock)
-        {F_Script = GameObject.Find("F_Player").GetComponent<CharacterMove>(); ForkHUD.SetActive(true);}
+        {F_Script = GameManager.instance.F_Hero.GetComponent<CharacterMove>(); ForkHUD.SetActive(true);}
         else{ForkHUD.SetActive(false);}
         if(GameManager.instance.K_Unlock)
-        {K_Script = GameObject.Find("K_Player").GetComponent<CharacterMove>(); KnifeHUD.SetActive(true);}
+        {K_Script = GameManager.instance.K_Hero.GetComponent<CharacterMove>(); KnifeHUD.SetActive(true);}
         else{KnifeHUD.SetActive(false);}
         if(GameManager.instance.S_Unlock)
-        {S_Script = GameObject.Find("S_Player").GetComponent<CharacterMove>(); SpoonHUD.SetActive(true);}
+        {S_Script = GameManager.instance.S_Hero.GetComponent<CharacterMove>(); SpoonHUD.SetActive(true);}
         else{SpoonHUD.SetActive(false);}
         //
-        if(GameManager.instance.F_Unlock){Skin_F = GameObject.Find("F_Player").GetComponent<ChangeHeroSkin>();}
-        if(GameManager.instance.K_Unlock){Skin_K = GameObject.Find("K_Player").GetComponent<ChangeHeroSkin>();}
-        if(GameManager.instance.S_Unlock){Skin_S = GameObject.Find("S_Player").GetComponent<ChangeHeroSkin>();}
+        if(GameManager.instance.F_Unlock){Skin_F = GameManager.instance.F_Hero.GetComponent<ChangeHeroSkin>();}
+        if(GameManager.instance.K_Unlock){Skin_K = GameManager.instance.K_Hero.GetComponent<ChangeHeroSkin>();}
+        if(GameManager.instance.S_Unlock){Skin_S = GameManager.instance.S_Hero.GetComponent<ChangeHeroSkin>();}
         GameManager.instance.Battle();
         //
         if(GameManager.instance.F_Unlock){Skin_F.UpdateCharacterSkin();}
@@ -88,9 +88,9 @@ public class StartBattle : MonoBehaviour
 		if(GameManager.instance.K_Unlock){Skin_K.UpdateCombinedSkin(); }
         GameManager.instance.Posebattle();
         //
-        if(GameManager.instance.F_Unlock){ForkActive = GameObject.Find("F_Player");}
-        if(GameManager.instance.S_Unlock){SpoonActive = GameObject.Find("S_Player");}
-        if(GameManager.instance.K_Unlock){KnifeActive = GameObject.Find("K_Player");}
+        if(GameManager.instance.F_Unlock){ForkActive = GameManager.instance.F_Hero;}
+        if(GameManager.instance.S_Unlock){SpoonActive = GameManager.instance.S_Hero;}
+        if(GameManager.instance.K_Unlock){KnifeActive = GameManager.instance.K_Hero;}
         CameraZoom.instance.ZoomOut();
     }
     public void Start()
@@ -99,13 +99,13 @@ public class StartBattle : MonoBehaviour
         if(GameManager.instance.K_Unlock){KnifeActive.transform.position = K_point.transform.position;}
         if(GameManager.instance.S_Unlock){SpoonActive.transform.position = S_point.transform.position;}
         ////////////////////////
-        if(GameManager.instance.S_Unlock){ch_SAc = GameObject.Find("S_Player").GetComponent<CharacterFollow>();}
-        if(GameManager.instance.F_Unlock){ch_FAc = GameObject.Find("F_Player").GetComponent<CharacterFollow>();}
-        if(GameManager.instance.K_Unlock){ch_KAc = GameObject.Find("K_Player").GetComponent<CharacterFollow>();}
+        if(GameManager.instance.S_Unlock){ch_SAc = GameManager.instance.S_Hero.GetComponent<CharacterFollow>();}
+        if(GameManager.instance.F_Unlock){ch_FAc = GameManager.instance.F_Hero.GetComponent<CharacterFollow>();}
+        if(GameManager.instance.K_Unlock){ch_KAc = GameManager.instance.K_Hero.GetComponent<CharacterFollow>();}
         //
-        if(GameManager.instance.F_Unlock){ForkActive = GameObject.FindWithTag("F_Player");}
-        if(GameManager.instance.S_Unlock){SpoonActive = GameObject.FindWithTag("S_Player");}
-        if(GameManager.instance.K_Unlock){KnifeActive = GameObject.FindWithTag("K_Player");}
+        if(GameManager.instance.F_Unlock){ForkActive = GameManager.instance.F_Hero;}
+        if(GameManager.instance.S_Unlock){SpoonActive = GameManager.instance.S_Hero;}
+        if(GameManager.instance.K_Unlock){KnifeActive = GameManager.instance.K_Hero;}
         //
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage = 0;}       
         if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage = 0;}
@@ -142,19 +142,19 @@ public class StartBattle : MonoBehaviour
         GameManager.instance.Posebattle();
         yield return new WaitForSeconds(2f);
         GameManager.instance.ChCanM();
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+        vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>();
         switch(GameManager.instance.CharacterID)
         {
             case 1:
-            if(GameManager.instance.F_Unlock){player = GameObject.FindWithTag("F_Player");}
+            if(GameManager.instance.F_Unlock){player = GameManager.instance.F_Hero;}
             vCam.Follow = player.transform;
             break;
             case 2:
-             if(GameManager.instance.K_Unlock){player = GameObject.FindWithTag("K_Player");}  
+             if(GameManager.instance.K_Unlock){player = GameManager.instance.K_Hero;}  
             vCam.Follow = player.transform;
             break;
             case 3:
-            if(GameManager.instance.S_Unlock){player = GameObject.FindWithTag("S_Player");}
+            if(GameManager.instance.S_Unlock){player = GameManager.instance.S_Hero;}
             vCam.Follow = player.transform;
             break;
         }
@@ -169,19 +169,19 @@ public class StartBattle : MonoBehaviour
         GameManager.instance.StopAllarm();
         GameManager.instance.Posebattle();
         GameManager.instance.ChCanM();
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+        vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>();
         switch(GameManager.instance.CharacterID)
         {
             case 1:
-            if(GameManager.instance.F_Unlock){player = GameObject.FindWithTag("F_Player");}
+            if(GameManager.instance.F_Unlock){player = GameManager.instance.F_Hero;}
             vCam.Follow = player.transform;
             break;
             case 2:
-             if(GameManager.instance.K_Unlock){player = GameObject.FindWithTag("K_Player");}  
+             if(GameManager.instance.K_Unlock){player = GameManager.instance.K_Hero;}  
             vCam.Follow = player.transform;
             break;
             case 3:
-            if(GameManager.instance.S_Unlock){player = GameObject.FindWithTag("S_Player");}
+            if(GameManager.instance.S_Unlock){player = GameManager.instance.S_Hero;}
             vCam.Follow = player.transform;
             break;
         }
