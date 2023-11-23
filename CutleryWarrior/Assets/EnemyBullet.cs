@@ -127,10 +127,9 @@ public class EnemyBullet : MonoBehaviour
     public void SpoonD()
     {
         if(Take){
-        if(GameManager.instance.S_Unlock && !S_Script.isDefence){S_Script.TakeDamage(attackDamage);}
-        else if(GameManager.instance.S_Unlock && S_Script.isDefence){}
-        if(GameManager.instance.S_Unlock && !ch_SAc.isGuard){ch_SAc.TakeDamage(attackDamage);}
-        else if(GameManager.instance.S_Unlock && ch_SAc.isGuard){}
+        if(GameManager.instance.S_Unlock){S_Script.TakeDamage(attackDamage);}
+        if(GameManager.instance.S_Unlock){ch_SAc.TakeDamage(attackDamage);}
+        else if(GameManager.instance.S_Unlock && ch_SAc.isGuard){ch_SAc.Guard();}
         AudioManager.instance.PlayUFX(9);
         //Debug.Log("danno +"+ attackDamage);
         if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}

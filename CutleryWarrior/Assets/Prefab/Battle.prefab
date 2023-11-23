@@ -13967,15 +13967,15 @@ MonoBehaviour:
   ch_SAc: {fileID: 0}
   damagePerSecond: 0.1
   duration: 5
+  F_Die: 0
+  K_Die: 0
+  S_Die: 0
   ATK_Ch: 0
   objectsToHighlight:
   - {fileID: 7171675390523412764}
   - {fileID: 4892266747474525442}
   - {fileID: 9099853016499373279}
   highlightedObjectIndicator: {fileID: 1657294145737118765}
-  minValue: 0
-  maxValue: 1
-  step: 0.1
   Win: {fileID: 5886415359555816719}
   inputCTR: 0
   CharacterID: 0
@@ -152949,15 +152949,15 @@ MonoBehaviour:
   ch_SAc: {fileID: 0}
   damagePerSecond: 0.1
   duration: 5
+  F_Die: 0
+  K_Die: 0
+  S_Die: 0
   ATK_Ch: 0
   objectsToHighlight:
   - {fileID: 4995871120210837558}
   - {fileID: 8129039485809369532}
   - {fileID: 4826947527154738530}
   highlightedObjectIndicator: {fileID: 1298293008685732473}
-  minValue: 0
-  maxValue: 1
-  step: 0.1
   Win: {fileID: 8175043319088950128}
   inputCTR: 0
   CharacterID: 0

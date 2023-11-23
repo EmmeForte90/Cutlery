@@ -38,11 +38,14 @@ public class CharacterFollow : MonoBehaviour
     public bool isGuard;
     private float defense;
     private float danno_subito;
+    [Header("VFX")]
     public GameObject VFXPoison;
     public GameObject VFXHurt;
+    public GameObject VFXHhitShield;
     private bool poisonState = false;
     private int TimePoison = 5;     
-    private CharacterController characterController;  
+    private CharacterController characterController; 
+    [Header("Animations")]
     [SpineAnimation][SerializeField]  string WalkAnimationName;    
     [SpineAnimation][SerializeField]  string RunAnimationName;
     [SpineAnimation][SerializeField]  string RunBAnimationName;    
@@ -303,7 +306,9 @@ public class CharacterFollow : MonoBehaviour
 
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
     public void Allarm(){Allarming = true;}       
-    public void StopAllarm(){Allarming = false;}    
+    public void StopAllarm(){Allarming = false;}  
+
+    public void Guard(){AudioManager.instance?.PlaySFX(8);Instantiate(VFXHhitShield, transform.position, transform.rotation);} 
     private void Flip()
     {
         if (Player.localScale.x > 0f){transform.localScale = new Vector3(1, 1,1);}
@@ -433,8 +438,12 @@ public class CharacterFollow : MonoBehaviour
         }
     AudioManager.instance.PlaySFX(8);
     //Debug.Log("danno "+ danno_subito);
+    if(!isGuard)
+    {
     Instantiate(VFXHurt, transform.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);
+    }
+    else if(isGuard){Instantiate(VFXHhitShield, transform.position, transform.rotation);}
     }
      #region Stato Veleno
     public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true); poisonState = true;} 

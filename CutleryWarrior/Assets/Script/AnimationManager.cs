@@ -393,11 +393,11 @@ public class AnimationManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Spoon
      if (e.Data.Name == "punch")
-    {AudioManager.instance.PlayUFX(8); ShiledT.gameObject.SetActive(true); StartCoroutine(StopVFX_S());}
+    {AudioManager.instance.PlayUFX(8); ShiledT.gameObject.SetActive(true);} //StartCoroutine(StopVFX_S());}
      if (e.Data.Name == "punch2")
-    {AudioManager.instance.PlayUFX(8); ShiledB.gameObject.SetActive(true); StartCoroutine(StopVFX_S());}
+    {AudioManager.instance.PlayUFX(8); ShiledB.gameObject.SetActive(true);} //StartCoroutine(StopVFX_S());}
      if (e.Data.Name == "crush")
-    {AudioManager.instance.PlayUFX(8); Crush.gameObject.SetActive(true); StartCoroutine(StopVFX_S());}
+    {AudioManager.instance.PlayUFX(8); Crush.gameObject.SetActive(true);} //StartCoroutine(StopVFX_S());}
     //--------------------------------------//
     if (e.Data.Name == "defence")
     {AudioManager.instance.PlayUFX(8); Skill_0.Use(); Instantiate(BenedictionTower, BPoint.position, BenedictionTower.transform.rotation);

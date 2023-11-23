@@ -112,7 +112,7 @@ public class StartBattle : MonoBehaviour
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage = 0;}
         if(isRight){
         if(GameManager.instance.F_Unlock){ForkActive.transform.localScale = new Vector3(1, 1,1);}
-        if(GameManager.instance.S_Unlock){KnifeActive.transform.localScale = new Vector3(1, 1,1);}
+        if(GameManager.instance.K_Unlock){KnifeActive.transform.localScale = new Vector3(1, 1,1);}
         if(GameManager.instance.S_Unlock){SpoonActive.transform.localScale = new Vector3(1, 1,1);}
         if(GameManager.instance.S_Unlock){ch_SAc.transform.localScale = new Vector3(1, 1,1);}
         if(GameManager.instance.F_Unlock){ch_FAc.transform.localScale = new Vector3(1, 1,1);}
@@ -120,7 +120,7 @@ public class StartBattle : MonoBehaviour
         }
         else if(!isRight){
         if(GameManager.instance.F_Unlock){ForkActive.transform.localScale = new Vector3(-1, 1,1);}
-        if(GameManager.instance.S_Unlock){KnifeActive.transform.localScale = new Vector3(-1, 1,1);}
+        if(GameManager.instance.K_Unlock){KnifeActive.transform.localScale = new Vector3(-1, 1,1);}
         if(GameManager.instance.S_Unlock){SpoonActive.transform.localScale = new Vector3(-1, 1,1);}
         if(GameManager.instance.S_Unlock){ch_SAc.transform.localScale = new Vector3(-1, 1,1);}
         if(GameManager.instance.F_Unlock){ch_FAc.transform.localScale = new Vector3(-1, 1,1);}

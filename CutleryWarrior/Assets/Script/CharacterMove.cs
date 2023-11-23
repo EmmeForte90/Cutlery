@@ -29,6 +29,7 @@ public class CharacterMove : MonoBehaviour
     private bool canAttack = true;
     public float comboCooldown = 0.5f; // Tempo di cooldown tra le combo in secondi
     public float comboCooldownK = 0.3f; // Tempo di cooldown tra le combo in secondi
+    public float comboCooldownS = 0.3f; // Tempo di cooldown tra le combo in secondi
     private bool isAttacking = false; // Aggiunto il flag per controllare se il personaggio sta attaccando
     private bool top = true;
     private bool StopRanm = false;
@@ -77,11 +78,17 @@ public class CharacterMove : MonoBehaviour
     [Header("Dodge and Knockback")]    
     private DodgeController DodgeController;
     private KnockbackController knockbackController;       
-    [Header("VFX")]
+    [Header("VFX Knife")]
     public GameObject SlashV;
     public GameObject SlashH;
     public GameObject SlashB;
+
+    [Header("VFX Spoon")]
+    public GameObject ShiledT;
+    public GameObject ShiledB;
+    public GameObject Crush;
     public GameObject VFXHhitShield;
+    [Header("VFX")]
     public GameObject VFXPoison;
     public GameObject VFXHurt;
     public GameObject VFXCharge;
@@ -417,19 +424,37 @@ private IEnumerator StumpKTime()
     
     //Attack
        // Verifica se il tasto del mouse è stato premuto
-         if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && canAttack && PlayerStats.instance.S_curMP > 20 
-         && Stump)
-        {HandleComboAttackS(); PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP; Stop();} 
+         if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && canAttack && 
+        PlayerStats.instance.S_curMP > 20 && !isCharging && !isAttacking)
+        {
+            Stop();
+            HandleComboAttackS();
+            canAttack = false;
+            PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
+            StartCoroutine(ComboCooldownS());
+        } 
         else if(PlayerStats.instance.S_curMP < 20){AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);}
     }
-    private void HandleComboAttackS()
-    {
-        comboCount = (comboCount % 3) + 1;
-        PlayComboAnimation("Battle/attack_" + comboCount.ToString());
-        canAttack = false;
-        Invoke("StopAtk", comboCooldown);
-        //StartCoroutine(ComboCooldown());
-    }  
+     private void HandleComboAttackS()
+{
+    comboCount = (comboCount % 3) + 1;
+    PlayComboAnimation("Battle/attack_" + comboCount.ToString());
+    isAttacking = true; // Imposta il flag per indicare che il personaggio sta attaccando
+}
+
+private IEnumerator ComboCooldownS()
+{
+    moveDirection = Vector3.zero;
+    yield return new WaitForSeconds(comboCooldownS);
+    isAttacking = false; // Resetta il flag quando l'animazione è completa
+    ShiledT.SetActive(false); ShiledB.SetActive(false); Crush.SetActive(false);
+    canAttack = true;
+}
+    
+
+
+
+    
 #endregion
 
     private void PlayComboAnimation(string animationName)
@@ -480,7 +505,7 @@ private IEnumerator StumpKTime()
                 Anm?.TemporaryChangeColor(Color.red);
                 //Debug.Log("danno " +  Stats.S_curHP);
             }
-            else
+            else if (isDefence)
             {
                 PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
                 Instantiate(VFXHhitShield, transform.position, transform.rotation);
