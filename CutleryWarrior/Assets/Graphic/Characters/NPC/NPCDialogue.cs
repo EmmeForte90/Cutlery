@@ -207,12 +207,12 @@ public void changeDialogue()
         }
     }
 
-    private void OnTriggerEnter(Collider collision)
-    {if(collision.CompareTag("F_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+   private void OnTriggerEnter(Collider collision)
+    {if(collision.CompareTag("F_Player") && GameManager.instance.CharacterID == 1)
     {Touch();}
-    else if (collision.CompareTag("K_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
+    else if (collision.CompareTag("K_Player") && GameManager.instance.CharacterID == 2)
     {Touch();}
-    else if (collision.CompareTag("S_Player") && SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
+    else if (collision.CompareTag("S_Player") && GameManager.instance.CharacterID == 3)
     {Touch();}}
         
     private void Touch()

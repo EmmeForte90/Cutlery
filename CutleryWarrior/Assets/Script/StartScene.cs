@@ -17,7 +17,7 @@ public class StartScene : MonoBehaviour
     private GameObject SAct;    
     public GameObject[] SpawnArr; 
     public GameObject[] ActiveObj; 
-    public GameObject[] ActiveObjAB;
+    //public GameObject[] ActiveObjAB;
     public GameObject[] Notte; 
     public Material newSkyboxMaterial_N;
     public GameObject[] Giorno;
@@ -131,7 +131,7 @@ public class StartScene : MonoBehaviour
     PlayerStats.instance.DeactivateSwitch();
     PlayerStats.instance.DeactivateCHEST();}
     public void EnemiesActive(int ID){Enemies[ID].SetActive(false);}
-    public void AreaActive(int ID)
+    /*public void AreaActive(int ID)
     {
             // Disattiva tutti gli oggetti nel tuo array
             for (int i = 0; i < ActiveObjAB.Length; i++){ActiveObjAB[i].SetActive(false);}
@@ -141,5 +141,5 @@ public class StartScene : MonoBehaviour
 
             // Attiva l'oggetto corrispondente
             ActiveObjAB[arrayIndex].SetActive(true);
-    }
+    }*/
 }

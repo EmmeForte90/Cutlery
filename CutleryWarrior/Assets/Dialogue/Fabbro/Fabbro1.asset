@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 2
   CharacterName: Hammings
   dialogue:
-  - If you have material we can have some deal!
+  - '{#size}If you have material we can have some deal!'
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []

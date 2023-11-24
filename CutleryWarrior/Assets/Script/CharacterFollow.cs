@@ -24,7 +24,8 @@ public class CharacterFollow : MonoBehaviour
     private Transform Player;
     public GameObject Esclamation;
     public bool Attention;
-    //private SwitchCharacter Switch;
+     private float originalSize = 1.0f; // Dimensione originale del capsule
+    private float expandedSize = 2.0f; // Dimensione del capsule quando è allargato
     private CharacterMove F_b;
     private CharacterMove S_b;
     private CharacterMove K_b;
@@ -71,6 +72,9 @@ public class CharacterFollow : MonoBehaviour
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
+    private CapsuleCollider capsuleCollider; // Riferimento al capsule collider
+    public float expandedRadius = 3.0f; // Raggio del capsule collider quando è allargato
+    private float originalRadius; // Raggio originale del capsule collider
     public static CharacterFollow instance;
     public DuelManager DM;
     #endregion
@@ -81,8 +85,11 @@ public class CharacterFollow : MonoBehaviour
         if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");} 
         //if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();;} 
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        originalRadius = capsuleCollider.radius; // Salva il raggio originale
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
+        capsuleCollider = GetComponent<CapsuleCollider>();
         characterController = GetComponent<CharacterController>();
         characterRigidbody = GetComponent<Rigidbody>();
         Player = GameManager.instance.F_Hero.transform;
@@ -285,17 +292,17 @@ public class CharacterFollow : MonoBehaviour
         switch(order)
         {
             case 0:
-            Posebattle();
+            Posebattle(); ShrinkCapsule();
             break;
             case 1:
-            if(!inputCTR){AttackEnm();}
+            if(!inputCTR){AttackEnm();ShrinkCapsule();}
             else if(inputCTR){Anm.PlayAnimation(IdleBAnimationName);}
             break;
             case 2:
-            DefenceEnm();
+            DefenceEnm(); ExpandCapsule();
             break;
             case 3:
-            MoveInPoint();
+            MoveInPoint(); ShrinkCapsule();
             break;
             case 4:
             break;
@@ -307,6 +314,7 @@ public class CharacterFollow : MonoBehaviour
     public void Character(int ord){DM.Character(ord); order = 0; }//order = ord;}
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
+    public void DefenceEnm(){Anm.PlayAnimationLoop(GuardAnimationName); isGuard = true; }
 
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName);}
     public void Allarm(){Allarming = true;}       
@@ -363,6 +371,8 @@ public class CharacterFollow : MonoBehaviour
 
         // Se il contatore raggiunge il numero massimo di tentativi, esci senza cambiare il bersaglio
         print("Errore: Impossibile trovare un bersaglio valido dopo " + maxRetries + " tentativi. Riprova");
+        if(target == null)
+        {order = 2;}
     }
     else if (Win)
     {
@@ -393,6 +403,10 @@ public class CharacterFollow : MonoBehaviour
         { isAttacking = false; Anm.PlayAnimationLoop(RunBAnimationName);}
     }else if (target == null){order = 2;}
     }
+    /// ////////////////////////////////////////////////////////////////////////////////////
+    //void ExpandCapsule(){transform.localScale = new Vector3(expandedSize, expandedSize, expandedSize);}
+    void ExpandCapsule(){capsuleCollider.radius = expandedRadius;}
+    void ShrinkCapsule(){capsuleCollider.radius = originalRadius;}    /// ////////////////////////////////////////////////////////////////////////////////////
     public void PointStart(){Indicatore.transform.position = StartP.transform.position;}
     public void MoveInPoint()
     {
@@ -428,10 +442,7 @@ public class CharacterFollow : MonoBehaviour
         isAttacking = false;
     }
     #endregion
-    //Creare la function di danno prima di proseguire con la difesa
-    #region Defence
-    public void DefenceEnm(){Anm.PlayAnimationLoop(GuardAnimationName); isGuard = true;}
-    #endregion
+    
     public void TakeDamage(float damage)
     {
         if(order == 2){Instantiate(VFXHhitShield, transform.position, transform.rotation);}

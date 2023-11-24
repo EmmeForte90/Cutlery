@@ -19,7 +19,7 @@ MonoBehaviour:
 
     It''s a horrible curse, anyone take
     this curse lost his mind.'
-  - "I am very afraid for this. I hope I never take\r."
+  - "<shake>I am very afraid for this. I hope I never take\r.</shake>"
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []

@@ -10,10 +10,10 @@ public class StartBattle : MonoBehaviour
     public GameObject ActiveTutorial; 
     [Header("Battle direction")]
     public bool isRight = true; 
-    public GameObject Notte; 
+    /*public GameObject Notte; 
     public Material newSkyboxMaterial_N;
     public GameObject Giorno;
-    public Material newSkyboxMaterial_G;
+    public Material newSkyboxMaterial_G;*/
     public GameObject PointView; // Variabile per il player
     public static StartBattle instance;
     //private SwitchCharacter Switch;
@@ -52,8 +52,9 @@ public class StartBattle : MonoBehaviour
         //if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
         vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>();
         vCam.Follow = PointView.transform;
-        if(!GameManager.instance.Day){Giorno.SetActive(false); Notte.SetActive(true); RenderSettings.skybox = newSkyboxMaterial_N;}
+        /*if(!GameManager.instance.Day){Giorno.SetActive(false); Notte.SetActive(true); RenderSettings.skybox = newSkyboxMaterial_N;}
         else if(GameManager.instance.Day){Giorno.SetActive(true); Notte.SetActive(false); RenderSettings.skybox = newSkyboxMaterial_G;}
+        */
         Duel_Script.inputCTR = true;
         //
         GameManager.instance.NotTouchOption = true;

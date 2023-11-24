@@ -29,10 +29,7 @@ public class CharacterMove : MonoBehaviour
     private bool canAttack = true;
     public float comboCooldown = 0.5f; // Tempo di cooldown tra le combo in secondi
     public float comboCooldownK = 0.3f; // Tempo di cooldown tra le combo in secondi
-    //public float comboCooldownS = 0.3f; // Tempo di cooldown tra le combo in secondi
-    [Header ("SpoonCombo")]
-    //public string[] comboAnimations;
-    //public float[] comboTimings;
+   
     private bool isAttacking = false; // Aggiunto il flag per controllare se il personaggio sta attaccando
     private bool top = true;
     private bool StopRanm = false;
@@ -42,6 +39,10 @@ public class CharacterMove : MonoBehaviour
     public float maxChargeTime = 1f; // Tempo massimo di carica
     private Vector3 moveDirection = Vector3.zero;
     public bool isDodging = false;
+    ////////////////////////////////////////
+    private CapsuleCollider capsuleCollider; // Riferimento al capsule collider
+    public float expandedRadius = 3.0f; // Raggio del capsule collider quando è allargato
+    private float originalRadius; // Raggio originale del capsule collider
     [Header("Dodge")]
     public float dodgeSpeed = 20.0f;
     public float dodgeDuration = 1f;
@@ -113,6 +114,8 @@ public void Awake()
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");}  
         cam = GameManager.instance.vcam.transform;      
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        originalRadius = capsuleCollider.radius; // Salva il raggio originale
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;        
@@ -417,12 +420,12 @@ private IEnumerator StumpKTime()
     //DODGE
         // Rileva l'input del tasto spazio
         if (Input.GetMouseButtonDown(1)|| Input.GetButton("Fire2") && PlayerStats.instance.S_curMP > 20)
-        {isDefence = true;}
+        {isDefence = true; ExpandCapsule();} // Allarga il capsule}}
         else if (PlayerStats.instance.S_curMP < 10)
         {AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);}     
 
         // Verifica se il tasto del mouse è stato rilasciato
-        if (Input.GetMouseButtonUp(1)|| Input.GetButtonUp("Fire2")){isDefence = false;}
+        if (Input.GetMouseButtonUp(1)|| Input.GetButtonUp("Fire2")){isDefence = false; ShrinkCapsule();}
 
         // Continua ad eseguire l'azione mentre il tasto del mouse è premuto
         //if (isDefence){Anm.PlayAnimationLoop(GuardAnimationName);}
@@ -437,7 +440,6 @@ private IEnumerator StumpKTime()
                 HandleComboAttackS();
                 canAttack = false;
                 PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
-                //StartCoroutine(ComboCooldownS());
             }
             else
             {
@@ -447,16 +449,9 @@ private IEnumerator StumpKTime()
         }
     }
 
+
 private void HandleComboAttackS()
 {
-        /*comboCount = (comboCount % comboAnimations.Length);
-        string animationToPlay = "Battle/" + comboAnimations[comboCount];
-        float timing = comboTimings[comboCount];
-
-        StartCoroutine(PlayCombo(animationToPlay, timing));
-
-        isAttacking = true; // Imposta il flag per indicare che il personaggio sta attaccando
-        comboCount++;*/
         comboCount = (comboCount % 3) + 1;
         Stop();
         PlayComboAnimation("Battle/attack_" + comboCount.ToString());
@@ -468,22 +463,8 @@ private void HandleComboAttackS()
 }
     private void StopAtkS(){canAttack = true; inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
     private void StopAtkS1(){canAttack = true;  inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
-
-
-   /* private IEnumerator PlayCombo(string animationToPlay, float timing)
-    {
-        PlayComboAnimation(animationToPlay);
-        yield return new WaitForSeconds(timing);
-        //ShiledB.SetActive(false); ShiledT.SetActive(false); Crush.SetActive(false);
-        isAttacking = false; // Resetta il flag quando l'animazione è completa
-    }
-    private IEnumerator ComboCooldownS()
-{
-    moveDirection = Vector3.zero;
-    yield return new WaitForSeconds(2);
-    isAttacking = false; // Resetta il flag quando l'animazione è completa
-    canAttack = true;
-}*/
+    void ExpandCapsule(){capsuleCollider.radius = expandedRadius;}
+    void ShrinkCapsule(){capsuleCollider.radius = originalRadius;}
  
 #endregion
 

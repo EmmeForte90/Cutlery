@@ -133,7 +133,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: -23.730362, z: 0, w: 49.894382}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &9007543905064129019
@@ -147,6 +147,8 @@ GameObject:
   - component: {fileID: 9007543905064129018}
   - component: {fileID: 9007543905064129020}
   - component: {fileID: 9007543905064129021}
+  - component: {fileID: 917668101}
+  - component: {fileID: 917668102}
   m_Layer: 0
   m_Name: Dialogue
   m_TagString: Untagged
@@ -272,6 +274,71 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &917668101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9007543905064129019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ace8ced0e81c847968cdca0aeda757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typewriterStartsAutomatically: 1
+  animationLoop: 0
+  timeScale: 0
+  _text: 
+  useDynamicScaling: 1
+  referenceFontSize: 40
+  isResettingTimeOnNewText: 1
+  useDefaultDatabases: 1
+  databaseBehaviors: {fileID: 11400000, guid: e499709404c472941ab7873de453b452, type: 2}
+  databaseAppearances: {fileID: 11400000, guid: e746ff0336128a14381666fd5c28065c,
+    type: 2}
+  databaseActions: {fileID: 11400000, guid: ed0f300296b2aa9438f979ba0fd8a44d, type: 2}
+  defaultAppearancesTags:
+  - size
+  defaultDisappearancesTags: []
+  defaultBehaviorsTags: []
+  defaultTagsMode: 0
+--- !u!114 &917668102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9007543905064129019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb821b3a89e0240aa91c53955ccade89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTypeWriter: 1
+  startTypewriterMode: 3
+  hideAppearancesOnSkip: 0
+  triggerEventsOnSkip: 0
+  resetTypingSpeedAtStartup: 1
+  disappearanceOrientation: 0
+  onTextShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  onTypewriterStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onTextDisappeared:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacterVisible:
+    m_PersistentCalls:
+      m_Calls: []
+  onMessage:
+    m_PersistentCalls:
+      m_Calls: []
+  waitForNormalWord: 0.1
+  waitForWordWithPunctuation: 0.3
+  disappearanceDelay: 0.5
 --- !u!1 &9007543905135837868
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +520,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9007543905952998825}
-  m_LocalRotation: {x: -0.24985296, y: -0.7001604, z: 0.19627671, w: 0.6393938}
+  m_LocalRotation: {x: 0.24985404, y: 0.70016235, z: -0.19627164, w: -0.63939273}
   m_LocalPosition: {x: 0, y: 0, z: -1067.1278}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
@@ -461,7 +528,7 @@ RectTransform:
   - {fileID: 9007543905459216769}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 177.152, z: 0}
+  m_LocalEulerAnglesHint: {x: -2.56, y: 263.949, z: 36.975}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 465.48373, y: -186.3471}
