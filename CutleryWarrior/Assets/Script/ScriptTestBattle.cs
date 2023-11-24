@@ -87,7 +87,7 @@ public class ScriptTestBattle : MonoBehaviour
     //private TimerSkill S_Time_Skill_10;
 
     public float DamageTest;
-    public void Awake()
+    public void Start()
     {
         //if (instance == null){instance = this;} 
         if(GameManager.instance.S_Unlock){ch_SAc = GameManager.instance.S_Hero.GetComponent<CharacterFollow>();}

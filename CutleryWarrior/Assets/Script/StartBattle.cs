@@ -16,7 +16,7 @@ public class StartBattle : MonoBehaviour
     public Material newSkyboxMaterial_G;
     public GameObject PointView; // Variabile per il player
     public static StartBattle instance;
-    private SwitchCharacter Switch;
+    //private SwitchCharacter Switch;
     private CinemachineVirtualCamera vCam;
     private GameObject player;
     
@@ -46,10 +46,10 @@ public class StartBattle : MonoBehaviour
     [Header("Enemy")]
     public DuelManager Duel_Script;
     #endregion
-    public void Awake()
+    public void Start()
     {
         if (instance == null){instance = this;}
-        if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
+        //if (Switch == null) {Switch = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();}
         vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>();
         vCam.Follow = PointView.transform;
         if(!GameManager.instance.Day){Giorno.SetActive(false); Notte.SetActive(true); RenderSettings.skybox = newSkyboxMaterial_N;}
@@ -92,9 +92,7 @@ public class StartBattle : MonoBehaviour
         if(GameManager.instance.S_Unlock){SpoonActive = GameManager.instance.S_Hero;}
         if(GameManager.instance.K_Unlock){KnifeActive = GameManager.instance.K_Hero;}
         CameraZoom.instance.ZoomOut();
-    }
-    public void Start()
-    {
+
         if(GameManager.instance.F_Unlock){ForkActive.transform.position = F_point.transform.position;}
         if(GameManager.instance.K_Unlock){KnifeActive.transform.position = K_point.transform.position;}
         if(GameManager.instance.S_Unlock){SpoonActive.transform.position = S_point.transform.position;}
@@ -130,6 +128,7 @@ public class StartBattle : MonoBehaviour
         if(!isTutorial){StartCoroutine(DuringInter());}
         else if(isTutorial){StartCoroutine(StartTutorial());}
     }
+   
     IEnumerator StartTutorial()
     {vCam.Follow = PointView.transform;
     yield return new WaitForSeconds(2f);

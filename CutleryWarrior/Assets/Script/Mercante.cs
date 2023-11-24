@@ -82,8 +82,8 @@ public class Mercante : MonoBehaviour
     {StartCoroutine(List());}
     IEnumerator List(){
     yield return new WaitForSeconds(1); 
-    itemList = GameObject.FindWithTag("Manager").GetComponent<Inventory>().itemList; //ottieni il riferimento alla virtual camera di Cinemachine
-    quantityList = GameObject.FindWithTag("Manager").GetComponent<Inventory>().quantityList;
+    itemList = GameManager.instance.Inv.GetComponent<Inventory>().itemList; //ottieni il riferimento alla virtual camera di Cinemachine
+    quantityList =  GameManager.instance.Inv.GetComponent<Inventory>().quantityList;
     UpdateInventoryUI();
     }
     public void Update()

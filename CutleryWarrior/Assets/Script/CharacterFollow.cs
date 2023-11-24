@@ -27,6 +27,7 @@ public class CharacterFollow : MonoBehaviour
     private CharacterMove K_b;
     public bool inputCTR = false;
     public float AiSpeed = 3f;
+    private int maxRetries = 3; // Numero massimo di tentativi di scelta del bersaglio
     public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
     public float followSpeed = 5f;
     public float RunSpeed = 6f;
@@ -322,27 +323,48 @@ public class CharacterFollow : MonoBehaviour
     /*private void PlayComboAnimation(string animationName)
     {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, false);}}*/
     private void Choise()
+{
+    if (!Win)
     {
-    if(!Win){
-    int randomNumber = Random.Range(0, 2);
-    result = Mathf.RoundToInt(randomNumber);
-    switch(result)
-    {
-            case 0:
-            target = GameObject.Find("Enm_Spoon");
-            if(target == null){Choise(); isAttacking = false;}
-            break;
-            case 1:
-            target = GameObject.Find("Enm_Fork");
-            if(target == null){Choise(); isAttacking = false;}
-            break;
-            case 2:
-            target = GameObject.Find("Enm_Knife");
-            if(target == null){Choise(); isAttacking = false;}
-            break;
-    } 
-    }else if(Win){order = 0;}
+        int randomNumber = Random.Range(0, 3);
+        result = Mathf.RoundToInt(randomNumber);
+
+        // Aggiungi un contatore per evitare una ricorsione infinita
+        int retryCount = 0;
+
+        while (retryCount < maxRetries)
+        {
+            switch (result)
+            {
+                case 0:
+                    target = GameObject.Find("Enm_Spoon");
+                    break;
+                case 1:
+                    target = GameObject.Find("Enm_Fork");
+                    break;
+                case 2:
+                    target = GameObject.Find("Enm_Knife");
+                    break;
+            }
+
+            if (target != null)
+            {
+                isAttacking = false;
+                return; // Esci dalla funzione quando il bersaglio è stato trovato con successo
+            }
+
+            // Incrementa il contatore e riprova
+            retryCount++;
+        }
+
+        // Se il contatore raggiunge il numero massimo di tentativi, esci senza cambiare il bersaglio
+        Debug.LogError("Errore: Impossibile trovare un bersaglio valido dopo " + maxRetries + " tentativi.");
     }
+    else if (Win)
+    {
+        order = 0;
+    }
+}
     private void ChaseEnm()
     {
     if (target != null)

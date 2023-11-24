@@ -87,36 +87,6 @@ public class KnifeSample : MonoBehaviour
         poisonResistanceCont = poisonResistance;
         DM.EnemyinArena += 1;
     }
-    private void Choise()
-    {
-        // Genera un numero casuale tra 1 e 3
-        if(GameManager.instance.F_Unlock &&
-        GameManager.instance.S_Unlock &&
-        GameManager.instance.K_Unlock){
-        int randomNumber = Random.Range(0, 2);
-        result = Mathf.RoundToInt(randomNumber);} 
-        else if(GameManager.instance.F_Unlock &&
-        !GameManager.instance.S_Unlock &&
-        !GameManager.instance.K_Unlock){
-        result = 0;}
-        //Debug.Log("Numero casuale: " + result);
-        //Debug.Log(ID + "ha Preso" + result);
-        switch(result)
-        {
-            case 0:
-            if(GameManager.instance.F_Unlock){player = GameManager.instance.F_Hero;}
-            else if(!GameManager.instance.F_Unlock){Choise();}
-            break;
-            case 1:
-            if(GameManager.instance.K_Unlock){player =  GameManager.instance.K_Hero;}
-            else if(!GameManager.instance.K_Unlock){Choise();}
-            break;
-            case 2:
-            if(GameManager.instance.S_Unlock){player =  GameManager.instance.S_Hero;}
-            else if(!GameManager.instance.S_Unlock){Choise();}
-            break;
-        } 
-    }
     public void ChoseFork()
     { if(GameManager.instance.F_Unlock){player = GameManager.instance.F_Hero;}}
     public void ChoseKnife()
@@ -124,18 +94,48 @@ public class KnifeSample : MonoBehaviour
     public void ChoseSpoon()
     { if(GameManager.instance.S_Unlock){player = GameManager.instance.S_Hero;}}
     
+    private void Choise()
+    {
+        // Genera un numero casuale tra 1 e 3
+        int randomNumber = Random.Range(0, 3);
+        result = randomNumber;
+    }
+    // Debug.Log("Numero casuale: " + result);
+    // Debug.Log(ID + "ha Preso" + result);
+    public void Target()
+    {
+        switch (result)
+        {
+            case 0:
+                if (GameManager.instance.F_Unlock && !DM.F_Die){player = GameManager.instance.F_Hero;}
+                else{Choise();}
+                break;
+            case 1:
+                if (GameManager.instance.K_Unlock && !DM.K_Die){player = GameManager.instance.K_Hero;}
+                else{Choise();}
+                break;
+            case 2:
+                if (GameManager.instance.S_Unlock && !DM.S_Die){player = GameManager.instance.S_Hero;}
+                else{Choise();}
+                break;
+        }
+    }
 
     public void Update()
     {
         if(!DieB){
         if(!DM.inputCTR){ 
         if (player == null && !take){Choise(); take = true; }
+        Target();
         healthBar.size = currentHealth / maxHealth;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
+        //if(player == GameManager.instance.F_Hero && !DM.F_Die){Choise();}
+        //if(player == GameManager.instance.S_Hero && !DM.S_Die){Choise();}
+        //if(player == GameManager.instance.K_Hero && !DM.K_Die){Choise();}
         switch(Action)
         {
             case 0:
-            FacePlayer(); if(!isAttacking){ChasePlayer();}
+            if(!isAttacking){FacePlayer();ChasePlayer();}
             break;
             case 1:
             Stun();

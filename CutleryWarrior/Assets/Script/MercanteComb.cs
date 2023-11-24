@@ -100,25 +100,25 @@ public class MercanteComb : MonoBehaviour
     {StartCoroutine(List());}
     IEnumerator List(){
     yield return new WaitForSeconds(1); 
-    Inv = GameObject.FindWithTag("Manager").GetComponent<Inventory>();
-    itemList = GameObject.FindWithTag("Manager").GetComponent<Inventory>().itemList; //ottieni il riferimento alla virtual camera di Cinemachine
-    quantityList = GameObject.FindWithTag("Manager").GetComponent<Inventory>().quantityList;
+    Inv =  GameManager.instance.Inv.GetComponent<Inventory>();
+    itemList =  GameManager.instance.Inv.GetComponent<Inventory>().itemList; //ottieni il riferimento alla virtual camera di Cinemachine
+    quantityList =  GameManager.instance.Inv.GetComponent<Inventory>().quantityList;
     //
-    M_Q = GameObject.FindWithTag("Manager").GetComponent<QuestsManager>();    
-    Q_List = GameObject.FindWithTag("Manager").GetComponent<QuestsManager>().itemList;    
-    Q_quantityList = GameObject.FindWithTag("Manager").GetComponent<QuestsManager>().quantityList;
+    M_Q = GameManager.instance.QuM.GetComponent<QuestsManager>();    
+    Q_List = GameManager.instance.QuM.GetComponent<QuestsManager>().itemList;    
+    Q_quantityList = GameManager.instance.QuM.GetComponent<QuestsManager>().quantityList;
     //
-    M_F = GameObject.Find("EquipManager").GetComponent<EquipM_F>();
-    F_List = GameObject.Find("EquipManager").GetComponent<EquipM_F>().itemList;
-    F_quantityList = GameObject.Find("EquipManager").GetComponent<EquipM_F>().quantityList;
+    M_F = GameManager.instance.M_F.GetComponent<EquipM_F>();
+    F_List = GameManager.instance.M_F.GetComponent<EquipM_F>().itemList;
+    F_quantityList = GameManager.instance.M_F.GetComponent<EquipM_F>().quantityList;
     //
-    M_K = GameObject.Find("EquipManager").GetComponent<EquipM_K>();
-    K_List = GameObject.Find("EquipManager").GetComponent<EquipM_K>().itemList;
-    K_quantityList = GameObject.Find("EquipManager").GetComponent<EquipM_K>().quantityList;
+    M_K = GameManager.instance.M_K.GetComponent<EquipM_K>();
+    K_List = GameManager.instance.M_K.GetComponent<EquipM_K>().itemList;
+    K_quantityList = GameManager.instance.M_K.GetComponent<EquipM_K>().quantityList;
     //
-    M_S = GameObject.Find("EquipManager").GetComponent<EquipM_S>();
-    S_List = GameObject.Find("EquipManager").GetComponent<EquipM_S>().itemList;
-    S_quantityList = GameObject.Find("EquipManager").GetComponent<EquipM_S>().quantityList;
+    M_S = GameManager.instance.M_S.GetComponent<EquipM_S>();
+    S_List = GameManager.instance.M_S.GetComponent<EquipM_S>().itemList;
+    S_quantityList = GameManager.instance.M_S.GetComponent<EquipM_S>().quantityList;
     UpdateInventoryUI();
     }
     

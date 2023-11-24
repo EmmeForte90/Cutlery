@@ -9,25 +9,33 @@ public class ForkSemple : MonoBehaviour
     [Header("Change Script")]
     public ForkSemple This;
 
-    [Header("Stop For Test")]
+    [Header("Attack")]
+    public int N_SHMAX = 2;
+    public int N__Shoot = 2;
+    public bool nextPoint = false;
+
+    [Header("Move")]
+    public GameObject[] destinationPoints;
+    private int currentDestinationIndex = 0;
+    public float PointTange = 1f;
+    public int WaitAtk = 3;
+    public float moveSpeed = 3f;
+    public int defense = 2;
+    public int attackPauseDuration = 1;
     public GameObject player;
     public GameObject Icon;
     public GameObject IconVFX;
-     
     private bool take = false; 
     [Header("Hp")]
     public float maxHealth = 100f;
     public float currentHealth;
     public Scrollbar healthBar;
-    //public GameObject Stats;
-    //public float SpeedRestore = 5f; // il massimo valore di essenza disponibile
     [Header("Status")]
     public float damagePerSecond = 0.1f;
     public float duration = 5.0f;
     private float elapsedTime = 0.0f;
     private bool isDamaging = false;
     public GameObject VFXPoison;
-    //private bool poisonState = false;
     public int poisonResistance = 100;
     public int poisonResistanceCont;
     private int TimePoison = 5;   
@@ -52,15 +60,6 @@ public class ForkSemple : MonoBehaviour
     public int SleepProbabilityCount = 2;
     public int SleepProbabilityMAX = 10;
     public int timeSleep = 3;
-
-    [Header("Move")]
-    public int N__Shoot = 2;
-    public float PointTange = 1f;
-    public int WaitAtk = 3;
-    public float moveSpeed = 3f;
-    public int defense = 2;
-    public int attackPauseDuration = 1;
-    public GameObject P1, P2, P3; 
     private bool isAttacking = false;   
     public bool DieB = false;
     public DuelManager DM;
@@ -90,6 +89,7 @@ public class ForkSemple : MonoBehaviour
         currentHealth = maxHealth;
         poisonResistanceCont = poisonResistance;
         DM.EnemyinArena += 1;
+        N__Shoot = N_SHMAX;
     }
     private void Choise()
     {
@@ -111,16 +111,16 @@ public class ForkSemple : MonoBehaviour
         switch(result)
         {
             case 0:
-            if(GameManager.instance.F_Unlock){player = GameManager.instance.F_Hero;}
-            else if(!GameManager.instance.F_Unlock){Choise();}
+            if(GameManager.instance.F_Unlock && !DM.F_Die){player = GameManager.instance.F_Hero;}
+            else if(!GameManager.instance.F_Unlock || DM.F_Die){Choise();}
             break;
             case 1:
-            if(GameManager.instance.K_Unlock){player =  GameManager.instance.K_Hero;}
-            else if(!GameManager.instance.K_Unlock){Choise();}
+            if(GameManager.instance.K_Unlock && !DM.K_Die){player =  GameManager.instance.K_Hero;}
+            else if(!GameManager.instance.K_Unlock || DM.K_Die){Choise();}
             break;
             case 2:
-            if(GameManager.instance.S_Unlock){player =  GameManager.instance.S_Hero;}
-            else if(!GameManager.instance.S_Unlock){Choise();}
+            if(GameManager.instance.S_Unlock && !DM.S_Die){player =  GameManager.instance.S_Hero;}
+            else if(!GameManager.instance.S_Unlock || DM.S_Die){Choise();}
             break;
         } 
     }
@@ -133,10 +133,14 @@ public class ForkSemple : MonoBehaviour
         if (player == null && !take){Choise(); take = true; }
         healthBar.size = currentHealth / maxHealth;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
+        if(player == GameManager.instance.F_Hero && !DM.F_Die){Choise();}
+        if(player == GameManager.instance.S_Hero && !DM.S_Die){Choise();}
+        if(player == GameManager.instance.K_Hero && !DM.K_Die){Choise();}
+
         switch(Action)
         {
             case 0:
-            FacePlayer(); if(!isAttacking){ChasePlayer();}
+            if(!isAttacking){ChasePlayer();}
             break;
             case 1:
             Stun();
@@ -144,14 +148,15 @@ public class ForkSemple : MonoBehaviour
             case 2:
             DieB = true; IconVFX.SetActive(true); Die();
             break;
+            
        }
+       
        if(N__Shoot <= 0)
        {
-        Choise();
+         // Passa al punto successivo
+        nextPoint = true;
+        if(nextPoint){currentDestinationIndex++; N__Shoot = N_SHMAX; nextPoint = false; }
        }
-
-
-
        }
         else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
         if(currentHealth < 0){Action = 2;}
@@ -168,40 +173,29 @@ public class ForkSemple : MonoBehaviour
         }
         if(StunProbability >= StunProbabilityMAX)
         {Action = 1;}
-       
     }
     }
     
-
-
     private void ChasePlayer()
     {
         if(!DM.inputCTR){
         if (player != null)
         {
-            if(!isAttacking)
-            {
-               
-                switch(resultPoint)
+        if(!isAttacking)
         {
-            case 0:
-            transform.position = Vector3.MoveTowards(transform.position, P1.transform.position, moveSpeed * Time.deltaTime);
-            break;
-            case 1:
-            transform.position = Vector3.MoveTowards(transform.position, P2.transform.position, moveSpeed * Time.deltaTime);
-            break;
-            case 2:
-            transform.position = Vector3.MoveTowards(transform.position, P3.transform.position, moveSpeed * Time.deltaTime);
-            break;
-        } 
+        if (currentDestinationIndex < destinationPoints.Length)
+        {
+            Transform destination = destinationPoints[currentDestinationIndex].transform;
+            transform.position = Vector3.MoveTowards(transform.position, destination.position, moveSpeed * Time.deltaTime);
+            if(!DieB){Anm.PlayAnimationLoop(RunAnimationName);}
 
-                
-            if(!DieB){Anm.PlayAnimationLoop(RunAnimationName);}}
-            if (Vector3.Distance(transform.position, P1.transform.position) <= PointTange ||
-            Vector3.Distance(transform.position, P2.transform.position) <= PointTange ||
-            Vector3.Distance(transform.position, P3.transform.position) <= PointTange)
-            {N__Shoot = 2; StartAttack();}
+            if (Vector3.Distance(transform.position, destination.position) <= PointTange){StartAttack();}
+        } else 
+        {// Hai raggiunto tutti i punti, ricomincia dal primo punto
+        currentDestinationIndex = 0;}
+    
         }}else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
+    }
     }
     public void OnTriggerEnter(Collider collision)
     {   
@@ -248,10 +242,10 @@ public class ForkSemple : MonoBehaviour
     #endregion
     private void StartAttack()
     {
+        FacePlayer();
         isAttacking = true;
         FacePlayer();
         Anm.PlayAnimation(Atk1AnimationName);
-        N__Shoot--;
         //Debug.Log("Attacco!");
         StartCoroutine(AttackPause());
     }
@@ -260,6 +254,7 @@ public class ForkSemple : MonoBehaviour
     {        
         yield return new WaitForSeconds(WaitAtk);
         if(!DieB){Anm.PlayAnimationLoop(IdleAnimationName);}
+        N__Shoot--;
         yield return new WaitForSeconds(attackPauseDuration);
         take = false;
         isAttacking = false;

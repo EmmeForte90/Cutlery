@@ -110,16 +110,16 @@ public class SpoonSemple : MonoBehaviour
         switch(result)
         {
             case 0:
-            if(GameManager.instance.F_Unlock){player = GameManager.instance.F_Hero;}
-            else if(!GameManager.instance.F_Unlock){Choise();}
+            if(GameManager.instance.F_Unlock && !DM.F_Die){player = GameManager.instance.F_Hero;}
+            else if(!GameManager.instance.F_Unlock || DM.F_Die){Choise();}
             break;
             case 1:
-            if(GameManager.instance.K_Unlock){player =  GameManager.instance.K_Hero;}
-            else if(!GameManager.instance.K_Unlock){Choise();}
+            if(GameManager.instance.K_Unlock && !DM.K_Die){player =  GameManager.instance.K_Hero;}
+            else if(!GameManager.instance.K_Unlock || DM.K_Die){Choise();}
             break;
             case 2:
-            if(GameManager.instance.S_Unlock){player =  GameManager.instance.S_Hero;}
-            else if(!GameManager.instance.S_Unlock){Choise();}
+            if(GameManager.instance.S_Unlock && !DM.S_Die){player =  GameManager.instance.S_Hero;}
+            else if(!GameManager.instance.S_Unlock || DM.S_Die){Choise();}
             break;
         } 
     }
@@ -138,6 +138,9 @@ public class SpoonSemple : MonoBehaviour
         if (player == null && !take){Choise(); take = true; }
         healthBar.size = currentHealth / maxHealth;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
+        if(player == GameManager.instance.F_Hero && !DM.F_Die){Choise();}
+        if(player == GameManager.instance.S_Hero && !DM.S_Die){Choise();}
+        if(player == GameManager.instance.K_Hero && !DM.K_Die){Choise();}
         switch(Action)
         {
             case 0:

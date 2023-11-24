@@ -11,56 +11,30 @@ public class GameManager : MonoBehaviour
     public GameObject MouseCursorIcon;
     public bool StartGame = false;    
     public GameObject player;
-    public GameObject Fork;
-    public GameObject F_SkillW;
-    public GameObject[] OrderFork;
-    public bool F_Unlock = true; 
-    public GameObject Spoon;
-    public GameObject S_SkillW;
-    public GameObject[] OrderSpoon;
-    public  bool S_Unlock = false; 
-    public GameObject Knife;
-    public GameObject K_SkillW;
-    public GameObject[] OrderKnife;
-    public  bool K_Unlock = false;
     public GameObject Minimap;
     public static bool GameManagerExist; 
+    public Inventory Inv;
+    public Inventory QuM;
+    public EquipM_F M_F;
+    public EquipM_K M_K;
+    public EquipM_S M_S;
+
     public Vector3 savedPosition;
     public Transform savedPositionEscape;
     public string sceneName;
     public bool notChange = false;
-    [Header("Pause")]
-    public bool stopInput = false;
-    public bool battle = false;
-    public bool Day = true;
-    public bool isRun = false;
-    public bool Interact = false; 
-    public bool NotParty = true; 
-    public bool F_Die, K_Die, S_Die = false;
-    [SerializeField]  GameObject Pause;
-    [SerializeField]  GameObject LittleM;
-    [SerializeField]  GameObject TimerM;
-    [SerializeField]  GameObject Ord;
-    [SerializeField]  GameObject Itm;
-    [SerializeField]  GameObject Esc;
-    [Header("Fade")]
-    [SerializeField] GameObject callFadeIn;
-    [SerializeField] GameObject callFadeOut;
-    [Header("Money")]
-    [SerializeField] public int money = 0;
-    [SerializeField] public TextMeshProUGUI moneyTextM;
-    public int IDPorta;
-    [Header("Stats")]
-    [SerializeField] public GameObject F_Hero;
-    [SerializeField] public GameObject K_Hero;
-    [SerializeField] public GameObject S_Hero;
-    [SerializeField] public GameObject MP_F;
-    [SerializeField] public GameObject MP_S;
-    [SerializeField] public GameObject MP_K;
-   
     [Range (1,3)]
     public int CharacterID;
+    /// ////////////////////////////////////////////////////////
     [Header("Fork")]
+    [SerializeField] public GameObject F_Hero;
+    [SerializeField] public CharacterMove F_HeroP;
+    [SerializeField] public CharacterFollow F_HeroAI;
+    [SerializeField] public GameObject MP_F;
+    public GameObject Fork;
+    public GameObject F_SkillW;
+    public GameObject[] OrderFork;
+    public bool F_Unlock = true; 
     private  int F_LV;
     private float F_HP;
     private float F_MP;
@@ -72,7 +46,6 @@ public class GameManager : MonoBehaviour
     private float F_paralysisResistance;
     private float F_sleepResistance;
     private float F_rustResistance;
-    [Header("Fork")]
     [SerializeField] public TextMeshProUGUI F_ExpTextM;
     [SerializeField] public TextMeshProUGUI F_ExpText;
     [SerializeField] public TextMeshProUGUI F_LVTextM;
@@ -90,7 +63,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] CharacterMove ch_F;
     [SerializeField] CharacterFollow ch_FAc;
     [SerializeField] ManagerCharacter Manager_F;
+    /// ////////////////////////////
     [Header("Spoon")]
+    [SerializeField] public GameObject S_Hero;
+    [SerializeField] public CharacterMove S_HeroP;
+    [SerializeField] public CharacterFollow S_HeroAI;
+    [SerializeField] public GameObject MP_S;
+    public GameObject Spoon;
+    public GameObject S_SkillW;
+    public GameObject[] OrderSpoon;
+    public  bool S_Unlock = false; 
     private  int S_LV;
     private float S_HP;
     private float S_MP;
@@ -102,7 +84,6 @@ public class GameManager : MonoBehaviour
     private float S_paralysisResistance;
     private float S_sleepResistance;
     private float S_rustResistance;
-    [Header("Spoon")]
     [SerializeField] public TextMeshProUGUI S_ExpTextM;
     [SerializeField] public TextMeshProUGUI S_ExpText;
     [SerializeField] public TextMeshProUGUI S_LVTextM;
@@ -121,6 +102,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] CharacterFollow ch_SAc;
     [SerializeField] ManagerCharacter Manager_S;
     [Header("Knife")]
+    [SerializeField] public GameObject K_Hero;
+    [SerializeField] public CharacterMove K_HeroP;
+    [SerializeField] public CharacterFollow K_HeroAI;
+    [SerializeField] public GameObject MP_K;
+    public GameObject Knife;
+    public GameObject K_SkillW;
+    public GameObject[] OrderKnife;
+    public  bool K_Unlock = false;
     private  int K_LV;
     private float K_HP;
     private float K_MP;
@@ -132,7 +121,6 @@ public class GameManager : MonoBehaviour
     private float K_paralysisResistance;
     private float K_sleepResistance;
     private float K_rustResistance;
-    [Header("Knife")]
     [SerializeField] public TextMeshProUGUI K_ExpTextM;
     [SerializeField] public TextMeshProUGUI K_ExpText;
     [SerializeField] public TextMeshProUGUI K_LVTextM;
@@ -150,6 +138,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] CharacterMove ch_K;
     [SerializeField] CharacterFollow ch_KAc;
     [SerializeField] ManagerCharacter Manager_K;
+    /// ///////////////////////////////////////////////////
     public UIRotationSwitcher rotationSwitcher;
     public SwitchCharacter SwitcherUI;
     public GameObject[] Skill_FI;
@@ -159,7 +148,28 @@ public class GameManager : MonoBehaviour
     public GameObject[] Skill_SI;
     public GameObject[] Skill_SIB;
     public int IdENM;
+    [Header("Pause")]
+    public bool stopInput = false;
+    public bool battle = false;
+    public bool Day = true;
+    public bool isRun = false;
+    public bool Interact = false; 
+    public bool NotParty = true; 
+    public bool F_Die, K_Die, S_Die = false;
     public bool NotTouchOption = false;
+    [SerializeField]  GameObject Pause;
+    [SerializeField]  GameObject LittleM;
+    [SerializeField]  GameObject TimerM;
+    [SerializeField]  GameObject Ord;
+    [SerializeField]  GameObject Itm;
+    [SerializeField]  GameObject Esc;
+    [Header("Fade")]
+    [SerializeField] GameObject callFadeIn;
+    [SerializeField] GameObject callFadeOut;
+    [Header("Money")]
+    [SerializeField] public int money = 0;
+    [SerializeField] public TextMeshProUGUI moneyTextM;
+    public int IDPorta;   
     public float Cooldown = 1.2f; // Tempo di cooldown tra le combo in second
     public CinemachineVirtualCamera vcam; // La telecamera virtuale Cinemachine
     public static GameManager instance;

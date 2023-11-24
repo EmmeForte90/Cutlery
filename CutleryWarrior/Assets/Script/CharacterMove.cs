@@ -508,7 +508,8 @@ private IEnumerator ComboCooldownS()
             else if (isDefence)
             {
                 PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
-                Instantiate(VFXHhitShield, transform.position, transform.rotation);
+                AudioManager.instance?.PlaySFX(12);
+                Instantiate(VFXHhitShield, BP.transform.position, transform.rotation);
             }
             break;
     }
