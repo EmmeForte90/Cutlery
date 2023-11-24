@@ -31,8 +31,8 @@ public class CharacterMove : MonoBehaviour
     public float comboCooldownK = 0.3f; // Tempo di cooldown tra le combo in secondi
     //public float comboCooldownS = 0.3f; // Tempo di cooldown tra le combo in secondi
     [Header ("SpoonCombo")]
-    public string[] comboAnimations;
-    public float[] comboTimings;
+    //public string[] comboAnimations;
+    //public float[] comboTimings;
     private bool isAttacking = false; // Aggiunto il flag per controllare se il personaggio sta attaccando
     private bool top = true;
     private bool StopRanm = false;
@@ -462,10 +462,12 @@ private void HandleComboAttackS()
         PlayComboAnimation("Battle/attack_" + comboCount.ToString());
         canAttack = false;
         inputCTR = true;
-        Invoke("StopAtkS", comboCooldown);
+        if(comboCount < 3){Invoke("StopAtkS", 0.4f);}
+        else if(comboCount >= 3){Invoke("StopAtkS1", 1.3f);}
         //StartCoroutine(ComboCooldown());
 }
     private void StopAtkS(){canAttack = true; inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
+    private void StopAtkS1(){canAttack = true;  inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
 
 
    /* private IEnumerator PlayCombo(string animationToPlay, float timing)
