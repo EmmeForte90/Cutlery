@@ -6,6 +6,7 @@ public class TouchPlayer : MonoBehaviour
 {
     #region Header
     public int IdENM;
+    public int IdAudio;
     public GameObject BattleObj;
     public GameObject[] DeactiveObj; 
     public GameObject This;
@@ -72,6 +73,7 @@ public class TouchPlayer : MonoBehaviour
     {   
     GameManager.instance.ChStop();
     yield return new WaitForSeconds(1f);
+    AudioManager.instance.CrossFadeINAudio(1);
     GameManager.instance.battle = true;
     GameManager.instance.savedPositionEscape = savedPositionEscape;
     GameManager.instance.FadeIn();
@@ -93,14 +95,13 @@ public class TouchPlayer : MonoBehaviour
     
     public void Touch()
     {   if (isMove) {Mnpc.Behav = 0; Mnpc.isPaused = true;}
-        AudioManager.instance.CrossFadeOUTAudio(0);
+        AudioManager.instance.CrossFadeOUTAudio(IdAudio);
         GameManager.instance.IdENM = IdENM;
         GameManager.instance.NotChange();
         AudioManager.instance.PlayUFX(7);
         GameManager.instance.ChStop();
         GameManager.instance.Allarm();
         CameraZoom.instance.ZoomIn();
-        AudioManager.instance.CrossFadeINAudio(1);
         StartCoroutine(WaitForSceneLoad());}
     #if(UNITY_EDITOR)
     #region Gizmos

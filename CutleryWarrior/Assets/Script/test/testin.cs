@@ -45,6 +45,11 @@ public class testin : MonoBehaviour
         if(PlayerStats.instance.K_Unlock){PlayerStats.instance.K_LevelUp();}
         if(PlayerStats.instance.S_Unlock){PlayerStats.instance.S_LevelUp();}
     }
+
+    public void StopMusic()
+    {
+        AudioManager.instance.CrossFadeOUTAudio(4);
+    }
     public void LoadGameF()
     {
         Save = GameObject.FindWithTag("Save").GetComponent<SaveManager>();

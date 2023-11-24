@@ -215,13 +215,14 @@ public void Update()
         if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curHP > 0){F_Die = false; GameManager.instance.F_Die = false;}
         /////////////////////////////////////////////////////////////////////////////////
         #region Status
+        //Paralisi
         if(GameManager.instance.F_Unlock && PlayerStats.instance.F_paralysisResistance <= 0)
         {GameManager.instance.StunF();}
         if(GameManager.instance.K_Unlock && PlayerStats.instance.K_paralysisResistance <= 0)
         {GameManager.instance.StunK();}
         if(GameManager.instance.S_Unlock && PlayerStats.instance.S_paralysisResistance <= 0)
         {GameManager.instance.StunS();}
-        //
+        //Poison
         if(GameManager.instance.F_Unlock && PlayerStats.instance.F_poisonResistance <= 0)
         {GameManager.instance.PoisonF();
         isDamaging = true;
@@ -264,6 +265,20 @@ public void Update()
                 isDamaging = false;
             }
         }}
+        //Rust/Silence
+        if(GameManager.instance.F_Unlock && PlayerStats.instance.F_rustResistance <= 0)
+        {GameManager.instance.RustF();
+        //Attiva funzione di rust
+        }
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.F_rustResistance <= 0)
+        {GameManager.instance.RustK();
+        //Attiva funzione di rust
+        }
+        if(GameManager.instance.S_Unlock && PlayerStats.instance.F_rustResistance <= 0)
+        {GameManager.instance.RustS();
+        //Attiva funzione di rust
+        }
+
         #endregion
         if(EnemyinArena <= 0){StartCoroutine(EndBattle());}
         ////////////
@@ -501,6 +516,7 @@ IEnumerator StartAI()
     }
 IEnumerator EndBattle()
     {
+        GameManager.instance.NotTouchOption = true;
         GameManager.instance.ChStop();
         AudioManager.instance.CrossFadeOUTAudio(1);
         yield return new WaitForSeconds(3f);
@@ -535,6 +551,7 @@ IEnumerator EndBattle()
     GameManager.instance.FadeIn();
     AudioManager.instance.CrossFadeOUTAudio(1);
     yield return new WaitForSeconds(2f);
+    GameManager.instance.NotTouchOption = false;
     foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);}
     if(GameManager.instance.K_Unlock){ch_KAc.IDAction = 0;}
     if(GameManager.instance.S_Unlock){ch_SAc.IDAction = 0;}

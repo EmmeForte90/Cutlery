@@ -53,7 +53,10 @@ public class CharacterMove : MonoBehaviour
     private float hor;
     private float danno_subito;
     private bool poisonState = false;
+    private bool rustState = false;
     private int TimePoison = 5;   
+    private int TimeRust = 50;   
+
     public bool isMoving;
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string WalkAnimationName;
@@ -94,6 +97,7 @@ public class CharacterMove : MonoBehaviour
     public GameObject VFXHhitShield;
     [Header("VFX")]
     public GameObject VFXPoison;
+    public GameObject VFXRust;
     public GameObject VFXHurt;
     public GameObject VFXCharge;
     public GameObject VFXChargeComplete;
@@ -526,7 +530,8 @@ private void HandleComboAttackS()
 }
 
     #region Stato Veleno
-    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true); poisonState = true;} 
+    public void Poison(){Anm.ChangeColorP(); VFXPoison.SetActive(true); poisonState = true;}
+ 
     private IEnumerator Poi()
     {
         yield return new WaitForSeconds(TimePoison);
@@ -545,7 +550,32 @@ private void HandleComboAttackS()
         }}
     }
     #endregion
-    public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false);}
+
+    #region Stato Rust
+    public void Rust(){Anm.ChangeColorR(); VFXRust.SetActive(true); rustState = true;}
+ 
+    private IEnumerator Rus()
+    {
+        yield return new WaitForSeconds(TimeRust);
+        if(rustState){
+        switch (kindCh)
+        {
+            case 0:
+            GameManager.instance.RestoreF(); rustState = false;
+            break;
+            case 1:
+            GameManager.instance.RestoreK(); rustState = false;
+            break; 
+            case 2:
+            GameManager.instance.RestoreS(); rustState = false;
+            break;
+        }}
+    }
+    #endregion
+
+
+
+    public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false); VFXRust.SetActive(false);}
   
     #region Move
     //For Knife
@@ -582,7 +612,8 @@ private void HandleComboAttackS()
         {Anm.PlayAnimationLoop(StumpAnimationName);}
         if(!isDodging || !canAttack){hor = Input.GetAxisRaw("Horizontal"); 
         isMoving = (Mathf.Abs(hor) > 0.0f || Mathf.Abs(verticalInput) > 0.0f) && !isDefence;}
-        if (poisonState){StartCoroutine(Poi());}     
+        if (poisonState){StartCoroutine(Poi());} 
+        if (rustState){StartCoroutine(Rus());}     
         }
         }
 #endregion

@@ -87,28 +87,47 @@ public class AudioManager : MonoBehaviour
     public void CrossFadeINAudio(int soundToPlay){StartCoroutine(FadeIn(bgm[soundToPlay], 1f));}
     public void CrossFadeOUTAudio(int soundToPlay){StartCoroutine(FadeOut(bgm[soundToPlay], 1f));}
     public IEnumerator FadeOut(AudioSource bgm, float FadeTime)
+{
+    // Impostare la variabile bgmActive a false per indicare che l'audio è in fase di dissolvenza
+    bgmActive = false;
+
+    // Memorizzare il volume iniziale dell'audio
+    float startVolume = bgm.volume;
+
+    // Ridurre gradualmente il volume durante il tempo specificato per la dissolvenza
+    while (bgm.volume > 0)
     {
-        bgmActive = false;
-        float startVolume = bgm.volume;
-        while (bgm.volume > 0)
-        {
-            bgm.volume -= startVolume * Time.deltaTime / FadeTime;
-            yield return null;
-        }
-        bgm.Stop();
-        bgm.volume = startVolume;
+        bgm.volume -= startVolume * Time.deltaTime / FadeTime;
+        yield return null;
     }
-    public  IEnumerator FadeIn(AudioSource bgm, float FadeTime)
+
+    // Interrompere la riproduzione dell'audio una volta completata la dissolvenza
+    bgm.Stop();
+
+    // Ripristinare il volume iniziale dell'audio
+    bgm.volume = startVolume;
+}
+
+public IEnumerator FadeIn(AudioSource bgm, float FadeTime)
+{
+    // Impostare la variabile bgmActive a false per indicare che l'audio è in fase di dissolvenza
+    bgmActive = false;
+
+    // Impostare il volume iniziale a 0.2f per evitare che l'audio parta troppo forte
+    float startVolume = 0.2f;
+
+    // Impostare il volume dell'audio a 0 e avviare la riproduzione
+    bgm.volume = 0;
+    bgm.Play();
+
+    // Aumentare gradualmente il volume durante il tempo specificato per la dissolvenza
+    while (bgm.volume < 0.5f)
     {
-        bgmActive = false;
-        float startVolume = 0.2f;
-        bgm.volume = 0;
-        bgm.Play();
-        while (bgm.volume < 1.0f)
-        {
-            bgm.volume += startVolume * Time.deltaTime / FadeTime;
-            yield return null;
-        }
-        bgm.volume = 0.5f;
+        bgm.volume += startVolume * Time.deltaTime / FadeTime;
+        yield return null;
     }
+
+    // Impostare il volume dell'audio a 0.5f dopo completata la dissolvenza per un volume finale desiderato
+    bgm.volume = 0.5f;
+}
 }

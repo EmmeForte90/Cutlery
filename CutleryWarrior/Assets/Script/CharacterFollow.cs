@@ -45,10 +45,14 @@ public class CharacterFollow : MonoBehaviour
     private float danno_subito;
     [Header("VFX")]
     public GameObject VFXPoison;
+    public GameObject VFXRust;
     public GameObject VFXHurt;
     public GameObject VFXHhitShield;
     private bool poisonState = false;
-    private int TimePoison = 5;     
+    private bool rustState = false;
+    private int TimePoison = 5;  
+    private int TimeRust = 50;     
+   
     private CharacterController characterController; 
     [Header("Animations")]
     [SpineAnimation][SerializeField]  string WalkAnimationName;    
@@ -129,6 +133,7 @@ public class CharacterFollow : MonoBehaviour
         DM = GameObject.Find("DuelManager").GetComponent<DuelManager>();
         take = true;}
         if(poisonState){StartCoroutine(Poi());}
+        if(rustState){StartCoroutine(Rus());}
         switch (kindCh)
         {
             case 0:
@@ -482,7 +487,7 @@ public class CharacterFollow : MonoBehaviour
     }
     }
      #region Stato Veleno
-    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true); poisonState = true;} 
+    public void Poison(){Anm.ChangeColorP(); VFXPoison.SetActive(true); poisonState = true;} 
     private IEnumerator Poi()
     {
         yield return new WaitForSeconds(TimePoison);
@@ -501,7 +506,29 @@ public class CharacterFollow : MonoBehaviour
         }}
     }
     #endregion
-    public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false);}
+    #region Stato Rust
+    public void Rust(){Anm.ChangeColorR(); VFXRust.SetActive(true); rustState = true;}
+ 
+    private IEnumerator Rus()
+    {
+        yield return new WaitForSeconds(TimeRust);
+        if(rustState){
+        switch (kindCh)
+        {
+            case 0:
+            GameManager.instance.RestoreF(); rustState = false;
+            break;
+            case 1:
+            GameManager.instance.RestoreK(); rustState = false;
+            break; 
+            case 2:
+            GameManager.instance.RestoreS(); rustState = false;
+            break;
+        }}
+    }
+    #endregion
+
+    public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false); VFXRust.SetActive(false);}
 
 #if(UNITY_EDITOR)
 #region Gizmos

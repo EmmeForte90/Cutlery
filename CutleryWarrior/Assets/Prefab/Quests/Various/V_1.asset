@@ -21,18 +21,18 @@ MonoBehaviour:
   Bigicon: {fileID: 21300000, guid: 47eb3e1706b3a5547a10c163f4e97b70, type: 3}
   Desicon: {fileID: 0}
   Startdialogue:
-  - My parent think I'm creazy because I want to go outside the wall for reserach
-    my precious doll, give me from m granpa.
-  - I just want give back... Sob...
+  - My parent think I'm crazy because I want to go outside the wall for reserach
+    my <color=red>precious doll</color>, give me from m granpa.
+  - <shake>I just want give back... Sob...</shake>
   Middledialogue:
-  - I just want give back... my doll... Sob...
+  - <shake>I just want give back... Sob...</shake>
   Endingdialogue:
-  - That my doll! You find it! Where... Never mind, I don't have word, thank you
-    very much!
+  - <shake a=2>That my doll!</shake> You find it! Where... <waitfor=1>Never mind,
+    I don't have word, thank you very much!
   - Here, take this, I don't know what is it, but maybe you will use for something.
     Thank you again!
   Afterdialogue:
-  - Thank you much, I don't lost it anymore, I promise!
-  isActive: 1
+  - <dangle>Thank you much, I don't lost it anymore, I promise!</dangle>
+  isActive: 0
   isComplete: 0
-  AfterQuest: 0
+  AfterQuest: 1

@@ -832,6 +832,15 @@ public class GameManager : MonoBehaviour
     {if(S_Unlock){ RecognizeCharacters();Manager_S.SwitchScriptsStun();}}
     #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #region Rust/Silence
+    public void RustF()
+    {if(F_Unlock){ RecognizeCharacters();ch_FAc.Rust();ch_F.Rust();}}
+    public void RustK()
+    {if(K_Unlock){ RecognizeCharacters();ch_KAc.Rust();ch_K.Rust();}}
+    public void RustS()
+    {if(S_Unlock){ RecognizeCharacters();ch_SAc.Rust();ch_S.Rust();}}
+    #endregion
+////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region PoisonState
     public void PoisonF(){if(F_Unlock){RecognizeCharacters();ch_FAc.Poison();ch_F.Poison();}}
     public void PoisonK(){if(K_Unlock){RecognizeCharacters();ch_KAc.Poison();ch_K.Poison();}}

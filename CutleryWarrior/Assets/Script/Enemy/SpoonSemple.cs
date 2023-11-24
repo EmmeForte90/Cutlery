@@ -224,7 +224,7 @@ public class SpoonSemple : MonoBehaviour
         } 
     }
     #region Stato Veleno
-    public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true);} //poisonState = true;} 
+    public void Poison(){Anm.ChangeColorP(); VFXPoison.SetActive(true);} //poisonState = true;} 
     private IEnumerator Poi()
     {
         yield return new WaitForSeconds(TimePoison);
