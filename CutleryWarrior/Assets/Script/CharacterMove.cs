@@ -29,7 +29,10 @@ public class CharacterMove : MonoBehaviour
     private bool canAttack = true;
     public float comboCooldown = 0.5f; // Tempo di cooldown tra le combo in secondi
     public float comboCooldownK = 0.3f; // Tempo di cooldown tra le combo in secondi
-    public float comboCooldownS = 0.3f; // Tempo di cooldown tra le combo in secondi
+    //public float comboCooldownS = 0.3f; // Tempo di cooldown tra le combo in secondi
+    [Header ("SpoonCombo")]
+    public string[] comboAnimations;
+    public float[] comboTimings;
     private bool isAttacking = false; // Aggiunto il flag per controllare se il personaggio sta attaccando
     private bool top = true;
     private bool StopRanm = false;
@@ -287,7 +290,7 @@ public void Awake()
     }
     private void StopDodge(){isDodging = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
     private void ResetDodgeCooldown(){canDodge = true;}
-    
+    private void StopAtkF(){canAttack = true; inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
     private void HandleComboAttackF()
     {
         comboCount = (comboCount % 3) + 1;
@@ -295,7 +298,7 @@ public void Awake()
         PlayComboAnimation("Battle/attack_" + comboCount.ToString());
         canAttack = false;
         inputCTR = true;
-        Invoke("StopAtk", comboCooldown);
+        Invoke("StopAtkF", comboCooldown);
         //StartCoroutine(ComboCooldown());
     }
 #endregion
@@ -368,6 +371,7 @@ else if (PlayerStats.instance.K_curMP < 20)
     comboCount = (comboCount % 3) + 1;
     PlayComboAnimation("Battle/attack_" + comboCount.ToString());
     isAttacking = true; // Imposta il flag per indicare che il personaggio sta attaccando
+    inputCTR = true;
 }
 
 private IEnumerator ComboCooldownK()
@@ -375,7 +379,8 @@ private IEnumerator ComboCooldownK()
     moveDirection = Vector3.zero;
     yield return new WaitForSeconds(comboCooldownK);
     isAttacking = false; // Resetta il flag quando l'animazione è completa
-    SlashV.SetActive(false); SlashH.SetActive(false); SlashB.SetActive(false);
+    //SlashV.SetActive(false); SlashH.SetActive(false); SlashB.SetActive(false);
+    inputCTR = false;
     canAttack = true;
 }
 
@@ -424,37 +429,60 @@ private IEnumerator StumpKTime()
     
     //Attack
        // Verifica se il tasto del mouse è stato premuto
-         if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && canAttack && 
-        PlayerStats.instance.S_curMP > 20 && !isCharging && !isAttacking)
+         if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && !isAttacking && canAttack)
         {
-            Stop();
-            HandleComboAttackS();
-            canAttack = false;
-            PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
-            StartCoroutine(ComboCooldownS());
-        } 
-        else if(PlayerStats.instance.S_curMP < 20){AudioManager.instance.PlayUFX(10); VFXCantATK.SetActive(true);}
+            if (PlayerStats.instance.S_curMP > 20)
+            {
+                Stop();
+                HandleComboAttackS();
+                canAttack = false;
+                PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
+                //StartCoroutine(ComboCooldownS());
+            }
+            else
+            {
+                AudioManager.instance.PlayUFX(10);
+                VFXCantATK.SetActive(true);
+            }
+        }
     }
-     private void HandleComboAttackS()
-{
-    comboCount = (comboCount % 3) + 1;
-    PlayComboAnimation("Battle/attack_" + comboCount.ToString());
-    isAttacking = true; // Imposta il flag per indicare che il personaggio sta attaccando
-}
 
-private IEnumerator ComboCooldownS()
+private void HandleComboAttackS()
+{
+        /*comboCount = (comboCount % comboAnimations.Length);
+        string animationToPlay = "Battle/" + comboAnimations[comboCount];
+        float timing = comboTimings[comboCount];
+
+        StartCoroutine(PlayCombo(animationToPlay, timing));
+
+        isAttacking = true; // Imposta il flag per indicare che il personaggio sta attaccando
+        comboCount++;*/
+        comboCount = (comboCount % 3) + 1;
+        Stop();
+        PlayComboAnimation("Battle/attack_" + comboCount.ToString());
+        canAttack = false;
+        inputCTR = true;
+        Invoke("StopAtkS", comboCooldown);
+        //StartCoroutine(ComboCooldown());
+}
+    private void StopAtkS(){canAttack = true; inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
+
+
+   /* private IEnumerator PlayCombo(string animationToPlay, float timing)
+    {
+        PlayComboAnimation(animationToPlay);
+        yield return new WaitForSeconds(timing);
+        //ShiledB.SetActive(false); ShiledT.SetActive(false); Crush.SetActive(false);
+        isAttacking = false; // Resetta il flag quando l'animazione è completa
+    }
+    private IEnumerator ComboCooldownS()
 {
     moveDirection = Vector3.zero;
-    yield return new WaitForSeconds(comboCooldownS);
+    yield return new WaitForSeconds(2);
     isAttacking = false; // Resetta il flag quando l'animazione è completa
-    ShiledT.SetActive(false); ShiledB.SetActive(false); Crush.SetActive(false);
     canAttack = true;
-}
-    
-
-
-
-    
+}*/
+ 
 #endregion
 
     private void PlayComboAnimation(string animationName)
@@ -462,7 +490,6 @@ private IEnumerator ComboCooldownS()
     private void PlayDodgeAnimation(string animationName)
     {if (_skeletonAnimation != null){_skeletonAnimation.AnimationState.SetAnimation(0, animationName, true);}}
     
-    private void StopAtk(){canAttack = true; inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void OpenBook(){Anm.PlayAnimationExplore(OpenBookAnimationName);}
     public void CloseBook(){Anm.PlayAnimationExplore(CloseBookAnimationName);}

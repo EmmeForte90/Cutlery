@@ -16,7 +16,8 @@ public class AiBullet : MonoBehaviour
     AI_Ch = GameManager.instance.F_Hero.GetComponent<CharacterFollow>();
     target = AI_Ch.target;
     Destroy(OBJ, lifeTime);
-    lastKnownPlayerPosition = target.transform.position;
+    if(target != null){lastKnownPlayerPosition = target.transform.position;}
+    else if(target == null){Destroy(OBJ);}
     print("target" + target);
     }
     

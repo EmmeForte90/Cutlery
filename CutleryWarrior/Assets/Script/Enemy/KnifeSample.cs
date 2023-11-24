@@ -247,8 +247,10 @@ public class KnifeSample : MonoBehaviour
     
     public void FacePlayer()
     {
+    if(player != null){
     if (player.transform.position.z > transform.position.z){transform.localScale = new Vector3(1, 1, 1);}
-    else if (player.transform.position.z < transform.position.z){transform.localScale = new Vector3(-1, 1, 1);}  
+    else if (player.transform.position.z < transform.position.z){transform.localScale = new Vector3(-1, 1, 1);}} 
+    if(player == null){/*Aspetta*/}
     }
         #region Stato Stun
 

@@ -11,6 +11,9 @@ public class CharacterFollow : MonoBehaviour
     [Tooltip("Scegli personaggi 0.Fork 1.Knife 2.Spoon")]
     [Range(0, 2)]
     public int kindCh;
+    private int randomNumber;
+    private int maxRange = 3; // Range massimo iniziale
+    private int retryCount = 0;
     public GameObject Indicatore;
     public GameObject StartP;
     public Transform MoveP;
@@ -326,14 +329,12 @@ public class CharacterFollow : MonoBehaviour
 {
     if (!Win)
     {
-        int randomNumber = Random.Range(0, 3);
-        result = Mathf.RoundToInt(randomNumber);
-
-        // Aggiungi un contatore per evitare una ricorsione infinita
-        int retryCount = 0;
-
+        
         while (retryCount < maxRetries)
         {
+            randomNumber = Random.Range(0, maxRange);
+            result = Mathf.RoundToInt(randomNumber);
+
             switch (result)
             {
                 case 0:
@@ -353,12 +354,15 @@ public class CharacterFollow : MonoBehaviour
                 return; // Esci dalla funzione quando il bersaglio è stato trovato con successo
             }
 
+            // Se non trova un bersaglio valido, riduci il range massimo
+            maxRange--;
+
             // Incrementa il contatore e riprova
             retryCount++;
         }
 
         // Se il contatore raggiunge il numero massimo di tentativi, esci senza cambiare il bersaglio
-        Debug.LogError("Errore: Impossibile trovare un bersaglio valido dopo " + maxRetries + " tentativi.");
+        Debug.LogError("Errore: Impossibile trovare un bersaglio valido dopo " + maxRetries + " tentativi. Riprova");
     }
     else if (Win)
     {
@@ -430,6 +434,8 @@ public class CharacterFollow : MonoBehaviour
     #endregion
     public void TakeDamage(float damage)
     {
+        if(order == 2){Instantiate(VFXHhitShield, transform.position, transform.rotation);}
+        else{
         switch (kindCh)
         {
             case 0:
@@ -458,14 +464,11 @@ public class CharacterFollow : MonoBehaviour
             if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage +=  5;}
             break;
         }
-    AudioManager.instance.PlaySFX(8);
-    //Debug.Log("danno "+ danno_subito);
-    if(!isGuard)
-    {
-    Instantiate(VFXHurt, transform.position, transform.rotation);
-    Anm.TemporaryChangeColor(Color.red);
+        AudioManager.instance.PlaySFX(8);
+        //Debug.Log("danno "+ danno_subito);
+        Instantiate(VFXHurt, transform.position, transform.rotation);
+        Anm.TemporaryChangeColor(Color.red);
     }
-    else if(isGuard){Instantiate(VFXHhitShield, transform.position, transform.rotation);}
     }
      #region Stato Veleno
     public void Poison(){Anm.ChangeColor(); VFXPoison.SetActive(true); poisonState = true;} 

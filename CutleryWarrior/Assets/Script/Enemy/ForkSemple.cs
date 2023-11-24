@@ -133,10 +133,6 @@ public class ForkSemple : MonoBehaviour
         if (player == null && !take){Choise(); take = true; }
         healthBar.size = currentHealth / maxHealth;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
-        if(player == GameManager.instance.F_Hero && !DM.F_Die){Choise();}
-        if(player == GameManager.instance.S_Hero && !DM.S_Die){Choise();}
-        if(player == GameManager.instance.K_Hero && !DM.K_Die){Choise();}
-
         switch(Action)
         {
             case 0:

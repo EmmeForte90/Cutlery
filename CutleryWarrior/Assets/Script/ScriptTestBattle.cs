@@ -290,9 +290,9 @@ public class ScriptTestBattle : MonoBehaviour
     }
     public void Silence()
     {
-        //if(GameManager.instance.K_Unlock){PlayerStats.instance.K_paralysisResistance = 0;}
-        //if(GameManager.instance.F_Unlock){PlayerStats.instance.F_paralysisResistance = 0;}
-        //if(GameManager.instance.S_Unlock){PlayerStats.instance.S_paralysisResistance = 0;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_rustResistance = 0;}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_rustResistance = 0;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_rustResistance = 0;}
     }
     public void Poison()
     {
@@ -319,6 +319,10 @@ public class ScriptTestBattle : MonoBehaviour
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_poisonResistance = PlayerStats.instance.K_poisonResistanceCont;}
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_poisonResistance = PlayerStats.instance.F_poisonResistanceCont;}
         if(GameManager.instance.S_Unlock){ PlayerStats.instance.S_poisonResistance = PlayerStats.instance.S_poisonResistanceCont;}
+        //
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_rustResistance = PlayerStats.instance.K_rustResistanceCont;}
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_rustResistance = PlayerStats.instance.F_rustResistanceCont;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_rustResistance = PlayerStats.instance.S_rustResistanceCont;}
         //
         if(GameManager.instance.F_Unlock){GameManager.instance.RestoreF();}
         if(GameManager.instance.K_Unlock){GameManager.instance.RestoreK(); }

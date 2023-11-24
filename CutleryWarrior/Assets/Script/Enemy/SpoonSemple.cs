@@ -96,32 +96,28 @@ public class SpoonSemple : MonoBehaviour
     private void Choise()
     {
         // Genera un numero casuale tra 1 e 3
-        if(GameManager.instance.F_Unlock &&
-        GameManager.instance.S_Unlock &&
-        GameManager.instance.K_Unlock){
-        int randomNumber = Random.Range(0, 2);
-        result = Mathf.RoundToInt(randomNumber);} 
-        else if(GameManager.instance.F_Unlock &&
-        !GameManager.instance.S_Unlock &&
-        !GameManager.instance.K_Unlock){
-        result = 0;}
-        //Debug.Log("Numero casuale: " + result);
-        //Debug.Log(ID + "ha Preso" + result);
-        switch(result)
+        int randomNumber = Random.Range(0, 3);
+        result = randomNumber;
+    }
+    // Debug.Log("Numero casuale: " + result);
+    // Debug.Log(ID + "ha Preso" + result);
+    public void Target()
+    {
+        switch (result)
         {
             case 0:
-            if(GameManager.instance.F_Unlock && !DM.F_Die){player = GameManager.instance.F_Hero;}
-            else if(!GameManager.instance.F_Unlock || DM.F_Die){Choise();}
-            break;
+                if (GameManager.instance.F_Unlock && !DM.F_Die){player = GameManager.instance.F_Hero;}
+                else{Choise();}
+                break;
             case 1:
-            if(GameManager.instance.K_Unlock && !DM.K_Die){player =  GameManager.instance.K_Hero;}
-            else if(!GameManager.instance.K_Unlock || DM.K_Die){Choise();}
-            break;
+                if (GameManager.instance.K_Unlock && !DM.K_Die){player = GameManager.instance.K_Hero;}
+                else{Choise();}
+                break;
             case 2:
-            if(GameManager.instance.S_Unlock && !DM.S_Die){player =  GameManager.instance.S_Hero;}
-            else if(!GameManager.instance.S_Unlock || DM.S_Die){Choise();}
-            break;
-        } 
+                if (GameManager.instance.S_Unlock && !DM.S_Die){player = GameManager.instance.S_Hero;}
+                else{Choise();}
+                break;
+        }
     }
     
     public void ChoseFork()

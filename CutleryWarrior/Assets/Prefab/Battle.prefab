@@ -13931,6 +13931,7 @@ MonoBehaviour:
   ThisBattle: {fileID: 1657294146021087943}
   WhatMusicAB: 0
   savedPosition: {x: 0, y: 0, z: 0}
+  MoveP: {fileID: 550553187623322953}
   EnemyinArena: 0
   WinEnd: 0
   Ending: 0
@@ -14250,6 +14251,7 @@ Transform:
   - {fileID: 8801694856459000854}
   - {fileID: 1319313042108114379}
   - {fileID: 8919935389563752949}
+  - {fileID: 7108487505124402027}
   m_Father: {fileID: 6256537772272523645}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -102.496, z: 0}
@@ -22048,6 +22050,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7807538432633192378, guid: 12e0c2a0be7ac5a4289b308077400683, type: 3}
+--- !u!1 &1394932009370737594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 550553187623322953}
+  m_Layer: 0
+  m_Name: PF_Start
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &550553187623322953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394932009370737594}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.9200535, y: 0.1899414, z: 3.0399628}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8356251131333398649}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1397134592050275703
 GameObject:
   m_ObjectHideFlags: 0
@@ -22212,7 +22245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1433981180986538971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.52, y: 1.48, z: 0.05}
+  m_LocalPosition: {x: 1.54, y: 1.48, z: -0.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -73332,6 +73365,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &3602699438194050392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7108487505124402027}
+  m_Layer: 0
+  m_Name: PF_Start
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7108487505124402027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3602699438194050392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.92, y: 0.19, z: 3.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1118866083292406157}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3609919776148015927
 GameObject:
   m_ObjectHideFlags: 0
@@ -90088,6 +90152,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   This: {fileID: 2095118778681504096}
+  N_SHMAX: 2
+  N__Shoot: 2
+  nextPoint: 0
+  destinationPoints: []
+  PointTange: 1
+  WaitAtk: 3
+  moveSpeed: 5
+  defense: 2
+  attackPauseDuration: 1
   player: {fileID: 0}
   Icon: {fileID: 7879803157073663941}
   IconVFX: {fileID: 102897831771908241}
@@ -90114,15 +90187,6 @@ MonoBehaviour:
   SleepProbabilityCount: 2
   SleepProbabilityMAX: 10
   timeSleep: 3
-  N__Shoot: 2
-  PointTange: 1
-  WaitAtk: 3
-  moveSpeed: 5
-  defense: 2
-  attackPauseDuration: 1
-  P1: {fileID: 3262343608917027104}
-  P2: {fileID: 925805228954254497}
-  P3: {fileID: 5355100815474863950}
   DieB: 0
   DM: {fileID: 1561206441109212130}
   Action: 0
@@ -90793,7 +90857,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2266479045114993940
 Transform:
   m_ObjectHideFlags: 0
@@ -92753,7 +92817,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5197774023696812567}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.73, y: 2.33, z: 0.06}
+  m_LocalPosition: {x: 1.76, y: 2.33, z: -0.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -112136,6 +112200,7 @@ Transform:
   - {fileID: 4608511753670209562}
   - {fileID: 9183164051274949016}
   - {fileID: 8585473483198523512}
+  - {fileID: 550553187623322953}
   m_Father: {fileID: 5773108643308922857}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -102.496, z: 0}
@@ -131104,6 +131169,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   This: {fileID: 4430738935318820036}
+  N_SHMAX: 2
+  N__Shoot: 2
+  nextPoint: 0
+  destinationPoints: []
+  PointTange: 1
+  WaitAtk: 3
+  moveSpeed: 5
+  defense: 2
+  attackPauseDuration: 1
   player: {fileID: 0}
   Icon: {fileID: 6386677443084558876}
   IconVFX: {fileID: 684777805822619568}
@@ -131130,15 +131204,6 @@ MonoBehaviour:
   SleepProbabilityCount: 2
   SleepProbabilityMAX: 10
   timeSleep: 3
-  N__Shoot: 2
-  PointTange: 1
-  WaitAtk: 3
-  moveSpeed: 5
-  defense: 2
-  attackPauseDuration: 1
-  P1: {fileID: 7039798668032549907}
-  P2: {fileID: 1020401436880266713}
-  P3: {fileID: 1094919365085525582}
   DieB: 0
   DM: {fileID: 5073002695190756782}
   Action: 0
@@ -152913,6 +152978,7 @@ MonoBehaviour:
   ThisBattle: {fileID: 0}
   WhatMusicAB: 0
   savedPosition: {x: 0, y: 0, z: 0}
+  MoveP: {fileID: 7108487505124402027}
   EnemyinArena: 0
   WinEnd: 0
   Ending: 0

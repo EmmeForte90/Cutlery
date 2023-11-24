@@ -15,6 +15,7 @@ public class DuelManager : MonoBehaviour
        
     [Header("Arena")]
     public Vector3 savedPosition;
+    public Transform MoveP;
     public int EnemyinArena;
     private bool win = true;
     public bool WinEnd = false;
@@ -127,6 +128,8 @@ public void Awake()
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage = 0;}       
         if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage = 0;}
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage = 0;}
+        //
+        ch_FAc.MoveP.transform.position = MoveP.transform.position;
         //
         ID_Enm = GameManager.instance.IdENM;
         StartCoroutine(StartAI());    
@@ -494,7 +497,7 @@ IEnumerator StartAI()
         yield return new WaitForSeconds(3f);
         if(GameManager.instance.K_Unlock){ch_KAc.order = 1;}
         if(GameManager.instance.S_Unlock){ch_SAc.order = 2;}
-        if(GameManager.instance.F_Unlock){ch_FAc.order = 1;}
+        if(GameManager.instance.F_Unlock){ch_FAc.order = 3;}
     }
 IEnumerator EndBattle()
     {
