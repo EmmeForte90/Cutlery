@@ -1,0 +1,6 @@
+mult.png
+size:128,64
+filter:Linear,Linear
+Z
+bounds:2,2,60,66
+rotate:90

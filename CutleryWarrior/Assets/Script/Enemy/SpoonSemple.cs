@@ -16,6 +16,8 @@ public class SpoonSemple : MonoBehaviour
     //public bool Test = false;  
     
     private bool take = false; 
+    private int N_Target = 0;
+
     [Header("Hp")]
     public float maxHealth = 100f;
     public float currentHealth;
@@ -86,38 +88,41 @@ public class SpoonSemple : MonoBehaviour
 
     public AnimationManager Anm;
     
-    public void Awake()
+    public void Start()
     {
         if (instance == null){instance = this;}
         currentHealth = maxHealth;
         poisonResistanceCont = poisonResistance;
         DM.EnemyinArena += 1;
+        N_Target = GameManager.instance.N_Target;
+        //N__Shoot = N_SHMAX;
     }
     private void Choise()
     {
         // Genera un numero casuale tra 1 e 3
-        int randomNumber = Random.Range(0, 3);
+        int randomNumber = Random.Range(1, N_Target);
         result = randomNumber;
+        Target();
     }
     // Debug.Log("Numero casuale: " + result);
     // Debug.Log(ID + "ha Preso" + result);
     public void Target()
     {
-        switch (result)
+        switch(result)
         {
-            case 0:
-                if (GameManager.instance.F_Unlock && !DM.F_Die){player = GameManager.instance.F_Hero;}
-                else{Choise();}
-                break;
             case 1:
-                if (GameManager.instance.K_Unlock && !DM.K_Die){player = GameManager.instance.K_Hero;}
-                else{Choise();}
-                break;
+            if(GameManager.instance.F_Unlock && !DM.F_Die){player = GameManager.instance.F_Hero;}
+            else if(!GameManager.instance.F_Unlock || DM.F_Die){Choise();}
+            break;
             case 2:
-                if (GameManager.instance.S_Unlock && !DM.S_Die){player = GameManager.instance.S_Hero;}
-                else{Choise();}
-                break;
-        }
+            if(GameManager.instance.K_Unlock && !DM.K_Die){player =  GameManager.instance.K_Hero;}
+            else if(!GameManager.instance.K_Unlock || DM.K_Die){Choise();}
+            break;
+            case 3:
+            if(GameManager.instance.S_Unlock && !DM.S_Die){player =  GameManager.instance.S_Hero;}
+            else if(!GameManager.instance.S_Unlock || DM.S_Die){Choise();}
+            break;
+        } 
     }
     
     public void ChoseFork()
@@ -262,8 +267,10 @@ public class SpoonSemple : MonoBehaviour
     
     public void FacePlayer()
     {
+    if(player != null){
     if (player.transform.position.z > transform.position.z){transform.localScale = new Vector3(1, 1, 1);}
-    else if (player.transform.position.z < transform.position.z){transform.localScale = new Vector3(-1, 1, 1);}  
+    else if (player.transform.position.z < transform.position.z){transform.localScale = new Vector3(-1, 1, 1);}} 
+    if(player == null){/*Aspetta*/}
     }    
     
     #region Stato Stun

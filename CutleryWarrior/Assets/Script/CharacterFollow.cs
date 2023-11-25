@@ -46,12 +46,17 @@ public class CharacterFollow : MonoBehaviour
     [Header("VFX")]
     public GameObject VFXPoison;
     public GameObject VFXRust;
+    public GameObject VFXSleep;
+    public GameObject VFXStun;
     public GameObject VFXHurt;
     public GameObject VFXHhitShield;
     private bool poisonState = false;
     private bool rustState = false;
-    private int TimePoison = 5;  
-    private int TimeRust = 50;     
+    private bool sleepState = false;
+    private int TimePoison = 5;   
+    private int TimeRust = 50;   
+    public float TimeStun = 5;
+    public float TimeSleep = 5;  
    
     private CharacterController characterController; 
     [Header("Animations")]
@@ -63,6 +68,9 @@ public class CharacterFollow : MonoBehaviour
     [SpineAnimation][SerializeField]  string AllarmAnimationName;
     [SpineAnimation][SerializeField]  string GuardAnimationName;
     [SpineAnimation][SerializeField]  string Atk1AnimationName;
+    [SpineAnimation][SerializeField]  string StunAnimationName;
+    [SpineAnimation][SerializeField]  string SleepAnimationName;
+    [SpineAnimation][SerializeField]  string DieAnimationName;
     [Header("Battle")]
     public int attackPauseDuration = 1;
     public float attackRange = 3f;
@@ -258,8 +266,13 @@ public class CharacterFollow : MonoBehaviour
             MoveInPoint();
             break;
             case 4:
+            StunLoop();
             break;
             case 5:
+            Sleep();
+            break;
+            case 6:
+            Death();
             break;
         }
     }
@@ -284,8 +297,13 @@ public class CharacterFollow : MonoBehaviour
             MoveInPoint();
             break;
             case 4:
+            StunLoop();
             break;
             case 5:
+            Sleep();
+            break;
+            case 6:
+            Death();
             break;
         }
     }
@@ -310,8 +328,13 @@ public class CharacterFollow : MonoBehaviour
             MoveInPoint(); ShrinkCapsule();
             break;
             case 4:
+            StunLoop();
             break;
             case 5:
+            Sleep();
+            break;
+            case 6:
+            Death();
             break;
         }
     }
@@ -482,10 +505,17 @@ public class CharacterFollow : MonoBehaviour
         }
         AudioManager.instance.PlaySFX(8);
         //Debug.Log("danno "+ danno_subito);
+        if(sleepState){SleepRestored();}
         Instantiate(VFXHurt, transform.position, transform.rotation);
         Anm.TemporaryChangeColor(Color.red);
     }
     }
+    #region Death
+    public void Death(){Anm.PlayAnimationLoop(DieAnimationName);}
+    public void RestoreDeath(){order = 0; Anm.PlayAnimationLoop(IdleBAnimationName);}
+    #endregion
+
+
      #region Stato Veleno
     public void Poison(){Anm.ChangeColorP(); VFXPoison.SetActive(true); poisonState = true;} 
     private IEnumerator Poi()
@@ -528,6 +558,19 @@ public class CharacterFollow : MonoBehaviour
     }
     #endregion
 
+    #region Stato Stun
+    public void StunLoop(){Anm.ClearAnm(); Anm.PlayAnimationLoop(StunAnimationName); VFXStun.SetActive(true);}
+    private IEnumerator StunRestored()
+    {
+        yield return new WaitForSeconds(TimeStun);
+        VFXStun.SetActive(false); order = 0;
+    }
+    #endregion
+
+    #region Stato Sleep
+    public void Sleep(){Anm.ClearAnm(); Anm.PlayAnimationLoop(SleepAnimationName); VFXSleep.SetActive(true); sleepState = true;}
+    public void SleepRestored(){ VFXSleep.SetActive(false); order = 0; sleepState = false; }
+    #endregion
     public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false); VFXRust.SetActive(false);}
 
 #if(UNITY_EDITOR)

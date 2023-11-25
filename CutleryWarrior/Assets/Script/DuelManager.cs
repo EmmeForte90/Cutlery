@@ -105,6 +105,10 @@ public void Awake()
         //
         vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>();
         //
+        if(GameManager.instance.F_Unlock){GameManager.instance.N_Target++;}
+        if(GameManager.instance.K_Unlock){GameManager.instance.N_Target++;}
+        if(GameManager.instance.S_Unlock){GameManager.instance.N_Target++;}
+        //
         if(GameManager.instance.F_Unlock){
         PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
         PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;}
@@ -116,7 +120,22 @@ public void Awake()
         if(GameManager.instance.S_Unlock){
         PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
         PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;}
-        //CharacterID = 1; 
+        //
+        PlayerStats.instance.F_poisonResistanceCont = PlayerStats.instance.F_poisonResistance;
+        PlayerStats.instance.F_paralysisResistanceCont = PlayerStats.instance.F_paralysisResistance;
+        PlayerStats.instance.F_sleepResistanceCont = PlayerStats.instance.F_sleepResistance;
+        PlayerStats.instance.F_rustResistanceCont = PlayerStats.instance.F_rustResistance;
+        //
+        PlayerStats.instance.K_poisonResistanceCont = PlayerStats.instance.K_poisonResistance;
+        PlayerStats.instance.K_paralysisResistanceCont = PlayerStats.instance.K_paralysisResistance;
+        PlayerStats.instance.K_sleepResistanceCont = PlayerStats.instance.K_sleepResistance;
+        PlayerStats.instance.K_rustResistanceCont = PlayerStats.instance.K_rustResistance;
+        //
+        PlayerStats.instance.S_poisonResistanceCont = PlayerStats.instance.S_poisonResistance;
+        PlayerStats.instance.S_paralysisResistanceCont = PlayerStats.instance.S_paralysisResistance;
+        PlayerStats.instance.S_sleepResistanceCont = PlayerStats.instance.S_sleepResistance;
+        PlayerStats.instance.S_rustResistanceCont = PlayerStats.instance.S_rustResistance;
+        //
         if(GameManager.instance.S_Unlock){ch_SAc = GameManager.instance.S_Hero.GetComponent<CharacterFollow>();}
         if(GameManager.instance.F_Unlock){ch_FAc = GameManager.instance.F_Hero.GetComponent<CharacterFollow>();}
         if(GameManager.instance.K_Unlock){ch_KAc = GameManager.instance.K_Hero.GetComponent<CharacterFollow>();}
@@ -270,14 +289,21 @@ public void Update()
         {GameManager.instance.RustF();
         //Attiva funzione di rust
         }
-        if(GameManager.instance.K_Unlock && PlayerStats.instance.F_rustResistance <= 0)
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.K_rustResistance <= 0)
         {GameManager.instance.RustK();
         //Attiva funzione di rust
         }
-        if(GameManager.instance.S_Unlock && PlayerStats.instance.F_rustResistance <= 0)
+        if(GameManager.instance.S_Unlock && PlayerStats.instance.S_rustResistance <= 0)
         {GameManager.instance.RustS();
         //Attiva funzione di rust
         }
+        //Sleep
+        if(GameManager.instance.F_Unlock && PlayerStats.instance.F_sleepResistance <= 0)
+        {GameManager.instance.SleepF();}
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.K_sleepResistance <= 0)
+        {GameManager.instance.SleepK();}
+        if(GameManager.instance.S_Unlock && PlayerStats.instance.S_sleepResistance <= 0)
+        {GameManager.instance.SleepS();}
 
         #endregion
         if(EnemyinArena <= 0){StartCoroutine(EndBattle());}
@@ -401,6 +427,7 @@ public void Update()
     if(GameManager.instance.F_Unlock){FAct.transform.position = GameManager.instance.savedPositionEscape.position;}
     if(GameManager.instance.K_Unlock){KAct.transform.position = GameManager.instance.savedPositionEscape.position;}
     if(GameManager.instance.S_Unlock){SAct.transform.position = GameManager.instance.savedPositionEscape.position;}
+    GameManager.instance.N_Target = 0;
     GameManager.instance.StopWin();
     GameManager.instance.ChCanM();
     GameManager.instance.ActiveMinimap();
@@ -476,7 +503,8 @@ public void Update()
     {
         inputCTR = true;
         AudioManager.instance.StopMFX(1);
-       yield return new WaitForSeconds(2f);
+        GameManager.instance.N_Target = 0;
+        yield return new WaitForSeconds(2f);
         AudioManager.instance.PlayMFX(2);
 
        GameOverBox.SetActive(true);
@@ -525,6 +553,7 @@ IEnumerator EndBattle()
         if(win)
         {Win.gameObject.SetActive(true);
         RandomReward();
+        GameManager.instance.N_Target = 0;
         AudioManager.instance.PlaySFX(7);
         GameManager.instance.NotChange(); 
         GameManager.instance.PoseWin();

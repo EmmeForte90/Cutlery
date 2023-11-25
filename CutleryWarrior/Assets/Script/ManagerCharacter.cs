@@ -5,8 +5,8 @@ public class ManagerCharacter : MonoBehaviour
     public CharacterFollow Actor;
     public Winanimation WinANM;
     public ChargeSkill Skill;
-    public DeathAnimation Death;
-    public StunAnimation Stun;
+    //public DeathAnimation Death;
+    //public StunAnimation Stun;
     public int kindCH;
 
     public void SwitchScriptsPlayer()
@@ -15,8 +15,8 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = false;
             WinANM.enabled = false;
             Skill.enabled = false;
-            Death.enabled = false;
-            Stun.enabled = false;
+           // Death.enabled = false;
+            //Stun.enabled = false;
             Player.Direction();
             kindCH = 0;
     }
@@ -26,8 +26,8 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = true;
             WinANM.enabled = false;
             Skill.enabled = false;
-            Death.enabled = false;
-             Stun.enabled = false;
+           // Death.enabled = false;
+            // Stun.enabled = false;
             Actor.Direction();
             kindCH = 1;
     }
@@ -38,8 +38,8 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = false;
             WinANM.enabled = true;
             Skill.enabled = false;
-            Death.enabled = false;
-             Stun.enabled = false;
+           // Death.enabled = false;
+           //  Stun.enabled = false;
             WinANM.Direction();
             WinANM.Win();
     }
@@ -49,8 +49,8 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = false;
             WinANM.enabled = false;
             Skill.enabled = true;
-            Death.enabled = false;
-             Stun.enabled = false;
+           // Death.enabled = false;
+           //  Stun.enabled = false;
     }
     public void SwitchScriptsDeath()
     {
@@ -58,8 +58,8 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = false;
             WinANM.enabled = false;
             Skill.enabled = false;
-            Death.enabled = true;
-            Stun.enabled = false;
+           // Death.enabled = true;
+           // Stun.enabled = false;
     }
     public void SwitchScriptsStun()
     {
@@ -67,7 +67,7 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = false;
             WinANM.enabled = false;
             Skill.enabled = false;
-            Death.enabled = false;
-            Stun.enabled = true;
+          //  Death.enabled = false;
+          //  Stun.enabled = true;
     }
 }

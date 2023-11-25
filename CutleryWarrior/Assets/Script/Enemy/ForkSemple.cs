@@ -30,6 +30,8 @@ public class ForkSemple : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
     public Scrollbar healthBar;
+    private int N_Target = 0;
+
     [Header("Status")]
     public float damagePerSecond = 0.1f;
     public float duration = 5.0f;
@@ -83,12 +85,13 @@ public class ForkSemple : MonoBehaviour
     [SpineAnimation][SerializeField] private string SleepAnimationName;
     public AnimationManager Anm;
     
-    public void Awake()
+    public void Start()
     {
         if (instance == null){instance = this;}
         currentHealth = maxHealth;
         poisonResistanceCont = poisonResistance;
         DM.EnemyinArena += 1;
+        N_Target = GameManager.instance.N_Target;
         N__Shoot = N_SHMAX;
     }
     private void Choise()
@@ -97,9 +100,9 @@ public class ForkSemple : MonoBehaviour
         if(GameManager.instance.F_Unlock &&
         GameManager.instance.S_Unlock &&
         GameManager.instance.K_Unlock){
-        int randomNumber = Random.Range(0, 2);
+        int randomNumber = Random.Range(1, N_Target);
         result = Mathf.RoundToInt(randomNumber);
-        int randomNumberPoint = Random.Range(0, 2);
+        int randomNumberPoint = Random.Range(1, 2);
         resultPoint = Mathf.RoundToInt(randomNumberPoint);
         } 
         else if(GameManager.instance.F_Unlock &&
@@ -110,15 +113,15 @@ public class ForkSemple : MonoBehaviour
         //Debug.Log(ID + "ha Preso" + result);
         switch(result)
         {
-            case 0:
+            case 1:
             if(GameManager.instance.F_Unlock && !DM.F_Die){player = GameManager.instance.F_Hero;}
             else if(!GameManager.instance.F_Unlock || DM.F_Die){Choise();}
             break;
-            case 1:
+            case 2:
             if(GameManager.instance.K_Unlock && !DM.K_Die){player =  GameManager.instance.K_Hero;}
             else if(!GameManager.instance.K_Unlock || DM.K_Die){Choise();}
             break;
-            case 2:
+            case 3:
             if(GameManager.instance.S_Unlock && !DM.S_Die){player =  GameManager.instance.S_Hero;}
             else if(!GameManager.instance.S_Unlock || DM.S_Die){Choise();}
             break;
@@ -269,8 +272,10 @@ public class ForkSemple : MonoBehaviour
     
     public void FacePlayer()
     {
+    if(player != null){
     if (player.transform.position.z > transform.position.z){transform.localScale = new Vector3(1, 1, 1);}
-    else if (player.transform.position.z < transform.position.z){transform.localScale = new Vector3(-1, 1, 1);}  
+    else if (player.transform.position.z < transform.position.z){transform.localScale = new Vector3(-1, 1, 1);}} 
+    if(player == null){/*Aspetta*/}
     }
     
     #region Stato Stun

@@ -13,6 +13,8 @@ public class KnifeSample : MonoBehaviour
     public GameObject Icon;
     public GameObject IconVFX;
     private bool take = false; 
+    private int N_Target = 0;
+
     [Header("Hp")]
     public float maxHealth = 100f;
     public float currentHealth;
@@ -80,12 +82,14 @@ public class KnifeSample : MonoBehaviour
     [SpineAnimation][SerializeField] private string SleepAnimationName;
     public AnimationManager Anm;
     
-    public void Awake()
+    public void Start()
     {
         if (instance == null){instance = this;}
         currentHealth = maxHealth;
         poisonResistanceCont = poisonResistance;
         DM.EnemyinArena += 1;
+        N_Target = GameManager.instance.N_Target;
+        //N__Shoot = N_SHMAX;
     }
     public void ChoseFork()
     { if(GameManager.instance.F_Unlock){player = GameManager.instance.F_Hero;}}
@@ -97,28 +101,29 @@ public class KnifeSample : MonoBehaviour
     private void Choise()
     {
         // Genera un numero casuale tra 1 e 3
-        int randomNumber = Random.Range(0, 3);
+        int randomNumber = Random.Range(1, N_Target);
         result = randomNumber;
+        Target();
     }
     // Debug.Log("Numero casuale: " + result);
     // Debug.Log(ID + "ha Preso" + result);
     public void Target()
     {
-        switch (result)
+        switch(result)
         {
-            case 0:
-                if (GameManager.instance.F_Unlock && !DM.F_Die){player = GameManager.instance.F_Hero;}
-                else{Choise();}
-                break;
             case 1:
-                if (GameManager.instance.K_Unlock && !DM.K_Die){player = GameManager.instance.K_Hero;}
-                else{Choise();}
-                break;
+            if(GameManager.instance.F_Unlock && !DM.F_Die){player = GameManager.instance.F_Hero;}
+            else if(!GameManager.instance.F_Unlock || DM.F_Die){Choise();}
+            break;
             case 2:
-                if (GameManager.instance.S_Unlock && !DM.S_Die){player = GameManager.instance.S_Hero;}
-                else{Choise();}
-                break;
-        }
+            if(GameManager.instance.K_Unlock && !DM.K_Die){player =  GameManager.instance.K_Hero;}
+            else if(!GameManager.instance.K_Unlock || DM.K_Die){Choise();}
+            break;
+            case 3:
+            if(GameManager.instance.S_Unlock && !DM.S_Die){player =  GameManager.instance.S_Hero;}
+            else if(!GameManager.instance.S_Unlock || DM.S_Die){Choise();}
+            break;
+        } 
     }
 
     public void Update()

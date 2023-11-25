@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public EquipM_F M_F;
     public EquipM_K M_K;
     public EquipM_S M_S;
-
+    public int N_Target = 0;
     public Vector3 savedPosition;
     public Transform savedPositionEscape;
     public string sceneName;
@@ -814,25 +814,77 @@ public class GameManager : MonoBehaviour
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region Death
-    public void PoseDeathF(){if(F_Unlock){RecognizeCharacters();Manager_F.SwitchScriptsDeath();}}
-    public void PoseDeathK(){if(K_Unlock){RecognizeCharacters(); Manager_K.SwitchScriptsDeath();}}
-    public void PoseDeathS(){if(S_Unlock){RecognizeCharacters();Manager_S.SwitchScriptsDeath();}}
+    public void PoseDeathF(){if(F_Unlock){RecognizeCharacters();ch_FAc.order=6;ch_F.IDAction=4;}}
+    public void PoseDeathK(){if(K_Unlock){RecognizeCharacters();ch_KAc.order=6;ch_K.IDAction=4;}}
+    public void PoseDeathS(){if(S_Unlock){RecognizeCharacters();ch_SAc.order=6;ch_S.IDAction=4;}}
     //----------------//
-    public void RestoreDeathF(){if(F_Unlock){RecognizeCharacters();Manager_F.SwitchScriptsActor();}}
-    public void RestoreDeathhK(){RecognizeCharacters();Manager_K.SwitchScriptsActor();}
-    public void RestoreDeathS(){RecognizeCharacters(); Manager_S.SwitchScriptsActor();}
+    public void RestoreDeathF(){if(F_Unlock){RecognizeCharacters();ch_FAc.RestoreDeath();ch_F.RestoreDeath();}}
+    public void RestoreDeathhK(){if(K_Unlock){RecognizeCharacters();ch_KAc.RestoreDeath();ch_K.RestoreDeath();}}
+    public void RestoreDeathS(){if(S_Unlock){RecognizeCharacters();ch_SAc.RestoreDeath();ch_S.RestoreDeath();}}
     #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region Stun
     public void StunF()
-    {if(F_Unlock){ RecognizeCharacters();Manager_F.SwitchScriptsStun();}}
+    {if(F_Unlock){ RecognizeCharacters();ch_FAc.order=4;ch_F.IDAction=2;}}
     public void StunK()
-    {if(K_Unlock){ RecognizeCharacters();Manager_K.SwitchScriptsStun();}}
+    {if(K_Unlock){ RecognizeCharacters();ch_KAc.order=4;ch_K.IDAction=2;}}
     public void StunS()
-    {if(S_Unlock){ RecognizeCharacters();Manager_S.SwitchScriptsStun();}}
+    {if(S_Unlock){ RecognizeCharacters();ch_SAc.order=4;ch_S.IDAction=2;}}
+    public void RestoreStunF()
+    {
+        RecognizeCharacters();
+        if(F_Unlock)
+        {PlayerStats.instance.F_paralysisResistance = PlayerStats.instance.F_paralysisResistanceCont;
+        ch_F.Idle();ch_F.ReCol();ch_FAc.Idle();ch_FAc.ReCol();}
+    }
+    public void RestoreStunK()
+    {
+        RecognizeCharacters();
+        if(K_Unlock)
+        {PlayerStats.instance.K_paralysisResistance = PlayerStats.instance.K_paralysisResistanceCont;
+        ch_K.Idle();ch_K.ReCol();ch_KAc.Idle();ch_KAc.ReCol();}
+    }
+    public void RestoreStunS()
+    {
+        RecognizeCharacters();
+        if(S_Unlock)
+        {PlayerStats.instance.S_paralysisResistance = PlayerStats.instance.S_paralysisResistanceCont;
+        ch_S.Idle();ch_S.ReCol();ch_SAc.Idle();ch_SAc.ReCol();}
+    }
     #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    #region Rust/Silence
+    #region Sleep
+    public void SleepF()
+    {if(F_Unlock){RecognizeCharacters();ch_FAc.order=5;ch_F.IDAction=3;}}
+    public void SleepK()
+    {if(K_Unlock){ RecognizeCharacters();ch_KAc.order=5;ch_K.IDAction=3;}}
+    public void SleepS()
+    {if(S_Unlock){ RecognizeCharacters();ch_SAc.order=5;ch_S.IDAction=3;}}
+    //
+    public void RestoreSleepF()
+    {
+        RecognizeCharacters();
+        if(F_Unlock)
+        {PlayerStats.instance.F_sleepResistance = PlayerStats.instance.F_sleepResistanceCont;
+        ch_F.Idle();ch_F.ReCol();ch_FAc.Idle();ch_FAc.ReCol();ch_F.SleepRestored(); ch_FAc.SleepRestored();}
+    }
+    public void RestoreSleepK()
+    {
+        RecognizeCharacters();
+        if(K_Unlock)
+        {PlayerStats.instance.K_sleepResistance = PlayerStats.instance.K_sleepResistanceCont;
+        ch_K.Idle();ch_K.ReCol();ch_KAc.Idle();ch_KAc.ReCol();ch_K.SleepRestored(); ch_KAc.SleepRestored();}
+    }
+    public void RestoreSleepS()
+    {
+        RecognizeCharacters();
+        if(S_Unlock)
+        {PlayerStats.instance.S_sleepResistance = PlayerStats.instance.S_sleepResistanceCont;
+        ch_S.Idle();ch_S.ReCol();ch_SAc.Idle();ch_SAc.ReCol();ch_S.SleepRestored(); ch_SAc.SleepRestored();}
+    }
+    #endregion
+////////////////////////////////////////////////////////////////////////////////////////////////////////    
+#region Rust/Silence
     public void RustF()
     {if(F_Unlock){ RecognizeCharacters();ch_FAc.Rust();ch_F.Rust();}}
     public void RustK()

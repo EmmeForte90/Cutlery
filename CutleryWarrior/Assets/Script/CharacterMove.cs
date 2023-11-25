@@ -54,8 +54,13 @@ public class CharacterMove : MonoBehaviour
     private float danno_subito;
     private bool poisonState = false;
     private bool rustState = false;
+    private bool stunState = false;
+    private bool sleepState = false;
+    private bool deathState = false;
     private int TimePoison = 5;   
     private int TimeRust = 50;   
+    public float TimeStun = 5;
+    public float TimeSleep = 5;
 
     public bool isMoving;
     [Header("Animations")]
@@ -75,6 +80,9 @@ public class CharacterMove : MonoBehaviour
     [SpineAnimation][SerializeField]  string GuardWalkAnimationName;
     [SpineAnimation][SerializeField]  string DodgeFAnimationName;
     [SpineAnimation][SerializeField]  string StumpAnimationName;
+    [SpineAnimation][SerializeField]  string StunAnimationName;
+    [SpineAnimation][SerializeField]  string SleepAnimationName;
+    [SpineAnimation][SerializeField]  string DieAnimationName;
     [SpineAnimation][SerializeField]  string OpenBookAnimationName;
     [SpineAnimation][SerializeField]  string CloseBookAnimationName;
     public SkeletonAnimation _skeletonAnimation;
@@ -98,6 +106,8 @@ public class CharacterMove : MonoBehaviour
     [Header("VFX")]
     public GameObject VFXPoison;
     public GameObject VFXRust;
+    public GameObject VFXSleep;
+    public GameObject VFXStun;
     public GameObject VFXHurt;
     public GameObject VFXCharge;
     public GameObject VFXChargeComplete;
@@ -150,7 +160,7 @@ public void Awake()
         switch(IDAction){
         case 0:  
         ////////////////////////////////////////
-        SimpleMove();
+        SimpleMove(); RestoreStuts();
         break;
         ////////////////////////////////////////
         case 1: 
@@ -172,7 +182,27 @@ public void Awake()
             break;
         }
         break;
+        ////////////////////////////////////////
+        case 2: 
+        StunLoop();
+        break;
+        ////////////////////////////////////////
+        case 3: 
+        Sleep();
+        break;
+        ////////////////////////////////////////
+        case 4: 
+        Death();
+        break;
         }}
+    }
+
+    public void RestoreStuts()
+    {
+        VFXStun.SetActive(false);
+        VFXPoison.SetActive(false);
+        VFXSleep.SetActive(false);
+        VFXRust.SetActive(false);
     }
     
 #region MoveExploration
@@ -480,13 +510,13 @@ private void HandleComboAttackS()
     public void Posebattle(){Anm.PlayAnimation(IdleBAnimationName);}
     public void OpenBook(){Anm.PlayAnimationExplore(OpenBookAnimationName);}
     public void CloseBook(){Anm.PlayAnimationExplore(CloseBookAnimationName);}
-
     public void TakeCamera(){cam = GameManager.instance.vcam.transform;}
     public void Idle(){Anm.PlayAnimationLoop(IdleAnimationName); VFXCantATK.SetActive(false);}
     public void Allarm(){warning = true;}
     public void StopAllarm(){warning = false;}
     public void TakeDamage(float damage)
 {
+    if(!deathState){
     switch (kindCh)
     {
         case 0:
@@ -496,6 +526,8 @@ private void HandleComboAttackS()
             PlayerStats.instance.F_curRage += 5;
             AudioManager.instance?.PlaySFX(8);
             Instantiate(VFXHurt, transform.position, transform.rotation);
+            if(sleepState){GameManager.instance.RestoreSleepF();}
+            print("sleepState" + sleepState);
             Anm?.TemporaryChangeColor(Color.red);}
             //Debug.Log("danno " +  Stats.F_curHP);
             break;
@@ -505,8 +537,9 @@ private void HandleComboAttackS()
             PlayerStats.instance.K_curRage += 5;
             AudioManager.instance?.PlaySFX(8);
             Instantiate(VFXHurt, transform.position, transform.rotation);
+            if(sleepState){GameManager.instance.RestoreSleepK();}
+            print("sleepState" + sleepState);
             Anm?.TemporaryChangeColor(Color.red);
-            //Debug.Log("danno " +  Stats.K_curHP);
             break;
         case 2:
             if (!isDefence)
@@ -516,6 +549,7 @@ private void HandleComboAttackS()
                 PlayerStats.instance.S_curRage += 5;
                 AudioManager.instance?.PlaySFX(8);
                 Instantiate(VFXHurt, transform.position, transform.rotation);
+                if(sleepState){SleepRestored();}
                 Anm?.TemporaryChangeColor(Color.red);
                 //Debug.Log("danno " +  Stats.S_curHP);
             }
@@ -523,10 +557,12 @@ private void HandleComboAttackS()
             {
                 PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
                 AudioManager.instance?.PlaySFX(12);
+                if(sleepState){GameManager.instance.RestoreSleepS();}
+                print("sleepState" + sleepState);
                 Instantiate(VFXHhitShield, BP.transform.position, transform.rotation);
             }
             break;
-    }
+    }}
 }
 
     #region Stato Veleno
@@ -553,7 +589,6 @@ private void HandleComboAttackS()
 
     #region Stato Rust
     public void Rust(){Anm.ChangeColorR(); VFXRust.SetActive(true); rustState = true;}
- 
     private IEnumerator Rus()
     {
         yield return new WaitForSeconds(TimeRust);
@@ -573,8 +608,38 @@ private void HandleComboAttackS()
     }
     #endregion
 
+    #region Stato Stun
+    public void StunLoop(){if(!stunState){Anm.ClearAnm(); Anm.PlayAnimationLoop(StunAnimationName); 
+    VFXStun.SetActive(true); stunState = true; isRun = false; Invoke("StunRestored", TimeStun);}}
+    private void StunRestored()
+    {
+        if(stunState){
+        switch (kindCh)
+        {
+            case 0:
+            GameManager.instance.RestoreStunF(); stunState = false;
+            break;
+            case 1:
+            GameManager.instance.RestoreStunK(); stunState = false;
+            break; 
+            case 2:
+            GameManager.instance.RestoreStunS(); stunState = false;
+            break;
+        }
+        VFXStun.SetActive(false); IDAction = 1; 
+    }}
+    #endregion
 
+    #region Stato Sleep
+    public void Sleep(){if(!sleepState){ Anm.ClearAnm(); 
+    Anm.PlayAnimationLoop(SleepAnimationName); VFXSleep.SetActive(true); sleepState = true; isRun = false;}}
+    public void SleepRestored(){ VFXSleep.SetActive(false);  sleepState = false; IDAction = 1;}
+    #endregion
 
+    #region Death
+    public void Death(){Anm.ClearAnm(); Anm.PlayAnimationLoop(DieAnimationName); deathState = true; isRun = false; IDAction = 4; }
+    public void RestoreDeath(){Anm.ClearAnm(); Anm.PlayAnimationLoop(IdleBAnimationName); deathState = false; IDAction = 1;}
+    #endregion
     public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false); VFXRust.SetActive(false);}
   
     #region Move
