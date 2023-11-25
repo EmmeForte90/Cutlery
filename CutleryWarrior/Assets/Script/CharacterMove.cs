@@ -327,7 +327,13 @@ public void Awake()
     }
     private void StopDodge(){isDodging = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
     private void ResetDodgeCooldown(){canDodge = true;}
-    private void StopAtkF(){canAttack = true; inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
+    private void StopAtkF()
+    {
+    canAttack = true; inputCTR = false; 
+    moveDirection = Vector3.zero; 
+    if(isMoving){PlayDodgeAnimation(RunBAnimationName);}
+    else {PlayDodgeAnimation(IdleBAnimationName);}
+    }
     private void HandleComboAttackF()
     {
         comboCount = (comboCount % 3) + 1;
@@ -495,8 +501,13 @@ private void HandleComboAttackS()
         else if(comboCount >= 3){Invoke("StopAtkS1", 1.3f);}
         //StartCoroutine(ComboCooldown());
 }
-    private void StopAtkS(){canAttack = true; inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
-    private void StopAtkS1(){canAttack = true;  inputCTR = false; moveDirection = Vector3.zero; PlayDodgeAnimation(RunBAnimationName);}
+    private void StopAtkS(){canAttack = true; inputCTR = false; moveDirection = Vector3.zero;
+    if(isMoving){PlayDodgeAnimation(RunBAnimationName);}
+    else {PlayDodgeAnimation(IdleBAnimationName);}}
+    private void StopAtkS1(){canAttack = true;  inputCTR = false; 
+    moveDirection = Vector3.zero;  
+    if(isMoving){PlayDodgeAnimation(RunBAnimationName);}
+    else {PlayDodgeAnimation(IdleBAnimationName);}}
     void ExpandCapsule(){capsuleCollider.radius = expandedRadius;}
     void ShrinkCapsule(){capsuleCollider.radius = originalRadius;}
  
@@ -643,7 +654,7 @@ private void HandleComboAttackS()
     public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false); VFXRust.SetActive(false);}
   
     #region Move
-    //For Knife
+    
         public void MoveB()
         {if(cam == null){cam = GameManager.instance.vcam.transform;}
         Flip();  
