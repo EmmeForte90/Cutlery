@@ -263,10 +263,7 @@ public class ScriptTestBattle : MonoBehaviour
         if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curHP =  0;}
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curHP =  0;}
     }
-    public void DeathEN()
-    {
-        
-    }
+    
     public void Paralisi()
     {
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_paralysisResistance = 0;}
@@ -328,8 +325,6 @@ public class ScriptTestBattle : MonoBehaviour
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_rustResistance = PlayerStats.instance.F_rustResistanceCont;}
         if(GameManager.instance.S_Unlock){PlayerStats.instance.S_rustResistance = PlayerStats.instance.S_rustResistanceCont;}
         //
-        
-        //
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_sleepResistance = PlayerStats.instance.K_sleepResistanceCont;}
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_sleepResistance = PlayerStats.instance.F_sleepResistanceCont;}
         if(GameManager.instance.S_Unlock){PlayerStats.instance.S_sleepResistance = PlayerStats.instance.S_sleepResistanceCont;}
@@ -353,6 +348,12 @@ public class ScriptTestBattle : MonoBehaviour
         if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage =  100;}
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage =  100;}
     }
+     public void RageLess()
+    {
+        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage =  0;}
+        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage =  0;}
+        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage =  0;}
+    }
 
     public void Win()
     {
@@ -364,10 +365,5 @@ public class ScriptTestBattle : MonoBehaviour
         EnmS[0].Die();
         EnmK[0].Die();
     }
-    public void RageLess()
-    {
-        if(GameManager.instance.F_Unlock){PlayerStats.instance.F_curRage =  0;}
-        if(GameManager.instance.S_Unlock){PlayerStats.instance.S_curRage =  0;}
-        if(GameManager.instance.K_Unlock){PlayerStats.instance.K_curRage =  0;}
-    }
+   
 }

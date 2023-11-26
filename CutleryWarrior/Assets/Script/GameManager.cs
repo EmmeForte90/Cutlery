@@ -344,7 +344,7 @@ public class GameManager : MonoBehaviour
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();
-            //Posebattle();
+            Posebattle();
             MouseCursorIcon.SetActive(true);
             notChange = true;
             DuelManager.instance.inputCTR = true;
@@ -822,16 +822,24 @@ public class GameManager : MonoBehaviour
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region Stun
     public void StunF()
-    {if(F_Unlock){ RecognizeCharacters();ch_FAc.order=4;ch_F.IDAction=2;}}
+    {if(F_Unlock){ RecognizeCharacters();ch_FAc.order=4;ch_F.IDAction=2;
+    ch_F.VFXStun.SetActive(true);ch_FAc.VFXStun.SetActive(true);
+    ch_F.VFXStun_I.SetActive(true);ch_FAc.VFXStun_I.SetActive(true);}}
     public void StunK()
-    {if(K_Unlock){ RecognizeCharacters();ch_KAc.order=4;ch_K.IDAction=2;}}
+    {if(K_Unlock){ RecognizeCharacters();ch_KAc.order=4;ch_K.IDAction=2;
+    ch_K.VFXStun.SetActive(true);ch_KAc.VFXStun.SetActive(true);
+    ch_K.VFXStun_I.SetActive(true);ch_KAc.VFXStun_I.SetActive(true);}}
     public void StunS()
-    {if(S_Unlock){ RecognizeCharacters();ch_SAc.order=4;ch_S.IDAction=2;}}
+    {if(S_Unlock){ RecognizeCharacters();ch_SAc.order=4;ch_S.IDAction=2;
+    ch_S.VFXStun.SetActive(true);ch_SAc.VFXStun.SetActive(true);
+    ch_S.VFXStun_I.SetActive(true);ch_SAc.VFXStun_I.SetActive(true);}}
     public void RestoreStunF()
     {
         RecognizeCharacters();
         if(F_Unlock)
         {PlayerStats.instance.F_paralysisResistance = PlayerStats.instance.F_paralysisResistanceCont;
+        ch_F.VFXStun.SetActive(false);ch_FAc.VFXStun.SetActive(false);
+        ch_F.VFXStun_I.SetActive(false);ch_FAc.VFXStun_I.SetActive(false);
         ch_F.Idle();ch_F.ReCol();ch_FAc.Idle();ch_FAc.ReCol();}
     }
     public void RestoreStunK()
@@ -839,6 +847,8 @@ public class GameManager : MonoBehaviour
         RecognizeCharacters();
         if(K_Unlock)
         {PlayerStats.instance.K_paralysisResistance = PlayerStats.instance.K_paralysisResistanceCont;
+        ch_K.VFXStun.SetActive(false);ch_KAc.VFXStun.SetActive(false);
+        ch_K.VFXStun_I.SetActive(false);ch_KAc.VFXStun_I.SetActive(false);
         ch_K.Idle();ch_K.ReCol();ch_KAc.Idle();ch_KAc.ReCol();}
     }
     public void RestoreStunS()
@@ -846,6 +856,8 @@ public class GameManager : MonoBehaviour
         RecognizeCharacters();
         if(S_Unlock)
         {PlayerStats.instance.S_paralysisResistance = PlayerStats.instance.S_paralysisResistanceCont;
+        ch_S.VFXStun.SetActive(false);ch_SAc.VFXStun.SetActive(false);
+        ch_S.VFXStun_I.SetActive(false);ch_SAc.VFXStun_I.SetActive(false);
         ch_S.Idle();ch_S.ReCol();ch_SAc.Idle();ch_SAc.ReCol();}
     }
     #endregion
@@ -891,13 +903,19 @@ public class GameManager : MonoBehaviour
     //
     public void RestoreRustF()
     {if(F_Unlock){ PlayerStats.instance.F_rustResistance = PlayerStats.instance.F_rustResistanceCont;
-    RecognizeCharacters();Rust_F.SetActive(false);ch_F.ReCol();ch_FAc.Idle();ch_FAc.ReCol();}}
+    RecognizeCharacters();Rust_F.SetActive(false);ch_F.ReCol();ch_FAc.Idle();ch_FAc.ReCol();
+    ch_F.VFXRust.SetActive(false);ch_FAc.VFXRust.SetActive(false);
+    ch_F.VFXRust_I.SetActive(false);ch_FAc.VFXRust_I.SetActive(false);}}
     public void RestoreRustK()
     {if(K_Unlock){ PlayerStats.instance.K_rustResistance = PlayerStats.instance.K_rustResistanceCont;
-    RecognizeCharacters();Rust_K.SetActive(false);ch_K.ReCol();ch_KAc.Idle();ch_KAc.ReCol();}}
+    RecognizeCharacters();Rust_K.SetActive(false);ch_K.ReCol();ch_KAc.Idle();ch_KAc.ReCol();
+    ch_K.VFXRust.SetActive(false);ch_KAc.VFXRust.SetActive(false);
+    ch_K.VFXRust_I.SetActive(false);ch_KAc.VFXRust_I.SetActive(false);}}
     public void RestoreRustS()
     {if(S_Unlock){ PlayerStats.instance.S_rustResistance = PlayerStats.instance.S_rustResistanceCont;
-    RecognizeCharacters();Rust_S.SetActive(false);ch_S.ReCol();ch_SAc.Idle();ch_SAc.ReCol();}}
+    RecognizeCharacters();Rust_S.SetActive(false);ch_S.ReCol();ch_SAc.Idle();ch_SAc.ReCol();
+    ch_S.VFXRust.SetActive(false);ch_SAc.VFXRust.SetActive(false);
+    ch_S.VFXRust_I.SetActive(false);ch_SAc.VFXRust_I.SetActive(false);}}
     #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region PoisonState
