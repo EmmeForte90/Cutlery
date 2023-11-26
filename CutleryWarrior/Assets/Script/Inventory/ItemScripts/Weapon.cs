@@ -1,9 +1,5 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 [System.Serializable]
-
 [CreateAssetMenu(fileName = "Weapon", menuName = "Item/Weapon")]
 public class Weapon : Item
 {
@@ -26,7 +22,8 @@ public class Weapon : Item
         base.Equip();
         if (TypesE == 1)
         {Inventory.instance.AssignWeapon(this);}
-        else if (TypesE == 0){Inventory.instance.AssignDress(this);} //Debug.Log("Hai cliccato il pulsante!");
+        else if (TypesE == 0){Inventory.instance.AssignDress(this);} 
+        //Debug.Log("Hai cliccato il pulsante!");
     }
     //public enum weaponType { Sword, Fork, Spoon}
 }

@@ -30,13 +30,13 @@ public class ChangeHeroSkin : MonoBehaviour
 		AtlasUtilities.ClearCache();
 		Resources.UnloadUnusedAssets();
 	}
-	public void UpdateCharacterSkin()
+	public void UpdateCharacterSkin(string CH)
 	{
 		skeleton = skeletonAnimation.Skeleton;
 		if(skeleton == null){print("Nothing happens");}
 		SkeletonData skeletonData = skeleton.Data;
 		characterSkin = new Skin("character-base");
-		characterSkin.AddSkin(skeletonData.FindSkin(DressSkin));
+		characterSkin.AddSkin(skeletonData.FindSkin(CH));//DressSkin
 	}
 	void AddEquipmentSkinsTo(Skin combinedSkin)
 	{

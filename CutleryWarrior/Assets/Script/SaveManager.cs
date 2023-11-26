@@ -1,7 +1,7 @@
 using System;
-using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 [Serializable]
 public class GameData
@@ -139,10 +139,17 @@ public class GameData
     [SerializeField]    public List<int> S_quantityList;
     [SerializeField]    public List<Item> K_itemList;
     [SerializeField]    public List<int> K_quantityList;
-    [SerializeField]    public List<Item> Key_itemList;
+    [SerializeField]    public List<Item> Kay_itemList;
     [SerializeField]    public List<int> Key_quantityList;
     [SerializeField]    public List<Item> Quest_itemList;
-   [SerializeField]    public List<int> Quest_quantityList;
+    [SerializeField]    public List<int> Quest_quantityList;
+    public string F_NameWeapon;
+    public string S_NameWeapon;
+    public string K_NameWeapon;
+    public string F_NameArmor;
+    public string S_NameArmor;
+    public string K_NameArmor;
+
 
     public string ToJson()
     {
@@ -182,26 +189,17 @@ public class SaveManager : MonoBehaviour
     public string NameScene;
     public string saveFilePath;
     public GameManager GM_Data;
+    public string F_NameWeapon;
+    public string S_NameWeapon;
+    public string K_NameWeapon;
+    public string F_NameArmor;
+    public string S_NameArmor;
+    public string K_NameArmor;
 
     public static SaveManager instance;
     //
     [SerializeField]    public PlayerStats PS;
-    [SerializeField]    public List<Item> I_itemList;
-    [SerializeField]    public List<int> I_quantityList;
-    [SerializeField]    public List<Item> IBattle_itemList;
-    [SerializeField]    public List<int> IBattle_quantityList;
-    [SerializeField]    public List<Item> F_itemList;
-    [SerializeField]    public List<int> F_quantityList;
-    [SerializeField]    public List<Item> S_itemList;
-    [SerializeField]    public List<int> S_quantityList;
-    [SerializeField]    public List<Item> K_itemList;
-    [SerializeField]    public List<int> K_quantityList;
-    [SerializeField]    public List<Item> Key_itemList;
-    [SerializeField]    public List<int> Key_quantityList;
-    [SerializeField]    public List<Item> Quest_itemList;
-   [SerializeField]    public List<int> Quest_quantityList;
-
-
+    
     public void SaveGame()
     {
         ES3.Save("savedPosition", PS.savedPosition);
@@ -209,6 +207,32 @@ public class SaveManager : MonoBehaviour
         ES3.Save("NameScene", PS.NameScene);
         ES3.Save("HaveData", PS.HaveData);
         ES3.Save("CanLoading", PS.CanLoading);
+        //
+        PS.F_NameWeapon = GameManager.instance.Inv.F_NameWeapon;
+        PS.S_NameWeapon = GameManager.instance.Inv.S_NameWeapon;
+        PS.K_NameWeapon = GameManager.instance.Inv.K_NameWeapon;
+        PS.F_NameArmor = GameManager.instance.Inv.F_NameArmor;
+        PS.S_NameArmor = GameManager.instance.Inv.S_NameArmor;
+        PS.K_NameArmor = GameManager.instance.Inv.K_NameArmor;
+        //
+        F_NameWeapon = GameManager.instance.Inv.F_NameWeapon;
+        S_NameWeapon = GameManager.instance.Inv.S_NameWeapon;
+        K_NameWeapon = GameManager.instance.Inv.K_NameWeapon;
+        F_NameArmor = GameManager.instance.Inv.F_NameArmor;
+        S_NameArmor = GameManager.instance.Inv.S_NameArmor;
+        K_NameArmor = GameManager.instance.Inv.K_NameArmor;
+        ES3.Save("F_NameWeapon", PS.F_NameWeapon);
+        ES3.Save("S_NameWeapon", PS.S_NameWeapon);
+        ES3.Save("K_NameWeapon", PS.K_NameWeapon);
+        ES3.Save("F_NameArmor", PS.F_NameArmor);
+        ES3.Save("S_NameArmor", PS.S_NameArmor);
+        ES3.Save("K_NameArmor", PS.K_NameArmor);
+        /*print("PS.F_NameWeapon" + PS.F_NameWeapon);
+        print("PS.S_NameWeapon" + PS.S_NameWeapon);
+        print("PS.K_NameWeapon" + PS.K_NameWeapon);
+        print("PS.F_NameArmor" + PS.F_NameArmor);
+        print("PS.K_NameArmor" + PS.K_NameWeapon);
+        print("PS.S_NameArmor" + PS.S_NameArmor);*/
         //
         ES3.Save("F_Unlock", PS.F_Unlock);
         ES3.Save("S_Unlock", PS.S_Unlock);
@@ -329,10 +353,12 @@ public class SaveManager : MonoBehaviour
         //
         ES3.Save("I_itemList", PS.I_itemList);
         ES3.Save("IBattle_itemList", PS.IBattle_itemList);
-        ES3.Save("Key_quantityList", PS.Key_quantityList);
+        ES3.Save("Kay_itemList", PS.Kay_itemList);
         ES3.Save("Quest_itemList", PS.Quest_itemList);
         ES3.Save("F_itemList", PS.F_itemList);
         ES3.Save("S_itemList", PS.S_itemList);
+        ES3.Save("K_itemList", PS.K_itemList);
+        //
         ES3.Save("K_itemList", PS.K_itemList);
     }
 
@@ -343,7 +369,7 @@ public class SaveManager : MonoBehaviour
         //////////////////////////////////////////////
         PS.I_itemList = null;
         PS.IBattle_itemList = null;
-        //PS.Key_itemList = null;
+        PS.Kay_itemList = null;
         PS.Quest_itemList = null;
         PS.F_itemList = null;
         PS.S_itemList = null;
@@ -362,7 +388,7 @@ public class SaveManager : MonoBehaviour
         //
         PS.Money = ES3.Load<int>("Money");
         PS.WhatMusic = ES3.Load<int>("WhatMusic");
-        //
+        /////////////////////////////////////////
         PS.F_LV = ES3.Load<int>("F_LV");
         PS.F_HP = ES3.Load<float>("F_HP");
         PS.F_curHP = ES3.Load<float>("F_curHP");
@@ -391,8 +417,8 @@ public class SaveManager : MonoBehaviour
         PS.F_poisonResistanceCont = ES3.Load<float>("F_poisonResistanceCont");
         PS.F_paralysisResistanceCont = ES3.Load<float>("F_paralysisResistanceCont");
         PS.F_sleepResistanceCont = ES3.Load<float>("F_sleepResistanceCont");
-        //PS.F_rustResistanceCont = ES3.Load<int>("F_rustResistanceCont");
-        //
+        PS.F_rustResistanceCont = ES3.Load<float>("F_rustResistanceCont");
+        /////////////////////////////////////////
         PS.K_LV = ES3.Load<int>("K_LV");
         PS.K_HP = ES3.Load<float>("K_HP");
         PS.K_curHP = ES3.Load<float>("K_curHP");
@@ -421,8 +447,8 @@ public class SaveManager : MonoBehaviour
         PS.K_poisonResistanceCont = ES3.Load<float>("K_poisonResistanceCont");
         PS.K_paralysisResistanceCont = ES3.Load<float>("K_paralysisResistanceCont");
         PS.K_sleepResistanceCont = ES3.Load<float>("K_sleepResistanceCont");
-        //PS.K_rustResistanceCont = ES3.Load<int>("K_rustResistanceCont");
-        //
+        PS.K_rustResistanceCont = ES3.Load<float>("K_rustResistanceCont");
+        /////////////////////////////////////////
         PS.S_LV = ES3.Load<int>("S_LV");
         PS.S_HP = ES3.Load<float>("S_HP");
         PS.S_curHP = ES3.Load<float>("S_curHP");
@@ -451,8 +477,8 @@ public class SaveManager : MonoBehaviour
         PS.S_poisonResistanceCont = ES3.Load<float>("S_poisonResistanceCont");
         PS.S_paralysisResistanceCont = ES3.Load<float>("S_paralysisResistanceCont");
         PS.S_sleepResistanceCont = ES3.Load<float>("S_sleepResistanceCont");
-        //PS.S_rustResistanceCont = ES3.Load<int>("S_rustResistanceCont");
-        //
+        PS.S_rustResistanceCont = ES3.Load<float>("S_rustResistanceCont");
+        //////////////////////////////////////////
         PS.Enemies = ES3.Load<bool[]>("Enemies");
         PS.Treasure = ES3.Load<bool[]>("Treasure");
         //
@@ -464,14 +490,19 @@ public class SaveManager : MonoBehaviour
         PS.QuestActive = ES3.Load<bool[]>("QuestActive");
         PS.QuestComplete = ES3.Load<bool[]>("QuestComplete");
         PS.QuestSegnal = ES3.Load<bool[]>("QuestSegnal");
-        //
+        /////////////////////////////////////////
+        PS.I_itemList = ES3.Load<List<Item>>("I_itemList");
+        PS.IBattle_itemList = ES3.Load<List<Item>>("IBattle_itemList");
+        PS.Kay_itemList = ES3.Load<List<Item>>("Kay_itemList");
+        PS.Quest_itemList = ES3.Load<List<Item>>("Quest_itemList");
+        /////////////////////////////////////////
         PS.I_quantityList = null;
         PS.IBattle_quantityList = null;
         PS.Key_quantityList = null;
         PS.Quest_quantityList = null;
-        PS.F_quantityList = null;
-        PS.S_quantityList = null;
-        PS.K_quantityList = null;
+        if(GameManager.instance.F_Unlock){PS.F_quantityList = null;}
+        if(GameManager.instance.S_Unlock){PS.S_quantityList = null;}
+        if(GameManager.instance.K_Unlock){PS.K_quantityList = null;}
         //
         PS.I_quantityList = ES3.Load<List<int>>("I_quantityList");
         GameManager.instance.Inv.quantityList = PS.I_quantityList;
@@ -485,25 +516,83 @@ public class SaveManager : MonoBehaviour
         PS.Quest_quantityList = ES3.Load<List<int>>("Quest_quantityList");
         GameManager.instance.QuM.quantityList = PS.Quest_quantityList;
         GameManager.instance.QuM.UpdateInventoryUI();
+        ///////////////////////////////////////////////
+        if(GameManager.instance.S_Unlock){
+        PS.S_itemList = ES3.Load<List<Item>>("S_itemList");
+        PS.S_quantityList = ES3.Load<List<int>>("S_quantityList");
+        GameManager.instance.M_S.quantityList = PS.S_quantityList;
+        GameManager.instance.M_S.UpdateInventoryUI();
+        
+        PS.S_NameWeapon = ES3.Load<string>("S_NameWeapon");
+        PS.S_NameArmor = ES3.Load<string>("S_NameArmor");
+        //print("PS.S_NameWeapon" + PS.S_NameWeapon);
+        //print("PS.S_NameArmor" + PS.S_NameArmor);
+        
+        GameManager.instance.Inv.Skin_S.Weapon = PS.S_NameWeapon;
+        GameManager.instance.Inv.Puppets_S.Weapon = PS.S_NameWeapon;
+        GameManager.instance.Inv.Skin_S.DressSkin = PS.S_NameArmor;
+        GameManager.instance.Inv.Puppets_S.DressSkin = PS.S_NameArmor;
+        GameManager.instance.Inv.Skin_S.UpdateCharacterSkin(GameManager.instance.Inv.Skin_S.Weapon);
+	    GameManager.instance.Inv.Skin_S.UpdateCombinedSkin();
+        GameManager.instance.Inv.Puppets_S.UpdateCharacterSkinUI(GameManager.instance.Inv.Skin_S.Weapon);
+        GameManager.instance.Inv.Puppets_S.UpdateCombinedSkinUI();
+        //__//
+        GameManager.instance.Inv.Skin_S.UpdateCharacterSkin(GameManager.instance.Inv.Puppets_S.DressSkin);
+	    GameManager.instance.Inv.Skin_S.UpdateCombinedSkin();
+        //GameManager.instance.Inv.Puppets_S.UpdateCharacterSkinUI(GameManager.instance.Inv.Puppets_S.DressSkin);
+        //GameManager.instance.Inv.Puppets_S.UpdateCombinedSkinUI();
+        }
+        /////////////////////////////////////////
+        if(GameManager.instance.F_Unlock){
+        PS.F_itemList = ES3.Load<List<Item>>("F_itemList");
         PS.F_quantityList = ES3.Load<List<int>>("F_quantityList");
         GameManager.instance.M_F.quantityList = PS.F_quantityList;
         GameManager.instance.M_F.UpdateInventoryUI();
-        PS.S_quantityList = ES3.Load<List<int>>("S_quantityList");
-         GameManager.instance.M_S.quantityList = PS.S_quantityList;
-        GameManager.instance.M_S.UpdateInventoryUI();
+        PS.F_NameWeapon = ES3.Load<string>("F_NameWeapon");
+        PS.F_NameArmor = ES3.Load<string>("F_NameArmor");
+        //print("PS.F_NameWeapon" + PS.F_NameWeapon);
+        //print("PS.F_NameArmor" + PS.F_NameArmor);
+
+        GameManager.instance.Inv.Skin_F.Weapon = PS.F_NameWeapon;
+        GameManager.instance.Inv.Puppets_F.Weapon = PS.F_NameWeapon;
+        GameManager.instance.Inv.Skin_F.DressSkin = PS.F_NameArmor;
+        GameManager.instance.Inv.Puppets_F.DressSkin = PS.F_NameArmor;
+        GameManager.instance.Inv.Skin_F.UpdateCharacterSkin(GameManager.instance.Inv.Skin_F.Weapon);
+	    GameManager.instance.Inv.Skin_F.UpdateCombinedSkin();
+        //GameManager.instance.Inv.Puppets_F.UpdateCharacterSkinUI(GameManager.instance.Inv.Skin_F.Weapon);
+        //GameManager.instance.Inv.Puppets_F.UpdateCombinedSkinUI();
+        //__//
+        GameManager.instance.Inv.Skin_F.UpdateCharacterSkin(GameManager.instance.Inv.Puppets_F.DressSkin);
+	    GameManager.instance.Inv.Skin_F.UpdateCombinedSkin();
+        //GameManager.instance.Inv.Puppets_F.UpdateCharacterSkinUI(GameManager.instance.Inv.Puppets_F.DressSkin);
+        //GameManager.instance.Inv.Puppets_F.UpdateCombinedSkinUI();
+        }
+        /////////////////////////////////////////
+        if(GameManager.instance.K_Unlock){
+        PS.K_itemList = ES3.Load<List<Item>>("K_itemList");
         PS.K_quantityList = ES3.Load<List<int>>("K_quantityList"); 
         GameManager.instance.M_K.quantityList = PS.K_quantityList;
         GameManager.instance.M_K.UpdateInventoryUI();
-        //
-        PS.I_itemList = ES3.Load<List<Item>>("I_itemList");
-        PS.IBattle_itemList = ES3.Load<List<Item>>("IBattle_itemList");
-        //PS.Key_itemList = ES3.Load<List<Item>>("Key_itemList");
-        PS.Quest_itemList = ES3.Load<List<Item>>("Quest_itemList");
-        PS.F_itemList = ES3.Load<List<Item>>("F_itemList");
-        PS.S_itemList = ES3.Load<List<Item>>("S_itemList");
-        PS.K_itemList = ES3.Load<List<Item>>("K_itemList");
+        PS.K_NameWeapon = ES3.Load<string>("K_NameWeapon");
+        PS.K_NameArmor = ES3.Load<string>("K_NameArmor");
+        //print("PS.k_NameArmor" + PS.K_NameWeapon);
+        //print("PS.K_NameWeapon" + PS.K_NameWeapon);
 
-
+        GameManager.instance.Inv.Skin_K.Weapon = PS.K_NameWeapon;
+        GameManager.instance.Inv.Puppets_K.Weapon = PS.K_NameWeapon;
+        GameManager.instance.Inv.Skin_K.DressSkin = PS.K_NameArmor;
+        GameManager.instance.Inv.Puppets_K.DressSkin = PS.K_NameArmor;
+        GameManager.instance.Inv.Skin_K.UpdateCharacterSkin(GameManager.instance.Inv.Skin_K.Weapon);
+	    GameManager.instance.Inv.Skin_K.UpdateCombinedSkin();
+        //GameManager.instance.Inv.Puppets_K.UpdateCharacterSkinUI(GameManager.instance.Inv.Skin_K.Weapon);
+        //GameManager.instance.Inv.Puppets_K.UpdateCombinedSkinUI();
+        //__//
+        GameManager.instance.Inv.Skin_K.UpdateCharacterSkin(GameManager.instance.Inv.Puppets_K.DressSkin);
+	    GameManager.instance.Inv.Skin_K.UpdateCombinedSkin();
+       // GameManager.instance.Inv.Puppets_K.UpdateCharacterSkinUI(GameManager.instance.Inv.Puppets_K.DressSkin);
+        //GameManager.instance.Inv.Puppets_K.UpdateCombinedSkinUI();
+        }
+        ///////////////////////////////
         print("Hai caricato");  
     }
 }

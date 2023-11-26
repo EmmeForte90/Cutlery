@@ -112,6 +112,13 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float K_sleepResistanceCont;
     [HideInInspector] public float K_rustResistanceCont;
     //
+    [HideInInspector] public string F_NameWeapon = "Weapon/Latta";
+    [HideInInspector] public string S_NameWeapon = "Weapon/Latta";
+    [HideInInspector] public string K_NameWeapon = "Weapon/Latta";
+    [HideInInspector] public string F_NameArmor = "Dress/Dress";
+    [HideInInspector] public string S_NameArmor = "Dress/Dress";
+    [HideInInspector] public string K_NameArmor = "Dress/Dress";
+    //
     [Header("Enemies List")]
     public bool[] Enemies;
     [Header("Treasure List")]
@@ -123,20 +130,20 @@ public class PlayerStats : MonoBehaviour
 
     
     [Header("Item List")]
-    public List<Item> I_itemList = new List<Item>();
-    public List<int> I_quantityList = new List<int>();
-    public List<Item> IBattle_itemList = new List<Item>();
-    public List<int> IBattle_quantityList = new List<int>();
-    public List<Item> F_itemList = new List<Item>();
-    public List<int> F_quantityList = new List<int>();
-    public List<Item> S_itemList = new List<Item>();
-    public List<int> S_quantityList = new List<int>();
-    public List<Item> K_itemList = new List<Item>();
-    public List<int> K_quantityList = new List<int>();
-    public List<Item> Key_itemList = new List<Item>();
-    public List<int> Key_quantityList = new List<int>();
-    public List<Item> Quest_itemList = new List<Item>();
-    public List<int> Quest_quantityList = new List<int>();
+    [SerializeField]    public List<Item> I_itemList;
+    [SerializeField]    public List<int> I_quantityList;
+    [SerializeField]    public List<Item> IBattle_itemList;
+    [SerializeField]    public List<int> IBattle_quantityList;
+    [SerializeField]    public List<Item> F_itemList;
+    [SerializeField]    public List<int> F_quantityList;
+    [SerializeField]    public List<Item> S_itemList;
+    [SerializeField]    public List<int> S_quantityList;
+    [SerializeField]    public List<Item> K_itemList;
+    [SerializeField]    public List<int> K_quantityList;
+    [SerializeField]    public List<Item> Kay_itemList;
+    [SerializeField]    public List<int> Key_quantityList;
+    [SerializeField]    public List<Item> Quest_itemList;
+    [SerializeField]    public List<int> Quest_quantityList;
     
     [Header("Events")]
     public bool[] EventsDesert;  
@@ -195,7 +202,7 @@ public class PlayerStats : MonoBehaviour
     S_itemList = EquipM_S.instance.itemList;
     S_quantityList = EquipM_S.instance.quantityList;
     //
-    Key_itemList = KeyManager.instance.itemList;
+    Kay_itemList = KeyManager.instance.itemList;
     Key_quantityList = KeyManager.instance.quantityList;
     //
     Quest_itemList = QuestsManager.instance.itemList;
@@ -297,7 +304,7 @@ public class PlayerStats : MonoBehaviour
     S_itemList = EquipM_S.instance.itemList;
     S_quantityList = EquipM_S.instance.quantityList;
     //
-    Key_itemList = KeyManager.instance.itemList;
+    Kay_itemList = KeyManager.instance.itemList;
     Key_quantityList = KeyManager.instance.quantityList;
     //
     Quest_itemList = QuestsManager.instance.itemList;
@@ -604,7 +611,7 @@ public void ResetStatNewGame()
     S_quantityList = null;
     K_itemList = null;
     K_quantityList = null;
-    Key_itemList = null;
+    Kay_itemList = null;
     Key_quantityList = null;
     Quest_itemList = null;
     Quest_quantityList = null;

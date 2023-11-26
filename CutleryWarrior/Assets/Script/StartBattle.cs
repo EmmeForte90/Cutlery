@@ -79,14 +79,14 @@ public class StartBattle : MonoBehaviour
         if(GameManager.instance.S_Unlock){Skin_S = GameManager.instance.S_Hero.GetComponent<ChangeHeroSkin>();}
         GameManager.instance.Battle();
         //
-        if(GameManager.instance.F_Unlock){Skin_F.UpdateCharacterSkin();}
+        /*if(GameManager.instance.F_Unlock){Skin_F.UpdateCharacterSkin();}
 		if(GameManager.instance.F_Unlock){Skin_F.UpdateCombinedSkin();}
         //
         if(GameManager.instance.S_Unlock){Skin_S.UpdateCharacterSkin();}
 		if(GameManager.instance.S_Unlock){Skin_S.UpdateCombinedSkin();}
         //
         if(GameManager.instance.K_Unlock){Skin_K.UpdateCharacterSkin();}
-		if(GameManager.instance.K_Unlock){Skin_K.UpdateCombinedSkin(); }
+		if(GameManager.instance.K_Unlock){Skin_K.UpdateCombinedSkin(); }*/
         GameManager.instance.Posebattle();
         //
         if(GameManager.instance.F_Unlock){ForkActive = GameManager.instance.F_Hero;}

@@ -128,7 +128,7 @@ namespace ES3Types
 			writer.WriteProperty("S_quantityList", instance.S_quantityList, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<System.Int32>)));
 			writer.WriteProperty("K_itemList", instance.K_itemList, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<Item>)));
 			writer.WriteProperty("K_quantityList", instance.K_quantityList, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<System.Int32>)));
-			writer.WriteProperty("Key_itemList", instance.Key_itemList, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<Item>)));
+			writer.WriteProperty("Kay_itemList", instance.Kay_itemList, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<Item>)));
 			writer.WriteProperty("Key_quantityList", instance.Key_quantityList, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<System.Int32>)));
 			writer.WriteProperty("Quest_itemList", instance.Quest_itemList, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<Item>)));
 			writer.WriteProperty("Quest_quantityList", instance.Quest_quantityList, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<System.Int32>)));
@@ -488,8 +488,8 @@ namespace ES3Types
 					case "K_quantityList":
 						instance.K_quantityList = reader.Read<System.Collections.Generic.List<System.Int32>>();
 						break;
-					case "Key_itemList":
-						instance.Key_itemList = reader.Read<System.Collections.Generic.List<Item>>();
+					case "Kay_itemList":
+						instance.Kay_itemList = reader.Read<System.Collections.Generic.List<Item>>();
 						break;
 					case "Key_quantityList":
 						instance.Key_quantityList = reader.Read<System.Collections.Generic.List<System.Int32>>();

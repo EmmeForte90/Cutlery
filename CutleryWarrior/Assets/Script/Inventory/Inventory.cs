@@ -10,6 +10,12 @@ public class Inventory : MonoBehaviour
     public List<int> quantityList = new List<int>();
     public Image previewImages_AF;
     public Image previewImages_WF;
+     public string F_NameWeapon = "Weapon/Latta";
+     public string S_NameWeapon = "Weapon/Latta";
+     public string K_NameWeapon = "Weapon/Latta";
+     public string F_NameArmor = "Dress/Dress";
+     public string S_NameArmor = "Dress/Dress";
+     public string K_NameArmor = "Dress/Dress";
     public ChangeHeroSkin Skin_F;
     public PuppetSkin Puppets_F;
     public Image previewImages_AK;
@@ -76,9 +82,11 @@ public class Inventory : MonoBehaviour
     {
     case 1:
             Skin_F.DressSkin = Item.NameSkin;
+            F_NameArmor = Item.NameSkin;
             AudioManager.instance.PlayUFX(6);  
             previewImages_WF.sprite = Item.itemIcon;
-            Skin_F.UpdateCharacterSkin();
+            Skin_F.UpdateCharacterSkin(Skin_F.DressSkin);
+            //Skin_F.UpdateCharacterSkin(Item.NameSkin);
 	    	Skin_F.UpdateCombinedSkin();
             //
             PlayerStats.instance.F_HP = 0;
@@ -96,14 +104,17 @@ public class Inventory : MonoBehaviour
             PlayerStats.instance.F_sleepResistance += Item.Res_Sleep + PlayerStats.instance.F_sleepResistanceCont;
             PlayerStats.instance.F_rustResistance += Item.Res_Rust + PlayerStats.instance.F_rustResistanceCont;
             Puppets_F.DressSkin = Item.NameSkin;
-            Puppets_F.UpdateCharacterSkinUI(Item.NameSkin);
+            //Puppets_F.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_F.UpdateCharacterSkinUI(Puppets_F.DressSkin);
             Puppets_F.UpdateCombinedSkinUI(); 
     break;
     case 2:
             Skin_K.DressSkin = Item.NameSkin;
+            K_NameArmor = Item.NameSkin;
             AudioManager.instance.PlayUFX(6);  
             previewImages_WK.sprite = Item.itemIcon;
-            Skin_K.UpdateCharacterSkin();
+            Skin_K.UpdateCharacterSkin(Skin_K.DressSkin);
+            //Skin_K.UpdateCharacterSkin(Item.NameSkin);
 	    	Skin_K.UpdateCombinedSkin();
             //
             PlayerStats.instance.K_HP = 0;
@@ -121,14 +132,17 @@ public class Inventory : MonoBehaviour
             PlayerStats.instance.K_sleepResistance += Item.Res_Sleep + PlayerStats.instance.K_sleepResistanceCont;
             PlayerStats.instance.K_rustResistance += Item.Res_Rust + PlayerStats.instance.K_rustResistanceCont;
             Puppets_K.DressSkin = Item.NameSkin;
-            Puppets_K.UpdateCharacterSkinUI(Item.NameSkin);
+            //Puppets_K.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_K.UpdateCharacterSkinUI(Puppets_K.DressSkin);
             Puppets_K.UpdateCombinedSkinUI(); 
     break;
     case 3:
             Skin_S.DressSkin = Item.NameSkin;
+            S_NameArmor = Item.NameSkin;
             AudioManager.instance.PlayUFX(6);  
             previewImages_WS.sprite = Item.itemIcon;
-            Skin_S.UpdateCharacterSkin();
+            //Skin_S.UpdateCharacterSkin(Item.NameSkin);
+            Skin_S.UpdateCharacterSkin(Skin_S.DressSkin);
 	    	Skin_S.UpdateCombinedSkin();
             //
             PlayerStats.instance.S_HP = 0;
@@ -146,7 +160,8 @@ public class Inventory : MonoBehaviour
             PlayerStats.instance.S_sleepResistance += Item.Res_Sleep + PlayerStats.instance.S_sleepResistanceCont;
             PlayerStats.instance.S_rustResistance += Item.Res_Rust + PlayerStats.instance.S_rustResistanceCont;
             Puppets_S.DressSkin = Item.NameSkin;
-            Puppets_S.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_S.UpdateCharacterSkinUI(Puppets_S.DressSkin);
+            //Puppets_S.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_S.UpdateCombinedSkinUI(); 
     break;  
     }          
@@ -156,39 +171,48 @@ public void AssignWeapon(Weapon Item)
     switch (rotationSwitcher.CharacterID)
     {
     case 1:
-            Skin_F.Weapon = Item.NameSkin;            
+            Skin_F.Weapon = Item.NameSkin; 
+            F_NameWeapon = Item.NameSkin;           
             AudioManager.instance.PlayUFX(6);  
             previewImages_AF.sprite = Item.itemIcon;
-            Skin_F.UpdateCharacterSkin();
+            Skin_F.UpdateCharacterSkin(Skin_F.Weapon);
+            //Skin_F.UpdateCharacterSkin(Item.NameSkin);
 		    Skin_F.UpdateCombinedSkin();
             PlayerStats.instance.F_attack = 0; 
             PlayerStats.instance.F_attack += Item.weaponDamage;
             Puppets_F.Weapon = Item.NameSkin;
-            Puppets_F.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_F.UpdateCharacterSkinUI(Puppets_F.Weapon);
+            //Puppets_F.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_F.UpdateCombinedSkinUI();  
     break;
     case 2:
             Skin_K.Weapon = Item.NameSkin;
+            K_NameWeapon = Item.NameSkin;
             AudioManager.instance.PlayUFX(6);  
             previewImages_AK.sprite = Item.itemIcon;
-            Skin_K.UpdateCharacterSkin();
+            Skin_K.UpdateCharacterSkin(Skin_K.Weapon);
+            //Skin_K.UpdateCharacterSkin(Item.NameSkin);
 		    Skin_K.UpdateCombinedSkin(); 
             PlayerStats.instance.K_attack = 0;
             PlayerStats.instance.K_attack += Item.weaponDamage;
             Puppets_K.Weapon = Item.NameSkin;
-            Puppets_K.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_K.UpdateCharacterSkinUI(Puppets_K.Weapon);
+            //Puppets_K.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_K.UpdateCombinedSkinUI();   
     break;
     case 3:
             Skin_S.Weapon = Item.NameSkin;
+            S_NameWeapon = Item.NameSkin;
             AudioManager.instance.PlayUFX(6);  
             previewImages_AS.sprite = Item.itemIcon;
-            Skin_S.UpdateCharacterSkin();
+            Skin_S.UpdateCharacterSkin(Skin_S.Weapon);
+            //Skin_S.UpdateCharacterSkin(Item.NameSkin);
 		    Skin_S.UpdateCombinedSkin(); 
             PlayerStats.instance.S_attack = 0; 
             PlayerStats.instance.S_attack += Item.weaponDamage;
             Puppets_S.Weapon = Item.NameSkin;
-            Puppets_S.UpdateCharacterSkinUI(Item.NameSkin);
+            Puppets_S.UpdateCharacterSkinUI(Puppets_S.Weapon);
+            //Puppets_S.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_S.UpdateCombinedSkinUI();   
     break;     
 }}

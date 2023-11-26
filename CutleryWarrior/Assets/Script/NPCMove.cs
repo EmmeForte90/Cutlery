@@ -30,7 +30,7 @@ public class NPCMove : MonoBehaviour
 
     public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
 
-    private SwitchCharacter rotationSwitcher;
+    //private SwitchCharacter rotationSwitcher;
     [Header("Animations")]
     [SpineAnimation] public string IdleAnimationName;
     [SpineAnimation] public string WalkAnimationName;
@@ -48,7 +48,7 @@ public class NPCMove : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
-        rotationSwitcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
+        //rotationSwitcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
         ForkActive = GameManager.instance.F_Hero;
         SpoonActive = GameManager.instance.S_Hero;
         KnifeActive = GameManager.instance.K_Hero;
