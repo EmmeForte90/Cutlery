@@ -32,12 +32,12 @@ public class NPCMove : MonoBehaviour
 
     private SwitchCharacter rotationSwitcher;
     [Header("Animations")]
-    [SpineAnimation][SerializeField] private string IdleAnimationName;
-    [SpineAnimation][SerializeField] private string WalkAnimationName;
-    [SpineAnimation][SerializeField] private string RunAnimationName;
-    [SpineAnimation][SerializeField] private string IdleUPAnimationName;
-    [SpineAnimation][SerializeField] private string WalkUPAnimationName;
-    [SpineAnimation][SerializeField] private string RunUPAnimationName;
+    [SpineAnimation] public string IdleAnimationName;
+    [SpineAnimation] public string WalkAnimationName;
+    [SpineAnimation] public string RunAnimationName;
+    [SpineAnimation] public string IdleUPAnimationName;
+    [SpineAnimation] public string WalkUPAnimationName;
+    [SpineAnimation] public string RunUPAnimationName;
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
@@ -49,9 +49,9 @@ public class NPCMove : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         rotationSwitcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
-        ForkActive = GameObject.Find("F_Player");
-        SpoonActive = GameObject.Find("S_Player");
-        KnifeActive = GameObject.Find("K_Player");
+        ForkActive = GameManager.instance.F_Hero;
+        SpoonActive = GameManager.instance.S_Hero;
+        KnifeActive = GameManager.instance.K_Hero;
         if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");}        
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;

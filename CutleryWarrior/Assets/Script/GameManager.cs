@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     #region Header  
     public GameObject GM;
+    public GameManager GM_Data;
     public GameObject MouseCursorIcon;
     public bool StartGame = false;    
     public GameObject player;

@@ -57,6 +57,6 @@ public class testin : MonoBehaviour
         if(GameManager.instance.F_Unlock){FAct.transform.position = PlayerStats.instance.savedPosition;}
         if(GameManager.instance.K_Unlock){KAct.transform.position = PlayerStats.instance.savedPosition;}
         if(GameManager.instance.S_Unlock){SAct.transform.position = PlayerStats.instance.savedPosition;}
-        PlayerStats.instance.IBattle_quantityList =   PlayerStats.instance.I_quantityList; 
+        //PlayerStats.instance.IBattle_quantityList =   PlayerStats.instance.I_quantityList; 
     }
 }
