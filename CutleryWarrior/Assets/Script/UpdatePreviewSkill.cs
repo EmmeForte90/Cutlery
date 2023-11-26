@@ -7,6 +7,7 @@ public class UpdatePreviewSkill : MonoBehaviour
 {
     public Skill item;
     public GameObject infoPanel;
+    public bool isRage = true;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI DesText;
     public TextMeshProUGUI Utilizzi;
@@ -24,7 +25,7 @@ public class UpdatePreviewSkill : MonoBehaviour
             nameText.text = itemInfo.itemName;
             DesText.text = itemInfo.itemDes;
             icon.sprite = itemInfo.SkillIcon;
-            Utilizzi.text = itemInfo.Utilizzi.ToString();  
+            if(!isRage){Utilizzi.text = itemInfo.Utilizzi.ToString();}
         }
         else{infoPanel.SetActive(false);}
     }
