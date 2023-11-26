@@ -229,9 +229,34 @@ public void Update()
         if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curHP <= 0)
         {GameManager.instance.PoseDeathF(); F_Die = true; GameManager.instance.F_Die = true;}
         //print("F_Die" + F_Die);
-        if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curHP > 0){S_Die = false; GameManager.instance.S_Die = false;}
-        if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curHP > 0){K_Die = false; GameManager.instance.K_Die = false;}
-        if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curHP > 0){F_Die = false; GameManager.instance.F_Die = false;}
+        if(GameManager.instance.S_Unlock && PlayerStats.instance.S_curHP > 0)
+        {S_Die = false; GameManager.instance.S_Die = false;}
+        if(GameManager.instance.K_Unlock && PlayerStats.instance.K_curHP > 0)
+        {K_Die = false; GameManager.instance.K_Die = false;}
+        if(GameManager.instance.F_Unlock && PlayerStats.instance.F_curHP > 0)
+        {F_Die = false; GameManager.instance.F_Die = false;}
+        //
+        if(F_Die && K_Die && S_Die && //Sono tutti sbloccati e muoiono
+        GameManager.instance.F_Unlock && GameManager.instance.S_Unlock && GameManager.instance.K_Unlock)
+        {StartCoroutine(GameOver());}  
+        else if(F_Die && !K_Die && !S_Die && //C'è solo forchetta e muore
+        GameManager.instance.F_Unlock && !GameManager.instance.S_Unlock && !GameManager.instance.K_Unlock)
+        {StartCoroutine(GameOver());} 
+        else if(!F_Die && K_Die && !S_Die && //C'è solo Coltello e muore
+        GameManager.instance.F_Unlock && !GameManager.instance.S_Unlock && GameManager.instance.K_Unlock)
+        {StartCoroutine(GameOver());} 
+        else if(!F_Die && !K_Die && S_Die && //C'è solo cucchiaio e muore
+        !GameManager.instance.F_Unlock && GameManager.instance.S_Unlock && !GameManager.instance.K_Unlock)
+        {StartCoroutine(GameOver());}  
+        else if(F_Die && K_Die && !S_Die &&//Ci sono forchetta e coltello e muoiono
+        GameManager.instance.F_Unlock && !GameManager.instance.S_Unlock && GameManager.instance.K_Unlock)
+        {StartCoroutine(GameOver());} 
+        else if(!F_Die && K_Die && S_Die &&//Ci sono cucchiaio e coltello e muoiono
+        !GameManager.instance.F_Unlock && GameManager.instance.S_Unlock && GameManager.instance.K_Unlock)
+        {StartCoroutine(GameOver());} 
+        else if(F_Die && !K_Die && S_Die &&//Ci sono cucchiaio e forchetta e muoiono
+        GameManager.instance.F_Unlock && GameManager.instance.S_Unlock && !GameManager.instance.K_Unlock)
+        {StartCoroutine(GameOver());} 
         /////////////////////////////////////////////////////////////////////////////////
         #region Status
         //Paralisi
@@ -311,8 +336,6 @@ public void Update()
         CharacterID = GameManager.instance.CharacterID;
         ////////
         if(WinEnd){if(Input.GetMouseButtonDown(0)){StartCoroutine(RetunBattle());}}
-        if(F_Die && K_Die && S_Die )
-        {StartCoroutine(GameOver());}   
         if(Ending){if(Input.GetMouseButtonDown(0)){StartCoroutine(ReturnMainMenu());}} 
         /////////////
         if(isIndicator)
