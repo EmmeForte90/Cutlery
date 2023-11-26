@@ -202,10 +202,10 @@ public class SaveManager : MonoBehaviour
    [SerializeField]    public List<int> Quest_quantityList;
 
 
-    public void Awake()
+    /*public void Awake()
     {
         saveFilePath = Path.Combine(Application.persistentDataPath, "saveData.json");
-    }
+    }*/
 
     public void SaveGame()
     {
@@ -555,159 +555,6 @@ public class SaveManager : MonoBehaviour
 
     public void LoadGame()
     {
-        if (File.Exists(saveFilePath))
-        {
-            // Read the JSON from the file
-            /*string jsonData = File.ReadAllText(saveFilePath);
-
-            // Deserialize the JSON into a GameData object
-            GameData loadedGameData = GameData.FromJson(jsonData);
-
-            // Restore your game data values here...
-            //Debug.Log("Loaded position: " + loadedGameData.savedPosition.ToVector3());
-            PS.savedPosition = loadedGameData.savedPosition.ToVector3();*/
-            #region DatiDaCaricare
-        //
-        /*PS.HaveData = loadedGameData.HaveData;
-        PS.CanLoading = loadedGameData.CanLoading;
-        PS.NameScene = loadedGameData.NameScene;
-        PS.F_Unlock = loadedGameData.F_Unlock; 
-        PS.S_Unlock = loadedGameData.S_Unlock; 
-        PS.K_Unlock = loadedGameData.K_Unlock;
-        PS.Money = loadedGameData.Money;
-        PS.WhatMusic = loadedGameData.WhatMusic;
-        //
-        PS.F_LV = loadedGameData.F_LV;
-        PS.F_HP = loadedGameData.F_HP;
-        PS.F_curHP = loadedGameData.F_curHP;
-        PS.F_MP = loadedGameData.F_MP;
-        PS.F_curMP = loadedGameData.F_curMP;
-        PS.F_curRage = loadedGameData.F_curRage;
-        PS.F_Rage = loadedGameData.F_Rage;
-        PS.F_CostMP = loadedGameData.F_CostMP;
-        PS.F_Exp = loadedGameData.F_Exp;
-        PS.F_curExp = loadedGameData.F_curExp;
-        PS.F_attack = loadedGameData.F_attack;
-        PS.F_defense = loadedGameData.F_defense;
-        PS.F_poisonResistance = loadedGameData.F_poisonResistance;
-        PS.F_paralysisResistance = loadedGameData.F_paralysisResistance;
-        PS.F_sleepResistance = loadedGameData.F_sleepResistance;
-        PS.F_rustResistance = loadedGameData.F_rustResistance;
-        //
-        PS.F_HPCont = loadedGameData.F_HPCont;
-        PS.F_curHPCont = loadedGameData.F_curHPCont;
-        PS.F_MPCont = loadedGameData.F_MPCont;
-        PS.F_curMPCont = loadedGameData.F_curMPCont;
-        PS.F_CostMPCont = loadedGameData.F_CostMPCont;
-        PS.F_ExpCont = loadedGameData.F_ExpCont;
-        PS.F_curExpCont = loadedGameData.F_curExpCont;
-        PS.F_attackCont = loadedGameData.F_attackCont;
-        PS.F_defenseCont = loadedGameData.F_defenseCont;
-        PS.F_poisonResistanceCont = loadedGameData.F_poisonResistanceCont;
-        PS.F_paralysisResistanceCont = loadedGameData.F_paralysisResistanceCont;
-        PS.F_sleepResistanceCont = loadedGameData.F_sleepResistanceCont;
-        PS.F_rustResistanceCont = loadedGameData.F_rustResistanceCont; 
-        //
-        PS.S_LV = loadedGameData.S_LV;
-        PS.S_HP = loadedGameData.S_HP;
-        PS.S_curHP = loadedGameData.S_curHP;
-        PS.S_MP = loadedGameData.S_MP;
-        PS.S_curMP = loadedGameData.S_curMP;
-        PS.S_curRage = loadedGameData.S_curRage;
-        PS.S_Rage = loadedGameData.S_Rage;
-        PS.S_CostMP = loadedGameData.S_CostMP;
-        PS.S_Exp = loadedGameData.S_Exp;
-        PS.S_curExp = loadedGameData.S_curExp;
-        PS.S_attack = loadedGameData.S_attack;
-        PS.S_defense = loadedGameData.S_defense;
-        PS.S_poisonResistance = loadedGameData.S_poisonResistance;
-        PS.S_paralysisResistance = loadedGameData.S_paralysisResistance;
-        PS.S_sleepResistance = loadedGameData.S_sleepResistance;
-        PS.S_rustResistance = loadedGameData.S_rustResistance;
-        //
-        PS.S_HPCont = loadedGameData.S_HPCont;
-        PS.S_curHPCont = loadedGameData.S_curHPCont;
-        PS.S_MPCont = loadedGameData.S_MPCont;
-        PS.S_curMPCont = loadedGameData.S_curMPCont;
-        PS.S_CostMPCont = loadedGameData.S_CostMPCont;
-        PS.S_ExpCont = loadedGameData.S_ExpCont;
-        PS.S_curExpCont = loadedGameData.S_curExpCont;
-        PS.S_attackCont = loadedGameData.S_attackCont;
-        PS.S_defenseCont = loadedGameData.S_defenseCont;
-        PS.S_poisonResistanceCont = loadedGameData.S_poisonResistanceCont;
-        PS.S_paralysisResistanceCont = loadedGameData.S_paralysisResistanceCont;
-        PS.S_sleepResistanceCont = loadedGameData.S_sleepResistanceCont;
-        PS.S_rustResistanceCont = loadedGameData.S_rustResistanceCont; 
-        //
-        PS.K_LV = loadedGameData.K_LV;
-        PS.K_HP = loadedGameData.K_HP;
-        PS.K_curHP = loadedGameData.K_curHP;
-        PS.K_MP = loadedGameData.K_MP;
-        PS.K_curMP = loadedGameData.K_curMP;
-        PS.K_curRage = loadedGameData.K_curRage;
-        PS.K_Rage = loadedGameData.K_Rage;
-        PS.K_CostMP = loadedGameData.K_CostMP;
-        PS.K_Exp = loadedGameData.K_Exp;
-        PS.K_curExp = loadedGameData.K_curExp;
-        PS.K_attack = loadedGameData.K_attack;
-        PS.K_defense = loadedGameData.K_defense;
-        PS.K_poisonResistance = loadedGameData.K_poisonResistance;
-        PS.K_paralysisResistance = loadedGameData.K_paralysisResistance;
-        PS.K_sleepResistance = loadedGameData.K_sleepResistance;
-        PS.K_rustResistance = loadedGameData.K_rustResistance;
-        //
-        PS.K_HPCont = loadedGameData.K_HPCont;
-        PS.K_curHPCont = loadedGameData.K_curHPCont;
-        PS.K_MPCont = loadedGameData.K_MPCont;
-        PS.K_curMPCont = loadedGameData.K_curMPCont;
-        PS.K_CostMPCont = loadedGameData.K_CostMPCont;
-        PS.K_ExpCont = loadedGameData.K_ExpCont;
-        PS.K_curExpCont = loadedGameData.K_curExpCont;
-        PS.K_attackCont = loadedGameData.K_attackCont;
-        PS.K_defenseCont = loadedGameData.K_defenseCont;
-        PS.K_poisonResistanceCont = loadedGameData.K_poisonResistanceCont;
-        PS.K_paralysisResistanceCont = loadedGameData.K_paralysisResistanceCont;
-        PS.K_sleepResistanceCont = loadedGameData.K_sleepResistanceCont;
-        PS.K_rustResistanceCont = loadedGameData.K_rustResistanceCont; 
-        //
-        PS.Enemies = loadedGameData.Enemies;
-        PS.Treasure = loadedGameData.Treasure;
-        //
-        PS.Skill_F  = loadedGameData.Skill_F;
-        PS.Skill_K  = loadedGameData.Skill_K;
-        PS.Skill_S  = loadedGameData.Skill_S;
-        //
-        PS.EventsDesert = loadedGameData.EventsDesert; 
-        PS.SwitchDesert = loadedGameData.SwitchDesert; 
-        //
-        PS.F_Unlock = loadedGameData.F_Unlock;
-        PS.K_Unlock = loadedGameData.K_Unlock;
-        PS.S_Unlock = loadedGameData.S_Unlock;
-        //
-        PS.quest = loadedGameData.quest;
-        PS.QuestActive = loadedGameData.QuestActive;
-        PS.QuestComplete = loadedGameData.QuestComplete;
-        PS.QuestSegnal = loadedGameData.QuestSegnal;
-        #endregion
-            // Chiamare il metodo per la deserializzazione della lista di Item
-            //
-            PS.I_quantityList = loadedGameData.I_quantityList;
-            PS.IBattle_quantityList = loadedGameData.IBattle_quantityList;
-            PS.F_quantityList = loadedGameData.F_quantityList;
-            PS.S_quantityList = loadedGameData.S_quantityList;
-            PS.K_quantityList = loadedGameData.K_quantityList;
-            PS.Key_quantityList = loadedGameData.Key_quantityList;
-            PS.Quest_quantityList = loadedGameData.Quest_quantityList;
-            //
-            PS.I_itemList = ES3.Load("I_itemList", I_itemList);
-            PS.IBattle_itemList = ES3.Load("IBattle_itemList", IBattle_itemList);
-            PS.Key_itemList = ES3.Load("Key_itemList", Key_itemList);
-            PS.Quest_itemList = ES3.Load("Quest_itemList", Quest_itemList);
-            PS.F_itemList = ES3.Load("F_itemList", F_itemList);
-            PS.S_itemList = ES3.Load("S_itemList", S_itemList);
-            PS.K_itemList = ES3.Load("K_itemList", K_itemList);
-            */
-        #endregion
         PS.savedPosition = ES3.Load<Vector3>("savedPosition");
         //
         PS.NameScene = ES3.Load<string>("NameScene");
@@ -838,8 +685,10 @@ public class SaveManager : MonoBehaviour
         PS.F_itemList = ES3.Load<List<Item>>("F_itemList");
         PS.S_itemList = ES3.Load<List<Item>>("S_itemList");
         PS.K_itemList = ES3.Load<List<Item>>("K_itemList");
-        }
-        }
+        print("Hai caricato");
+        
+    }
+    }
 
             //GameManager.instance.GM_Data = ES3.Load("GM_Data");
 
@@ -879,4 +728,3 @@ public class SaveManager : MonoBehaviour
 
     return itemList;
 }*/
-}

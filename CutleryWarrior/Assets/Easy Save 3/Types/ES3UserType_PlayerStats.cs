@@ -525,7 +525,7 @@ namespace ES3Types
 						instance.items = reader.Read<System.Boolean[]>(ES3Type_boolArray.Instance);
 						break;
 					case "instance":
-						PlayerStats.instance = reader.Read<PlayerStats>();
+						PlayerStats.instance = reader.Read<PlayerStats>(ES3UserType_PlayerStats.Instance);
 						break;
 					case "DataManager":
 						PlayerStats.DataManager = reader.Read<System.Boolean>(ES3Type_bool.Instance);
