@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour
     public GameObject Minimap;
     public static bool GameManagerExist; 
     public Inventory Inv;
-    public Inventory QuM;
+    public InventoryB InvB;
+    public QuestsManager QuM;
+    public KeyManager KM;
     public EquipM_F M_F;
     public EquipM_K M_K;
     public EquipM_S M_S;
@@ -254,6 +256,7 @@ public class GameManager : MonoBehaviour
         TakeCharacter();
         SkillINMenu();
         Order();
+        UnlockCharacter();
         moneyTextM.text = money.ToString(); 
 ////////////////////////////////////////////////////////////////////////////
         if(!NotTouchOption){
@@ -670,6 +673,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene (sceneName:"MainMenu");
         DestroyManager();
+    }
+
+    public void UnlockCharacter()
+    {
+        if(F_Unlock){F_Hero.SetActive(true);}else if(!F_Unlock){F_Hero.SetActive(false);}
+        if(K_Unlock){K_Hero.SetActive(true);}else if(!K_Unlock){K_Hero.SetActive(false);}
+        if(S_Unlock){S_Hero.SetActive(true);}else if(!S_Unlock){S_Hero.SetActive(false);}
     }
     public void RecognizeCharacters()
     {

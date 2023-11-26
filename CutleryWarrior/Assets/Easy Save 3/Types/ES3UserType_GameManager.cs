@@ -180,7 +180,7 @@ namespace ES3Types
 						instance.Inv = reader.Read<Inventory>();
 						break;
 					case "QuM":
-						instance.QuM = reader.Read<Inventory>();
+						instance.QuM = reader.Read<QuestsManager>();
 						break;
 					case "M_F":
 						instance.M_F = reader.Read<EquipM_F>();

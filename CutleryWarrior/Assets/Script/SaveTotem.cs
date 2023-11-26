@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SaveTotem : MonoBehaviour
 {
-    public Vector3 savedPosition;
+    public GameObject savedPosition;
     public string NameScene;
     public GameObject VFXTake;
     private Transform Player;
@@ -73,9 +73,9 @@ public class SaveTotem : MonoBehaviour
         PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
         PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;}
         
-        savedPosition = Player.transform.position; 
-        GameManager.instance.savedPosition = savedPosition;
-        PlayerStats.instance.savedPosition = savedPosition;
+        //savedPosition.transform.position = Player.transform.position; 
+        GameManager.instance.savedPosition = savedPosition.transform.position;
+        PlayerStats.instance.savedPosition = savedPosition.transform.position;
         PlayerStats.instance.HaveData = true;
         PlayerStats.instance.NameScene = NameScene;
         PlayerStats.instance.UpdateInventorySaving();

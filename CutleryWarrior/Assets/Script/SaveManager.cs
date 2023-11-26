@@ -202,180 +202,8 @@ public class SaveManager : MonoBehaviour
    [SerializeField]    public List<int> Quest_quantityList;
 
 
-    /*public void Awake()
-    {
-        saveFilePath = Path.Combine(Application.persistentDataPath, "saveData.json");
-    }*/
-
     public void SaveGame()
     {
-        //List<string> serializedStrings = new List<string>();
-        // Create an instance of your game data object
-        //GameData gameData = new GameData();
-        // Assign your game data values here...
-        //gameData.savedPosition = new SaveVector3(PS.savedPosition);
-        //Debug.Log("Save position: " + gameData.savedPosition.ToVector3());
-        
-        #region DatiDaSalvare
-        
-        /*NameScene = PS.NameScene;
-        gameData.HaveData = PS.HaveData;
-        gameData.CanLoading = PS.CanLoading;
-        gameData.NameScene = PS.NameScene;
-        gameData.F_Unlock = PS.F_Unlock; 
-        gameData.S_Unlock = PS.S_Unlock; 
-        gameData.K_Unlock = PS.K_Unlock;
-        gameData.Money = PS.Money;
-        gameData.WhatMusic = PS.WhatMusic;
-        //
-        gameData.F_LV = PS.F_LV;
-        gameData.F_HP = PS.F_HP;
-        gameData.F_curHP = PS.F_curHP;
-        gameData.F_MP = PS.F_MP;
-        gameData.F_curMP = PS.F_curMP;
-        gameData.F_curRage = PS.F_curRage;
-        gameData.F_Rage = PS.F_Rage;
-        gameData.F_CostMP = PS.F_CostMP;
-        gameData.F_Exp = PS.F_Exp;
-        gameData.F_curExp = PS.F_curExp;
-        gameData.F_attack = PS.F_attack;
-        gameData.F_defense = PS.F_defense;
-        gameData.F_poisonResistance = PS.F_poisonResistance;
-        gameData.F_paralysisResistance = PS.F_paralysisResistance;
-        gameData.F_sleepResistance = PS.F_sleepResistance;
-        gameData.F_rustResistance = PS.F_rustResistance;
-        //
-        gameData.F_HPCont = PS.F_HPCont;
-        gameData.F_curHPCont = PS.F_curHPCont;
-        gameData.F_MPCont = PS.F_MPCont;
-        gameData.F_curMPCont = PS.F_curMPCont;
-        gameData.F_CostMPCont = PS.F_CostMPCont;
-        gameData.F_ExpCont = PS.F_ExpCont;
-        gameData.F_curExpCont = PS.F_curExpCont;
-        gameData.F_attackCont = PS.F_attackCont;
-        gameData.F_defenseCont = PS.F_defenseCont;
-        gameData.F_poisonResistanceCont = PS.F_poisonResistanceCont;
-        gameData.F_paralysisResistanceCont = PS.F_paralysisResistanceCont;
-        gameData.F_sleepResistanceCont = PS.F_sleepResistanceCont;
-        gameData.F_rustResistanceCont = PS.F_rustResistanceCont; 
-        //
-        gameData.S_LV = PS.S_LV;
-        gameData.S_HP = PS.S_HP;
-        gameData.S_curHP = PS.S_curHP;
-        gameData.S_MP = PS.S_MP;
-        gameData.S_curMP = PS.S_curMP;
-        gameData.S_curRage = PS.S_curRage;
-        gameData.S_Rage = PS.S_Rage;
-        gameData.S_CostMP = PS.S_CostMP;
-        gameData.S_Exp = PS.S_Exp;
-        gameData.S_curExp = PS.S_curExp;
-        gameData.S_attack = PS.S_attack;
-        gameData.S_defense = PS.S_defense;
-        gameData.S_poisonResistance = PS.S_poisonResistance;
-        gameData.S_paralysisResistance = PS.S_paralysisResistance;
-        gameData.S_sleepResistance = PS.S_sleepResistance;
-        gameData.S_rustResistance = PS.S_rustResistance;
-        //
-        gameData.S_HPCont = PS.S_HPCont;
-        gameData.S_curHPCont = PS.S_curHPCont;
-        gameData.S_MPCont = PS.S_MPCont;
-        gameData.S_curMPCont = PS.S_curMPCont;
-        gameData.S_CostMPCont = PS.S_CostMPCont;
-        gameData.S_ExpCont = PS.S_ExpCont;
-        gameData.S_curExpCont = PS.S_curExpCont;
-        gameData.S_attackCont = PS.S_attackCont;
-        gameData.S_defenseCont = PS.S_defenseCont;
-        gameData.S_poisonResistanceCont = PS.S_poisonResistanceCont;
-        gameData.S_paralysisResistanceCont = PS.S_paralysisResistanceCont;
-        gameData.S_sleepResistanceCont = PS.S_sleepResistanceCont;
-        gameData.S_rustResistanceCont = PS.S_rustResistanceCont; 
-        //
-        gameData.K_LV = PS.K_LV;
-        gameData.K_HP = PS.K_HP;
-        gameData.K_curHP = PS.K_curHP;
-        gameData.K_MP = PS.K_MP;
-        gameData.K_curMP = PS.K_curMP;
-        gameData.K_curRage = PS.K_curRage;
-        gameData.K_Rage = PS.K_Rage;
-        gameData.K_CostMP = PS.K_CostMP;
-        gameData.K_Exp = PS.K_Exp;
-        gameData.K_curExp = PS.K_curExp;
-        gameData.K_attack = PS.K_attack;
-        gameData.K_defense = PS.K_defense;
-        gameData.K_poisonResistance = PS.K_poisonResistance;
-        gameData.K_paralysisResistance = PS.K_paralysisResistance;
-        gameData.K_sleepResistance = PS.K_sleepResistance;
-        gameData.K_rustResistance = PS.K_rustResistance;
-        //
-        gameData.K_HPCont = PS.K_HPCont;
-        gameData.K_curHPCont = PS.K_curHPCont;
-        gameData.K_MPCont = PS.K_MPCont;
-        gameData.K_curMPCont = PS.K_curMPCont;
-        gameData.K_CostMPCont = PS.K_CostMPCont;
-        gameData.K_ExpCont = PS.K_ExpCont;
-        gameData.K_curExpCont = PS.K_curExpCont;
-        gameData.K_attackCont = PS.K_attackCont;
-        gameData.K_defenseCont = PS.K_defenseCont;
-        gameData.K_poisonResistanceCont = PS.K_poisonResistanceCont;
-        gameData.K_paralysisResistanceCont = PS.K_paralysisResistanceCont;
-        gameData.K_sleepResistanceCont = PS.K_sleepResistanceCont;
-        gameData.K_rustResistanceCont = PS.K_rustResistanceCont; 
-        //
-        gameData.Enemies = PS.Enemies;
-        gameData.Treasure = PS.Treasure;
-        //
-        gameData.Skill_F  = PS.Skill_F;
-        gameData.Skill_K  = PS.Skill_K;
-        gameData.Skill_S  = PS.Skill_S;
-        //
-        gameData.EventsDesert = PS.EventsDesert; 
-        gameData.SwitchDesert = PS.SwitchDesert; 
-        //
-        gameData.F_Unlock = PS.F_Unlock;
-        gameData.K_Unlock = PS.K_Unlock;
-        gameData.S_Unlock = PS.S_Unlock;
-        //
-        gameData.quest = PS.quest;
-        gameData.QuestActive = PS.QuestActive;
-        gameData.QuestComplete = PS.QuestComplete;
-        gameData.QuestSegnal = PS.QuestSegnal;
-        //
-        gameData.I_quantityList = PS.I_quantityList;
-        gameData.IBattle_quantityList = PS.IBattle_quantityList;
-        gameData.Key_quantityList = PS.Key_quantityList;
-        gameData.Quest_quantityList = PS.Quest_quantityList;
-        gameData.F_quantityList = PS.F_quantityList;
-        gameData.S_quantityList = PS.S_quantityList;
-        gameData.K_quantityList = PS.K_quantityList;
-        //Per aggiornare il save manager dell'inspector
-        I_quantityList = PS.I_quantityList;
-        IBattle_quantityList = PS.IBattle_quantityList;
-        Key_quantityList = PS.Key_quantityList;
-        Quest_quantityList = PS.Quest_quantityList;
-        F_quantityList = PS.F_quantityList;
-        S_quantityList = PS.S_quantityList;
-        K_quantityList = PS.K_quantityList;
-        //
-        I_itemList = PS.I_itemList;
-        IBattle_itemList = PS.IBattle_itemList;
-        Key_quantityList = PS.Key_quantityList;
-        Quest_itemList = PS.Quest_itemList;
-        F_itemList = PS.F_itemList;
-        S_itemList = PS.S_itemList;
-        K_itemList = PS.K_itemList;
-        
-        // Chiamare il metodo per la serializzazione della lista di ScriptableObject
-           
-        //
-        SerializeItemList(I_itemList, saveFilePath);
-        SerializeItemList(IBattle_itemList, saveFilePath);
-        SerializeItemList(F_itemList, saveFilePath);
-        SerializeItemList(S_itemList, saveFilePath);
-        SerializeItemList(K_itemList, saveFilePath);
-        SerializeItemList(Key_itemList, saveFilePath);
-        SerializeItemList(Quest_itemList, saveFilePath);*/
-        #endregion
-
         ES3.Save("savedPosition", PS.savedPosition);
         //
         ES3.Save("NameScene", PS.NameScene);
@@ -506,57 +334,21 @@ public class SaveManager : MonoBehaviour
         ES3.Save("F_itemList", PS.F_itemList);
         ES3.Save("S_itemList", PS.S_itemList);
         ES3.Save("K_itemList", PS.K_itemList);
-        //
-        //GM_Data = GameManager.instance.GM_Data;
-        //ES3.Save("GM_Data", GM_Data);
-
     }
 
-        // Convert the game data to JSON
-        // Supponendo che gameData sia un oggetto che desideri serializzare
-        /*string gameDataJson = JsonUtility.ToJson(gameData);
-
-        foreach (var scriptableObject in I_itemList)
-        {
-            serializedStrings.Add(scriptableObject.IdItem);
-        }
-
-        // Serializza la lista di stringhe
-        string serializedStringsJson = JsonUtility.ToJson(serializedStrings);
-
-        // Puoi combinare le due stringhe JSON come desideri, ad esempio concatenandole
-        string jsonData = gameDataJson + serializedStringsJson;
-
-
-        // Save the JSON data to a file
-        File.WriteAllText(saveFilePath, jsonData);*/
-
-    /*public void SerializeItemList(List<Item> itemList, string filePath)
-{
-    // Creare una lista di oggetti serializzati
-    List<string> serializedObjects = new List<string>();
-
-    // Ciclare attraverso la lista di Item e serializzare ciascuno
-    foreach (Item item in itemList)
-    {
-        string json = JsonUtility.ToJson(item);
-        serializedObjects.Add(json);
-    }
-
-    // Converti la lista in un array
-    string[] serializedArray = serializedObjects.ToArray();
-
-    // Serializza l'array in formato JSON
-    string finalJson = JsonUtility.ToJson(serializedArray, true);
-
-    // Salva il JSON su file o fai qualsiasi altra cosa tu voglia
-    File.WriteAllText(filePath, finalJson);
-}*/
 
     public void LoadGame()
     {
         PS.savedPosition = ES3.Load<Vector3>("savedPosition");
-        //
+        //////////////////////////////////////////////
+        PS.I_itemList = null;
+        PS.IBattle_itemList = null;
+        //PS.Key_itemList = null;
+        PS.Quest_itemList = null;
+        PS.F_itemList = null;
+        PS.S_itemList = null;
+        PS.K_itemList = null;
+        ////////////////////////////////////////////////
         PS.NameScene = ES3.Load<string>("NameScene");
         PS.HaveData = ES3.Load<bool>("HaveData");
         PS.CanLoading = ES3.Load<bool>("CanLoading");
@@ -564,6 +356,9 @@ public class SaveManager : MonoBehaviour
         PS.F_Unlock = ES3.Load<bool>("F_Unlock");
         PS.S_Unlock = ES3.Load<bool>("S_Unlock");
         PS.K_Unlock = ES3.Load<bool>("K_Unlock");
+        GameManager.instance.F_Unlock = PS.F_Unlock;
+        GameManager.instance.S_Unlock = PS.S_Unlock;
+        GameManager.instance.K_Unlock = PS.K_Unlock;
         //
         PS.Money = ES3.Load<int>("Money");
         PS.WhatMusic = ES3.Load<int>("WhatMusic");
@@ -596,7 +391,7 @@ public class SaveManager : MonoBehaviour
         PS.F_poisonResistanceCont = ES3.Load<float>("F_poisonResistanceCont");
         PS.F_paralysisResistanceCont = ES3.Load<float>("F_paralysisResistanceCont");
         PS.F_sleepResistanceCont = ES3.Load<float>("F_sleepResistanceCont");
-//        PS.F_rustResistanceCont = ES3.Load<int>("F_rustResistanceCont");
+        //PS.F_rustResistanceCont = ES3.Load<int>("F_rustResistanceCont");
         //
         PS.K_LV = ES3.Load<int>("K_LV");
         PS.K_HP = ES3.Load<float>("K_HP");
@@ -626,7 +421,7 @@ public class SaveManager : MonoBehaviour
         PS.K_poisonResistanceCont = ES3.Load<float>("K_poisonResistanceCont");
         PS.K_paralysisResistanceCont = ES3.Load<float>("K_paralysisResistanceCont");
         PS.K_sleepResistanceCont = ES3.Load<float>("K_sleepResistanceCont");
-   //     PS.K_rustResistanceCont = ES3.Load<int>("K_rustResistanceCont");
+        //PS.K_rustResistanceCont = ES3.Load<int>("K_rustResistanceCont");
         //
         PS.S_LV = ES3.Load<int>("S_LV");
         PS.S_HP = ES3.Load<float>("S_HP");
@@ -656,7 +451,7 @@ public class SaveManager : MonoBehaviour
         PS.S_poisonResistanceCont = ES3.Load<float>("S_poisonResistanceCont");
         PS.S_paralysisResistanceCont = ES3.Load<float>("S_paralysisResistanceCont");
         PS.S_sleepResistanceCont = ES3.Load<float>("S_sleepResistanceCont");
-   //     PS.S_rustResistanceCont = ES3.Load<int>("S_rustResistanceCont");
+        //PS.S_rustResistanceCont = ES3.Load<int>("S_rustResistanceCont");
         //
         PS.Enemies = ES3.Load<bool[]>("Enemies");
         PS.Treasure = ES3.Load<bool[]>("Treasure");
@@ -670,13 +465,35 @@ public class SaveManager : MonoBehaviour
         PS.QuestComplete = ES3.Load<bool[]>("QuestComplete");
         PS.QuestSegnal = ES3.Load<bool[]>("QuestSegnal");
         //
+        PS.I_quantityList = null;
+        PS.IBattle_quantityList = null;
+        PS.Key_quantityList = null;
+        PS.Quest_quantityList = null;
+        PS.F_quantityList = null;
+        PS.S_quantityList = null;
+        PS.K_quantityList = null;
+        //
         PS.I_quantityList = ES3.Load<List<int>>("I_quantityList");
+        GameManager.instance.Inv.quantityList = PS.I_quantityList;
+        GameManager.instance.Inv.UpdateInventoryUI();
         PS.IBattle_quantityList = ES3.Load<List<int>>("IBattle_quantityList");
+        GameManager.instance.InvB.quantityList = PS.IBattle_quantityList;
+        GameManager.instance.InvB.UpdateInventoryUI();
         PS.Key_quantityList = ES3.Load<List<int>>("Key_quantityList");
+        GameManager.instance.KM.quantityList = PS.Key_quantityList;
+        GameManager.instance.KM.UpdateInventoryUI();
         PS.Quest_quantityList = ES3.Load<List<int>>("Quest_quantityList");
+        GameManager.instance.QuM.quantityList = PS.Quest_quantityList;
+        GameManager.instance.QuM.UpdateInventoryUI();
         PS.F_quantityList = ES3.Load<List<int>>("F_quantityList");
+        GameManager.instance.M_F.quantityList = PS.F_quantityList;
+        GameManager.instance.M_F.UpdateInventoryUI();
         PS.S_quantityList = ES3.Load<List<int>>("S_quantityList");
-        PS.K_quantityList = ES3.Load<List<int>>("K_quantityList");
+         GameManager.instance.M_S.quantityList = PS.S_quantityList;
+        GameManager.instance.M_S.UpdateInventoryUI();
+        PS.K_quantityList = ES3.Load<List<int>>("K_quantityList"); 
+        GameManager.instance.M_K.quantityList = PS.K_quantityList;
+        GameManager.instance.M_K.UpdateInventoryUI();
         //
         PS.I_itemList = ES3.Load<List<Item>>("I_itemList");
         PS.IBattle_itemList = ES3.Load<List<Item>>("IBattle_itemList");
@@ -685,46 +502,8 @@ public class SaveManager : MonoBehaviour
         PS.F_itemList = ES3.Load<List<Item>>("F_itemList");
         PS.S_itemList = ES3.Load<List<Item>>("S_itemList");
         PS.K_itemList = ES3.Load<List<Item>>("K_itemList");
-        print("Hai caricato");
-        
+
+
+        print("Hai caricato");  
     }
-    }
-
-            //GameManager.instance.GM_Data = ES3.Load("GM_Data");
-
-           /* List<string> serializedStrings = JsonUtility.FromJson<List<string>>(jsonData);
-            I_itemList.Clear();
-
-            foreach (var serializedString in serializedStrings)
-            {
-                Item scriptableObject = ScriptableObject.CreateInstance<Item>();
-                scriptableObject.IdItem = serializedString;
-                I_itemList.Add(scriptableObject);
-            }
-            }
-            else
-            {
-                Debug.Log("Save file not found. Creating a new one.");
-            }*/
-    
-
-/*        public List<Item> DeserializeItemList(string filePath)
-{
-    // Carica il JSON della lista di Item da file o da qualsiasi altra fonte
-    string json = File.ReadAllText(filePath);
-
-    // Deserializza l'array
-    string[] serializedArray = JsonUtility.FromJson<string[]>(json);
-
-    // Creare una nuova lista di Item
-    List<Item> itemList = new List<Item>();
-
-    // Ciclare attraverso l'array serializzato e deserializzare ciascun oggetto
-    foreach (string serializedObject in serializedArray)
-    {
-        Item item = JsonUtility.FromJson<Item>(serializedObject);
-        itemList.Add(item);
-    }
-
-    return itemList;
-}*/
+}

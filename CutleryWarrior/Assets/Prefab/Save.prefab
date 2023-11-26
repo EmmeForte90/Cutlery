@@ -4953,7 +4953,7 @@ Transform:
   - {fileID: 2590805306563280114}
   - {fileID: 2909280706526523508}
   m_Father: {fileID: 6009354721248775123}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &355054821301659172
 ParticleSystem:
@@ -14753,10 +14753,42 @@ Transform:
   - {fileID: 7737226195038257047}
   - {fileID: 7765652461665038906}
   - {fileID: 6171532728749557634}
+  - {fileID: 4057439986179597262}
   - {fileID: 2796052397566939482}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1585184156379360738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4057439986179597262}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4057439986179597262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585184156379360738}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: 5}
+  m_LocalScale: {x: -1.3973233, y: 1.3973234, z: 1.3973233}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6009354721248775123}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2325360909046669349
 GameObject:
   m_ObjectHideFlags: 0
@@ -19891,7 +19923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff9ece98094ea945825d3d2c6b18356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savedPosition: {x: 0, y: 0, z: 0}
+  savedPosition: {fileID: 1585184156379360738}
   NameScene: FirstD
   VFXTake: {fileID: 1988170249196224223, guid: 657fe776cee95cb42a940229b6651a3d, type: 3}
 --- !u!1 &6926591211867406710
