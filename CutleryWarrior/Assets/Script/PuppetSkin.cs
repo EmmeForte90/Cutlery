@@ -19,6 +19,19 @@ public class PuppetSkin : MonoBehaviour
 	public enum ItemSlot{None,Weapon,DressSkin}
 	public void Awake()
 	{if (Instance == null){Instance = this;}_skeletonGraphic = this.GetComponent<SkeletonGraphic>();}
+
+	public  void OnEnable()
+	{
+	if (GameManager.instance.CharacterID == 1)
+    {	UpdateCharacterSkinUI(GameManager.instance.Inv.Puppets_F.DressSkin);
+}
+    else if (GameManager.instance.CharacterID == 2)
+    {	UpdateCharacterSkinUI(GameManager.instance.Inv.Puppets_K.DressSkin);
+}
+    else if (GameManager.instance.CharacterID == 3)
+    {	UpdateCharacterSkinUI(GameManager.instance.Inv.Puppets_S.DressSkin);
+}
+	}
 	
 	#region ChangeSkin
 	public void OptimizeSkin()
