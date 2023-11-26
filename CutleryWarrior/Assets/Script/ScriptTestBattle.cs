@@ -328,6 +328,7 @@ public class ScriptTestBattle : MonoBehaviour
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_rustResistance = PlayerStats.instance.F_rustResistanceCont;}
         if(GameManager.instance.S_Unlock){PlayerStats.instance.S_rustResistance = PlayerStats.instance.S_rustResistanceCont;}
         //
+        
         //
         if(GameManager.instance.K_Unlock){PlayerStats.instance.K_sleepResistance = PlayerStats.instance.K_sleepResistanceCont;}
         if(GameManager.instance.F_Unlock){PlayerStats.instance.F_sleepResistance = PlayerStats.instance.F_sleepResistanceCont;}

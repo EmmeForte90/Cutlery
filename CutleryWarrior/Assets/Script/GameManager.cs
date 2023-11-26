@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public CharacterMove F_HeroP;
     [SerializeField] public CharacterFollow F_HeroAI;
     [SerializeField] public GameObject MP_F;
+    [SerializeField] public GameObject Rust_F;
     public GameObject Fork;
     public GameObject F_SkillW;
     public GameObject[] OrderFork;
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public CharacterMove S_HeroP;
     [SerializeField] public CharacterFollow S_HeroAI;
     [SerializeField] public GameObject MP_S;
+    [SerializeField] public GameObject Rust_S;
     public GameObject Spoon;
     public GameObject S_SkillW;
     public GameObject[] OrderSpoon;
@@ -106,6 +108,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public CharacterMove K_HeroP;
     [SerializeField] public CharacterFollow K_HeroAI;
     [SerializeField] public GameObject MP_K;
+    [SerializeField] public GameObject Rust_K;
     public GameObject Knife;
     public GameObject K_SkillW;
     public GameObject[] OrderKnife;
@@ -792,25 +795,19 @@ public class GameManager : MonoBehaviour
         if(S_Unlock){Manager_S.SwitchScriptsDeath();}
         if(K_Unlock){Manager_K.SwitchScriptsDeath();}
     }
-    public void Stun()
-    {
-        RecognizeCharacters();
-        if(F_Unlock){Manager_F.SwitchScriptsStun();}
-        if(S_Unlock){Manager_S.SwitchScriptsStun();}
-        if(K_Unlock){Manager_K.SwitchScriptsStun();}
-    }
-    public void Poison()
-    {
-        RecognizeCharacters();
-        if(F_Unlock){ch_F.Poison();ch_FAc.Poison();}
-        if(K_Unlock){ch_K.Poison();ch_KAc.Poison();}
-        if(S_Unlock){ch_S.Poison();ch_SAc.Poison();}
-    }
+    
     public void PoseWin()
     {
-        if(F_Unlock){Manager_F.SwitchScriptsWin();}
-        if(S_Unlock){Manager_S.SwitchScriptsWin();}
-        if(K_Unlock){Manager_K.SwitchScriptsWin();}
+        if(F_Unlock){ch_FAc.order=7;ch_F.IDAction=5;}
+        if(K_Unlock){ch_KAc.order=7;ch_K.IDAction=5;}
+        if(S_Unlock){ch_SAc.order=7;ch_S.IDAction=5;}
+    }
+    public void StopWin()
+    {
+        RecognizeCharacters();
+        if(F_Unlock){ch_F.RestoreWin();ch_FAc.RestoreWin();ch_F.Stop();ch_F.ReCol();ch_FAc.ReCol();}
+        if(K_Unlock){ch_K.RestoreWin();ch_KAc.RestoreWin();ch_K.Stop();ch_K.ReCol();ch_KAc.ReCol();}
+        if(S_Unlock){ch_S.RestoreWin();ch_SAc.RestoreWin();ch_S.Stop();ch_S.ReCol();ch_SAc.ReCol();}
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region Death
@@ -886,11 +883,21 @@ public class GameManager : MonoBehaviour
 ////////////////////////////////////////////////////////////////////////////////////////////////////////    
 #region Rust/Silence
     public void RustF()
-    {if(F_Unlock){ RecognizeCharacters();ch_FAc.Rust();ch_F.Rust();}}
+    {if(F_Unlock){ RecognizeCharacters();ch_FAc.Rust();ch_F.Rust();Rust_F.SetActive(true);}}
     public void RustK()
-    {if(K_Unlock){ RecognizeCharacters();ch_KAc.Rust();ch_K.Rust();}}
+    {if(K_Unlock){ RecognizeCharacters();ch_KAc.Rust();ch_K.Rust();Rust_K.SetActive(true);}}
     public void RustS()
-    {if(S_Unlock){ RecognizeCharacters();ch_SAc.Rust();ch_S.Rust();}}
+    {if(S_Unlock){ RecognizeCharacters();ch_SAc.Rust();ch_S.Rust();Rust_S.SetActive(true);}}
+    //
+    public void RestoreRustF()
+    {if(F_Unlock){ PlayerStats.instance.F_rustResistance = PlayerStats.instance.F_rustResistanceCont;
+    RecognizeCharacters();Rust_F.SetActive(false);ch_F.ReCol();ch_FAc.Idle();ch_FAc.ReCol();}}
+    public void RestoreRustK()
+    {if(K_Unlock){ PlayerStats.instance.K_rustResistance = PlayerStats.instance.K_rustResistanceCont;
+    RecognizeCharacters();Rust_K.SetActive(false);ch_K.ReCol();ch_KAc.Idle();ch_KAc.ReCol();}}
+    public void RestoreRustS()
+    {if(S_Unlock){ PlayerStats.instance.S_rustResistance = PlayerStats.instance.S_rustResistanceCont;
+    RecognizeCharacters();Rust_S.SetActive(false);ch_S.ReCol();ch_SAc.Idle();ch_SAc.ReCol();}}
     #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region PoisonState
@@ -906,6 +913,9 @@ public class GameManager : MonoBehaviour
         if(F_Unlock)
         {PlayerStats.instance.F_paralysisResistance = PlayerStats.instance.F_paralysisResistanceCont;
         PlayerStats.instance.F_poisonResistance = PlayerStats.instance.F_poisonResistanceCont;
+        PlayerStats.instance.F_rustResistance = PlayerStats.instance.F_rustResistanceCont;
+        PlayerStats.instance.F_sleepResistance = PlayerStats.instance.F_sleepResistanceCont;
+        RestoreRustF();
         ch_F.Idle();ch_F.ReCol();ch_FAc.Idle();ch_FAc.ReCol();}
     }
     public void RestoreK()
@@ -914,6 +924,9 @@ public class GameManager : MonoBehaviour
         if(K_Unlock)
         {PlayerStats.instance.K_paralysisResistance = PlayerStats.instance.K_paralysisResistanceCont;
         PlayerStats.instance.K_poisonResistance = PlayerStats.instance.K_poisonResistanceCont;   
+        PlayerStats.instance.K_rustResistance = PlayerStats.instance.K_rustResistanceCont;
+        PlayerStats.instance.K_sleepResistance = PlayerStats.instance.K_sleepResistanceCont;
+        RestoreRustK();
         ch_K.Idle();ch_K.ReCol();ch_KAc.Idle();ch_KAc.ReCol();}
     }
     public void RestoreS()
@@ -921,36 +934,15 @@ public class GameManager : MonoBehaviour
         RecognizeCharacters();
         if(S_Unlock)
         {PlayerStats.instance.S_paralysisResistance = PlayerStats.instance.S_paralysisResistanceCont;
-        PlayerStats.instance.S_poisonResistance = PlayerStats.instance.S_poisonResistanceCont;   
+        PlayerStats.instance.S_poisonResistance = PlayerStats.instance.S_poisonResistanceCont; 
+        PlayerStats.instance.S_rustResistance = PlayerStats.instance.S_rustResistanceCont;  
+        PlayerStats.instance.S_sleepResistance = PlayerStats.instance.S_sleepResistanceCont;
+        RestoreRustS();
         ch_S.Idle();ch_S.ReCol();ch_SAc.Idle();ch_SAc.ReCol();}
     }
     #endregion   
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void StopWin()
-    {
-        RecognizeCharacters();
-        switch(CharacterID)
-        {
-            case 1:
-            if(F_Unlock){Manager_F.SwitchScriptsPlayer();}
-            if(K_Unlock){Manager_K.SwitchScriptsActor();}
-            if(S_Unlock){Manager_S.SwitchScriptsActor();}
-            break;
-            case 2:
-            if(F_Unlock){Manager_F.SwitchScriptsActor();}
-            if(K_Unlock){Manager_K.SwitchScriptsPlayer();}
-            if(S_Unlock){Manager_S.SwitchScriptsActor();}
-            break;
-            case 3:
-            if(F_Unlock){Manager_F.SwitchScriptsActor();}
-            if(K_Unlock){Manager_K.SwitchScriptsActor();}
-            if(S_Unlock){Manager_S.SwitchScriptsPlayer();} 
-            break;
-        }
-       if(F_Unlock){ch_F.Idle();ch_F.Stop();ch_F.ReCol();ch_FAc.ReCol();ch_FAc.Idle();}
-       if(S_Unlock){ch_S.Idle();ch_S.Stop();ch_S.ReCol();ch_SAc.ReCol();ch_SAc.Idle();}
-       if(K_Unlock){ch_K.Idle();ch_K.Stop();ch_K.ReCol();ch_KAc.ReCol();ch_KAc.Idle();}
-    }
+    
     public void Allarm()
     {
         RecognizeCharacters();

@@ -2,15 +2,20 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SSU_Demo_Frozen
   m_Shader: {fileID: 4800000, guid: 0803c241834332942abfcbd27c498b46, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _ENABLEFROZEN_ON _SHADERFADING_NONE _SHADERSPACE_UV
-    _STRONGTINTCONTRASTTOGGLE_ON
+  m_ValidKeywords:
+  - ETC1_EXTERNAL_ALPHA
+  - _ENABLEFROZEN_ON
+  - _SHADERFADING_NONE
+  - _SHADERSPACE_UV
+  - _STRONGTINTCONTRASTTOGGLE_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -92,7 +97,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RecolorRGBTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _RecolorRGBTintAreas:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RecolorRGBYCPTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -124,6 +137,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - PixelSnap: 0
     - _AddColorContrast: 0.5
@@ -219,6 +233,7 @@ Material:
     - _EnableInkSpread: 0
     - _EnableInnerOutline: 0
     - _EnableMetal: 0
+    - _EnableNegative: 0
     - _EnableOuterOutline: 0
     - _EnablePingPongGlow: 0
     - _EnablePixelOutline: 0
@@ -277,7 +292,7 @@ Material:
     - _FrozenHighlightContrast: 2
     - _FrozenHighlightDensity: 1
     - _FrozenSnowContrast: 1
-    - _FrozenSnowDensity: 0.25
+    - _FrozenSnowDensity: 0.71
     - _FullAlphaDissolveFade: 0.5
     - _FullAlphaDissolveWidth: 0.5
     - _FullDistortionFade: 1
@@ -324,6 +339,7 @@ Material:
     - _MetalMaskToggle: 0
     - _Metallic: 0
     - _Mode: 0
+    - _NegativeFade: 1
     - _OcclusionStrength: 1
     - _OuterOutlineDistortionToggle: 0
     - _OuterOutlineFade: 1
@@ -357,7 +373,9 @@ Material:
     - _RainbowSaturation: 1
     - _RainbowSpeed: 1
     - _RecolorRGBFade: 1
+    - _RecolorRGBTextureToggle: 0
     - _RecolorRGBYCPFade: 1
+    - _RecolorRGBYCPTextureToggle: 0
     - _RectHeight: 100
     - _RectWidth: 100
     - _Saturation: 1
@@ -507,15 +525,15 @@ Material:
     - _FadingPosition: {r: 0, g: 0, b: 0, a: 0}
     - _FlameNoiseScale: {r: 1.2, g: 0.8, b: 0, a: 0}
     - _FlameSpeed: {r: 0, g: -0.5, b: 0, a: 0}
-    - _FrozenHighlightColor: {r: 1.797647, g: 4.604501, b: 5.992157, a: 1}
+    - _FrozenHighlightColor: {r: 5.992157, g: 2.8416965, b: 1.8196079, a: 1}
     - _FrozenHighlightDistortion: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _FrozenHighlightDistortionScale: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _FrozenHighlightDistortionSpeed: {r: -0.05, g: -0.05, b: 0, a: 0}
     - _FrozenHighlightScale: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _FrozenHighlightSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
-    - _FrozenSnowColor: {r: 1.123529, g: 1.373203, b: 1.498039, a: 0}
+    - _FrozenSnowColor: {r: 1.4980391, g: 1.30846, b: 1.1294117, a: 0}
     - _FrozenSnowScale: {r: 0.1, g: 0.1, b: 0, a: 0}
-    - _FrozenTint: {r: 1.819608, g: 4.611765, b: 5.992157, a: 0}
+    - _FrozenTint: {r: 5.992157, g: 3.500894, b: 1.8509802, a: 0}
     - _FullAlphaDissolveNoiseScale: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _FullDistortionDistortion: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _FullDistortionNoiseScale: {r: 0.5, g: 0.5, b: 0, a: 0}

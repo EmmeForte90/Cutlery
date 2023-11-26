@@ -85,6 +85,7 @@ public class CharacterMove : MonoBehaviour
     [SpineAnimation][SerializeField]  string DieAnimationName;
     [SpineAnimation][SerializeField]  string OpenBookAnimationName;
     [SpineAnimation][SerializeField]  string CloseBookAnimationName;
+    [SpineAnimation][SerializeField]  string WinAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
@@ -105,9 +106,13 @@ public class CharacterMove : MonoBehaviour
     public GameObject VFXHhitShield;
     [Header("VFX")]
     public GameObject VFXPoison;
+    public GameObject VFXPoison_I;
     public GameObject VFXRust;
+    public GameObject VFXRust_I;
     public GameObject VFXSleep;
+    public GameObject VFXSleep_I;
     public GameObject VFXStun;
+    public GameObject VFXStun_I;
     public GameObject VFXHurt;
     public GameObject VFXCharge;
     public GameObject VFXChargeComplete;
@@ -193,6 +198,10 @@ public void Awake()
         ////////////////////////////////////////
         case 4: 
         Death();
+        break;
+        ////////////////////////////////////////
+        case 5: 
+        WinFunc();
         break;
         }}
     }
@@ -538,7 +547,7 @@ private void HandleComboAttackS()
             AudioManager.instance?.PlaySFX(8);
             Instantiate(VFXHurt, transform.position, transform.rotation);
             if(sleepState){GameManager.instance.RestoreSleepF();}
-            print("sleepState" + sleepState);
+            //print("sleepState" + sleepState);
             Anm?.TemporaryChangeColor(Color.red);}
             //Debug.Log("danno " +  Stats.F_curHP);
             break;
@@ -549,7 +558,7 @@ private void HandleComboAttackS()
             AudioManager.instance?.PlaySFX(8);
             Instantiate(VFXHurt, transform.position, transform.rotation);
             if(sleepState){GameManager.instance.RestoreSleepK();}
-            print("sleepState" + sleepState);
+            //print("sleepState" + sleepState);
             Anm?.TemporaryChangeColor(Color.red);
             break;
         case 2:
@@ -569,7 +578,7 @@ private void HandleComboAttackS()
                 PlayerStats.instance.S_curMP -= PlayerStats.instance.S_CostMP;
                 AudioManager.instance?.PlaySFX(12);
                 if(sleepState){GameManager.instance.RestoreSleepS();}
-                print("sleepState" + sleepState);
+                //print("sleepState" + sleepState);
                 Instantiate(VFXHhitShield, BP.transform.position, transform.rotation);
             }
             break;
@@ -577,7 +586,7 @@ private void HandleComboAttackS()
 }
 
     #region Stato Veleno
-    public void Poison(){Anm.ChangeColorP(); VFXPoison.SetActive(true); poisonState = true;}
+    public void Poison(){Anm.ChangeColorP(); VFXPoison.SetActive(true);VFXPoison_I.SetActive(true); poisonState = true;}
  
     private IEnumerator Poi()
     {
@@ -586,20 +595,20 @@ private void HandleComboAttackS()
         switch (kindCh)
         {
             case 0:
-            GameManager.instance.RestoreF(); poisonState = false;
+            GameManager.instance.RestoreF(); poisonState = false;VFXPoison.SetActive(false);VFXPoison_I.SetActive(false);
             break;
             case 1:
-            GameManager.instance.RestoreK(); poisonState = false;
+            GameManager.instance.RestoreK(); poisonState = false;VFXPoison.SetActive(false);VFXPoison_I.SetActive(false);
             break; 
             case 2:
-            GameManager.instance.RestoreS(); poisonState = false;
+            GameManager.instance.RestoreS(); poisonState = false;VFXPoison.SetActive(false);VFXPoison_I.SetActive(false);
             break;
         }}
     }
     #endregion
 
     #region Stato Rust
-    public void Rust(){Anm.ChangeColorR(); VFXRust.SetActive(true); rustState = true;}
+    public void Rust(){Anm.ChangeColorR(); VFXRust.SetActive(true);VFXRust_I.SetActive(true); rustState = true;}
     private IEnumerator Rus()
     {
         yield return new WaitForSeconds(TimeRust);
@@ -607,13 +616,13 @@ private void HandleComboAttackS()
         switch (kindCh)
         {
             case 0:
-            GameManager.instance.RestoreF(); rustState = false;
+            GameManager.instance.RestoreRustF(); rustState = false; VFXRust.SetActive(false);VFXRust_I.SetActive(false);
             break;
             case 1:
-            GameManager.instance.RestoreK(); rustState = false;
+            GameManager.instance.RestoreRustK(); rustState = false; VFXRust.SetActive(false);VFXRust_I.SetActive(false);
             break; 
             case 2:
-            GameManager.instance.RestoreS(); rustState = false;
+            GameManager.instance.RestoreRustS(); rustState = false; VFXRust.SetActive(false);VFXRust_I.SetActive(false);
             break;
         }}
     }
@@ -621,37 +630,42 @@ private void HandleComboAttackS()
 
     #region Stato Stun
     public void StunLoop(){if(!stunState){Anm.ClearAnm(); Anm.PlayAnimationLoop(StunAnimationName); 
-    VFXStun.SetActive(true); stunState = true; isRun = false; Invoke("StunRestored", TimeStun);}}
+    VFXStun.SetActive(true); VFXStun_I.SetActive(false); stunState = true; isRun = false; Invoke("StunRestored", TimeStun);}}
     private void StunRestored()
     {
         if(stunState){
         switch (kindCh)
         {
             case 0:
-            GameManager.instance.RestoreStunF(); stunState = false;
+            GameManager.instance.RestoreStunF(); stunState = false; VFXStun.SetActive(false);VFXStun_I.SetActive(false);
             break;
             case 1:
-            GameManager.instance.RestoreStunK(); stunState = false;
+            GameManager.instance.RestoreStunK(); stunState = false; VFXStun.SetActive(false);VFXStun_I.SetActive(false);
             break; 
             case 2:
-            GameManager.instance.RestoreStunS(); stunState = false;
+            GameManager.instance.RestoreStunS(); stunState = false; VFXStun.SetActive(false);VFXStun_I.SetActive(false);
             break;
         }
-        VFXStun.SetActive(false); IDAction = 1; 
+        IDAction = 1; 
     }}
     #endregion
 
     #region Stato Sleep
     public void Sleep(){if(!sleepState){ Anm.ClearAnm(); 
-    Anm.PlayAnimationLoop(SleepAnimationName); VFXSleep.SetActive(true); sleepState = true; isRun = false;}}
-    public void SleepRestored(){ VFXSleep.SetActive(false);  sleepState = false; IDAction = 1;}
+    Anm.PlayAnimationLoop(SleepAnimationName); VFXSleep.SetActive(true); VFXSleep_I.SetActive(true);sleepState = true; isRun = false;}}
+    public void SleepRestored(){ VFXSleep.SetActive(false); VFXSleep_I.SetActive(false); sleepState = false; IDAction = 1;}
     #endregion
 
     #region Death
-    public void Death(){Anm.ClearAnm(); Anm.PlayAnimationLoop(DieAnimationName); deathState = true; isRun = false; IDAction = 4; }
+    public void Death(){Anm.ClearAnm(); Anm.PlayAnimationLoop(DieAnimationName); deathState = true; isRun = false;}
     public void RestoreDeath(){Anm.ClearAnm(); Anm.PlayAnimationLoop(IdleBAnimationName); deathState = false; IDAction = 1;}
     #endregion
-    public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false); VFXRust.SetActive(false);}
+    public void ReCol(){Anm.ResetColor();}
+    
+    #region Win
+    public void WinFunc(){Anm.ClearAnm(); Anm.PlayAnimationLoop(WinAnimationName);  isRun = false;}
+    public void RestoreWin(){Anm.ClearAnm(); Anm.PlayAnimationLoop(IdleAnimationName); IDAction = 0;}
+    #endregion
   
     #region Move
     

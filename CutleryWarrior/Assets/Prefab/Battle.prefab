@@ -89602,7 +89602,7 @@ MonoBehaviour:
   timeSleep: 3
   WaitAtk: 1
   moveSpeed: 5
-  attackRange: 5
+  attackRange: 3
   defense: 2
   attackPauseDuration: 1
   DieB: 0
@@ -90911,7 +90911,7 @@ MonoBehaviour:
   timeSleep: 3
   WaitAtk: 3
   moveSpeed: 3
-  attackRange: 5
+  attackRange: 3
   defense: 2
   defenseSpell: 10
   attackPauseDuration: 1

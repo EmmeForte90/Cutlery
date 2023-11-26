@@ -45,9 +45,13 @@ public class CharacterFollow : MonoBehaviour
     private float danno_subito;
     [Header("VFX")]
     public GameObject VFXPoison;
+    public GameObject VFXPoison_I;
     public GameObject VFXRust;
+    public GameObject VFXRust_I;
     public GameObject VFXSleep;
+    public GameObject VFXSleep_I;
     public GameObject VFXStun;
+    public GameObject VFXStun_I;
     public GameObject VFXHurt;
     public GameObject VFXHhitShield;
     private bool poisonState = false;
@@ -71,6 +75,7 @@ public class CharacterFollow : MonoBehaviour
     [SpineAnimation][SerializeField]  string StunAnimationName;
     [SpineAnimation][SerializeField]  string SleepAnimationName;
     [SpineAnimation][SerializeField]  string DieAnimationName;
+    [SpineAnimation][SerializeField]  string WinAnimationName;
     [Header("Battle")]
     public int attackPauseDuration = 1;
     public float attackRange = 3f;
@@ -274,6 +279,9 @@ public class CharacterFollow : MonoBehaviour
             case 6:
             Death();
             break;
+            case 7:
+            WinFunc();
+            break;
         }
     }
 #endregion
@@ -305,6 +313,9 @@ public class CharacterFollow : MonoBehaviour
             case 6:
             Death();
             break;
+            case 7:
+            WinFunc();
+            break;
         }
     }
 #endregion
@@ -335,6 +346,9 @@ public class CharacterFollow : MonoBehaviour
             break;
             case 6:
             Death();
+            break;
+            case 7:
+            WinFunc();
             break;
         }
     }
@@ -511,13 +525,17 @@ public class CharacterFollow : MonoBehaviour
     }
     }
     #region Death
-    public void Death(){Anm.PlayAnimationLoop(DieAnimationName);}
+    public void Death(){Anm.ClearAnm(); Anm.PlayAnimationLoop(DieAnimationName);}
     public void RestoreDeath(){order = 0; Anm.PlayAnimationLoop(IdleBAnimationName);}
+    #endregion
+     #region Win
+    public void WinFunc(){Anm.ClearAnm(); Anm.PlayAnimationLoop(WinAnimationName);}
+    public void RestoreWin(){Anm.ClearAnm(); Anm.PlayAnimationLoop(IdleAnimationName);  IDAction=0; order = 0;}
     #endregion
 
 
      #region Stato Veleno
-    public void Poison(){Anm.ChangeColorP(); VFXPoison.SetActive(true); poisonState = true;} 
+    public void Poison(){Anm.ChangeColorP(); VFXPoison.SetActive(true);VFXPoison_I.SetActive(true); poisonState = true;} 
     private IEnumerator Poi()
     {
         yield return new WaitForSeconds(TimePoison);
@@ -525,19 +543,19 @@ public class CharacterFollow : MonoBehaviour
         switch (kindCh)
         {
             case 0:
-            GameManager.instance.RestoreF(); poisonState = false;
+            GameManager.instance.RestoreF(); poisonState = false;VFXPoison.SetActive(false);VFXPoison_I.SetActive(false);
             break;
             case 1:
-            GameManager.instance.RestoreK(); poisonState = false;
+            GameManager.instance.RestoreK(); poisonState = false;VFXPoison.SetActive(false);VFXPoison_I.SetActive(false);
             break; 
             case 2:
-            GameManager.instance.RestoreS(); poisonState = false;
+            GameManager.instance.RestoreS(); poisonState = false;VFXPoison.SetActive(false);VFXPoison_I.SetActive(false);
             break;
         }}
     }
     #endregion
     #region Stato Rust
-    public void Rust(){Anm.ChangeColorR(); VFXRust.SetActive(true); rustState = true;}
+    public void Rust(){Anm.ChangeColorR(); VFXRust.SetActive(true);VFXRust_I.SetActive(true); rustState = true;}
  
     private IEnumerator Rus()
     {
@@ -546,32 +564,34 @@ public class CharacterFollow : MonoBehaviour
         switch (kindCh)
         {
             case 0:
-            GameManager.instance.RestoreF(); rustState = false;
+            GameManager.instance.RestoreF(); rustState = false;VFXRust.SetActive(false);VFXRust_I.SetActive(false);
             break;
             case 1:
-            GameManager.instance.RestoreK(); rustState = false;
+            GameManager.instance.RestoreK(); rustState = false;VFXRust.SetActive(false);VFXRust_I.SetActive(false);
             break; 
             case 2:
-            GameManager.instance.RestoreS(); rustState = false;
+            GameManager.instance.RestoreS(); rustState = false;VFXRust.SetActive(false);VFXRust_I.SetActive(false);
             break;
         }}
     }
     #endregion
 
     #region Stato Stun
-    public void StunLoop(){Anm.ClearAnm(); Anm.PlayAnimationLoop(StunAnimationName); VFXStun.SetActive(true);}
+    public void StunLoop(){Anm.ClearAnm(); Anm.PlayAnimationLoop(StunAnimationName); 
+    VFXStun.SetActive(true);VFXStun_I.SetActive(true);}
     private IEnumerator StunRestored()
     {
         yield return new WaitForSeconds(TimeStun);
-        VFXStun.SetActive(false); order = 0;
+        VFXStun.SetActive(false);VFXStun_I.SetActive(false); order = 0;
     }
     #endregion
 
     #region Stato Sleep
-    public void Sleep(){Anm.ClearAnm(); Anm.PlayAnimationLoop(SleepAnimationName); VFXSleep.SetActive(true); sleepState = true;}
-    public void SleepRestored(){ VFXSleep.SetActive(false); order = 0; sleepState = false; }
+    public void Sleep(){Anm.ClearAnm(); Anm.PlayAnimationLoop(SleepAnimationName); 
+    VFXSleep.SetActive(true); VFXSleep_I.SetActive(true);sleepState = true;}
+    public void SleepRestored(){ VFXSleep.SetActive(false);VFXSleep_I.SetActive(false); order = 0; sleepState = false; }
     #endregion
-    public void ReCol(){Anm.ResetColor(); VFXPoison.SetActive(false); VFXRust.SetActive(false);}
+    public void ReCol(){Anm.ResetColor();}
 
 #if(UNITY_EDITOR)
 #region Gizmos
