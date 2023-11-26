@@ -29,5 +29,16 @@ public class UpdatePreviewSkill : MonoBehaviour
         }
         else{infoPanel.SetActive(false);}
     }
+    public void RageUpdateInfoPanel(Skill itemInfo)
+    {
+        if (itemInfo != null)
+        {
+            infoPanel.SetActive(true);
+            nameText.text = itemInfo.itemName;
+            DesText.text = itemInfo.itemDes;
+            icon.sprite = itemInfo.SkillIcon;
+        }
+        else{infoPanel.SetActive(false);}
+    }
     public void ClosePanel(){infoPanel.SetActive(false);}
 }

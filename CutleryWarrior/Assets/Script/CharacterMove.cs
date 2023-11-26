@@ -663,7 +663,7 @@ private void HandleComboAttackS()
     public void ReCol(){Anm.ResetColor();}
     
     #region Win
-    public void WinFunc(){Anm.ClearAnm(); Anm.PlayAnimationLoop(WinAnimationName);  isRun = false;}
+    public void WinFunc(){Anm.PlayAnimationLoop(WinAnimationName);}
     public void RestoreWin(){Anm.ClearAnm(); Anm.PlayAnimationLoop(IdleAnimationName); IDAction = 0;}
     #endregion
   

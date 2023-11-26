@@ -94,7 +94,7 @@ public class ForkSemple : MonoBehaviour
         N_Target = GameManager.instance.N_Target;
         N__Shoot = N_SHMAX;
     }
-    private void Choise()
+    /*private void Choise()
     {
         // Genera un numero casuale tra 1 e 3
         if(GameManager.instance.F_Unlock &&
@@ -109,8 +109,20 @@ public class ForkSemple : MonoBehaviour
         !GameManager.instance.S_Unlock &&
         !GameManager.instance.K_Unlock){
         result = 0;}
-        //Debug.Log("Numero casuale: " + result);
-        //Debug.Log(ID + "ha Preso" + result);
+    }*/
+    private void Choise()
+    {
+        // Genera un numero casuale tra 1 e 3
+        int randomNumber = Random.Range(1, N_Target);
+        result = randomNumber;
+        //
+         int randomNumberPoint = Random.Range(1, 2);
+        resultPoint = Mathf.RoundToInt(randomNumberPoint);
+        Target();
+    }
+
+    public void Target()
+    {
         switch(result)
         {
             case 1:
@@ -243,7 +255,6 @@ public class ForkSemple : MonoBehaviour
     {
         FacePlayer();
         isAttacking = true;
-        FacePlayer();
         Anm.PlayAnimation(Atk1AnimationName);
         //Debug.Log("Attacco!");
         StartCoroutine(AttackPause());

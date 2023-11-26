@@ -302,7 +302,7 @@ IEnumerator ItemLunch()
     isItemLaunched = true;
     GameManager.instance.ChCanM();
     GameManager.instance.NotTouchOption = false;
-    GameManager.instance.StopWin();
+    GameManager.instance.EndSkill();
 }
 
 IEnumerator SkillLunch()
@@ -330,7 +330,7 @@ IEnumerator SkillLunch()
     isSkillLaunched = true;
     GameManager.instance.ChCanM();
     GameManager.instance.NotTouchOption = false;
-    GameManager.instance.StopWin();
+    GameManager.instance.EndSkill();
 }
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void CamSkill(){vCam.Follow = RPoint.transform;}

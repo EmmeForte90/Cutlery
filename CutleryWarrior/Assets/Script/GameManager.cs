@@ -798,16 +798,67 @@ public class GameManager : MonoBehaviour
     
     public void PoseWin()
     {
-        if(F_Unlock){ch_FAc.order=7;ch_F.IDAction=5;}
+        RecognizeCharacters();
+        if(F_Unlock){Manager_F.SwitchScriptsWin();}
+        if(S_Unlock){Manager_S.SwitchScriptsWin();}
+        if(K_Unlock){Manager_K.SwitchScriptsWin();}
+        /*if(F_Unlock){ch_FAc.order=7;ch_F.IDAction=5;}
         if(K_Unlock){ch_KAc.order=7;ch_K.IDAction=5;}
-        if(S_Unlock){ch_SAc.order=7;ch_S.IDAction=5;}
+        if(S_Unlock){ch_SAc.order=7;ch_S.IDAction=5;}*/
     }
     public void StopWin()
     {
         RecognizeCharacters();
-        if(F_Unlock){ch_F.RestoreWin();ch_FAc.RestoreWin();ch_F.Stop();ch_F.ReCol();ch_FAc.ReCol();}
+        /*if(F_Unlock){ch_F.RestoreWin();ch_FAc.RestoreWin();ch_F.Stop();ch_F.ReCol();ch_FAc.ReCol();}
         if(K_Unlock){ch_K.RestoreWin();ch_KAc.RestoreWin();ch_K.Stop();ch_K.ReCol();ch_KAc.ReCol();}
-        if(S_Unlock){ch_S.RestoreWin();ch_SAc.RestoreWin();ch_S.Stop();ch_S.ReCol();ch_SAc.ReCol();}
+        if(S_Unlock){ch_S.RestoreWin();ch_SAc.RestoreWin();ch_S.Stop();ch_S.ReCol();ch_SAc.ReCol();}*/
+        RecognizeCharacters();
+        switch(CharacterID)
+        {
+            case 1:
+            if(F_Unlock){Manager_F.SwitchScriptsPlayer();}
+            if(K_Unlock){Manager_K.SwitchScriptsActor();}
+            if(S_Unlock){Manager_S.SwitchScriptsActor();}
+            break;
+            case 2:
+            if(F_Unlock){Manager_F.SwitchScriptsActor();}
+            if(K_Unlock){Manager_K.SwitchScriptsPlayer();}
+            if(S_Unlock){Manager_S.SwitchScriptsActor();}
+            break;
+            case 3:
+            if(F_Unlock){Manager_F.SwitchScriptsActor();}
+            if(K_Unlock){Manager_K.SwitchScriptsActor();}
+            if(S_Unlock){Manager_S.SwitchScriptsPlayer();} 
+            break;
+        }
+       if(F_Unlock){ch_F.Idle();ch_F.Stop();ch_F.ReCol();ch_FAc.ReCol();ch_FAc.Idle();}
+       if(S_Unlock){ch_S.Idle();ch_S.Stop();ch_S.ReCol();ch_SAc.ReCol();ch_SAc.Idle();}
+       if(K_Unlock){ch_K.Idle();ch_K.Stop();ch_K.ReCol();ch_KAc.ReCol();ch_KAc.Idle();}
+    }
+    public void EndSkill()
+    {
+        RecognizeCharacters();
+        switch(CharacterID)
+        {
+            case 1:
+            if(F_Unlock){Manager_F.SwitchScriptsPlayer();}
+            if(K_Unlock){Manager_K.SwitchScriptsActor();}
+            if(S_Unlock){Manager_S.SwitchScriptsActor();}
+            break;
+            case 2:
+            if(F_Unlock){Manager_F.SwitchScriptsActor();}
+            if(K_Unlock){Manager_K.SwitchScriptsPlayer();}
+            if(S_Unlock){Manager_S.SwitchScriptsActor();}
+            break;
+            case 3:
+            if(F_Unlock){Manager_F.SwitchScriptsActor();}
+            if(K_Unlock){Manager_K.SwitchScriptsActor();}
+            if(S_Unlock){Manager_S.SwitchScriptsPlayer();} 
+            break;
+        }
+       if(F_Unlock){ch_F.Idle();ch_F.Stop();ch_F.ReCol();ch_FAc.ReCol();ch_FAc.Idle();}
+       if(S_Unlock){ch_S.Idle();ch_S.Stop();ch_S.ReCol();ch_SAc.ReCol();ch_SAc.Idle();}
+       if(K_Unlock){ch_K.Idle();ch_K.Stop();ch_K.ReCol();ch_KAc.ReCol();ch_KAc.Idle();}
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region Death

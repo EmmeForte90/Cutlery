@@ -357,6 +357,7 @@ public class ScriptTestBattle : MonoBehaviour
 
     public void Win()
     {
+        
         EnmF[0].currentHealth =  0;
         EnmS[0].currentHealth =  0;
         EnmK[0].currentHealth =  0;

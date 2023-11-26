@@ -588,9 +588,9 @@ IEnumerator EndBattle()
     GameManager.instance.Exploration();
     GameManager.instance.Change();
     GameManager.instance.RecalculateCharacter();
+    yield return new WaitForSeconds(2f);
     if(isTimeline){ResetCamera();}
     else if(!isTimeline){SpawnB();}
-    GameManager.instance.FadeOut();
     }
 
     public  void ResetCamera()
@@ -627,6 +627,7 @@ IEnumerator EndBattle()
     GameManager.instance.ChCanM();
     GameManager.instance.ActiveMinimap();
     AudioManager.instance.CrossFadeINAudio(WhatMusicAB);
+    GameManager.instance.FadeOut();
     ThisBattle.SetActive(false);
     }
     //public void EnemiesActive(int ID){Enemies[ID].SetActive(false);}
