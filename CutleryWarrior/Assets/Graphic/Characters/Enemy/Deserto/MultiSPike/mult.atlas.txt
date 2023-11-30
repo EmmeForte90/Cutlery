@@ -22,8 +22,6 @@ Spalla
 bounds:1264,643,114,69
 Spalla1
 bounds:901,381,114,69
-Z
-bounds:1017,384,60,66
 maleborgefire1
 bounds:529,338,184,300
 maleborgefire2
