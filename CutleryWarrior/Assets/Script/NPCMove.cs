@@ -1,5 +1,6 @@
 using UnityEngine;
 using Spine.Unity;
+using System.Collections;
 public class NPCMove : MonoBehaviour
 {
     #region Header
@@ -27,7 +28,7 @@ public class NPCMove : MonoBehaviour
     private Transform Fork;
     private Transform Spoon;
     private Transform Knife;
-
+    private bool SoundPlay = true;
     public float gravity = 9.81f;  // Gravità personalizzata, puoi regolarla come desideri
 
     //private SwitchCharacter rotationSwitcher;
@@ -80,11 +81,13 @@ public class NPCMove : MonoBehaviour
     if ((transform.position - Player.transform.position).sqrMagnitude > agroDistance * agroDistance)
     {
         Behav = 0;
+        if(GameManager.instance.activeMinimap){GameManager.instance.AllarmMap.SetActive(false);}
     }
     else if ((transform.position - Player.transform.position).sqrMagnitude < agroDistance * agroDistance && isMonster)
     {
         Behav = 1;
-        AudioManager.instance.PlaySFX(14);
+        if(SoundPlay){StartCoroutine(PlaySound());SoundPlay = false; }
+        if(GameManager.instance.activeMinimap){GameManager.instance.AllarmMap.SetActive(true);}
     }
 
     switch (Behav)
@@ -118,6 +121,13 @@ public class NPCMove : MonoBehaviour
             break;
     }
 }
+
+    IEnumerator PlaySound()
+    {
+            yield return new WaitForSeconds(1f);
+            AudioManager.instance.PlayUFX(7);
+            SoundPlay = true; 
+    }
 
     private void Gravity()
     {
@@ -163,8 +173,12 @@ public class NPCMove : MonoBehaviour
     {
         float distanceToTarget = Vector3.Distance(transform.position, Player.transform.position);
         float currentZPosition = transform.position.z;
+
         if (Player != null && distanceToTarget > TouchDistance)
-        {transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, RunSpeed * Time.deltaTime);}
+        {
+            transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, RunSpeed * Time.deltaTime);
+            
+        }
         else if(Player != null && distanceToTarget < TouchDistance)
         {Behav = 2;}
          // Ruota il personaggio in base all'asse locale X o Z
@@ -184,6 +198,7 @@ public class NPCMove : MonoBehaviour
 private void MoveToWaypoint()
 {
     float currentZPosition = transform.position.z;
+     if(GameManager.instance.activeMinimap){GameManager.instance.AllarmMap.SetActive(false);}
 
     if (waypoints.Length > 1 && currentWaypointIndex < waypoints.Length - 1)
     {

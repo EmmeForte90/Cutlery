@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public bool StartGame = false;    
     public GameObject player;
     public GameObject Minimap;
+    public GameObject AllarmMap;
+    public bool activeMinimap = false; 
+
     public static bool GameManagerExist; 
     public Inventory Inv;
     public InventoryB InvB;
@@ -175,7 +178,7 @@ public class GameManager : MonoBehaviour
     [Header("Money")]
     [SerializeField] public int money = 0;
     [SerializeField] public TextMeshProUGUI moneyTextM;
-    public int IDPorta;   
+    public int IDPorta;  
     public float Cooldown = 1.2f; // Tempo di cooldown tra le combo in second
     public CinemachineVirtualCamera vcam; // La telecamera virtuale Cinemachine
     public static GameManager instance;
@@ -247,7 +250,7 @@ public class GameManager : MonoBehaviour
         if(S_Unlock){S_SkillW.SetActive(true);}
         else if(!S_Unlock){S_SkillW.SetActive(false);}
     }
-    public void Start(){Application.targetFrameRate = 60; Day = true;}
+    public void Start(){Application.targetFrameRate = 60; Day = true; Minimap.SetActive(false);}
     public void Update()
     {
         CharacterID = rotationSwitcher.CharacterID;
@@ -262,6 +265,11 @@ public class GameManager : MonoBehaviour
         if(!NotTouchOption){
     if(!battle){
         //Minimap.SetActive(true);
+        if (Input.GetButtonDown("Minimap") && !activeMinimap)
+        {Minimap.SetActive(true); activeMinimap = true; AudioManager.instance.PlayUFX(2);}
+        else if (Input.GetButtonDown("Minimap") && activeMinimap)
+        {Minimap.SetActive(false); activeMinimap = false; AudioManager.instance.PlayUFX(2);}
+
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
             ChStop();

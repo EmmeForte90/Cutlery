@@ -5,6 +5,7 @@ public class SaveTotem : MonoBehaviour
     public GameObject savedPosition;
     public string NameScene;
     public GameObject VFXTake;
+    public GameObject LoadVFX;
     private Transform Player;
     private Transform Fork;
     private Transform Spoon;
@@ -80,9 +81,12 @@ public class SaveTotem : MonoBehaviour
         PlayerStats.instance.NameScene = NameScene;
         PlayerStats.instance.UpdateInventorySaving();
         Save.SaveGame();
+        LoadVFX.SetActive(true);
+        Invoke("EndingLoad", 5);
         print("Hai salvato");
     }
     }
+    public void EndingLoad(){LoadVFX.SetActive(false);}
 
     /*public void Saving()
     {

@@ -16,7 +16,7 @@ public class IconFollow : MonoBehaviour
     private IEnumerator FindMinimap()
     {
         yield return new WaitForSeconds(1);
-		MinimapCam = GameObject.FindGameObjectWithTag("Minimap").transform;
+		MinimapCam = GameManager.instance.Minimap.transform;
 		Take = true;
     }
     public void Update()
