@@ -75,8 +75,7 @@ public class PickUpItem : MonoBehaviour
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
         GameManager.instance.Inv.itemsArea(Id);
         if(isStartEquip)
-        {if (TypesE == 1)
-        {GameManager.instance.Inv.AssignWeapon(Equip);}
+        {if (TypesE == 1){GameManager.instance.Inv.AssignWeapon(Equip);}
         else if (TypesE == 0){GameManager.instance.Inv.AssignDress(Equip);} 
         if(GameManager.instance.F_Unlock){
         PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
