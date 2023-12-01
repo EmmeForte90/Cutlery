@@ -76,7 +76,7 @@ public class MercanteComb : MonoBehaviour
     private Spine.AnimationState _spineAnimationState;
     private Spine.Skeleton _skeleton;
     Spine.EventData eventData;
-    private Inventory Inv;
+    private KeyManager Inv;
     private EquipM_F M_F;
     private EquipM_K M_K;
     private EquipM_S M_S;
@@ -100,9 +100,9 @@ public class MercanteComb : MonoBehaviour
     {StartCoroutine(List());}
     IEnumerator List(){
     yield return new WaitForSeconds(1); 
-    Inv =  GameManager.instance.Inv.GetComponent<Inventory>();
-    itemList =  GameManager.instance.Inv.GetComponent<Inventory>().itemList; //ottieni il riferimento alla virtual camera di Cinemachine
-    quantityList =  GameManager.instance.Inv.GetComponent<Inventory>().quantityList;
+    Inv =  GameManager.instance.KM.GetComponent<KeyManager>();
+    itemList =  GameManager.instance.KM.GetComponent<KeyManager>().itemList; //ottieni il riferimento alla virtual camera di Cinemachine
+    quantityList =  GameManager.instance.KM.GetComponent<KeyManager>().quantityList;
     //
     M_Q = GameManager.instance.QuM.GetComponent<QuestsManager>();    
     Q_List = GameManager.instance.QuM.GetComponent<QuestsManager>().itemList;    
@@ -138,6 +138,7 @@ public class MercanteComb : MonoBehaviour
         {
             GameManager.instance.ChInteract();
             GameManager.instance.Interact = true;
+            GameManager.instance.NotTouchOption = true;
             dialogueIndex = 0;
             StartCoroutine(ShowDialogue());
         }
@@ -154,6 +155,7 @@ public class MercanteComb : MonoBehaviour
             _isDialogueActive = false;
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             Talk = false;
+            GameManager.instance.NotTouchOption = false;
             EndDia = false;
         }
     }
@@ -518,6 +520,7 @@ public class MercanteComb : MonoBehaviour
     {
         if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
         {
+            GameManager.instance.NotTouchOption = false;
             button.gameObject.SetActive(false); // Initially hide the dialogue text
             _isInTrigger = false;
             StopCoroutine(ShowDialogue());

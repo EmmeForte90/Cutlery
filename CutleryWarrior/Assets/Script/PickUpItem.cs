@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 public class PickUpItem : MonoBehaviour
 {
@@ -24,6 +22,13 @@ public class PickUpItem : MonoBehaviour
     [Tooltip("Attiva la skill su numerazione")]
     [Range(0, 9)]
     public int IdSkill;
+    [Header("EquipStart")]
+    public bool isStartEquip = false;
+    public Weapon Equip;
+    [Range(0, 1)]
+        [Tooltip("0, Dress - 1, Weapon")]
+
+    public int TypesE;
 
     #endregion
     public void Awake(){KindItem = specificItem.KindItem; Id = specificItem.ID;}
@@ -31,8 +36,8 @@ public class PickUpItem : MonoBehaviour
     public void Update()
     {
         if(IsQuest){
-        if(QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(true);} 
-        else if(!QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(false);}
+        if(GameManager.instance.activeMinimap){if(QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(true);} 
+        else if(!QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(false);}}
         }else if(IsSkill)
         {
             
@@ -68,7 +73,23 @@ public class PickUpItem : MonoBehaviour
         AddSpecificItem();
         if(!StartGame){Inventory.instance.Reward(specificItem, specificQuant);}
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
-        Inventory.instance.itemsArea(Id);
+        GameManager.instance.Inv.itemsArea(Id);
+        if(isStartEquip)
+        {if (TypesE == 1)
+        {GameManager.instance.Inv.AssignWeapon(Equip);}
+        else if (TypesE == 0){GameManager.instance.Inv.AssignDress(Equip);} 
+        if(GameManager.instance.F_Unlock){
+        PlayerStats.instance.F_curHP = PlayerStats.instance.F_HP;
+        PlayerStats.instance.F_curMP = PlayerStats.instance.F_MP;}
+        //
+        if(GameManager.instance.K_Unlock){
+        PlayerStats.instance.K_curHP = PlayerStats.instance.K_HP;
+        PlayerStats.instance.K_curMP = PlayerStats.instance.K_MP;}
+        //
+        if(GameManager.instance.S_Unlock){
+        PlayerStats.instance.S_curHP = PlayerStats.instance.S_HP;
+        PlayerStats.instance.S_curMP = PlayerStats.instance.S_MP;}
+        }
         takeitem = false;
         }
     }
@@ -77,8 +98,8 @@ public class PickUpItem : MonoBehaviour
         switch(KindItem)
         {
             case 0:
-            Inventory.instance.AddItem(specificItem, specificQuant);  
-            InventoryB.instance.AddItem(specificItem, specificQuant);
+            GameManager.instance.Inv.AddItem(specificItem, specificQuant);  
+            GameManager.instance.InvB.AddItem(specificItem, specificQuant);
             break;
             case 1:
             QuestsManager.instance.AddItem(specificItem, specificQuant);            

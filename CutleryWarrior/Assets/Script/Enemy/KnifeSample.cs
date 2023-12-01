@@ -53,11 +53,14 @@ public class KnifeSample : MonoBehaviour
     public int timeSleep = 3;
 
     [Header("Move")]
+    [Tooltip("Il tempo dedicato all'attacco")]
     public int WaitAtk = 1;
+    [Tooltip("Il tempo che deve aspettare per il prossimo attacco")]
+    public int attackPauseDuration = 1;
+
     public float moveSpeed = 3f;
     public float attackRange = 1.5f;
     public int defense = 2;
-    public int attackPauseDuration = 1;
     private bool isAttacking = false;   
     public bool DieB = false;
     public DuelManager DM;

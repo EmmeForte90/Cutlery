@@ -30,15 +30,17 @@ public class Item : ScriptableObject
     public int MaxDurationItem;
 
     private Inventory Inv;
+    private KeyManager KM;
+
     #endregion
     public void Use(int whatDo)
     {if(whatDo == 0)//Lo usa
-    {Inv = GameObject.FindWithTag("Manager").GetComponent<Inventory>();
+    {Inv = GameManager.instance.Inv.GetComponent<Inventory>();
     Inv.RemoveItem(this, 1);}
     else if(whatDo == 1)//Lo vende
     {GameManager.instance.money += price;
-    Inv = GameObject.FindWithTag("Manager").GetComponent<Inventory>();
-    Inv.RemoveItem(this, 1);
+    KM = GameManager.instance.KM.GetComponent<KeyManager>();
+    KM.RemoveItem(this, 1);
      //Debug.Log("Hai Venduto!");
     }}
     public virtual void Equip()

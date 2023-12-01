@@ -12,16 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56cdccba5a6f6f9419ac405c1abccdff, type: 3}
   m_Name: Stalactite
   m_EditorClassIdentifier: 
+  IdItem: 
   itemName: Stalactites
   NameSkin: 
   itemDes: An upward slash so powerful that it causes stalactites to erupt towards
     the enemy.
   ID: 6
-  KindItem: 0
+  KindItem: 1
+  WhoConsumable: 0
   price: 0
   Stackable: 0
+  itemData:
+    itemName: 
+    NameSkin: 
+    itemDes: 
+    ID: 0
+    KindItem: 0
+    WhoConsumable: 0
+    price: 0
+    Stackable: 0
+    itemIcon: {fileID: 0}
+    TypesE: 0
+    TimeItem: 0
+    MaxDurationItem: 0
+    item: {fileID: 0}
+    quantity: 0
   itemIcon: {fileID: 21300000, guid: 9508df88f5a2c3b42a0d79378712b778, type: 3}
   TypesE: 0
+  TimeItem: 0
+  MaxDurationItem: 0
   SkillIcon: {fileID: 21300000, guid: 9cec3df08c97ae740b6609bad71752a9, type: 3}
   isRage: 0
   IsDirectional: 0

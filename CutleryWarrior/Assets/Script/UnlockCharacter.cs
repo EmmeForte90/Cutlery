@@ -7,6 +7,8 @@ public class UnlockCharacter : MonoBehaviour
     public GameObject This;
     public Item Weapon;
     public Item Armor;
+    public Weapon Weapon_B;
+    public Weapon Armor_B;
     public int specificQuant;
     public bool isTest = false;
     public bool Fork;
@@ -20,48 +22,66 @@ public class UnlockCharacter : MonoBehaviour
     if(Spoon){GameManager.instance.SpoonUnlock(); 
     PlayerStats.instance.ResetStatS();
     EquipM_S.instance.AddItem(Weapon, specificQuant);
-    EquipM_S.instance.AddItem(Armor, specificQuant);} 
+    EquipM_S.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);}
     else if(Knife)
     {GameManager.instance.KnifeUnlock();
     PlayerStats.instance.ResetStatK();
     EquipM_K.instance.AddItem(Weapon, specificQuant);
-    EquipM_K.instance.AddItem(Armor, specificQuant);}
+    EquipM_K.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);}
     else if(Fork){GameManager.instance.ForkUnlock();
     PlayerStats.instance.ResetStatF();
     EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);}
+    EquipM_F.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);}
     }
     else if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
     {
     if(Spoon){GameManager.instance.SpoonUnlock(); 
     PlayerStats.instance.ResetStatS();
     EquipM_S.instance.AddItem(Weapon, specificQuant);
-    EquipM_S.instance.AddItem(Armor, specificQuant);} 
+    EquipM_S.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);} 
     else if(Knife)
     {GameManager.instance.KnifeUnlock();
     PlayerStats.instance.ResetStatK();
     EquipM_K.instance.AddItem(Weapon, specificQuant);
-    EquipM_K.instance.AddItem(Armor, specificQuant);}
+    EquipM_K.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);}
     else if(Fork){GameManager.instance.ForkUnlock();
     PlayerStats.instance.ResetStatF();
     EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);}
+    EquipM_F.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);}
     }
     else if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
     {
     if(Spoon){GameManager.instance.SpoonUnlock(); 
     PlayerStats.instance.ResetStatS();
     EquipM_S.instance.AddItem(Weapon, specificQuant);
-    EquipM_S.instance.AddItem(Armor, specificQuant);} 
+    EquipM_S.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);} 
     else if(Knife)
     {GameManager.instance.KnifeUnlock();
     PlayerStats.instance.ResetStatK();
     EquipM_K.instance.AddItem(Weapon, specificQuant);
-    EquipM_K.instance.AddItem(Armor, specificQuant);}
+    EquipM_K.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);}
     else if(Fork){GameManager.instance.ForkUnlock();
     PlayerStats.instance.ResetStatF();
     EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);}
+    EquipM_F.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);}
     }
     SwitchCharacter.instance.TakeCharacters();
     //print("SwitchCharacter.instance.TakeCharacters");

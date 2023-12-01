@@ -103,10 +103,11 @@ public class Inventory : MonoBehaviour
             PlayerStats.instance.F_paralysisResistance += Item.Res_Stun + PlayerStats.instance.F_paralysisResistanceCont;
             PlayerStats.instance.F_sleepResistance += Item.Res_Sleep + PlayerStats.instance.F_sleepResistanceCont;
             PlayerStats.instance.F_rustResistance += Item.Res_Rust + PlayerStats.instance.F_rustResistanceCont;
-            Puppets_F.DressSkin = Item.NameSkin;
+            if(GameManager.instance.stopInput)
+            {Puppets_F.DressSkin = Item.NameSkin;
             //Puppets_F.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_F.UpdateCharacterSkinUI(Puppets_F.DressSkin);
-            Puppets_F.UpdateCombinedSkinUI(); 
+            Puppets_F.UpdateCombinedSkinUI();}
     break;
     case 2:
             Skin_K.DressSkin = Item.NameSkin;
@@ -131,10 +132,12 @@ public class Inventory : MonoBehaviour
             PlayerStats.instance.K_paralysisResistance += Item.Res_Stun + PlayerStats.instance.K_paralysisResistanceCont;
             PlayerStats.instance.K_sleepResistance += Item.Res_Sleep + PlayerStats.instance.K_sleepResistanceCont;
             PlayerStats.instance.K_rustResistance += Item.Res_Rust + PlayerStats.instance.K_rustResistanceCont;
+            if(GameManager.instance.stopInput)
+            {
             Puppets_K.DressSkin = Item.NameSkin;
             //Puppets_K.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_K.UpdateCharacterSkinUI(Puppets_K.DressSkin);
-            Puppets_K.UpdateCombinedSkinUI(); 
+            Puppets_K.UpdateCombinedSkinUI();} 
     break;
     case 3:
             Skin_S.DressSkin = Item.NameSkin;
@@ -159,10 +162,12 @@ public class Inventory : MonoBehaviour
             PlayerStats.instance.S_paralysisResistance += Item.Res_Stun + PlayerStats.instance.S_paralysisResistanceCont;
             PlayerStats.instance.S_sleepResistance += Item.Res_Sleep + PlayerStats.instance.S_sleepResistanceCont;
             PlayerStats.instance.S_rustResistance += Item.Res_Rust + PlayerStats.instance.S_rustResistanceCont;
+            if(GameManager.instance.stopInput)
+            {
             Puppets_S.DressSkin = Item.NameSkin;
             Puppets_S.UpdateCharacterSkinUI(Puppets_S.DressSkin);
             //Puppets_S.UpdateCharacterSkinUI(Item.NameSkin);
-            Puppets_S.UpdateCombinedSkinUI(); 
+            Puppets_S.UpdateCombinedSkinUI();} 
     break;  
     }          
 }
@@ -180,10 +185,12 @@ public void AssignWeapon(Weapon Item)
 		    Skin_F.UpdateCombinedSkin();
             PlayerStats.instance.F_attack = 0; 
             PlayerStats.instance.F_attack += Item.weaponDamage;
+            if(GameManager.instance.stopInput)
+            {
             Puppets_F.Weapon = Item.NameSkin;
             Puppets_F.UpdateCharacterSkinUI(Puppets_F.Weapon);
             //Puppets_F.UpdateCharacterSkinUI(Item.NameSkin);
-            Puppets_F.UpdateCombinedSkinUI();  
+            Puppets_F.UpdateCombinedSkinUI();}
     break;
     case 2:
             Skin_K.Weapon = Item.NameSkin;
@@ -195,10 +202,12 @@ public void AssignWeapon(Weapon Item)
 		    Skin_K.UpdateCombinedSkin(); 
             PlayerStats.instance.K_attack = 0;
             PlayerStats.instance.K_attack += Item.weaponDamage;
+            if(GameManager.instance.stopInput)
+            {
             Puppets_K.Weapon = Item.NameSkin;
             Puppets_K.UpdateCharacterSkinUI(Puppets_K.Weapon);
             //Puppets_K.UpdateCharacterSkinUI(Item.NameSkin);
-            Puppets_K.UpdateCombinedSkinUI();   
+            Puppets_K.UpdateCombinedSkinUI();}
     break;
     case 3:
             Skin_S.Weapon = Item.NameSkin;
@@ -210,10 +219,12 @@ public void AssignWeapon(Weapon Item)
 		    Skin_S.UpdateCombinedSkin(); 
             PlayerStats.instance.S_attack = 0; 
             PlayerStats.instance.S_attack += Item.weaponDamage;
+            if(GameManager.instance.stopInput)
+            {
             Puppets_S.Weapon = Item.NameSkin;
             Puppets_S.UpdateCharacterSkinUI(Puppets_S.Weapon);
             //Puppets_S.UpdateCharacterSkinUI(Item.NameSkin);
-            Puppets_S.UpdateCombinedSkinUI();   
+            Puppets_S.UpdateCombinedSkinUI();}
     break;     
 }}
 #endregion
