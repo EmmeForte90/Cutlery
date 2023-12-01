@@ -807,6 +807,7 @@ public class GameManager : MonoBehaviour
         if(S_Unlock){Manager_S.SwitchScriptsCharge();}
         if(K_Unlock){Manager_K.SwitchScriptsCharge();}
     }
+
     public void Die()
     {
         RecognizeCharacters();
@@ -827,10 +828,6 @@ public class GameManager : MonoBehaviour
     }
     public void StopWin()
     {
-        RecognizeCharacters();
-        /*if(F_Unlock){ch_F.RestoreWin();ch_FAc.RestoreWin();ch_F.Stop();ch_F.ReCol();ch_FAc.ReCol();}
-        if(K_Unlock){ch_K.RestoreWin();ch_KAc.RestoreWin();ch_K.Stop();ch_K.ReCol();ch_KAc.ReCol();}
-        if(S_Unlock){ch_S.RestoreWin();ch_SAc.RestoreWin();ch_S.Stop();ch_S.ReCol();ch_SAc.ReCol();}*/
         RecognizeCharacters();
         switch(CharacterID)
         {
@@ -878,7 +875,7 @@ public class GameManager : MonoBehaviour
        if(F_Unlock){ch_F.Idle();ch_F.Stop();ch_F.ReCol();ch_FAc.ReCol();ch_FAc.Idle();}
        if(S_Unlock){ch_S.Idle();ch_S.Stop();ch_S.ReCol();ch_SAc.ReCol();ch_SAc.Idle();}
        if(K_Unlock){ch_K.Idle();ch_K.Stop();ch_K.ReCol();ch_KAc.ReCol();ch_KAc.Idle();}
-    }
+    }     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region Death
     public void PoseDeathF(){if(F_Unlock){RecognizeCharacters();ch_FAc.order=6;ch_F.IDAction=4;}}

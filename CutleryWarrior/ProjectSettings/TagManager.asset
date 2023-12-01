@@ -36,6 +36,7 @@ TagManager:
   - Data
   - Bomb
   - Save
+  - CrushENM
   layers:
   - Default
   - TransparentFX

@@ -119,6 +119,7 @@ public class EditoAnimationM : Editor
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("VfxEnmSlash"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("Bullet"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("VfxCrush"));
             // Add other fields as needed
         }
         // Apply changes to serialized object

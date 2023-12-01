@@ -45,6 +45,7 @@ public class AnimationManager : MonoBehaviour
 
     [Header("Enemy")]
     [HideInInspector] public GameObject VfxEnmSlash;
+    [HideInInspector] public GameObject VfxCrush;
 
     [Header("Fork")]
     private GameObject ForkActive;
@@ -141,9 +142,8 @@ public class AnimationManager : MonoBehaviour
         SlashV.gameObject.SetActive(false);
         SlashH.gameObject.SetActive(false);
         SlashB.gameObject.SetActive(false);
-        
         }
-        if(Enemy){VfxEnmSlash.gameObject.SetActive(false);}
+        if(Enemy){VfxEnmSlash.gameObject.SetActive(false);VfxCrush.gameObject.SetActive(false);}
     }
     IEnumerator StopVFX_S()
     {
@@ -310,6 +310,7 @@ public class AnimationManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     ///Enemy
     if (e.Data.Name == "atk"){AudioManager.instance.PlayUFX(0); VfxEnmSlash.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
+    if (e.Data.Name == "crash"){AudioManager.instance.PlayUFX(0); VfxCrush.gameObject.SetActive(true); StartCoroutine(StopVFX_K());}
     if (e.Data.Name == "shootEnm" && VFX){Instantiate(Bullet, BPoint.position, Bullet.transform.rotation); 
     StartCoroutine(StopVFX_FNormal()); VFX = false;}
     ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -5,6 +5,7 @@ public class ManagerCharacter : MonoBehaviour
     public CharacterFollow Actor;
     public Winanimation WinANM;
     public ChargeSkill Skill;
+    //public KnockbackController Knock;
     //public DeathAnimation Death;
     //public StunAnimation Stun;
     public int kindCH;
@@ -15,6 +16,7 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = false;
             WinANM.enabled = false;
             Skill.enabled = false;
+            //Knock.enabled = false;
            // Death.enabled = false;
             //Stun.enabled = false;
             Player.Direction();
@@ -26,6 +28,7 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = true;
             WinANM.enabled = false;
             Skill.enabled = false;
+            //Knock.enabled = false;
            // Death.enabled = false;
             // Stun.enabled = false;
             Actor.Direction();
@@ -38,6 +41,7 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = false;
             WinANM.enabled = true;
             Skill.enabled = false;
+            //Knock.enabled = false;
            // Death.enabled = false;
            //  Stun.enabled = false;
             WinANM.Direction();
@@ -49,6 +53,7 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = false;
             WinANM.enabled = false;
             Skill.enabled = true;
+            //Knock.enabled = false;
            // Death.enabled = false;
            //  Stun.enabled = false;
     }
@@ -58,6 +63,7 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = false;
             WinANM.enabled = false;
             Skill.enabled = false;
+           // Knock.enabled = false;
            // Death.enabled = true;
            // Stun.enabled = false;
     }
@@ -67,7 +73,9 @@ public class ManagerCharacter : MonoBehaviour
             Actor.enabled = false;
             WinANM.enabled = false;
             Skill.enabled = false;
+           // Knock.enabled = false;
           //  Death.enabled = false;
           //  Stun.enabled = true;
     }
+    
 }

@@ -10,6 +10,8 @@ public class AtkEnm : MonoBehaviour
     private CharacterMove S_Script;
     private CharacterFollow ch_SAc;
     public bool canATK = true;
+    public bool PowerAtk = false;
+
     public int attackDamage = 5;
     public void Awake()
     {
@@ -33,7 +35,9 @@ public class AtkEnm : MonoBehaviour
         if(GameManager.instance.F_Unlock && canATK){F_Script.TakeDamage(attackDamage); canATK = false;}
         //
         if(GameManager.instance.F_Unlock  && canATK){ch_FAc.TakeDamage(attackDamage); canATK = false;}
-        else if(GameManager.instance.F_Unlock  && canATK){ch_FAc.TakeDamage(5); canATK = false;}   
+        else if(GameManager.instance.F_Unlock  && canATK){ch_FAc.TakeDamage(5); canATK = false;} 
+        if(PowerAtk){F_Script.Knockback();}  
+        //if(PowerAtk){GameManager.instance.KnockbackF();}  
         AudioManager.instance.PlayUFX(9);
         //Debug.Log("danno +"+ attackDamage);
         StartCoroutine(StumpKTime());
@@ -45,6 +49,7 @@ public class AtkEnm : MonoBehaviour
         if(GameManager.instance.K_Unlock  && canATK){ch_KAc.TakeDamage(attackDamage); canATK = false;}
         else if(GameManager.instance.K_Unlock  && canATK){ch_KAc.TakeDamage(5); canATK = false;}        
         AudioManager.instance.PlayUFX(9);
+        //if(PowerAtk){GameManager.instance.KnockbackK();}  
         //Debug.Log("danno +"+ attackDamage);
         StartCoroutine(StumpKTime());
     }
@@ -55,6 +60,7 @@ public class AtkEnm : MonoBehaviour
         //
         if(GameManager.instance.S_Unlock  && canATK){ch_SAc.TakeDamage(attackDamage); canATK = false;}
         else if(GameManager.instance.S_Unlock && canATK){ canATK = false;}
+        //if(PowerAtk){GameManager.instance.KnockbackS();}  
         AudioManager.instance.PlayUFX(9);
         //Debug.Log("danno +"+ attackDamage);
         StartCoroutine(StumpKTime());

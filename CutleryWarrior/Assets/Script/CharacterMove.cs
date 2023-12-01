@@ -29,7 +29,6 @@ public class CharacterMove : MonoBehaviour
     private bool canAttack = true;
     public float comboCooldown = 0.5f; // Tempo di cooldown tra le combo in secondi
     public float comboCooldownK = 0.3f; // Tempo di cooldown tra le combo in secondi
-   
     private bool isAttacking = false; // Aggiunto il flag per controllare se il personaggio sta attaccando
     private bool top = true;
     private bool StopRanm = false;
@@ -39,6 +38,7 @@ public class CharacterMove : MonoBehaviour
     public float maxChargeTime = 1f; // Tempo massimo di carica
     private Vector3 moveDirection = Vector3.zero;
     public bool isDodging = false;
+    public bool isKnock = false;       
     ////////////////////////////////////////
     private CapsuleCollider capsuleCollider; // Riferimento al capsule collider
     public float expandedRadius = 3.0f; // Raggio del capsule collider quando è allargato
@@ -48,6 +48,7 @@ public class CharacterMove : MonoBehaviour
     public float dodgeDuration = 1f;
     public float cooldownTime = 0.5f;
     private bool canDodge = true;
+    public bool canKnock = true;
     private bool Stump = true;
     public bool warning = false;
     private float hor;
@@ -86,6 +87,8 @@ public class CharacterMove : MonoBehaviour
     [SpineAnimation][SerializeField]  string OpenBookAnimationName;
     [SpineAnimation][SerializeField]  string CloseBookAnimationName;
     [SpineAnimation][SerializeField]  string WinAnimationName;
+    [SpineAnimation][SerializeField]  string KnockbackAnimationName;
+    [SpineAnimation][SerializeField]  string UpKnockbackAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     public Spine.AnimationState _spineAnimationState;
     public Spine.Skeleton _skeleton;
@@ -723,5 +726,65 @@ private void HandleComboAttackS()
     public void OnCollisionExit(Collision collision)
     {if (collision.gameObject.CompareTag("Collider")){}//StopRun = false;}
     if (collision.gameObject.CompareTag("Question")){Attention = false;}}
+    public void Knockback()
+    {
+        if (!isKnock && canKnock)
+        {
+            isKnock = true;
+            GameManager.instance.NotTouchOption = true;
+            canKnock = false;
+            inputCTR = true;
+
+            moveDirection = Vector3.zero;
+
+            if (transform.localScale.x > 0f)
+            {
+                moveDirection = new Vector3(0f, 0f, -15f);
+            }
+            else if (transform.localScale.x < 0f)
+            {
+                moveDirection = new Vector3(0f, 0f, 15f);
+            }
+            else if (transform.localScale.x == 0f)
+            {
+                moveDirection = new Vector3(0f, 0f, -15f);
+            }
+
+            // Applica la forza di knockback al Rigidbody
+            //rb.AddForce(moveDirection, ForceMode.Impulse);
+            //characterController.Move(moveDirection * Time.deltaTime);
+            StartCoroutine(ApplyKnockback(moveDirection));
+
+            PlayComboAnimation(KnockbackAnimationName);
+            Invoke("StopKnock", 0.5f);
+            Invoke("ResetKnockCooldown", 2);
+        }
+    }
+     private IEnumerator ApplyKnockback(Vector3 force)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < 1)
+        {
+            characterController.Move(force * Time.deltaTime);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private void StopKnock()
+    {
+        isKnock = false;
+        PlayComboAnimation(UpKnockbackAnimationName);
+        inputCTR = true;
+    }
+
+    private void ResetKnockCooldown()
+    {
+        canKnock = true;
+        moveDirection = Vector3.zero;
+        GameManager.instance.NotTouchOption = false;
+        inputCTR = false;
+    }
     
 }

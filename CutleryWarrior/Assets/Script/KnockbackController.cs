@@ -1,17 +1,31 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Spine.Unity;
+
 
 public class KnockbackController : MonoBehaviour
 {
-    public float knockbackForce = 10f;
+    /*public float knockbackForce = 10f;
     public float knockbackDuration = 0.5f;
+    private bool stopKnock = false;
+    public AnimationManager Anm;
+    [SpineAnimation][SerializeField] string knockbackAnimationName;
+    [SpineAnimation][SerializeField] string upKnockbackAnimationName;
 
-    private Rigidbody rb;
+    private Vector3 moveDirection;
+    private CharacterController characterController;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
+        moveDirection = Vector3.zero;
+
+        if (!stopKnock)
+        {
+            ApplyKnockback(moveDirection);
+        }
+
+        StartCoroutine(EndKnock());
     }
 
     public void ApplyKnockback(Vector3 direction)
@@ -25,13 +39,37 @@ public class KnockbackController : MonoBehaviour
         // Normalizza la direzione per ottenere una forza costante
         direction.Normalize();
 
-        // Applica una forza di knockback al Rigidbody nella direzione opposta
-        rb.AddForce(-direction * knockbackForce, ForceMode.Impulse);
+        Anm.PlayAnimationLoop(knockbackAnimationName);
+
+        // Calcola la velocità di knockback
+        moveDirection = -direction * knockbackForce;
 
         // Attendi per la durata del knockback
         yield return new WaitForSeconds(knockbackDuration);
 
-        // Ripristina la posizione del personaggio
-        rb.velocity = Vector3.zero;
+        // Ripristina la velocità del personaggio
+        moveDirection = Vector3.zero;
+
+        // Ferma l'animazione di knockback
+        Anm.PlayAnimation(upKnockbackAnimationName);
+
+        stopKnock = true;
     }
+
+    private IEnumerator EndKnock()
+    {
+        yield return new WaitForSeconds(knockbackDuration + 1f);
+
+        // Ripristina lo stato di knockback
+        stopKnock = false;
+
+        // Esegui altre azioni se necessario
+        GameManager.instance.StopWin();
+    }
+
+    private void Update()
+    {
+        // Muovi il personaggio usando il Character Controller
+        characterController.Move(moveDirection * Time.deltaTime);
+    }*/
 }

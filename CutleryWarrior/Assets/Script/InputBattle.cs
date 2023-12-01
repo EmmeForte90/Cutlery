@@ -255,7 +255,7 @@ private void OnCollisionEnter(Collision collision)
     {
         StopM = true;
         Vector3 knockbackDirection = transform.position - collision.transform.position;
-        knockbackController.ApplyKnockback(knockbackDirection);
+        //knockbackController.ApplyKnockback(knockbackDirection);
     }
 }
 

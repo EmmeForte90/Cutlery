@@ -6,10 +6,26 @@ public class testin : MonoBehaviour
     private GameObject KAct;
     private GameObject SAct;  
     public SaveManager Save;
+    private CharacterMove F_Script;
+    private CharacterFollow ch_FAc;
+    private CharacterMove K_Script;
+    private CharacterFollow ch_KAc;
+    private CharacterMove S_Script;
+    private CharacterFollow ch_SAc;
     public void Start()
     {
         FAct = GameManager.instance.F_Hero;
         Save = GameObject.FindWithTag("Save").GetComponent<SaveManager>();
+      
+        if(GameManager.instance.S_Unlock){ch_SAc = GameManager.instance.S_Hero.GetComponent<CharacterFollow>();}
+        if(GameManager.instance.F_Unlock){ch_FAc = GameManager.instance.F_Hero.GetComponent<CharacterFollow>();}
+        if(GameManager.instance.K_Unlock){ch_KAc = GameManager.instance.K_Hero.GetComponent<CharacterFollow>();}
+        //
+        if(GameManager.instance.S_Unlock){S_Script = GameManager.instance.S_Hero.GetComponent<CharacterMove>();}
+        if(GameManager.instance.F_Unlock){F_Script = GameManager.instance.F_Hero.GetComponent<CharacterMove>();}
+        if(GameManager.instance.K_Unlock){K_Script = GameManager.instance.K_Hero.GetComponent<CharacterMove>();}
+        AudioManager.instance.PlayUFX(8);
+    
 
     }
         public void addskill()
@@ -44,6 +60,12 @@ public class testin : MonoBehaviour
         if(PlayerStats.instance.F_Unlock){PlayerStats.instance.F_LevelUp();}
         if(PlayerStats.instance.K_Unlock){PlayerStats.instance.K_LevelUp();}
         if(PlayerStats.instance.S_Unlock){PlayerStats.instance.S_LevelUp();}
+    }
+    public void Knockback()
+    {
+        if(PlayerStats.instance.F_Unlock){F_Script.Knockback();}
+        if(PlayerStats.instance.K_Unlock){K_Script.Knockback();}
+        if(PlayerStats.instance.S_Unlock){S_Script.Knockback();}
     }
 
     public void StopMusic()

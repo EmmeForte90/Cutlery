@@ -159,6 +159,7 @@ public class Inventory : MonoBehaviour
             Skin_S.UpdateCharacterSkin(Skin_S.DressSkin);
 	    	Skin_S.UpdateCombinedSkin();
             //
+            
             PlayerStats.instance.S_HP = 0;
             PlayerStats.instance.S_MP = 0;
             PlayerStats.instance.S_defense = 0;
