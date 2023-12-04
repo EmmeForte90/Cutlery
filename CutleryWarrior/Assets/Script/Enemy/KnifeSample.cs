@@ -26,8 +26,8 @@ public class KnifeSample : MonoBehaviour
     public float duration = 5.0f;
     private float elapsedTime = 0.0f;
     private bool isDamaging = false;
+    [Header("Poison")]
     public GameObject VFXPoison;
-    //private bool poisonState = false;
     public int poisonResistance = 100;
     public int poisonResistanceCont;
     private int TimePoison = 5;   

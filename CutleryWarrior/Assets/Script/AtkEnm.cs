@@ -49,6 +49,7 @@ public class AtkEnm : MonoBehaviour
         if(GameManager.instance.K_Unlock  && canATK){ch_KAc.TakeDamage(attackDamage); canATK = false;}
         else if(GameManager.instance.K_Unlock  && canATK){ch_KAc.TakeDamage(5); canATK = false;}        
         AudioManager.instance.PlayUFX(9);
+        if(PowerAtk){K_Script.Knockback();}  
         //if(PowerAtk){GameManager.instance.KnockbackK();}  
         //Debug.Log("danno +"+ attackDamage);
         StartCoroutine(StumpKTime());
@@ -60,6 +61,7 @@ public class AtkEnm : MonoBehaviour
         //
         if(GameManager.instance.S_Unlock  && canATK){ch_SAc.TakeDamage(attackDamage); canATK = false;}
         else if(GameManager.instance.S_Unlock && canATK){ canATK = false;}
+        if(PowerAtk){S_Script.Knockback();}  
         //if(PowerAtk){GameManager.instance.KnockbackS();}  
         AudioManager.instance.PlayUFX(9);
         //Debug.Log("danno +"+ attackDamage);

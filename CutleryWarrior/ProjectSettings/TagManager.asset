@@ -37,6 +37,7 @@ TagManager:
   - Bomb
   - Save
   - CrushENM
+  - Target
   layers:
   - Default
   - TransparentFX

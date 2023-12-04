@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class testin : MonoBehaviour
 {
+    public GameObject Bullets;
+    public GameObject BP;
     private GameObject FAct;
     private GameObject KAct;
     private GameObject SAct;  
@@ -55,6 +57,9 @@ public class testin : MonoBehaviour
         PlayerStats.instance.SSkillATT(6);
         PlayerStats.instance.SSkillATT(7);
     }
+    public void Shoot()
+    {Instantiate(Bullets, BP.transform.position, transform.rotation);}
+
     public void Addlevel()
     {
         if(PlayerStats.instance.F_Unlock){PlayerStats.instance.F_LevelUp();}

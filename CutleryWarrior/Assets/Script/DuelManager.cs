@@ -92,6 +92,8 @@ public class DuelManager : MonoBehaviour
     public bool S_isRight = false;
     public bool K_isRight = false;
     public bool isTimeline = false;
+    public bool isBoss = false;
+    public GameObject Boss;
     public GameObject ActorSpoon;
     public GameObject ActorKnife;
     public GameObject ActorFork;
