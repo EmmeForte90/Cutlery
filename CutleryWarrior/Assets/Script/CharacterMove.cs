@@ -540,6 +540,8 @@ private void HandleComboAttackS()
     public void TakeDamage(float damage)
 {
     if(!deathState){
+    if (isKnock && !canKnock)
+    {
     switch (kindCh)
     {
         case 0:
@@ -585,7 +587,7 @@ private void HandleComboAttackS()
                 Instantiate(VFXHhitShield, BP.transform.position, transform.rotation);
             }
             break;
-    }}
+    }}}
 }
 
     #region Stato Veleno

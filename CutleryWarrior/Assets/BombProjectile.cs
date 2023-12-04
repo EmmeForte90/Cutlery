@@ -2,24 +2,17 @@ using UnityEngine;
 
 public class BombProjectile : MonoBehaviour
 {
-   public GameObject target; // Assegna il target nell'Inspector
-    //public float launchForce = 10f; // Forza di lancio iniziale
-    //public float gravity = 9.8f; // Gravità
-    //public bool randomDirection = false; // Se true, i valori del vettore di lancio sono randomici
+    public GameObject target; // Assegna il target nell'Inspector
     public GameObject landingPointPrefab; // Assegna il target nell'Inspector
-     public float velocita = 5f;
+    public float velocita = 5f;
     public float accelerazioneGravitazionale = 9.8f;
-    //public float speed = 5f;
-    //public float ascendSpeed = 2f;
-    //public float ascendHeight = 10f;
-
     private bool isAscending = true;
-
     private Rigidbody rb;
+    public static BombProjectile instance;
 
-     private void OnEnable() {
-        target = GameObject.FindGameObjectWithTag("Target");
-    }
+
+    private void OnEnable() {if (instance == null){instance = this;}}
+    //target = GameObject.FindGameObjectWithTag("Target");}
 
     void Update()
     {
@@ -49,18 +42,11 @@ public class BombProjectile : MonoBehaviour
         }
         } else if (target == null)
         {
-            target = GameObject.FindGameObjectWithTag("Target");
+            //Salva questa logica per un altro tipo di attacco magari per un altro boss
+            //target = GameObject.FindGameObjectWithTag("Target");
+            
             //Debug.LogError("Il target non è stato assegnato alla bomba.");
             //return;
         }
-
-    }
-
-
-    public void OnTriggerEnter(Collider collision)
-    {   
-        if (collision.gameObject.CompareTag("Ground"))
-        {if (landingPointPrefab != null){Instantiate(landingPointPrefab, transform.position, transform.rotation);}}
-        Destroy(gameObject);
     }
 }

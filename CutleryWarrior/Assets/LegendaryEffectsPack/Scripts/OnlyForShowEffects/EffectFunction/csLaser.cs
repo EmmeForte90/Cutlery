@@ -1,10 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-
 public class csLaser : MonoBehaviour
 {
-
     public float Width = 1.5f; //LineRenderer Width Value
     float CurrentWidth = 0.0f;
     public float Offset = 1.0f; //LineRenderer MainTexture Offset Value 

@@ -25,9 +25,16 @@ public class BossMiniera : MonoBehaviour
     [Header("Move")]
     public float moveSpeed = 3f;
     [Header("Attack")]
-    public Vector3 launchDirection = Vector3.right; // Direzione del lancio iniziale
-    //public float randomRadius = 5f; // Puoi regolare questo valore in base alle tue esigenze
-    public GameObject Bullets;
+    public Transform target;
+    public GameObject TargetLaserOBJ;
+    public GameObject LaserOBJ;
+    bool Start_Laser = false;
+    bool isLaser = false;
+    bool  LaserAnimation = true;
+    public float TimeLaser = 5f;
+    public GameObject objectToSpawn;
+    public float spawnRadius = 5f;
+    bool Bomb_1,Bomb_2,Bomb_3,Bomb_4,Bomb_5,Bomb_6 = true;
     [Tooltip("Il tempo dedicato all'attacco")]
     public int WaitAtk = 1;
     [Tooltip("Il tempo che deve aspettare per il prossimo attacco")]
@@ -40,23 +47,28 @@ public class BossMiniera : MonoBehaviour
     public int Action_P1,Action_P2,Action_P3 = 0;
     private bool Lock_P2,Lock_P3 = false;
     private bool Lock_P1 = true;
-    bool isMoving = false;
+    bool isMoving, isWalk = false;
     private float lerpTime = 2f; //Tempo interpolazione
+    bool Right = true;
+    public float stoppingDistance = 1f;
+    private int currentWaypointIndex = 0; // Indice del punto attuale
+    public Transform[] waypoints; // Array di punti verso cui muoversi
+    public bool isPaused = false; // Flag per indicare se è in pausa
+    private float pauseTimer = 0f; // Timer per il conteggio della pausa
+    private float pauseTime = 2f; // Tempo di pausa in secondi quando raggiunge un punto
+    private float previousZPosition; // Aggiungi questa variabile
     /////////////////////////////////////////////////////////////////////////////////
-
     [Header("Status")]
     public float damagePerSecond = 0.1f;
     public float duration = 5.0f;
     private float elapsedTime = 0.0f;
-    private bool isDamaging = false;
-    
+    private bool isDamaging = false;   
     [Header("Poison")]
     public GameObject VFXPoison;
     public int poisonResistance = 100;
     public int poisonResistanceCont;
     private int TimePoison = 5;   
-
-    [Header("Stun")]
+    /*[Header("Stun")]
     public GameObject VFXStun;
     public bool isStun = false;
     public int StunProbability = 0;
@@ -64,22 +76,20 @@ public class BossMiniera : MonoBehaviour
     public int StunProbabilityMAX = 10;
     public int timeStun = 3;
     public int StunTimer = 5;
-
     [Header("Sleep")]
     public GameObject VFXSleep;
     public bool isSleep = false;
     public int SleepProbability = 0;
     public int SleepProbabilityCount = 2;
     public int SleepProbabilityMAX = 10;
-    public int timeSleep = 3;
-
+    public int timeSleep = 3;*/
+    /////////////////////////////////////////////////////////////////////////////////
     [Header("VFX")]
     [SerializeField] GameObject VFX_Barier;
     [SerializeField]  Transform hitpoint;
     [SerializeField] GameObject CenterPoint;
     [SerializeField] GameObject VFXHurt;    
     [SerializeField] GameObject VFXDie;
-
     [Header("Move")]
     [Tooltip("Il tempo dedicato all'attacco")]
     public int WaitAtk_P2 = 1;
@@ -91,23 +101,24 @@ public class BossMiniera : MonoBehaviour
     [SpineAnimation][SerializeField] private string IdleP2AnimationName;
     [SpineAnimation][SerializeField] private string IdleP3AnimationName;
     [SpineAnimation][SerializeField] private string WalkAnimationName;
-    [SpineAnimation][SerializeField] private string RunAnimationName;
+    //[SpineAnimation][SerializeField] private string RunAnimationName;
     [SpineAnimation][SerializeField] private string Atk1AnimationName;
-    [SpineAnimation][SerializeField] private string Atk2AnimationName;
+    //[SpineAnimation][SerializeField] private string Atk2AnimationName;
     [SpineAnimation][SerializeField] private string Atk3AnimationName;
-    [SpineAnimation][SerializeField] private string StunStartAnimationName;
-    [SpineAnimation][SerializeField] private string StunAnimationName;
-    [SpineAnimation][SerializeField] private string StunEndAnimationName;
-    [SpineAnimation][SerializeField] private string StunFlashAnimationName;
-    [SpineAnimation][SerializeField] private string SleepAnimationName;
+    //[SpineAnimation][SerializeField] private string StunStartAnimationName;
+    //[SpineAnimation][SerializeField] private string StunAnimationName;
+    //[SpineAnimation][SerializeField] private string StunEndAnimationName;
+    //[SpineAnimation][SerializeField] private string StunFlashAnimationName;
+    //[SpineAnimation][SerializeField] private string SleepAnimationName;
     [SpineAnimation][SerializeField] private string StartP2AnimationName;
     [SpineAnimation][SerializeField] private string StartP3AnimationName;
+    [SpineAnimation][SerializeField] private string ShootStartAnimationName;
+    [SpineAnimation][SerializeField] private string ShootLoopAnimationName;
+    [SpineAnimation][SerializeField] private string ShootEndAnimationName;
     [SpineAnimation][SerializeField] private string DieAnimationName;
     [SpineAnimation][SerializeField] private string PredieAnimationName;
-
     public AnimationManager Anm;
     public static BossMiniera instance;
-
     void Start()
     {
         if (instance == null){instance = this;}
@@ -190,6 +201,9 @@ public class BossMiniera : MonoBehaviour
         }
     }}}
     /////////////////////////////////////////////////////////////////////////////////
+    ///For Test
+    public void Fase2(){currentHealth = 3499;}public void Fase3(){currentHealth = 2499;}
+    ////////////////////////////////////////////////////////////////////////////////////
     public void Phase_1Move()
     {
         switch (Action_P1)
@@ -200,7 +214,7 @@ public class BossMiniera : MonoBehaviour
             break;
             case 1:
             // Fase 1
-            if(!isAttacking){FacePlayer();Shoot();}
+            if(!isAttacking){Shoot();}
             break;
             case 2:
             // Fase 2
@@ -226,6 +240,10 @@ public class BossMiniera : MonoBehaviour
             break;
             case 2:
             // Fase 2
+            Wait();
+            break;
+            case 3:
+            // Fase 2
             StartP3();
             break;
             default:
@@ -240,11 +258,23 @@ public class BossMiniera : MonoBehaviour
         {
             case 0:
             // Fase 0
-            if(!isAttacking){FacePlayer();ChasePlayer();}
+            moveSpeed *= 2;
+            if (!isPaused)
+            {
+                MoveToWaypoint();
+                Flip();
+                isWalk = true;
+            }
+            else
+            {
+                PauseAtWaypoint();
+                isWalk = false;
+                Flip();
+            }
             break;
             case 1:
             // Fase 1
-            if(!isAttacking){Shoot();}
+            if(!isAttacking){FacePlayer();Shoot();}
             break;
             case 2:
             // Fase 2
@@ -269,30 +299,88 @@ public class BossMiniera : MonoBehaviour
                 StartCoroutine(MoveTowardsCenterPoint());
             }
         }
-    private IEnumerator MoveTowardsCenterPoint()
-    {
-    isMoving = true;
-
-    Vector3 startPosition = transform.position;
-    Vector3 targetPosition = CenterPoint.transform.position;
-    float elapsedTime = 0f;
-
-    while (elapsedTime < lerpTime)
-    {
-        transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / lerpTime);
-        elapsedTime += Time.deltaTime;
-        yield return null;  // Attendi il frame successivo
-    }
-    transform.position = targetPosition;  // Assicurati che la posizione finale sia esatta
-    isMoving = false;
-    }
-    //////////////////////////////////////////////////////////////////////////
-    private void StartP3()
+        private IEnumerator MoveTowardsCenterPoint()
         {
-            if(!DM.inputCTR){Anm.PlayAnimation(StartP3AnimationName);}
+        isMoving = true;
+
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = CenterPoint.transform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < lerpTime)
+        {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / lerpTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;  // Attendi il frame successivo
+        }
+        transform.position = targetPosition;  // Assicurati che la posizione finale sia esatta
+        isMoving = false;
+        yield return new WaitForSeconds(5);
+        VFX_Barier.SetActive(true);
+        Action_P2 = 0;
         }
     //////////////////////////////////////////////////////////////////////////
+    private void StartP3()
+    {if(!DM.inputCTR){Anm.ClearAnm();Anm.PlayAnimation(StartP3AnimationName);StartCoroutine(StartP3_Time());}}
+    private IEnumerator StartP3_Time()
+    {            
+        yield return new WaitForSeconds(5);
+        VFX_Barier.SetActive(true);
+        Action_P3 = 0;
+    }
+    //////////////////////////////////////////////////////////////////////////
+    private void MoveToWaypoint()
+{
+    float currentZPosition = transform.position.z;
+     if(GameManager.instance.activeMinimap){GameManager.instance.AllarmMap.SetActive(false);}
 
+    if (waypoints.Length > 1 && currentWaypointIndex < waypoints.Length - 1)
+    {
+        Vector3 targetPosition = waypoints[currentWaypointIndex + 1].position;
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        // Verifica se il personaggio è vicino al punto di destinazione
+        if (Vector3.Distance(transform.position, targetPosition) < stoppingDistance)
+        {
+            isPaused = true;
+            Action_P3 = 1;
+            transform.localScale = new Vector3(-1, 1,1);
+            previousZPosition = currentZPosition;
+        }
+    }
+    else if (currentWaypointIndex == waypoints.Length - 1)
+    {
+        Vector3 initialPosition = waypoints[0].position;
+        transform.position = Vector3.MoveTowards(transform.position, initialPosition, moveSpeed * Time.deltaTime);
+
+        // Verifica se il personaggio è vicino al punto di destinazione
+        if (Vector3.Distance(transform.position, initialPosition) < stoppingDistance)
+        {
+            isPaused = true;
+            Action_P3 = 1;
+            transform.localScale = new Vector3(1, 1,1);
+
+            // Incrementa l'indice del waypoint o torna al punto 0 se siamo all'ultimo
+            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+            previousZPosition = currentZPosition;
+        }
+    }
+}
+    private void PauseAtWaypoint()
+    {
+        if (pauseTimer < pauseTime){pauseTimer += Time.deltaTime;}
+        else{isPaused = false; currentWaypointIndex++;}
+    }
+    private void Flip()
+    {
+        if (Right && transform.localScale.z < 0f || !Right && transform.localScale.z > 0f)
+        {
+            Right = !Right;
+            Vector3 localScale = transform.localScale;
+            localScale.z *= -1f;
+            transform.localScale = localScale;
+        }
+    }
+    //////////////////////////////////////////////////////////////////////////  
     private void ChasePlayer()
         {
             if(!DM.inputCTR){
@@ -300,12 +388,12 @@ public class BossMiniera : MonoBehaviour
             {
                 if(!isAttacking)
                 {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
-                if(!DieB){Anm.PlayAnimationLoop(RunAnimationName);}}
+                if(!DieB){Anm.PlayAnimationLoop(WalkAnimationName);}}
                 if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
                 {StartAttack();}
             }}
-            else if(DM.inputCTR && !DieB && currentHealth > 3500){Anm.PlayAnimationLoop(IdleP1AnimationName);}
-            else if(DM.inputCTR && !DieB && currentHealth <= 2500){Anm.PlayAnimationLoop(IdleP3AnimationName);}
+            else if(!DieB && currentHealth > 3500){Anm.PlayAnimationLoop(IdleP1AnimationName);}
+            else if(!DieB && currentHealth <= 2500){Anm.PlayAnimationLoop(IdleP3AnimationName);}
         }
     private void StartAttack()
     {
@@ -324,36 +412,71 @@ public class BossMiniera : MonoBehaviour
         yield return new WaitForSeconds(attackPauseDuration);
         take = false;
         isAttacking = false;
-        if(currentHealth > 3500 && Action_P1 == 0){Action_P1 = 1;}//Prossimo attacco
-        else if(currentHealth <= 2500 && Action_P3 == 0){Action_P3 = 1;}//Prossimo attacco
+        Choise();
+        if(!DieB && currentHealth > 3500 && Action_P1 == 0){Action_P1 = 1;}//Prossimo attacco
+        else if(!DieB && currentHealth <= 2500 && Action_P3 == 0){Action_P3 = 1;}//Prossimo attacco
 
     }
-    //////////////////////////////////////////////////////////////////////////
-    private void Shoot()
+    /////////////////////////////////////////////////////////////////////////////
+   private void Shoot()
+{
+    if (!DM.inputCTR && player != null)
+    {
+        if (!isLaser)
         {
-            if(!DM.inputCTR){
-            if (player != null)
+            if (LaserAnimation)
             {
-                if(!isAttacking)
-                {
+                Anm.PlayAnimationStop(ShootStartAnimationName);
+                LaserAnimation = false;
+            }
+            StartCoroutine(StartShooting());
+        }
+        else if (target != null && Start_Laser)
+        {
+            Anm.PlayAnimationLoop(ShootLoopAnimationName);
+            StartCoroutine(StopShooting());
+        }
+    }
+}
 
-                }   
-            }}
-            else if(DM.inputCTR && !DieB && currentHealth > 3500){Anm.PlayAnimationLoop(IdleP1AnimationName);}
-            else if(DM.inputCTR && !DieB && currentHealth <= 2500){Anm.PlayAnimationLoop(IdleP3AnimationName);}
-        }
-    private void Bomba()
-        {
-            if(!DM.inputCTR){
-            if (player != null)
-            {
-                if(!isAttacking)
-                {
-                    
-                }   
-            }}
-            
-        }
+private IEnumerator StartShooting()
+{
+    yield return new WaitForSeconds(2); // Il tempo per attivare il Laser
+
+    TargetLaserOBJ.SetActive(true);
+    LaserOBJ.SetActive(true);
+    Start_Laser = true;
+    isLaser = true;
+}
+
+private IEnumerator StopShooting()
+{
+    yield return new WaitForSeconds(TimeLaser); // Il tempo per disattivare il Laser
+
+    TargetLaserOBJ.SetActive(false);
+    LaserOBJ.SetActive(false);
+    Start_Laser = false;
+    take = false;
+    LaserAnimation = true;
+    if (LaserAnimation)
+    {
+        Anm.PlayAnimation(ShootEndAnimationName);
+        LaserAnimation = false;
+    }
+    pauseTimer = 0f;
+    Choise();   
+    yield return new WaitForSeconds(2); // Il tempo per disattivare il Laser
+    isLaser = false;
+    isAttacking = false;
+
+    if (!DieB)
+    {
+        Action_P1 = Lock_P1 && !Lock_P2 && !Lock_P3 ? 0 : Action_P1;
+        Action_P3 = !Lock_P1 && !Lock_P2 && Lock_P3 ? 0 : Action_P3;
+    }
+}
+
+    /////////////////////////////////////////////////////////////////////////////
     private void Bombing()
         {
             if(!DM.inputCTR){
@@ -361,18 +484,41 @@ public class BossMiniera : MonoBehaviour
             {
                 if(!isAttacking)
                 {
-                     // Genera una direzione casuale sulla superficie di una sfera
-                    //Vector3 randomDirection = Random.onUnitSphere;
-
-                    // Moltiplica la direzione per ottenere una posizione casuale
-                    //Vector3 randomPosition = transform.position + randomDirection * randomRadius;
-
-                    // Lauch bomb
-                    Instantiate(Bullets, transform.position, transform.rotation);
+                    if(Bomb_1){SpawnObjectInRandomPosition(); Bomb_1 = false;}
+                    if(Bomb_2){SpawnObjectInRandomPosition(); Bomb_2 = false;}
+                    if(Bomb_3){SpawnObjectInRandomPosition(); Bomb_3 = false;}
+                    if(Bomb_4){SpawnObjectInRandomPosition(); Bomb_4 = false;}
+                    if(Bomb_5){SpawnObjectInRandomPosition(); Bomb_5 = false;}
+                    if(Bomb_6){SpawnObjectInRandomPosition(); Bomb_6 = false;}
+                    StartCoroutine(BombingTime());
                 }   
             }}
+            else if(DM.inputCTR && !DieB && currentHealth > 3500){Anm.PlayAnimationLoop(IdleP1AnimationName);}
+            else if(DM.inputCTR && !DieB && currentHealth <= 2500){Anm.PlayAnimationLoop(IdleP3AnimationName);}
             
         }
+    public void SpawnObjectInRandomPosition()
+    {
+        Vector2 randomPoint = Random.insideUnitCircle * spawnRadius;
+        Vector3 spawnPosition = new Vector3(randomPoint.x, 0f, randomPoint.y) + transform.position;
+        Instantiate(objectToSpawn, spawnPosition, objectToSpawn.transform.rotation);
+    }
+    private IEnumerator BombingTime()
+    {        
+        yield return new WaitForSeconds(5); 
+        if(DM.inputCTR && !DieB && currentHealth > 3500){Action_P2 = 2;}
+        else if(DM.inputCTR && !DieB && currentHealth <= 2500){Action_P3 = 0;}
+        VFX_Barier.SetActive(true);
+        Choise();
+        take = false;
+        isAttacking = false;
+
+    }
+    private void Wait()
+    {
+        Anm.PlayAnimationLoop(IdleP2AnimationName);
+        Bomb_1 = true; Bomb_2 = true; Bomb_3 = true; Bomb_4 = true; Bomb_5 = true; Bomb_6 = true; 
+    }
 
     //////////////////////////////////////////////////////////////////////////
     private void CanHurt()
@@ -393,25 +539,24 @@ public class BossMiniera : MonoBehaviour
         VFX_Barier.SetActive(true);
         take = false;
         isAttacking = false;
-
     }
     //////////////////////////////////////////////////////////////////////////
     public void OnTriggerEnter(Collider collision)
     {   
         if (collision.gameObject.CompareTag("F_Coll"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack); ChoseFork();}} 
+        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack);}} 
         else if (collision.gameObject.CompareTag("F_Stump"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack); ChoseFork();}} 
+        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack);}} 
         else if (collision.gameObject.CompareTag("K_Coll"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack); ChoseKnife();}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack);}}
         else if (collision.gameObject.CompareTag("K_Stump"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack); ChoseKnife(); StunProbability += StunProbabilityCount;}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.K_attack);}}
         else if (collision.gameObject.CompareTag("S_Coll"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.S_attack); ChoseSpoon();}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.S_attack);}}
          else if (collision.gameObject.CompareTag("S_Stump"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.S_attack); ChoseSpoon();}}
+        {if(!DieB){TakeDamage(PlayerStats.instance.S_attack);}}
         else if (collision.gameObject.CompareTag("Spell"))
-        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack + Bullet.instance.damage); ChoseFork();}} 
+        {if(!DieB){TakeDamage(PlayerStats.instance.F_attack + Bullet.instance.damage);}} 
         else if (collision.gameObject.CompareTag("Bomb"))
         {if(!DieB){TakeDamage(Bomb.instance.damage);}}
     }
@@ -441,9 +586,9 @@ public class BossMiniera : MonoBehaviour
     Instantiate(VFXHurt, transform.position, transform.rotation);
     Anm.TemporaryChangeColor(Color.red);}
     }
-    //////////////////////////////////////////////////////////////////////////
-    #region  Stun
-    public void Stun()
+    //////////////////////////////////////////////////////////////////////////  
+    #region Stun
+    /*public void Stun()
     {
         if (!isStun && !DieB)
         {
@@ -477,13 +622,13 @@ public class BossMiniera : MonoBehaviour
         StunProbabilityCount = 0;
         //Action = 0;
         }
-        }
+        }*/
     
     #endregion
 
     #region Stato StunFlash
 
-    public void StunFlash()
+    /*public void StunFlash()
     {
         if (!isStun && !DieB)
         {
@@ -514,13 +659,13 @@ public class BossMiniera : MonoBehaviour
     StunProbabilityCount = 0;
     //Action = 0;
     }
-    }
+    }*/
     
     #endregion
 
     #region Stato Sleep
 
-    public void Sleep()
+/*    public void Sleep()
 {
     if (!isSleep && !DieB)
     {
@@ -551,9 +696,9 @@ public class BossMiniera : MonoBehaviour
     SleepProbabilityCount = 0;
     //Action = 0;
     }
-    }
+    }*/
     
-    #endregion
+    #endregion 
     
     #region Stato Veleno
     public void Poison(){Anm.ChangeColorP(); VFXPoison.SetActive(true);}// poisonState = true;} 
@@ -593,6 +738,8 @@ public class BossMiniera : MonoBehaviour
         {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, spawnRadius);
         }
     #endregion
     #endif

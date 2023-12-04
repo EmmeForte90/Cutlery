@@ -194,6 +194,11 @@ public class AnimationManager : MonoBehaviour
         {_skeletonAnimation.state.SetAnimation(0, animationName, false); _spineAnimationState.Event += HandleEvent;}
         _skeletonAnimation.state.GetCurrent(0).Complete += OnAttackAnimationComplete;
     }
+    public void PlayAnimationStop(string animationName)
+    {
+        if (currentAnimationName != animationName)
+        {_skeletonAnimation.state.SetAnimation(0, animationName, false); _spineAnimationState.Event += HandleEvent;}
+    }
 
     public void PlayAnimationExplore(string animationName)
     {
