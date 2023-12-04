@@ -6,11 +6,17 @@ public class TargetPlayer : MonoBehaviour
     private GameObject ForkActive;
 	private GameObject SpoonActive;
 	private GameObject KnifeActive;
-     private Transform Fork;
+    public GameObject Boss;
+    private Transform Fork;
     private Transform Spoon;
     private Transform Knife;
     public float RunSpeed = 4f; // Velocità di movimento del personaggio
     public float TouchDistance = 1f;
+
+    public void OnEnable()
+    {
+        transform.position = Boss.transform.position;
+    }
 
     public void Update()
     {

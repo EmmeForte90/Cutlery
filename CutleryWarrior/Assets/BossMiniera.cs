@@ -215,7 +215,7 @@ public class BossMiniera : MonoBehaviour
             break;
             case 1:
             // Fase 1
-            if(!isAttacking){Shoot();}
+            Shoot();
             break;
             case 2:
             // Fase 2
@@ -330,6 +330,18 @@ public class BossMiniera : MonoBehaviour
         Action_P3 = 0;
     }
     //////////////////////////////////////////////////////////////////////////
+    public void ResetBool()
+    {
+        Anm.ClearAnm();
+        pauseTimer = 0f;
+        Start_Laser = false;
+        isLaser = false;
+        LaserAnimation = true;
+        LaserAnimationStop = true;
+        isAttacking = false;
+    }
+    //////////////////////////////////////////////////////////////////////////
+
     private void MoveToWaypoint()
 {
     float currentZPosition = transform.position.z;
@@ -387,11 +399,11 @@ public class BossMiniera : MonoBehaviour
             if(!DM.inputCTR){
             if (player != null)
             {
-                if(!isAttacking && !DieB)
-                {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
-                Anm.PlayAnimationLoop(WalkAnimationName);}
-                if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
-                {StartAttack();}
+            if(!isAttacking)
+            {transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+            Anm.PlayAnimationLoop(WalkAnimationName);}
+            if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
+            {StartAttack();}
             }}
         }
     private void StartAttack()
@@ -405,17 +417,8 @@ public class BossMiniera : MonoBehaviour
         yield return new WaitForSeconds(WaitAtk);        
         Anm.PlayAnimationLoop(IdleP1AnimationName);
         yield return new WaitForSeconds(attackPauseDuration);
-        if (!DieB && Action_P1 == 0)
-        {
-        Choise();   
-        pauseTimer = 0f;
-        Start_Laser = false;
-        isLaser = false;
-        LaserAnimation = true;
-        isAttacking = false;
-        LaserAnimationStop = true;
-        Action_P1 = 1;
-        }
+        if (Action_P1 == 0){Choise();ResetBool();Action_P1 = 1;}
+
     }
     /////////////////////////////////////////////////////////////////////////////
    private void Shoot()
@@ -457,21 +460,12 @@ private IEnumerator StopShooting()
     LaserOBJ.SetActive(false);
     if (LaserAnimationStop)
     {
-        Anm.PlayAnimationStop(ShootStartAnimationName);
+        Anm.PlayAnimationStop(ShootEndAnimationName);
+        yield return new WaitForSeconds(0.4f);
         LaserAnimationStop = false;
     }
     yield return new WaitForSeconds(attackPauseDuration);
-    if (!DieB && Action_P1 == 1)
-    {
-    Choise();   
-    pauseTimer = 0f;
-    Start_Laser = false;
-    isLaser = false;
-    LaserAnimation = true;
-    LaserAnimationStop = true;
-    isAttacking = false;
-    Action_P1 = 0;
-    }
+    if (Action_P1 == 1){Choise();ResetBool();Action_P1 = 0;}
 }
 
     /////////////////////////////////////////////////////////////////////////////
