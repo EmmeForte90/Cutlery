@@ -45,7 +45,7 @@ public class BossMiniera : MonoBehaviour
     private bool isAttacking = false;   
     /////////////////////////////////////////////////////////////////////////////////
     [Header("Actions")]
-    public int Action_P1,Action_P2,Action_P3 = 0;
+    public int PhaseM,Action_P1,Action_P2,Action_P3 = 0;
     private bool Lock_P2,Lock_P3 = false;
     private bool Lock_P1 = true;
     bool isMoving, isWalk = false;
@@ -69,6 +69,7 @@ public class BossMiniera : MonoBehaviour
     public int poisonResistance = 100;
     public int poisonResistanceCont;
     private int TimePoison = 5;   
+    string AN;
     /*[Header("Stun")]
     public GameObject VFXStun;
     public bool isStun = false;
@@ -175,27 +176,27 @@ public class BossMiniera : MonoBehaviour
         if(!DM.inputCTR){ 
         if (player == null && !take){Choise(); take = true;}
         Target();
+        Phase_Master();
         healthBar.size = currentHealth / maxHealth;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
         if (currentHealth > 3500 && !DieB)
         {
             // Fase 1
-            Phase_1Move();
-            Lock_P1 = true;Lock_P2 = false;Lock_P3 = false;
+            PhaseM = 0;
+            //Lock_P1 = true;Lock_P2 = false;Lock_P3 = false;
         }
-        else if (currentHealth <= 3500 && currentHealth > 2500 && Lock_P1 && !Lock_P2 && !Lock_P3 && !DieB)
+        else if (currentHealth <= 3500 && currentHealth > 2500)
         {
             // Fase 2
-            Phase_2Move();
-            Lock_P1 = false;Lock_P2 = true;Lock_P3 = false;
+            if(Lock_P2){Action_P1 = 2;}else if(!Lock_P2){PhaseM = 1;}
+            //Lock_P1 = false;Lock_P2 = true;Lock_P3 = false;
         }
-        else if (currentHealth <= 2500 && currentHealth < 3500 && !Lock_P1 && Lock_P2 && !Lock_P3 && !DieB)
+        else if (currentHealth <= 2500 && currentHealth < 3500)
         {
             // Fase 3
-            Phase_3Move();
-            Lock_P1 = false;Lock_P2 = false;Lock_P3 = true;
+            if(Lock_P3){Action_P2 = 3;}else if(!Lock_P3){PhaseM = 2;}
         }
-        else if (currentHealth <= 0 && !Lock_P1 && !Lock_P2 && Lock_P3 && !DieB)
+        else if (currentHealth <= 0)
         {
             // Morte
             DieB = true; IconVFX.SetActive(true); Die();
@@ -205,6 +206,32 @@ public class BossMiniera : MonoBehaviour
     ///For Test
     public void Fase2(){currentHealth = 3499;}public void Fase3(){currentHealth = 2499;}
     ////////////////////////////////////////////////////////////////////////////////////
+    public void Phase_Master()
+    {
+        switch (PhaseM)
+        {
+            case 0:
+            // Fase 0
+            Phase_1Move();
+            break;
+            case 1:
+            // Fase 1
+            Phase_2Move();
+            break;
+            case 2:
+            // Fase 2
+            Phase_3Move();
+            break;
+            case 3:
+            // Fase 2
+            Die();
+            break;
+            default:
+            // Altre fasi o gestione degli errori
+            break;
+
+        }
+    }
     public void Phase_1Move()
     {
         switch (Action_P1)
@@ -215,7 +242,7 @@ public class BossMiniera : MonoBehaviour
             break;
             case 1:
             // Fase 1
-            Shoot();
+            if(!isAttacking){Shoot();}
             break;
             case 2:
             // Fase 2
@@ -316,8 +343,9 @@ public class BossMiniera : MonoBehaviour
         }
         transform.position = targetPosition;  // Assicurati che la posizione finale sia esatta
         isMoving = false;
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         VFX_Barier.SetActive(true);
+        Lock_P2 = false;
         Action_P2 = 0;
         }
     //////////////////////////////////////////////////////////////////////////
@@ -341,7 +369,6 @@ public class BossMiniera : MonoBehaviour
         isAttacking = false;
     }
     //////////////////////////////////////////////////////////////////////////
-
     private void MoveToWaypoint()
 {
     float currentZPosition = transform.position.z;
@@ -436,6 +463,7 @@ public class BossMiniera : MonoBehaviour
         }
         else if (target != null && Start_Laser)
         {
+            isAttacking = true;
             Anm.PlayAnimationLoop(ShootLoopAnimationName);
             StartCoroutine(StopShooting());
         }

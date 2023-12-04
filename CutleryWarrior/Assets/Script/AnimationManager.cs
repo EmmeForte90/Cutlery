@@ -191,35 +191,37 @@ public class AnimationManager : MonoBehaviour
     public void PlayAnimation(string animationName)
     {
         if (currentAnimationName != animationName)
-        {_skeletonAnimation.state.SetAnimation(0, animationName, false); _spineAnimationState.Event += HandleEvent;}
+        {_skeletonAnimation.state.SetAnimation(0, animationName, false); 
+        currentAnimationName = animationName; _spineAnimationState.Event += HandleEvent;}
         _skeletonAnimation.state.GetCurrent(0).Complete += OnAttackAnimationComplete;
     }
     public void PlayAnimationStop(string animationName)
     {
         if (currentAnimationName != animationName)
-        {_skeletonAnimation.state.SetAnimation(0, animationName, false); _spineAnimationState.Event += HandleEvent;}
+        {_skeletonAnimation.state.SetAnimation(0, animationName, false); 
+        currentAnimationName = animationName; _spineAnimationState.Event += HandleEvent;}
     }
 
     public void PlayAnimationExplore(string animationName)
     {
         if (currentAnimationName != animationName)
-        {_skeletonAnimation.state.SetAnimation(0, animationName, false); _spineAnimationState.Event += HandleEvent;}
+        {_skeletonAnimation.state.SetAnimation(0, animationName, false); 
+        currentAnimationName = animationName; _spineAnimationState.Event += HandleEvent;}
         _skeletonAnimation.state.GetCurrent(0).Complete += OnExploreAnimationComplete;
     }
     public void PlayAnimationLoop(string animationName)
     {
     if (currentAnimationName != animationName)
-                {
-                    _spineAnimationState.SetAnimation(0, animationName, true);
-                    currentAnimationName = animationName;
-                    _spineAnimationState.Event += HandleEvent;
-                }
+    {_skeletonAnimation.state.SetAnimation(0, animationName, true);
+    currentAnimationName = animationName;
+    _spineAnimationState.Event += HandleEvent;}
     }
     private void StopAtk(){VFX = true;}
 
     public void ClearAnm()
     {
         _skeletonAnimation.state.ClearTrack(0);
+        currentAnimationName = null;
     }
     private void OnExploreAnimationComplete(Spine.TrackEntry trackEntry)
     {
