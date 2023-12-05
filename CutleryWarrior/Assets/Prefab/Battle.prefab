@@ -13171,7 +13171,6 @@ Transform:
   - {fileID: 3549613883197226559}
   - {fileID: 2524010831215564385}
   - {fileID: 2318923321317358746}
-  - {fileID: 7985370653410576066}
   - {fileID: 1893484782094939873}
   m_Father: {fileID: 6256537772272523645}
   m_RootOrder: 7
@@ -13981,6 +13980,8 @@ MonoBehaviour:
   S_isRight: 0
   K_isRight: 0
   isTimeline: 0
+  isBoss: 0
+  Boss: {fileID: 0}
   ActorSpoon: {fileID: 0}
   ActorKnife: {fileID: 0}
   ActorFork: {fileID: 0}
@@ -20771,6 +20772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canATK: 1
+  PowerAtk: 0
   attackDamage: 10
 --- !u!1 &1173833256768926395
 GameObject:
@@ -22275,6 +22277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canATK: 1
+  PowerAtk: 0
   attackDamage: 15
 --- !u!1 &1442218935316975342
 GameObject:
@@ -41098,51 +41101,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &1825062066367142012
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7985370653410576066}
-  - component: {fileID: 786479407861158531}
-  m_Layer: 0
-  m_Name: Pav (1)
-  m_TagString: Collider
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7985370653410576066
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825062066367142012}
-  m_LocalRotation: {x: -0, y: -0.71179473, z: -0, w: 0.7023876}
-  m_LocalPosition: {x: -7.19, y: -6.41, z: -27.1}
-  m_LocalScale: {x: 0.4695838, y: 1.6462252, z: 0.9792584}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1077294356828994736}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: -90.762, z: 0}
---- !u!65 &786479407861158531
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825062066367142012}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.199598, y: 13.418776, z: 35.6497}
-  m_Center: {x: 9.243395, y: 6.209394, z: 1.7462615}
 --- !u!1 &1826409852056750255
 GameObject:
   m_ObjectHideFlags: 0
@@ -53855,7 +53813,7 @@ Transform:
   - {fileID: 4818328581866734892}
   - {fileID: 224947413064038151}
   m_Father: {fileID: 1077294356828994736}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2590239416092271889
 GameObject:
@@ -89601,10 +89559,10 @@ MonoBehaviour:
   SleepProbabilityMAX: 10
   timeSleep: 3
   WaitAtk: 1
+  attackPauseDuration: 1
   moveSpeed: 5
   attackRange: 3
   defense: 2
-  attackPauseDuration: 1
   DieB: 0
   DM: {fileID: 5073002695190756782}
   Action: 0
@@ -89786,6 +89744,7 @@ MonoBehaviour:
   Foot: {fileID: 0}
   Rage: {fileID: 0}
   VfxEnmSlash: {fileID: 5197774023696812567}
+  VfxCrush: {fileID: 0}
   BulletP: {fileID: 0}
   Bullet_AI: {fileID: 0}
   Bullet: {fileID: 1862645643401743441, guid: 709ca3e7b07bcb246bda3a4ed2a76e10, type: 3}
@@ -90364,6 +90323,7 @@ MonoBehaviour:
   Foot: {fileID: 0}
   Rage: {fileID: 0}
   VfxEnmSlash: {fileID: 0}
+  VfxCrush: {fileID: 0}
   BulletP: {fileID: 0}
   Bullet_AI: {fileID: 0}
   Bullet: {fileID: 8398752575585346106, guid: 6fa7a92b137d7544e815c8439cda1dcb, type: 3}
@@ -91095,6 +91055,7 @@ MonoBehaviour:
   Foot: {fileID: 0}
   Rage: {fileID: 0}
   VfxEnmSlash: {fileID: 1433981180986538971}
+  VfxCrush: {fileID: 0}
   BulletP: {fileID: 0}
   Bullet_AI: {fileID: 0}
   Bullet: {fileID: 1862645643401743441, guid: 709ca3e7b07bcb246bda3a4ed2a76e10, type: 3}
@@ -92847,6 +92808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canATK: 1
+  PowerAtk: 0
   attackDamage: 30
 --- !u!1 &5255736382464894703
 GameObject:
@@ -105321,6 +105283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canATK: 1
+  PowerAtk: 0
   attackDamage: 20
 --- !u!1 &5778831008305952316
 GameObject:
@@ -127298,6 +127261,7 @@ MonoBehaviour:
   Foot: {fileID: 0}
   Rage: {fileID: 0}
   VfxEnmSlash: {fileID: 1161902122020083287}
+  VfxCrush: {fileID: 0}
   BulletP: {fileID: 0}
   Bullet_AI: {fileID: 0}
   Bullet: {fileID: 1862645643401743441, guid: 709ca3e7b07bcb246bda3a4ed2a76e10, type: 3}
@@ -131381,6 +131345,7 @@ MonoBehaviour:
   Foot: {fileID: 0}
   Rage: {fileID: 0}
   VfxEnmSlash: {fileID: 0}
+  VfxCrush: {fileID: 0}
   BulletP: {fileID: 0}
   Bullet_AI: {fileID: 0}
   Bullet: {fileID: 8398752575585346106, guid: 6fa7a92b137d7544e815c8439cda1dcb, type: 3}
@@ -152300,10 +152265,10 @@ MonoBehaviour:
   SleepProbabilityMAX: 10
   timeSleep: 3
   WaitAtk: 1
+  attackPauseDuration: 1
   moveSpeed: 5
   attackRange: 5
   defense: 2
-  attackPauseDuration: 1
   DieB: 0
   DM: {fileID: 1561206441109212130}
   Action: 0
@@ -152485,6 +152450,7 @@ MonoBehaviour:
   Foot: {fileID: 0}
   Rage: {fileID: 0}
   VfxEnmSlash: {fileID: 5756865255168228571}
+  VfxCrush: {fileID: 0}
   BulletP: {fileID: 0}
   Bullet_AI: {fileID: 0}
   Bullet: {fileID: 1862645643401743441, guid: 709ca3e7b07bcb246bda3a4ed2a76e10, type: 3}
@@ -153024,6 +152990,8 @@ MonoBehaviour:
   S_isRight: 0
   K_isRight: 0
   isTimeline: 0
+  isBoss: 0
+  Boss: {fileID: 0}
   ActorSpoon: {fileID: 0}
   ActorKnife: {fileID: 0}
   ActorFork: {fileID: 0}

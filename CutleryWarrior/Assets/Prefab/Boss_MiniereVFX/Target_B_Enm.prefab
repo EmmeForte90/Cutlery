@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 3169281103680581874}
   - component: {fileID: 1048840823630188198}
   - component: {fileID: 8757568616633743138}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Projectile_Ice_Ball_Lv1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4961,7 +4961,7 @@ GameObject:
   - component: {fileID: 1424067374705251304}
   - component: {fileID: 543935713957324457}
   - component: {fileID: 7688790139675727752}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Fog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9785,7 +9785,7 @@ GameObject:
   - component: {fileID: 2680058703616631187}
   - component: {fileID: 1918496353571375207}
   - component: {fileID: 8594839084192344094}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Ice_Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14609,7 +14609,7 @@ GameObject:
   - component: {fileID: 2098043787784514751}
   - component: {fileID: 6491833700838805463}
   - component: {fileID: 9185365873842719580}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Glow_Faint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19433,7 +19433,7 @@ GameObject:
   - component: {fileID: 8626043999026748857}
   - component: {fileID: 8771537617786515462}
   - component: {fileID: 4297065506874912855}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Fog (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24257,7 +24257,7 @@ GameObject:
   - component: {fileID: 1222936480428410614}
   - component: {fileID: 1427199119427505943}
   - component: {fileID: 5541207967821747925}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Wind Lines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29081,7 +29081,7 @@ GameObject:
   - component: {fileID: 7537318904310679292}
   - component: {fileID: 9178533715871960865}
   - component: {fileID: 8844020880663481903}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33914,7 +33914,7 @@ GameObject:
   - component: {fileID: 1099956690024121151}
   - component: {fileID: 3750753108216262789}
   - component: {fileID: 5663358122661335779}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Glow_Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38738,7 +38738,7 @@ GameObject:
   - component: {fileID: 7779371446259066386}
   - component: {fileID: 2929672282419860203}
   - component: {fileID: 8198908955164241500}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: P_Crystal
   m_TagString: Enm_Bullet
   m_Icon: {fileID: 0}
@@ -38803,7 +38803,7 @@ GameObject:
   - component: {fileID: 7528737577594620601}
   - component: {fileID: 4671730641972286329}
   - component: {fileID: 7660559579719689707}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Center_Blizzard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43627,7 +43627,7 @@ GameObject:
   - component: {fileID: 739522835089163494}
   - component: {fileID: 9094527004550270164}
   - component: {fileID: 2502260971923669277}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Glow_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -48323,7 +48323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canATK: 1
-  PowerAtk: 1
+  PowerAtk: 0
   attackDamage: 50
 --- !u!136 &512613348761991149
 CapsuleCollider:

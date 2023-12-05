@@ -540,7 +540,7 @@ private void HandleComboAttackS()
     public void TakeDamage(float damage)
 {
     if(!deathState){
-    if (isKnock && !canKnock)
+    if (!isKnock)
     {
     switch (kindCh)
     {

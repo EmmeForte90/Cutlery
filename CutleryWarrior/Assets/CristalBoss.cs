@@ -11,6 +11,7 @@ public class CristalBoss : MonoBehaviour
     public BossMiniera BM;
     private void OnEnable()
     {CurrentCrystal = BM.MaxCrystal;VFX();}
+    //private void OnDisable(){VFX();}
     void Update(){BM.CurrentCrystal = CurrentCrystal; 
     if(CurrentCrystal <= 0){VFX();Cristal.SetActive(false);}}
     public void VFX(){Instantiate(VFXCristal, Cristal.transform.position, VFXCristal.transform.rotation);}
