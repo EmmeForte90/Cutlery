@@ -38776,6 +38776,8 @@ MonoBehaviour:
   target: {fileID: 24771070656076294}
   landingPointPrefab: {fileID: 2608123557668247276, guid: b676567196bc3c945a4356238cf67b28,
     type: 3}
+  attackDamage: 10
+  Take: 1
   velocita: 20
   accelerazioneGravitazionale: -10
 --- !u!136 &8198908955164241500

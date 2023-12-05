@@ -83,7 +83,8 @@ public class BombProjectile : MonoBehaviour
         //Debug.Log("danno +"+ attackDamage);
         if (landingPointPrefab != null){Instantiate(landingPointPrefab, transform.position, transform.rotation);}
         Take = false;}
-        Destroy(gameObject);
+         Destroy(target);
+            Destroy(gameObject);
     }
     public void KnifeD()
     {
@@ -95,7 +96,8 @@ public class BombProjectile : MonoBehaviour
         //Debug.Log("danno +"+ attackDamage);
         if (landingPointPrefab != null){Instantiate(landingPointPrefab, transform.position, transform.rotation);}
         Take = false;}
-        Destroy(gameObject);
+         Destroy(target);
+            Destroy(gameObject);
     }
     public void SpoonD()
     {
@@ -107,6 +109,7 @@ public class BombProjectile : MonoBehaviour
         //Debug.Log("danno +"+ attackDamage);
         if (landingPointPrefab != null){Instantiate(landingPointPrefab, transform.position, transform.rotation);}
         Take = false;}
-        Destroy(gameObject);
+         Destroy(target);
+            Destroy(gameObject);
     }
 }

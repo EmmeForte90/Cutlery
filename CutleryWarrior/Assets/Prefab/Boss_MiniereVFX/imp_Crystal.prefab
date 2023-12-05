@@ -39068,7 +39068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canATK: 1
   PowerAtk: 1
-  attackDamage: 50
+  attackDamage: 10
 --- !u!65 &-6630641505735873055
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39077,8 +39077,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2608123557668247276}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
