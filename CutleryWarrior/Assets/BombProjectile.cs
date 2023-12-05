@@ -65,7 +65,7 @@ public class BombProjectile : MonoBehaviour
             //return;
         }
     }
-    public void OnTriggerEnter(Collider collision)
+    /*public void OnTriggerEnter(Collider collision)
     {   
         if (collision.gameObject.CompareTag("F_Player")){ForkD();} 
         else if (collision.gameObject.CompareTag("K_Player")){KnifeD();} 
@@ -111,5 +111,5 @@ public class BombProjectile : MonoBehaviour
         Take = false;}
          Destroy(target);
             Destroy(gameObject);
-    }
+    }*/
 }
