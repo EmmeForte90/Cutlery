@@ -35,7 +35,12 @@ public class BossMiniera : MonoBehaviour
     public float TimeLaser = 5f;
     public GameObject objectToSpawn;
     public float spawnRadius = 5f;
-    bool Bomb_1,Bomb_2,Bomb_3,Bomb_4,Bomb_5,Bomb_6 = true;
+    bool Bomb_1 = true;
+    /*bool Bomb_2 = true;
+    bool Bomb_3 = true;
+    bool Bomb_4 = true;
+    bool Bomb_5 = true;
+    bool Bomb_6 = true;*/
     [Tooltip("Il tempo dedicato all'attacco")]
     public int WaitAtk = 1;
     [Tooltip("Il tempo che deve aspettare per il prossimo attacco")]
@@ -45,10 +50,17 @@ public class BossMiniera : MonoBehaviour
     private bool isAttacking = false;   
     /////////////////////////////////////////////////////////////////////////////////
     [Header("Actions")]
+    public GameObject[] Cristals;
+    public int CurrentCrystal = 0;
+    [HideInInspector] public int MaxCrystal = 5;
+    public float TouchDistance = 1f;
     public int PhaseM,Action_P1,Action_P2,Action_P3 = 0;
     private bool Lock_P2,Lock_P3 = false;
+    private bool P_3 = true;
     private bool Lock_P1 = true;
     bool isMoving, isWalk = false;
+    bool StartP2Anm,EndP2Anm = true;
+    bool StartP3Anm,EndP3Anm = true;
     private float lerpTime = 2f; //Tempo interpolazione
     bool Right = true;
     public float stoppingDistance = 1f;
@@ -113,10 +125,12 @@ public class BossMiniera : MonoBehaviour
     //[SpineAnimation][SerializeField] private string StunFlashAnimationName;
     //[SpineAnimation][SerializeField] private string SleepAnimationName;
     [SpineAnimation][SerializeField] private string StartP2AnimationName;
+     [SpineAnimation][SerializeField] private string EndP2AnimationName;
     [SpineAnimation][SerializeField] private string StartP3AnimationName;
     [SpineAnimation][SerializeField] private string ShootStartAnimationName;
     [SpineAnimation][SerializeField] private string ShootLoopAnimationName;
     [SpineAnimation][SerializeField] private string ShootEndAnimationName;
+    [SpineAnimation][SerializeField] private string BombingP2AnimationName;
     [SpineAnimation][SerializeField] private string DieAnimationName;
     [SpineAnimation][SerializeField] private string PredieAnimationName;
     public AnimationManager Anm;
@@ -129,6 +143,7 @@ public class BossMiniera : MonoBehaviour
         N_Target = GameManager.instance.N_Target;
         currentHealth = maxHealth;
         poisonResistanceCont = poisonResistance;
+        CurrentCrystal = MaxCrystal;
     }
     
     /////////////////////////////////////////////////////////////////////////////////
@@ -185,22 +200,24 @@ public class BossMiniera : MonoBehaviour
             PhaseM = 0;
             //Lock_P1 = true;Lock_P2 = false;Lock_P3 = false;
         }
-        else if (currentHealth <= 3500 && currentHealth > 2500)
+        else if (currentHealth <= 3500 && P_3)
         {
             // Fase 2
-            if(Lock_P2){Action_P1 = 2;}else if(!Lock_P2){PhaseM = 1;}
-            //Lock_P1 = false;Lock_P2 = true;Lock_P3 = false;
+            if(!Lock_P2){Action_P1 = 2;}else if(Lock_P2){PhaseM = 1;}
+            if(CurrentCrystal == 0){Action_P2 = 1;}
         }
-        else if (currentHealth <= 2500 && currentHealth < 3500)
+        else if (currentHealth <= 2000 && !P_3)
         {
             // Fase 3
-            if(Lock_P3){Action_P2 = 3;}else if(!Lock_P3){PhaseM = 2;}
+            P_3 = true;
+            if(!Lock_P3){Action_P2 = 3;}else if(Lock_P3){PhaseM = 2;}
         }
         else if (currentHealth <= 0)
         {
             // Morte
             DieB = true; IconVFX.SetActive(true); Die();
         }
+        
     }}}
     /////////////////////////////////////////////////////////////////////////////////
     ///For Test
@@ -321,40 +338,41 @@ public class BossMiniera : MonoBehaviour
     //////////////////////////////////////////////////////////////////////////
     private void StartP2()
         {
-            if(!DM.inputCTR)
-            {
-                Anm.PlayAnimation(StartP2AnimationName);
-                StartCoroutine(MoveTowardsCenterPoint());
-            }
+        if(!DM.inputCTR)
+        {
+        if(EndP2Anm){
+        float distanceToTarget = Vector3.Distance(transform.position, CenterPoint.transform.position);
+        moveSpeed = 5; TargetLaserOBJ.SetActive(false);LaserOBJ.SetActive(false);
+        if(StartP2Anm){Anm.ClearAnm(); Anm.PlayAnimationLoop(StartP2AnimationName); StartP2Anm = false;}
+        if (distanceToTarget > TouchDistance)
+        {
+        transform.position = Vector3.MoveTowards(transform.position, CenterPoint.transform.position, moveSpeed * Time.deltaTime);
+        }
+        else if(distanceToTarget < TouchDistance)
+        {Anm.ClearAnm(); StartCoroutine(MoveTowardsCenterPoint());}
+        }}
         }
         private IEnumerator MoveTowardsCenterPoint()
         {
-        isMoving = true;
-
-        Vector3 startPosition = transform.position;
-        Vector3 targetPosition = CenterPoint.transform.position;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < lerpTime)
-        {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / lerpTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;  // Attendi il frame successivo
-        }
-        transform.position = targetPosition;  // Assicurati che la posizione finale sia esatta
-        isMoving = false;
-        yield return new WaitForSeconds(10);
-        VFX_Barier.SetActive(true);
-        Lock_P2 = false;
-        Action_P2 = 0;
+        EndP2Anm = false;
+        Anm.PlayAnimationStop(EndP2AnimationName);
+        yield return new WaitForSeconds(1);
+        VFX_Barier.SetActive(true); VFX_Barier.transform.position = transform.position;
+        yield return new WaitForSeconds(1);
+        ResetBool(); Anm.PlayAnimationLoop(IdleP2AnimationName); 
+        foreach (GameObject arenaObject in Cristals){arenaObject.SetActive(true);}
+        Action_P2 = 0; isAttacking = false; Lock_P2 = true;
         }
     //////////////////////////////////////////////////////////////////////////
     private void StartP3()
-    {if(!DM.inputCTR){Anm.ClearAnm();Anm.PlayAnimation(StartP3AnimationName);StartCoroutine(StartP3_Time());}}
+    {if(!DM.inputCTR && StartP3Anm){Anm.ClearAnm();Anm.PlayAnimation(StartP3AnimationName);
+    StartCoroutine(StartP3_Time()); StartP3Anm = false;}}
     private IEnumerator StartP3_Time()
     {            
         yield return new WaitForSeconds(5);
         VFX_Barier.SetActive(true);
+        VFX_Barier.transform.position = transform.position;
+        Lock_P3 = true;
         Action_P3 = 0;
     }
     //////////////////////////////////////////////////////////////////////////
@@ -448,7 +466,7 @@ public class BossMiniera : MonoBehaviour
 
     }
     /////////////////////////////////////////////////////////////////////////////
-   private void Shoot()
+    private void Shoot()
 {
     if (!DM.inputCTR && player != null)
     {
@@ -469,18 +487,16 @@ public class BossMiniera : MonoBehaviour
         }
     }
 }
+    private IEnumerator StartShooting()
+    {
+        yield return new WaitForSeconds(2); // Il tempo per attivare il Laser
 
-private IEnumerator StartShooting()
-{
-    yield return new WaitForSeconds(2); // Il tempo per attivare il Laser
-
-    TargetLaserOBJ.SetActive(true);
-    LaserOBJ.SetActive(true);
-    Start_Laser = true;
-    isLaser = true;
-}
-
-private IEnumerator StopShooting()
+        TargetLaserOBJ.SetActive(true);
+        LaserOBJ.SetActive(true);
+        Start_Laser = true;
+        isLaser = true;
+    }
+    private IEnumerator StopShooting()
 {
     yield return new WaitForSeconds(TimeLaser); // Il tempo per disattivare il Laser
 
@@ -500,44 +516,45 @@ private IEnumerator StopShooting()
     private void Bombing()
         {
             if(!DM.inputCTR){
-            if (player != null)
-            {
                 if(!isAttacking)
                 {
-                    if(Bomb_1){SpawnObjectInRandomPosition(); Bomb_1 = false;}
-                    if(Bomb_2){SpawnObjectInRandomPosition(); Bomb_2 = false;}
-                    if(Bomb_3){SpawnObjectInRandomPosition(); Bomb_3 = false;}
-                    if(Bomb_4){SpawnObjectInRandomPosition(); Bomb_4 = false;}
-                    if(Bomb_5){SpawnObjectInRandomPosition(); Bomb_5 = false;}
-                    if(Bomb_6){SpawnObjectInRandomPosition(); Bomb_6 = false;}
+                    Anm.PlayAnimationStop(BombingP2AnimationName);
+                    if(Bomb_1){Bomb_1 = false;SpawnObjectInRandomPosition();}
+                    /*if(Bomb_2){Bomb_1 = false;SpawnObjectInRandomPosition();}
+                    if(Bomb_3){Bomb_1 = false;SpawnObjectInRandomPosition();}
+                    if(Bomb_4){Bomb_1 = false;SpawnObjectInRandomPosition();}
+                    if(Bomb_5){Bomb_1 = false;SpawnObjectInRandomPosition();}
+                    if(Bomb_6){Bomb_1 = false;SpawnObjectInRandomPosition();}*/
+                    isAttacking = true;
                     StartCoroutine(BombingTime());
+                    
                 }   
-            }}
-            else if(DM.inputCTR && !DieB && currentHealth > 3500){Anm.PlayAnimationLoop(IdleP1AnimationName);}
-            else if(DM.inputCTR && !DieB && currentHealth <= 2500){Anm.PlayAnimationLoop(IdleP3AnimationName);}
-            
+            }
         }
     public void SpawnObjectInRandomPosition()
     {
         Vector2 randomPoint = Random.insideUnitCircle * spawnRadius;
-        Vector3 spawnPosition = new Vector3(randomPoint.x, 0f, randomPoint.y) + transform.position;
+        Vector3 spawnPosition = new Vector3(randomPoint.x, 1f, randomPoint.y) + transform.position;
         Instantiate(objectToSpawn, spawnPosition, objectToSpawn.transform.rotation);
     }
+
     private IEnumerator BombingTime()
     {        
-        yield return new WaitForSeconds(5); 
-        if(DM.inputCTR && !DieB && currentHealth > 3500){Action_P2 = 2;}
-        else if(DM.inputCTR && !DieB && currentHealth <= 2500){Action_P3 = 0;}
-        VFX_Barier.SetActive(true);
-        Choise();
-        take = false;
-        isAttacking = false;
-
+        yield return new WaitForSeconds(2);
+        Anm.PlayAnimationLoop(IdleP2AnimationName); 
+        VFX_Barier.SetActive(true); VFX_Barier.transform.position = transform.position;
+        yield return new WaitForSeconds(3);
+        if (Action_P2 == 0){Choise();Action_P2 = 2;}
     }
-    private void Wait()
-    {
+    private void Wait(){StartCoroutine(RestoreAtk()); }
+    private IEnumerator RestoreAtk()
+    {        
+        yield return new WaitForSeconds(1);
         Anm.PlayAnimationLoop(IdleP2AnimationName);
-        Bomb_1 = true; Bomb_2 = true; Bomb_3 = true; Bomb_4 = true; Bomb_5 = true; Bomb_6 = true; 
+        Bomb_1 = true; //Bomb_2 = true; Bomb_3 = true; Bomb_4 = true; Bomb_5 = true; Bomb_6 = true;
+        isAttacking = false;
+        yield return new WaitForSeconds(attackPauseDuration);
+        if (Action_P2 == 2){Action_P2 = 0;}
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -553,10 +570,12 @@ private IEnumerator StopShooting()
         }
     private IEnumerator VulnerableTime()
     {        
-        Action_P2 = 1;
-        yield return new WaitForSeconds(5); 
+        yield return new WaitForSeconds(10); 
         Action_P2 = 0;
+        foreach (GameObject arenaObject in Cristals){arenaObject.SetActive(true);}
         VFX_Barier.SetActive(true);
+        VFX_Barier.transform.position = transform.position;
+        CurrentCrystal = MaxCrystal;
         take = false;
         isAttacking = false;
     }
@@ -760,6 +779,8 @@ private IEnumerator StopShooting()
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, spawnRadius);
+         Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, TouchDistance);
         }
     #endregion
     #endif
