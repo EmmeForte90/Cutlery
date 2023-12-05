@@ -156,12 +156,6 @@ public class BossMiniera : MonoBehaviour
         Vector3 spawnPosition = new Vector3(randomPoint.x, 1f, randomPoint.y) + transform.position;
         Instantiate(objectToSpawn, spawnPosition, objectToSpawn.transform.rotation);
     }
-    public void SpawnObjectInRandomPosition_3()
-    {
-        Vector2 randomPoint = Random.insideUnitCircle * spawnRadius;
-        Vector3 spawnPosition = new Vector3(randomPoint.x, 1f, randomPoint.y) + transform.position;
-        Instantiate(objectToSpawn_3, spawnPosition, objectToSpawn_3.transform.rotation);
-    }
     private void Choise()
     {
         // Genera un numero casuale tra 1 e 3
@@ -223,18 +217,20 @@ public class BossMiniera : MonoBehaviour
         //
         if(DieB){Action_P3 = 4; IconVFX.SetActive(true); PreDie();}
         //
-        if(isMoveRunning){
-            Transform targetWaypoint = waypoints[currentWaypointIndex];
-            float distanceToTarget = Vector3.Distance(transform.position, targetWaypoint.transform.position);
-            Anm.PlayAnimationLoop(IdleP3AnimationName);
-            if (distanceToTarget > TouchDistance)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, moveSpeed * Time.deltaTime);
-            }
-            else if (distanceToTarget < TouchDistance)
-            {
-                currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
-            }}
+        if(isMove){moveSpeed = 20f; 
+        Transform targetWaypoint = waypoints[currentWaypointIndex];
+        float distanceToTarget = Vector3.Distance(transform.position, targetWaypoint.transform.position);
+        Anm.PlayAnimationLoop(IdleP3AnimationName);
+        if (distanceToTarget > TouchDistance)
+        {
+        transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, moveSpeed * Time.deltaTime);
+        }
+        else if(distanceToTarget < TouchDistance)
+        {
+            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+        }
+        StartCoroutine(StopMoving());}
+        
         
     }}}
     /////////////////////////////////////////////////////////////////////////////////
@@ -323,10 +319,10 @@ public class BossMiniera : MonoBehaviour
     {
         case 0:
             if (!isAttacking)
-            {FacePlayer();Raffica();}
+            {FacePlayer();Raffica(); VFX_Blam.SetActive(false);}
             break;
         case 1:
-            MovingPoints();
+            MovingPoints(); VFX_Blam.SetActive(true); 
             break;
         case 2:
             // Puoi inserire qui la logica per la terza azione
@@ -569,9 +565,9 @@ public class BossMiniera : MonoBehaviour
         }
     private void RafficaAtk()
     {
-        isRaffica = true;  print("F3_Atk3");
+        isRaffica = true; isAttacking = true; print("F3_Atk3");
         Anm.PlayAnimation(Atk3AnimationName);
-        SpawnObjectInRandomPosition_3();
+        Instantiate(objectToSpawn, transform.position, objectToSpawn.transform.rotation);
         StartCoroutine(RafficaAtkPause());
     }
     private IEnumerator RafficaAtkPause()
@@ -579,35 +575,23 @@ public class BossMiniera : MonoBehaviour
         yield return new WaitForSeconds(WaitAtk);        
         Anm.PlayAnimationLoop(IdleP3AnimationName);
         yield return new WaitForSeconds(attackPauseDuration);
-        if (Action_P3 == 0){Choise();ResetBool();Action_P3 = 1;}
-        yield break;
+        if (Action_P3 == 0){Choise();ResetBool(); 
+        isRaffica = false; isAttacking = false; Action_P3 = 1;}
+        //yield break;
     }
     //----//
     private void MovingPoints()
     {
         // Muovi il GameObject verso il waypoint corrente
-        if(!DM.inputCTR){
-        moveSpeed = 20f; VFX_Blam.SetActive(true); 
-        Transform targetWaypoint = waypoints[currentWaypointIndex];
-        float distanceToTarget = Vector3.Distance(transform.position, targetWaypoint.transform.position);
-        Anm.PlayAnimationLoop(IdleP3AnimationName);
-        if (distanceToTarget > TouchDistance)
-        {
-        transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, moveSpeed * Time.deltaTime);
-        }
-        else if(distanceToTarget < TouchDistance)
-        {
-            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
-        }
-        StartCoroutine(StopMoving());
-        }
+        if(!DM.inputCTR){isMove = true;}
     }
     private IEnumerator StopMoving()
     {        
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(TimeRush);
         print("F3_Atk2");
-        if (Action_P3 == 1){Choise();VFX_Blam.SetActive(false); ResetBool();Action_P3 = 0;}
-        yield break;
+        if (Action_P3 == 1){Choise();VFX_Blam.SetActive(false); ResetBool(); 
+        isRaffica = false; isAttacking = false; isMove = false; Action_P3 = 0;}
+        //yield break;
     }
     //----//
     private void CanHurt_3()
