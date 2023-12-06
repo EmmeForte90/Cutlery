@@ -148,6 +148,7 @@ public class PlayerStats : MonoBehaviour
     [Header("Events")]
     public bool[] EventsDesert;  
     public bool[] SwitchDesert;
+    public bool[] Timelines;
 
     [Header("Quests")]
     public List<Quests> questDatabase;
@@ -339,6 +340,34 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void DeactivateTimeline()
+    {
+        // Cerca tutti i GameObjects con il tag "Enemy"
+        GameObject[] WarningEvent = GameObject.FindGameObjectsWithTag("Timeline");
+    
+    foreach (GameObject Character in WarningEvent)
+        {
+            // Ottiene il componente QuestCharacters
+            TimelineController Event = Character.GetComponent<TimelineController>();
+
+            // Verifica se il componente esiste
+            if (Event != null)
+            {
+                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
+                int Id = Event.ID;
+                for (int i = 0; i <  EventsDesert.Length; i++)
+                {
+                    if ( EventsDesert[i] && i == Id)
+                    {
+                        // Imposta ordaliT.FirstD a false
+                        Event.Take();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
 
 
 
@@ -436,7 +465,13 @@ public class PlayerStats : MonoBehaviour
     {Skill_K[Act] = true; GameManager.instance.Skill_KI[Act].SetActive(true);
      GameManager.instance.Skill_KIB[Act].SetActive(true);}
 
-    public void EnemyDefeatArea(int Defeat){Enemies[Defeat] = true;}
+    //public void EnemyDefeatArea(int Defeat){Enemies[Defeat] = true;}
+    public void TreasureOpen(int Open)
+    {
+        Treasure[Open] = true;
+        DeactivateCHEST();
+    }
+
     public void EventDesertEnd(int id)
     {
         EventsDesert[id] = true;
@@ -449,7 +484,20 @@ public class PlayerStats : MonoBehaviour
         DeactivateSwitch();
     }
 
-    public void TreasureOpen(int Open){Treasure[Open] = true;}
+    public void TimelineEnd(int id)
+    {
+        Timelines[id] = true;
+        DeactivateTimeline();
+    }
+
+    public void DeactivateEventsAwake()
+    {   
+        DeactivateTimeline();
+        DeactivateSwitch();
+        DeactivateWarning();
+        DeactivateCHEST();
+    }
+
 
     #region Levelup
     public void F_LevelUp()

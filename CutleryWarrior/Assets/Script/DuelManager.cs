@@ -586,7 +586,7 @@ IEnumerator EndBattle()
         if(GameManager.instance.S_Unlock){Stats.S_GainExperience(result);}
         if(GameManager.instance.K_Unlock){Stats.K_GainExperience(result);}
         GameManager.instance.AddTomoney(Money);
-        PlayerStats.instance.EnemyDefeatArea(GameManager.instance.IdENM);
+        //PlayerStats.instance.EnemyDefeatArea(GameManager.instance.IdENM);
         //LVCH.sceneName = GameManager.instance.sceneName;
         //Reward();
         win = false;}

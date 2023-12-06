@@ -38,6 +38,7 @@ TagManager:
   - Save
   - CrushENM
   - Target
+  - Timeline
   layers:
   - Default
   - TransparentFX

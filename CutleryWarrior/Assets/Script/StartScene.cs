@@ -44,11 +44,13 @@ public class StartScene : MonoBehaviour
     Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
     Instantiate(Data, transform.position, transform.rotation); 
     PlayerStats.instance.StartData = true;
+    PlayerStats.instance.DeactivateEventsAwake();
     AudioManager.instance.CrossFadeINAudio(WhatMusic); Once = false;
     }
     else if(!Once)
     {if(SaveManager.instance.Saving)
     {   SaveManager.instance.LoadGame();
+        PlayerStats.instance.DeactivateEventsAwake();
         if(GameManager.instance.F_Unlock){FAct = GameManager.instance.F_Hero;}
         if(GameManager.instance.S_Unlock){SAct = GameManager.instance.S_Hero;}
         if(GameManager.instance.K_Unlock){KAct = GameManager.instance.K_Hero;}
