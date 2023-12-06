@@ -67,9 +67,11 @@ using Cinemachine;
     
     public void ActivateActor()
     {
+        if(isCutscene){virtualCamera.Follow =  PointView.transform;}
         switch(GameManager.instance.CharacterID)
         {
             case 1:
+            GameManager.instance.NotTouchOption = true;
             if(GameManager.instance.F_Unlock){player = GameManager.instance.Fork; 
             FAct.SetActive(true); 
             FAct.transform.position = F_Brain.transform.position;
@@ -87,6 +89,7 @@ using Cinemachine;
             break;
             //////////////////////////////////////////////////
             case 2:
+            GameManager.instance.NotTouchOption = true;
             if(GameManager.instance.F_Unlock){AI_1 = GameManager.instance.Fork; 
             FAct.SetActive(true); 
             FAct.transform.position = F_Brain.transform.position;
@@ -104,6 +107,7 @@ using Cinemachine;
             break;
             //////////////////////////////////////////////////
             case 3:
+            GameManager.instance.NotTouchOption = true;
             if(GameManager.instance.F_Unlock){AI_1 = GameManager.instance.Fork; 
             FAct.SetActive(true); 
             FAct.transform.position = F_Brain.transform.position;
@@ -126,9 +130,11 @@ using Cinemachine;
         switch(GameManager.instance.CharacterID)
         {
             case 1:
+            GameManager.instance.NotTouchOption = false;
             if(GameManager.instance.F_Unlock){player = GameManager.instance.Fork; 
             player.SetActive(true); 
             F_Brain.transform.position = FAct.transform.position;
+            virtualCamera.Follow =  F_Brain.transform;
             FAct.SetActive(false); }
             //
             if(GameManager.instance.K_Unlock){AI_1 = GameManager.instance.Knife;
@@ -143,6 +149,7 @@ using Cinemachine;
             break;
             //////////////////////////////////////////////////
             case 2:
+            GameManager.instance.NotTouchOption = false;
             if(GameManager.instance.F_Unlock){AI_1 = GameManager.instance.Fork; 
             AI_1.SetActive(true);
             F_Brain.transform.position = FAct.transform.position;
@@ -151,6 +158,7 @@ using Cinemachine;
             if(GameManager.instance.K_Unlock){player = GameManager.instance.Knife;
             player.SetActive(true);
             K_Brain.transform.position = KAct.transform.position;
+            virtualCamera.Follow =  K_Brain.transform;
             KAct.SetActive(false);}
             //
             if(GameManager.instance.S_Unlock){AI_2 = GameManager.instance.Spoon;
@@ -160,6 +168,7 @@ using Cinemachine;
             break;
             //////////////////////////////////////////////////
             case 3:
+            GameManager.instance.NotTouchOption = false;
             if(GameManager.instance.F_Unlock){AI_1 = GameManager.instance.Fork; 
             AI_1.SetActive(true);
             F_Brain.transform.position = FAct.transform.position;
@@ -173,6 +182,7 @@ using Cinemachine;
             if(GameManager.instance.S_Unlock){player = GameManager.instance.Spoon;
             player.SetActive(true);
             S_Brain.transform.position = SAct.transform.position;
+            virtualCamera.Follow =  S_Brain.transform;
             SAct.SetActive(false);}
             break;
         }   

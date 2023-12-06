@@ -6,6 +6,7 @@ public class StartScene : MonoBehaviour
 {
     #region Header
     public int WhatMusic;
+    [Header("Metti true su Start solo per testare il livello!!!!")]
     public bool Start = false;
     public bool startMusic = false;
     public GameObject StartGameOBJ;
@@ -44,6 +45,7 @@ public class StartScene : MonoBehaviour
     Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
     Instantiate(Data, transform.position, transform.rotation); 
     PlayerStats.instance.StartData = true;
+    GameManager.instance.NotTouchOption = false;
     PlayerStats.instance.DeactivateEventsAwake();
     AudioManager.instance.CrossFadeINAudio(WhatMusic); Once = false;
     }
@@ -51,6 +53,7 @@ public class StartScene : MonoBehaviour
     {if(SaveManager.instance.Saving)
     {   SaveManager.instance.LoadGame();
         PlayerStats.instance.DeactivateEventsAwake();
+        GameManager.instance.NotTouchOption = false;
         if(GameManager.instance.F_Unlock){FAct = GameManager.instance.F_Hero;}
         if(GameManager.instance.S_Unlock){SAct = GameManager.instance.S_Hero;}
         if(GameManager.instance.K_Unlock){KAct = GameManager.instance.K_Hero;}
