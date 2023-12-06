@@ -264,7 +264,7 @@ public void Awake()
         else if (horizontalInput > 0 && !top)//Sta fermo
         {Anm.PlayAnimationLoop(WalkUPAnimationName); top = false; } 
         else if (horizontalInput < 0 && !top)//Sta fermo
-        {Anm.ClearAnm(); Anm.PlayAnimationLoop(WalkUPAnimationName); top = false; } 
+        {Anm.PlayAnimationLoop(WalkUPAnimationName); top = false; } 
          else if (horizontalInput > 0 && top)//Sta fermo
         {Anm.PlayAnimationLoop(WalkAnimationName); top = true; } 
         else if (horizontalInput < 0 && top)//Sta fermo

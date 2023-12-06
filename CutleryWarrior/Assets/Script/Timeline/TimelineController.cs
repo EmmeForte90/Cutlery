@@ -61,19 +61,28 @@ using Cinemachine;
     if(GameManager.instance.F_Unlock){F_Brain = GameManager.instance.F_Hero;}
     if(GameManager.instance.K_Unlock){K_Brain = GameManager.instance.K_Hero;}
     if(GameManager.instance.S_Unlock){S_Brain = GameManager.instance.S_Hero;}
-    ActivateActor(); GameManager.instance.ChStop();
+    ActivateActor(); //GameManager.instance.ChStop();
     if(isCutscene){virtualCamera.Follow =  PointView.transform;}
     }
+
+    
+    public void CameraONPoint(){virtualCamera.Follow = PointView.transform;}
+
+    public void CameraONActor(){ActivateActor();}
     
     public void ActivateActor()
     {
-        if(isCutscene){virtualCamera.Follow =  PointView.transform;}
+        //if(isCutscene){virtualCamera.Follow =  PointView.transform;}
         switch(GameManager.instance.CharacterID)
         {
             case 1:
             GameManager.instance.NotTouchOption = true;
-            if(GameManager.instance.F_Unlock){player = GameManager.instance.Fork; 
+            if(GameManager.instance.F_Unlock){
+            player = GameManager.instance.Fork; 
             FAct.SetActive(true); 
+            if(isCutscene){virtualCamera.Follow =  PointView.transform;}
+            else if(!isCutscene){virtualCamera.Follow =  FAct.transform;}
+            FAct.transform.position = player.transform.position;
             FAct.transform.position = F_Brain.transform.position;
             player.SetActive(false);}
             //
@@ -131,8 +140,10 @@ using Cinemachine;
         {
             case 1:
             GameManager.instance.NotTouchOption = false;
-            if(GameManager.instance.F_Unlock){player = GameManager.instance.Fork; 
+            if(GameManager.instance.F_Unlock){
+            player = GameManager.instance.Fork; 
             player.SetActive(true); 
+            player.transform.position = FAct.transform.position;
             F_Brain.transform.position = FAct.transform.position;
             virtualCamera.Follow =  F_Brain.transform;
             FAct.SetActive(false); }
