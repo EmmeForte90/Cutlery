@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using System.Linq;
-using UnityEditor;
+
 
 public class DuelManager : MonoBehaviour
 {
