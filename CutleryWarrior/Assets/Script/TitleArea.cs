@@ -7,6 +7,7 @@ public class TitleArea : MonoBehaviour
     private bool HaveButton = false;
     public int lifeTime;
     public bool DestroyObj = false;
+    public bool needSFX = false;
     public void Start()
     {if(Title != null){Title.gameObject.SetActive(false);}}
     void Update(){if(HaveButton){if(Input.GetMouseButtonDown(0) || Input.GetButton("Fire1")){continueGame();}}} 
@@ -28,9 +29,8 @@ public class TitleArea : MonoBehaviour
     }
     IEnumerator CoordinateActor()
     {
-    yield return new WaitForSeconds(2);
     Title.gameObject.SetActive(true);
-    AudioManager.instance.PlaySFX(13);
+    if(needSFX){AudioManager.instance.PlaySFX(13);}
     yield return new WaitForSeconds(lifeTime);
     GameManager.instance.ChCanM();
     if(!DestroyObj){Title.gameObject.SetActive(false);}

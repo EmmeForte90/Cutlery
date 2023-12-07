@@ -50,7 +50,7 @@ using Cinemachine;
     private void Start()
     {
     virtualCamera = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    //SavePositionCamera.transform.position = virtualCamera.transform.position;
+    GameManager.instance.Minimap.SetActive(false); GameManager.instance.activeMinimap = false;
     if(GameManager.instance.S_Unlock){AI_S = GameManager.instance.S_Hero.GetComponent<CharacterFollow>();}
     if(GameManager.instance.F_Unlock){AI_F = GameManager.instance.F_Hero.GetComponent<CharacterFollow>();}
     if(GameManager.instance.K_Unlock){AI_K = GameManager.instance.K_Hero.GetComponent<CharacterFollow>();}
@@ -70,7 +70,11 @@ using Cinemachine;
     public void CameraONPoint(){CameraTransition.StartTransition();}
 
     public void CameraONActor(){ActivateActor();}
-    
+
+    public void TalkFork(){AudioManager.instance.PlaySFX(2);}
+    public void TalkKnife(){AudioManager.instance.PlaySFX(0);}
+    public void TalkSpoon(){AudioManager.instance.PlaySFX(1);}
+
     public void ActivateActor()
     {
         //if(isCutscene){virtualCamera.Follow =  PointView.transform;}

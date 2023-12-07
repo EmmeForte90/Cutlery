@@ -10,6 +10,7 @@ public class Switch : MonoBehaviour
     public GameObject IconSwitch;
     public GameObject IconGate;
     public GameObject VFXTake;
+    public GameObject VFXSegnal;
     public bool canOpen = true;
     public void Take(){
     Anm.Play("Switch_Anm");
@@ -40,6 +41,7 @@ public class Switch : MonoBehaviour
         Anm.Play("Switch_Anm");
         AnmGate.Play("GateOpen_Anm");
         Instantiate(VFXTake, transform.position, transform.rotation);
+        VFXSegnal.SetActive(false);
         AudioManager.instance.PlaySFX(11);
         GameManager.instance.EsclamationStop();
         PlayerStats.instance.EventSwitchEnd(IDEvent);
