@@ -222,6 +222,7 @@ using Cinemachine;
             SAct.SetActive(false);}
             break;
         }   
+        PlayerStats.instance.TimelineEnd(ID);
     }
 
 
