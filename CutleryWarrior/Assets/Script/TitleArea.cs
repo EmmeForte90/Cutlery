@@ -6,8 +6,7 @@ public class TitleArea : MonoBehaviour
     public int lifeTime = 0;
     public bool DestroyObj = false;
     public void Start()
-    {if(Title != null){Title.gameObject.SetActive(false); StartCoroutine(CoordinateActor());}
-    else if(Title == null){print("Nothing title");}}
+    {if(Title != null){Title.gameObject.SetActive(false);}}
     public void OnTriggerEnter(Collider other) 
     {if (other.CompareTag("F_Player") || other.CompareTag("K_Player") || other.CompareTag("S_Player"))
     {
@@ -20,5 +19,5 @@ public class TitleArea : MonoBehaviour
     AudioManager.instance.PlaySFX(13);
     yield return new WaitForSeconds(lifeTime);
     if(!DestroyObj){Title.gameObject.SetActive(false);}
-    else if(DestroyObj){if(Title != null){Destroy(Title);}}}
+    else if(DestroyObj){if(Title != null){Destroy(gameObject);}}}
 }

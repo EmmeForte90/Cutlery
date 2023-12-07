@@ -41,7 +41,7 @@ using Cinemachine;
     private GameObject F_Brain; // Variabile per il player
     private GameObject K_Brain; // Variabile per il player
     private GameObject S_Brain; // Variabile per il player
-
+    public CambioFollow CameraTransition;
     public GameObject[] ActiveTiemAfterScene;
 
 
@@ -61,12 +61,12 @@ using Cinemachine;
     if(GameManager.instance.F_Unlock){F_Brain = GameManager.instance.F_Hero;}
     if(GameManager.instance.K_Unlock){K_Brain = GameManager.instance.K_Hero;}
     if(GameManager.instance.S_Unlock){S_Brain = GameManager.instance.S_Hero;}
-    ActivateActor(); //GameManager.instance.ChStop();
+    if(isCutscene){ActivateActor();} //GameManager.instance.ChStop();
+    //if(isCutscene){virtualCamera.Follow =  PointView.transform;}
     if(isCutscene){virtualCamera.Follow =  PointView.transform;}
     }
 
-    
-    public void CameraONPoint(){virtualCamera.Follow = PointView.transform;}
+    public void CameraONPoint(){CameraTransition.StartTransition();}
 
     public void CameraONActor(){ActivateActor();}
     

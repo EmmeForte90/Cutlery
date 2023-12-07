@@ -15,6 +15,7 @@ public class Treasure : MonoBehaviour
     [Header("Solo se è in item da Quest")]
     public GameObject Icon;
     public GameObject VFXTake;
+    public GameObject VFXSegnalator;
     public int specificQuant;
     [Tooltip("Che tipo di oggetto? 0-Item 1-Quest 2-Key 3-Weapom 4-Armor")]
     private int KindItem;
@@ -75,6 +76,7 @@ public class Treasure : MonoBehaviour
         GameManager.instance.EsclamationStop();
         AddSpecificItem();
         //iconM.SetActive(false);
+        VFXSegnalator.SetActive(false);
         Inventory.instance.Reward(specificItem, specificQuant);
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
         PlayerStats.instance.TreasureOpen(Id);
