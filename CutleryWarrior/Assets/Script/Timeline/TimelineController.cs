@@ -43,13 +43,14 @@ using Cinemachine;
     private GameObject S_Brain; // Variabile per il player
     public CambioFollow CameraTransition;
     public GameObject[] ActiveTiemAfterScene;
+    public GameObject SavePositionCamera;
 
 
 
     private void Start()
     {
     virtualCamera = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    
+    SavePositionCamera.transform.position = virtualCamera.transform.position;
     if(GameManager.instance.S_Unlock){AI_S = GameManager.instance.S_Hero.GetComponent<CharacterFollow>();}
     if(GameManager.instance.F_Unlock){AI_F = GameManager.instance.F_Hero.GetComponent<CharacterFollow>();}
     if(GameManager.instance.K_Unlock){AI_K = GameManager.instance.K_Hero.GetComponent<CharacterFollow>();}
@@ -145,6 +146,7 @@ using Cinemachine;
             player.SetActive(true); 
             player.transform.position = FAct.transform.position;
             F_Brain.transform.position = FAct.transform.position;
+            virtualCamera.transform.position = SavePositionCamera.transform.position;
             virtualCamera.Follow =  F_Brain.transform;
             FAct.SetActive(false); }
             //
@@ -221,8 +223,7 @@ public  void ResetCamera()
 }
 public void Take(){Destroy(gameObject);}
 public void CancellTimeline(){PlayerStats.instance.TimelineEnd(ID);}
-public void RestoreGameplay(){ActivatePlayer();  
-foreach (GameObject arenaObject in ActiveTiemAfterScene){arenaObject.SetActive(true);}}
+public void RestoreGameplay(){foreach (GameObject arenaObject in ActiveTiemAfterScene){arenaObject.SetActive(true);}}
 
 //public  void TimelineRepeat(){CutsceneManager.Instance.TimelineStart(ID);}
 
