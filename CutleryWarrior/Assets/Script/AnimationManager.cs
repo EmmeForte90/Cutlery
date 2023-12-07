@@ -242,7 +242,7 @@ public class AnimationManager : MonoBehaviour
     StartCoroutine(StopVFX_Rapid()); VFX = false; }}
     if (e.Data.Name == "stump" && VFX){Instantiate(Stump, Foot.position, Stump.transform.rotation);
     StartCoroutine(StopVFX_FNormal()); VFX = false; }
-     if (e.Data.Name == "dodge"){Instantiate(Dodge, Foot.position, Dodge.transform.rotation);
+    if (e.Data.Name == "dodge" && VFX){Instantiate(Dodge, Foot.position, Dodge.transform.rotation);
     StartCoroutine(StopVFX_Rapid()); VFX = false; }
     if (e.Data.Name == "EndAtk" && VFX){PlayAnimationLoop(WalkBAnimationName);}
     ////////////////////////////////////////////////////////////////////////////////////////////////////

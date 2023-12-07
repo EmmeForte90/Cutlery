@@ -225,7 +225,7 @@ public  void ResetCamera()
     virtualCamera.Follow =  player.transform;
     GameManager.instance.StopWin();
     GameManager.instance.ChCanM();  
-    GameManager.instance.ActiveMinimap(); 
+    GameManager.instance.notChange = false;
     Destroy(this);
 }
 public void Take(){Destroy(gameObject);}

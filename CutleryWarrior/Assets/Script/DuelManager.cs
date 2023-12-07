@@ -650,7 +650,10 @@ IEnumerator EndBattle()
     foreach (GameObject arenaObject in Enemies){arenaObject.SetActive(false);}
     GameManager.instance.StopWin();
     GameManager.instance.ChCanM();
-    GameManager.instance.ActiveMinimap();
+    GameManager.instance.NotTouchOption = false;
+    GameManager.instance.notChange = false;
+    GameManager.instance.battle = false;
+    GameManager.instance.DectiveMinimap();
     AudioManager.instance.CrossFadeINAudio(WhatMusicAB);
     GameManager.instance.FadeOut();
     ThisBattle.SetActive(false);

@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public GameObject Minimap;
     public GameObject AllarmMap;
     public bool activeMinimap = false; 
-
     public static bool GameManagerExist; 
     public Inventory Inv;
     public InventoryB InvB;
@@ -28,7 +27,6 @@ public class GameManager : MonoBehaviour
     public Vector3 savedPosition;
     public Transform savedPositionEscape;
     public string sceneName;
-    public bool notChange = false;
     [Range (1,3)]
     public int CharacterID;
     /// ////////////////////////////////////////////////////////
@@ -166,6 +164,8 @@ public class GameManager : MonoBehaviour
     public bool NotParty = true; 
     public bool F_Die, K_Die, S_Die = false;
     public bool NotTouchOption = false;
+    public bool notChange = false;
+
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject LittleM;
     [SerializeField]  GameObject TimerM;
@@ -668,8 +668,8 @@ public class GameManager : MonoBehaviour
     }
     public void Change(){notChange = false;} 
     public void NotChange(){notChange = true;} 
-    public void ActiveMinimap(){Minimap.SetActive(true);battle = false;}
-    public void DectiveMinimap(){Minimap.SetActive(false);battle = true;}
+    public void ActiveMinimap(){Minimap.SetActive(true); activeMinimap = true; battle = false;}
+    public void DectiveMinimap(){Minimap.SetActive(false); activeMinimap = false; battle = true;}
     public void ReturnMainMenu()
         {   
         FadeIn();

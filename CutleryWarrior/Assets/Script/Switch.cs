@@ -29,6 +29,16 @@ public class Switch : MonoBehaviour
     {Touch();}
     }
 
+    public void OnTriggerExit(Collider other)
+    {
+    if (other.CompareTag("F_Player") && GameManager.instance.CharacterID == 1)
+    {GameManager.instance.EsclamationStop();}
+    else if (other.CompareTag("K_Player") && GameManager.instance.CharacterID == 2)
+    {GameManager.instance.EsclamationStop();}
+    else if (other.CompareTag("S_Player") && GameManager.instance.CharacterID == 3)
+    {GameManager.instance.EsclamationStop();}
+    }
+
     public void Touch()
     {
         if(canOpen){GameManager.instance.Esclamation();}

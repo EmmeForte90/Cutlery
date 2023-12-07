@@ -86,8 +86,9 @@ public class NPCMove : MonoBehaviour
     else if ((transform.position - Player.transform.position).sqrMagnitude < agroDistance * agroDistance && isMonster)
     {
         Behav = 1;
-        if(SoundPlay){StartCoroutine(PlaySound());SoundPlay = false; }
-        if(GameManager.instance.activeMinimap){GameManager.instance.AllarmMap.SetActive(true);}
+        if(GameManager.instance.activeMinimap)
+        {if(SoundPlay){StartCoroutine(PlaySound());SoundPlay = false;}
+        GameManager.instance.AllarmMap.SetActive(true);}
     }
 
     switch (Behav)

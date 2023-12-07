@@ -3,6 +3,7 @@ using UnityEngine;
 public class TitleArea : MonoBehaviour
 {
     public GameObject Title;
+    public GameObject Container;
     public bool interaction = false;
     private bool HaveButton = false;
     public int lifeTime;
@@ -16,7 +17,9 @@ public class TitleArea : MonoBehaviour
     {
     if(interaction){//Devi premere il pulsante
     HaveButton = true;Title.gameObject.SetActive(true);
-    GameManager.instance.NotChange();GameManager.instance.ChStop();}
+    GameManager.instance.NotTouchOption = true;
+    GameManager.instance.notChange = true;
+    GameManager.instance.ChStop();}
     //
     else if (!interaction){StartCoroutine(CoordinateActor());}//Si attiva in automatico quando collide   
     }}
@@ -24,8 +27,10 @@ public class TitleArea : MonoBehaviour
     public void continueGame()
     {
     GameManager.instance.ChCanM();
+    GameManager.instance.NotTouchOption = false;
+    GameManager.instance.notChange = false;
     if(!DestroyObj){Title.gameObject.SetActive(false);}
-    else if(DestroyObj){Destroy(gameObject);}
+    else if(DestroyObj){Destroy(Container);}
     }
     IEnumerator CoordinateActor()
     {
@@ -33,6 +38,8 @@ public class TitleArea : MonoBehaviour
     if(needSFX){AudioManager.instance.PlaySFX(13);}
     yield return new WaitForSeconds(lifeTime);
     GameManager.instance.ChCanM();
-    if(!DestroyObj){Title.gameObject.SetActive(false);}
-    else if(DestroyObj){Destroy(gameObject);}}
+    GameManager.instance.NotTouchOption = false;
+    GameManager.instance.notChange = false;
+    Destroy(Title);
+    Destroy(Container);}
 }

@@ -548,7 +548,7 @@ private void HandleComboAttackS()
         if (canDodge)
             {danno_subito = Mathf.Max(damage - PlayerStats.instance.F_defense, 0);
             PlayerStats.instance.F_curHP -= danno_subito;
-            PlayerStats.instance.F_curRage += 5;
+            PlayerStats.instance.F_curRage += 2;
             AudioManager.instance?.PlaySFX(8);
             Instantiate(VFXHurt, transform.position, transform.rotation);
             if(sleepState){GameManager.instance.RestoreSleepF();}
@@ -559,7 +559,7 @@ private void HandleComboAttackS()
         case 1:
             danno_subito = Mathf.Max(damage - PlayerStats.instance.K_defense, 0);
             PlayerStats.instance.K_curHP -= danno_subito;
-            PlayerStats.instance.K_curRage += 5;
+            PlayerStats.instance.K_curRage += 2;
             AudioManager.instance?.PlaySFX(8);
             Instantiate(VFXHurt, transform.position, transform.rotation);
             if(sleepState){GameManager.instance.RestoreSleepK();}
@@ -571,7 +571,7 @@ private void HandleComboAttackS()
             {
                 danno_subito = Mathf.Max(damage - PlayerStats.instance.S_defense, 0);
                 PlayerStats.instance.S_curHP -= danno_subito;
-                PlayerStats.instance.S_curRage += 5;
+                PlayerStats.instance.S_curRage += 2;
                 AudioManager.instance?.PlaySFX(8);
                 Instantiate(VFXHurt, transform.position, transform.rotation);
                 if(sleepState){SleepRestored();}
