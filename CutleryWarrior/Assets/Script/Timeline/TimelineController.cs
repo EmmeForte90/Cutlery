@@ -43,14 +43,14 @@ using Cinemachine;
     private GameObject S_Brain; // Variabile per il player
     public CambioFollow CameraTransition;
     public GameObject[] ActiveTiemAfterScene;
-    public GameObject SavePositionCamera;
+    //public GameObject SavePositionCamera;
 
 
 
     private void Start()
     {
     virtualCamera = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    SavePositionCamera.transform.position = virtualCamera.transform.position;
+    //SavePositionCamera.transform.position = virtualCamera.transform.position;
     if(GameManager.instance.S_Unlock){AI_S = GameManager.instance.S_Hero.GetComponent<CharacterFollow>();}
     if(GameManager.instance.F_Unlock){AI_F = GameManager.instance.F_Hero.GetComponent<CharacterFollow>();}
     if(GameManager.instance.K_Unlock){AI_K = GameManager.instance.K_Hero.GetComponent<CharacterFollow>();}
@@ -137,6 +137,7 @@ using Cinemachine;
     }
     public void ActivatePlayer()
     {
+        
         switch(GameManager.instance.CharacterID)
         {
             case 1:
@@ -146,8 +147,9 @@ using Cinemachine;
             player.SetActive(true); 
             player.transform.position = FAct.transform.position;
             F_Brain.transform.position = FAct.transform.position;
-            virtualCamera.transform.position = SavePositionCamera.transform.position;
             virtualCamera.Follow =  F_Brain.transform;
+            virtualCamera.transform.rotation = Quaternion.Euler(18f, -90f, 0f);
+            F_Script.isRun = false;
             FAct.SetActive(false); }
             //
             if(GameManager.instance.K_Unlock){AI_1 = GameManager.instance.Knife;
@@ -185,6 +187,7 @@ using Cinemachine;
             if(GameManager.instance.F_Unlock){AI_1 = GameManager.instance.Fork; 
             AI_1.SetActive(true);
             F_Brain.transform.position = FAct.transform.position;
+            F_Script.isRun = false;S_Script.isRun = false;K_Script.isRun = false;
             FAct.SetActive(false); }
             //
             if(GameManager.instance.K_Unlock){AI_2 = GameManager.instance.Knife;

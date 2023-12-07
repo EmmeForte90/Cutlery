@@ -10,8 +10,8 @@ public class NPCMove : MonoBehaviour
 	private GameObject KnifeActive;
     public bool isMonster, isWalk, isRun, top = false;
     public Transform[] waypoints; // Array di punti verso cui muoversi
-    private float moveSpeed = 5f; // Velocità di movimento del personaggio
-    private float RunSpeed = 6f; // Velocità di movimento del personaggio
+    public float moveSpeed = 5f; // Velocità di movimento del personaggio
+    public float RunSpeed = 6f; // Velocità di movimento del personaggio
     private float pauseTime = 2f; // Tempo di pausa in secondi quando raggiunge un punto
     bool Right = true;
     public float stoppingDistance = 1f;

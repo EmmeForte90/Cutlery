@@ -4,6 +4,10 @@ using Cinemachine;
 public class CambioFollow : MonoBehaviour
 {
    private CinemachineVirtualCamera virtualCamera;
+    private Transform originalFollowTarget;
+    private Vector3 originalCameraPosition;
+    private Quaternion originalCameraRotation;
+
     public Transform[] targets;
     public float transitionDuration = 2.0f;
 
@@ -12,17 +16,20 @@ public class CambioFollow : MonoBehaviour
     private bool isTransitioning = false;
 
     void Start()
-    {virtualCamera = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>();}
+    {
+        virtualCamera = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>();
+
+        // Imposta la rotazione desiderata.
+        virtualCamera.transform.rotation = Quaternion.Euler(18f, -90f, 0f);
+
+        // Salva la posizione e la rotazione originali della camera.
+        originalCameraPosition = virtualCamera.transform.position;
+        originalCameraRotation = virtualCamera.transform.rotation;
+    }
 
     void Update()
     {
-        // Puoi chiamare questa funzione da un altro script o evento per iniziare la transizione.
-        /*if (Input.GetMouseButtonDown(0) || Input.GetButton("Fire1") && !isTransitioning)
-        {
-            StartTransition();
-        }*/
-
-         if (isTransitioning)
+        if (isTransitioning)
         {
             transitionTimer += Time.deltaTime;
 
@@ -39,11 +46,25 @@ public class CambioFollow : MonoBehaviour
 
     public void StartTransition()
     {
+        // Salva la posizione e la rotazione correnti della camera.
+        originalCameraPosition = virtualCamera.transform.position;
+        originalCameraRotation = virtualCamera.transform.rotation;
+
+        // Imposta il follow su null per interrompere il tracking.
         virtualCamera.Follow = null;
         transitionTimer = 0.0f;
         isTransitioning = true;
 
         // Passa al successivo target nell'array.
         currentTargetIndex = (currentTargetIndex + 1) % targets.Length;
+    }
+
+    public void ResetCamera()
+    {
+        // Ripristina la posizione e la rotazione originali della camera.
+        virtualCamera.transform.position = originalCameraPosition;
+        virtualCamera.transform.rotation = originalCameraRotation;
+        // Imposta nuovamente il follow al target originale.
+        virtualCamera.Follow = originalFollowTarget;
     }
 }

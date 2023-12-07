@@ -26,7 +26,7 @@ public class CameraWarning : MonoBehaviour
         vcam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
     }
     void Update(){if(canpress){
-        if(Input.GetButtonDown("Fire1")){Box.SetActive(false);
+        if(Input.GetMouseButtonDown(0) || Input.GetButton("Fire1")){Box.SetActive(false);
         vcam.Follow = Player.transform;
         GameManager.instance.ChCanM();
         PlayerStats.instance.EventDesertEnd(IdEvent);
