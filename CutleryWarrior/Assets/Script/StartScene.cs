@@ -46,13 +46,13 @@ public class StartScene : MonoBehaviour
     Instantiate(Data, transform.position, transform.rotation); 
     PlayerStats.instance.StartData = true;
     GameManager.instance.NotTouchOption = false;
-    PlayerStats.instance.DeactivateEventsAwake();
+    //PlayerStats.instance.DeactivateEventsAwake();
     AudioManager.instance.CrossFadeINAudio(WhatMusic); Once = false;
     }
     else if(!Once)
     {if(SaveManager.instance.Saving)
     {   SaveManager.instance.LoadGame();
-        PlayerStats.instance.DeactivateEventsAwake();
+        //PlayerStats.instance.DeactivateEventsAwake();
         GameManager.instance.NotTouchOption = false;
         if(GameManager.instance.F_Unlock){FAct = GameManager.instance.F_Hero;}
         if(GameManager.instance.S_Unlock){SAct = GameManager.instance.S_Hero;}
@@ -132,9 +132,10 @@ public class StartScene : MonoBehaviour
     IEnumerator BoxDel()
     {yield return new WaitForSeconds(0.5f);
     CameraZoom.instance.ZoomOut();GameManager.instance.FadeOut(); GameManager.instance.ChCanM(); 
-    PlayerStats.instance.DeactivateWarning();
-    PlayerStats.instance.DeactivateSwitch();
-    PlayerStats.instance.DeactivateCHEST();}
+    //PlayerStats.instance.DeactivateWarning();
+    //PlayerStats.instance.DeactivateSwitch();
+    //PlayerStats.instance.DeactivateCHEST();
+    }
     public void EnemiesActive(int ID){Enemies[ID].SetActive(false);}
     /*public void AreaActive(int ID)
     {

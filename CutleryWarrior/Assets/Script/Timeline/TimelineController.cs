@@ -5,6 +5,7 @@ using Cinemachine;
     public class TimelineController : MonoBehaviour 
     {    
     [Header("Timeline")]
+    public int ID;
     public int WhatMusic = 1;
     public PlayableDirector _director;
     public GameObject Cutscene;
@@ -12,7 +13,6 @@ using Cinemachine;
     [Header("Activate&Deactivate")]
     public bool isCutscene = false;
     public GameObject PointView; // Variabile per il player
-    public int ID;
     public GameObject FAct;
     public GameObject KAct;
     public GameObject SAct;
@@ -62,9 +62,25 @@ using Cinemachine;
     if(GameManager.instance.F_Unlock){F_Brain = GameManager.instance.F_Hero;}
     if(GameManager.instance.K_Unlock){K_Brain = GameManager.instance.K_Hero;}
     if(GameManager.instance.S_Unlock){S_Brain = GameManager.instance.S_Hero;}
-    if(isCutscene){ActivateActor();} //GameManager.instance.ChStop();
-    //if(isCutscene){virtualCamera.Follow =  PointView.transform;}
+    if(isCutscene){ActivateActor();}
     if(isCutscene){virtualCamera.Follow =  PointView.transform;}
+    if (ContainsIdEvent(PlayerStats.instance.Timelines, ID))
+        {
+            // Se la condizione è vera, disattiva il gameObject
+            gameObject.SetActive(false);
+        }
+    }
+    bool ContainsIdEvent(bool[] array, int idEvent)
+    {
+        // Controlla se l'indice idEvent è valido nell'array
+        if (idEvent >= 0 && idEvent < array.Length)
+        {
+            // Restituisci true se l'elemento nell'array corrispondente all'idEvent è true
+            return array[idEvent];
+        }
+
+        // Restituisci false se l'indice idEvent non è valido
+        return false;
     }
 
     public void CameraONPoint(){CameraTransition.StartTransition();}

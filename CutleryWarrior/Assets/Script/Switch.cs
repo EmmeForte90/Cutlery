@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Switch : MonoBehaviour
 {
-    public int IDEvent;
+    public int IdEvent;
     public Animator Anm;
     public Animator AnmGate;
     public GameObject Gate;
@@ -12,12 +12,32 @@ public class Switch : MonoBehaviour
     public GameObject VFXTake;
     public GameObject VFXSegnal;
     public bool canOpen = true;
-    public void Take(){
-    Anm.Play("Switch_Anm");
-    AnmGate.Play("GateOpen_Anm");
-    canOpen = false;
-    IconSwitch.SetActive(false);
-    IconGate.SetActive(false);}
+    
+
+    public void Start()
+    {
+        if (ContainsIdEvent(PlayerStats.instance.SwitchDesert, IdEvent))
+    {
+        Anm.Play("Switch_Anm");
+        AnmGate.Play("GateOpen_Anm");
+        canOpen = false;
+        IconSwitch.SetActive(false);
+        IconGate.SetActive(false);
+        Destroy(gameObject);
+    }
+    }
+    bool ContainsIdEvent(bool[] array, int idEvent)
+    {
+        // Controlla se l'indice idEvent è valido nell'array
+        if (idEvent >= 0 && idEvent < array.Length)
+        {
+            // Restituisci true se l'elemento nell'array corrispondente all'idEvent è true
+            return array[idEvent];
+        }
+
+        // Restituisci false se l'indice idEvent non è valido
+        return false;
+    }
 
    public void OnTriggerStay(Collider other)
     {
@@ -54,7 +74,6 @@ public class Switch : MonoBehaviour
         VFXSegnal.SetActive(false);
         AudioManager.instance.PlaySFX(11);
         GameManager.instance.EsclamationStop();
-        PlayerStats.instance.EventSwitchEnd(IDEvent);
         //print("Leva usata" + IDEvent);
         }
     }

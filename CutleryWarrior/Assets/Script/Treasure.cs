@@ -30,8 +30,24 @@ public class Treasure : MonoBehaviour
     [Tooltip("Attiva la skill su numerazione")]
     [Range(0, 9)]
     public int IdSkill;
-    public void Awake(){KindItem = specificItem.KindItem; Id = specificItem.ID;}
-    public void Take(){Destroy(gameObject); Anm.SetBool("Open", canOpen);}
+    public void Start()
+    {
+    KindItem = specificItem.KindItem; Id = specificItem.ID;
+    if (ContainsIdEvent(PlayerStats.instance.Treasure, IdChest))
+    {Destroy(gameObject);}
+    }
+    bool ContainsIdEvent(bool[] array, int idEvent)
+    {
+        // Controlla se l'indice idEvent è valido nell'array
+        if (idEvent >= 0 && idEvent < array.Length)
+        {
+            // Restituisci true se l'elemento nell'array corrispondente all'idEvent è true
+            return array[idEvent];
+        }
+
+        // Restituisci false se l'indice idEvent non è valido
+        return false;
+    }
     public void Update()
     {
         if(IsQuest){

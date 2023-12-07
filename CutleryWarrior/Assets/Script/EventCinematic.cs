@@ -26,6 +26,27 @@ public class EventCinematic : MonoBehaviour
     if(GameManager.instance.F_Unlock){Fork = GameManager.instance.F_Hero.transform;}
     if(GameManager.instance.S_Unlock){Spoon = GameManager.instance.S_Hero.transform;}
     if(GameManager.instance.K_Unlock){Knife = GameManager.instance.K_Hero.transform;}
+     if (ContainsIdEvent(PlayerStats.instance.EventsDesert, IdEvent))
+    {
+        if (HavePersistOBJ)
+        {
+            PersistOBJ.SetActive(true);
+        }
+        Destroy(gameObject);
+    }
+    }
+
+    bool ContainsIdEvent(bool[] array, int idEvent)
+    {
+        // Controlla se l'indice idEvent è valido nell'array
+        if (idEvent >= 0 && idEvent < array.Length)
+        {
+            // Restituisci true se l'elemento nell'array corrispondente all'idEvent è true
+            return array[idEvent];
+        }
+
+        // Restituisci false se l'indice idEvent non è valido
+        return false;
     }
     public void Take(){if(HavePersistOBJ){PersistOBJ.SetActive(true);}Destroy(gameObject); }
 

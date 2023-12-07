@@ -312,147 +312,7 @@ public class PlayerStats : MonoBehaviour
     Quest_quantityList = QuestsManager.instance.quantityList;
     }
 
-    public void DeactivateWarning()
-    {
-        // Cerca tutti i GameObjects con il tag "Enemy"
-        GameObject[] WarningEvent = GameObject.FindGameObjectsWithTag("Event");
-    
-    foreach (GameObject Character in WarningEvent)
-        {
-            // Ottiene il componente QuestCharacters
-            CameraWarning Event = Character.GetComponent<CameraWarning>();
 
-            // Verifica se il componente esiste
-            if (Event != null)
-            {
-                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
-                int Id = Event.IdEvent;
-                for (int i = 0; i <  EventsDesert.Length; i++)
-                {
-                    if ( EventsDesert[i] && i == Id)
-                    {
-                        // Imposta ordaliT.FirstD a false
-                        Event.Take();
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    public void DeactivateTimeline()
-    {
-        // Cerca tutti i GameObjects con il tag "Enemy"
-        GameObject[] WarningEvent = GameObject.FindGameObjectsWithTag("Timeline");
-    
-    foreach (GameObject Character in WarningEvent)
-        {
-            // Ottiene il componente QuestCharacters
-            TimelineController Event = Character.GetComponent<TimelineController>();
-
-            // Verifica se il componente esiste
-            if (Event != null)
-            {
-                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
-                int Id = Event.ID;
-                for (int i = 0; i <  EventsDesert.Length; i++)
-                {
-                    if ( EventsDesert[i] && i == Id)
-                    {
-                        // Imposta ordaliT.FirstD a false
-                        Event.Take();
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-
-
-
-    public void DeactivateENM()
-    {
-        // Cerca tutti i GameObjects con il tag "Enemy"
-        GameObject[] ENMIT = GameObject.FindGameObjectsWithTag("Enemy");
-    
-    foreach (GameObject Character in ENMIT)
-        {
-            // Ottiene il componente QuestCharacters
-            TouchPlayer Enm = Character.GetComponent<TouchPlayer>();
-
-            // Verifica se il componente esiste
-            if (Enm != null)
-            {
-                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
-                int Id = Enm.IdENM;
-                for (int i = 0; i <  Enemies.Length; i++)
-                {
-                    if ( Enemies[i] && i == Id)
-                    {
-                        // Imposta ordaliT.FirstD a false
-                        Enm.Take();
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    public void DeactivateCHEST()
-    {
-        // Cerca tutti i GameObjects con il tag "Enemy"
-        GameObject[] Chest = GameObject.FindGameObjectsWithTag("Chest");
-    
-    foreach (GameObject Character in Chest)
-        {
-            // Ottiene il componente QuestCharacters
-            Treasure tre = Character.GetComponent<Treasure>();
-
-            // Verifica se il componente esiste
-            if (tre != null)
-            {
-                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
-                int Id = tre.IdChest;
-                for (int i = 0; i <  Enemies.Length; i++)
-                {
-                    if ( Treasure[i] && i == Id)
-                    {
-                        // Imposta ordaliT.FirstD a false
-                        tre.Take();
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    public void DeactivateSwitch()
-    {
-        // Cerca tutti i GameObjects con il tag "Enemy"
-        GameObject[] Event = GameObject.FindGameObjectsWithTag("Event");
-    
-    foreach (GameObject Character in Event)
-        {
-            // Ottiene il componente QuestCharacters
-            Switch tre = Character.GetComponent<Switch>();
-
-            // Verifica se il componente esiste
-            if (tre != null)
-            {
-                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
-                int Id = tre.IDEvent;
-                for (int i = 0; i <  Enemies.Length; i++)
-                {
-                    if ( SwitchDesert[i] && i == Id)
-                    {
-                        // Imposta ordaliT.FirstD a false
-                        tre.Take();
-                        break;
-                    }
-                }
-            }
-        }
-    }
 
 
     public void FSkillATT(int Act)
@@ -469,35 +329,30 @@ public class PlayerStats : MonoBehaviour
     public void TreasureOpen(int Open)
     {
         Treasure[Open] = true;
-        DeactivateCHEST();
     }
 
     public void EventDesertEnd(int id)
     {
         EventsDesert[id] = true;
-        DeactivateWarning();
     }
 
     public void EventSwitchEnd(int id)
     {
         SwitchDesert[id] = true;
-        DeactivateSwitch();
     }
 
     public void TimelineEnd(int id)
     {
         Timelines[id] = true;
-        DeactivateTimeline();
     }
 
-    public void DeactivateEventsAwake()
+    /*public void DeactivateEventsAwake()
     {   
         DeactivateTimeline();
         DeactivateSwitch();
         DeactivateWarning();
         DeactivateCHEST();
-    }
-
+    }*/
 
     #region Levelup
     public void F_LevelUp()

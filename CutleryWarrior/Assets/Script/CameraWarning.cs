@@ -24,6 +24,24 @@ public class CameraWarning : MonoBehaviour
     {
         Player = GameManager.instance.player;       
         vcam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+        if (ContainsIdEvent(PlayerStats.instance.EventsDesert, IdEvent))
+        {
+            // Se la condizione è vera, disattiva il gameObject
+            gameObject.SetActive(false);
+        }
+    }
+
+    bool ContainsIdEvent(bool[] array, int idEvent)
+    {
+        // Controlla se l'indice idEvent è valido nell'array
+        if (idEvent >= 0 && idEvent < array.Length)
+        {
+            // Restituisci true se l'elemento nell'array corrispondente all'idEvent è true
+            return array[idEvent];
+        }
+
+        // Restituisci false se l'indice idEvent non è valido
+        return false;
     }
     void Update(){if(canpress){
         if(Input.GetMouseButtonDown(0) || Input.GetButton("Fire1")){Box.SetActive(false);
