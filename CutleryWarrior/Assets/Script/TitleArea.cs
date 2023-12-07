@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 public class TitleArea : MonoBehaviour
 {
+    public GameObject Activator;
     public GameObject Title;
     public GameObject Container;
     public bool interaction = false;
@@ -30,7 +31,7 @@ public class TitleArea : MonoBehaviour
     GameManager.instance.NotTouchOption = false;
     GameManager.instance.notChange = false;
     if(!DestroyObj){Title.gameObject.SetActive(false);}
-    else if(DestroyObj){Destroy(Container);}
+    else if(DestroyObj){Destroy(Container);Destroy(Activator);}
     }
     IEnumerator CoordinateActor()
     {
@@ -41,5 +42,7 @@ public class TitleArea : MonoBehaviour
     GameManager.instance.NotTouchOption = false;
     GameManager.instance.notChange = false;
     Destroy(Title);
-    Destroy(Container);}
+    Destroy(Container);
+    Destroy(Activator);
+    }
 }

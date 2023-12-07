@@ -144,7 +144,7 @@ public class ForkSemple : MonoBehaviour
     public void Update()
     {
         if(!DieB){
-        if(!DM.inputCTR){ 
+        if(!GameManager.instance.inputCTRbattle){ 
         if (player == null && !take){Choise(); take = true; }
         healthBar.size = currentHealth / maxHealth;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
@@ -169,7 +169,7 @@ public class ForkSemple : MonoBehaviour
         if(nextPoint){currentDestinationIndex++; N__Shoot = N_SHMAX; nextPoint = false; }
        }
        }
-        else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
+        else if(GameManager.instance.inputCTRbattle){Anm.PlayAnimationLoop(IdleAnimationName);}
         if(currentHealth < 0){Action = 2;}
         ////////////////////////
         if (isDamaging)
@@ -189,7 +189,7 @@ public class ForkSemple : MonoBehaviour
     
     private void ChasePlayer()
     {
-        if(!DM.inputCTR){
+        if(!GameManager.instance.inputCTRbattle){
         if (player != null)
         {
         if(!isAttacking)
@@ -205,7 +205,7 @@ public class ForkSemple : MonoBehaviour
         {// Hai raggiunto tutti i punti, ricomincia dal primo punto
         currentDestinationIndex = 0;}
     
-        }}else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
+        }}else if(GameManager.instance.inputCTRbattle){Anm.PlayAnimationLoop(IdleAnimationName);}
     }
     }
     public void OnTriggerEnter(Collider collision)

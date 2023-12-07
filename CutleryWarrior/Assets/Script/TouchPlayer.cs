@@ -74,7 +74,6 @@ public class TouchPlayer : MonoBehaviour
     GameManager.instance.ChStop();
     yield return new WaitForSeconds(1f);
     AudioManager.instance.CrossFadeINAudio(1);
-    GameManager.instance.battle = true;
     GameManager.instance.savedPositionEscape = savedPositionEscape;
     GameManager.instance.FadeIn();
     if(GameManager.instance.activeMinimap){GameManager.instance.AllarmMap.SetActive(false);}

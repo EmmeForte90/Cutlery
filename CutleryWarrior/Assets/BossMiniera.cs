@@ -198,7 +198,7 @@ public class BossMiniera : MonoBehaviour
     void Update()
     {
         if(!DieB){
-        if(!DM.inputCTR){ 
+        if(!GameManager.instance.inputCTRbattle){ 
         if (player == null && !take){Choise(); take = true;}
         Target();
         healthBar.size = currentHealth / maxHealth;
@@ -331,7 +331,7 @@ public class BossMiniera : MonoBehaviour
     //////////////////////////////////////////////////////////////////////////
     private void StartP2()
         {
-        if(!DM.inputCTR)
+        if(!GameManager.instance.inputCTRbattle)
         {
         if(EndP2Anm){
         float distanceToTarget = Vector3.Distance(transform.position, CenterPoint.transform.position);
@@ -360,7 +360,7 @@ public class BossMiniera : MonoBehaviour
     //////////////////////////////////////////////////////////////////////////
     private void StartP3()
      {
-        if(!DM.inputCTR)
+        if(!GameManager.instance.inputCTRbattle)
         {
         if(EndP3Anm){
         float distanceToTarget = Vector3.Distance(transform.position, CenterPoint.transform.position);
@@ -398,7 +398,7 @@ public class BossMiniera : MonoBehaviour
     #region Fase_1        
     private void ChasePlayer()
         {
-            if(!DM.inputCTR){
+            if(!GameManager.instance.inputCTRbattle){
             if (player != null)
             {
             if(!isAttacking)
@@ -425,7 +425,7 @@ public class BossMiniera : MonoBehaviour
     //----//
     private void Shoot()
 {
-    if (!DM.inputCTR && player != null)
+    if (!GameManager.instance.inputCTRbattle && player != null)
     {
         //Creare la possibilità al boss di spostarsi i un punto e poi sparare il laser per evitare compenetrazioni strane
         float distanceToTarget = Vector3.Distance(transform.position, TopArena.transform.position);
@@ -489,7 +489,7 @@ public class BossMiniera : MonoBehaviour
     #region  Fase_2
     private void Bombing()
         {
-            if(!DM.inputCTR){
+            if(!GameManager.instance.inputCTRbattle){
                 if(!isAttacking)
                 {
                     Anm.PlayAnimationStop(BombingP2AnimationName);
@@ -519,7 +519,7 @@ public class BossMiniera : MonoBehaviour
     //----//
     private void CanHurt()
         {
-            if(!DM.inputCTR){
+            if(!GameManager.instance.inputCTRbattle){
             if (player != null)
             {
                  //La barriera si dissolve per un tot di tempo
@@ -551,7 +551,7 @@ public class BossMiniera : MonoBehaviour
     #region  Fase_3  
     private void Raffica()
         {
-            if(!DM.inputCTR){
+            if(!GameManager.instance.inputCTRbattle){
             if (player != null)
             {
             if(!isRaffica)
@@ -581,7 +581,7 @@ public class BossMiniera : MonoBehaviour
     private void MovingPoints()
     {
         // Muovi il GameObject verso il waypoint corrente
-        if(!DM.inputCTR){isMove = true;}
+        if(!GameManager.instance.inputCTRbattle){isMove = true;}
     }
     private IEnumerator StopMoving()
     {        
@@ -594,7 +594,7 @@ public class BossMiniera : MonoBehaviour
     //----//
     private void CanHurt_3()
         {
-        if(!DM.inputCTR){
+        if(!GameManager.instance.inputCTRbattle){
         float distanceToTarget = Vector3.Distance(transform.position, CenterPoint.transform.position); moveSpeed = 10; 
         if (distanceToTarget > TouchDistance)
         {transform.position = Vector3.MoveTowards(transform.position, CenterPoint.transform.position, moveSpeed * Time.deltaTime);
@@ -796,7 +796,7 @@ public class BossMiniera : MonoBehaviour
     Anm.PlayAnimationLoop(PredieAnimationName);  
     vCam.Follow = CenterBoss.transform;
     yield return new WaitForSeconds(5f);
-    DM.inputCTR = true;
+    GameManager.instance.inputCTRbattle = true;
     AudioManager.instance.PlayUFX(11);
     Icon.SetActive(false);
     if(VFXDieBool){Instantiate(VFXDie, CenterBoss.transform.position, transform.rotation);VFXDieBool = false;}

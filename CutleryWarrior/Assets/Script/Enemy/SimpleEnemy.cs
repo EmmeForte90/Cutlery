@@ -103,12 +103,12 @@ public class SimpleEnemy : MonoBehaviour
     public void Update()
     {
         if(!DieB){
-        if(!DM.inputCTR){ 
+        if(!GameManager.instance.inputCTRbattle){ 
         if (player == null && !take){Choise(); take = true; }
         healthBar.size = currentHealth / maxHealth;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
         FacePlayer(); if(!isAttacking){ChasePlayer();}
-        }else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
+        }else if(GameManager.instance.inputCTRbattle){Anm.PlayAnimationLoop(IdleAnimationName);}
         if(currentHealth < 0){DieB = true; IconVFX.SetActive(true); Die();}
         ////////////////////////
         if (isDamaging)
@@ -125,7 +125,7 @@ public class SimpleEnemy : MonoBehaviour
     }
     private void ChasePlayer()
     {
-        if(!DM.inputCTR){
+        if(!GameManager.instance.inputCTRbattle){
         if (player != null)
         {
             if(!isAttacking)
@@ -133,7 +133,7 @@ public class SimpleEnemy : MonoBehaviour
             if(!DieB){Anm.PlayAnimationLoop(WalkAnimationName);}}
             if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
             {StartAttack();}
-        }}else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
+        }}else if(GameManager.instance.inputCTRbattle){Anm.PlayAnimationLoop(IdleAnimationName);}
     }
     public void OnTriggerEnter(Collider collision)
     {   

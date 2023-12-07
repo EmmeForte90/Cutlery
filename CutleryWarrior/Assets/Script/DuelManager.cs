@@ -82,7 +82,7 @@ public class DuelManager : MonoBehaviour
 
     [SerializeField]  GameObject Win;
     private int ID_Enm;
-    public bool inputCTR = false;
+    //public bool inputCTR = false;
     
     public int CharacterID;
     [Header("TimelineAfterBattle")]
@@ -337,14 +337,16 @@ public void Update()
         ////////////
         CharacterID = GameManager.instance.CharacterID;
         ////////
-        if(WinEnd){if(Input.GetMouseButtonDown(0)){StartCoroutine(RetunBattle());}}
-        if(Ending){if(Input.GetMouseButtonDown(0)){StartCoroutine(ReturnMainMenu());}} 
+        if(WinEnd){if(Input.GetMouseButtonDown(0)){StartCoroutine(RetunBattle());
+        GameManager.instance.battle = false; GameManager.instance.ComandBattle = false;}}
+        if(Ending){if(Input.GetMouseButtonDown(0)){StartCoroutine(ReturnMainMenu()); 
+        GameManager.instance.battle = false; GameManager.instance.ComandBattle = false;}} 
         /////////////
         if(isIndicator)
         {
             CamPlayer = false;
             highlightedObjectIndicator.SetActive(true);
-            inputCTR = true;
+            GameManager.instance.inputCTRbattle = true;
             // Input per diminuire il valore
             if (Input.GetKeyDown(KeyCode.A)){DecreaseValue();}
 
@@ -421,12 +423,12 @@ public void Update()
         GameManager.instance.Change();
         GameManager.instance.ChCanM();
         GameManager.instance.stopInput = false;
-        inputCTR = false; 
+        GameManager.instance.inputCTRbattle = false; 
         highlightedObjectIndicator.SetActive(false); 
         isIndicator = false;
     }
 
-    public void Escape(){StartCoroutine(EscapeBattle());}
+    public void Escape(){StartCoroutine(EscapeBattle()); GameManager.instance.battle = false;}
     IEnumerator EscapeBattle()
     {   
     GameManager.instance.StartGame = false;
@@ -439,7 +441,8 @@ public void Update()
     if(GameManager.instance.K_Unlock){ch_KAc.IDAction = 0;}
     if(GameManager.instance.S_Unlock){ch_SAc.IDAction = 0;}
     if(GameManager.instance.F_Unlock){ch_FAc.IDAction = 0;}
-    GameManager.instance.money -= 300;
+    if(GameManager.instance.money >= 300){GameManager.instance.money -= 300;}
+    else if(GameManager.instance.money <= 0){GameManager.instance.money = 0;}
     GameManager.instance.Exploration();
     GameManager.instance.Change();
     GameManager.instance.RecalculateCharacter();
@@ -448,7 +451,6 @@ public void Update()
     }
      public void EscapePoint()
     {
-    GameManager.instance.battle = false;
     if(GameManager.instance.F_Unlock){FAct.transform.position = GameManager.instance.savedPositionEscape.position;}
     if(GameManager.instance.K_Unlock){KAct.transform.position = GameManager.instance.savedPositionEscape.position;}
     if(GameManager.instance.S_Unlock){SAct.transform.position = GameManager.instance.savedPositionEscape.position;}
@@ -526,7 +528,7 @@ public void Update()
 
     IEnumerator GameOver()
     {
-        inputCTR = true;
+        GameManager.instance.inputCTRbattle = true;
         AudioManager.instance.StopMFX(1);
         GameManager.instance.N_Target = 0;
         yield return new WaitForSeconds(2f);
@@ -573,7 +575,6 @@ IEnumerator EndBattle()
         GameManager.instance.ChStop();
         AudioManager.instance.CrossFadeOUTAudio(1);
         yield return new WaitForSeconds(3f);
-        GameManager.instance.battle = true;
         GameManager.instance.notChange = false;
         if(win)
         {Win.gameObject.SetActive(true);
@@ -643,22 +644,20 @@ IEnumerator EndBattle()
     }
     public void SpawnB()
     {
-    GameManager.instance.battle = false;
     if(GameManager.instance.F_Unlock){FAct.transform.position = savedPosition;}
     if(GameManager.instance.K_Unlock){KAct.transform.position = savedPosition;}
     if(GameManager.instance.S_Unlock){SAct.transform.position = savedPosition;}
     foreach (GameObject arenaObject in Enemies){arenaObject.SetActive(false);}
+    AudioManager.instance.CrossFadeINAudio(WhatMusicAB);
     GameManager.instance.StopWin();
     GameManager.instance.ChCanM();
     GameManager.instance.NotTouchOption = false;
     GameManager.instance.notChange = false;
-    GameManager.instance.battle = false;
     GameManager.instance.DectiveMinimap();
-    AudioManager.instance.CrossFadeINAudio(WhatMusicAB);
     GameManager.instance.FadeOut();
     ThisBattle.SetActive(false);
     }
-    //public void EnemiesActive(int ID){Enemies[ID].SetActive(false);}
+
     private void RandomReward()
     {
         int randomNumber = Random.Range(10, 20);

@@ -93,7 +93,7 @@ private void Awake()
     // Update is called once per frame
     void Update()
 {
-    if(!DuelManager.instance.inputCTR)
+    if(!GameManager.instance.inputCTRbattle)
     {
     Flip();
     input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -170,7 +170,7 @@ private void Awake()
 
     void FixedUpdate()
     {
-        if(!DuelManager.instance.inputCTR)
+        if(!GameManager.instance.inputCTRbattle)
     {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

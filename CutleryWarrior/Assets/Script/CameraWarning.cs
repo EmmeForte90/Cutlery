@@ -29,6 +29,10 @@ public class CameraWarning : MonoBehaviour
         if(Input.GetMouseButtonDown(0) || Input.GetButton("Fire1")){Box.SetActive(false);
         vcam.Follow = Player.transform;
         GameManager.instance.ChCanM();
+        GameManager.instance.ChCanM();
+        GameManager.instance.NotTouchOption = false;
+        GameManager.instance.notChange = false;
+        GameManager.instance.battle = false;
         PlayerStats.instance.EventDesertEnd(IdEvent);
         Destroy(This);}}}
 
@@ -44,6 +48,9 @@ public class CameraWarning : MonoBehaviour
     IEnumerator ChangeAreaF()
     {
         GameManager.instance.NotChange();
+        GameManager.instance.NotTouchOption = true;
+        GameManager.instance.ChCanM();
+        GameManager.instance.battle = false;
         AudioManager.instance.PlayUFX(7);
         GameManager.instance.ChStop();
         GameManager.instance.Allarm();

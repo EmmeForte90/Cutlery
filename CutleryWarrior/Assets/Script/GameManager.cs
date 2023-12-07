@@ -158,11 +158,13 @@ public class GameManager : MonoBehaviour
     [Header("Pause")]
     public bool stopInput = false;
     public bool battle = false;
+    public bool inputCTRbattle = false;
     public bool Day = true;
     public bool isRun = false;
     public bool Interact = false; 
     public bool NotParty = true; 
     public bool F_Die, K_Die, S_Die = false;
+    public bool ComandBattle = false;
     public bool NotTouchOption = false;
     public bool notChange = false;
 
@@ -359,7 +361,7 @@ public class GameManager : MonoBehaviour
             Posebattle();
             MouseCursorIcon.SetActive(true);
             notChange = true;
-            DuelManager.instance.inputCTR = true;
+            if(ComandBattle){inputCTRbattle = true;}
             switch (CharacterID)
         {
     case 1:
@@ -418,7 +420,7 @@ public class GameManager : MonoBehaviour
             break;
             }  
             CameraZoom.instance.ZoomOut();
-            DuelManager.instance.inputCTR = false;
+            if(ComandBattle){inputCTRbattle = false;}
             AudioManager.instance.PlayUFX(1);
         }}}
     }
@@ -459,7 +461,7 @@ public class GameManager : MonoBehaviour
             break;
             }  
             CameraZoom.instance.ZoomOut();
-            DuelManager.instance.inputCTR = false;
+            inputCTRbattle = false;
             AudioManager.instance.PlayUFX(1);
     }
     public void CloseLittleMWithoutInput()
@@ -497,9 +499,9 @@ public class GameManager : MonoBehaviour
             break;
             }  
     }
-    public void StopBattle(){ChStopWithoutANM(); notChange = true; DuelManager.instance.inputCTR = true;}
+    public void StopBattle(){ChStopWithoutANM(); notChange = true; inputCTRbattle = true;}
     public void Escapebattle(){DuelManager.instance.Escape(); MouseCursorIcon.SetActive(false);}
-    public void ResumeBattle(){ChCanM(); notChange = false; DuelManager.instance.inputCTR = false;}
+    public void ResumeBattle(){ChCanM(); notChange = false; inputCTRbattle = false;}
      
         public void TimerMenu()
     {
@@ -668,8 +670,8 @@ public class GameManager : MonoBehaviour
     }
     public void Change(){notChange = false;} 
     public void NotChange(){notChange = true;} 
-    public void ActiveMinimap(){Minimap.SetActive(true); activeMinimap = true; battle = false;}
-    public void DectiveMinimap(){Minimap.SetActive(false); activeMinimap = false; battle = true;}
+    public void ActiveMinimap(){Minimap.SetActive(true); activeMinimap = true;}
+    public void DectiveMinimap(){Minimap.SetActive(false); activeMinimap = false;}
     public void ReturnMainMenu()
         {   
         FadeIn();

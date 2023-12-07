@@ -132,7 +132,7 @@ public class KnifeSample : MonoBehaviour
     public void Update()
     {
         if(!DieB){
-        if(!DM.inputCTR){ 
+        if(!GameManager.instance.inputCTRbattle){ 
         if (player == null && !take){Choise(); take = true; }
         Target();
         healthBar.size = currentHealth / maxHealth;
@@ -153,7 +153,7 @@ public class KnifeSample : MonoBehaviour
             break;
        }
        }
-        else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
+        else if(GameManager.instance.inputCTRbattle){Anm.PlayAnimationLoop(IdleAnimationName);}
         if(currentHealth < 0){Action = 2;}
         ////////////////////////
         if (isDamaging)
@@ -172,7 +172,7 @@ public class KnifeSample : MonoBehaviour
     }
     private void ChasePlayer()
     {
-        if(!DM.inputCTR){
+        if(!GameManager.instance.inputCTRbattle){
         if (player != null)
         {
             if(!isAttacking)
@@ -180,7 +180,7 @@ public class KnifeSample : MonoBehaviour
             if(!DieB){Anm.PlayAnimationLoop(RunAnimationName);}}
             if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
             {StartAttack();}
-        }}else if(DM.inputCTR){Anm.PlayAnimationLoop(IdleAnimationName);}
+        }}else if(GameManager.instance.inputCTRbattle){Anm.PlayAnimationLoop(IdleAnimationName);}
     }
     public void OnTriggerEnter(Collider collision)
     {   

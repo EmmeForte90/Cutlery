@@ -55,7 +55,7 @@ public class StartBattle : MonoBehaviour
         /*if(!GameManager.instance.Day){Giorno.SetActive(false); Notte.SetActive(true); RenderSettings.skybox = newSkyboxMaterial_N;}
         else if(GameManager.instance.Day){Giorno.SetActive(true); Notte.SetActive(false); RenderSettings.skybox = newSkyboxMaterial_G;}
         */
-        Duel_Script.inputCTR = true;
+        GameManager.instance.inputCTRbattle = true;
         //
         GameManager.instance.NotTouchOption = true;
         //
@@ -161,7 +161,8 @@ public class StartBattle : MonoBehaviour
         GameManager.instance.Change();
         GameManager.instance.ChCanM();
         GameManager.instance.NotTouchOption = false;
-        Duel_Script.inputCTR = false;
+        GameManager.instance.inputCTRbattle = false;
+        GameManager.instance.ComandBattle = true;
     }
 
     public void AfterTutorial()
@@ -188,6 +189,7 @@ public class StartBattle : MonoBehaviour
         GameManager.instance.Change();
         GameManager.instance.ChCanM();
         GameManager.instance.NotTouchOption = false;
-        Duel_Script.inputCTR = false;
+        GameManager.instance.inputCTRbattle = false;
+        GameManager.instance.ComandBattle = true;
     }
 }
