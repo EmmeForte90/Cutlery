@@ -119,16 +119,6 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public string S_NameArmor = "Dress/Dress";
     [HideInInspector] public string K_NameArmor = "Dress/Dress";
     //
-    [Header("Enemies List")]
-    public bool[] Enemies;
-    [Header("Treasure List")]
-    public bool[] Treasure;
-    [Header("Skill List")]
-    public bool[] Skill_F;
-    public bool[] Skill_K; 
-    public bool[] Skill_S;
-
-    
     [Header("Item List")]
     [SerializeField]    public List<Item> I_itemList;
     [SerializeField]    public List<int> I_quantityList;
@@ -144,6 +134,15 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]    public List<int> Key_quantityList;
     [SerializeField]    public List<Item> Quest_itemList;
     [SerializeField]    public List<int> Quest_quantityList;
+    //
+    [Header("Enemies List")]
+    public bool[] Enemies;
+    [Header("Treasure List")]
+    public bool[] Treasure;
+    [Header("Skill List")]
+    public bool[] Skill_F;
+    public bool[] Skill_K; 
+    public bool[] Skill_S;
     
     [Header("Events")]
     public bool[] EventsDesert;  

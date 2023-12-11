@@ -1,9 +1,19 @@
 using UnityEngine;
 using UnityEngine.Playables;
 using Cinemachine;
+using System.Collections;
+using TMPro;
 
     public class TimelineController : MonoBehaviour 
     {    
+    public Dialogues DialoguesT;
+    public TextMeshProUGUI CharacterName; // Reference to the TextMeshProUGUI component
+    public TextMeshProUGUI dialogueText; // Reference to the TextMeshProUGUI component
+    private string[] dialogue; // array of string to store the dialogues
+    private float dialogueDuration; // variable to set the duration of the dialogue
+    private int dialogueIndex; // variable to keep track of the dialogue status
+    private float elapsedTime; // variable to keep track of the elapsed time
+
     [Header("Timeline")]
     public int ID;
     public int WhatMusic = 1;
@@ -62,6 +72,8 @@ using Cinemachine;
     if(GameManager.instance.F_Unlock){F_Brain = GameManager.instance.F_Hero;}
     if(GameManager.instance.K_Unlock){K_Brain = GameManager.instance.K_Hero;}
     if(GameManager.instance.S_Unlock){S_Brain = GameManager.instance.S_Hero;}
+    CharacterName.text = DialoguesT.CharacterName;
+    dialogue = DialoguesT.dialogue;
     if(isCutscene){ActivateActor();}
     if(isCutscene){virtualCamera.Follow =  PointView.transform;}
     if (ContainsIdEvent(PlayerStats.instance.Timelines, ID))
@@ -93,7 +105,7 @@ using Cinemachine;
 
     public void ActivateActor()
     {
-        //if(isCutscene){virtualCamera.Follow =  PointView.transform;}
+        dialogueIndex = 0;
         switch(GameManager.instance.CharacterID)
         {
             case 1:
@@ -224,6 +236,37 @@ using Cinemachine;
         }   
         PlayerStats.instance.TimelineEnd(ID);
     }
+
+    public void NextDialogue()
+    {
+        elapsedTime = 0; // reset elapsed time
+        dialogueIndex++; // Increment the dialogue index
+        if (dialogueIndex >= dialogue.Length)
+        {
+            dialogueIndex = 0;
+            
+        }
+        else{StartCoroutine(ShowDialogue());}
+    }
+
+     IEnumerator ShowDialogue()
+{
+    //_isDialogueActive = true;
+    elapsedTime = 0; // reset elapsed time
+    string currentDialogue = dialogue[dialogueIndex]; // Get the current dialogue
+    dialogueText.text = ""; // Clear the dialogue text
+    for (int i = 0; i < currentDialogue.Length; i++)
+    {
+        dialogueText.text += currentDialogue[i]; // Add one letter at a time
+        elapsedTime += Time.deltaTime; // Update the elapsed time
+        if (elapsedTime >= dialogueDuration)
+        {
+            break;
+        }
+        yield return new WaitForSeconds(0.001f); // Wait before showing the next letter
+    }
+            dialogueText.text = currentDialogue; // Set the dialogue text to the full current dialogue
+}
 
 
 

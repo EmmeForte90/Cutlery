@@ -142,6 +142,12 @@ MonoBehaviour:
   K_paralysisResistanceCont: 0
   K_sleepResistanceCont: 0
   K_rustResistanceCont: 0
+  F_NameWeapon: Weapon/Latta
+  S_NameWeapon: Weapon/Latta
+  K_NameWeapon: Weapon/Latta
+  F_NameArmor: Dress/Dress
+  S_NameArmor: Dress/Dress
+  K_NameArmor: Dress/Dress
   Enemies: 000000000000000000000000000000000000000000000000000000000000
   Treasure: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   Skill_F: 0100000000000000000001
@@ -157,18 +163,19 @@ MonoBehaviour:
   S_quantityList: 
   K_itemList: []
   K_quantityList: 
-  Key_itemList: []
+  Kay_itemList: []
   Key_quantityList: 
   Quest_itemList: []
   Quest_quantityList: 
   EventsDesert: 0000000000
   SwitchDesert: 0000000000
+  Timelines: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   questDatabase: []
   quest: 
   QuestActive: 
   QuestComplete: 
   QuestSegnal: 
-  items: 
+  items: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &8760654960572201012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,4 +188,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eeb182877e24684385f74f1bb50122e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Saving: 0
+  NameScene: 
+  saveFilePath: 
+  GM_Data: {fileID: 0}
+  F_NameWeapon: 
+  S_NameWeapon: 
+  K_NameWeapon: 
+  F_NameArmor: 
+  S_NameArmor: 
+  K_NameArmor: 
   PS: {fileID: 8244634831866167443}
