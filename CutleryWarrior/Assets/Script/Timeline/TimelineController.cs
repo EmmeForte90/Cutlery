@@ -98,8 +98,13 @@ using TMPro;
     public void CameraONPoint(){CameraTransition.StartTransition();}
     public void CameraONActor(){ActivateActor();}
 
-    public void FirstDialogue()
-    {dialogue = DialoguesT.dialogue; dialogueIndex = 0; StartCoroutine(ShowDialogue());}
+    public void FirstDialogue(){dialogue = DialoguesT.dialogue; dialogueIndex = 0; StartCoroutine(ShowDialogue());}
+    public void CH_Name_1(){CharacterName.text = DialoguesT.CharacterName;}
+    public void CH_Name_2(){CharacterName.text = DialoguesT.CharacterName_1;}
+    public void CH_Name_3(){CharacterName.text = DialoguesT.CharacterName_2;}
+    public void CH_Name_4(){CharacterName.text = DialoguesT.CharacterName_3;}
+    public void CH_Name_5(){CharacterName.text = DialoguesT.CharacterName_4;}
+
 
     public void TalkFork(){AudioManager.instance.PlaySFX(2);}
     public void TalkKnife(){AudioManager.instance.PlaySFX(0);}

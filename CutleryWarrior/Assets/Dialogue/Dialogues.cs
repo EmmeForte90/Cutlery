@@ -8,6 +8,11 @@ public class Dialogues : ScriptableObject
 {
 public int id;
 public string CharacterName;
+public string CharacterName_1;
+public string CharacterName_2;
+public string CharacterName_3;
+public string CharacterName_4;
+
 [SerializeField][TextArea(3, 10)]public string[] dialogue;
 
 //////////////////////////////////
