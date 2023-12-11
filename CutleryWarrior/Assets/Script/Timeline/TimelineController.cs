@@ -96,8 +96,10 @@ using TMPro;
     }
 
     public void CameraONPoint(){CameraTransition.StartTransition();}
-
     public void CameraONActor(){ActivateActor();}
+
+    public void FirstDialogue()
+    {dialogue = DialoguesT.dialogue; dialogueIndex = 0; StartCoroutine(ShowDialogue());}
 
     public void TalkFork(){AudioManager.instance.PlaySFX(2);}
     public void TalkKnife(){AudioManager.instance.PlaySFX(0);}
@@ -283,11 +285,36 @@ public  void StartMusicG()
 public  void ResetCamera()
 {
     virtualCamera.Follow =  player.transform;
+    virtualCamera.transform.rotation = Quaternion.Euler(18f, -90f, 0f);
     GameManager.instance.StopWin();
     GameManager.instance.ChCanM();  
     GameManager.instance.notChange = false;
-    Destroy(this);
+    //Destroy(this);
 }
+public  void ResetCameraActor()
+{
+         switch(GameManager.instance.CharacterID)
+        {
+            case 1:
+            if(GameManager.instance.F_Unlock){
+            virtualCamera.Follow =  F_Brain.transform;
+            virtualCamera.transform.rotation = Quaternion.Euler(18f, -90f, 0f);}
+            break;
+            //////////////////////////////////////////////////
+            case 2:
+            if(GameManager.instance.F_Unlock){
+            virtualCamera.Follow =  K_Brain.transform;
+            virtualCamera.transform.rotation = Quaternion.Euler(18f, -90f, 0f);}
+            break;
+            //////////////////////////////////////////////////
+            case 3:
+            GameManager.instance.NotTouchOption = false;
+            if(GameManager.instance.F_Unlock){
+            virtualCamera.Follow =  S_Brain.transform;
+            virtualCamera.transform.rotation = Quaternion.Euler(18f, -90f, 0f);}
+            break;
+    
+}}
 public void Take(){Destroy(gameObject);}
 public void CancellTimeline(){PlayerStats.instance.TimelineEnd(ID);}
 public void RestoreGameplay(){foreach (GameObject arenaObject in ActiveTiemAfterScene){arenaObject.SetActive(true);}}
