@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
     public GameObject StartGameOBJ;
     public GameObject Data;
     public GameObject PStart;
+     public SaveManager SaveData;
     public bool StartGameNew = true;
 
     public static MainMenu instance;
@@ -22,6 +23,7 @@ public class MainMenu : MonoBehaviour
     {
         if (instance == null){instance = this;}
         Application.targetFrameRate = 60;
+        SaveData = GameObject.Find("Data").GetComponent<SaveManager>();
         StartCoroutine(StartM());
     }
     public void SetVolume(float volume){MSX.SetFloat("Volume", volume);}
@@ -40,14 +42,8 @@ public class MainMenu : MonoBehaviour
     {           
         Fade.gameObject.SetActive(true);
         yield return new WaitForSeconds(Timelife);
-        if(StartGameNew)
-        {
         Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
-        PlayerStats.instance.ResetStatNewGame();
-        //SaveManager.instance.ResetValueStat();
-        StartGameNew = false;
-        }
-        PlayerStats.instance.StartData = true;
+        //PlayerStats.instance.StartData = false;
         SceneManager.LoadScene(startScene);       
     }
 
@@ -55,12 +51,9 @@ public class MainMenu : MonoBehaviour
     {           
         Fade.gameObject.SetActive(true);
         yield return new WaitForSeconds(Timelife);
-        if(StartGameNew)
-        {
         Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
-        StartGameNew = false;
-        }
-        PlayerStats.instance.StartData = true;
+        SaveData.LoadGame();
+        //PlayerStats.instance.StartData = true;
         SceneManager.LoadScene(startScene);       
     }
     public void QuitGame()

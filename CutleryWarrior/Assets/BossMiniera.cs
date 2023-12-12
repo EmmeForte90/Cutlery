@@ -30,7 +30,7 @@ public class BossMiniera : MonoBehaviour
     public float moveSpeed = 3f;
     public int TimeRush = 20;
     public Transform[] waypoints;
-    public float speed = 2.0f;
+    //public float speed = 2.0f;
     private int currentWaypointIndex = 0;
     [Header("Attack")]
     public Transform target;
@@ -46,7 +46,7 @@ public class BossMiniera : MonoBehaviour
     public float TimeLaser = 5f;
     public float TimeForDamage = 10;
     public GameObject objectToSpawn;
-    public GameObject objectToSpawn_3;
+    //public GameObject objectToSpawn_3;
     public float spawnRadius = 5f;
     bool Bomb_1 = true;
     [Tooltip("Il tempo dedicato all'attacco")]
@@ -68,13 +68,13 @@ public class BossMiniera : MonoBehaviour
     private bool P_2 = false;
     private bool isRaffica = false;
     private bool isMove = false;
-    private bool isRafficaRunning = false;
-    private bool isMoveRunning = false;
+    //private bool isRafficaRunning = false;
+    //private bool isMoveRunning = false;
     private bool P_3 = false;
     bool StartP2Anm,EndP2Anm = true;
     bool StartP3Anm,EndP3Anm = true;
-    bool Right = true;
-    private float pauseTimer = 0f; // Timer per il conteggio della pausa
+    //bool Right = true;
+    //private float pauseTimer = 0f; // Timer per il conteggio della pausa
     /////////////////////////////////////////////////////////////////////////////////
     [Header("Status")]
     //public float damagePerSecond = 0.1f;
@@ -389,7 +389,8 @@ public class BossMiniera : MonoBehaviour
     //////////////////////////////////////////////////////////////////////////
     public void ResetBool()
     {
-        Anm.ClearAnm();pauseTimer = 0f; Start_Laser = false;
+        Anm.ClearAnm();//pauseTimer = 0f; 
+        Start_Laser = false;
         isLaser = false; LaserAnimation = true; LaserAnimationStop = true;
         isAttacking = false;isRaffica = false; isMove = false;
     }

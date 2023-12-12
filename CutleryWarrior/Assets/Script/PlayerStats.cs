@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     [Header("Stats")]
     public bool HaveData = false;
     public bool CanLoading = false;
+    public int IdSpawn;
     public string NameScene;
     public Vector3 savedPosition;
     public bool F_Unlock = true; 

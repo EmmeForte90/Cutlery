@@ -41,6 +41,7 @@ public class ChangeArea : MonoBehaviour
     }
     IEnumerator ChangeAreaF()
     {
+        GameManager.instance.EnemyCanTouch = true;
         GameManager.instance.ChStop();
         CharacterMove.instance.Idle();
         GameManager.instance.FadeIn();
@@ -57,6 +58,7 @@ public class ChangeArea : MonoBehaviour
         if(GameManager.instance.F_Unlock){FAct.transform.position = PointSpawn.transform.position;}
         if(GameManager.instance.S_Unlock){SAct.transform.position = PointSpawn.transform.position;}
         yield return new WaitForSeconds(2f);
+        GameManager.instance.EnemyCanTouch = false;
         GameManager.instance.ChCanM();
         GameManager.instance.FadeOut();
     }

@@ -4,11 +4,11 @@ public class BombProjectile : MonoBehaviour
 {
     public GameObject target; // Assegna il target nell'Inspector
     public GameObject landingPointPrefab; // Assegna il target nell'Inspector
-    public int attackDamage = 5;
-    public bool Take = true;
+    //public int attackDamage = 5;
+    //public bool Take = true;
     public float velocita = 5f;
     public float accelerazioneGravitazionale = 9.8f;
-    private bool isAscending = true;
+    //private bool isAscending = true;
     private Rigidbody rb;
      private CharacterMove F_Script;
     private CharacterFollow ch_FAc;

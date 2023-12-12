@@ -4,6 +4,7 @@ public class SaveTotem : MonoBehaviour
 {
     public GameObject savedPosition;
     public string NameScene;
+    public int IDSpawn;
     public GameObject VFXTake;
     public GameObject LoadVFX;
     private Transform Player;
@@ -76,9 +77,11 @@ public class SaveTotem : MonoBehaviour
         
         //savedPosition.transform.position = Player.transform.position; 
         GameManager.instance.savedPosition = savedPosition.transform.position;
+        
         PlayerStats.instance.savedPosition = savedPosition.transform.position;
         PlayerStats.instance.HaveData = true;
         PlayerStats.instance.NameScene = NameScene;
+        PlayerStats.instance.IdSpawn = IDSpawn;
         PlayerStats.instance.UpdateInventorySaving();
         Save.SaveGame();
         LoadVFX.SetActive(true);

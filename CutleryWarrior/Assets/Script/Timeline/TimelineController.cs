@@ -6,6 +6,7 @@ using TMPro;
 
     public class TimelineController : MonoBehaviour 
     {    
+    public bool isTutorial;
     public Dialogues DialoguesT;
     public TextMeshProUGUI CharacterName; // Reference to the TextMeshProUGUI component
     public TextMeshProUGUI dialogueText; // Reference to the TextMeshProUGUI component
@@ -72,8 +73,8 @@ using TMPro;
     if(GameManager.instance.F_Unlock){F_Brain = GameManager.instance.F_Hero;}
     if(GameManager.instance.K_Unlock){K_Brain = GameManager.instance.K_Hero;}
     if(GameManager.instance.S_Unlock){S_Brain = GameManager.instance.S_Hero;}
-    CharacterName.text = DialoguesT.CharacterName;
-    dialogue = DialoguesT.dialogue;
+    if(!isTutorial){CharacterName.text = DialoguesT.CharacterName;}
+    if(!isTutorial){dialogue = DialoguesT.dialogue;}
     if(isCutscene){ActivateActor();}
     if(isCutscene){virtualCamera.Follow =  PointView.transform;}
     if (ContainsIdEvent(PlayerStats.instance.Timelines, ID))
@@ -97,6 +98,7 @@ using TMPro;
 
     public void CameraONPoint(){CameraTransition.StartTransition();}
     public void CameraONActor(){ActivateActor();}
+    private void OnDisable(){ActivatePlayer();}
 
     public void FirstDialogue(){dialogue = DialoguesT.dialogue; dialogueIndex = 0; StartCoroutine(ShowDialogue());}
     public void CH_Name_1(){CharacterName.text = DialoguesT.CharacterName;}
@@ -242,6 +244,7 @@ using TMPro;
             break;
         }   
         PlayerStats.instance.TimelineEnd(ID);
+        CharacterMove.instance.inputCTR = false;
     }
 
     public void NextDialogue()

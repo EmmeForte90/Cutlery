@@ -24,8 +24,8 @@ public class CharacterFollow : MonoBehaviour
     private Transform Player;
     public GameObject Esclamation;
     public bool Attention;
-     private float originalSize = 1.0f; // Dimensione originale del capsule
-    private float expandedSize = 2.0f; // Dimensione del capsule quando è allargato
+    // private float originalSize = 1.0f; // Dimensione originale del capsule
+    //private float expandedSize = 2.0f; // Dimensione del capsule quando è allargato
     private CharacterMove F_b;
     private CharacterMove S_b;
     private CharacterMove K_b;

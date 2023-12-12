@@ -94,7 +94,9 @@ public class TouchPlayer : MonoBehaviour
     }
     
     public void Touch()
-    {   if (isMove) {Mnpc.Behav = 0; Mnpc.isPaused = true;}
+    {   
+        if(!GameManager.instance.EnemyCanTouch){
+        if (isMove) {Mnpc.Behav = 0; Mnpc.isPaused = true;}
         AudioManager.instance.CrossFadeOUTAudio(IdAudio);
         GameManager.instance.IdENM = IdENM;
         GameManager.instance.NotChange();
@@ -102,7 +104,7 @@ public class TouchPlayer : MonoBehaviour
         GameManager.instance.ChStop();
         GameManager.instance.Allarm();
         CameraZoom.instance.ZoomIn();
-        StartCoroutine(WaitForSceneLoad());}
+        StartCoroutine(WaitForSceneLoad());}}
     #if(UNITY_EDITOR)
     #region Gizmos
         private void OnDrawGizmos()

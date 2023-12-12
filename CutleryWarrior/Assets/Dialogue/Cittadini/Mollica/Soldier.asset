@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   CharacterName: Soldier
+  CharacterName_1: 
+  CharacterName_2: 
+  CharacterName_3: 
+  CharacterName_4: 
   dialogue:
+  - Go away.
   - Go away.
   Startdialogue: []
   Middledialogue: []

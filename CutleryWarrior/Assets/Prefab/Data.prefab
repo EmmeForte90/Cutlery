@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8244634831866167441}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -47,7 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HaveData: 0
   CanLoading: 0
-  NameScene: 
+  IdSpawn: 0
+  NameScene: FirstD
   savedPosition: {x: 0, y: 0, z: 0}
   F_Unlock: 1
   S_Unlock: 0
@@ -148,11 +149,6 @@ MonoBehaviour:
   F_NameArmor: Dress/Dress
   S_NameArmor: Dress/Dress
   K_NameArmor: Dress/Dress
-  Enemies: 000000000000000000000000000000000000000000000000000000000000
-  Treasure: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  Skill_F: 0100000000000000000001
-  Skill_K: 0100000000000000000001
-  Skill_S: 0100000000000000000001
   I_itemList: []
   I_quantityList: 
   IBattle_itemList: []
@@ -167,14 +163,69 @@ MonoBehaviour:
   Key_quantityList: 
   Quest_itemList: []
   Quest_quantityList: 
-  EventsDesert: 0000000000
-  SwitchDesert: 0000000000
+  Enemies: 000000000000000000000000000000000000000000000000000000000000
+  Treasure: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  Skill_F: 0100000000000000000001
+  Skill_K: 0100000000000000000001
+  Skill_S: 0100000000000000000001
+  EventsDesert: 00000000000000000000
+  SwitchDesert: 00000000000000000000
   Timelines: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  questDatabase: []
-  quest: 
-  QuestActive: 
-  QuestComplete: 
-  QuestSegnal: 
+  questDatabase:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  quest: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  QuestActive: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  QuestComplete: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  QuestSegnal: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   items: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &8760654960572201012
 MonoBehaviour:
@@ -188,14 +239,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eeb182877e24684385f74f1bb50122e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Saving: 0
-  NameScene: 
-  saveFilePath: 
-  GM_Data: {fileID: 0}
-  F_NameWeapon: 
-  S_NameWeapon: 
-  K_NameWeapon: 
-  F_NameArmor: 
-  S_NameArmor: 
-  K_NameArmor: 
   PS: {fileID: 8244634831866167443}

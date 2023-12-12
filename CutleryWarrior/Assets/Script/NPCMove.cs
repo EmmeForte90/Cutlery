@@ -63,6 +63,7 @@ public class NPCMove : MonoBehaviour
 {
     Gravity();
     TargetPlayer();
+    if(!GameManager.instance.EnemyCanTouch){
 
     if (top && isWalk && !isRun)
     {WalkUP();}
@@ -78,7 +79,8 @@ public class NPCMove : MonoBehaviour
     {Idle();}
 
     // Verifica della distanza tra il nemico e il giocatore
-    if(!GameManager.instance.stopInput){
+    if(!GameManager.instance.stopInput)
+    {
     if ((transform.position - Player.transform.position).sqrMagnitude > agroDistance * agroDistance)
     {
         Behav = 0;
@@ -92,6 +94,7 @@ public class NPCMove : MonoBehaviour
         GameManager.instance.AllarmMap.SetActive(true);}
     }
     }
+    
 
     switch (Behav)
     {
@@ -122,6 +125,7 @@ public class NPCMove : MonoBehaviour
             isWalk = false;
             isRun = false;
             break;
+    }
     }
 }
 

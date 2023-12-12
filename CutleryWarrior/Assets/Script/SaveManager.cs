@@ -185,16 +185,16 @@ public class SaveVector3
 
 public class SaveManager : MonoBehaviour
 {
-    public bool Saving = false;
-    public string NameScene;
-    public string saveFilePath;
-    public GameManager GM_Data;
-    public string F_NameWeapon;
-    public string S_NameWeapon;
-    public string K_NameWeapon;
-    public string F_NameArmor;
-    public string S_NameArmor;
-    public string K_NameArmor;
+    //public bool Saving = false;
+    //public string NameScene;
+    //public string saveFilePath;
+    //public GameManager GM_Data;
+    //public string F_NameWeapon;
+    //public string S_NameWeapon;
+    //public string K_NameWeapon;
+    //public string F_NameArmor;
+    //public string S_NameArmor;
+    //public string K_NameArmor;
 
     public static SaveManager instance;
     //
@@ -203,6 +203,7 @@ public class SaveManager : MonoBehaviour
     public void SaveGame()
     {
         ES3.Save("savedPosition", PS.savedPosition);
+        ES3.Save("IdSpawn", PS.IdSpawn);
         //
         ES3.Save("NameScene", PS.NameScene);
         ES3.Save("HaveData", PS.HaveData);
@@ -215,12 +216,6 @@ public class SaveManager : MonoBehaviour
         PS.S_NameArmor = GameManager.instance.Inv.S_NameArmor;
         PS.K_NameArmor = GameManager.instance.Inv.K_NameArmor;
         //
-        F_NameWeapon = GameManager.instance.Inv.F_NameWeapon;
-        S_NameWeapon = GameManager.instance.Inv.S_NameWeapon;
-        K_NameWeapon = GameManager.instance.Inv.K_NameWeapon;
-        F_NameArmor = GameManager.instance.Inv.F_NameArmor;
-        S_NameArmor = GameManager.instance.Inv.S_NameArmor;
-        K_NameArmor = GameManager.instance.Inv.K_NameArmor;
         ES3.Save("F_NameWeapon", PS.F_NameWeapon);
         ES3.Save("S_NameWeapon", PS.S_NameWeapon);
         ES3.Save("K_NameWeapon", PS.K_NameWeapon);
@@ -333,6 +328,9 @@ public class SaveManager : MonoBehaviour
         //
         ES3.Save("Enemies", PS.Enemies);
         ES3.Save("Treasure", PS.Treasure);
+        ES3.Save("Timelines", PS.Timelines);
+        ES3.Save("EventsDesert", PS.EventsDesert); 
+        ES3.Save("SwitchDesert", PS.SwitchDesert);
         //
         ES3.Save("Skill_F", PS.Skill_F);
         ES3.Save("Skill_K", PS.Skill_K);
@@ -366,6 +364,7 @@ public class SaveManager : MonoBehaviour
     public void LoadGame()
     {
         PS.savedPosition = ES3.Load<Vector3>("savedPosition");
+        PS.IdSpawn = ES3.Load<int>("IdSpawn");
         //////////////////////////////////////////////
         PS.I_itemList = null;
         PS.IBattle_itemList = null;
@@ -387,6 +386,8 @@ public class SaveManager : MonoBehaviour
         GameManager.instance.K_Unlock = PS.K_Unlock;
         //
         PS.Money = ES3.Load<int>("Money");
+        GameManager.instance.money = PS.Money;
+        GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
         PS.WhatMusic = ES3.Load<int>("WhatMusic");
         /////////////////////////////////////////
         PS.F_LV = ES3.Load<int>("F_LV");
@@ -479,8 +480,15 @@ public class SaveManager : MonoBehaviour
         PS.S_sleepResistanceCont = ES3.Load<float>("S_sleepResistanceCont");
         PS.S_rustResistanceCont = ES3.Load<float>("S_rustResistanceCont");
         //////////////////////////////////////////
+        GameManager.instance.F_ExpTextM.text = GameManager.instance.F_Exp.ToString(); 
+        GameManager.instance.S_ExpTextM.text = GameManager.instance.S_Exp.ToString();    
+        GameManager.instance.K_ExpTextM.text = GameManager.instance.K_Exp.ToString(); 
+        ///////////////////////////////////////
         PS.Enemies = ES3.Load<bool[]>("Enemies");
         PS.Treasure = ES3.Load<bool[]>("Treasure");
+        PS.EventsDesert = ES3.Load<bool[]>("EventsDesert");
+        PS.Timelines = ES3.Load<bool[]>("Timelines");
+        PS.SwitchDesert = ES3.Load<bool[]>("SwitchDesert");
         //
         PS.Skill_F = ES3.Load<bool[]>("Skill_F");
         PS.Skill_K = ES3.Load<bool[]>("Skill_K");

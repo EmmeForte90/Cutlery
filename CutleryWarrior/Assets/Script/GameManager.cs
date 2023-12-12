@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject MouseCursorIcon;
     public bool StartGame = false;    
     public GameObject player;
+    public GameObject ContainerHero;
     public GameObject Minimap;
     public GameObject AllarmMap;
     public bool activeMinimap = false; 
@@ -25,10 +26,12 @@ public class GameManager : MonoBehaviour
     public EquipM_S M_S;
     public int N_Target = 0;
     public Vector3 savedPosition;
+    public Vector3 savedPositionLoading;
     public Transform savedPositionEscape;
     public string sceneName;
     [Range (1,3)]
     public int CharacterID;
+    public bool EnemyCanTouch = false;    
     /// ////////////////////////////////////////////////////////
     [Header("Fork")]
     [SerializeField] public GameObject F_Hero;
@@ -43,7 +46,7 @@ public class GameManager : MonoBehaviour
     private  int F_LV;
     private float F_HP;
     private float F_MP;
-    private float F_Exp;
+    [HideInInspector]public float F_Exp;
     private float F_curExp;
     private float F_attack;
     private float F_defense;
@@ -82,7 +85,7 @@ public class GameManager : MonoBehaviour
     private  int S_LV;
     private float S_HP;
     private float S_MP;
-    private float S_Exp;
+    [HideInInspector]public float S_Exp;
     private float S_curExp;
     private float S_attack;
     private float S_defense;
@@ -120,7 +123,7 @@ public class GameManager : MonoBehaviour
     private  int K_LV;
     private float K_HP;
     private float K_MP;
-    private float K_Exp;
+    [HideInInspector]public float K_Exp;
     private float K_curExp;
     private float K_attack;
     private float K_defense;

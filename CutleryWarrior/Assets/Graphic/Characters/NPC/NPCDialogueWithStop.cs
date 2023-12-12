@@ -8,7 +8,7 @@ public class NPCDialogueWithStop : MonoBehaviour
     [Header("Data")]
     public Dialogues Dialogue;
     private int IDDialogue;
-    public int IDCharacter;
+    //public int IDCharacter;
     private GameObject player; // Reference to the player's position
     [Header("Dialogue")]
     public TextMeshProUGUI dialogueText; // Reference to the TextMeshProUGUI component
@@ -19,7 +19,6 @@ public class NPCDialogueWithStop : MonoBehaviour
     public float dialogueDuration; // variable to set the duration of the dialogue
     private int dialogueIndex; // variable to keep track of the dialogue status
     private float elapsedTime; // variable to keep track of the elapsed time
-    private Animator anim; // componente Animator del personaggio
     private bool notGo = false;
     public bool isInteragible;
     public bool heFlip;
@@ -41,24 +40,22 @@ public class NPCDialogueWithStop : MonoBehaviour
     [Tooltip("0,1-Male 2,3-Female 4-Kid 5-Oldman 6-Oste")]
     public int IDAudio;
     #endregion
-    void Awake()
-    {
-            //player = GameObject.FindWithTag("Player");
-            IDDialogue = Dialogue.id;
-            CharacterName.text = Dialogue.CharacterName;
-            if (instance == null){instance = this;}
-            _skeletonAnimation = GetComponent<SkeletonAnimation>();
-            if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");}        
-            _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
-            _spineAnimationState = _skeletonAnimation.AnimationState;
-            _skeleton = _skeletonAnimation.skeleton;
-    }
+    
     void Start()
     {        
+         //player = GameObject.FindWithTag("Player");
+        IDDialogue = Dialogue.id;
+        CharacterName.text = Dialogue.CharacterName;
+        if (instance == null){instance = this;}
+        _skeletonAnimation = GetComponent<SkeletonAnimation>();
+        if (_skeletonAnimation == null) {Debug.LogError("Componente SkeletonAnimation non trovato!");}        
+        _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
+        _spineAnimationState = _skeletonAnimation.AnimationState;
+        _skeleton = _skeletonAnimation.skeleton;
+        dialogue = Dialogue.dialogue;
         button.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueText.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-        anim = GetComponent<Animator>();
     }
     void Update()
     {
@@ -115,11 +112,10 @@ public class NPCDialogueWithStop : MonoBehaviour
         }
     }
     IEnumerator ShowDialogue()
-    {
+{
     Talk = true;
     AudioManager.instance.PlaySFX(IDAudio);
-
-    //talk.Play();
+    //PlayMFX(1);
     _isDialogueActive = true;
     elapsedTime = 0; // reset elapsed time
     dialogueBox.gameObject.SetActive(true); // Show dialogue box
@@ -134,10 +130,11 @@ public class NPCDialogueWithStop : MonoBehaviour
         {
             break;
         }
-        yield return new WaitForSeconds(0); // Wait before showing the next letter
+        yield return new WaitForSeconds(0.001f); // Wait before showing the next letter
     }
             dialogueText.text = currentDialogue; // Set the dialogue text to the full current dialogue
             StopButton = true;
+
 }
     void NextDialogue()
     {

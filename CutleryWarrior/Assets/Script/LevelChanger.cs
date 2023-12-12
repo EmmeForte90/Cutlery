@@ -7,12 +7,13 @@ public class LevelChanger : MonoBehaviour
     public int IDPorta;
     public bool Loading = false;
     private SceneEvent sceneEvent;
+
+
     public void Start()
     {
     sceneEvent = GetComponent<SceneEvent>();
     sceneEvent.onSceneChange.AddListener(ChangeScene);
-    /*if(SaveManager.instance.Saving)
-    {sceneName = SaveManager.instance.NameScene;}*/
+
     }
     private void ChangeScene()
     {
@@ -37,7 +38,7 @@ public class LevelChanger : MonoBehaviour
     other.CompareTag("K_Player") ||
     other.CompareTag("S_Player"))
     {GameManager.instance.ChStop();
-    StartScene.instance.Start = false;
+    //StartScene.instance.Start = false;
     CameraZoom.instance.ZoomIn();
     StartCoroutine(WaitForSceneLoad());}
     }
