@@ -722,11 +722,11 @@ private void HandleComboAttackS()
     public void LeftD(){transform.localScale = new Vector3(-1, 1,1);}
     public void Direction(){transform.localScale = new Vector3(1, 1,1);}
     public void OnCollisionEnter(Collision collision)
-    {if (collision.gameObject.CompareTag("Collider")){}//StopRun = true;}
+    {if (collision.gameObject.CompareTag("Collider")){Stop();}//StopRun = true;}
     if (collision.gameObject.CompareTag("Question")){Attention = true;}
     }
     public void OnCollisionExit(Collision collision)
-    {if (collision.gameObject.CompareTag("Collider")){}//StopRun = false;}
+    {if (collision.gameObject.CompareTag("Collider")){Stop();}//StopRun = false;}
     if (collision.gameObject.CompareTag("Question")){Attention = false;}}
     public void Knockback()
     {
