@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74896e8e20d07d4c913bec59de3ca9c, type: 3}
+  m_Name: Tutorial_2
+  m_EditorClassIdentifier: 
+  id: 0
+  CharacterName: 
+  CharacterName_1: 
+  CharacterName_2: 
+  CharacterName_3: 
+  CharacterName_4: 
+  dialogue:
+  - A friend join in your team! Now the battle can be more frenetics.
+  - You can switch the characters press space. Each character have a unique move
+    and skills.
+  - Use Esc for open the little menu, you can give order to alliance.
+  - The tutorial is over, now let's fight!
+  Startdialogue: []
+  Middledialogue: []
+  Endingdialogue: []
+  First: 0
+  Middle: 0
+  End: 0
