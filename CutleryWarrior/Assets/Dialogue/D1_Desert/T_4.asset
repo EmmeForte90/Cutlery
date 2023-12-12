@@ -24,15 +24,14 @@ MonoBehaviour:
   - Hm? And who are you? It's forbidden to enter Mollica until further notice.
   - Mollica? It seems like the city I'm looking for. Do you happen to know Abbot
     Moccup? I urgently need to speak with him.
-  - You are lloking for Moccup? He is the abbot of the Mollica temple... But as I
-    said, no one enters Mollica without a permit.
-  - I'm afraid I can't make an exception?
+  - You are looking for Moccup? He is the abbot of the Mollica temple... But as I
+    said, no one enters <color=red>Mollica without a permit.</color>
+  - Can't you make an exception?
   - Absolutely not! Without a permit, no one gets through. But you can ask for one
     from Don Ferrante. He is the head of the village of Briciola, a small village
-    located near an oasis to the west from here. Try asking him for one, and if he
-    grants it, I'll let you enter the city.
+    at west from here.
   - What a hassle...
-  - Remember, Briciola is to the west from here. Good luck!
+  - Remember,<color=red> Briciola is to the west from here.</color> Good luck!
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []
