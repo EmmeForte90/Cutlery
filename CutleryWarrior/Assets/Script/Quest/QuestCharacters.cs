@@ -7,6 +7,7 @@ public class QuestCharacters : MonoBehaviour
     #region Header
     public Quests Quest;
     private int IDQuest;
+    public bool PlayerCanSpeak = false;
     public int IDCharacter;
     public TextMeshProUGUI CharacterName; // Reference to the TextMeshProUGUI component
     public TextMeshProUGUI QNameE; // Reference to the TextMeshProUGUI component
@@ -30,6 +31,7 @@ public class QuestCharacters : MonoBehaviour
     private bool notGo = false;
     public bool isInteragible;
     public bool heFlip;
+    public int countD = 0;
     public bool FirstD = true;
     public bool StopButton = false; // o la variabile che deve attivare la sostituzione
     private bool _isInTrigger;
@@ -77,6 +79,17 @@ public class QuestCharacters : MonoBehaviour
         if(QuestsManager.instance.QuestSegnal[Quest.id]){QuestAt.SetActive(true); QuestCo.SetActive(false);}
         else if(!QuestsManager.instance.QuestSegnal[Quest.id]){QuestAt.SetActive(false); QuestCo.SetActive(true);}}
         if(heFlip){FacePlayer();}
+        if (PlayerCanSpeak)
+        {
+            if (countD % 2 == 0) // Even dialogue count
+            {
+                CharacterName.text = Quest.CharacterName;
+            }
+            else // Odd dialogue count
+            {
+                CharacterName.text = Quest.PlayerName;
+            }
+        }
         if(!notGo)
         {
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)
@@ -90,6 +103,7 @@ public class QuestCharacters : MonoBehaviour
         else if (_isDialogueActive && Input.GetButtonDown("Fire1") && StopButton && !GameManager.instance.stopInput)
         {
             NextDialogue();
+            countD++;
             //StopButton = false;
         }}
     }
@@ -126,6 +140,7 @@ public class QuestCharacters : MonoBehaviour
             if (dialogueIndex >= dialogue.Length)
             {
                 dialogueIndex = 0;
+                countD = 0;
                 _isDialogueActive = false;
                 dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
                 dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
@@ -173,7 +188,8 @@ public class QuestCharacters : MonoBehaviour
             GameManager.instance.ChInteractStop();
             CameraZoom.instance.ZoomOut();
             GameManager.instance.notChange = false;
-            GameManager.instance.ChCanM();}
+            GameManager.instance.ChCanM();            
+            countD = 0;}
             else if(!FirstD && Quest.isComplete){StartCoroutine(EndQuest());}
             //else {GameManager.instance.ChInteractStop();}
         }
@@ -197,6 +213,7 @@ public class QuestCharacters : MonoBehaviour
         Quest.isComplete = false;
         Quest.AfterQuest = true;
         notGo = false;
+        countD = 0;
         GameManager.instance.ChInteractStop();
         CameraZoom.instance.ZoomOut();
         GameManager.instance.notChange = false;
@@ -223,6 +240,7 @@ public class QuestCharacters : MonoBehaviour
             CameraZoom.instance.ZoomOut();
             GameManager.instance.notChange = false;
             GameManager.instance.ChCanM();
+            countD = 0;
             if(NeedKey)
             {KeyManager.instance.AddItem(KeyForQuest, specificQuant);
             Inventory.instance.Reward(KeyForQuest, specificQuant);}

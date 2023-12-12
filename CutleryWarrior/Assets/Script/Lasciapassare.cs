@@ -54,7 +54,7 @@ public class Lasciapassare : MonoBehaviour
     }
      IEnumerator StartData()
     {yield return new WaitForSeconds(0.01f);
-    if (M_K == null) {M_K = GameObject.FindWithTag("Manager").GetComponent<KeyManager>();}}
+    if (M_K == null) {M_K = GameManager.instance.KM.GetComponent<KeyManager>();}}
     void Start()
     {        
         button.gameObject.SetActive(false); // Initially hide the dialogue text
@@ -99,7 +99,7 @@ public class Lasciapassare : MonoBehaviour
     private void OnTriggerExit(Collider collision)
     {
     if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
-    {button.gameObject.SetActive(false);}
+    {button.gameObject.SetActive(false);  _isInTrigger = false;}
     }
     public void AddQuestItem()
     {

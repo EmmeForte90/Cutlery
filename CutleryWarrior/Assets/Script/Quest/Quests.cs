@@ -7,6 +7,8 @@ public class Quests : ScriptableObject
 [Tooltip("Che tipo di Quest è? 0-Importante 1-Raccolta 2-Caccia 3-Varie")]
 public int KindQuest;
 public string CharacterName;
+public string PlayerName;
+
 [TextArea(3, 10)]
 public string questName;
 [TextArea(3, 10)]

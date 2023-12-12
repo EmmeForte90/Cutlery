@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 2
   KindQuest: 0
   CharacterName: Ferrante
+  PlayerName: Elara
   questName: Find Armin
   Description: Ferrante can only give you the pass to the city of Mollica if you
     find his nephew Armin in the mine. The mine is south-east of the village of Briciola.
@@ -24,12 +25,21 @@ MonoBehaviour:
   - Mh? Who are you, stranger? I don't have time to talk now.... My brave young nephew
     was trapped in the<color=red>Shining Mine</color>. His life is intrinsically
     linked to that of the entire village.
-  - Mmmh... The city of <color=red>Mollica</color>? it's inaccessible at the moment,
-    only I can give you a pass into the city... Mmmh, but... If you can bring my
-    nephew back to me safe and sound I could give you one.
-  - The mine is located southeast from here, keep this mine pass or the soldiers
-    won't let you continue. Normally I wouldn't ask like this at the first person
-    who comes along but I'm really desperate.
+  - I see but i need to go to Mollica. Someone told me you can give me a permitt,
+    may I ask one, please?
+  - 'Mmmh... The city of <color=red>Mollica</color>?
+
+    I can give you a pass into
+    the city... Mmmh, but... if you want one  you can do something for me in return?'
+  - I'm in a hurry. I don't want to be disrespectful, but I really don't have time.
+  - Normally I wouldn't ask like this at the first person who comes along but I'm
+    really desperate. Could you save my nephew? He went into the mines and hasn't
+    come back.
+  - Sigh... Okay, fine. I'll TRY to save your nephew, but I expect the permit for
+    Mollica when I get back.
+  - Absolutely, I always keep my promises! Now, take this, it's the permit for the
+    mines. Without it, the guards won't let you in.
+  - Ok, thank you.
   - Good luck, stranger. If you don't come back I will prepare a grave for you...
     and for my nephew.
   Middledialogue:
