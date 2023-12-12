@@ -119,6 +119,7 @@ public class AnimationManager : MonoBehaviour
     Spine.EventData eventData;
     public bool VFX = true;
     public bool VFXSkills = true;
+    private int sound = 0;
 
     [HideInInspector]public Transform SkillPoint;
     public Transform BPoint;
@@ -244,9 +245,13 @@ public class AnimationManager : MonoBehaviour
         _skeletonAnimation.state.ClearTrack(0);
     _skeletonAnimation.state.SetAnimation(0, IdleBAnimationName, true);
     }
+        public void SoundImp(int soundEff)
+    {
+        sound = soundEff;
+    }
     void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
     //Normal VFX
-    if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(0);}
+    if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(sound);}
     if (e.Data.Name == "impronte" && VFX){if(canImp){Instantiate(impronte, Foot.position, impronte.transform.rotation);
     StartCoroutine(StopVFX_Rapid()); VFX = false; }}
     if (e.Data.Name == "stump" && VFX){Instantiate(Stump, Foot.position, Stump.transform.rotation);
