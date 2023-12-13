@@ -162,6 +162,10 @@ public class PlayerStats : MonoBehaviour
     [Header("Item List")]
     public bool[] items;
 
+    [Header("Bool Boss")]
+    public bool MinerBoss = false;
+
+
     public static PlayerStats instance;
 
 

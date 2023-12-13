@@ -6,6 +6,7 @@ public class MinerManager : MonoBehaviour
     public GameObject MainFire;
     public Animator Door_L;
     public Animator Door_R;
+    public GameObject[] DeactivateOBJAfterBoss;
 
     public void Update()
     {
@@ -15,5 +16,6 @@ public class MinerManager : MonoBehaviour
             Door_L.Play("Door_L");
             Door_R.Play("Door_R");
         }
+        if(PlayerStats.instance.MinerBoss){foreach (GameObject arenaObjectN in DeactivateOBJAfterBoss){arenaObjectN.SetActive(false);}}
     }
 }
