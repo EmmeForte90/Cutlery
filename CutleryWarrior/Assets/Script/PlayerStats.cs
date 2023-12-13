@@ -149,10 +149,11 @@ public class PlayerStats : MonoBehaviour
     public bool[] EventsDesert;  
     public bool[] SwitchDesert;
     public bool[] Timelines;
-
+    public bool[] MinieraSwitch;
+    [Header("Switch")]
+    public int SwitchMiniera = 0;
     [Header("Quests")]
     public List<Quests> questDatabase;
-     // Array di booleani che mantengono lo stato delle quest
     public bool[] quest;
     public bool[] QuestActive;
     public bool[] QuestComplete;
@@ -346,13 +347,11 @@ public class PlayerStats : MonoBehaviour
         Timelines[id] = true;
     }
 
-    /*public void DeactivateEventsAwake()
-    {   
-        DeactivateTimeline();
-        DeactivateSwitch();
-        DeactivateWarning();
-        DeactivateCHEST();
-    }*/
+    public void MinieraSwitchEnd(int id)
+    {
+        MinieraSwitch[id] = true;
+    }
+
 
     #region Levelup
     public void F_LevelUp()

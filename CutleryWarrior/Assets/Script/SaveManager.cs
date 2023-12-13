@@ -185,17 +185,6 @@ public class SaveVector3
 
 public class SaveManager : MonoBehaviour
 {
-    //public bool Saving = false;
-    //public string NameScene;
-    //public string saveFilePath;
-    //public GameManager GM_Data;
-    //public string F_NameWeapon;
-    //public string S_NameWeapon;
-    //public string K_NameWeapon;
-    //public string F_NameArmor;
-    //public string S_NameArmor;
-    //public string K_NameArmor;
-
     public static SaveManager instance;
     //
     [SerializeField]    public PlayerStats PS;
@@ -331,6 +320,7 @@ public class SaveManager : MonoBehaviour
         ES3.Save("Timelines", PS.Timelines);
         ES3.Save("EventsDesert", PS.EventsDesert); 
         ES3.Save("SwitchDesert", PS.SwitchDesert);
+        ES3.Save("MinieraSwitch", PS.MinieraSwitch);
         //
         ES3.Save("Skill_F", PS.Skill_F);
         ES3.Save("Skill_K", PS.Skill_K);
@@ -489,6 +479,7 @@ public class SaveManager : MonoBehaviour
         PS.EventsDesert = ES3.Load<bool[]>("EventsDesert");
         PS.Timelines = ES3.Load<bool[]>("Timelines");
         PS.SwitchDesert = ES3.Load<bool[]>("SwitchDesert");
+        PS.MinieraSwitch = ES3.Load<bool[]>("MinieraSwitch");
         //
         PS.Skill_F = ES3.Load<bool[]>("Skill_F");
         PS.Skill_K = ES3.Load<bool[]>("Skill_K");

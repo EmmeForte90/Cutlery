@@ -19,8 +19,8 @@ MonoBehaviour:
   CharacterName_3: 
   CharacterName_4: 
   dialogue:
-  - If you're planning to enter the mine, be careful! We dug too deep in search of
-    diamonds, and I fear we've unleashed... something.
+  - Miner for generations, I could say I've grown tired and turn to something else,
+    but I love crushing rocks. I fear it's the only thing I know how to do.
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []

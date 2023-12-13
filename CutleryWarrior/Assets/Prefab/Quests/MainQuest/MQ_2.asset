@@ -16,9 +16,9 @@ MonoBehaviour:
   KindQuest: 0
   CharacterName: Ferrante
   PlayerName: Elara
-  questName: Find Armin
+  questName: Find Alden
   Description: Ferrante can only give you the pass to the city of Mollica if you
-    find his nephew Armin in the mine. The mine is south-east of the village of Briciola.
+    find his nephew Alden in the mine. The mine is south-east of the village of Briciola.
   Bigicon: {fileID: 21300000, guid: b6921313e6d2c0e40bd93876bfb17958, type: 3}
   Desicon: {fileID: 0}
   Startdialogue:
@@ -41,7 +41,7 @@ MonoBehaviour:
     mines. Without it, the guards won't let you in.
   - Ok, thank you.
   - Good luck, stranger. If you don't come back I will prepare a grave for you...
-    and for my nephew.
+    and for my nephew, Alden.
   Middledialogue:
   - You can find the <color=red>Shining Mine</color> to the Southeast.
   Endingdialogue:

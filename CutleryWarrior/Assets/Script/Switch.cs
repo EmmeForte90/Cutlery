@@ -5,8 +5,8 @@ public class Switch : MonoBehaviour
     public int IdEvent;
     public Animator Anm;
     public Animator AnmGate;
-    public GameObject Gate;
-    public GameObject Leva;
+    //public GameObject Gate;
+    //public GameObject Leva;
     public GameObject IconSwitch;
     public GameObject IconGate;
     public GameObject VFXTake;

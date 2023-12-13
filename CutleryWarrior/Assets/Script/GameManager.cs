@@ -170,7 +170,6 @@ public class GameManager : MonoBehaviour
     public bool ComandBattle = false;
     public bool NotTouchOption = false;
     public bool notChange = false;
-
     [SerializeField]  GameObject Pause;
     [SerializeField]  GameObject LittleM;
     [SerializeField]  GameObject TimerM;
@@ -185,6 +184,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI moneyTextM;
     public int IDPorta;  
     public float Cooldown = 1.2f; // Tempo di cooldown tra le combo in second
+
     public CinemachineVirtualCamera vcam; // La telecamera virtuale Cinemachine
     public static GameManager instance;
     #endregion
