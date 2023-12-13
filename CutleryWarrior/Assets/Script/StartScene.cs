@@ -18,7 +18,8 @@ public class StartScene : MonoBehaviour
     private GameObject SAct;    
     public GameObject[] SpawnArr; 
     public GameObject[] ActiveObj; 
-    //public GameObject[] ActiveObjAB;
+    public bool needDeactive = false;
+    public GameObject[] DeActiveObj;
     public GameObject[] Notte; 
     public Material newSkyboxMaterial_N;
     public GameObject[] Giorno;
@@ -95,6 +96,7 @@ public class StartScene : MonoBehaviour
     {
     GameManager.instance.FadeOut();
     foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);}
+    if(needDeactive){foreach (GameObject arenaObject in DeActiveObj){arenaObject.SetActive(false);}}
     vCam.Follow = FAct.transform;
     if(GameManager.instance.F_Unlock){if(!FAct){FAct.SetActive(true);}}
     if(GameManager.instance.K_Unlock){KAct.SetActive(true);}

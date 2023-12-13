@@ -98,6 +98,7 @@ using TMPro;
 
     public void CameraONPoint(){CameraTransition.StartTransition();}
     public void CameraONActor(){ActivateActor();}
+    private void OnEnable(){ActivateActor();}
     private void OnDisable(){ActivatePlayer();}
 
     public void FirstDialogue(){dialogue = DialoguesT.dialogue; dialogueIndex = 0; StartCoroutine(ShowDialogue());}
