@@ -83,6 +83,46 @@ public class SaveTotem : MonoBehaviour
         PlayerStats.instance.NameScene = NameScene;
         PlayerStats.instance.IdSpawn = IDSpawn;
         PlayerStats.instance.UpdateInventorySaving();
+        if(GameManager.instance.F_Unlock)
+        {
+            PlayerStats.instance.ResetStatF();
+            if(PlayerStats.instance.Skill_F[0]){PlayerStats.instance.Skill_F_0.Utilizzi = PlayerStats.instance.Skill_F_0.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_F[1]){PlayerStats.instance.Skill_F_1.Utilizzi = PlayerStats.instance.Skill_F_1.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_F[2]){PlayerStats.instance.Skill_F_2.Utilizzi = PlayerStats.instance.Skill_F_2.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_F[3]){PlayerStats.instance.Skill_F_3.Utilizzi = PlayerStats.instance.Skill_F_3.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_F[4]){PlayerStats.instance.Skill_F_4.Utilizzi = PlayerStats.instance.Skill_F_4.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_F[5]){PlayerStats.instance.Skill_F_5.Utilizzi = PlayerStats.instance.Skill_F_5.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_F[6]){PlayerStats.instance.Skill_F_6.Utilizzi = PlayerStats.instance.Skill_F_6.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_F[7]){PlayerStats.instance.Skill_F_7.Utilizzi = PlayerStats.instance.Skill_F_7.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_F[8]){PlayerStats.instance.Skill_F_8.Utilizzi = PlayerStats.instance.Skill_F_8.UtilizziMAX;}
+        }
+        if(GameManager.instance.K_Unlock)
+        {
+            PlayerStats.instance.ResetStatK();
+            if(PlayerStats.instance.Skill_K[0]){PlayerStats.instance.Skill_K_0.Utilizzi = PlayerStats.instance.Skill_K_0.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_K[1]){PlayerStats.instance.Skill_K_1.Utilizzi = PlayerStats.instance.Skill_K_1.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_K[2]){PlayerStats.instance.Skill_K_2.Utilizzi = PlayerStats.instance.Skill_K_2.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_K[3]){PlayerStats.instance.Skill_K_3.Utilizzi = PlayerStats.instance.Skill_K_3.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_K[4]){PlayerStats.instance.Skill_K_4.Utilizzi = PlayerStats.instance.Skill_K_4.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_K[5]){PlayerStats.instance.Skill_K_5.Utilizzi = PlayerStats.instance.Skill_K_5.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_K[6]){PlayerStats.instance.Skill_K_6.Utilizzi = PlayerStats.instance.Skill_K_6.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_K[7]){PlayerStats.instance.Skill_K_7.Utilizzi = PlayerStats.instance.Skill_K_7.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_K[8]){PlayerStats.instance.Skill_K_8.Utilizzi = PlayerStats.instance.Skill_K_8.UtilizziMAX;}
+        }
+        if(GameManager.instance.S_Unlock)
+        {
+            PlayerStats.instance.ResetStatS();
+            if(PlayerStats.instance.Skill_S[0]){PlayerStats.instance.Skill_S_0.Utilizzi = PlayerStats.instance.Skill_S_0.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_S[1]){PlayerStats.instance.Skill_S_1.Utilizzi = PlayerStats.instance.Skill_S_1.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_S[2]){PlayerStats.instance.Skill_S_2.Utilizzi = PlayerStats.instance.Skill_S_2.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_S[3]){PlayerStats.instance.Skill_S_3.Utilizzi = PlayerStats.instance.Skill_S_3.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_S[4]){PlayerStats.instance.Skill_S_4.Utilizzi = PlayerStats.instance.Skill_S_4.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_S[5]){PlayerStats.instance.Skill_S_5.Utilizzi = PlayerStats.instance.Skill_S_5.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_S[6]){PlayerStats.instance.Skill_S_6.Utilizzi = PlayerStats.instance.Skill_S_6.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_S[7]){PlayerStats.instance.Skill_S_7.Utilizzi = PlayerStats.instance.Skill_S_7.UtilizziMAX;}
+            if(PlayerStats.instance.Skill_S[8]){PlayerStats.instance.Skill_S_8.Utilizzi = PlayerStats.instance.Skill_S_8.UtilizziMAX;}
+        }
+
         Save.SaveGame();
         LoadVFX.SetActive(true);
         Invoke("EndingLoad", 5);
@@ -91,26 +131,4 @@ public class SaveTotem : MonoBehaviour
     }
     public void EndingLoad(){LoadVFX.SetActive(false);}
 
-    /*public void Saving()
-    {
-            Save.SaveGame
-            (
-            PlayerStats.instance.questDatabase,
-            PlayerStats.instance.I_itemList,
-            PlayerStats.instance.I_quantityList,
-            PlayerStats.instance.IBattle_itemList,
-            PlayerStats.instance.IBattle_quantityList,
-            PlayerStats.instance.F_itemList,
-            PlayerStats.instance.F_quantityList,
-            PlayerStats.instance.S_itemList,
-            PlayerStats.instance.S_quantityList,
-            PlayerStats.instance.K_itemList,
-            PlayerStats.instance.K_quantityList,
-            PlayerStats.instance.Key_itemList,
-            PlayerStats.instance.Key_quantityList,
-            PlayerStats.instance.Quest_itemList,
-            PlayerStats.instance.Quest_quantityList
-            );
-
-    }*/
 }

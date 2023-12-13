@@ -1,19 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UnlockCharacter : MonoBehaviour
 {
     public GameObject This;
+    public bool isDestroy = false;
     public Item Weapon;
     public Item Armor;
     public Weapon Weapon_B;
     public Weapon Armor_B;
     public int specificQuant;
-    public bool isTest = false;
+    public bool with_contact = false;
+    [Header("Characters")]
     public bool Fork;
     public bool Spoon;
     public bool Knife;
+
+    [Header("WhatPlace")]
+    public bool isMiner = false;
+
 
     public void Unlock( )
     {
@@ -88,7 +93,8 @@ public class UnlockCharacter : MonoBehaviour
     //Destroy(ThisObj);
     } 
     //////////////////////////////////////////////////////////////////////////////////////
-    ///
+    public void Unlock_F( )
+    {StartCoroutine(UnlockToFork());}
 
     IEnumerator UnlockToFork()
     {yield return new WaitForSeconds(2f);
@@ -106,10 +112,12 @@ public class UnlockCharacter : MonoBehaviour
     PlayerStats.instance.ResetStatF();
     EquipM_F.instance.AddItem(Weapon, specificQuant);
     EquipM_F.instance.AddItem(Armor, specificQuant);}
-     Destroy(This);}
+    if(isDestroy){Destroy(This);}
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////
-    
+    public void Unlock_K( )
+    {StartCoroutine(UnlockToKnife());}
     IEnumerator UnlockToKnife()
     {yield return new WaitForSeconds(2f);
     GameManager.instance.NotParty = false;
@@ -126,9 +134,12 @@ public class UnlockCharacter : MonoBehaviour
     PlayerStats.instance.ResetStatF();
     EquipM_F.instance.AddItem(Weapon, specificQuant);
     EquipM_F.instance.AddItem(Armor, specificQuant);}
-    Destroy(This);}
+    if(isDestroy){Destroy(This);}
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////
+    public void Unlock_S( )
+    {StartCoroutine(UnlockToSpoon());}
 
     IEnumerator UnlockToSpoon()
     {yield return new WaitForSeconds(2f);
@@ -146,13 +157,15 @@ public class UnlockCharacter : MonoBehaviour
     PlayerStats.instance.ResetStatF();
     EquipM_F.instance.AddItem(Weapon, specificQuant);
     EquipM_F.instance.AddItem(Armor, specificQuant);}
-    Destroy(This);}
+    if(isDestroy){Destroy(This);}
+    }
 
     public void OnTriggerEnter(Collider other)
     {
-    if (other.CompareTag("F_Player") && isTest && Fork){StartCoroutine(UnlockToFork());}
-    if (other.CompareTag("F_Player") && isTest && Knife){StartCoroutine(UnlockToKnife());}
-    if (other.CompareTag("F_Player") && isTest && Spoon){StartCoroutine(UnlockToSpoon());}
+    if (other.CompareTag("F_Player") && with_contact && Fork){StartCoroutine(UnlockToFork());}
+    if (other.CompareTag("F_Player") && with_contact && Knife){StartCoroutine(UnlockToKnife());}
+    if (other.CompareTag("F_Player") && with_contact && Spoon){StartCoroutine(UnlockToSpoon());}
     SwitchCharacter.instance.TakeCharacters();
+    if(isMiner){DeactivateEvent.instance.ConfirmDeactivation();}
     }
 }

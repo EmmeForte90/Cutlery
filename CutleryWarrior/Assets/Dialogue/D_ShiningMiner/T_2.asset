@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74896e8e20d07d4c913bec59de3ca9c, type: 3}
+  m_Name: T_2
+  m_EditorClassIdentifier: 
+  id: 0
+  CharacterName: Elara
+  CharacterName_1: Varren
+  CharacterName_2: Alden
+  CharacterName_3: 
+  CharacterName_4: 
+  dialogue:
+  - That's... Alden!
+  - Varren... What are you doing here?
+  - What do you think? I came to find you. It's been a long time since we've seen
+    you around. We were all worried!
+  - I understand... And who are you?
+  - I'm Elara. Don Ferrante sent me to find you. Frankly, I didn't think we'd find
+    you alive given the mess we encountered.
+  - <shake>Hey!</shake> We don't say those things! Fortunately, we got here in time!
+  - You're right, I'd say at this point, we can go.
+  - I'm not going back
+  - Excuse me?
+  - You said it yourself, it's a mess in here. The miners dug too deep and awakened
+    an ancient evil that will spawn more monsters if I don't stop it. I'm not leaving
+    until I've eradicated it.
+  - That's why you came down here alone? Impressive, Alden. Truly impressive. But
+    you could have let me know; I would have definitely helped.
+  - The thing is, it's a personal matter, and I didn't want to involve anyone in
+    my issues.
+  - All right, I understand that you're determined to stay and save the mine, right?
+    Well, then all that's left is to help you in your quest.
+  - Are you sure? It could be very dangerous.
+  - <shake>Oh, come on, Alden, you know me well!</shake> I laugh in the face of danger,
+    and Elara here knows her way around with her magic. I assure you we won't be
+    a hindrance!
+  - That's not what I meant... But if you're both so determined, then okay.
+  - So it's settled. Let's go and take down whatever is in there.
+  Startdialogue: []
+  Middledialogue: []
+  Endingdialogue: []
+  First: 0
+  Middle: 0
+  End: 0

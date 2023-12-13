@@ -50,6 +50,17 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float F_paralysisResistanceCont;
     [HideInInspector] public float F_sleepResistanceCont;
     [HideInInspector] public float F_rustResistanceCont;
+    //
+    public Skill Skill_F_0;
+    public Skill Skill_F_1;
+    public Skill Skill_F_2;
+    public Skill Skill_F_3;
+    public Skill Skill_F_4;
+    public Skill Skill_F_5;
+    public Skill Skill_F_6;
+    public Skill Skill_F_7;
+    public Skill Skill_F_8;
+    //    
     [Header("Spoon")]
     [SerializeField] public int S_LV = 1;
     [SerializeField] public float S_HP = 0;
@@ -81,6 +92,17 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float S_paralysisResistanceCont;
     [HideInInspector] public float S_sleepResistanceCont;
     [HideInInspector] public float S_rustResistanceCont;
+    //
+    public Skill Skill_S_0;
+    public Skill Skill_S_1;
+    public Skill Skill_S_2;
+    public Skill Skill_S_3;
+    public Skill Skill_S_4;
+    public Skill Skill_S_5;
+    public Skill Skill_S_6;
+    public Skill Skill_S_7;
+    public Skill Skill_S_8;
+    //    
     [Header("Knife")]
     [SerializeField] public int K_LV = 1;
     [SerializeField] public float K_HP = 0;
@@ -113,6 +135,16 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public float K_sleepResistanceCont;
     [HideInInspector] public float K_rustResistanceCont;
     //
+    public Skill Skill_K_0;
+    public Skill Skill_K_1;
+    public Skill Skill_K_2;
+    public Skill Skill_K_3;
+    public Skill Skill_K_4;
+    public Skill Skill_K_5;
+    public Skill Skill_K_6;
+    public Skill Skill_K_7;
+    public Skill Skill_K_8;
+    //    
     [HideInInspector] public string F_NameWeapon = "Weapon/Latta";
     [HideInInspector] public string S_NameWeapon = "Weapon/Latta";
     [HideInInspector] public string K_NameWeapon = "Weapon/Latta";

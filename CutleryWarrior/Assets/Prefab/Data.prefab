@@ -85,6 +85,16 @@ MonoBehaviour:
   F_paralysisResistanceCont: 0
   F_sleepResistanceCont: 0
   F_rustResistanceCont: 0
+  Skill_F_0: {fileID: 11400000, guid: a6e87a1f7dbf99a4581819b8afdeb74e, type: 2}
+  Skill_F_1: {fileID: 11400000, guid: e64e05f55b9902249bf22dcc53c456cf, type: 2}
+  Skill_F_2: {fileID: 11400000, guid: 97067f4412b63d84d8f1f6f438fe3edd, type: 2}
+  Skill_F_3: {fileID: 11400000, guid: a7921ddba2c187748b70531ef6676bcd, type: 2}
+  Skill_F_4: {fileID: 11400000, guid: 48fce3fb84ad28240b2a7661de2a92d6, type: 2}
+  Skill_F_5: {fileID: 11400000, guid: ae1a62f2cfa694d438d7b45c72b601e2, type: 2}
+  Skill_F_6: {fileID: 11400000, guid: 0f29d513876a72548b91d40017ae3ab6, type: 2}
+  Skill_F_7: {fileID: 11400000, guid: 18d3e6ed6bbc6064b8a00566898744c7, type: 2}
+  Skill_F_8: {fileID: 11400000, guid: 20cfaca8ed01b2e4dafff9f815549308, type: 2}
+  Skill_F_9: {fileID: 0}
   S_LV: 1
   S_HP: 100
   S_curHP: 0
@@ -114,6 +124,15 @@ MonoBehaviour:
   S_paralysisResistanceCont: 0
   S_sleepResistanceCont: 0
   S_rustResistanceCont: 0
+  Skill_S_0: {fileID: 11400000, guid: 5cf539e221ed31245831d1fd223697b7, type: 2}
+  Skill_S_1: {fileID: 11400000, guid: d0e073f298ed2d04992b31fae9883b6f, type: 2}
+  Skill_S_2: {fileID: 11400000, guid: 4ab4a8ebf0262174898650c5ef941299, type: 2}
+  Skill_S_3: {fileID: 11400000, guid: bb1b018b4254ce14d8fb1f5a67a9f067, type: 2}
+  Skill_S_4: {fileID: 11400000, guid: 5a84bd3b370668b4d9823f4a303b3163, type: 2}
+  Skill_S_5: {fileID: 11400000, guid: 2f3b740f901c6f84e96a054d443ceaab, type: 2}
+  Skill_S_6: {fileID: 11400000, guid: 3a7d416f1acdd804884232d554f857cd, type: 2}
+  Skill_S_7: {fileID: 11400000, guid: 4dfeaf4735bd3c44b94d8744e3026cbe, type: 2}
+  Skill_S_8: {fileID: 11400000, guid: b65663ac852b4d8438d3710d487fea51, type: 2}
   K_LV: 1
   K_HP: 100
   K_curHP: 0
@@ -143,6 +162,15 @@ MonoBehaviour:
   K_paralysisResistanceCont: 0
   K_sleepResistanceCont: 0
   K_rustResistanceCont: 0
+  Skill_K_0: {fileID: 11400000, guid: 859d45a47f534534ea4fb6a3367844b9, type: 2}
+  Skill_K_1: {fileID: 11400000, guid: 647b9e3193ba02142acf85b79eb05f21, type: 2}
+  Skill_K_2: {fileID: 11400000, guid: 306e632018a7edf4cb0e7e72949478af, type: 2}
+  Skill_K_3: {fileID: 11400000, guid: 9154f9ab5b9898643b0a3ddfa44a2791, type: 2}
+  Skill_K_4: {fileID: 11400000, guid: 29f66e86004e572408988bdda1f0513e, type: 2}
+  Skill_K_5: {fileID: 11400000, guid: 4ecda8ecc6cd5e24f84295c4c21caa1d, type: 2}
+  Skill_K_6: {fileID: 11400000, guid: d1f9fd919dad9d7418692873955f86e4, type: 2}
+  Skill_K_7: {fileID: 11400000, guid: dc57287f0cff435498a08b86dc1f13cd, type: 2}
+  Skill_K_8: {fileID: 11400000, guid: 1f9e58488b8c1c840a23aa4bed530182, type: 2}
   F_NameWeapon: Weapon/Latta
   S_NameWeapon: Weapon/Latta
   K_NameWeapon: Weapon/Latta
@@ -172,6 +200,7 @@ MonoBehaviour:
   SwitchDesert: 00000000000000000000
   Timelines: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   MinieraSwitch: 00000000000000000000
+  SwitchMiniera: 0
   questDatabase:
   - {fileID: 0}
   - {fileID: 0}
@@ -228,6 +257,7 @@ MonoBehaviour:
   QuestComplete: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   QuestSegnal: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   items: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  MinerBoss: 0
 --- !u!114 &8760654960572201012
 MonoBehaviour:
   m_ObjectHideFlags: 0

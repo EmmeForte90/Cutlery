@@ -38,7 +38,8 @@ public class CharacterMove : MonoBehaviour
     public float maxChargeTime = 1f; // Tempo massimo di carica
     private Vector3 moveDirection = Vector3.zero;
     public bool isDodging = false;
-    public bool isKnock = false;       
+    public bool isKnock = false;  
+    public bool isInvincible = false;     
     ////////////////////////////////////////
     private CapsuleCollider capsuleCollider; // Riferimento al capsule collider
     public float expandedRadius = 3.0f; // Raggio del capsule collider quando è allargato
@@ -540,7 +541,7 @@ private void HandleComboAttackS()
     public void TakeDamage(float damage)
 {
     if(!deathState){
-    if (!isKnock)
+    if (!isInvincible)
     {
     switch (kindCh)
     {
@@ -733,6 +734,7 @@ private void HandleComboAttackS()
         if (!isKnock && canKnock)
         {
             isKnock = true;
+            isInvincible = true;
             GameManager.instance.NotTouchOption = true;
             canKnock = false;
             inputCTR = true;
@@ -760,6 +762,7 @@ private void HandleComboAttackS()
             PlayComboAnimation(KnockbackAnimationName);
             Invoke("StopKnock", 0.5f);
             Invoke("ResetKnockCooldown", 2);
+
         }
     }
      private IEnumerator ApplyKnockback(Vector3 force)
@@ -777,6 +780,7 @@ private void HandleComboAttackS()
     private void StopKnock()
     {
         isKnock = false;
+        isInvincible = false;
         PlayComboAnimation(UpKnockbackAnimationName);
         inputCTR = true;
     }

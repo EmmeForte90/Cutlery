@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74896e8e20d07d4c913bec59de3ca9c, type: 3}
+  m_Name: T_1
+  m_EditorClassIdentifier: 
+  id: 0
+  CharacterName: Elara
+  CharacterName_1: Varren
+  CharacterName_2: 
+  CharacterName_3: 
+  CharacterName_4: 
+  dialogue:
+  - Sigh... everything okay?
+  - Yes, yes... Umpf, no one asked for your help; I would have managed to annihilate
+    them anyway. I'm a knife knight, you know. But who are you? I've never seen you
+    before. You're not from Mollica, are you?
+  - Oh, not exactly, but truth be told, that's exactly where I should be going. I'm
+    here because Don Ferrante promised me a permit as long as I found his nephew.
+    Are you Alden by any chance?
+  - No, actually, I'm looking for him too. Alden and I are old friends, and I haven't
+    seen him around for a while. When Don Ferrante told me he had gone to the mine,
+    I came here to look for him.
+  - Hey, now that I think about it, we have the same goal, finding Alden! You're
+    skilled in magic. What do you say we team up for this mission? You don't even
+    know what Alden looks like, but I, being familiar with him, won't have any trouble
+    recognizing him. Are you in?
+  - Well, why not? I suppose it'll be easier to wrap up this story if we work together.
+    Lead the way.
+  - Perfect! By the way, my name is Varren, don't forget it! And you are...?
+  - My name is Elara, I am a wandering fork.
+  - Oh, how strange, I feel like I've heard that name before... Well, let's go then,
+    Elara! Alden, here we come!
+  Startdialogue: []
+  Middledialogue: []
+  Endingdialogue: []
+  First: 0
+  Middle: 0
+  End: 0
