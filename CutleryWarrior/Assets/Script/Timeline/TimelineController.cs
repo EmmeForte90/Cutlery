@@ -56,9 +56,14 @@ using TMPro;
     public GameObject[] ActiveTiemAfterScene;
     //public GameObject SavePositionCamera;
 
-
-
     private void Start()
+    {if (ContainsIdEvent(PlayerStats.instance.Timelines, ID))
+        {
+            // Se la condizione è vera, disattiva il gameObject
+            gameObject.SetActive(false);
+        }
+    }
+    public void TakeData()
     {
     virtualCamera = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
     GameManager.instance.Minimap.SetActive(false); GameManager.instance.activeMinimap = false;
@@ -77,11 +82,6 @@ using TMPro;
     if(!isTutorial){dialogue = DialoguesT.dialogue;}
     if(isCutscene){ActivateActor();}
     if(isCutscene){virtualCamera.Follow =  PointView.transform;}
-    if (ContainsIdEvent(PlayerStats.instance.Timelines, ID))
-        {
-            // Se la condizione è vera, disattiva il gameObject
-            gameObject.SetActive(false);
-        }
     }
     bool ContainsIdEvent(bool[] array, int idEvent)
     {
@@ -98,8 +98,10 @@ using TMPro;
 
     public void CameraONPoint(){CameraTransition.StartTransition();}
     public void CameraONActor(){ActivateActor();}
-    private void OnEnable(){ActivateActor();}
+    private void OnEnable(){TakeData();ActivateActor();}
     private void OnDisable(){ActivatePlayer();}
+
+    public void StartFirstMusic(){AudioManager.instance.PlayMFX(0);}
 
     public void FirstDialogue(){dialogue = DialoguesT.dialogue; dialogueIndex = 0; StartCoroutine(ShowDialogue());}
     public void CH_Name_1(){CharacterName.text = DialoguesT.CharacterName;}
@@ -123,8 +125,7 @@ using TMPro;
             if(GameManager.instance.F_Unlock){
             player = GameManager.instance.Fork; 
             FAct.SetActive(true); 
-            if(isCutscene){virtualCamera.Follow =  PointView.transform;}
-            else if(!isCutscene){virtualCamera.Follow =  FAct.transform;}
+            if(!isCutscene){virtualCamera.Follow =  FAct.transform;}
             FAct.transform.position = player.transform.position;
             FAct.transform.position = F_Brain.transform.position;
             player.SetActive(false);}

@@ -34,7 +34,7 @@ public class StartScene : MonoBehaviour
     private Quaternion defaultRotation;
     public static StartScene instance;
     #endregion
-    public void Awake()
+    public void Start()
     {
     if (instance == null){instance = this;}
     //////////////
@@ -51,8 +51,9 @@ public class StartScene : MonoBehaviour
     defaultRotation = transform.rotation;
     if(startMusic)
     {
-        AudioManager.instance.CrossFadeOUTAudio(PlayerStats.instance.WhatMusic);
         AudioManager.instance.CrossFadeINAudio(WhatMusic); 
+        //AudioManager.instance.CrossFadeOUTAudio(PlayerStats.instance.WhatMusic);
+        //AudioManager.instance.CrossFadeINAudio(WhatMusic); 
         PlayerStats.instance.WhatMusic = WhatMusic;
     }
     /////////////////

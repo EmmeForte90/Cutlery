@@ -48,7 +48,7 @@ MonoBehaviour:
   HaveData: 0
   CanLoading: 0
   IdSpawn: 0
-  NameScene: FirstD
+  NameScene: Intro
   savedPosition: {x: 0, y: 0, z: 0}
   F_Unlock: 1
   S_Unlock: 0
@@ -94,7 +94,6 @@ MonoBehaviour:
   Skill_F_6: {fileID: 11400000, guid: 0f29d513876a72548b91d40017ae3ab6, type: 2}
   Skill_F_7: {fileID: 11400000, guid: 18d3e6ed6bbc6064b8a00566898744c7, type: 2}
   Skill_F_8: {fileID: 11400000, guid: 20cfaca8ed01b2e4dafff9f815549308, type: 2}
-  Skill_F_9: {fileID: 0}
   S_LV: 1
   S_HP: 100
   S_curHP: 0

@@ -19,11 +19,11 @@ MonoBehaviour:
   CharacterName_3: 
   CharacterName_4: 
   dialogue:
-  - 
-  - 
-  - 
-  - 
-  - 
+  - </shake>What the hell...?<shake>
+  - I really think we've found what you were looking for, Alden.
+  - Yes, undoubtedly the origin of those monsters comes from here.
+  - It doesn't look friendly at all. Do we take it down?
+  - <incr><shake>YOU CAN SAY THAT AGAIN! YAAAAAAH!</shake></>
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []

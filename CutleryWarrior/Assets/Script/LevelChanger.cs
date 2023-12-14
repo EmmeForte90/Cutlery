@@ -5,7 +5,8 @@ public class LevelChanger : MonoBehaviour
 {
     public string sceneName;
     public int IDPorta;
-    public bool Loading = false;
+    public bool isLoading = false;
+    public float TimeLoading;
     private SceneEvent sceneEvent;
 
 
@@ -13,15 +14,21 @@ public class LevelChanger : MonoBehaviour
     {
     sceneEvent = GetComponent<SceneEvent>();
     sceneEvent.onSceneChange.AddListener(ChangeScene);
-
+    if(isLoading){StartCoroutine(StartLoad());}
+    }
+    IEnumerator StartLoad()
+    {    
+    yield return new WaitForSeconds(TimeLoading);
+    GameManager.instance.ChStop();
+    CameraZoom.instance.ZoomIn();
+    StartCoroutine(WaitForSceneLoad());
     }
     private void ChangeScene()
     {
     SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {SceneManager.sceneLoaded -= OnSceneLoaded;}  
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode){SceneManager.sceneLoaded -= OnSceneLoaded;}  
     public void Escape()
     {
     GameManager.instance.FadeOut();
@@ -31,7 +38,6 @@ public class LevelChanger : MonoBehaviour
     GameManager.instance.ChMov();
     StartCoroutine(RetunBattle());
     }
-    public void LoadingEnd(){StartCoroutine(StartLoad());}
     public void OnTriggerEnter(Collider other)
     {
     if (other.CompareTag("F_Player") ||
@@ -41,11 +47,6 @@ public class LevelChanger : MonoBehaviour
     //StartScene.instance.Start = false;
     CameraZoom.instance.ZoomIn();
     StartCoroutine(WaitForSceneLoad());}
-    }
-    IEnumerator StartLoad()
-    {    
-    yield return new WaitForSeconds(3f);
-    sceneEvent.InvokeOnSceneChange();
     }
     
     IEnumerator WaitForSceneLoad()
@@ -61,7 +62,6 @@ public class LevelChanger : MonoBehaviour
     CharacterMove.instance.isRun = false;
     yield return new WaitForSeconds(2f);
     CharacterMove.instance.inputCTR = false; 
-    //GameManager.instance.FadeOut();
     yield return new WaitForSeconds(2f);
     }
     IEnumerator RetunBattle()

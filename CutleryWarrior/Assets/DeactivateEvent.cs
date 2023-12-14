@@ -4,6 +4,7 @@ public class DeactivateEvent : MonoBehaviour
 {
     public int IdEvent;
     public GameObject OBJ;
+    public bool FirstD = false;
     public static DeactivateEvent instance;
 
     void Start()
@@ -13,6 +14,12 @@ public class DeactivateEvent : MonoBehaviour
             // Se la condizione è vera, disattiva il gameObject
             OBJ.SetActive(false);
         }
+
+        if(FirstD){if (ContainsIdEvent(PlayerStats.instance.SwitchDesert, IdEvent))        
+        {
+            // Se la condizione è vera, disattiva il gameObject
+            OBJ.SetActive(false);
+        }}
     }
 
     bool ContainsIdEvent(bool[] array, int idEvent)
@@ -29,4 +36,6 @@ public class DeactivateEvent : MonoBehaviour
     }
 
     public void ConfirmDeactivation(){PlayerStats.instance.MinieraSwitchEnd(IdEvent);}
+    public void ConfirmDeactivationDesert(){PlayerStats.instance.EventSwitchEnd(IdEvent);}
+
 }
