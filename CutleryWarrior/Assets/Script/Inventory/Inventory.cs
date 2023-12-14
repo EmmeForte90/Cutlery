@@ -44,6 +44,8 @@ public class Inventory : MonoBehaviour
     public Image previewReward;
     public TextMeshProUGUI QunatityR;
     public TextMeshProUGUI NameReward;
+    [Header("Item List")]
+    public Sprite[] ItemsIcon;
      [Header("Item List")]
     public bool[] items;
     #endregion
@@ -51,33 +53,7 @@ public class Inventory : MonoBehaviour
     public static Inventory instance;
     public void Awake(){instance = this; DontDestroyOnLoad(gameObject);}
     #endregion
-       public void DeactivateItem()
-    {
-        // Cerca tutti i GameObjects con il tag "Enemy"
-        GameObject[] ItemIT = GameObject.FindGameObjectsWithTag("Items");
-    
-    foreach (GameObject Character in ItemIT)
-        {
-            // Ottiene il componente QuestCharacters
-            PickUpItem Takeitem = Character.GetComponent<PickUpItem>();
 
-            // Verifica se il componente esiste
-            if (Takeitem != null)
-            {
-                // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
-                int Id = Takeitem.Id;
-                for (int i = 0; i <  items.Length; i++)
-                {
-                    if ( items[i] && i == Id)
-                    {
-                        Takeitem.Take();
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    public void itemsArea(int Take){items[Take] = true;}
     #region Equip
     public void AssignDress(Weapon Item)
     {

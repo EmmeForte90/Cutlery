@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Big Sphere
   NameSkin: 
   itemDes: A big fire ball, damage all enemies  touch it.
-  ID: 0
+  ID: 50
   KindItem: 1
   WhoConsumable: 0
   price: 0

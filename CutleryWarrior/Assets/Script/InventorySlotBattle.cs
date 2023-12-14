@@ -26,7 +26,8 @@ public class InventorySlotBattle : MonoBehaviour
         if (itemInSlot != null && quantityInSlot !=0)
         {
             itemImage.enabled = true; 
-            itemImage.sprite = itemInSlot.itemIcon;
+            if(itemInSlot.itemIcon != null){itemImage.sprite = itemInSlot.itemIcon;}
+            else if (itemInSlot.itemIcon == null){itemImage.sprite = GameManager.instance.Inv.ItemsIcon[item.ID];}
             if (quantityInSlot > 1)
             {quantity.enabled = true;quantity.text = quantityInSlot.ToString();}
             else{quantity.enabled = false;}
@@ -45,10 +46,10 @@ public class InventorySlotBattle : MonoBehaviour
     {
         if (item != null)
         {
-            InvB = GameObject.FindWithTag("Manager").GetComponent<InventoryB>();
-            if(Using){InvB.RemoveItem(item, 1);  Using = false;}//Lo rimuove dall'inventario
-            rotationSwitcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
-            switch(rotationSwitcher.rotationSwitcher.CharacterID)
+            //InvB = GameObject.FindWithTag("Manager").GetComponent<InventoryB>();
+            if(Using){GameManager.instance.InvB.RemoveItem(item, 1);  Using = false;}//Lo rimuove dall'inventario
+            //rotationSwitcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
+            switch(GameManager.instance.CharacterID)
         {
             case 1:
             UseItemCharacter = GameManager.instance.F_Hero.GetComponent<ChargeSkill>();
@@ -70,5 +71,5 @@ public class InventorySlotBattle : MonoBehaviour
         yield return new WaitForSeconds(0.001f);
         Using = true; 
     }
-    public void RemoveItem(){Inventory.instance.RemoveItem(Inventory.instance.itemList[Inventory.instance.itemList.IndexOf(item)], 1);}
+    public void RemoveItem(){GameManager.instance.Inv.RemoveItem(GameManager.instance.Inv.itemList[GameManager.instance.Inv.itemList.IndexOf(item)], 1);}
 }

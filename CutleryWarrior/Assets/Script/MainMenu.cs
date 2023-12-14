@@ -43,7 +43,8 @@ public class MainMenu : MonoBehaviour
         Fade.gameObject.SetActive(true);
         yield return new WaitForSeconds(Timelife);
         Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
-        //PlayerStats.instance.StartData = false;
+        PlayerStats.instance.StartData = false;
+        PlayerStats.instance.HaveData = false;
         SceneManager.LoadScene(startScene);       
     }
 
@@ -53,7 +54,9 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(Timelife);
         Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
         SaveData.LoadGame();
-        //PlayerStats.instance.StartData = true;
+        PlayerStats.instance.StartData = true;
+        PlayerStats.instance.HaveData = true;
+        PlayerStats.instance.NameScene = GameManager.instance.sceneName;
         SceneManager.LoadScene(startScene);       
     }
     public void QuitGame()

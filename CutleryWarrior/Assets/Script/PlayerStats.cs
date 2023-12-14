@@ -330,23 +330,36 @@ public class PlayerStats : MonoBehaviour
     
     public void UpdateInventorySaving()
     {
-    I_itemList = Inventory.instance.itemList;
-    I_quantityList = Inventory.instance.quantityList;
+    Money = GameManager.instance.money;
+    F_Unlock = GameManager.instance.F_Unlock;
+    K_Unlock = GameManager.instance.K_Unlock;
+    S_Unlock = GameManager.instance.S_Unlock;
     //
-    F_itemList = EquipM_F.instance.itemList;
-    F_quantityList = EquipM_F.instance.quantityList;
+    items = GameManager.instance.Inv.items;
     //
-    K_itemList = EquipM_K.instance.itemList;
-    K_quantityList = EquipM_K.instance.quantityList;
+    questDatabase = GameManager.instance.QuM.questDatabase;
+    quest = GameManager.instance.QuM.quest;
+    QuestActive = GameManager.instance.QuM.QuestActive;
+    QuestComplete = GameManager.instance.QuM.QuestComplete;
+    QuestSegnal = GameManager.instance.QuM.QuestSegnal;
     //
-    S_itemList = EquipM_S.instance.itemList;
-    S_quantityList = EquipM_S.instance.quantityList;
+    I_itemList = GameManager.instance.Inv.itemList;
+    I_quantityList = GameManager.instance.Inv.quantityList;
     //
-    Kay_itemList = KeyManager.instance.itemList;
-    Key_quantityList = KeyManager.instance.quantityList;
+    F_itemList = GameManager.instance.M_F.itemList;
+    F_quantityList = GameManager.instance.M_F.quantityList;
     //
-    Quest_itemList = QuestsManager.instance.itemList;
-    Quest_quantityList = QuestsManager.instance.quantityList;
+    K_itemList = GameManager.instance.M_K.itemList;
+    K_quantityList = GameManager.instance.M_K.quantityList;
+    //
+    S_itemList = GameManager.instance.M_S.itemList;
+    S_quantityList = GameManager.instance.M_S.quantityList;
+    //
+    Kay_itemList = GameManager.instance.KM.itemList;
+    Key_quantityList = GameManager.instance.KM.quantityList;
+    //
+    Quest_itemList = GameManager.instance.QuM.itemList;
+    Quest_quantityList = GameManager.instance.QuM.quantityList;
     }
 
 

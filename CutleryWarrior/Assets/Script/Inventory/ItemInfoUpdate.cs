@@ -18,7 +18,9 @@ public class ItemInfoUpdate : MonoBehaviour
             infoPanel.SetActive(true);
             nameText.text = itemInfo.itemName;
             DesText.text = itemInfo.itemDes;
-            icon.sprite = itemInfo.itemIcon;
+            //icon.sprite = itemInfo.itemIcon;
+             if(itemInfo.itemIcon != null){icon.sprite = itemInfo.itemIcon;}
+            else if (itemInfo.itemIcon == null){icon.sprite = GameManager.instance.Inv.ItemsIcon[itemInfo.ID];}
             if(HaveMoney){MoneyText.text = itemInfo.price.ToString();}
         }
         else{infoPanel.SetActive(false);}

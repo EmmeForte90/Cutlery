@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Potion
   NameSkin: 
   itemDes: A simple potion, restore 30 HP
-  ID: 1
+  ID: 0
   KindItem: 0
   WhoConsumable: 0
   price: 5

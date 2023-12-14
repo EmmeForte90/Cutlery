@@ -12,13 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b728530c479d843803971ca11c5f55, type: 3}
   m_Name: Iron Ore
   m_EditorClassIdentifier: 
+  IdItem: 
   itemName: Iron Ore
   NameSkin: 
   itemDes: A Iron ore, useful for make tools
-  ID: 3
+  ID: 31
   KindItem: 0
+  WhoConsumable: 0
   price: 500
   Stackable: 1
+  itemData:
+    itemName: 
+    NameSkin: 
+    itemDes: 
+    ID: 0
+    KindItem: 0
+    WhoConsumable: 0
+    price: 0
+    Stackable: 0
+    itemIcon: {fileID: 0}
+    TypesE: 0
+    TimeItem: 0
+    MaxDurationItem: 0
+    item: {fileID: 0}
+    quantity: 0
   itemIcon: {fileID: 21300000, guid: be70337855b6da645ac079d5a354f54f, type: 3}
   TypesE: 0
+  TimeItem: 0
+  MaxDurationItem: 0
   type: 0

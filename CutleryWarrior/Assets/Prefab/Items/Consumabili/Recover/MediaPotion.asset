@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Media Potion
   NameSkin: 
   itemDes: A normal  potion, restore 100 HP
-  ID: 0
+  ID: 1
   KindItem: 0
   WhoConsumable: 1
   price: 50

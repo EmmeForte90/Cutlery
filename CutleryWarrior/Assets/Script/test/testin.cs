@@ -57,6 +57,11 @@ public class testin : MonoBehaviour
         PlayerStats.instance.SSkillATT(6);
         PlayerStats.instance.SSkillATT(7);
     }
+    public void UpdateInv()
+    {//GameManager.instance.QuM.UpdateInventoryUI();
+        //GameManager.instance.KM.UpdateInventoryUI();
+        //GameManager.instance.InvB.UpdateInventoryUI();
+        GameManager.instance.Inv.UpdateInventoryUI();}
     public void Shoot()
     {Instantiate(Bullets, BP.transform.position, transform.rotation);}
 

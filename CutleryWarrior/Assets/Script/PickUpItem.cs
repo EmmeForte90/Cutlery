@@ -73,7 +73,7 @@ public class PickUpItem : MonoBehaviour
         AddSpecificItem();
         if(!StartGame){Inventory.instance.Reward(specificItem, specificQuant);}
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
-        GameManager.instance.Inv.itemsArea(Id);
+        //GameManager.instance.Inv.itemsArea(Id);
         if(isStartEquip)
         {if (TypesE == 1){GameManager.instance.Inv.AssignWeapon(Equip);}
         else if (TypesE == 0){GameManager.instance.Inv.AssignDress(Equip);} 

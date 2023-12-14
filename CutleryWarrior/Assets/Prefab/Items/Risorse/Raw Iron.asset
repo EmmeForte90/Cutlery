@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Raw Iron
   NameSkin: 
   itemDes: A raw Iron, need to make Iron Ore
-  ID: 2
+  ID: 30
   KindItem: 2
   WhoConsumable: 0
   price: 300

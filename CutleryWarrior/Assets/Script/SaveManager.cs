@@ -365,6 +365,7 @@ public class SaveManager : MonoBehaviour
         PS.K_itemList = null;
         ////////////////////////////////////////////////
         PS.NameScene = ES3.Load<string>("NameScene");
+        GameManager.instance.sceneName = PS.NameScene;
         PS.HaveData = ES3.Load<bool>("HaveData");
         PS.CanLoading = ES3.Load<bool>("CanLoading");
         //
@@ -490,11 +491,6 @@ public class SaveManager : MonoBehaviour
         PS.QuestComplete = ES3.Load<bool[]>("QuestComplete");
         PS.QuestSegnal = ES3.Load<bool[]>("QuestSegnal");
         /////////////////////////////////////////
-        PS.I_itemList = ES3.Load<List<Item>>("I_itemList");
-        PS.IBattle_itemList = ES3.Load<List<Item>>("IBattle_itemList");
-        PS.Kay_itemList = ES3.Load<List<Item>>("Kay_itemList");
-        PS.Quest_itemList = ES3.Load<List<Item>>("Quest_itemList");
-        /////////////////////////////////////////
         PS.I_quantityList = null;
         PS.IBattle_quantityList = null;
         PS.Key_quantityList = null;
@@ -505,16 +501,26 @@ public class SaveManager : MonoBehaviour
         //
         PS.I_quantityList = ES3.Load<List<int>>("I_quantityList");
         GameManager.instance.Inv.quantityList = PS.I_quantityList;
-        GameManager.instance.Inv.UpdateInventoryUI();
         PS.IBattle_quantityList = ES3.Load<List<int>>("IBattle_quantityList");
         GameManager.instance.InvB.quantityList = PS.IBattle_quantityList;
-        GameManager.instance.InvB.UpdateInventoryUI();
         PS.Key_quantityList = ES3.Load<List<int>>("Key_quantityList");
         GameManager.instance.KM.quantityList = PS.Key_quantityList;
-        GameManager.instance.KM.UpdateInventoryUI();
         PS.Quest_quantityList = ES3.Load<List<int>>("Quest_quantityList");
         GameManager.instance.QuM.quantityList = PS.Quest_quantityList;
+        /////////////////////////////////////////
+        PS.I_itemList = ES3.Load<List<Item>>("I_itemList");
+        GameManager.instance.Inv.itemList = PS.I_itemList;
+        PS.IBattle_itemList = ES3.Load<List<Item>>("I_itemList");
+        GameManager.instance.InvB.itemList = PS.I_itemList;
+        PS.Kay_itemList = ES3.Load<List<Item>>("Kay_itemList");
+        GameManager.instance.KM.itemList = PS.Kay_itemList;
+        PS.Quest_itemList = ES3.Load<List<Item>>("Quest_itemList");
+        GameManager.instance.QuM.itemList = PS.Quest_itemList;
+        ////////////////////////////////////////////////////
         GameManager.instance.QuM.UpdateInventoryUI();
+        GameManager.instance.KM.UpdateInventoryUI();
+        GameManager.instance.InvB.UpdateInventoryUI();
+        GameManager.instance.Inv.UpdateInventoryUI();
         ///////////////////////////////////////////////
         if(GameManager.instance.S_Unlock){
         PS.S_itemList = ES3.Load<List<Item>>("S_itemList");

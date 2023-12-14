@@ -21,7 +21,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (itemInSlot != null && quantityInSlot !=0)
         {
             itemImage.enabled = true; 
-            itemImage.sprite = itemInSlot.itemIcon;
+            if(itemInSlot.itemIcon != null){itemImage.sprite = itemInSlot.itemIcon;}
+            else if (itemInSlot.itemIcon == null){itemImage.sprite = GameManager.instance.Inv.ItemsIcon[item.ID];}
             if (quantityInSlot > 1)
             {quantity.enabled = true;quantity.text = quantityInSlot.ToString();}
             else{quantity.enabled = false;}
@@ -32,5 +33,5 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerExit(PointerEventData eventData){GetComponentInParent<ItemInfoUpdate>().ClosePanel();}
     public void UseItem(){if (item != null){}}//item.Use(0);}}
     //public void SellItem(){if (item != null){item.Sell();}}
-    public void RemoveItem(){Inventory.instance.RemoveItem(Inventory.instance.itemList[Inventory.instance.itemList.IndexOf(item)], 1);}
+    public void RemoveItem(){GameManager.instance.Inv.RemoveItem(GameManager.instance.Inv.itemList[GameManager.instance.Inv.itemList.IndexOf(item)], 1);}
 }

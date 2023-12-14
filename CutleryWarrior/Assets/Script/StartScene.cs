@@ -62,12 +62,21 @@ public class StartScene : MonoBehaviour
     SpawnB(PlayerStats.instance.IdSpawn); //Spawna nel punto dove hai salvato
     GameManager.instance.NotTouchOption = false;
     PlayerStats.instance.HaveData = false;
+    UpdateInventory();
     }
     else if(!PlayerStats.instance.HaveData)
     {   
         IDPorta = GameManager.instance.IDPorta;Spawn(IDPorta); //Spawna nel punto scelto dopo una transition
     }
     }
+    public void UpdateInventory()
+    {
+        GameManager.instance.Inv.UpdateInventoryUI();
+        GameManager.instance.QuM.UpdateInventoryUI();
+        GameManager.instance.KM.UpdateInventoryUI();
+        GameManager.instance.InvB.UpdateInventoryUI();
+    }
+
     public void Update()
     {
         

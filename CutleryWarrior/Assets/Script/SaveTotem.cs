@@ -79,7 +79,6 @@ public class SaveTotem : MonoBehaviour
         GameManager.instance.savedPosition = savedPosition.transform.position;
         
         PlayerStats.instance.savedPosition = savedPosition.transform.position;
-        PlayerStats.instance.HaveData = true;
         PlayerStats.instance.NameScene = NameScene;
         PlayerStats.instance.IdSpawn = IDSpawn;
         PlayerStats.instance.UpdateInventorySaving();
@@ -122,15 +121,21 @@ public class SaveTotem : MonoBehaviour
             if(PlayerStats.instance.Skill_S[7]){PlayerStats.instance.Skill_S_7.Utilizzi = PlayerStats.instance.Skill_S_7.UtilizziMAX;}
             if(PlayerStats.instance.Skill_S[8]){PlayerStats.instance.Skill_S_8.Utilizzi = PlayerStats.instance.Skill_S_8.UtilizziMAX;}
         }
-
+        PlayerStats.instance.HaveData = true;
         Save.SaveGame();
         LoadVFX.SetActive(true);
         Invoke("EndingLoad", 5);
-        Invoke("DontPreseveForLoading", 2);
+        //Invoke("DontPreseveForLoading", 2);
         print("Hai salvato");
     }
     }
+    private void OnTriggerExit(Collider collision)
+    {
+    if (collision.CompareTag("F_Player") || collision.CompareTag("K_Player") || collision.CompareTag("S_Player"))
+    {      
+        PlayerStats.instance.HaveData = false;
+    }}
     public void EndingLoad(){LoadVFX.SetActive(false);}
-    public void DontPreseveForLoading(){PlayerStats.instance.HaveData = false;}
+    //public void DontPreseveForLoading(){PlayerStats.instance.HaveData = false;}
 
 }
