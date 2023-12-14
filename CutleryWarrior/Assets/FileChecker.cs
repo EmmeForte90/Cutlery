@@ -4,11 +4,13 @@ using System.IO;
 public class FileChecker : MonoBehaviour
 {
     public GameObject Continue;
+    public string NameScene;
    void Start()
     {
         string folderPath = "C:/Users/Utente/AppData/LocalLow/DefaultCompany/CutleryWarrior";
         string fileName = "SaveFile.es3";
         string filePath = Path.Combine(folderPath, fileName);
+        PlayerStats.instance.NameScene = NameScene;
 
         if (File.Exists(filePath))
         {

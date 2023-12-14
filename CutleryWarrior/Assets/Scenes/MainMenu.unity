@@ -2755,6 +2755,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8244634831866167443, guid: 1f64e13e0b2358f43be8a47151768688,
+        type: 3}
+      propertyPath: StartData
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f64e13e0b2358f43be8a47151768688, type: 3}
 --- !u!1 &481964869
@@ -10247,6 +10252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Continue: {fileID: 977855573}
+  NameScene: Intro
 --- !u!1 &1986125877
 GameObject:
   m_ObjectHideFlags: 0

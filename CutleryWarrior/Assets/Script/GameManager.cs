@@ -266,6 +266,7 @@ public class GameManager : MonoBehaviour
         SkillINMenu();
         Order();
         UnlockCharacter();
+        money = PlayerStats.instance.Money;
         moneyTextM.text = money.ToString(); 
 ////////////////////////////////////////////////////////////////////////////
         if(!NotTouchOption){

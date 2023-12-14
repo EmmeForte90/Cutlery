@@ -204,7 +204,7 @@ public class QuestCharacters : MonoBehaviour
         notGo = true;
         QNameE.text = Quest.questName;
         QuestEnd.gameObject.SetActive(true); 
-        AudioManager.instance.PlaySFX(9);//AudioQuestComplete
+        GameManager.instance.AM.PlaySFX(9);//AudioQuestComplete
         yield return new WaitForSeconds(5f); 
         //Instantiate(Reward, RewardPoint.position, transform.rotation);
         KindItem = Reward.KindItem;
@@ -229,16 +229,16 @@ public class QuestCharacters : MonoBehaviour
             QNameS.text = Quest.questName;
             Quest.isActive = true;
             GameManager.instance.Allarm();
-            AudioManager.instance.PlayUFX(7);
+            GameManager.instance.AM.PlayUFX(7);
             yield return new WaitForSeconds(1f); 
-            AudioManager.instance.PlaySFX(10);//AudioQuestStart
+            GameManager.instance.AM.PlaySFX(10);//AudioQuestStart
             GameManager.instance.StopAllarm();
             QuestStart.gameObject.SetActive(true); 
-            QuestsManager.instance.AddQuest(Quest);
-            QuestsManager.instance.ListQuest(IDQuest);
-            QuestsManager.instance.QuestStart(IDQuest);
+            GameManager.instance.QuM.AddQuest(Quest);
+            GameManager.instance.QuM.ListQuest(IDQuest);
+            GameManager.instance.QuM.QuestStart(IDQuest);
             yield return new WaitForSeconds(5f); 
-            QuestsManager.instance.QuestActiveF(IDQuest);
+            GameManager.instance.QuM.QuestActiveF(IDQuest);
             QuestStart.gameObject.SetActive(false); 
             GameManager.instance.ChInteractStop();
             CameraZoom.instance.ZoomOut();
@@ -246,8 +246,8 @@ public class QuestCharacters : MonoBehaviour
             GameManager.instance.ChCanM();
             countD = 0;
             if(NeedKey)
-            {KeyManager.instance.AddItem(KeyForQuest, specificQuant);
-            Inventory.instance.Reward(KeyForQuest, specificQuant);}
+            {GameManager.instance.KM.AddItem(KeyForQuest, specificQuant);
+            GameManager.instance.Inv.Reward(KeyForQuest, specificQuant);}
             notGo = false;
             FirstD = false;
     }
@@ -256,23 +256,23 @@ public class QuestCharacters : MonoBehaviour
         switch(KindItem)
         {
             case 0:
-            Inventory.instance.AddItem(Reward, specificQuant);  
-            InventoryB.instance.AddItem(Reward, specificQuant);
+            GameManager.instance.Inv.AddItem(Reward, specificQuant);  
+            GameManager.instance.InvB.AddItem(Reward, specificQuant);
             break;
             case 1:
-            QuestsManager.instance.AddItem(Reward, specificQuant);            
+            GameManager.instance.QuM.AddItem(Reward, specificQuant);            
             break;
             case 2:
-            KeyManager.instance.AddItem(Reward, specificQuant);            
+            GameManager.instance.KM.AddItem(Reward, specificQuant);            
             break;
             case 3:
-            EquipM_F.instance.AddItem(Reward, specificQuant);            
+            GameManager.instance.M_F.AddItem(Reward, specificQuant);            
             break;
             case 4:
-            EquipM_K.instance.AddItem(Reward, specificQuant);            
+            GameManager.instance.M_K.AddItem(Reward, specificQuant);            
             break;
             case 5:
-            EquipM_S.instance.AddItem(Reward, specificQuant);            
+            GameManager.instance.M_S.AddItem(Reward, specificQuant);            
             break;
         }
     } 

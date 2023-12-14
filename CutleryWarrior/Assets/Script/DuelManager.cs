@@ -333,13 +333,16 @@ public void Update()
         {GameManager.instance.SleepS();}
 
         #endregion
-        if(EnemyinArena <= 0){StartCoroutine(EndBattle());}
+        if(EnemyinArena <= 0){StartCoroutine(EndBattle());    
+        foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);}}
         ////////////
         CharacterID = GameManager.instance.CharacterID;
         ////////
         if(WinEnd){if(Input.GetMouseButtonDown(0)){StartCoroutine(RetunBattle());
+        foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);}
         GameManager.instance.battle = false; GameManager.instance.ComandBattle = false;}}
-        if(Ending){if(Input.GetMouseButtonDown(0)){StartCoroutine(ReturnMainMenu()); 
+        if(Ending){if(Input.GetMouseButtonDown(0)){StartCoroutine(ReturnMainMenu());
+        foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);} 
         GameManager.instance.battle = false; GameManager.instance.ComandBattle = false;}} 
         /////////////
         if(isIndicator)
@@ -437,7 +440,6 @@ public void Update()
     GameManager.instance.FadeIn();
     AudioManager.instance.CrossFadeOUTAudio(1);
     yield return new WaitForSeconds(2f);
-    foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);}
     if(GameManager.instance.K_Unlock){ch_KAc.IDAction = 0;}
     if(GameManager.instance.S_Unlock){ch_SAc.IDAction = 0;}
     if(GameManager.instance.F_Unlock){ch_FAc.IDAction = 0;}
@@ -607,7 +609,6 @@ IEnumerator EndBattle()
     AudioManager.instance.CrossFadeOUTAudio(1);
     yield return new WaitForSeconds(2f);
     GameManager.instance.NotTouchOption = false;
-    foreach (GameObject arenaObject in ActiveObj){arenaObject.SetActive(true);}
     if(GameManager.instance.K_Unlock){ch_KAc.IDAction = 0;}
     if(GameManager.instance.S_Unlock){ch_SAc.IDAction = 0;}
     if(GameManager.instance.F_Unlock){ch_FAc.IDAction = 0;}
