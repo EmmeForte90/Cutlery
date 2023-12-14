@@ -45,6 +45,7 @@ public class MainMenu : MonoBehaviour
         Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
         PlayerStats.instance.StartData = false;
         PlayerStats.instance.HaveData = false;
+        PlayerStats.instance.RestoreForNewGame();
         SceneManager.LoadScene(startScene);       
     }
 

@@ -525,6 +525,7 @@ public class SaveManager : MonoBehaviour
         if(GameManager.instance.S_Unlock){
         PS.S_itemList = ES3.Load<List<Item>>("S_itemList");
         PS.S_quantityList = ES3.Load<List<int>>("S_quantityList");
+        GameManager.instance.M_S.itemList = PS.S_itemList;
         GameManager.instance.M_S.quantityList = PS.S_quantityList;
         GameManager.instance.M_S.UpdateInventoryUI();
         
@@ -551,6 +552,7 @@ public class SaveManager : MonoBehaviour
         if(GameManager.instance.F_Unlock){
         PS.F_itemList = ES3.Load<List<Item>>("F_itemList");
         PS.F_quantityList = ES3.Load<List<int>>("F_quantityList");
+        GameManager.instance.M_F.itemList = PS.F_itemList;
         GameManager.instance.M_F.quantityList = PS.F_quantityList;
         GameManager.instance.M_F.UpdateInventoryUI();
         PS.F_NameWeapon = ES3.Load<string>("F_NameWeapon");
@@ -575,7 +577,8 @@ public class SaveManager : MonoBehaviour
         /////////////////////////////////////////
         if(GameManager.instance.K_Unlock){
         PS.K_itemList = ES3.Load<List<Item>>("K_itemList");
-        PS.K_quantityList = ES3.Load<List<int>>("K_quantityList"); 
+        PS.K_quantityList = ES3.Load<List<int>>("K_quantityList");
+        GameManager.instance.M_K.itemList = PS.K_itemList; 
         GameManager.instance.M_K.quantityList = PS.K_quantityList;
         GameManager.instance.M_K.UpdateInventoryUI();
         PS.K_NameWeapon = ES3.Load<string>("K_NameWeapon");

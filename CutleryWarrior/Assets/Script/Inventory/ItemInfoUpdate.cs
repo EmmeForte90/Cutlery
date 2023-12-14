@@ -7,6 +7,7 @@ public class ItemInfoUpdate : MonoBehaviour
 {
     public GameObject infoPanel;
     public bool HaveMoney = false;
+    public bool EquipMenu = false;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI DesText;
     public TextMeshProUGUI MoneyText;
@@ -20,7 +21,11 @@ public class ItemInfoUpdate : MonoBehaviour
             DesText.text = itemInfo.itemDes;
             //icon.sprite = itemInfo.itemIcon;
              if(itemInfo.itemIcon != null){icon.sprite = itemInfo.itemIcon;}
-            else if (itemInfo.itemIcon == null){icon.sprite = GameManager.instance.Inv.ItemsIcon[itemInfo.ID];}
+            else if (itemInfo.itemIcon == null)
+            {
+                if(EquipMenu){icon.sprite = GameManager.instance.Inv.EquipsIcon[itemInfo.ID];}
+                else if(!EquipMenu){icon.sprite = GameManager.instance.Inv.ItemsIcon[itemInfo.ID];}
+            }
             if(HaveMoney){MoneyText.text = itemInfo.price.ToString();}
         }
         else{infoPanel.SetActive(false);}

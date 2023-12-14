@@ -10,17 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 830a471aa6218094fb4284bf788e3276, type: 3}
-  m_Name: DressK
+  m_Name: K_Dress
   m_EditorClassIdentifier: 
+  IdItem: 
   itemName: Normal Dress
   NameSkin: Dress/Dress
   itemDes: A simple dress
-  ID: 1
+  ID: 23
   KindItem: 4
+  WhoConsumable: 0
   price: 100
   Stackable: 1
+  itemData:
+    itemName: 
+    NameSkin: 
+    itemDes: 
+    ID: 0
+    KindItem: 0
+    WhoConsumable: 0
+    price: 0
+    Stackable: 0
+    itemIcon: {fileID: 0}
+    TypesE: 0
+    TimeItem: 0
+    MaxDurationItem: 0
+    item: {fileID: 0}
+    quantity: 0
   itemIcon: {fileID: 21300000, guid: 222c19c6b5f6e6a4a8699b05aa73548d, type: 3}
   TypesE: 0
+  TimeItem: 0
+  MaxDurationItem: 0
   weaponDamage: 0
   MpCost: 0
   DefenceDress: 0

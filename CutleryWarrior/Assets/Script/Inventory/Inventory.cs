@@ -44,8 +44,11 @@ public class Inventory : MonoBehaviour
     public Image previewReward;
     public TextMeshProUGUI QunatityR;
     public TextMeshProUGUI NameReward;
-    [Header("Item List")]
+    [Header("Item Icon List")]
     public Sprite[] ItemsIcon;
+     [Header("Equip Icon List")]
+    public Sprite[] EquipsIcon;
+    
      [Header("Item List")]
     public bool[] items;
     #endregion

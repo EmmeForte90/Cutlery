@@ -75,6 +75,9 @@ public class StartScene : MonoBehaviour
         GameManager.instance.QuM.UpdateInventoryUI();
         GameManager.instance.KM.UpdateInventoryUI();
         GameManager.instance.InvB.UpdateInventoryUI();
+        if(GameManager.instance.F_Unlock){GameManager.instance.M_F.UpdateInventoryUI();}
+        if(GameManager.instance.S_Unlock){GameManager.instance.M_S.UpdateInventoryUI();}
+        if(GameManager.instance.K_Unlock){GameManager.instance.M_K.UpdateInventoryUI();}
     }
 
     public void Update()

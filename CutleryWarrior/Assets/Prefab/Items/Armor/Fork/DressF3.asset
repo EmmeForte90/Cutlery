@@ -12,17 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830a471aa6218094fb4284bf788e3276, type: 3}
   m_Name: DressF3
   m_EditorClassIdentifier: 
+  IdItem: 
   itemName: Armor Dress
   NameSkin: Dress/Dress3
   itemDes: Very defence dress
-  ID: 4
+  ID: 13
   KindItem: 3
+  WhoConsumable: 0
   price: 1500
   Stackable: 1
+  itemData:
+    itemName: 
+    NameSkin: 
+    itemDes: 
+    ID: 0
+    KindItem: 0
+    WhoConsumable: 0
+    price: 0
+    Stackable: 0
+    itemIcon: {fileID: 0}
+    TypesE: 0
+    TimeItem: 0
+    MaxDurationItem: 0
+    item: {fileID: 0}
+    quantity: 0
   itemIcon: {fileID: 21300000, guid: 0eef774bf1b4df14f91d42bc5518a6ee, type: 3}
   TypesE: 0
-  type: 0
+  TimeItem: 0
+  MaxDurationItem: 0
   weaponDamage: 0
+  MpCost: 0
   DefenceDress: 30
   HP: 250
   MP: 250

@@ -10,20 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 830a471aa6218094fb4284bf788e3276, type: 3}
-  m_Name: Latta
+  m_Name: S_Latta
   m_EditorClassIdentifier: 
-  itemName: Simple Fork
+  IdItem: 
+  itemName: 'Simple shield '
   NameSkin: Weapon/Latta
-  itemDes: Simple fork
-  ID: 1
-  KindItem: 3
+  itemDes: 'Simple shield '
+  ID: 50
+  KindItem: 5
+  WhoConsumable: 0
   price: 10
   Stackable: 1
-  itemIcon: {fileID: 21300000, guid: 4c974cabc5953264d9d228fb4f1f1cce, type: 3}
+  itemData:
+    itemName: 
+    NameSkin: 
+    itemDes: 
+    ID: 0
+    KindItem: 0
+    WhoConsumable: 0
+    price: 0
+    Stackable: 0
+    itemIcon: {fileID: 0}
+    TypesE: 0
+    TimeItem: 0
+    MaxDurationItem: 0
+    item: {fileID: 0}
+    quantity: 0
+  itemIcon: {fileID: 21300000, guid: 448358951b28d624c9924cb1cb2c7293, type: 3}
   TypesE: 1
-  type: 1
-  weaponDamage: 10
-  MpCost: 15
+  TimeItem: 0
+  MaxDurationItem: 0
+  weaponDamage: 5
+  MpCost: 7
   DefenceDress: 0
   HP: 0
   MP: 0

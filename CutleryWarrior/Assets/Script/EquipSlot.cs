@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -18,7 +16,9 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (itemInSlot != null && quantityInSlot !=0)
         {
             itemImage.enabled = true; 
-            itemImage.sprite = itemInSlot.itemIcon;
+            //itemImage.sprite = itemInSlot.itemIcon;
+            if(itemInSlot.itemIcon != null){itemImage.sprite = itemInSlot.itemIcon;}
+            else if (itemInSlot.itemIcon == null){itemImage.sprite = GameManager.instance.Inv.EquipsIcon[item.ID];}
             if (quantityInSlot > 1)
             {
                 quantity.enabled = true;
@@ -38,5 +38,5 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerExit(PointerEventData eventData){GetComponentInParent<ItemInfoUpdate>().ClosePanel();}
     public void UseItem(){if (item != null){item.Equip();}}
     public void RemoveItem()
-    {Inventory.instance.RemoveItem(Inventory.instance.itemList[Inventory.instance.itemList.IndexOf(item)], 1);}
+    {GameManager.instance.Inv.RemoveItem(GameManager.instance.Inv.itemList[GameManager.instance.Inv.itemList.IndexOf(item)], 1);}
 }

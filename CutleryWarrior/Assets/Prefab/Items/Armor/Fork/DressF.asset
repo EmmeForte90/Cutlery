@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Normal Dress
   NameSkin: Dress/Dress
   itemDes: A simple dress
-  ID: 1
+  ID: 10
   KindItem: 3
   WhoConsumable: 0
   price: 100

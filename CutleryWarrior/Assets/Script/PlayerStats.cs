@@ -15,7 +15,7 @@ public class PlayerStats : MonoBehaviour
     public bool F_Unlock = true; 
     public  bool S_Unlock = false; 
     public  bool K_Unlock = false;
-    public int Money;
+    public int Money = 100;
     public int WhatMusic = 0;
     public  bool StartData = false;
 
@@ -327,6 +327,7 @@ public class PlayerStats : MonoBehaviour
     K_sleepResistanceCont = K_sleepResistance;
     K_rustResistanceCont = K_rustResistance;}  
     }
+
     
     public void UpdateInventorySaving()
     {
@@ -362,7 +363,64 @@ public class PlayerStats : MonoBehaviour
     Quest_quantityList = GameManager.instance.QuM.quantityList;
     }
 
-
+    public void RestoreForNewGame()
+    {
+    Money = 100;
+    F_Unlock = true;
+    K_Unlock = false;
+    S_Unlock = false;
+    //
+    I_itemList = null;
+    I_quantityList = null;
+    //
+    F_itemList = null;
+    F_quantityList = null;
+    //
+    K_itemList = null;
+    K_quantityList = null;
+    //
+    S_itemList = null;
+    S_quantityList = null;
+    //
+    Kay_itemList = null;
+    Key_quantityList = null;
+    //
+    Quest_itemList = null;
+    Quest_quantityList = null;
+    //
+    DisableSpecificArrayElements(Skill_F,1,2,3,4,5,6,7,8,9);
+    DisableSpecificArrayElements(Skill_K,1,2,3,4,5,6,7,8,9);
+    DisableSpecificArrayElements(Skill_S,1,2,3,4,5,6,7,8,9);
+     //
+    SetAllArrayElementsToFalse(Treasure);
+    SetAllArrayElementsToFalse(Enemies);
+    SetAllArrayElementsToFalse(EventsDesert);
+    SetAllArrayElementsToFalse(SwitchDesert);
+    SetAllArrayElementsToFalse(Timelines);
+    SetAllArrayElementsToFalse(MinieraSwitch);
+    SetAllArrayElementsToFalse(quest);
+    SetAllArrayElementsToFalse(QuestActive);
+    SetAllArrayElementsToFalse(QuestComplete);
+    SetAllArrayElementsToFalse(QuestSegnal);
+    SetAllArrayElementsToFalse(items);
+    //
+    SwitchMiniera = 0;
+    }
+    void SetAllArrayElementsToFalse(bool[] array){System.Array.Fill(array, false);}
+    void DisableSpecificArrayElements(bool[] array, params int[] indices)
+    {
+        foreach (int index in indices)
+        {
+            if (index >= 0 && index < array.Length)
+            {
+                array[index] = false;
+            }
+            else
+            {
+                Debug.LogError("Index out of bounds: " + index);
+            }
+        }
+    }
 
 
     public void FSkillATT(int Act)

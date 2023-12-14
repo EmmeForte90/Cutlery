@@ -10,18 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 830a471aa6218094fb4284bf788e3276, type: 3}
-  m_Name: Acciaio
+  m_Name: S_Acciaio
   m_EditorClassIdentifier: 
+  IdItem: 
   itemName: Steel shield
   NameSkin: Weapon/Acciaio
   itemDes: Strong and elegant fork
-  ID: 4
+  ID: 53
   KindItem: 5
+  WhoConsumable: 0
   price: 1000
   Stackable: 1
+  itemData:
+    itemName: 
+    NameSkin: 
+    itemDes: 
+    ID: 0
+    KindItem: 0
+    WhoConsumable: 0
+    price: 0
+    Stackable: 0
+    itemIcon: {fileID: 0}
+    TypesE: 0
+    TimeItem: 0
+    MaxDurationItem: 0
+    item: {fileID: 0}
+    quantity: 0
   itemIcon: {fileID: 21300000, guid: 124b67496d201634ba5b9f27abd5d353, type: 3}
   TypesE: 1
-  type: 0
+  TimeItem: 0
+  MaxDurationItem: 0
   weaponDamage: 80
   MpCost: 5
   DefenceDress: 0
