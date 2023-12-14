@@ -14,7 +14,17 @@ public class LevelChanger : MonoBehaviour
     {
     sceneEvent = GetComponent<SceneEvent>();
     sceneEvent.onSceneChange.AddListener(ChangeScene);
-    if(isLoading){StartCoroutine(StartLoad());}
+    if(isLoading){
+        GameManager.instance.ChStopB(); 
+        GameManager.instance.NotTouchOption = true;
+        StartCoroutine(StartLoad());}
+    }
+
+    public void Update()
+    {
+   
+    if(isLoading){ if (Input.GetButtonDown("Pause"))
+    {sceneEvent.InvokeOnSceneChange();}}
     }
     IEnumerator StartLoad()
     {    

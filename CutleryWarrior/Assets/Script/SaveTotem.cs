@@ -126,9 +126,11 @@ public class SaveTotem : MonoBehaviour
         Save.SaveGame();
         LoadVFX.SetActive(true);
         Invoke("EndingLoad", 5);
+        Invoke("DontPreseveForLoading", 2);
         print("Hai salvato");
     }
     }
     public void EndingLoad(){LoadVFX.SetActive(false);}
+    public void DontPreseveForLoading(){PlayerStats.instance.HaveData = false;}
 
 }

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject AllarmMap;
     public bool activeMinimap = false; 
     public static bool GameManagerExist; 
+    public AudioManager AM;
     public Inventory Inv;
     public InventoryB InvB;
     public QuestsManager QuM;

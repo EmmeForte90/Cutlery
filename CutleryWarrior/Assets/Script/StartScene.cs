@@ -59,14 +59,13 @@ public class StartScene : MonoBehaviour
     /////////////////
     if(PlayerStats.instance.HaveData)
     {
-    //Instantiate(StartGameOBJ, PStart.transform.position, PStart.transform.rotation);
-    SpawnB(PlayerStats.instance.IdSpawn); 
+    SpawnB(PlayerStats.instance.IdSpawn); //Spawna nel punto dove hai salvato
     GameManager.instance.NotTouchOption = false;
     PlayerStats.instance.HaveData = false;
     }
     else if(!PlayerStats.instance.HaveData)
     {   
-        IDPorta = GameManager.instance.IDPorta;Spawn(IDPorta);
+        IDPorta = GameManager.instance.IDPorta;Spawn(IDPorta); //Spawna nel punto scelto dopo una transition
     }
     }
     public void Update()

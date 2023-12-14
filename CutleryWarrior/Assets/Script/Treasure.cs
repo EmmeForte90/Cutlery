@@ -48,8 +48,8 @@ public class Treasure : MonoBehaviour
     public void Update()
     {
         if(IsQuest){
-        if(QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(true);} 
-        else if(!QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(false);}
+        if(GameManager.instance.QuM.QuestSegnal[Quest.id]){Icon.SetActive(true);} 
+        else if(!GameManager.instance.QuM.QuestSegnal[Quest.id]){Icon.SetActive(false);}
         }else if(IsSkill)
         {
             switch(KindSkill)
@@ -85,12 +85,12 @@ public class Treasure : MonoBehaviour
         Icon.SetActive(false);
         Anm.Play("Treasure_Anm");
         Instantiate(VFXTake, transform.position, transform.rotation);
-        AudioManager.instance.PlaySFX(11);
+        GameManager.instance.AM.PlaySFX(11);
         GameManager.instance.EsclamationStop();
         AddSpecificItem();
         //iconM.SetActive(false);
         VFXSegnalator.SetActive(false);
-        Inventory.instance.Reward(specificItem, specificQuant);
+        GameManager.instance.Inv.Reward(specificItem, specificQuant);
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
         PlayerStats.instance.TreasureOpen(Id);
         }
@@ -110,23 +110,23 @@ public class Treasure : MonoBehaviour
         switch(KindItem)
         {
             case 0:
-            Inventory.instance.AddItem(specificItem, specificQuant);  
-            InventoryB.instance.AddItem(specificItem, specificQuant);
+            GameManager.instance.Inv.AddItem(specificItem, specificQuant);  
+            GameManager.instance.InvB.AddItem(specificItem, specificQuant);
             break;
             case 1:
-            QuestsManager.instance.AddItem(specificItem, specificQuant);            
+            GameManager.instance.QuM.AddItem(specificItem, specificQuant);            
             break;
             case 2:
-            KeyManager.instance.AddItem(specificItem, specificQuant);            
+            GameManager.instance.KM.AddItem(specificItem, specificQuant);            
             break;
             case 3:
-            EquipM_F.instance.AddItem(specificItem, specificQuant);            
+            GameManager.instance.M_F.AddItem(specificItem, specificQuant);            
             break;
             case 4:
-            EquipM_K.instance.AddItem(specificItem, specificQuant);            
+            GameManager.instance.M_K.AddItem(specificItem, specificQuant);            
             break;
             case 5:
-            EquipM_S.instance.AddItem(specificItem, specificQuant);            
+            GameManager.instance.M_S.AddItem(specificItem, specificQuant);            
             break;
         }
     }

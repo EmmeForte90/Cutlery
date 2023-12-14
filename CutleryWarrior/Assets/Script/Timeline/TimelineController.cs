@@ -57,7 +57,9 @@ using TMPro;
     //public GameObject SavePositionCamera;
 
     private void Start()
-    {if (ContainsIdEvent(PlayerStats.instance.Timelines, ID))
+    {
+        dialogue = DialoguesT.dialogue;
+        if (ContainsIdEvent(PlayerStats.instance.Timelines, ID))
         {
             // Se la condizione è vera, disattiva il gameObject
             gameObject.SetActive(false);
@@ -79,7 +81,6 @@ using TMPro;
     if(GameManager.instance.K_Unlock){K_Brain = GameManager.instance.K_Hero;}
     if(GameManager.instance.S_Unlock){S_Brain = GameManager.instance.S_Hero;}
     if(!isTutorial){CharacterName.text = DialoguesT.CharacterName;}
-    if(!isTutorial){dialogue = DialoguesT.dialogue;}
     if(isCutscene){ActivateActor();}
     if(isCutscene){virtualCamera.Follow =  PointView.transform;}
     }
@@ -98,10 +99,10 @@ using TMPro;
 
     public void CameraONPoint(){CameraTransition.StartTransition();}
     public void CameraONActor(){ActivateActor();}
-    private void OnEnable(){TakeData();ActivateActor();}
-    private void OnDisable(){ActivatePlayer();}
+    private void OnEnable(){if(!isTutorial){TakeData();ActivateActor();}}    
+    private void OnDisable(){if(!isTutorial){ActivatePlayer();}}
 
-    public void StartFirstMusic(){AudioManager.instance.PlayMFX(0);}
+    public void StartFirstMusic(){GameManager.instance.AM.PlayMFX(0);}
 
     public void FirstDialogue(){dialogue = DialoguesT.dialogue; dialogueIndex = 0; StartCoroutine(ShowDialogue());}
     public void CH_Name_1(){CharacterName.text = DialoguesT.CharacterName;}
@@ -111,9 +112,9 @@ using TMPro;
     public void CH_Name_5(){CharacterName.text = DialoguesT.CharacterName_4;}
 
 
-    public void TalkFork(){AudioManager.instance.PlaySFX(2);}
-    public void TalkKnife(){AudioManager.instance.PlaySFX(0);}
-    public void TalkSpoon(){AudioManager.instance.PlaySFX(1);}
+    public void TalkFork(){GameManager.instance.AM.PlaySFX(2);}
+    public void TalkKnife(){GameManager.instance.AM.PlaySFX(0);}
+    public void TalkSpoon(){GameManager.instance.AM.PlaySFX(1);}
 
     public void ActivateActor()
     {
@@ -246,7 +247,9 @@ using TMPro;
             break;
         }   
         PlayerStats.instance.TimelineEnd(ID);
-        CharacterMove.instance.inputCTR = false;
+        GameManager.instance.NotTouchOption = false;
+        GameManager.instance.ChCanM();
+        //CharacterMove.instance.inputCTR = false;
     }
 
     public void NextDialogue()

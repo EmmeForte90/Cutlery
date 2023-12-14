@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tutorial_1
   m_EditorClassIdentifier: 
   id: 0
-  CharacterName: 
+  CharacterName: Tutorial
   CharacterName_1: 
   CharacterName_2: 
   CharacterName_3: 
