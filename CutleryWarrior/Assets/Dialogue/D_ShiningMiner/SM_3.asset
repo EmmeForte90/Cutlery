@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b74896e8e20d07d4c913bec59de3ca9c, type: 3}
-  m_Name: T_3
+  m_Name: SM_3
   m_EditorClassIdentifier: 
   id: 0
   CharacterName: Elara

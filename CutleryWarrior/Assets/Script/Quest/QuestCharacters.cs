@@ -79,7 +79,8 @@ public class QuestCharacters : MonoBehaviour
         if(QuestsManager.instance.QuestSegnal[Quest.id]){QuestAt.SetActive(true); QuestCo.SetActive(false);}
         else if(!QuestsManager.instance.QuestSegnal[Quest.id]){QuestAt.SetActive(false); QuestCo.SetActive(true);}}
         if(heFlip){FacePlayer();}
-        if (PlayerCanSpeak)
+        if(FirstD){
+        if (PlayerCanSpeak)//Il personaggio e il player parlano uno alla volta, occhio
         {
             if (countD % 2 == 0) // Even dialogue count
             {
@@ -90,6 +91,9 @@ public class QuestCharacters : MonoBehaviour
                 CharacterName.text = Quest.PlayerName;
             }
         }
+        } 
+        else{CharacterName.text = Quest.CharacterName;}
+        
         if(!notGo)
         {
         if (_isInTrigger && Input.GetButtonDown("Fire1") && !_isDialogueActive && !GameManager.instance.stopInput)

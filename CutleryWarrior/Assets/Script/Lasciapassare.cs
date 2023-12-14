@@ -71,6 +71,14 @@ public class Lasciapassare : MonoBehaviour
             CharacterMove.instance.Interact = true;
             AddQuestItem();
         }
+        if (_isInTrigger && Input.GetButtonDown("Fire1") && _isDialogueActive)
+        {
+            Talk = false;
+            dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+            dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+            CharacterMove.instance.Interact = false;
+            _isDialogueActive = false;
+        }
 
     if(start)
     {
@@ -103,6 +111,7 @@ public class Lasciapassare : MonoBehaviour
     }
     public void AddQuestItem()
     {
+    _isDialogueActive = true;
     if(M_K.itemList.Contains(objectToCheck[obj1]))
     { 
         dialogueBox.gameObject.SetActive(true); 
@@ -110,23 +119,23 @@ public class Lasciapassare : MonoBehaviour
         dialogueText.text = TextYES; //"Oh, you have permission. Ok then, you can go!";
         PlayerStats.instance.EventDesertEnd(IdEvent);
         Collider.SetActive(false);
-        StartCoroutine(BoxDel());
+        //StartCoroutine(BoxDel());
     }else
     {
-        AudioManager.instance.PlayUFX(10);
+        GameManager.instance.AM.PlayUFX(10);
         dialogueBox.gameObject.SetActive(true); 
         dialogueText.gameObject.SetActive(true); 
         dialogueText.text = TextNO;
-        StartCoroutine(BoxDel());
+        //StartCoroutine(BoxDel());
     }
     }
-    IEnumerator BoxDel()
+    /*IEnumerator BoxDel()
     {yield return new WaitForSeconds(3);
     _isDialogueActive = false;
     Talk = false;
     dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
     dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-    CharacterMove.instance.Interact = false;}
+    CharacterMove.instance.Interact = false;}*/
     void FacePlayer()
     {
         if (player != null)
