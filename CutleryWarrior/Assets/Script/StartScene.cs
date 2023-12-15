@@ -3,7 +3,8 @@ using Cinemachine;
 public class StartScene : MonoBehaviour
 {
     #region Header
-    public int WhatMusic;
+    public int WhatMusicStart;
+    public int WhatMusicStop;
     [Header("Metti true su Test solo per testare il livello!!!!")]
     public bool Test = false;
     public bool startMusic = false;
@@ -43,10 +44,9 @@ public class StartScene : MonoBehaviour
     defaultRotation = transform.rotation;
     if(startMusic)
     {
-        AudioManager.instance.CrossFadeINAudio(WhatMusic); 
-        //AudioManager.instance.CrossFadeOUTAudio(PlayerStats.instance.WhatMusic);
-        //AudioManager.instance.CrossFadeINAudio(WhatMusic); 
-        PlayerStats.instance.WhatMusic = WhatMusic;
+        GameManager.instance.AM.CrossFadeINAudio(WhatMusicStart); 
+        GameManager.instance.AM.CrossFadeOUTAudio(WhatMusicStop);
+        PlayerStats.instance.WhatMusic = WhatMusicStart;
     }
     /////////////////
     if(PlayerStats.instance.HaveData)
