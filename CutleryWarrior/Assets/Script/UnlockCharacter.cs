@@ -23,71 +23,111 @@ public class UnlockCharacter : MonoBehaviour
 
     public void Unlock( )
     {
-    if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 1)
+    if (GameManager.instance.CharacterID == 1)
     {
-    if(Spoon){GameManager.instance.SpoonUnlock(); 
+    if(Spoon)
+    {GameManager.instance.SpoonUnlock(); 
     PlayerStats.instance.ResetStatS();
-    EquipM_S.instance.AddItem(Weapon, specificQuant);
-    EquipM_S.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.M_S.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_S.AddItem(Armor, specificQuant);
+
     GameManager.instance.Inv.AssignWeapon(Weapon_B);
-    GameManager.instance.Inv.AssignDress(Armor_B);}
-    else if(Knife)
-    {GameManager.instance.KnifeUnlock();
-    PlayerStats.instance.ResetStatK();
-    EquipM_K.instance.AddItem(Weapon, specificQuant);
-    EquipM_K.instance.AddItem(Armor, specificQuant);
-    GameManager.instance.Inv.AssignWeapon(Weapon_B);
-    GameManager.instance.Inv.AssignDress(Armor_B);}
-    else if(Fork){GameManager.instance.ForkUnlock();
-    PlayerStats.instance.ResetStatF();
-    EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);
-    GameManager.instance.Inv.AssignWeapon(Weapon_B);
-    GameManager.instance.Inv.AssignDress(Armor_B);}
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_S.UpdateCharacterSkin(GameManager.instance.Inv.Skin_S.Weapon);
+    GameManager.instance.Inv.Skin_S.UpdateCharacterSkin(GameManager.instance.Inv.Skin_S.DressSkin);
+	GameManager.instance.Inv.Skin_S.UpdateCombinedSkin();
     }
-    else if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 2)
-    {
-    if(Spoon){GameManager.instance.SpoonUnlock(); 
-    PlayerStats.instance.ResetStatS();
-    EquipM_S.instance.AddItem(Weapon, specificQuant);
-    EquipM_S.instance.AddItem(Armor, specificQuant);
-    GameManager.instance.Inv.AssignWeapon(Weapon_B);
-    GameManager.instance.Inv.AssignDress(Armor_B);} 
     else if(Knife)
     {GameManager.instance.KnifeUnlock();
     PlayerStats.instance.ResetStatK();
-    EquipM_K.instance.AddItem(Weapon, specificQuant);
-    EquipM_K.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.M_K.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_K.AddItem(Armor, specificQuant);
     GameManager.instance.Inv.AssignWeapon(Weapon_B);
-    GameManager.instance.Inv.AssignDress(Armor_B);}
-    else if(Fork){GameManager.instance.ForkUnlock();
-    PlayerStats.instance.ResetStatF();
-    EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);
-    GameManager.instance.Inv.AssignWeapon(Weapon_B);
-    GameManager.instance.Inv.AssignDress(Armor_B);}
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_K.UpdateCharacterSkin(GameManager.instance.Inv.Skin_K.Weapon);
+    GameManager.instance.Inv.Skin_K.UpdateCharacterSkin(GameManager.instance.Inv.Skin_K.DressSkin);
+	GameManager.instance.Inv.Skin_K.UpdateCombinedSkin();
     }
-    else if (SwitchCharacter.instance.rotationSwitcher.CharacterID == 3)
-    {
-    if(Spoon){GameManager.instance.SpoonUnlock(); 
-    PlayerStats.instance.ResetStatS();
-    EquipM_S.instance.AddItem(Weapon, specificQuant);
-    EquipM_S.instance.AddItem(Armor, specificQuant);
+    else if(Fork)
+    {GameManager.instance.ForkUnlock();
+    PlayerStats.instance.ResetStatF();
+    GameManager.instance.M_F.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_F.AddItem(Armor, specificQuant);
     GameManager.instance.Inv.AssignWeapon(Weapon_B);
-    GameManager.instance.Inv.AssignDress(Armor_B);} 
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_F.UpdateCharacterSkin(GameManager.instance.Inv.Skin_F.Weapon);
+    GameManager.instance.Inv.Skin_F.UpdateCharacterSkin(GameManager.instance.Inv.Skin_F.DressSkin);
+	GameManager.instance.Inv.Skin_F.UpdateCombinedSkin();
+    }
+    }
+    else if (GameManager.instance.CharacterID == 2)
+    {
+    if(Spoon)
+    {GameManager.instance.SpoonUnlock(); 
+    PlayerStats.instance.ResetStatS();
+    GameManager.instance.M_S.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_S.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_S.UpdateCharacterSkin(GameManager.instance.Inv.Skin_S.Weapon);
+    GameManager.instance.Inv.Skin_S.UpdateCharacterSkin(GameManager.instance.Inv.Skin_S.DressSkin);
+	GameManager.instance.Inv.Skin_S.UpdateCombinedSkin();} 
     else if(Knife)
     {GameManager.instance.KnifeUnlock();
     PlayerStats.instance.ResetStatK();
-    EquipM_K.instance.AddItem(Weapon, specificQuant);
-    EquipM_K.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.M_K.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_K.AddItem(Armor, specificQuant);
     GameManager.instance.Inv.AssignWeapon(Weapon_B);
-    GameManager.instance.Inv.AssignDress(Armor_B);}
-    else if(Fork){GameManager.instance.ForkUnlock();
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_K.UpdateCharacterSkin(GameManager.instance.Inv.Skin_K.Weapon);
+    GameManager.instance.Inv.Skin_K.UpdateCharacterSkin(GameManager.instance.Inv.Skin_K.DressSkin);
+	GameManager.instance.Inv.Skin_K.UpdateCombinedSkin();
+    }
+    else if(Fork)
+    {GameManager.instance.ForkUnlock();
     PlayerStats.instance.ResetStatF();
-    EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);
+    GameManager.instance.M_F.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_F.AddItem(Armor, specificQuant);
     GameManager.instance.Inv.AssignWeapon(Weapon_B);
-    GameManager.instance.Inv.AssignDress(Armor_B);}
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_F.UpdateCharacterSkin(GameManager.instance.Inv.Skin_F.Weapon);
+    GameManager.instance.Inv.Skin_F.UpdateCharacterSkin(GameManager.instance.Inv.Skin_F.DressSkin);
+	GameManager.instance.Inv.Skin_F.UpdateCombinedSkin();
+    }
+    }
+    else if (GameManager.instance.CharacterID == 3)
+    {
+    if(Spoon)
+    {GameManager.instance.SpoonUnlock(); 
+    PlayerStats.instance.ResetStatS();
+    GameManager.instance.M_S.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_S.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_S.UpdateCharacterSkin(GameManager.instance.Inv.Skin_S.Weapon);
+    GameManager.instance.Inv.Skin_S.UpdateCharacterSkin(GameManager.instance.Inv.Skin_S.DressSkin);
+	GameManager.instance.Inv.Skin_S.UpdateCombinedSkin();} 
+    else if(Knife)
+    {GameManager.instance.KnifeUnlock();
+    PlayerStats.instance.ResetStatK();
+    GameManager.instance.M_K.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_K.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_K.UpdateCharacterSkin(GameManager.instance.Inv.Skin_K.Weapon);
+    GameManager.instance.Inv.Skin_K.UpdateCharacterSkin(GameManager.instance.Inv.Skin_K.DressSkin);
+	GameManager.instance.Inv.Skin_K.UpdateCombinedSkin();}
+    else if(Fork)
+    {GameManager.instance.ForkUnlock();
+    PlayerStats.instance.ResetStatF();
+    GameManager.instance.M_F.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_F.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_F.UpdateCharacterSkin(GameManager.instance.Inv.Skin_F.Weapon);
+    GameManager.instance.Inv.Skin_F.UpdateCharacterSkin(GameManager.instance.Inv.Skin_F.DressSkin);
+	GameManager.instance.Inv.Skin_F.UpdateCombinedSkin();
+    }
     }
     SwitchCharacter.instance.TakeCharacters();
     //print("SwitchCharacter.instance.TakeCharacters");
@@ -95,78 +135,65 @@ public class UnlockCharacter : MonoBehaviour
     } 
     //////////////////////////////////////////////////////////////////////////////////////
     public void Unlock_F( )
-    {StartCoroutine(UnlockToFork());}
-
-    IEnumerator UnlockToFork()
-    {yield return new WaitForSeconds(2f);
-    GameManager.instance.NotParty = false;
-    if(Spoon){GameManager.instance.SpoonUnlock(); 
-    PlayerStats.instance.ResetStatS();
-    EquipM_S.instance.AddItem(Weapon, specificQuant);
-    EquipM_S.instance.AddItem(Armor, specificQuant);} 
-    else if(Knife)
-    {GameManager.instance.KnifeUnlock();
-    PlayerStats.instance.ResetStatK();
-    EquipM_K.instance.AddItem(Weapon, specificQuant);
-    EquipM_K.instance.AddItem(Armor, specificQuant);}
-    else if(Fork){GameManager.instance.ForkUnlock();
-    PlayerStats.instance.ResetStatF();
-    EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);}
-    if(isDestroy){Destroy(This);}
-    }
+    {StartCoroutine(UnlockStats());}
 
     //////////////////////////////////////////////////////////////////////////////////////
     public void Unlock_K( )
-    {StartCoroutine(UnlockToKnife());}
-    IEnumerator UnlockToKnife()
-    {yield return new WaitForSeconds(2f);
-    GameManager.instance.NotParty = false;
-    if(Spoon){GameManager.instance.SpoonUnlock(); 
-    PlayerStats.instance.ResetStatS();
-    EquipM_S.instance.AddItem(Weapon, specificQuant);
-    EquipM_S.instance.AddItem(Armor, specificQuant);} 
-    else if(Knife)
-    {GameManager.instance.KnifeUnlock();
-    PlayerStats.instance.ResetStatK();
-    EquipM_K.instance.AddItem(Weapon, specificQuant);
-    EquipM_K.instance.AddItem(Armor, specificQuant);}
-    else if(Fork){GameManager.instance.ForkUnlock();
-    PlayerStats.instance.ResetStatF();
-    EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);}
-    if(isDestroy){Destroy(This);}
-    }
-
+    {StartCoroutine(UnlockStats());}
+    
     //////////////////////////////////////////////////////////////////////////////////////
     public void Unlock_S( )
-    {StartCoroutine(UnlockToSpoon());}
+    {StartCoroutine(UnlockStats());}
 
-    IEnumerator UnlockToSpoon()
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    IEnumerator UnlockStats()
     {yield return new WaitForSeconds(2f);
     GameManager.instance.NotParty = false;
-    if(Spoon){GameManager.instance.SpoonUnlock(); 
+    if(Spoon)
+    {GameManager.instance.SpoonUnlock(); 
     PlayerStats.instance.ResetStatS();
-    EquipM_S.instance.AddItem(Weapon, specificQuant);
-    EquipM_S.instance.AddItem(Armor, specificQuant);} 
+    GameManager.instance.M_S.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_S.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_S.UpdateCharacterSkin(GameManager.instance.Inv.Skin_S.Weapon);
+    GameManager.instance.Inv.Skin_S.UpdateCharacterSkin(GameManager.instance.Inv.Skin_S.DressSkin);
+	GameManager.instance.Inv.Skin_S.UpdateCombinedSkin();
+    } 
     else if(Knife)
     {GameManager.instance.KnifeUnlock();
     PlayerStats.instance.ResetStatK();
-    EquipM_K.instance.AddItem(Weapon, specificQuant);
-    EquipM_K.instance.AddItem(Armor, specificQuant);}
-    else if(Fork){GameManager.instance.ForkUnlock();
+    GameManager.instance.M_K.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_K.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_K.UpdateCharacterSkin(GameManager.instance.Inv.Skin_K.Weapon);
+    GameManager.instance.Inv.Skin_K.UpdateCharacterSkin(GameManager.instance.Inv.Skin_K.DressSkin);
+	GameManager.instance.Inv.Skin_K.UpdateCombinedSkin();
+    }
+    else if(Fork)
+    {GameManager.instance.ForkUnlock();
     PlayerStats.instance.ResetStatF();
-    EquipM_F.instance.AddItem(Weapon, specificQuant);
-    EquipM_F.instance.AddItem(Armor, specificQuant);}
+    GameManager.instance.M_F.AddItem(Weapon, specificQuant);
+    GameManager.instance.M_F.AddItem(Armor, specificQuant);
+    GameManager.instance.Inv.AssignWeapon(Weapon_B);
+    GameManager.instance.Inv.AssignDress(Armor_B);
+    GameManager.instance.Inv.Skin_F.UpdateCharacterSkin(GameManager.instance.Inv.Skin_F.Weapon);
+    GameManager.instance.Inv.Skin_F.UpdateCharacterSkin(GameManager.instance.Inv.Skin_F.DressSkin);
+	GameManager.instance.Inv.Skin_F.UpdateCombinedSkin();
+    }
+    
     if(isDestroy){Destroy(This);}
     }
+
 
     public void OnTriggerEnter(Collider other)
     {
-    if (other.CompareTag("F_Player") && with_contact && Fork){StartCoroutine(UnlockToFork());}
-    if (other.CompareTag("F_Player") && with_contact && Knife){StartCoroutine(UnlockToKnife());}
-    if (other.CompareTag("F_Player") && with_contact && Spoon){StartCoroutine(UnlockToSpoon());}
-    SwitchCharacter.instance.TakeCharacters();
+    if (other.CompareTag("F_Player") && with_contact && Fork){StartCoroutine(UnlockStats());}
+    if (other.CompareTag("F_Player") && with_contact && Knife){StartCoroutine(UnlockStats());}
+    if (other.CompareTag("F_Player") && with_contact && Spoon){StartCoroutine(UnlockStats());}
+    //SwitchCharacter.instance.TakeCharacters();
     if(isMiner){DeactivateEvent_Var.ConfirmDeactivation();}
     }
 }

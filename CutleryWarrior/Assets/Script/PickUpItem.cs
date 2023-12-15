@@ -71,7 +71,7 @@ public class PickUpItem : MonoBehaviour
         Instantiate(VFXTake, transform.position, transform.rotation);
         GameManager.instance.AM.PlayUFX(5);
         AddSpecificItem();
-        if(!StartGame){Inventory.instance.Reward(specificItem, specificQuant);}
+        if(!StartGame){GameManager.instance.Inv.Reward(specificItem, specificQuant);}
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
         //GameManager.instance.Inv.itemsArea(Id);
         if(isStartEquip)

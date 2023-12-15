@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using UnityEngine.SceneManagement;
-using System.Linq;
+//using System.Linq;
 
 
 public class DuelManager : MonoBehaviour
@@ -361,7 +360,7 @@ public void Update()
             {CamBack(); SelectionENM();}
 
             // Input per testare la rimozione di un'unità
-            if (Input.GetKeyDown(KeyCode.R)){RemoveUnitAtIndex(currentIndex);}
+            //if (Input.GetKeyDown(KeyCode.R)){RemoveUnitAtIndex(currentIndex);}
 
             // Assicurati che l'indice sia all'interno dei limiti dell'array
             currentIndex = Mathf.Clamp(currentIndex, 0, objectsToHighlight.Length - 1);
@@ -438,7 +437,7 @@ public void Update()
     CharacterMove.instance.inputCTR = true;
     CharacterMove.instance.Idle();
     GameManager.instance.FadeIn();
-    AudioManager.instance.CrossFadeOUTAudio(1);
+    GameManager.instance.AM.CrossFadeOUTAudio(1);
     yield return new WaitForSeconds(2f);
     if(GameManager.instance.K_Unlock){ch_KAc.IDAction = 0;}
     if(GameManager.instance.S_Unlock){ch_SAc.IDAction = 0;}
@@ -460,7 +459,7 @@ public void Update()
     GameManager.instance.StopWin();
     GameManager.instance.ChCanM();
     GameManager.instance.ActiveMinimap();
-    AudioManager.instance.CrossFadeINAudio(WhatMusicAB);
+    GameManager.instance.AM.CrossFadeINAudio(WhatMusicAB);
     }
 
     void HighlightCurrentObject()
@@ -508,7 +507,7 @@ public void Update()
         }
     }
 
-    void RemoveUnitAtIndex(int index)
+   /* void RemoveUnitAtIndex(int index)
 {
     if (index >= 0 && index < objectsToHighlight.Length)
     {
@@ -522,19 +521,17 @@ public void Update()
         // Distruisci l'oggetto rimosso
         Destroy(removedObject);
     }
-}
+}*/
 #endregion
-
-
 
 
     IEnumerator GameOver()
     {
         GameManager.instance.inputCTRbattle = true;
-        AudioManager.instance.StopMFX(1);
+        GameManager.instance.AM.StopMFX(1);
         GameManager.instance.N_Target = 0;
         yield return new WaitForSeconds(2f);
-        AudioManager.instance.PlayMFX(2);
+        GameManager.instance.AM.PlayMFX(2);
 
        GameOverBox.SetActive(true);
        Ending = true;
@@ -575,14 +572,14 @@ IEnumerator EndBattle()
     {
         GameManager.instance.NotTouchOption = true;
         GameManager.instance.ChStop();
-        AudioManager.instance.CrossFadeOUTAudio(1);
+        GameManager.instance.AM.CrossFadeOUTAudio(1);
         yield return new WaitForSeconds(3f);
         GameManager.instance.notChange = false;
         if(win)
         {Win.gameObject.SetActive(true);
         RandomReward();
         GameManager.instance.N_Target = 0;
-        AudioManager.instance.PlaySFX(7);
+        GameManager.instance.AM.PlaySFX(7);
         GameManager.instance.NotChange(); 
         GameManager.instance.PoseWin();
         if(GameManager.instance.F_Unlock){Stats.F_GainExperience(result);}
@@ -606,7 +603,7 @@ IEnumerator EndBattle()
     CharacterMove.instance.inputCTR = true;
     CharacterMove.instance.Idle();
     GameManager.instance.FadeIn();
-    AudioManager.instance.CrossFadeOUTAudio(1);
+    GameManager.instance.AM.CrossFadeOUTAudio(1);
     yield return new WaitForSeconds(2f);
     GameManager.instance.NotTouchOption = false;
     if(GameManager.instance.K_Unlock){ch_KAc.IDAction = 0;}
@@ -622,8 +619,8 @@ IEnumerator EndBattle()
 
     public  void ResetCamera()
     {
-    virtualCamera = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    virtualCamera.Follow =  pointView.transform;
+    //virtualCamera = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    //virtualCamera.Follow =  pointView.transform;
     if(GameManager.instance.F_Unlock)
     {FAct.transform.position = ActorFork.transform.position;
     if(F_isRight){FAct.transform.localScale = new Vector3(1, 1,1);}
@@ -638,10 +635,11 @@ IEnumerator EndBattle()
     {KAct.transform.position = ActorKnife.transform.position;
     if(K_isRight){KAct.transform.localScale = new Vector3(1, 1,1);}
     else if(!K_isRight){KAct.transform.localScale = new Vector3(-1, 1,1);}
-    ThisBattle.SetActive(false);
     }
     GameManager.instance.ChCanM();
-    Destroy(this);
+    GameManager.instance.FadeIn();
+    ThisBattle.SetActive(false);
+    //Destroy(this);
     }
     public void SpawnB()
     {
@@ -649,7 +647,7 @@ IEnumerator EndBattle()
     if(GameManager.instance.K_Unlock){KAct.transform.position = savedPosition;}
     if(GameManager.instance.S_Unlock){SAct.transform.position = savedPosition;}
     foreach (GameObject arenaObject in Enemies){arenaObject.SetActive(false);}
-    AudioManager.instance.CrossFadeINAudio(WhatMusicAB);
+    GameManager.instance.AM.CrossFadeINAudio(WhatMusicAB);
     GameManager.instance.StopWin();
     GameManager.instance.ChCanM();
     GameManager.instance.NotTouchOption = false;

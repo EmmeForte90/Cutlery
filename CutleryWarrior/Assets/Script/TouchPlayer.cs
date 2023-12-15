@@ -79,7 +79,7 @@ public class TouchPlayer : MonoBehaviour
     GameManager.instance.savedPositionEscape = savedPositionEscape;
     GameManager.instance.FadeIn();
     if(GameManager.instance.activeMinimap){GameManager.instance.AllarmMap.SetActive(false);}
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(3f);
     GameManager.instance.StopAllarm();
     GameManager.instance.Posebattle();
     BattleObj.SetActive(true);
