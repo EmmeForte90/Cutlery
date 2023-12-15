@@ -4,7 +4,9 @@ public class TouchPlayer : MonoBehaviour
 {
     #region Header
     public int IdENM;
-    public int IdAudio;
+    [Header("AudioBattle")]
+    public int IdAudioBattle;
+    public int IdAudioLevel;
     [Header("Is Boss")]
     public int AudioBoss;
     public bool isBoss = false;
@@ -74,8 +76,10 @@ public class TouchPlayer : MonoBehaviour
     {   
     GameManager.instance.ChStop();
     yield return new WaitForSeconds(1f);
-    if(isBoss){GameManager.instance.AM.CrossFadeINAudio(AudioBoss);}
-    else if(!isBoss){GameManager.instance.AM.CrossFadeINAudio(1);}
+    if(isBoss){ GameManager.instance.AM.CrossFadeINAudio(AudioBoss); 
+    GameManager.instance.AM.CrossFadeOUTAudio(IdAudioLevel);}
+    else if(!isBoss){GameManager.instance.AM.CrossFadeINAudio(IdAudioBattle); 
+    GameManager.instance.AM.CrossFadeOUTAudio(IdAudioLevel);}
     GameManager.instance.savedPositionEscape = savedPositionEscape;
     GameManager.instance.FadeIn();
     if(GameManager.instance.activeMinimap){GameManager.instance.AllarmMap.SetActive(false);}
@@ -99,7 +103,6 @@ public class TouchPlayer : MonoBehaviour
     {   
         if(!GameManager.instance.EnemyCanTouch){
         if (isMove) {Mnpc.Behav = 0; Mnpc.isPaused = true;}
-        GameManager.instance.AM.CrossFadeOUTAudio(IdAudio);
         GameManager.instance.IdENM = IdENM;
         GameManager.instance.NotChange();
         GameManager.instance.AM.PlayUFX(7);

@@ -98,7 +98,7 @@ using TMPro;
 
     public void CameraONPoint(){CameraTransition.StartTransition();}
     public void CameraONActor(){ActivateActor();}
-    private void OnEnable(){if(!isTutorial){TakeData();ActivateActor();}}    
+    private void OnEnable(){if(!isTutorial){TakeData();ActivateActor();GameManager.instance.FadeOut();}}    
     private void OnDisable(){if(!isTutorial){ActivatePlayer();}}
 
     public void StartFirstMusic(){GameManager.instance.AM.PlayMFX(0);}
@@ -110,6 +110,8 @@ using TMPro;
     public void CH_Name_4(){CharacterName.text = DialoguesT.CharacterName_3;}
     public void CH_Name_5(){CharacterName.text = DialoguesT.CharacterName_4;}
 
+    public void FadeIn(){GameManager.instance.FadeIn();}
+    public void FadeOut(){GameManager.instance.FadeOut();}
 
     public void TalkFork(){GameManager.instance.AM.PlaySFX(2);}
     public void TalkKnife(){GameManager.instance.AM.PlaySFX(0);}
