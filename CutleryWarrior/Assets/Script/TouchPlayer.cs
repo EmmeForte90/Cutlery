@@ -1,15 +1,17 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using Cinemachine;
 public class TouchPlayer : MonoBehaviour
 {
     #region Header
     public int IdENM;
     public int IdAudio;
+    [Header("Is Boss")]
+    public int AudioBoss;
+    public bool isBoss = false;
+    [Header("Active/Deactive Battle")]
     public GameObject BattleObj;
     public GameObject[] DeactiveObj; 
-    public GameObject This;
+    //public GameObject This;
     public float stoppingDistance = 1f;
     public Vector3 savedPosition;
     public Transform savedPositionEscape;
@@ -31,7 +33,6 @@ public class TouchPlayer : MonoBehaviour
     if(GameManager.instance.K_Unlock){Knife = GameManager.instance.K_Hero.transform;}
     BattleObj.SetActive(false);
     }
-    public void Take(){Destroy(This);}
     public void Update()
     {
         switch(GameManager.instance.CharacterID)
@@ -73,7 +74,8 @@ public class TouchPlayer : MonoBehaviour
     {   
     GameManager.instance.ChStop();
     yield return new WaitForSeconds(1f);
-    AudioManager.instance.CrossFadeINAudio(1);
+    if(isBoss){GameManager.instance.AM.CrossFadeINAudio(AudioBoss);}
+    else if(!isBoss){GameManager.instance.AM.CrossFadeINAudio(1);}
     GameManager.instance.savedPositionEscape = savedPositionEscape;
     GameManager.instance.FadeIn();
     if(GameManager.instance.activeMinimap){GameManager.instance.AllarmMap.SetActive(false);}
@@ -97,13 +99,13 @@ public class TouchPlayer : MonoBehaviour
     {   
         if(!GameManager.instance.EnemyCanTouch){
         if (isMove) {Mnpc.Behav = 0; Mnpc.isPaused = true;}
-        AudioManager.instance.CrossFadeOUTAudio(IdAudio);
+        GameManager.instance.AM.CrossFadeOUTAudio(IdAudio);
         GameManager.instance.IdENM = IdENM;
         GameManager.instance.NotChange();
-        AudioManager.instance.PlayUFX(7);
+        GameManager.instance.AM.PlayUFX(7);
         GameManager.instance.ChStop();
         GameManager.instance.Allarm();
-        CameraZoom.instance.ZoomIn();
+        GameManager.instance.CZ.ZoomIn();
         StartCoroutine(WaitForSceneLoad());}}
     #if(UNITY_EDITOR)
     #region Gizmos

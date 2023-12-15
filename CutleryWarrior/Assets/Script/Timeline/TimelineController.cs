@@ -81,8 +81,7 @@ using TMPro;
     if(GameManager.instance.K_Unlock){K_Brain = GameManager.instance.K_Hero;}
     if(GameManager.instance.S_Unlock){S_Brain = GameManager.instance.S_Hero;}
     if(!isTutorial){CharacterName.text = DialoguesT.CharacterName;}
-    if(isCutscene){ActivateActor();}
-    if(isCutscene){virtualCamera.Follow =  PointView.transform;}
+    if(isCutscene){ActivateActor(); virtualCamera.Follow =  PointView.transform; dialogue = DialoguesT.dialogue;}
     }
     bool ContainsIdEvent(bool[] array, int idEvent)
     {

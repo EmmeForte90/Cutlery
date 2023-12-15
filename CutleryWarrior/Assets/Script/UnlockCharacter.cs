@@ -18,6 +18,7 @@ public class UnlockCharacter : MonoBehaviour
 
     [Header("WhatPlace")]
     public bool isMiner = false;
+    public DeactivateEvent DeactivateEvent_Var;
 
 
     public void Unlock( )
@@ -166,6 +167,6 @@ public class UnlockCharacter : MonoBehaviour
     if (other.CompareTag("F_Player") && with_contact && Knife){StartCoroutine(UnlockToKnife());}
     if (other.CompareTag("F_Player") && with_contact && Spoon){StartCoroutine(UnlockToSpoon());}
     SwitchCharacter.instance.TakeCharacters();
-    if(isMiner){DeactivateEvent.instance.ConfirmDeactivation();}
+    if(isMiner){DeactivateEvent_Var.ConfirmDeactivation();}
     }
 }
