@@ -16,9 +16,9 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (itemInSlot != null && quantityInSlot !=0)
         {
             itemImage.enabled = true; 
-            //itemImage.sprite = itemInSlot.itemIcon;
             if(itemInSlot.itemIcon != null){itemImage.sprite = itemInSlot.itemIcon;}
             else if (itemInSlot.itemIcon == null){itemImage.sprite = GameManager.instance.Inv.EquipsIcon[item.ID];}
+            //
             if (quantityInSlot > 1)
             {
                 quantity.enabled = true;

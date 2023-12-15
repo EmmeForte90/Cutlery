@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public EquipM_F M_F;
     public EquipM_K M_K;
     public EquipM_S M_S;
+    public CameraZoom CZ;
     public int N_Target = 0;
     public Vector3 savedPosition;
     public Vector3 savedPositionLoading;
@@ -273,9 +274,9 @@ public class GameManager : MonoBehaviour
     if(!battle){
         //Minimap.SetActive(true);
         if (Input.GetButtonDown("Minimap") && !activeMinimap)
-        {Minimap.SetActive(true); activeMinimap = true; AudioManager.instance.PlayUFX(2);}
+        {Minimap.SetActive(true); activeMinimap = true; AM.PlayUFX(2);}
         else if (Input.GetButtonDown("Minimap") && activeMinimap)
-        {Minimap.SetActive(false); activeMinimap = false; AudioManager.instance.PlayUFX(2);}
+        {Minimap.SetActive(false); activeMinimap = false; AM.PlayUFX(2);}
 
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
@@ -292,8 +293,8 @@ public class GameManager : MonoBehaviour
         OpenBookF();
         Invoke("OpenMenu", Cooldown);
         }
-        CameraZoom.instance.ZoomIn();
-        AudioManager.instance.PlayUFX(1);     
+        CZ.ZoomIn();
+        AM.PlayUFX(1);     
     break;
     case 2:
     if(!notChange){
@@ -305,8 +306,8 @@ public class GameManager : MonoBehaviour
         OpenBookK();
         Invoke("OpenMenu", Cooldown);
         }
-        CameraZoom.instance.ZoomIn();
-        AudioManager.instance.PlayUFX(1);  
+        CZ.ZoomIn();
+        AM.PlayUFX(1);  
     break;
     case 3:
         if(!notChange){
@@ -318,8 +319,8 @@ public class GameManager : MonoBehaviour
         OpenBookS();
         Invoke("OpenMenu", Cooldown);
         }
-        CameraZoom.instance.ZoomIn();
-        AudioManager.instance.PlayUFX(1);   
+        CZ.ZoomIn();
+        AM.PlayUFX(1);   
     break;
     }             
     }
@@ -353,8 +354,8 @@ public class GameManager : MonoBehaviour
             break;
             }  
             Invoke("CloseMenu", Cooldown);
-            CameraZoom.instance.ZoomOut();
-            AudioManager.instance.PlayUFX(1);
+            CZ.ZoomOut();
+            AM.PlayUFX(1);
         } 
     }
 ////////////////////////////////////////////////////////////////////////////
@@ -362,6 +363,7 @@ public class GameManager : MonoBehaviour
         //Minimap.SetActive(false);
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
+            InvB.UpdateInventoryUI();
             ChStop();
             Posebattle();
             MouseCursorIcon.SetActive(true);
@@ -375,8 +377,8 @@ public class GameManager : MonoBehaviour
         ch_F.inputCTR = true;}
         LittleM.gameObject.SetActive(true);
         LittleM.transform.position = MP_F.transform.position;
-        CameraZoom.instance.ZoomIn();
-        AudioManager.instance.PlayUFX(1);     
+        CZ.ZoomIn();
+        AM.PlayUFX(1);     
     break;
     case 2:
         if(K_Unlock){
@@ -385,8 +387,8 @@ public class GameManager : MonoBehaviour
         ch_K.inputCTR = true;}
         LittleM.gameObject.SetActive(true);
         LittleM.transform.position = MP_K.transform.position;
-        CameraZoom.instance.ZoomIn();
-        AudioManager.instance.PlayUFX(1);  
+        CZ.ZoomIn();
+        AM.PlayUFX(1);  
     break;
     case 3:
         if(S_Unlock){
@@ -395,8 +397,8 @@ public class GameManager : MonoBehaviour
         ch_S.inputCTR = true;}
         LittleM.gameObject.SetActive(true);
         LittleM.transform.position = MP_S.transform.position;
-        CameraZoom.instance.ZoomIn();
-        AudioManager.instance.PlayUFX(1);   
+        CZ.ZoomIn();
+        AM.PlayUFX(1);   
     break;
     }          
         }
@@ -424,9 +426,9 @@ public class GameManager : MonoBehaviour
                 ch_S.inputCTR = false; 
             break;
             }  
-            CameraZoom.instance.ZoomOut();
+            CZ.ZoomOut();
             if(ComandBattle){inputCTRbattle = false;}
-            AudioManager.instance.PlayUFX(1);
+            AM.PlayUFX(1);
         }}}
     }
 
@@ -465,9 +467,9 @@ public class GameManager : MonoBehaviour
             if(S_Unlock){ch_S.inputCTR = false;}
             break;
             }  
-            CameraZoom.instance.ZoomOut();
+            CZ.ZoomOut();
             inputCTRbattle = false;
-            AudioManager.instance.PlayUFX(1);
+            AM.PlayUFX(1);
     }
     public void CloseLittleMWithoutInput()
     {
@@ -477,7 +479,7 @@ public class GameManager : MonoBehaviour
             Esc.gameObject.SetActive(false);
             LittleM.gameObject.SetActive(false);
             MouseCursorIcon.SetActive(false);
-            CameraZoom.instance.ZoomOut();
+            CZ.ZoomOut();
     }
 
     public void CloseLittleMStop()
@@ -521,17 +523,17 @@ public class GameManager : MonoBehaviour
         case 1:
             TimerM.gameObject.SetActive(true);
             TimerM.transform.position = MP_F.transform.position;
-            AudioManager.instance.PlayUFX(1);     
+            AM.PlayUFX(1);     
         break;
         case 2:
             TimerM.gameObject.SetActive(true);
             TimerM.transform.position = MP_K.transform.position;
-            AudioManager.instance.PlayUFX(1);  
+            AM.PlayUFX(1);  
         break;
         case 3:
             TimerM.gameObject.SetActive(true);
             TimerM.transform.position = MP_S.transform.position;
-            AudioManager.instance.PlayUFX(1);   
+            AM.PlayUFX(1);   
         break;
         }}
         public void CloseTimerMenu()
@@ -543,7 +545,7 @@ public class GameManager : MonoBehaviour
             Esc.gameObject.SetActive(false);
             LittleM.gameObject.SetActive(false);
             TimerM.gameObject.SetActive(false);
-            AudioManager.instance.PlayUFX(1);   
+            AM.PlayUFX(1);   
         }
     public void DestroyManager(){GameManagerExist = false; Destroy(GM);}
     public void StatPlayer()

@@ -67,7 +67,7 @@ public class Inventory : MonoBehaviour
             Skin_F.DressSkin = Item.NameSkin;
             FW_ID = Item.NameSkin;
             F_NameArmor = Item.NameSkin;
-            AudioManager.instance.PlayUFX(6);  
+            GameManager.instance.AM.PlayUFX(6);  
             previewImages_WF.sprite = Item.itemIcon;
             Skin_F.UpdateCharacterSkin(Skin_F.DressSkin);
             //Skin_F.UpdateCharacterSkin(Item.NameSkin);
@@ -92,14 +92,14 @@ public class Inventory : MonoBehaviour
             //Puppets_F.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_F.UpdateCharacterSkinUI(Puppets_F.DressSkin);
             Puppets_F.UpdateCombinedSkinUI();}
-    }else{AudioManager.instance.PlayUFX(10);}
+    }else{GameManager.instance.AM.PlayUFX(10);}
     break;
     case 2:
     if(KW_ID != Item.NameSkin){
             Skin_K.DressSkin = Item.NameSkin;
             KW_ID = Item.NameSkin;
             K_NameArmor = Item.NameSkin;
-            AudioManager.instance.PlayUFX(6);  
+            GameManager.instance.AM.PlayUFX(6);  
             previewImages_WK.sprite = Item.itemIcon;
             Skin_K.UpdateCharacterSkin(Skin_K.DressSkin);
             //Skin_K.UpdateCharacterSkin(Item.NameSkin);
@@ -125,14 +125,14 @@ public class Inventory : MonoBehaviour
             //Puppets_K.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_K.UpdateCharacterSkinUI(Puppets_K.DressSkin);
             Puppets_K.UpdateCombinedSkinUI();} 
-    }else{AudioManager.instance.PlayUFX(10);}
+    }else{GameManager.instance.AM.PlayUFX(10);}
     break;
     case 3:
     if(SW_ID != Item.NameSkin){
             Skin_S.DressSkin = Item.NameSkin;
             SW_ID = Item.NameSkin;
             S_NameArmor = Item.NameSkin;
-            AudioManager.instance.PlayUFX(6);  
+            GameManager.instance.AM.PlayUFX(6);  
             previewImages_WS.sprite = Item.itemIcon;
             //Skin_S.UpdateCharacterSkin(Item.NameSkin);
             Skin_S.UpdateCharacterSkin(Skin_S.DressSkin);
@@ -159,7 +159,7 @@ public class Inventory : MonoBehaviour
             Puppets_S.UpdateCharacterSkinUI(Puppets_S.DressSkin);
             //Puppets_S.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_S.UpdateCombinedSkinUI();} 
-    }else{AudioManager.instance.PlayUFX(10);}
+    }else{GameManager.instance.AM.PlayUFX(10);}
     break;  
     }          
 }
@@ -172,7 +172,7 @@ public void AssignWeapon(Weapon Item)
             Skin_F.Weapon = Item.NameSkin; 
             FA_ID = Item.NameSkin;
             F_NameWeapon = Item.NameSkin;           
-            AudioManager.instance.PlayUFX(6);  
+            GameManager.instance.AM.PlayUFX(6);  
             previewImages_AF.sprite = Item.itemIcon;
             Skin_F.UpdateCharacterSkin(Skin_F.Weapon);
             //Skin_F.UpdateCharacterSkin(Item.NameSkin);
@@ -185,14 +185,14 @@ public void AssignWeapon(Weapon Item)
             Puppets_F.UpdateCharacterSkinUI(Puppets_F.Weapon);
             //Puppets_F.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_F.UpdateCombinedSkinUI();}
-    }else{AudioManager.instance.PlayUFX(10);}
+    }else{GameManager.instance.AM.PlayUFX(10);}
     break;
     case 2:
     if(KA_ID != Item.NameSkin){
             Skin_K.Weapon = Item.NameSkin;
             KA_ID = Item.NameSkin;
             K_NameWeapon = Item.NameSkin;
-            AudioManager.instance.PlayUFX(6);  
+            GameManager.instance.AM.PlayUFX(6);  
             previewImages_AK.sprite = Item.itemIcon;
             Skin_K.UpdateCharacterSkin(Skin_K.Weapon);
             //Skin_K.UpdateCharacterSkin(Item.NameSkin);
@@ -205,14 +205,14 @@ public void AssignWeapon(Weapon Item)
             Puppets_K.UpdateCharacterSkinUI(Puppets_K.Weapon);
             //Puppets_K.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_K.UpdateCombinedSkinUI();}
-    }else{AudioManager.instance.PlayUFX(10);}
+    }else{GameManager.instance.AM.PlayUFX(10);}
     break;
     case 3:
     if(SA_ID != Item.NameSkin){
             Skin_S.Weapon = Item.NameSkin;
             SA_ID = Item.NameSkin;
             S_NameWeapon = Item.NameSkin;
-            AudioManager.instance.PlayUFX(6);  
+            GameManager.instance.AM.PlayUFX(6);  
             previewImages_AS.sprite = Item.itemIcon;
             Skin_S.UpdateCharacterSkin(Skin_S.Weapon);
             //Skin_S.UpdateCharacterSkin(Item.NameSkin);
@@ -225,7 +225,7 @@ public void AssignWeapon(Weapon Item)
             Puppets_S.UpdateCharacterSkinUI(Puppets_S.Weapon);
             //Puppets_S.UpdateCharacterSkinUI(Item.NameSkin);
             Puppets_S.UpdateCombinedSkinUI();}
-    }else{AudioManager.instance.PlayUFX(10);}
+    }else{GameManager.instance.AM.PlayUFX(10);}
     break;     
 }}
 #endregion

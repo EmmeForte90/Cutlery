@@ -36,8 +36,8 @@ public class PickUpItem : MonoBehaviour
     public void Update()
     {
         if(IsQuest){
-        if(GameManager.instance.activeMinimap){if(QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(true);} 
-        else if(!QuestsManager.instance.QuestSegnal[Quest.id]){Icon.SetActive(false);}}
+        if(GameManager.instance.activeMinimap){if(GameManager.instance.QuM.QuestSegnal[Quest.id]){Icon.SetActive(true);} 
+        else if(!GameManager.instance.QuM.QuestSegnal[Quest.id]){Icon.SetActive(false);}}
         }else if(IsSkill)
         {
             
@@ -69,7 +69,7 @@ public class PickUpItem : MonoBehaviour
         if(takeitem)
         {
         Instantiate(VFXTake, transform.position, transform.rotation);
-        AudioManager.instance.PlayUFX(5);
+        GameManager.instance.AM.PlayUFX(5);
         AddSpecificItem();
         if(!StartGame){Inventory.instance.Reward(specificItem, specificQuant);}
         if(IsQuest){Quest.isComplete = true; Quest.isActive = false;}
@@ -101,19 +101,19 @@ public class PickUpItem : MonoBehaviour
             GameManager.instance.InvB.AddItem(specificItem, specificQuant);
             break;
             case 1:
-            QuestsManager.instance.AddItem(specificItem, specificQuant);            
+            GameManager.instance.QuM.AddItem(specificItem, specificQuant);            
             break;
             case 2:
-            KeyManager.instance.AddItem(specificItem, specificQuant);            
+            GameManager.instance.KM.AddItem(specificItem, specificQuant);            
             break;
             case 3:
-            EquipM_F.instance.AddItem(specificItem, specificQuant);            
+            GameManager.instance.M_F.AddItem(specificItem, specificQuant);            
             break;
             case 4:
-            EquipM_K.instance.AddItem(specificItem, specificQuant);            
+            GameManager.instance.M_K.AddItem(specificItem, specificQuant);            
             break;
             case 5:
-            EquipM_S.instance.AddItem(specificItem, specificQuant);            
+            GameManager.instance.M_S.AddItem(specificItem, specificQuant);            
             break;
         }
         Destroy(gameObject);

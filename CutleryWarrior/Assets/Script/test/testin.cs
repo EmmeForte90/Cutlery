@@ -61,7 +61,9 @@ public class testin : MonoBehaviour
     {//GameManager.instance.QuM.UpdateInventoryUI();
         //GameManager.instance.KM.UpdateInventoryUI();
         //GameManager.instance.InvB.UpdateInventoryUI();
-        GameManager.instance.Inv.UpdateInventoryUI();}
+        GameManager.instance.M_F.UpdateInventoryUI();
+        //GameManager.instance.Inv.UpdateInventoryUI();
+    }
     public void Shoot()
     {Instantiate(Bullets, BP.transform.position, transform.rotation);}
 

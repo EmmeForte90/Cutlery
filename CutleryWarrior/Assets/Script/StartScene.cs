@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 public class StartScene : MonoBehaviour
@@ -24,13 +22,8 @@ public class StartScene : MonoBehaviour
     public Material newSkyboxMaterial_N;
     public GameObject[] Giorno;
     public Material newSkyboxMaterial_G; // Il nuovo materiale Skybox che desideri applicare
-    public GameObject[] Enemies; 
-    //private CinemachineConfiner confiner;
     private CinemachineVirtualCamera vCam;
-    //private SwitchCharacter Switcher;
     private int IDPorta;
-    //private int ID_Enm;
-    public bool Once = true;
     private Quaternion defaultRotation;
     public static StartScene instance;
     #endregion
@@ -47,7 +40,6 @@ public class StartScene : MonoBehaviour
     if(GameManager.instance.K_Unlock){KAct = GameManager.instance.K_Hero;}
     if(GameManager.instance.S_Unlock){SAct = GameManager.instance.S_Hero;}
     vCam = GameManager.instance.vcam.GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    //confiner = GameManager.instance.vcam.GetComponent<CinemachineConfiner>();
     defaultRotation = transform.rotation;
     if(startMusic)
     {
@@ -64,25 +56,23 @@ public class StartScene : MonoBehaviour
     PlayerStats.instance.HaveData = false;
     UpdateInventory();
     }
-    else if(!PlayerStats.instance.HaveData)
-    {   
-        IDPorta = GameManager.instance.IDPorta;Spawn(IDPorta); //Spawna nel punto scelto dopo una transition
-    }
+    else if(!PlayerStats.instance.HaveData){IDPorta = GameManager.instance.IDPorta;Spawn(IDPorta);} //Spawna nel punto scelto dopo una transition
+
     }
     public void UpdateInventory()
     {
-        GameManager.instance.Inv.UpdateInventoryUI();
+        GameManager.instance.money = PlayerStats.instance.Money;
+        GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
         GameManager.instance.QuM.UpdateInventoryUI();
         GameManager.instance.KM.UpdateInventoryUI();
-        GameManager.instance.InvB.UpdateInventoryUI();
-        if(GameManager.instance.F_Unlock){GameManager.instance.M_F.UpdateInventoryUI();}
-        if(GameManager.instance.S_Unlock){GameManager.instance.M_S.UpdateInventoryUI();}
-        if(GameManager.instance.K_Unlock){GameManager.instance.M_K.UpdateInventoryUI();}
+        GameManager.instance.M_F.UpdateInventoryUI();
+        GameManager.instance.M_S.UpdateInventoryUI();
+        GameManager.instance.M_K.UpdateInventoryUI();
+        //GameManager.instance.InvB.UpdateInventoryUI();
     }
 
     public void Update()
     {
-        
         if(!GameManager.instance.Day)
         {foreach (GameObject arenaObject in Giorno){arenaObject.SetActive(false);}
         foreach (GameObject arenaObjectN in Notte){arenaObjectN.SetActive(true);}
@@ -116,6 +106,5 @@ public class StartScene : MonoBehaviour
     if(GameManager.instance.F_Unlock){FAct.transform.position = PlayerStats.instance.savedPosition;}
     if(GameManager.instance.K_Unlock){KAct.transform.position = PlayerStats.instance.savedPosition;}
     if(GameManager.instance.S_Unlock){SAct.transform.position = PlayerStats.instance.savedPosition;}
-    }
-    
+    } 
 }

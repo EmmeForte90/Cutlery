@@ -129,36 +129,23 @@ public class EquipM_F : MonoBehaviour
     }
 
     // Ogni volta che un oggetto viene aggiunto o rimosso dall'inventario, viene eseguita la funzione UpdateInventoryUI
-public void UpdateInventoryUI()
-{
-    // Questo int serve per contare quanti slot sono pieni
-    int ind = 0;
-
-    // Per ogni slot nella lista, viene assegnato un oggetto dalla itemList e la corrispondente quantità
-    foreach (EquipSlot slot in slotListItem)
+ public void UpdateInventoryUI()
     {
-        if (itemList.Count != 0)
+    int ind = 0;
+      foreach(EquipSlot slot in slotListItem)
         {
-            // Se ind è minore della quantità di oggetti nella itemList, l'elemento è considerato uno slot pieno
-            if (ind < itemList.Count)
+            if (itemList.Count != 0)
             {
-                // Chiama la funzione UpdateSlot() sul rispettivo slot e assegna l'oggetto e la quantità in base al loro indice univoco nella itemList
-                slot.UpdateSlot(itemList[ind], quantityList[ind]);
-                ind++;
+                if (ind < itemList.Count)
+                {
+                    slot.UpdateSlot(itemList[ind], quantityList[ind]);
+                    ind = ind + 1;
+                }
+                else{slot.UpdateSlot(null, 0);}
             }
-            else
-            {
-                // Aggiorna lo slot vuoto
-                slot.UpdateSlot(null, 0);
-            }
-        }
-        else
-        {
-            // Aggiorna lo slot vuoto
-            slot.UpdateSlot(null, 0);
+            else{slot.UpdateSlot(null, 0);}
         }
     }
-}
 
 #endregion
 

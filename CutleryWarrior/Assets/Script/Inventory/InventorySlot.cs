@@ -10,8 +10,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {    
     #region Header
     Item item;
-    Weapon weapon;
-    private string NameSkin;
+    //Weapon weapon;
+    //private string NameSkin;
     public Image itemImage;
     public TextMeshProUGUI quantity;
     #endregion
@@ -23,6 +23,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             itemImage.enabled = true; 
             if(itemInSlot.itemIcon != null){itemImage.sprite = itemInSlot.itemIcon;}
             else if (itemInSlot.itemIcon == null){itemImage.sprite = GameManager.instance.Inv.ItemsIcon[item.ID];}
+            //
             if (quantityInSlot > 1)
             {quantity.enabled = true;quantity.text = quantityInSlot.ToString();}
             else{quantity.enabled = false;}
