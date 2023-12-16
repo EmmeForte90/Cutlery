@@ -63,6 +63,7 @@ public class StartScene : MonoBehaviour
     {
         GameManager.instance.money = PlayerStats.instance.Money;
         GameManager.instance.moneyTextM.text = GameManager.instance.money.ToString();
+        GameManager.instance.Inv.UpdateInventoryUI();
         GameManager.instance.QuM.UpdateInventoryUI();
         GameManager.instance.KM.UpdateInventoryUI();
         GameManager.instance.M_F.UpdateInventoryUI();

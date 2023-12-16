@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject F_Hero;
     [SerializeField] public CharacterMove F_HeroP;
     [SerializeField] public CharacterFollow F_HeroAI;
+    [SerializeField] public AnimationManager F_t;
     [SerializeField] public GameObject MP_F;
     [SerializeField] public GameObject Rust_F;
     public GameObject Fork;
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject S_Hero;
     [SerializeField] public CharacterMove S_HeroP;
     [SerializeField] public CharacterFollow S_HeroAI;
+    [SerializeField] public AnimationManager S_t;
     [SerializeField] public GameObject MP_S;
     [SerializeField] public GameObject Rust_S;
     public GameObject Spoon;
@@ -116,6 +118,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject K_Hero;
     [SerializeField] public CharacterMove K_HeroP;
     [SerializeField] public CharacterFollow K_HeroAI;
+    [SerializeField] public AnimationManager K_t;
     [SerializeField] public GameObject MP_K;
     [SerializeField] public GameObject Rust_K;
     public GameObject Knife;
@@ -775,6 +778,22 @@ public class GameManager : MonoBehaviour
         if(S_Unlock){ch_S.Interact = false;}
         Interact = false;
     }  
+
+    public void TrasparentCH()
+    {
+        if(F_Unlock){F_t.ChangeColorTrasparent();} 
+        if(K_Unlock){K_t.ChangeColorTrasparent();}
+        if(S_Unlock){S_t.ChangeColorTrasparent();}
+    }
+
+    public void ResetTrasparentCH()
+    {
+         if(F_Unlock){F_t.ChangeColorNormal();} 
+        if(K_Unlock){K_t.ChangeColorNormal();}
+        if(S_Unlock){S_t.ChangeColorNormal();}
+    }
+
+
     public void ChStopB()
     {
         RecognizeCharacters();

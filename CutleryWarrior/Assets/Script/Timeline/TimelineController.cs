@@ -3,7 +3,6 @@ using UnityEngine.Playables;
 using Cinemachine;
 using System.Collections;
 using TMPro;
-
     public class TimelineController : MonoBehaviour 
     {    
     public bool isTutorial;
@@ -14,7 +13,6 @@ using TMPro;
     private float dialogueDuration; // variable to set the duration of the dialogue
     private int dialogueIndex; // variable to keep track of the dialogue status
     private float elapsedTime; // variable to keep track of the elapsed time
-
     [Header("Timeline")]
     public int ID;
     public int WhatMusic = 1;
@@ -27,24 +25,20 @@ using TMPro;
     public GameObject FAct;
     public GameObject KAct;
     public GameObject SAct;
-   
      [Header("Fork")]
     private GameObject ForkActive;
     private CharacterMove F_Script;
-    //public GameObject F_point; // Variabile per il player
     private ChangeHeroSkin Skin_F;
     private CharacterFollow AI_F;
     [Header("Spoon")]
     private GameObject SpoonActive;
     private CharacterMove S_Script;
-    //public GameObject S_point; // Variabile per il player
     private CharacterFollow AI_S;
     private ChangeHeroSkin Skin_S;
     [Header("Knife")]
     private GameObject KnifeActive;
     private CharacterMove K_Script;
     private CharacterFollow AI_K;
-    //public GameObject K_point; // Variabile per il player
     private CinemachineVirtualCamera virtualCamera; //riferimento alla virtual camera di Cinemachine
     private GameObject player; // Variabile per il player
     private GameObject AI_1; 
@@ -54,16 +48,10 @@ using TMPro;
     private GameObject S_Brain; // Variabile per il player
     public CambioFollow CameraTransition;
     public GameObject[] ActiveTiemAfterScene;
-    //public GameObject SavePositionCamera;
-
     private void Start()
     {
         dialogue = DialoguesT.dialogue;
-        if (ContainsIdEvent(PlayerStats.instance.Timelines, ID))
-        {
-            // Se la condizione è vera, disattiva il gameObject
-            gameObject.SetActive(false);
-        }
+        if (ContainsIdEvent(PlayerStats.instance.Timelines, ID)){gameObject.SetActive(false);}
     }
     public void TakeData()
     {
@@ -86,33 +74,25 @@ using TMPro;
     bool ContainsIdEvent(bool[] array, int idEvent)
     {
         // Controlla se l'indice idEvent è valido nell'array
-        if (idEvent >= 0 && idEvent < array.Length)
-        {
-            // Restituisci true se l'elemento nell'array corrispondente all'idEvent è true
-            return array[idEvent];
-        }
-
+        if (idEvent >= 0 && idEvent < array.Length){return array[idEvent];}
+        // Restituisci true se l'elemento nell'array corrispondente all'idEvent è true
+        return false; 
         // Restituisci false se l'indice idEvent non è valido
-        return false;
     }
 
     public void CameraONPoint(){CameraTransition.StartTransition();}
     public void CameraONActor(){ActivateActor();}
     private void OnEnable(){if(!isTutorial){TakeData();ActivateActor();GameManager.instance.FadeOut();}}    
     private void OnDisable(){if(!isTutorial){ActivatePlayer();}}
-
     public void StartFirstMusic(){GameManager.instance.AM.PlayMFX(0);}
-
     public void FirstDialogue(){dialogue = DialoguesT.dialogue; dialogueIndex = 0; StartCoroutine(ShowDialogue());}
     public void CH_Name_1(){CharacterName.text = DialoguesT.CharacterName;}
     public void CH_Name_2(){CharacterName.text = DialoguesT.CharacterName_1;}
     public void CH_Name_3(){CharacterName.text = DialoguesT.CharacterName_2;}
     public void CH_Name_4(){CharacterName.text = DialoguesT.CharacterName_3;}
     public void CH_Name_5(){CharacterName.text = DialoguesT.CharacterName_4;}
-
     public void FadeIn(){GameManager.instance.FadeIn();}
     public void FadeOut(){GameManager.instance.FadeOut();}
-
     public void TalkFork(){GameManager.instance.AM.PlaySFX(2);}
     public void TalkKnife(){GameManager.instance.AM.PlaySFX(0);}
     public void TalkSpoon(){GameManager.instance.AM.PlaySFX(1);}
@@ -120,76 +100,73 @@ using TMPro;
     public void ActivateActor()
     {
         dialogueIndex = 0;
+        GameManager.instance.NotTouchOption = true;
+        GameManager.instance.TrasparentCH();
         switch(GameManager.instance.CharacterID)
         {
             case 1:
-            GameManager.instance.NotTouchOption = true;
             if(GameManager.instance.F_Unlock){
             player = GameManager.instance.Fork; 
             FAct.SetActive(true); 
             if(!isCutscene){virtualCamera.Follow =  FAct.transform;}
             FAct.transform.position = player.transform.position;
             FAct.transform.position = F_Brain.transform.position;
-            player.SetActive(false);}
+            }
             //
             if(GameManager.instance.K_Unlock){AI_1 = GameManager.instance.Knife;
             KAct.SetActive(true); 
             KAct.transform.position = K_Brain.transform.position;
-            AI_1.SetActive(false);}
+            }
             //
             if(GameManager.instance.S_Unlock){AI_2 = GameManager.instance.Spoon;
             SAct.SetActive(true); 
             SAct.transform.position = S_Brain.transform.position;
-            AI_2.SetActive(false);}
+            }
             break;
             //////////////////////////////////////////////////
             case 2:
-            GameManager.instance.NotTouchOption = true;
             if(GameManager.instance.F_Unlock){AI_1 = GameManager.instance.Fork; 
             FAct.SetActive(true); 
             FAct.transform.position = F_Brain.transform.position;
-            AI_1.SetActive(false);}
+            }
             //
             if(GameManager.instance.K_Unlock){player = GameManager.instance.Knife;
             KAct.SetActive(true); 
             KAct.transform.position = K_Brain.transform.position;
-            player.SetActive(false);}
+            }
             //
             if(GameManager.instance.S_Unlock){AI_2 = GameManager.instance.Spoon;
             SAct.SetActive(true); 
             SAct.transform.position = S_Brain.transform.position;
-            AI_2.SetActive(false);}
+            }
             break;
             //////////////////////////////////////////////////
             case 3:
-            GameManager.instance.NotTouchOption = true;
             if(GameManager.instance.F_Unlock){AI_1 = GameManager.instance.Fork; 
             FAct.SetActive(true); 
             FAct.transform.position = F_Brain.transform.position;
-            AI_1.SetActive(false);}
+            }
             //
             if(GameManager.instance.K_Unlock){player = GameManager.instance.Knife;
             KAct.SetActive(true); 
             KAct.transform.position = K_Brain.transform.position;
-            AI_2.SetActive(false);}
+            }
             //
             if(GameManager.instance.S_Unlock){player = GameManager.instance.Spoon;
             SAct.SetActive(true); 
             SAct.transform.position = S_Brain.transform.position;
-            player.SetActive(false);}
+            }
             break;
         }   
     }
     public void ActivatePlayer()
     {
-        
         switch(GameManager.instance.CharacterID)
         {
             case 1:
             GameManager.instance.NotTouchOption = false;
             if(GameManager.instance.F_Unlock){
             player = GameManager.instance.Fork; 
-            player.SetActive(true); 
             player.transform.position = FAct.transform.position;
             F_Brain.transform.position = FAct.transform.position;
             virtualCamera.Follow =  F_Brain.transform;
@@ -198,12 +175,10 @@ using TMPro;
             FAct.SetActive(false); }
             //
             if(GameManager.instance.K_Unlock){AI_1 = GameManager.instance.Knife;
-            AI_1.SetActive(true);
             K_Brain.transform.position = KAct.transform.position;
             KAct.SetActive(false);}
             //
             if(GameManager.instance.S_Unlock){AI_2 = GameManager.instance.Spoon;
-            AI_2.SetActive(true);
             S_Brain.transform.position = SAct.transform.position;
             SAct.SetActive(false);}
             break;
@@ -211,18 +186,16 @@ using TMPro;
             case 2:
             GameManager.instance.NotTouchOption = false;
             if(GameManager.instance.F_Unlock){AI_1 = GameManager.instance.Fork; 
-            AI_1.SetActive(true);
             F_Brain.transform.position = FAct.transform.position;
             FAct.SetActive(false); }
             //
             if(GameManager.instance.K_Unlock){player = GameManager.instance.Knife;
-            player.SetActive(true);
             K_Brain.transform.position = KAct.transform.position;
             virtualCamera.Follow =  K_Brain.transform;
+            K_Script.isRun = false;
             KAct.SetActive(false);}
             //
             if(GameManager.instance.S_Unlock){AI_2 = GameManager.instance.Spoon;
-            AI_2.SetActive(true);
             S_Brain.transform.position = SAct.transform.position;
             SAct.SetActive(false);}
             break;
@@ -230,44 +203,37 @@ using TMPro;
             case 3:
             GameManager.instance.NotTouchOption = false;
             if(GameManager.instance.F_Unlock){AI_1 = GameManager.instance.Fork; 
-            AI_1.SetActive(true);
             F_Brain.transform.position = FAct.transform.position;
             F_Script.isRun = false;S_Script.isRun = false;K_Script.isRun = false;
             FAct.SetActive(false); }
             //
             if(GameManager.instance.K_Unlock){AI_2 = GameManager.instance.Knife;
-            AI_2.SetActive(true);
             K_Brain.transform.position = KAct.transform.position;
             KAct.SetActive(false);}
             //
             if(GameManager.instance.S_Unlock){player = GameManager.instance.Spoon;
-            player.SetActive(true);
             S_Brain.transform.position = SAct.transform.position;
             virtualCamera.Follow =  S_Brain.transform;
+            S_Script.isRun = false;
             SAct.SetActive(false);}
             break;
         }   
+        GameManager.instance.ResetTrasparentCH();
         PlayerStats.instance.TimelineEnd(ID);
         GameManager.instance.NotTouchOption = false;
         GameManager.instance.ChCanM();
-        //CharacterMove.instance.inputCTR = false;
     }
 
     public void NextDialogue()
     {
         elapsedTime = 0; // reset elapsed time
         dialogueIndex++; // Increment the dialogue index
-        if (dialogueIndex >= dialogue.Length)
-        {
-            dialogueIndex = 0;
-            
-        }
+        if (dialogueIndex >= dialogue.Length){dialogueIndex = 0;}
         else{StartCoroutine(ShowDialogue());}
     }
 
      IEnumerator ShowDialogue()
 {
-    //_isDialogueActive = true;
     elapsedTime = 0; // reset elapsed time
     string currentDialogue = dialogue[dialogueIndex]; // Get the current dialogue
     dialogueText.text = ""; // Clear the dialogue text
@@ -275,38 +241,31 @@ using TMPro;
     {
         dialogueText.text += currentDialogue[i]; // Add one letter at a time
         elapsedTime += Time.deltaTime; // Update the elapsed time
-        if (elapsedTime >= dialogueDuration)
-        {
-            break;
-        }
+        if (elapsedTime >= dialogueDuration){break;}
         yield return new WaitForSeconds(0.001f); // Wait before showing the next letter
     }
-            dialogueText.text = currentDialogue; // Set the dialogue text to the full current dialogue
+    dialogueText.text = currentDialogue; // Set the dialogue text to the full current dialogue
 }
-
-
 
     private void Update()
     {if ((Input.GetMouseButtonDown(0) || Input.GetButton("Fire1")) && _director.time != 0){StartTimeline();}}
 
+    public  void StartMusicG()
+    {
+        if(AudioManager.instance == null) return;
+        AudioManager.instance.PlayMFX(WhatMusic);
+    }
 
-public  void StartMusicG()
-{
-    if(AudioManager.instance == null) return;
-    AudioManager.instance.PlayMFX(WhatMusic);
-}
-
-public  void ResetCamera()
-{
-    virtualCamera.Follow =  player.transform;
-    virtualCamera.transform.rotation = Quaternion.Euler(18f, -90f, 0f);
-    GameManager.instance.StopWin();
-    GameManager.instance.ChCanM();  
-    GameManager.instance.notChange = false;
-    //Destroy(this);
-}
-public  void ResetCameraActor()
-{
+    public  void ResetCamera()
+    {
+        virtualCamera.Follow =  player.transform;
+        virtualCamera.transform.rotation = Quaternion.Euler(18f, -90f, 0f);
+        GameManager.instance.StopWin();
+        GameManager.instance.ChCanM();  
+        GameManager.instance.notChange = false;
+    }
+    public  void ResetCameraActor()
+    {
          switch(GameManager.instance.CharacterID)
         {
             case 1:
@@ -329,13 +288,9 @@ public  void ResetCameraActor()
             break;
     
 }}
-public void Take(){Destroy(gameObject);}
-public void CancellTimeline(){PlayerStats.instance.TimelineEnd(ID);}
-public void RestoreGameplay(){foreach (GameObject arenaObject in ActiveTiemAfterScene){arenaObject.SetActive(true);}}
-
-//public  void TimelineRepeat(){CutsceneManager.Instance.TimelineStart(ID);}
-
-//public  void TimelineDontRepeat(){CutsceneManager.Instance.TimelineEnd(ID);}
+    public void Take(){Destroy(gameObject);}
+    public void CancellTimeline(){PlayerStats.instance.TimelineEnd(ID);}
+    public void RestoreGameplay(){foreach (GameObject arenaObject in ActiveTiemAfterScene){arenaObject.SetActive(true);}}
 
     public void StartTimeline()
     {  

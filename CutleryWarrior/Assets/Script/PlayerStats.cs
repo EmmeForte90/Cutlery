@@ -347,6 +347,9 @@ public class PlayerStats : MonoBehaviour
     I_itemList = GameManager.instance.Inv.itemList;
     I_quantityList = GameManager.instance.Inv.quantityList;
     //
+    IBattle_itemList = GameManager.instance.InvB.itemList;
+    IBattle_quantityList = GameManager.instance.InvB.quantityList;
+    //
     F_itemList = GameManager.instance.M_F.itemList;
     F_quantityList = GameManager.instance.M_F.quantityList;
     //

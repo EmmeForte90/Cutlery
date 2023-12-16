@@ -197,6 +197,20 @@ public class AnimationManager : MonoBehaviour
     public void TemporaryChangeColor(Color color){_skeletonAnimation.Skeleton.SetColor(color); Invoke(nameof(ResetColor), 0.5f);}
     public void ChangeColorP(){_skeletonAnimation.Skeleton.SetColor(Color.green);}
     public void ChangeColorR(){_skeletonAnimation.Skeleton.SetColor(new Color32(193, 155, 26, 255));}
+    public void ChangeColorTrasparent()
+    {
+        // Imposta il canale alpha del colore a un valore più basso per rendere il personaggio trasparente
+        Color32 nuovoColore = new Color32(193, 155, 26, 0); 
+        // 0 è un valore di alpha che indica una trasparenza totale
+        _skeletonAnimation.Skeleton.SetColor(nuovoColore);
+    }
+    public void ChangeColorNormal()
+    {
+        // Imposta il canale alpha del colore a un valore più basso per rendere il personaggio trasparente
+        Color32 nuovoColore = new Color32(255, 255, 255, 255); 
+        // 0 è un valore di alpha che indica una trasparenza totale
+        _skeletonAnimation.Skeleton.SetColor(nuovoColore);
+    }
     public void ResetColor(){_skeletonAnimation.Skeleton.SetColor(Color.white);}
     public void PlayAnimation(string animationName)
     {

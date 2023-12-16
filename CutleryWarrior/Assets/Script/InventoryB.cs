@@ -31,47 +31,48 @@ public class InventoryB : MonoBehaviour
     //Inventory.instance.Add(ItemYouWantToGiveHere , quantityOfThatItem);
     // Currently it's being called by the AddItemToInventory Script on the Add Items Buttons 
     #region ItemInventory
-    public void AddItem(Item itemAdded, int quantityAdded)
+   public void AddItem(Item itemAdded, int quantityAdded)
+{
+    int index = itemList.IndexOf(itemAdded);
+
+    if (itemAdded.Stackable)
     {
-        //If the Item is Stackable it checks if there is already that item in the inventory and only adds the quantity
-  
-        if (itemAdded.Stackable)
+        if (index != -1)
         {
-            if (itemList.Contains(itemAdded))
-            {
-                quantityList[itemList.IndexOf(itemAdded)] = quantityList[itemList.IndexOf(itemAdded)] + quantityAdded;
-            }
-            else
-            {
-
-                if (itemList.Count < slotListItem.Count)
-                {
-                    itemList.Add(itemAdded);
-                    quantityList.Add(quantityAdded);
-                }
-                else { }
-               
-            }
-
+            quantityList[index] += quantityAdded;
         }
         else
         {
-            for (int i = 0; i < quantityAdded; i++)
+            if (itemList.Count < slotListItem.Count)
             {
-                if (itemList.Count < slotListItem.Count)
-                {
-                    itemList.Add(itemAdded);
-                    quantityList.Add(1);
-                }
-                else {  }
-               
+                itemList.Add(itemAdded);
+                quantityList.Add(quantityAdded);
             }
-            
+            else
+            {
+                // Gestire il caso in cui la lista è piena
+            }
         }
-        
-        // Update Inventory everytime an item is added
-        UpdateInventoryUI();
     }
+    else
+    {
+        for (int i = 0; i < quantityAdded; i++)
+        {
+            if (itemList.Count < slotListItem.Count)
+            {
+                itemList.Add(itemAdded);
+                quantityList.Add(1);
+            }
+            else
+            {
+                // Gestire il caso in cui la lista è piena
+            }
+        }
+    }
+
+    UpdateInventoryUI();
+}
+
 
     // As the previous function, this can be called from another script
     // Currently called by the Remove Button in each InventorySlot Prefab

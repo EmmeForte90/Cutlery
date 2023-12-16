@@ -34583,7 +34583,7 @@ MonoBehaviour:
   player: {fileID: 0}
   Icon: {fileID: 1536754788140049489}
   IconVFX: {fileID: 1536754788203477595}
-  maxHealth: 100
+  maxHealth: 500
   currentHealth: 0
   healthBar: {fileID: 1536754787860727503}
   damagePerSecond: 0.1
@@ -35139,7 +35139,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 7.07, y: 0}
   m_SizeDelta: {x: 5.84, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
