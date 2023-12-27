@@ -98,7 +98,7 @@ public class PickUpItem : MonoBehaviour
         {
             case 0:
             GameManager.instance.Inv.AddItem(specificItem, specificQuant);  
-            GameManager.instance.InvB.AddItem(specificItem, specificQuant);
+            //GameManager.instance.InvB.AddItem(specificItem, specificQuant);
             break;
             case 1:
             GameManager.instance.QuM.AddItem(specificItem, specificQuant);            

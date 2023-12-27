@@ -188,7 +188,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int money = 0;
     [SerializeField] public TextMeshProUGUI moneyTextM;
     public int IDPorta;  
-    public float Cooldown = 1.2f; // Tempo di cooldown tra le combo in second
+    [HideInInspector]public float Cooldown = 1.2f; // Tempo di cooldown tra le combo in second
 
     public CinemachineVirtualCamera vcam; // La telecamera virtuale Cinemachine
     public static GameManager instance;
