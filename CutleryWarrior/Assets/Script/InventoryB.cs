@@ -105,23 +105,22 @@ public class InventoryB : MonoBehaviour
     }
 
     // Everytime an item is Added or Removed from the Inventory, the UpdateInventoryUI runs
-  public void UpdateInventoryUI()
-{
-    int slotIndex = 0;
-
-    for (int i = 0; i < itemList.Count && slotIndex < slotListItem.Count; i++)
+ public void UpdateInventoryUI()
     {
-        slotListItem[slotIndex].UpdateSlot(itemList[i], quantityList[i]);
-        slotIndex++;
+    int ind = 0;
+      foreach(InventorySlotBattle slot in slotListItem)
+        {
+            if (itemList.Count != 0)
+            {
+                if (ind < itemList.Count)
+                {
+                    slot.UpdateSlot(itemList[ind], quantityList[ind]);
+                    ind = ind + 1;
+                }
+                else{slot.UpdateSlot(null, 0);}
+            }
+            else{slot.UpdateSlot(null, 0);}
+        }
     }
-
-    // Se ci sono slotListItem rimanenti senza corrispondenza in itemList, aggiornali a null
-    for (; slotIndex < slotListItem.Count; slotIndex++)
-    {
-        slotListItem[slotIndex].UpdateSlot(null, 0);
-    }
-}
-
-
 #endregion
 }
