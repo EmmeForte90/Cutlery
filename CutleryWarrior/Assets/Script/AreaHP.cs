@@ -1,10 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AreaHP : MonoBehaviour
 {
     #region Header
+    public GameObject OBJ;
     public float restore = 1;
     public bool isSkill = true;
     public bool one = true;
@@ -12,11 +12,11 @@ public class AreaHP : MonoBehaviour
     public float lifeTime = 10f;
     public static AreaHP instance;
     #endregion
-    void Start()
+    void OnEnable()
     {
         if (instance == null){instance = this;}
         if (isSkill){restore = itemInfo.damage;}
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(Deactivate());
     }
 
     public void OnTriggerStay(Collider other)
@@ -36,7 +36,12 @@ public class AreaHP : MonoBehaviour
         {
         AudioManager.instance.PlayUFX(9);
         PlayerStats.instance.S_curHP += restore;
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(Deactivate());
         }
         }
+          private IEnumerator Deactivate()
+    {
+    yield return new WaitForSeconds(lifeTime);
+    OBJ.SetActive(false);
+    }
 }

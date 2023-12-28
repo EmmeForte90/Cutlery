@@ -19637,7 +19637,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7024876014170189094
 Transform:
   m_ObjectHideFlags: 0
@@ -19645,7 +19645,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7024876014170189097}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -24483,10 +24483,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c84532776c9dc4ca6a63b3075e01cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OBJ: {fileID: 7024876014170189097}
   isVaccino: 0
   isCoffe: 0
   isAglio: 0
   isMalox: 1
+  isRistoro: 0
   one: 1
   lifeTime: 1
 --- !u!1 &7116961511098277298

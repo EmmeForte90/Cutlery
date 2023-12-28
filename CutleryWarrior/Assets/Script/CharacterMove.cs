@@ -551,7 +551,7 @@ private void HandleComboAttackS()
             PlayerStats.instance.F_curHP -= danno_subito;
             PlayerStats.instance.F_curRage += 2;
             AudioManager.instance?.PlaySFX(8);
-            Instantiate(VFXHurt, transform.position, transform.rotation);
+            VFXHurt.SetActive(true); VFXHurt.transform.position = transform.position;
             if(sleepState){GameManager.instance.RestoreSleepF();}
             //print("sleepState" + sleepState);
             Anm?.TemporaryChangeColor(Color.red);}
@@ -562,7 +562,7 @@ private void HandleComboAttackS()
             PlayerStats.instance.K_curHP -= danno_subito;
             PlayerStats.instance.K_curRage += 2;
             AudioManager.instance?.PlaySFX(8);
-            Instantiate(VFXHurt, transform.position, transform.rotation);
+            VFXHurt.SetActive(true); VFXHurt.transform.position = transform.position;
             if(sleepState){GameManager.instance.RestoreSleepK();}
             //print("sleepState" + sleepState);
             Anm?.TemporaryChangeColor(Color.red);
@@ -574,7 +574,7 @@ private void HandleComboAttackS()
                 PlayerStats.instance.S_curHP -= danno_subito;
                 PlayerStats.instance.S_curRage += 2;
                 AudioManager.instance?.PlaySFX(8);
-                Instantiate(VFXHurt, transform.position, transform.rotation);
+                VFXHurt.SetActive(true); VFXHurt.transform.position = transform.position;
                 if(sleepState){SleepRestored();}
                 Anm?.TemporaryChangeColor(Color.red);
                 //Debug.Log("danno " +  Stats.S_curHP);
@@ -585,7 +585,8 @@ private void HandleComboAttackS()
                 AudioManager.instance?.PlaySFX(12);
                 if(sleepState){GameManager.instance.RestoreSleepS();}
                 //print("sleepState" + sleepState);
-                Instantiate(VFXHhitShield, BP.transform.position, transform.rotation);
+                VFXHhitShield.SetActive(true); VFXHhitShield.transform.position = BP.transform.position;
+
             }
             break;
     }}}

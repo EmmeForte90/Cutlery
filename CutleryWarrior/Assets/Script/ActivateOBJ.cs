@@ -15,7 +15,7 @@ public class ActivateOBJ : MonoBehaviour
     }
     IEnumerator WaitForSceneLoad()
     {   
-    yield return new WaitForSeconds(0.5f);
+    yield return new WaitForSeconds(0.001f);
     if(repet){foreach (GameObject arenaObject in OBJ){arenaObject.SetActive(true);repet=false;}}
     }
 }

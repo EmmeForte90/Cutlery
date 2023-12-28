@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEngine;
-
 public class Healt : MonoBehaviour
 {
     #region Header
+    public GameObject OBJ;
     public float restore = 10;
     public bool isSkill = true;
     public bool isMana = false;
@@ -11,12 +12,12 @@ public class Healt : MonoBehaviour
     public float lifeTime = 2f;
     public static Healt instance;
     #endregion
-    void Start()
+    void OnEnable()
     {
         if (instance == null){instance = this;}
         if (isSkill){restore = itemInfo.damage;}
         //print("lanciato");
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(Deactivate());
     }
 
     public void OnTriggerEnter(Collider other)
@@ -45,6 +46,12 @@ public class Healt : MonoBehaviour
         one = false;
         }
         }
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(Deactivate());
+    }
+
+     private IEnumerator Deactivate()
+    {
+    yield return new WaitForSeconds(lifeTime);
+    OBJ.SetActive(false);
     }
 }

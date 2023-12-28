@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    //public float speed = 10f;
+    public GameObject OBJ;
     public float damage = 10;
     public float lifeTime = 2f;
     public static Bomb instance;
@@ -14,7 +13,12 @@ public class Bomb : MonoBehaviour
         if(other.CompareTag("Enemy") || other.CompareTag("Collider"))
         {
         AudioManager.instance.PlayUFX(9);
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(Deactivate());
         }
+    }
+     private IEnumerator Deactivate()
+    {
+    yield return new WaitForSeconds(lifeTime);
+    OBJ.SetActive(false);
     }
 }

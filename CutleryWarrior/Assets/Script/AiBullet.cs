@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AiBullet : MonoBehaviour
@@ -11,35 +12,42 @@ public class AiBullet : MonoBehaviour
     //public int attackDamage = 5;
     public GameObject hitEffect;
     //public bool Take = true;
-    public void Awake()
+    public void OnEnable()
     {
     AI_Ch = GameManager.instance.F_Hero.GetComponent<CharacterFollow>();
     target = AI_Ch.target;
-    Destroy(OBJ, lifeTime);
     if(target != null){lastKnownPlayerPosition = target.transform.position;}
-    else if(target == null){Destroy(OBJ);}
-    print("target" + target);
+    else if(target == null){OBJ.SetActive(false);}
+    StartCoroutine(Deactivate());
+    //print("target" + target);
     }
-    
+    private IEnumerator Deactivate()
+    {
+    yield return new WaitForSeconds(lifeTime);
+    OBJ.SetActive(false);
+    }
     private void Update()
     {
         if (target == null)
         {
-            Destroy(OBJ);  // Se il giocatore non è più presente, distruggi il proiettile
+            OBJ.SetActive(false);// Se il giocatore non è più presente, distruggi il proiettile
             return;
         }
         Vector3 direction = (lastKnownPlayerPosition - transform.position).normalized;  // Calcola la direzione verso il giocatore
         transform.Translate(direction * speed * Time.deltaTime, Space.World);  // Muovi il proiettile nella direzione del giocatore in uno spazio mondiale (3D).
+    }
+    public void OnDisable()
+    {
+        AudioManager.instance.PlayUFX(9);
+        if (hitEffect != null){hitEffect.SetActive(true); hitEffect.transform.position=transform.position;}
     }
 
     public void OnTriggerEnter(Collider collision)
     {   
         if(collision.CompareTag("Enemy") || collision.CompareTag("Collider"))
         {
-        if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
-        AudioManager.instance.PlayUFX(9);
-        print("Colpito" + target);
-        Destroy(OBJ);
+        //print("Colpito" + target);
+        OBJ.SetActive(false);
         }
     }
 }

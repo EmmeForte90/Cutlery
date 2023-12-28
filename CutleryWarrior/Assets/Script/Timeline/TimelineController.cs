@@ -48,6 +48,10 @@ using TMPro;
     private GameObject S_Brain; // Variabile per il player
     public CambioFollow CameraTransition;
     public GameObject[] ActiveTiemAfterScene;
+    //private float transitionTimer = 0.0f;
+    //private bool isTransitioning = false;
+    //private float transitionDuration = 500f;
+
     private void Start()
     {
         dialogue = DialoguesT.dialogue;
@@ -161,15 +165,16 @@ using TMPro;
     }
     public void ActivatePlayer()
     {
-        virtualCamera.transform.rotation = Quaternion.Euler(14f, -90f, 0f);
+        //isTransitioning = true;
         switch(GameManager.instance.CharacterID)
         {
             case 1:
             GameManager.instance.NotTouchOption = false;
             if(GameManager.instance.F_Unlock){
-            player = GameManager.instance.Fork; 
+            player = GameManager.instance.F_Hero; 
             player.transform.position = FAct.transform.position;
             F_Brain.transform.position = FAct.transform.position;
+            virtualCamera.transform.rotation = Quaternion.Euler(14f, -90f, 0f);
             virtualCamera.Follow =  F_Brain.transform;
             F_Script.isRun = false;
             FAct.SetActive(false); }
@@ -224,6 +229,7 @@ using TMPro;
         GameManager.instance.ChCanM();
     }
 
+
     public void NextDialogue()
     {
         elapsedTime = 0; // reset elapsed time
@@ -248,7 +254,21 @@ using TMPro;
 }
 
     private void Update()
-    {if ((Input.GetMouseButtonDown(0) || Input.GetButton("Fire1")) && _director.time != 0){StartTimeline();}}
+    {
+        if ((Input.GetMouseButtonDown(0) || Input.GetButton("Fire1")) && _director.time != 0){StartTimeline();}
+       /* if (isTransitioning)
+        {
+            transitionTimer += Time.deltaTime;
+
+            float t = Mathf.Clamp01(transitionTimer / transitionDuration);
+            //virtualCamera.transform.rotation = Quaternion.Slerp(virtualCamera.transform.rotation, targets[currentTargetIndex].rotation, t);
+            virtualCamera.transform.rotation = Quaternion.Euler(14f, -90f, 0f);
+            if (t >= 1.0f)
+            {
+                isTransitioning = false;
+            }
+        }*/
+    }
 
     public  void StartMusicG()
     {

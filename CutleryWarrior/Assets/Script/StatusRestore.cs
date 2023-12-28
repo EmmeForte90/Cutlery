@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class StatusRestore : MonoBehaviour
 {
+    public GameObject OBJ;
     public bool isVaccino, isCoffe, isAglio, isMalox, isRistoro = false;
     public bool one = true;
     public float lifeTime = 1f;
@@ -41,6 +43,11 @@ public class StatusRestore : MonoBehaviour
         one = false;
         }
         }
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(Deactivate());
+    }
+     private IEnumerator Deactivate()
+    {
+    yield return new WaitForSeconds(lifeTime);
+    OBJ.SetActive(false);
     }
 }
