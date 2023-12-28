@@ -34,6 +34,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Terr
     second: {fileID: 2100000, guid: 9598a45a2f0f0f342aa7b2f5f2e7cd75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TorreM1.001
+    second: {fileID: 2100000, guid: 72f3e151e1c4df34787a3c29e94aa817, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

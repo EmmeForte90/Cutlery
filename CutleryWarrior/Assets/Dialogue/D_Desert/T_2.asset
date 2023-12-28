@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   CharacterName: Elara
+  CharacterName_1: 
+  CharacterName_2: 
+  CharacterName_3: 
+  CharacterName_4: 
   dialogue:
-  - This statue... Why is this statue here? This place is... very weird.
+  - This statue... Why is it here? This place is... very weird.
   - But looking at this statue, I remember something... A name. <color=red>Moccup,
     the abbot.</color> I have no idea who he is, but I'm certain he's an abbot. Perhaps
     he can help me?

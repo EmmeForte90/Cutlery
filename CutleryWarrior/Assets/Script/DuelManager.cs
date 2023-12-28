@@ -654,6 +654,7 @@ IEnumerator EndBattle()
     GameManager.instance.notChange = false;
     GameManager.instance.DectiveMinimap();
     GameManager.instance.FadeOut();
+    GameManager.instance.EnemyCanTouch = false;
     ThisBattle.SetActive(false);
     }
 

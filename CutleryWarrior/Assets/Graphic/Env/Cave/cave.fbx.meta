@@ -12,8 +12,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Model001_Material001
+    second: {fileID: 2100000, guid: 44a1beac875189a4d804d54244008c03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Model001_Material004
+    second: {fileID: 2100000, guid: 5c9d7951d59344d4b8aafa22db8f9538, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: dark
     second: {fileID: 2100000, guid: 6f381355efb711441be09dcdb4f724cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock
+    second: {fileID: 2100000, guid: 5af5e214d7ec1cc4fb35d6c83d57d89c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

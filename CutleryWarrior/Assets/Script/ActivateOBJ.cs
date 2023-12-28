@@ -9,13 +9,13 @@ public class ActivateOBJ : MonoBehaviour
     {if (other.CompareTag("F_Player") || other.CompareTag("K_Player") || other.CompareTag("S_Player"))
     {
         GameManager.instance.ChStopB();
-        GameManager.instance.FadeIn();
+        //GameManager.instance.FadeIn();
         StartCoroutine(WaitForSceneLoad());
     }
     }
     IEnumerator WaitForSceneLoad()
     {   
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(0.5f);
     if(repet){foreach (GameObject arenaObject in OBJ){arenaObject.SetActive(true);repet=false;}}
     }
 }

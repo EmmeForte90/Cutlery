@@ -86,6 +86,7 @@ public class TouchPlayer : MonoBehaviour
     yield return new WaitForSeconds(3f);
     GameManager.instance.StopAllarm();
     GameManager.instance.Posebattle();
+    GameManager.instance.EnemyCanTouch = true;
     BattleObj.SetActive(true);
     foreach (GameObject arenaObject in DeactiveObj){arenaObject.SetActive(false);}
     }

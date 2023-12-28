@@ -82,7 +82,7 @@ using TMPro;
 
     public void CameraONPoint(){CameraTransition.StartTransition();}
     public void CameraONActor(){ActivateActor();}
-    private void OnEnable(){if(!isTutorial){TakeData();ActivateActor();GameManager.instance.FadeOut();}}    
+    private void OnEnable(){if(!isTutorial){TakeData();ActivateActor();}}//GameManager.instance.FadeOut();}}    
     private void OnDisable(){if(!isTutorial){ActivatePlayer();}}
     public void StartFirstMusic(){GameManager.instance.AM.PlayMFX(0);}
     public void FirstDialogue(){dialogue = DialoguesT.dialogue; dialogueIndex = 0; StartCoroutine(ShowDialogue());}
@@ -91,8 +91,8 @@ using TMPro;
     public void CH_Name_3(){CharacterName.text = DialoguesT.CharacterName_2;}
     public void CH_Name_4(){CharacterName.text = DialoguesT.CharacterName_3;}
     public void CH_Name_5(){CharacterName.text = DialoguesT.CharacterName_4;}
-    public void FadeIn(){GameManager.instance.FadeIn();}
-    public void FadeOut(){GameManager.instance.FadeOut();}
+    //public void FadeIn(){GameManager.instance.FadeIn();}
+    //public void FadeOut(){GameManager.instance.FadeOut();}
     public void TalkFork(){GameManager.instance.AM.PlaySFX(2);}
     public void TalkKnife(){GameManager.instance.AM.PlaySFX(0);}
     public void TalkSpoon(){GameManager.instance.AM.PlaySFX(1);}
@@ -161,6 +161,7 @@ using TMPro;
     }
     public void ActivatePlayer()
     {
+        virtualCamera.transform.rotation = Quaternion.Euler(14f, -90f, 0f);
         switch(GameManager.instance.CharacterID)
         {
             case 1:
@@ -170,7 +171,6 @@ using TMPro;
             player.transform.position = FAct.transform.position;
             F_Brain.transform.position = FAct.transform.position;
             virtualCamera.Follow =  F_Brain.transform;
-            virtualCamera.transform.rotation = Quaternion.Euler(18f, -90f, 0f);
             F_Script.isRun = false;
             FAct.SetActive(false); }
             //
