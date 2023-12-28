@@ -10,6 +10,7 @@ Material:
   m_Name: Big_rock_2
   m_Shader: {fileID: 4800000, guid: 2a230514c860643f69b6a4d1871d3825, type: 3}
   m_ValidKeywords:
+  - DR_GRADIENT_ON
   - DR_OUTLINE_ON
   - _DETAILMAPBLENDINGMODE_MULTIPLY
   - _TEXTUREBLENDINGMODE_MULTIPLY
@@ -117,10 +118,10 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.14090908
     - _GlossyReflections: 1
-    - _GradientAngle: 0
-    - _GradientCenterX: 0
-    - _GradientCenterY: 0
-    - _GradientEnabled: 0
+    - _GradientAngle: 200
+    - _GradientCenterX: 10
+    - _GradientCenterY: 10
+    - _GradientEnabled: 1
     - _GradientSize: 10
     - _LightContribution: 1
     - _LightmapDirectionPitch: 0

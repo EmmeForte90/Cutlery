@@ -7,8 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Castle
+    second: {fileID: 2100000, guid: 7e0b5e295abdd704794cbae69779391b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: FerStac
     second: {fileID: 2100000, guid: b5ab0b0426a1d464b9539c55b96c4d03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House.001
+    second: {fileID: 2100000, guid: 957b642660b9c114f8a64eaa9219af08, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

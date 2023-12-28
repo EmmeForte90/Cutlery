@@ -3,7 +3,17 @@ guid: 5e99730d09d8f6f43b4034cf1ab6c395
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Platf
+    second: {fileID: 2100000, guid: 9b578422f47cc254ea9acb561b358b60, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Statue
+    second: {fileID: 2100000, guid: 7c797c8347a73214f95ff03cd1e4e868, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
