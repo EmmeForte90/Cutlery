@@ -82,6 +82,14 @@ public class AudioManager : MonoBehaviour
             StartCoroutine(Restoresfx());
         }
     }
+    public void StopSFX(int soundToPlay)
+    {
+        if (sgmActive)
+        {
+            sgm[soundToPlay].Stop();
+            sgmActive = false;
+        }
+    }
     public void PlayUFX(int soundToPlay){ugm[soundToPlay].Play();}
     public IEnumerator Restoresfx(){yield return new WaitForSeconds(1f); sgmActive = false;}
     public void CrossFadeINAudio(int soundToPlay){StartCoroutine(FadeIn(bgm[soundToPlay], 1f));}

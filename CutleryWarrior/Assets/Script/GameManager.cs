@@ -809,6 +809,15 @@ public class GameManager : MonoBehaviour
         if(K_Unlock){ch_K.inputCTR = false; ch_KAc.inputCTR = false;}
         if(S_Unlock){ch_S.inputCTR = false; ch_SAc.inputCTR = false;}
     }
+
+    public void StopRunning()
+    {
+        
+        RecognizeCharacters();
+        if(F_Unlock){ch_F.isRun = false;}
+        if(K_Unlock){ch_K.isRun = false;}
+        if(S_Unlock){ch_S.isRun = false;}
+    }
     public void Posebattle()
     {
         
