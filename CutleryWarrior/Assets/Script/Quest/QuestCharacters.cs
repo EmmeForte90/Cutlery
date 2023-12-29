@@ -257,7 +257,7 @@ public class QuestCharacters : MonoBehaviour
         {
             case 0:
             GameManager.instance.Inv.AddItem(Reward, specificQuant);  
-            GameManager.instance.InvB.AddItem(Reward, specificQuant);
+            //GameManager.instance.InvB.AddItem(Reward, specificQuant);
             break;
             case 1:
             GameManager.instance.QuM.AddItem(Reward, specificQuant);            

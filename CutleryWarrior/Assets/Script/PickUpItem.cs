@@ -32,7 +32,7 @@ public class PickUpItem : MonoBehaviour
 
     #endregion
     public void Awake(){KindItem = specificItem.KindItem; Id = specificItem.ID;}
-    public void Take(){Destroy(gameObject);}
+    public void Take(){gameObject.SetActive(false);}
     public void Update()
     {
         if(IsQuest){
@@ -68,7 +68,7 @@ public class PickUpItem : MonoBehaviour
     {
         if(takeitem)
         {
-        Instantiate(VFXTake, transform.position, transform.rotation);
+        VFXTake.SetActive(true);VFXTake.transform.position=transform.position;
         GameManager.instance.AM.PlayUFX(5);
         AddSpecificItem();
         if(!StartGame){GameManager.instance.Inv.Reward(specificItem, specificQuant);}
@@ -116,6 +116,7 @@ public class PickUpItem : MonoBehaviour
             GameManager.instance.M_S.AddItem(specificItem, specificQuant);            
             break;
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

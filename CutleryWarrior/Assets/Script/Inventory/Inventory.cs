@@ -8,6 +8,10 @@ public class Inventory : MonoBehaviour
     #region Header
     public List<Item> itemList = new List<Item>();
     public List<int> quantityList = new List<int>();
+    private readonly List<InventorySlotBattle> slotListItemB = new();
+    public GameObject inventoryItem;
+    public GameObject inventoryItemB;
+
     public Image previewImages_AF;
     public Image previewImages_WF;
     private string FW_ID, KW_ID, SW_ID;
@@ -30,7 +34,6 @@ public class Inventory : MonoBehaviour
     public ChangeHeroSkin Skin_S;
     public PuppetSkin Puppets_S;     
     public UIRotationSwitcher rotationSwitcher;
-    public GameObject inventoryItem;
     public GameObject inventoryQuestsItem;
     public GameObject inventoryKey;
     public GameObject inventoryEquip_F;
@@ -230,7 +233,10 @@ public void AssignWeapon(Weapon Item)
 }}
 #endregion
     public void Start()
-    {foreach (InventorySlot child in inventoryItem.GetComponentsInChildren<InventorySlot>()){slotListItem.Add(child);}} 
+    {
+    foreach (InventorySlot child in inventoryItem.GetComponentsInChildren<InventorySlot>()){slotListItem.Add(child);}
+    foreach (InventorySlotBattle child in inventoryItemB.GetComponentsInChildren<InventorySlotBattle>()){slotListItemB.Add(child);}
+    } 
     #region ItemInventory
     public void AddItem(Item itemAdded, int quantityAdded)
     {
@@ -261,6 +267,7 @@ public void AssignWeapon(Weapon Item)
             }  
         }
         UpdateInventoryUI();
+        UpdateInventoryUIB();
     }
     public void RemoveItem(Item itemRemoved, int quantityRemoved)
     {
@@ -285,11 +292,30 @@ public void AssignWeapon(Weapon Item)
             }
         }
         UpdateInventoryUI();
+        UpdateInventoryUIB();
     }
     public void UpdateInventoryUI()
     {
     int ind = 0;
       foreach(InventorySlot slot in slotListItem)
+        {
+            if (itemList.Count != 0)
+            {
+                if (ind < itemList.Count)
+                {
+                    slot.UpdateSlot(itemList[ind], quantityList[ind]);
+                    ind = ind + 1;
+                }
+                else{slot.UpdateSlot(null, 0);}
+            }
+            else{slot.UpdateSlot(null, 0);}
+        }
+    }
+
+    public void UpdateInventoryUIB()
+    {
+    int ind = 0;
+      foreach(InventorySlotBattle slot in slotListItemB)
         {
             if (itemList.Count != 0)
             {

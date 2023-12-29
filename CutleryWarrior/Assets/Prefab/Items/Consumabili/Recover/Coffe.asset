@@ -12,14 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086ce4bd4efb77c4180089179b220146, type: 3}
   m_Name: Coffe
   m_EditorClassIdentifier: 
+  IdItem: 
   itemName: 
   NameSkin: 
   itemDes: 
-  ID: 0
+  ID: 6
   KindItem: 0
   WhoConsumable: 6
   price: 0
   Stackable: 0
+  itemData:
+    itemName: 
+    NameSkin: 
+    itemDes: 
+    ID: 0
+    KindItem: 0
+    WhoConsumable: 0
+    price: 0
+    Stackable: 0
+    itemIcon: {fileID: 0}
+    TypesE: 0
+    TimeItem: 0
+    MaxDurationItem: 0
+    item: {fileID: 0}
+    quantity: 0
   itemIcon: {fileID: 0}
   TypesE: 0
   TimeItem: 0

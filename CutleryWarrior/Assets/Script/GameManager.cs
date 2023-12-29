@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public static bool GameManagerExist; 
     public AudioManager AM;
     public Inventory Inv;
-    public InventoryB InvB;
+    //public InventoryB InvB;
     public QuestsManager QuM;
     public KeyManager KM;
     public EquipM_F M_F;
@@ -366,7 +366,7 @@ public class GameManager : MonoBehaviour
         //Minimap.SetActive(false);
        if (Input.GetButtonDown("Pause") && !stopInput)
         {
-            InvB.UpdateInventoryUI();
+            Inv.UpdateInventoryUI();
             ChStop();
             Posebattle();
             MouseCursorIcon.SetActive(true);
@@ -713,6 +713,8 @@ public class GameManager : MonoBehaviour
         if(S_Unlock){Manager_S = S_Hero.GetComponent<ManagerCharacter>();}
         if(K_Unlock){Manager_K = K_Hero.GetComponent<ManagerCharacter>();}
     }
+
+    
     public void TakeCamera()
     {
         RecognizeCharacters();

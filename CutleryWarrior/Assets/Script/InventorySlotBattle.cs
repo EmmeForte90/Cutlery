@@ -47,7 +47,7 @@ public class InventorySlotBattle : MonoBehaviour
         if (item != null)
         {
             //InvB = GameObject.FindWithTag("Manager").GetComponent<InventoryB>();
-            if(Using){GameManager.instance.InvB.RemoveItem(item, 1);  Using = false;}//Lo rimuove dall'inventario
+            if(Using){GameManager.instance.Inv.RemoveItem(item, 1);  Using = false;}//Lo rimuove dall'inventario
             //rotationSwitcher = GameObject.Find("EquipManager").GetComponent<SwitchCharacter>();
             switch(GameManager.instance.CharacterID)
         {

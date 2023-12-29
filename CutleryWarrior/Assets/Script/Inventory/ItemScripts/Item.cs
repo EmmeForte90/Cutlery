@@ -16,7 +16,7 @@ public class Item : ScriptableObject
     public int KindItem;
     
     //[Tooltip("0-Potion 1-MediaPotion 2-AltaPotion 3-Mana 4-Mediamana 5-Altamana 6-Coffe 7-malox 8-vaccino 9-aglio 10-panacea 11-ristoro")]
-    [Range(0, 20)]
+    [Range(0, 21)]
     public int WhoConsumable;
     public int price;
     public bool Stackable;
@@ -47,18 +47,6 @@ public class Item : ScriptableObject
     {}//Vai allo script Weapon per verificarne la function
     public virtual void Sell()
     {}//Vai allo script Consumable per verificarne la function
-
-
-    public string ToJson()
-    {
-        return JsonUtility.ToJson(itemData);
-    }
-
-    public void FromJson(string json)
-    {
-        itemData = JsonUtility.FromJson<SerializedItem>(json);
-    }
-
 
 }
 

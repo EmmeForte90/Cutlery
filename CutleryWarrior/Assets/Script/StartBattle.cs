@@ -63,9 +63,10 @@ public class StartBattle : MonoBehaviour
         GameManager.instance.ChStop();
         GameManager.instance.TakeCamera();
         GameManager.instance.DectiveMinimap();
-        GameManager.instance.Inv.itemList = GameManager.instance.InvB.itemList;
+        /*GameManager.instance.Inv.itemList = GameManager.instance.InvB.itemList;
         GameManager.instance.Inv.quantityList = GameManager.instance.InvB.quantityList;
-        GameManager.instance.InvB.UpdateInventoryUI();
+        GameManager.instance.InvB.UpdateInventoryUI();*/
+        GameManager.instance.Inv.UpdateInventoryUIB();
         //
         if(GameManager.instance.F_Unlock)
         {F_Script = GameManager.instance.F_Hero.GetComponent<CharacterMove>(); ForkHUD.SetActive(true);}
