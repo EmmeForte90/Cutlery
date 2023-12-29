@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-
 public class EnemyBullet : MonoBehaviour
 {
     public float speed = 20f;  // Velocità del proiettile
@@ -29,9 +29,9 @@ public class EnemyBullet : MonoBehaviour
 
     private Vector3 lastKnownPlayerPosition;  // Ultime coordinate conosciute del giocatore
 
-    private void Start()
+    private void OnEnable()
     {
-        Destroy(OBJ, lifeTime);
+        StartCoroutine(Deactivate());
         Choise();
         switch(resultP)
         {
@@ -46,6 +46,11 @@ public class EnemyBullet : MonoBehaviour
             break;
         } 
         lastKnownPlayerPosition = player.transform.position;  // Aggiorna le coordinate conosciute del giocatore
+    }
+     private IEnumerator Deactivate()
+    {
+    yield return new WaitForSeconds(lifeTime);
+    OBJ.SetActive(false);
     }
 
     private void Choise()
@@ -83,7 +88,7 @@ public class EnemyBullet : MonoBehaviour
     {
         if (player == null)
         {
-            Destroy(OBJ);  // Se il giocatore non è più presente, distruggi il proiettile
+            OBJ.SetActive(false);  // Se il giocatore non è più presente, distruggi il proiettile
             return;
         }
 
@@ -98,7 +103,7 @@ public class EnemyBullet : MonoBehaviour
         else if (collision.gameObject.CompareTag("K_Player")){KnifeD();} 
         else if (collision.gameObject.CompareTag("S_Player")){SpoonD();} 
         else if (collision.gameObject.CompareTag("Ground"))
-        {if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}}
+        {OBJ.SetActive(false);}
     }
     public void ForkD()
     {
@@ -110,7 +115,7 @@ public class EnemyBullet : MonoBehaviour
         //Debug.Log("danno +"+ attackDamage);
         if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
         Take = false;}
-        Destroy(OBJ);
+        OBJ.SetActive(false);
     }
     public void KnifeD()
     {
@@ -122,7 +127,7 @@ public class EnemyBullet : MonoBehaviour
         //Debug.Log("danno +"+ attackDamage);
         if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
         Take = false;}
-        Destroy(OBJ);    
+        OBJ.SetActive(false);   
     }
     public void SpoonD()
     {
@@ -134,6 +139,6 @@ public class EnemyBullet : MonoBehaviour
         //Debug.Log("danno +"+ attackDamage);
         if (hitEffect != null){Instantiate(hitEffect, transform.position, transform.rotation);}
         Take = false;}
-        Destroy(OBJ);
+        OBJ.SetActive(false);
     }
 }

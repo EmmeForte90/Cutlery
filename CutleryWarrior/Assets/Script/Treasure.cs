@@ -31,7 +31,7 @@ public class Treasure : MonoBehaviour
     {
     KindItem = specificItem.KindItem; Id = specificItem.ID;
     if (ContainsIdEvent(PlayerStats.instance.Treasure, IdChest))
-    {Destroy(gameObject);}
+    {gameObject.SetActive(false);}
     }
     bool ContainsIdEvent(bool[] array, int idEvent)
     {
@@ -84,7 +84,7 @@ public class Treasure : MonoBehaviour
         canOpen = false;
         Icon.SetActive(false);
         Anm.Play("Treasure_Anm");
-        Instantiate(VFXTake, transform.position, transform.rotation);
+        VFXTake.SetActive(true);VFXTake.transform.position=transform.position;
         GameManager.instance.AM.PlaySFX(11);
         GameManager.instance.EsclamationStop();
         AddSpecificItem();
