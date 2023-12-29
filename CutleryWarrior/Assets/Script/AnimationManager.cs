@@ -267,7 +267,7 @@ public class AnimationManager : MonoBehaviour
     //Normal VFX
     if (e.Data.Name == "walk"){AudioManager.instance.PlayUFX(sound);}
     if (e.Data.Name == "impronte")
-    {if(canImp){impronte.SetActive(true);impronte.transform.position=Foot.position;}}
+    {if(canImp){Instantiate(impronte, Foot.position, impronte.transform.rotation);}}
     /*if (e.Data.Name == "stump" && VFX){Instantiate(Stump, Foot.position, Stump.transform.rotation);
     StartCoroutine(StopVFX_FNormal()); VFX = false; }*/
     if (e.Data.Name == "dodge"){Dodge.SetActive(true);Dodge.transform.position=Foot.position;}

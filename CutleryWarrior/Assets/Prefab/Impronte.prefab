@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 3
+  isDestroy: 1
   title: {fileID: 465718086900702342}
 --- !u!95 &1962010605026207314
 Animator:
@@ -221,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 3
+  isDestroy: 1
   title: {fileID: 4497223818487058218}
 --- !u!95 &6896012720322982815
 Animator:

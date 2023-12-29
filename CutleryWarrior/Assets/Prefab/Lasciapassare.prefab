@@ -87,7 +87,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1652823453624176302
 MonoBehaviour:
@@ -166,6 +166,7 @@ MonoBehaviour:
   button: {fileID: 4266226267555154103}
   dialogueBox: {fileID: 8370675185921287923}
   heFlip: 0
+  StopButton: 0
   TalnkAnimationName: talk
   IdleAnimationName: idle
   _skeletonAnimation: {fileID: 1652823453624176302}
